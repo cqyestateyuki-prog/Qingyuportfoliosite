@@ -1,0 +1,444 @@
+// 新增：ProjectDetail.jsx - 项目详情页组件，用于展示单个项目的完整信息
+// 移除了client和completed，role部分变为可选
+
+//导入React Hooks，用于管理组件状态和副作用
+import { useState, useEffect } from 'react'
+//导入React Router Hooks，用于获取URL参数和导航
+import { useParams, Link } from 'react-router-dom'
+//导入shadcn/ui组件库的UI组件
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
+import { ArrowLeft, ArrowUp, ZoomIn } from 'lucide-react'
+//导入项目数据获取函数
+import { getProjectById } from '../../data/projects'
+import ImageGallery, { SingleImageDisplay, MultiImageGrid, SmartImageDisplay } from '../components/ImageGallery'
+import Footer from '../components/Footer'
+
+//ProjectDetail组件，展示单个项目的详细信息
+const ProjectDetail = () => {
+  /*从URL参数中获取项目ID，用于查找对应的项目数据
+   根据ID获取项目数据，如果找不到则返回undefined
+   管理选中的图片状态，用于图片画廊功能
+   管理当前激活的章节，用于左侧导航高亮
+   管理返回顶部按钮的显示状态
+  */
+  const { id } = useParams()
+  const project = getProjectById(id)
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [allImages, setAllImages] = useState([])
+  const [activeSection, setActiveSection] = useState('overview')
+  const [showBackToTop, setShowBackToTop] = useState(false)
+
+  // 创建导航数据（动态构建，根据实际内容）
+  const navigationSections = [
+    { id: 'overview', title: 'Overview', icon: '📋' },
+    { id: 'challenge', title: 'Challenge', icon: '🎯' },
+    // 只有当role存在时才添加
+    ...(project?.role ? [{ id: 'role', title: 'My Role', icon: '👤' }] : []),
+    // 添加所有章节
+    ...project?.sections?.map(section => ({
+      id: section.id,
+      title: section.title,
+      icon: section.icon || '📌'
+    })) || []
+  ]
+
+  // 监听滚动
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400)
+      
+      const scrollPosition = window.scrollY + 150
+      
+      for (let section of navigationSections) {
+        const element = document.getElementById(section.id)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section.id)
+            break
+          }
+        }
+      }
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [navigationSections])
+
+  // 滚动到指定部分
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const offset = 100
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  // 处理图片点击
+  const handleImageClick = (image, allImagesArray = []) => {
+    setSelectedImage(image)
+    setAllImages(allImagesArray)
+    setCurrentImageIndex(allImagesArray.findIndex(img => img.src === image.src))
+  }
+
+  // 上一张图片
+  const handlePreviousImage = () => {
+    if (currentImageIndex > 0) {
+      const newIndex = currentImageIndex - 1
+      setCurrentImageIndex(newIndex)
+      setSelectedImage(allImages[newIndex])
+    }
+  }
+
+  // 下一张图片
+  const handleNextImage = () => {
+    if (currentImageIndex < allImages.length - 1) {
+      const newIndex = currentImageIndex + 1
+      setCurrentImageIndex(newIndex)
+      setSelectedImage(allImages[newIndex])
+    }
+  }
+
+  // 关闭图片查看器
+  const handleCloseImage = () => {
+    setSelectedImage(null)
+    setAllImages([])
+    setCurrentImageIndex(0)
+  }
+
+  // 返回顶部
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  if (!project) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Project Not Found</h1>
+          <Link to="/">
+            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* ========== 顶部导航栏 ========== */}
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-purple-100 z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <Link 
+              to="/" 
+              className="flex items-center space-x-2 text-gray-400 hover:text-gray-600 transition-all duration-300 group px-4 py-2 rounded-lg hover:bg-gray-50"
+            >
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              <span className="font-medium">Back to Work</span>
+            </Link>
+            
+            
+            <Badge className="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 border-purple-200">
+              {project.category.toUpperCase()}
+            </Badge>
+          </div>
+        </div>
+      </nav>
+
+      {/* ========== 右侧进度导航 ========== */}
+      <aside className="hidden lg:block fixed right-8 top-1/2 -translate-y-1/2 z-30 max-w-[160px]">
+        <nav className="flex flex-col gap-4">
+          {navigationSections.map((section, index) => (
+            <button
+              key={section.id}
+              onClick={() => scrollToSection(section.id)}
+              className="group flex items-center gap-3 relative text-left"
+            >
+              {/* 连接线（除了最后一个）*/}
+              {index < navigationSections.length - 1 && (
+                <div className="absolute left-[4px] top-6 bottom-0 w-[1px] bg-gray-200 -z-10" />
+              )}
+              
+              {/* 进度点 */}
+              <div className="relative flex-shrink-0">
+                <div
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    activeSection === section.id
+                      ? 'scale-125'
+                      : 'bg-gray-200 hover:bg-gray-300'
+                  }`}
+                  style={activeSection === section.id ? {background: project.colors?.heroGradient || 'var(--gradient-hero)'} : {}}
+                />
+                {activeSection === section.id && (
+                  <div className="absolute inset-0 w-2 h-2 rounded-full animate-ping" style={{background: project.colors?.heroGradient || 'var(--gradient-hero)'}} />
+                )}
+              </div>
+              
+              {/* 标签文字 - 始终显示 */}
+              <div
+                className={`flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all duration-300 ${
+                  activeSection === section.id
+                    ? 'scale-105'
+                    : 'hover:bg-white/50'
+                }`}
+              >
+                <span className={`text-xs font-medium transition-colors ${
+                  activeSection === section.id
+                    ? 'text-gray-700'
+                    : 'text-gray-400 group-hover:text-gray-600'
+                }`}>
+                  {section.title}
+                </span>
+              </div>
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      {/* ========== 顶部标题区域 ========== */}
+      <section className="pt-32 pb-16 px-6" style={{background: project.colors?.heroGradient || 'var(--gradient-hero)'}}>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
+              {project.title}
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-delay-1">
+              {project.subtitle}
+            </p>
+          </div>
+
+          {/* 项目标签区域 */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* DOMAIN */}
+            <div className="group">
+              <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span className="text-white">●</span> DOMAIN
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.domain.map((item) => (
+                  <Badge 
+                    key={item} 
+                    className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                  >
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            
+            {/* FORM */}
+            <div className="group">
+              <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span className="text-white">●</span> FORM
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.form.map((item) => (
+                  <Badge 
+                    key={item} 
+                    className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                  >
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            
+            {/* COLLABORATORS */}
+            <div className="group">
+              <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span className="text-white">●</span> COLLABORATORS
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.collaborators.map((item) => (
+                  <Badge 
+                    key={item} 
+                    className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                  >
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== 项目概述区域 ========== */}
+      <section id="overview" className="py-20 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center" style={{background: project.colors?.subtitleGradient || 'var(--gradient-secondary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
+            PROJECT OVERVIEW
+          </h2>
+
+          {/* 主图展示 */}
+          <div className="relative group rounded-3xl overflow-hidden shadow-2xl mb-12">
+            <div className="aspect-[16/10] bg-gradient-to-br from-purple-100 to-blue-100">
+              {project.heroVideo ? (
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  poster={project.heroImage}
+                >
+                  <source src={project.heroVideo} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <>
+                  <img 
+                    src={project.heroImage} 
+                    alt={project.title}
+                    className="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-500"
+                    onClick={() => handleImageClick({ src: project.heroImage, alt: project.title }, [{ src: project.heroImage, alt: project.title }])}
+                  />
+                </>
+              )}
+            </div>
+          </div>
+          
+          <div className="prose prose-lg max-w-none mb-12">
+            <p className="text-lg text-gray-700 leading-relaxed text-left mb-8">
+              {project.overview.content}
+            </p>
+            
+            {project.overview.challenge && (
+              <div id="challenge" className="bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-2xl border-l-4 border-purple-500">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">The Challenge</h3>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  {project.overview.challenge}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== 角色部分（只在存在时渲染）========== */}
+      {project.role && (
+        <section id="role" className="py-8 px-6 bg-white">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{background: project.colors?.subtitleGradient || 'var(--gradient-secondary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
+              {project.role.title?.toUpperCase() || 'MY ROLE'}
+            </h2>
+            <div className="h-1 mb-12 w-96" style={{background: project.colors?.underlineGradient || 'var(--gradient-secondary)'}}></div>
+            
+            {/* 如果有responsibilities就显示，没有就只显示标题 */}
+            {project.role.responsibilities && project.role.responsibilities.length > 0 && (
+              <div className="grid gap-6">
+                {project.role.responsibilities.map((responsibility, index) => (
+                  <div key={index} className="flex items-start space-x-4 group hover:translate-x-2 transition-transform">
+                    <div className="flex-shrink-0 w-10 h-10 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg" style={{backgroundColor: 'var(--custom-purple)'}}>
+                      {index + 1}
+                    </div>
+                    <p className="text-lg text-gray-700 leading-relaxed pt-2">{responsibility}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ========== 项目内容章节 ========== */}
+      {project.sections.map((section, index) => (
+        <section 
+          key={section.id} 
+          id={section.id}
+          className={`py-20 px-6 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+        >
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{background: project.colors?.subtitleGradient || 'var(--gradient-secondary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
+              {section.title.toUpperCase()}
+            </h2>
+            <div className="h-1 mb-12 w-96" style={{background: project.colors?.underlineGradient || 'var(--gradient-secondary)'}}></div>
+            
+            <div className="prose prose-lg max-w-none mb-12">
+              <p className="text-lg text-gray-700 leading-relaxed">
+                {section.content}
+              </p>
+            </div>
+
+            {/* 特性卡片 */}
+            {section.features && section.features.length > 0 && (
+              <div className="grid md:grid-cols-3 gap-6 mb-12">
+                {section.features.map((feature, idx) => (
+                  <Card 
+                    key={idx} 
+                    className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-gradient-to-br from-white to-purple-50"
+                  >
+                    <CardContent className="p-6 text-center">
+                      <div className="inline-flex items-center justify-center w-12 h-12 text-white rounded-full mb-4 group-hover:scale-110 transition-transform" style={{backgroundColor: 'var(--custom-purple)'}}>
+                        <span className="text-xl font-bold">{idx + 1}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                        {feature.name}
+                      </h3>
+                      <p className="text-gray-600 font-medium mb-3">
+                        {feature.description}
+                      </p>
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        {feature.detail}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+
+            {/* 图片展示 */}
+            {section.images && section.images.length > 0 && (
+              <SmartImageDisplay 
+                images={section.images}
+                onImageClick={(image) => handleImageClick(image, section.images)}
+                displayMode={section.imageDisplayMode || 'single'}
+              />
+            )}
+          </div>
+        </section>
+      ))}
+
+
+      {/* ========== 返回顶部按钮 ========== */}
+      {showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 p-4 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 z-50 group bg-gray-500 hover:bg-gray-600"
+          aria-label="返回顶部"
+        >
+          <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
+        </button>
+      )}
+
+      {/* ========== 图片画廊 ========== */}
+      {selectedImage && (
+        <ImageGallery 
+          image={selectedImage}
+          images={allImages}
+          currentIndex={currentImageIndex}
+          onClose={handleCloseImage}
+          onPrevious={handlePreviousImage}
+          onNext={handleNextImage}
+        />
+      )}
+
+      {/* ========== Footer ========== */}
+      <Footer />
+    </div>
+  )
+}
+
+export default ProjectDetail
