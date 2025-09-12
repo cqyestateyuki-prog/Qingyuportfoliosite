@@ -7,7 +7,7 @@ export const projects = [
     id: 'stumbldoor',
     title: 'Stumbldoor',
     subtitle: 'Library Experience for the Future',
-    category: 'UIUX',  // 或 'Game'
+    categories: ['UIUX', 'Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
     
     // ========== 主页展示 ==========
@@ -19,7 +19,7 @@ export const projects = [
     heroVideo: null,  // 可选：视频路径
     
     // ========== 项目标签（参考Reshma的设计）==========
-    domain: ['Edtech', 'Social', 'Mobile'],
+    domain: ['Edtech', 'UI/UX', 'Mobile'],
     form: ['UX Research', 'App Design', 'Prototyping'],
     collaborators: ['Solo Project'],  // 或其他合作者名字
     
@@ -219,35 +219,30 @@ export const projects = [
     id: 'ziplink',
     title: 'Ziplink',
     subtitle: '',
-    category: 'UIUX',  // 或 'Game'
+    categories: ['UIUX','Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
     
     thumbnail: '/media/projects/ziplink/Slide27.jpeg',  // 列表页缩略图
-    brief: 'In the bustling streets of cities, where the rhythm of traffic never ceases, the challenge of maintaining focus while driving is ever-present. Our project, Ziplink, aims to address the critical issue of driver distraction and cognitive overload, particularly when interacting with in-car systems.',
+    brief: 'Redesign the user experience of future in-car system.',
     
-    heroImage: '/media/projects/ziplink/Slide27.jpeg',
+    heroImage: '/media/projects/ziplink/Slide1.jpeg',
     heroVideo: null,  // 可选：视频路径
-    domain: ['In-Car System'],
+    domain: ['In-Car System', 'UI/UX'],
     form: ['UX Research', 'App Design', 'Research'],
-    collaborators: ['Solo Project'],  // 或其他合作者名字
-    
+    collaborators: ['Yu Zhou', 'Francisco Guerrero'],  // 或其他合作者名字
+  
+    colors: {
+      heroGradient: 'linear-gradient(135deg, #69a84f 0%, #b2e36e 100%)', // 橙红到青色
+      subtitleGradient: 'linear-gradient(135deg, #69a84f 0%, #b2e36e 100%)', // 橙红到青色
+      underlineGradient: 'linear-gradient(135deg, #69a84f 0%, #b2e36e 100%)' // 橙红到青色
+    },
+
     overview: {
       content: "In the bustling streets of cities, where the rhythm of traffic never ceases, the challenge of maintaining focus while driving is ever-present. Our project, Ziplink, aims to address the critical issue of driver distraction and cognitive overload, particularly when interacting with in-car systems. With a focus on enhancing the driving experience for all, especially those new to the roads, our project seeks to integrate innovative solutions into the existing ZipCar app, making it a more comprehensive tool for drivers.",
       challenge: 'How might we reduce cognitive overload for new drivers by creating a unified in-car experience that minimizes the need to switch between multiple apps and screens while driving?'
     },
     
     sections: [
-      {
-        id: 'overview',
-        title: 'Overview',
-        content: '',
-        images: [
-          {
-            src: '/media/projects/ziplink/Slide1.jpeg',
-            alt: 'Ziplink Case Study', 
-          }, 
-        ]
-      },
 
       {
         id: 'problemstatement',
@@ -397,96 +392,177 @@ export const projects = [
   
   // ========== game项目示例 ==========
   {
-    id: 'game-project',
-    title: 'Adventure Quest',
-    subtitle: 'Interactive Storytelling Game',
-    category: 'Game',
-    tags: ['Game Design', 'Unity', 'Storytelling'],
+    id: 'eternal-dreams',
+    title: 'Eternal Dreams',
+    subtitle: 'Third Person Role Playing Game',
+    categories: ['Game', '3D', 'Programming'], // 多分类支持
+    tags: ['Game Design', 'Unity', '3D Environment Design', 'C#'],
     
-    thumbnail: 'https://images.unsplash.com/photo-1556438064-2d7646166914?w=400&h=300&fit=crop',
-    brief: 'An immersive adventure game combining storytelling with interactive elements.',
+    thumbnail: '/media/projects/eternaldreams/HeroCover.jpg',
+    brief: 'A Third Person 3D Role-playing game made in Unity. You are the chosen adventurer, who came into this fantastic world.',
     
-    heroImage: 'https://images.unsplash.com/photo-1556438064-2d7646166914?w=800&h=500&fit=crop',
+    heroImage: '/media/projects/eternaldreams/HeroCover.jpg',
     heroVideo: null,  // 游戏可以有预告片
     
-    domain: ['Gaming', 'Entertainment', 'Mobile'],
-    form: ['Game Design', 'Level Design', '3D Modeling'],
-    collaborators: ['Amy Artist', 'Bob Programmer'],
+    domain: ['Gaming', 'Entertainment', '3D Art'],
+    form: ['Game Design', 'Level Design', '3D Modeling', 'C# Programming'],
+    collaborators: ['Solo Project'],
     
     // ========== 项目颜色配置 ==========
     colors: {
-      heroGradient: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)', // 橙红到青色
-      subtitleGradient: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)', // 橙红到青色
-      underlineGradient: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)' // 橙红到青色
+      heroGradient: 'linear-gradient(135deg,rgb(27, 74, 168) 0%, #4ECDC4 100%)', // 橙红到青色
+      subtitleGradient: 'linear-gradient(135deg,rgb(27, 74, 168) 0%, #4ECDC4 100%)', // 橙红到青色
+      underlineGradient: 'linear-gradient(135deg,rgb(27, 74, 168) 0%, #4ECDC4 100%)' // 橙红到青色
     },
     
     overview: {
-      content: 'Adventure Quest is an interactive storytelling game that blends narrative with modern mechanics.',
+      content: "Eternal Dream takes place in a fantasy world known as 'Dream', featuring an art style that leans towards 3D anime and is non-realistic. Players awaken in this fantasy-styled world, as if they are in an eternal nightmare/dream. They need to defeat unknown monsters and travel to towns as beautiful as those in fairy tales. Players will start their journey, and end up going home or being the hero of this world.",
       challenge: 'How to create an engaging narrative that adapts to player choices?'
     },
     
-    // 游戏项目可能不需要详细的responsibilities
-    role: null,  // 或者简单的: { title: 'Game Designer' }
-    
     sections: [
-      {
-        id: 'concept',
-        title: 'Game Concept',
-        icon: '🎮',
-        content: 'The game focuses on player agency and meaningful choices.',
-        images: [
-          {
-            src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop',
-            alt: 'Concept art'
-          }
-        ]
-      },
       {
         id: 'mechanics',
         title: 'Game Mechanics',
-        icon: '⚙️',
-        content: 'Core mechanics include choice-based dialogue and resource management.',
-        // 游戏项目可以用features展示核心机制
-        features: [
-          {
-            name: 'Choice System',
-            description: 'Branching narratives',
-            detail: 'Every choice matters and affects the ending'
-          },
-          {
-            name: 'Combat',
-            description: 'Strategic battles',
-            detail: 'Turn-based combat with elemental system'
-          }
-        ],
-        images: []
-      },
-      {
-        id: 'art',
-        title: 'Art Direction',
-        icon: '🎨',
-        content: 'A unique art style that blends 2D and 3D elements.',
+        icon: '🎮',
+        content: 'The dreamland is divided into two different parts, a dangerous "dream" environment where bad creature skeletons live; and a beautiful fantasy village environment where good creatures live. As a third person role-playing game, the player will act as an archer, fight against the skeletons in bad "dream" and enjoy peach in the good "dream."',
         images: [
           {
-            src: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop',
-            alt: 'Character designs'
+            src: '/media/projects/eternaldreams/environment/largeshot.png',
+            alt: 'Fantasy village'
           },
           {
-            src: 'https://images.unsplash.com/photo-1556438064-2d7646166914?w=600&h=400&fit=crop',
-            alt: 'Environment art'
+            src: '/media/projects/eternaldreams/environment/4.png',
+            alt: 'Dream world'
           }
         ]
       },
+
+      {
+        id: 'inspirations',
+        title: 'Concept and Inspirations',
+        icon: '⚙️',
+        content: "The core idea of this game, Eternal Dream,stems from my own dreams, as I am a person with a vivid imagination who frequently experiences fantastical dreams. These dreams often involve battling alongside or against a myriad of mythical creatures, leaving me questioning their reality upon awakening. Inspired by this personal experience, I created a game that encapsulates the essence of navigating through a dreamlike world, offering players the choice to either escape the dream or become engrossed within it.",
+        imageDisplayMode: 'grid', // 网格模式
+        images: [
+          {
+            src: '/media/projects/eternaldreams/0.jpg',
+            alt: 'Concept art'
+          },
+          {
+            src: '/media/projects/eternaldreams/0-1.jpg',
+            alt: 'Concept art2'
+          }
+        ]
+      },
+      {
+        id: 'narrative',
+        title: 'Story and Narrative',
+        icon: '🎨',
+        content:[
+          "Players awaken in an unknown place, believing themselves to be in a nightmare. Surrounded by a dangerous, dark forest inhabited by skeleton monsters, they embark on a journey to explore this world. By defeating the skeletons, players eventually reach a village where elves and humans live in harmony, and are hailed as heroes for protecting the village from the skeletons.",
+          "The primary goal for player experience in Eternal Dream is to immerse players in a vivid, dreamlike world that blurs the lines between fantasy and reality, challenging them to question what is real and what is not. We aim to provide an experience that is both captivating and thought-provoking, where players feel a deep sense of adventure and exploration as they navigate through the contrasting environments of the dream world.",
+        ],
+        images: [
+          {
+            src: '/media/projects/eternaldreams/environment/3.png',
+            alt: 'Concept art'
+          },
+          {
+            src: '/media/projects/eternaldreams/dialogue.png',
+            alt: 'Concept art'
+          },
+        ]
+      },
+
+      {
+        id: 'levelEnvironmentDesign',
+        title: 'Level and Environment Design',
+        icon: '⚙️',
+        content: [
+          "The game comprises two distinct levels: a gloomy, dilapidated forest filled with low visibility and skeleton monsters that players must defeat; and a village inhabited by elves and humans, characterized by harmony and beauty. Unique to this game, the elves' homes are built into the mountains with distinctive shapes, made from trees, leaves, and mushrooms, contrasting with the human's more conventional houses. The focus on environmental construction utilized Maya and Blender for building different houses, trees, decorations, and flora, with shaders applied in Unity to render the game world in a cute, two-dimensional style.",
+          "I was inspired by the two-dimensional game environment style of Genshin Impact and aimed to achieve a similar effect. However, I had no prior knowledge in this area. Through self-study on YouTube, I learned how to use shaders in Unity to achieve this style of rendering. Completing the entire game construction alone was time-consuming. Initially, my plan also included developing the game's storyline, quests, and combat system, but due to time constraints, I focused mainly on environment design and polishing. I am still satisfied with the outcome.",
+        ],
+        imageDisplayMode: 'grid', // 网格模式
+        images: [
+          {
+            src: '/media/projects/eternaldreams/1.png',
+            alt: 'Environment Art Design'
+          },
+          {
+            src: '/media/projects/eternaldreams/2.png',
+            alt: 'Environment Art Design2'
+          },
+          {
+            src: '/media/projects/eternaldreams/3.png',
+            alt: 'Environment Art Design3'
+          },
+          {
+            src: '/media/projects/eternaldreams/4.png',
+            alt: 'Environment Art Design4'
+          },
+          {
+            src: '/media/projects/eternaldreams/5.png',
+            alt: 'Environment Art Design5'
+          },
+          {
+            src: '/media/projects/eternaldreams/6.png',
+            alt: 'Level Design'
+          },
+          {
+            src: '/media/projects/eternaldreams/7.png',
+            alt: 'Level Design2'
+          },
+          {
+            src: '/media/projects/eternaldreams/Shader3.png',
+            alt: 'Shader3'
+          },
+          {
+            src: '/media/projects/eternaldreams/Shader1.png',
+            alt: 'Shader'
+          }
+        ]
+      },
+
       {
         id: 'showcase',
         title: 'Final Showcase',
         icon: '🏆',
-        content: 'The completed game features multiple endings and 20+ hours of gameplay.',
+        content: "The key takeaways from the Eternal Dream project include the importance of a cohesive game world that captivates players' imaginations, and the balance between exploration and combat. This project taught me the significance of environmental storytelling and how it can be used to enhance the narrative and player immersion. The challenges faced during development, particularly in achieving a specific art style and refining gameplay mechanics, have greatly contributed to my growth as a game designer. This experience has improved my skills in environmental design and narrative construction to create a more engaging and enjoyable game. Eternal Dream represents not just a journey for the player, but also a significant step in my journey as a game designer, underscoring the importance of vision, adaptability, and the continuous pursuit of improvement.",
         images: [
           {
-            src: 'https://images.unsplash.com/photo-1556438064-2d7646166914?w=600&h=400&fit=crop',
-            alt: 'Gameplay screenshot'
-          }
+            src: '/media/projects/eternaldreams/environment/StartScreen.png',
+            alt: 'Game Start Screen'
+          },
+          {
+            src: '/media/projects/eternaldreams/environment/closeup.png',
+            alt: 'Closeup Environment'
+          },
+          {
+            src: '/media/projects/eternaldreams/environment/closeup2.png',
+            alt: 'Closeup Environment2'
+          },
+          {
+            src: '/media/projects/eternaldreams/environment/closeup3.png',
+            alt: 'Closeup Environment3'
+          },
+          {
+            src: '/media/projects/eternaldreams/environment/largeshot2.png',
+            alt: 'Large Shot'
+          },
+          {
+            src: '/media/projects/eternaldreams/environment/largeshot.png',
+            alt: 'Large Shot2'
+          },
+          {
+            src: '/media/projects/eternaldreams/environment/5.png',
+            alt: 'Large Shot3'
+          },
+          {
+            src: '/media/projects/eternaldreams/environment/4.png',
+            alt: 'Battle'
+          },
+
         ]
       }
     ]
@@ -497,7 +573,7 @@ export const projects = [
     id: 'web-app',
     title: 'E-Commerce Platform',
     subtitle: 'Full-Stack Web Application',
-    category: 'Programming',
+    categories: ['Programming'], // 多分类支持
     tags: ['React', 'Node.js', 'MongoDB', 'Full-Stack'],
     
     thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop',
@@ -558,7 +634,7 @@ export const projects = [
     id: 'user-research',
     title: 'UX Research Study',
     subtitle: 'Mobile App Usability Analysis',
-    category: 'Research',
+    categories: ['Research'], // 多分类支持
     tags: ['User Research', 'Usability Testing', 'Data Analysis'],
     
     thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
@@ -602,7 +678,7 @@ export const projects = [
     id: '3d-modeling',
     title: '3D Environment Design',
     subtitle: 'Virtual World Creation',
-    category: '3D',
+    categories: ['3D', 'Graphic Design'], // 多分类支持
     tags: ['3D Modeling', 'Blender', 'Texturing', 'Rendering'],
     
     thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop',
@@ -646,7 +722,7 @@ export const projects = [
     id: 'brand-identity',
     title: 'Brand Identity Design',
     subtitle: 'Complete Visual Identity System',
-    category: 'Graphic Design',
+    categories: ['Graphic Design'], // 多分类支持
     tags: ['Branding', 'Logo Design', 'Typography', 'Visual Identity'],
     
     thumbnail: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop',
@@ -717,7 +793,7 @@ export const getProjectById = (id) => {
 
 export const getProjectsByCategory = (category) => {
   if (category === 'All') return projects
-  return projects.filter(project => project.category === category)
+  return projects.filter(project => project.categories?.includes(category))
 }
 
 export const getFeaturedProjects = () => {

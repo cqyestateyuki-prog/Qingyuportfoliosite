@@ -59,7 +59,7 @@ const Hero = () => {
           </h2>
           
           {/* 个人介绍描述文字，使用半透明白色和响应式字体 */}
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-12 leading-snug">
             Specializing in games, web and UI/UX design. 
             I merge creative expertise with strategic thinking to create 
             innovative solutions that captivate and engage.
@@ -82,7 +82,13 @@ const Hero = () => {
               onClick={downloadResume}
               variant="outline"
               size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-purple-600 px-8 py-3 text-lg font-semibold transition-all duration-300 bg-transparent"
+              className="border-2 border-white text-white hover:bg-white px-8 py-3 text-lg font-semibold transition-all duration-300 bg-transparent"
+              style={{ 
+                '--hover-text-color': 'var(--custom-purple)',
+                color: 'white'
+              }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--custom-purple)'}
+              onMouseLeave={(e) => e.target.style.color = 'white'}
             >
               <Download className="mr-2 h-5 w-5" />
               Resume

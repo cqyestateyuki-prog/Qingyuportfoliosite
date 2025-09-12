@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,14 +18,20 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Work', href: '#work' },
-    { name: 'About', href: '#about' },
+    { name: 'About', href: '/about' },
     { name: 'Contact', href: '#contact' }
   ];
 
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (href) => {
+    if (href.startsWith('#')) {
+      // 如果是锚点链接，滚动到对应位置
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // 如果是页面链接，使用React Router导航
+      navigate(href);
     }
     setIsMobileMenuOpen(false);
   };
@@ -44,8 +52,12 @@ const Navbar = () => {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="nav-link text-white hover:text-purple-200 font-medium transition-colors"
+                onClick={() => handleNavClick(item.href)}
+                className={`nav-link font-medium transition-colors ${
+                  isScrolled 
+                    ? 'text-gray-700 hover:text-purple-600' 
+                    : 'text-white hover:text-purple-200'
+                }`}
               >
                 {item.name}
               </button>
@@ -54,7 +66,11 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-white hover:text-purple-200"
+            className={`md:hidden p-2 transition-colors ${
+              isScrolled 
+                ? 'text-gray-700 hover:text-purple-600' 
+                : 'text-white hover:text-purple-200'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -63,13 +79,19 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-purple-200">
+          <div className={`md:hidden mt-4 py-4 border-t ${
+            isScrolled ? 'border-gray-200' : 'border-purple-200'
+          }`}>
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-left text-white hover:text-purple-200 font-medium transition-colors"
+                  onClick={() => handleNavClick(item.href)}
+                  className={`text-left font-medium transition-colors ${
+                    isScrolled 
+                      ? 'text-gray-700 hover:text-purple-600' 
+                      : 'text-white hover:text-purple-200'
+                  }`}
                 >
                   {item.name}
                 </button>

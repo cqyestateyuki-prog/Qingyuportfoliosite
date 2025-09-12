@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 // 新增：导入项目详情页组件，用于展示单个项目的详细信息
 import ProjectDetail from './pages/ProjectDetail';
+// 新增：导入About页面组件
+import AboutPage from './pages/AboutPage';
 // 新增：导入全局样式文件，包含所有自定义CSS变量和样式
 import './App.css';
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         {/* 新增：动态路由"/project/:id"，:id是参数，可以匹配任何项目ID */}
         <Route path="/project/:id" element={<ProjectDetail />} />
+        {/* 新增：About页面路由 */}
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </div>
   );

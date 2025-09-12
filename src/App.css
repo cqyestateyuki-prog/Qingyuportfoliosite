@@ -58,7 +58,7 @@
   --gradient-primary: linear-gradient(135deg, #aa8bf1 0%, #8cb6fa 100%); 
   --gradient-secondary: linear-gradient(135deg, #9288e3 0%, #594f93  100%); 
   --gradient-background: linear-gradient(135deg, #667eea 0%, #af94f1 100%); 
-  --gradient-hero: linear-gradient(135deg, #271e3d 0%, #9293e6 60%, #233c63 100%); 
+  --gradient-hero: linear-gradient(135deg, #271e3d 0%, #9798ee 60%, #233c63 100%); 
   
   /* 新增：自定义颜色变量，用于特定元素 */
   --custom-purple: #8981d7; 
@@ -365,6 +365,92 @@ h1, h2, h3, h4, h5, h6 {
 /* 白色粉粒子闪烁效果 */
 .white-particle {
   animation: white-particle-twinkle 0.8s ease-in-out infinite;
+}
+
+/* 光幕流动效果 */
+@keyframes light-flow {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes light-flow-reverse {
+  0% {
+    transform: translateX(100%) skewX(12deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%) skewX(12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes light-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes light-points {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.light-flow {
+  animation: light-flow 3s ease-in-out infinite;
+}
+
+.light-flow-reverse {
+  animation: light-flow-reverse 3s ease-in-out infinite;
+}
+
+.light-scan {
+  animation: light-scan 2s ease-in-out infinite;
+}
+
+.light-points {
+  animation: light-points 2s ease-in-out infinite;
+}
+
+/* 语录切换动画 */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
 }
 
 

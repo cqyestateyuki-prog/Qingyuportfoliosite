@@ -4,7 +4,7 @@
 //导入React Hooks，用于管理组件状态和副作用
 import { useState, useEffect } from 'react'
 //导入React Router Hooks，用于获取URL参数和导航
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 //导入shadcn/ui组件库的UI组件
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -24,6 +24,7 @@ const ProjectDetail = () => {
    管理返回顶部按钮的显示状态
   */
   const { id } = useParams()
+  const navigate = useNavigate()
   const project = getProjectById(id)
   const [selectedImage, setSelectedImage] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -44,6 +45,11 @@ const ProjectDetail = () => {
       icon: section.icon || '📌'
     })) || []
   ]
+
+  // 页面加载时滚动到顶部
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   // 监听滚动
   useEffect(() => {
@@ -122,6 +128,12 @@ const ProjectDetail = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // 返回主页并滚动到My Projects板块
+  const handleBackToWork = () => {
+    // 导航到主页并添加hash参数
+    navigate('/#work')
+  }
+
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
@@ -143,17 +155,17 @@ const ProjectDetail = () => {
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-purple-100 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <Link 
-              to="/" 
+            <button 
+              onClick={handleBackToWork}
               className="flex items-center space-x-2 text-gray-400 hover:text-gray-600 transition-all duration-300 group px-4 py-2 rounded-lg hover:bg-gray-50"
             >
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               <span className="font-medium">Back to Work</span>
-            </Link>
+            </button>
             
-            
+             {/* ========== 更新category为categories 项目标签分类========== */}
             <Badge className="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 border-purple-200">
-              {project.category.toUpperCase()}
+              {project.categories?.[0]?.toUpperCase() || 'PROJECT'}
             </Badge>
           </div>
         </div>
@@ -367,9 +379,17 @@ const ProjectDetail = () => {
             <div className="h-1 mb-12 w-96" style={{background: project.colors?.underlineGradient || 'var(--gradient-secondary)'}}></div>
             
             <div className="prose prose-lg max-w-none mb-12">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                {section.content}
-              </p>
+              {Array.isArray(section.content) ? (
+                section.content.map((paragraph, index) => (
+                  <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  {section.content}
+                </p>
+              )}
             </div>
 
             {/* 特性卡片 */}

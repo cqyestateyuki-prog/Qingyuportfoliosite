@@ -28,7 +28,16 @@ const Portfolio = () => {
 
   const filters = ['All', 'UIUX', 'Game', 'Programming', 'Research', '3D', 'Graphic Design'];
 
-  const filteredProjects = getProjectsByCategory(activeFilter);
+  // 单选筛选逻辑
+  const handleFilterSelect = (filter) => {
+    setActiveFilter(filter);
+  };
+
+  // 筛选项目
+  const filteredProjects = projects.filter(project => {
+    if (activeFilter === 'All') return true;
+    return project.categories?.includes(activeFilter);
+  });
 
   return (
     <section id="work" className="py-20 bg-gray-50">
@@ -53,7 +62,7 @@ const Portfolio = () => {
           {filters.map((filter) => (
             <button
               key={filter}
-              onClick={() => setActiveFilter(filter)}
+              onClick={() => handleFilterSelect(filter)}
               className={`filter-button px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeFilter === filter ? 'active' : ''
               }`}
@@ -66,9 +75,10 @@ const Portfolio = () => {
         {/* 项目网格 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <div
+            <Link
               key={project.id}
-              className={`project-card bg-white rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 ${
+              to={`/project/${project.id}`}
+              className={`project-card bg-white rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 block ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${300 + index * 100}ms` }}
@@ -81,56 +91,49 @@ const Portfolio = () => {
                   className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Link to={`/project/${project.id}`}>
-                    <Button size="sm" className="bg-white/90 hover:bg-white text-gray-900 hover:text-gray-900">
-                      <Eye size={16} className="mr-2" />
-                      View Details
-                    </Button>
-                  </Link>
+                  <div className="bg-white/90 text-gray-900 px-4 py-2 rounded-lg font-medium">
+                    <Eye size={16} className="inline mr-2" />
+                    View Details
+                  </div>
                 </div>
               </div>
 
               {/* 项目信息 主页的卡片样式*/}
               <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-semibold text-gray-900">
-                    {project.title}
-                  </h3>
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    project.category === 'UIUX' 
-                      ? 'bg-purple-100 text-purple-700' 
-                      : project.category === 'Game'
-                      ? 'bg-blue-100 text-blue-700'
-                      : project.category === 'Programming'
-                      ? 'bg-green-100 text-green-700'
-                      : project.category === 'Research'
-                      ? 'bg-orange-100 text-orange-700'
-                      : project.category === '3D'
-                      ? 'bg-pink-100 text-pink-700'
-                      : project.category === 'Graphic Design'
-                      ? 'bg-indigo-100 text-indigo-700'
-                      : 'bg-gray-100 text-gray-700'
-                  }`}>
-                    {project.category}
-                  </span>
-                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {project.title}
+                </h3>
                 <p className="text-gray-600 mb-4 line-clamp-2">
                   {project.brief}
                 </p>
                 
-                {/* 标签 */}
+                {/* Category标签 - 替换原来的灰色标签 */}
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.slice(0, 3).map((tag) => (
+                  {project.categories.map((category) => (
                     <span
-                      key={tag}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      key={category}
+                      className={`px-3 py-1 text-sm font-medium rounded-full ${
+                        category === 'UIUX' 
+                          ? 'bg-purple-100 text-purple-700' 
+                          : category === 'Game'
+                          ? 'bg-blue-100 text-blue-700'
+                          : category === 'Programming'
+                          ? 'bg-green-100 text-green-700'
+                          : category === 'Research'
+                          ? 'bg-orange-100 text-orange-700'
+                          : category === '3D'
+                          ? 'bg-pink-100 text-pink-700'
+                          : category === 'Graphic Design'
+                          ? 'bg-indigo-100 text-indigo-700'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
                     >
-                      {tag}
+                      {category}
                     </span>
                   ))}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
