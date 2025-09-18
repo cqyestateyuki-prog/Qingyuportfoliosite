@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button.jsx';
 
 const Contact = () => {
@@ -50,12 +50,6 @@ const Contact = () => {
       title: 'Email',
       content: 'cqyestateyuki@gmail.com',
       link: 'mailto:cqyestateyuki@gmail.com'
-    },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: 'Phone',
-      content: '3522849856',
-      link: 'tel:3522849856'
     },
     {
       icon: <MapPin className="w-6 h-6" />,

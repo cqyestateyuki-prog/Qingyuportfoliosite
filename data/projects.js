@@ -214,6 +214,270 @@ export const projects = [
     ]
   },
   
+    // ========== Programming 项目示例 ==========
+    // ========== AI Community MVP项目 ==========
+    {
+      id: 'ai-community-platform',
+      title: 'AI Built-in Community Platform',
+      subtitle: 'Modern integrated Community Platform for AI Tools',
+      categories: ['UIUX', 'Programming', 'Research'],
+      tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
+      
+      thumbnail: '/media/projects/ai-community/hero/hero-cover.jpg',
+      brief: 'An AI community platform focused on prompt engineering, conversation sharing & learning, and community events.',
+      heroImage: '/media/projects/ai-community/hero/hero-cover.jpg',
+      heroVideo: null,
+      
+      domain: ['AI Product Design & Development', 'Web Platform', 'Learning Community'],
+      form: ['UI/UX Design', 'Frontend Development', 'React + TypeScript + Tailwind CSS', 'Next.js'],
+      collaborators: ['Solo Project','Cursor AI + ChatGPT + Claude'],
+      
+      colors: {
+        heroGradient: 'linear-gradient(135deg, #000000 0%, #374151 100%)',
+        subtitleGradient: 'linear-gradient(135deg,#374151 0%,rgb(72, 81, 97) 100%)',
+        underlineGradient: 'linear-gradient(135deg,#374151 0%, #374151 100%)'
+      },
+      
+       overview: {
+         content: 'AI applications such as ChatGPT, Grok, and Character.ai currently lack built-in communities, leaving everyday users without a dedicated space to learn, share, and connect while using these tools. AI Built-in Community Platform **fills this critical gap by offering an intuitive, accessible experience that transforms isolated AI use into collaborative discovery**. This platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events—along with trending search and a prompt voting system. This combination enables users not only to **learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging**. For product owners, the community **drives user retention, UGC content creation, and continuous feedback loops for their products, making it a strategic addition to any AI tool**. Built with **Next.js 14 + TypeScript + Tailwind CSS**, the platform blends modern design with seamless functionality to make AI learning and sharing accessible for everyone.',
+         challenge: 'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
+         challenges: [
+           'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
+           'How might we enable users to easily share their AI usage experiences and insights?',
+           'How might we help users quickly find relevant, high-quality AI content, prompts, and events?',
+           'How might we lower the barrier to entry for AI users to participate in community learning?',
+           'How might we ensure the quality and reliability of shared AI content and prompts?'
+         ],
+         buttons: [
+           {
+             text: 'Visit Live Community Platform',
+             url: 'https://ai-community-mvp-v2-7y9m.vercel.app/',
+             type: 'external'
+           }
+         ]
+       },
+  
+      sections: [ 
+        {
+          id: 'user-insights',
+          title: 'User Research & Market Insights',
+          icon: '🔍', 
+          content: "Through online questionnaires, user interviews, and research, we revealed that AI tool users face three critical challenges: fragmented knowledge sharing across social platforms, lack of specialized spaces for sharing and learning, and difficulty getting accurate/expected answers from AI tools. Users want to share their AI stories and creative AI interactions, learn from others' experiences to put in refined prompts to get the expected response sooner, not just access technical documentation. The platform should focus on human-centered AI knowledge sharing rather than purely technical information.",
+          imageDisplayMode: 'grid',
+           images: [
+             {
+               src: '/media/projects/ai-community/research/user-interviews.jpg',
+               alt: 'User Interview Insights',
+               caption: 'Key insight: Users want to share "my AI story" not just "how to use AI"'
+             },
+             {
+               src: '/media/projects/ai-community/research/competitive-analysis.jpg',
+               alt: 'Competitive Analysis',
+               caption: 'Analysis of existing platforms: Twitter, Reddit, Discord - all lack specialized AI community features'
+             },
+             {
+               src: '/media/projects/ai-community/research/user-personas.jpg',
+               alt: 'User Personas',
+               caption: 'Key user personas: AI Tool Users (35%), Content Creators (30%), Technical Learners (25%), Community Managers (10%)'
+             },
+             {
+               src: '/media/projects/ai-community/research/user-journey.jpg',
+               alt: 'User Journey Map',
+               caption: 'User journey from discovery to active community participation'
+             }
+           ]
+        },
+        
+        {
+          id: 'solution-strategy',
+          title: 'Solution & Design Approach',
+          icon: '💡',
+          content: 'Our solution addresses the core insight: users want to share their AI experiences, not just learn techniques. We designed a three-post-type system that accommodates different sharing needs: Share Chat & Thoughts for AI interactions, Share Prompt for technical knowledge, and Community Events for real-time collaboration. The platform emphasizes content discovery through intelligent search and personalized recommendations, while maintaining privacy protection for sensitive AI conversations.',
+          imageDisplayMode: 'single',
+          images: [
+            {
+              src: '/media/projects/ai-community/strategy/solution-framework.jpg',
+              alt: 'Solution Framework',
+              caption: 'Three-pillar approach: Knowledge Sharing + Community Building + Privacy Protection'
+            },
+            {
+              src: '/media/projects/ai-community/strategy/design-principles.jpg',
+              alt: 'Design Principles',
+              caption: 'Core design principles: Clean & Clear, Consistency, Accessibility, Modern'
+            }
+          ]
+        },
+         {
+           id: 'design-system',
+           title: 'Design System & Visual Language',
+           icon: '🎨',
+           content: 'Rather than creating a completely new design system, we used ChatGPT\'s built-in community as our design reference and foundation. This approach ensures familiarity and reduces user learning curve while maintaining a clean, content-focused aesthetic. The design system is built to be highly customizable, allowing other AI applications to adapt the visual language to match their brand identity—colors, typography, spacing, and component styles can all be easily modified to align with different AI tools\' existing design systems. We followed basic accessibility principles including good color contrast, readable typography, and responsive design to ensure the platform works well across different devices and user needs.',
+          imageDisplayMode: 'grid',
+           images: [
+             {
+               src: '/media/projects/ai-community/design-system/color-palette.jpg',
+               alt: 'Color Palette',
+               caption: 'Customizable color system: ChatGPT-inspired foundation with good contrast and readability'
+             },
+             {
+               src: '/media/projects/ai-community/design-system/typography.jpg',
+               alt: 'Typography System',
+               caption: 'Clear typography: Readable fonts and proper sizing for different screen sizes'
+             },
+             {
+               src: '/media/projects/ai-community/design-system/components.jpg',
+               alt: 'Component Library',
+               caption: 'Modular component library: Easy to customize for different AI applications'
+             },
+             {
+               src: '/media/projects/ai-community/design-system/spacing.jpg',
+               alt: 'Spacing System',
+               caption: 'Responsive spacing: Consistent layout that works across devices'
+             }
+           ]
+        },
+        {
+          id: 'features',
+          title: 'Core Features & User Experience',
+          icon: '✨',
+          content: 'The platform\'s three-post-type system directly addresses our research findings. Share Chat & Thoughts enables users to share their emotional AI interactions with privacy protection, Share Prompt facilitates technical knowledge exchange with voting systems, and Events creates more connection opportunities. Each feature is designed to encourage specific types of engagement while maintaining the platform\'s focus on community building and knowledge sharing.',
+          features: [
+            {
+              name: 'Share Chat & Thoughts',
+              description: 'AI Conversation Sharing',
+              detail: 'Users share their creative AI interactions with built-in privacy protection and content filtering'
+            },
+            {
+              name: 'Share Prompt',
+              description: 'Prompt Engineering Hub',
+              detail: 'Technical knowledge sharing with voting system and effectiveness ratings'
+            },
+            {
+              name: 'Events',
+              description: 'Connect with Others',
+              detail: 'Online & offline events, workshops, and discussions for community building'
+            },
+          ],
+          imageDisplayMode: 'grid',
+          images: [
+            {
+              src: '/media/projects/ai-community/features/post-types.jpg',
+              alt: 'Three Post Types',
+              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
+            },
+            {
+              src: '/media/projects/ai-community/features/voting-system.jpg',
+              alt: 'Voting System',
+              caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
+            },
+            {
+              src: '/media/projects/aicommunity/Search.png',
+              alt: 'Search & Filter',
+              caption: 'Advanced search capabilities with tag filtering and content categorization'
+            },
+            {
+              src: '/media/projects/aicommunity/features/personal-center.jpg',
+              alt: 'Personal Center',
+              caption: 'User dashboard with AI Coins system, bookmarks, and content management'
+            }
+          ]
+        },
+        
+         {
+           id: 'technical-implementation',
+           title: 'Technical Implementation & Codes',
+           icon: '💻',
+           content: 'Built with modern web technologies, the platform ensures excellent performance and developer experience. Next.js 14 with App Router provides optimal performance, TypeScript ensures type safety, and Tailwind CSS enables rapid development. The application is fully responsive, accessible, and optimized for all devices with a focus on user experience and maintainability.',
+           buttons: [
+             {
+               text: 'View Full Code & Documentation',
+               url: 'https://github.com/cqyestateyuki-prog/AI-Community-MVP-v2',
+               type: 'github'
+             }
+           ],
+          features: [
+            {
+              name: 'Next.js 14',
+              description: 'React Framework',
+              detail: 'App Router, Server Components, and optimized performance with automatic code splitting'
+            },
+            {
+              name: 'TypeScript',
+              description: 'Type Safety',
+              detail: '100% TypeScript coverage ensuring reliable code and better developer experience'
+            },
+            {
+              name: 'Tailwind CSS',
+              description: 'Styling System',
+              detail: 'Utility-first CSS framework for consistent design and rapid development'
+            },
+          ],
+          imageDisplayMode: 'grid',
+          images: [
+            {
+              src: '/media/projects/ai-community/tech/code-structure.jpg',
+              alt: 'Code Architecture',
+              caption: 'Clean, modular code structure with TypeScript interfaces and component organization'
+            },
+            {
+              src: '/media/projects/ai-community/tech/component-hierarchy.jpg',
+              alt: 'Component Hierarchy',
+              caption: 'Reusable component system with proper state management and data flow'
+            },
+            {
+              src: '/media/projects/ai-community/tech/performance.jpg',
+              alt: 'Performance Metrics',
+              caption: 'Lighthouse scores: Performance 95+, Accessibility 100, Best Practices 100'
+            },
+            {
+              src: '/media/projects/ai-community/tech/responsive.jpg',
+              alt: 'Responsive Design',
+              caption: 'Mobile, tablet, and desktop layouts with consistent user experience'
+            }
+          ]
+        },
+        {
+          id: 'final-showcase',
+          title: 'Final Showcase & Impact',
+          icon: '🚀',
+          content: 'The final platform successfully transforms isolated AI tool usage into collaborative community experiences. Users can easily discover relevant content, share their AI stories, and build meaningful connections. The platform serves as both a knowledge repository and social hub, addressing the critical gap in AI community building.',
+          imageDisplayMode: 'grid',
+          images: [
+            {
+              src: '/media/projects/aicommunity/Homepage.png',
+              alt: 'Homepage',
+              caption: 'Clean, modern homepage with intelligent content feed and seamless navigation'
+            },
+             {
+              src: '/media/projects/aicommunity/Postingflow.jpg',
+              alt: 'Posting Flow',
+              caption: 'Intuitive posting process with real-time preview and privacy protection'
+            },
+            {
+              src: '/media/projects/aicommunity/Trendingprompts.png',
+              alt: 'Trending Page',
+              caption: 'Smart trending content switched between prompts, posts & events'
+            },
+            {
+              src: '/media/projects/aicommunity/Postdetailpage.jpg',
+              alt: 'Post Detail Page',
+              caption: 'Rich post detail view with voting, comments, and social interactions'
+            },
+            {
+              src: '/media/projects/aicommunity/Mypost.png',
+              alt: 'Personal Data',
+              caption: 'Manage user posts,and bookmarks,and coins'
+            },
+             {
+              src: '/media/projects/aicommunity/Guide.png',
+              alt: 'Guidelines & Rules',
+              caption: 'Easy to understand guidelines and rules for beginners'
+            },
+          ]
+        }
+      ]
+    }, 
+
   // ========== Ziplink UIUX项目示例 ==========
   {
     id: 'ziplink',
@@ -390,7 +654,7 @@ export const projects = [
     ]
   },
   
-  // ========== game项目示例 ==========
+  // ========== game项目示例 eternal-dreams==========
   {
     id: 'eternal-dreams',
     title: 'Eternal Dreams',
@@ -567,68 +831,7 @@ export const projects = [
       }
     ]
   },
-  
-  // ========== Programming 项目示例 ==========
-  {
-    id: 'web-app',
-    title: 'E-Commerce Platform',
-    subtitle: 'Full-Stack Web Application',
-    categories: ['Programming'], // 多分类支持
-    tags: ['React', 'Node.js', 'MongoDB', 'Full-Stack'],
-    
-    thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop',
-    brief: 'A comprehensive e-commerce platform built with modern web technologies.',
-    
-    heroImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop',
-    heroVideo: null,
-    
-    domain: ['E-commerce', 'Web Development', 'Business'],
-    form: ['Frontend Development', 'Backend Development', 'Database Design'],
-    collaborators: ['Solo Project'],
-    
-    overview: {
-      content: 'A full-stack e-commerce platform featuring user authentication, product management, shopping cart, and payment processing.',
-      challenge: 'How to create a scalable and user-friendly e-commerce solution?'
-    },
-    
-    role: {
-      title: 'Full-Stack Developer',
-      responsibilities: [
-        'Frontend Development: React.js with modern hooks',
-        'Backend Development: Node.js and Express.js',
-        'Database Design: MongoDB with Mongoose ODM',
-        'API Integration: RESTful API design and implementation'
-      ]
-    },
-    
-    sections: [
-      {
-        id: 'tech-stack',
-        title: 'Technology Stack',
-        icon: '💻',
-        content: 'The project utilizes a modern MERN stack with additional technologies for enhanced functionality.',
-        features: [
-          {
-            name: 'Frontend',
-            description: 'React.js with Hooks',
-            detail: 'Modern functional components and state management'
-          },
-          {
-            name: 'Backend',
-            description: 'Node.js & Express',
-            detail: 'RESTful API with middleware and authentication'
-          },
-          {
-            name: 'Database',
-            description: 'MongoDB',
-            detail: 'NoSQL database with Mongoose ODM'
-          }
-        ],
-        images: []
-      }
-    ]
-  },
-  
+
   // ========== Research 项目示例 ==========
   {
     id: 'user-research',
@@ -670,51 +873,7 @@ export const projects = [
         content: 'The study employed mixed-methods research approach combining qualitative and quantitative data.',
         images: []
       }
-    ]
-  },
-  
-  // ========== 3D 项目示例 ==========
-  {
-    id: '3d-modeling',
-    title: '3D Environment Design',
-    subtitle: 'Virtual World Creation',
-    categories: ['3D', 'Graphic Design'], // 多分类支持
-    tags: ['3D Modeling', 'Blender', 'Texturing', 'Rendering'],
-    
-    thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop',
-    brief: 'Immersive 3D environment design for virtual reality applications.',
-    
-    heroImage: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=500&fit=crop',
-    heroVideo: null,
-    
-    domain: ['3D Art', 'Virtual Reality', 'Gaming'],
-    form: ['3D Modeling', 'Texturing', 'Rendering'],
-    collaborators: ['3D Art Team'],
-    
-    overview: {
-      content: 'A detailed 3D environment created for immersive virtual reality experiences.',
-      challenge: 'How to create realistic and engaging 3D environments for VR?'
-    },
-    
-    role: {
-      title: '3D Artist',
-      responsibilities: [
-        '3D Modeling: High-poly and low-poly asset creation',
-        'Texturing: UV mapping and material creation',
-        'Lighting: Scene lighting and atmosphere design',
-        'Optimization: Performance optimization for real-time rendering'
-      ]
-    },
-    
-    sections: [
-      {
-        id: 'modeling',
-        title: '3D Modeling Process',
-        icon: '🎨',
-        content: 'The 3D modeling process involved creating detailed assets optimized for real-time rendering.',
-        images: []
-      }
-    ]
+    ],
   },
   
   // ========== Graphic Design 项目示例 ==========
@@ -783,7 +942,8 @@ export const projects = [
         images: []
       }
     ]
-  }
+  },
+  
 ]
 
 // ========== 辅助函数 ==========

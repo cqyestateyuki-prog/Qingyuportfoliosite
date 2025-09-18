@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowLeft, ArrowUp, ZoomIn } from 'lucide-react'
+//导入Markdown渲染组件
+import ReactMarkdown from 'react-markdown'
 //导入项目数据获取函数
 import { getProjectById } from '../../data/projects'
 import ImageGallery, { SingleImageDisplay, MultiImageGrid, SmartImageDisplay } from '../components/ImageGallery'
@@ -320,19 +322,58 @@ const ProjectDetail = () => {
                 </>
               )}
             </div>
+            
+            {/* AI Community项目的重叠按钮 */}
+            {project.id === 'ai-community-platform' && (
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+                <a
+                  href="https://ai-community-mvp-v2-7y9m.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
+                >
+                  Visit AI Community Platform
+                  <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
           
           <div className="prose prose-lg max-w-none mb-12">
-            <p className="text-lg text-gray-700 leading-relaxed text-left mb-8">
-              {project.overview.content}
-            </p>
+            <div className="text-lg text-gray-700 leading-relaxed text-left mb-8">
+              <ReactMarkdown 
+                components={{
+                  p: ({children}) => <p className="mb-4">{children}</p>,
+                  strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                }}
+              >
+                {project.overview.content}
+              </ReactMarkdown>
+            </div>
             
-            {project.overview.challenge && (
+            {(project.overview.challenge || project.overview.challenges) && (
               <div id="challenge" className="bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-2xl border-l-4 border-purple-500">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">The Challenge</h3>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  {project.overview.challenge}
-                </p>
+                {project.overview.challenges ? (
+                  <div className="space-y-4">
+                    {project.overview.challenges.map((challenge, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <div className="flex-shrink-0 w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-1">
+                          <span className="text-purple-600 font-semibold text-sm">{index + 1}</span>
+                        </div>
+                        <p className="text-lg text-gray-700 leading-relaxed">
+                          {challenge}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    {project.overview.challenge}
+                  </p>
+                )}
               </div>
             )}
           </div>
@@ -415,6 +456,30 @@ const ProjectDetail = () => {
                       </p>
                     </CardContent>
                   </Card>
+                ))}
+              </div>
+            )}
+
+            {/* 按钮 */}
+            {section.buttons && section.buttons.length > 0 && (
+              <div className="mb-8 flex flex-wrap gap-4 justify-center">
+                {section.buttons.map((button, buttonIndex) => (
+                  <a
+                    key={buttonIndex}
+                    href={button.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl ${
+                      button.type === 'github' 
+                        ? 'bg-gray-800 text-white hover:bg-gray-900' 
+                        : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
+                    }`}
+                  >
+                    {button.text}
+                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 ))}
               </div>
             )}
