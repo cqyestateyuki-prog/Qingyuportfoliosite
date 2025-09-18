@@ -422,14 +422,28 @@ const ProjectDetail = () => {
             <div className="prose prose-lg max-w-none mb-12">
               {Array.isArray(section.content) ? (
                 section.content.map((paragraph, index) => (
-                  <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
-                    {paragraph}
-                  </p>
+                  <div key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
+                    <ReactMarkdown 
+                      components={{
+                        p: ({children}) => <p className="mb-4">{children}</p>,
+                        strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                      }}
+                    >
+                      {paragraph}
+                    </ReactMarkdown>
+                  </div>
                 ))
               ) : (
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  {section.content}
-                </p>
+                <div className="text-lg text-gray-700 leading-relaxed">
+                  <ReactMarkdown 
+                    components={{
+                      p: ({children}) => <p className="mb-4">{children}</p>,
+                      strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                    }}
+                  >
+                    {section.content}
+                  </ReactMarkdown>
+                </div>
               )}
             </div>
 

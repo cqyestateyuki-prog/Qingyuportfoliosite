@@ -276,9 +276,9 @@ export const projects = [
                caption: 'Analysis of existing platforms: Twitter, Reddit, Discord - all lack specialized AI community features'
              },
              {
-               src: '/media/projects/ai-community/research/user-personas.jpg',
+               src: '/media/projects/aicommunity/UserPersona.jpg',
                alt: 'User Personas',
-               caption: 'Key user personas: AI Tool Users (35%), Content Creators (30%), Technical Learners (25%), Community Managers (10%)'
+               caption: 'Key user personas'
              },
              {
                src: '/media/projects/ai-community/research/user-journey.jpg',
@@ -438,7 +438,7 @@ export const projects = [
             }
           ]
        },
-       
+
         {
           id: 'final-showcase',
           title: 'Final Showcase & Impact',
