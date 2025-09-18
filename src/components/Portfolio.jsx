@@ -78,17 +78,17 @@ const Portfolio = () => {
             <Link
               key={project.id}
               to={`/project/${project.id}`}
-              className={`project-card bg-white rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 block ${
+              className={`project-card bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 block ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
               {/* 项目图片 */}
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden aspect-[3/2]">
                 <img
                   src={project.thumbnail || project.heroImage}
                   alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                  className="w-full h-full object-cover rounded-2xl transition-transform duration-300 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="bg-white/90 text-gray-900 px-4 py-2 rounded-lg font-medium">

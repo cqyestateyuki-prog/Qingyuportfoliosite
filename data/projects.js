@@ -223,9 +223,9 @@ export const projects = [
       categories: ['UIUX', 'Programming', 'Research'],
       tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
       
-      thumbnail: '/media/projects/ai-community/hero/hero-cover.jpg',
+      thumbnail: '/media/projects/aicommunity/Homepage.png',
       brief: 'An AI community platform focused on prompt engineering, conversation sharing & learning, and community events.',
-      heroImage: '/media/projects/ai-community/hero/hero-cover.jpg',
+      heroImage: '/media/projects/aicommunity/Homepage.png',
       heroVideo: null,
       
       domain: ['AI Product Design & Development', 'Web Platform', 'Learning Community'],
@@ -239,7 +239,7 @@ export const projects = [
       },
       
        overview: {
-         content: 'AI applications such as ChatGPT, Grok, and Character.ai currently lack built-in communities, leaving everyday users without a dedicated space to learn, share, and connect while using these tools. AI Built-in Community Platform **fills this critical gap by offering an intuitive, accessible experience that transforms isolated AI use into collaborative discovery**. This platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events—along with trending search and a prompt voting system. This combination enables users not only to **learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging**. For product owners, the community **drives user retention, UGC content creation, and continuous feedback loops for their products, making it a strategic addition to any AI tool**. Built with **Next.js 14 + TypeScript + Tailwind CSS**, the platform blends modern design with seamless functionality to make AI learning and sharing accessible for everyone.',
+         content: 'AI applications such as ChatGPT, Grok, and Claude currently lack built-in communities, leaving everyday users without a dedicated space to learn, share, and connect while using these tools. AI Built-in Community Platform **fills this critical gap by offering an intuitive, accessible experience that transforms isolated AI use into collaborative discovery**. This platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events—along with trending search and a prompt voting system. This combination enables users not only to **learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging**. For product owners, the community **drives user retention, UGC content creation, and continuous feedback loops for their products, making it a strategic addition to any AI tool**. Built with **Next.js 14 + TypeScript + Tailwind CSS**, the platform blends modern design with seamless functionality to make AI learning and sharing accessible for everyone.',
          challenge: 'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
          challenges: [
            'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
@@ -307,35 +307,7 @@ export const projects = [
             }
           ]
         },
-         {
-           id: 'design-system',
-           title: 'Design System & Visual Language',
-           icon: '🎨',
-           content: 'Rather than creating a completely new design system, we used ChatGPT\'s built-in community as our design reference and foundation. This approach ensures familiarity and reduces user learning curve while maintaining a clean, content-focused aesthetic. The design system is built to be highly customizable, allowing other AI applications to adapt the visual language to match their brand identity—colors, typography, spacing, and component styles can all be easily modified to align with different AI tools\' existing design systems. We followed basic accessibility principles including good color contrast, readable typography, and responsive design to ensure the platform works well across different devices and user needs.',
-          imageDisplayMode: 'grid',
-           images: [
-             {
-               src: '/media/projects/ai-community/design-system/color-palette.jpg',
-               alt: 'Color Palette',
-               caption: 'Customizable color system: ChatGPT-inspired foundation with good contrast and readability'
-             },
-             {
-               src: '/media/projects/ai-community/design-system/typography.jpg',
-               alt: 'Typography System',
-               caption: 'Clear typography: Readable fonts and proper sizing for different screen sizes'
-             },
-             {
-               src: '/media/projects/ai-community/design-system/components.jpg',
-               alt: 'Component Library',
-               caption: 'Modular component library: Easy to customize for different AI applications'
-             },
-             {
-               src: '/media/projects/ai-community/design-system/spacing.jpg',
-               alt: 'Spacing System',
-               caption: 'Responsive spacing: Consistent layout that works across devices'
-             }
-           ]
-        },
+        
         {
           id: 'features',
           title: 'Core Features & User Experience',
@@ -361,7 +333,7 @@ export const projects = [
           imageDisplayMode: 'grid',
           images: [
             {
-              src: '/media/projects/ai-community/features/post-types.jpg',
+              src: '/media/projects/aicommunity/DiagramPost.jpg',
               alt: 'Three Post Types',
               caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
             },
@@ -436,6 +408,37 @@ export const projects = [
             }
           ]
         },
+
+        {
+          id: 'design-system',
+          title: 'Design System & Visual Language',
+          icon: '🎨',
+          content: 'Rather than creating a completely new design system, we used ChatGPT\'s built-in community as our design reference and foundation. This approach ensures familiarity and reduces user learning curve while maintaining a clean, content-focused aesthetic. The design system is built to be highly customizable, allowing other AI applications to adapt the visual language to match their brand identity—colors, typography, spacing, and component styles can all be easily modified to align with different AI tools\' existing design systems. We followed basic accessibility principles including good color contrast, readable typography, and responsive design to ensure the platform works well across different devices and user needs.',
+         imageDisplayMode: 'grid',
+          images: [
+            {
+              src: '/media/projects/ai-community/design-system/color-palette.jpg',
+              alt: 'Color Palette',
+              caption: 'Customizable color system: ChatGPT-inspired foundation with good contrast and readability'
+            },
+            {
+              src: '/media/projects/ai-community/design-system/typography.jpg',
+              alt: 'Typography System',
+              caption: 'Clear typography: Readable fonts and proper sizing for different screen sizes'
+            },
+            {
+              src: '/media/projects/ai-community/design-system/components.jpg',
+              alt: 'Component Library',
+              caption: 'Modular component library: Easy to customize for different AI applications'
+            },
+            {
+              src: '/media/projects/ai-community/design-system/spacing.jpg',
+              alt: 'Spacing System',
+              caption: 'Responsive spacing: Consistent layout that works across devices'
+            }
+          ]
+       },
+       
         {
           id: 'final-showcase',
           title: 'Final Showcase & Impact',
