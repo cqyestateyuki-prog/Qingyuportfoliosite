@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 // Google Analytics 4 配置
-const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // 替换为你的 GA4 测量 ID
+const GA_TRACKING_ID = 'G-83V8ECKPL8'; // 你的 GA4 测量 ID
 
 // 初始化 Google Analytics
 export const initGA = () => {
