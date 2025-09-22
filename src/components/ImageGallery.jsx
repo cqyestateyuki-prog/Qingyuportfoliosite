@@ -1,5 +1,6 @@
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ReactMarkdown from 'react-markdown';
 
 const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext }) => {
   if (!image) return null;
@@ -125,9 +126,100 @@ export const MultiImageGrid = ({ images, onImageClick }) => {
   );
 };
 
-// 新增：智能图片展示组件 - 根据配置选择展示模式
-export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single' }) => {
+// 新增：两列网格展示组件 - 强制一行两张图片
+export const TwoColumnGrid = ({ images, onImageClick }) => {
   if (!images || images.length === 0) return null;
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {images.map((image, idx) => (
+        <div key={idx} className="group">
+          <div 
+            className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+            onClick={() => onImageClick(image)}
+          >
+            <img 
+              src={image.src} 
+              alt={image.alt}
+              className="w-full h-auto group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          {image.caption && (
+            <p className="text-center text-gray-600 mt-4 text-sm italic">{image.caption}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// 新增：交替展示组件 - 文字和图片交替显示
+export const AlternatingDisplay = ({ content, images, onImageClick }) => {
+  if (!content || !images) return null;
+
+  const items = [];
+  
+  // 创建交替的内容项
+  for (let i = 0; i < Math.max(content.length, images.length); i++) {
+    // 添加文字内容
+    if (content[i]) {
+      items.push({
+        type: 'text',
+        content: content[i],
+        index: i
+      });
+    }
+    
+    // 添加图片内容
+    if (images[i]) {
+      items.push({
+        type: 'image',
+        image: images[i],
+        index: i
+      });
+    }
+  }
+
+  return (
+    <div className="space-y-12">
+      {items.map((item, idx) => (
+        <div key={idx}>
+          {item.type === 'text' ? (
+            <div className="text-lg text-gray-700 leading-relaxed">
+              <ReactMarkdown 
+                components={{
+                  p: ({children}) => <p className="mb-4">{children}</p>,
+                  strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                }}
+              >
+                {item.content}
+              </ReactMarkdown>
+            </div>
+          ) : (
+            <SingleImageDisplay 
+              image={item.image} 
+              onImageClick={onImageClick}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// 新增：智能图片展示组件 - 根据配置选择展示模式
+export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single', content = null }) => {
+  if (!images || images.length === 0) return null;
+
+  // 如果指定为交替模式，使用交替布局
+  if (displayMode === 'alternating' && content) {
+    return <AlternatingDisplay content={content} images={images} onImageClick={onImageClick} />;
+  }
+
+  // 如果指定为两列模式，使用两列布局
+  if (displayMode === 'two-column') {
+    return <TwoColumnGrid images={images} onImageClick={onImageClick} />;
+  }
 
   // 如果指定为单张模式，每张图片单独显示
   if (displayMode === 'single') {
