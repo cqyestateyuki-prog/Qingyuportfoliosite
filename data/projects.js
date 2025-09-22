@@ -9,6 +9,7 @@ export const projects = [
     subtitle: 'Library Experience for the Future',
     categories: ['UIUX', 'Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
+    techTags: ['#Figma', '#Wireframing & Prototyping', '#Mobile App'],  // 技术标签
     
     // ========== 主页展示 ==========
     thumbnail: '/media/projects/stumbldoor/hero/hero-image.jpg',  // 列表页缩略图
@@ -63,7 +64,7 @@ export const projects = [
         title: 'Research',
         icon: '🔍',  //用于左侧导航显示
         content: 'To comprehend the needs of users regarding physical and digital library experiences, we conducted comprehensive research combining secondary research on library evolution and trends, primary field research across four NYC libraries, and user interviews with 35 survey responses and 8 in-depth interviews. This multi-method approach enabled us to synthesize valuable insights into current user experiences and future expectations for digital reading.',
-        imageDisplayMode: 'grid', // 网格模式
+        imageDisplayMode: 'two-column', // 网格模式
         images: [
           {
             src: '/media/projects/stumbldoor/sections/2-SD Research.jpg',
@@ -192,7 +193,7 @@ export const projects = [
 
       {
         id: 'final',
-        title: 'Final Display',
+        title: 'Final Showcase',
         icon: '🚀',
         content: 'The final app design showcases a clean, intuitive interface.',
         imageDisplayMode: 'single', // 单图模式
@@ -222,10 +223,11 @@ export const projects = [
       subtitle: 'Modern integrated Community Platform for AI Tools',
       categories: ['UIUX', 'Programming', 'Research'],
       tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
+      techTags: ['#Figma','#React', '#TypeScript', '#Next.js'],
       
-      thumbnail: '/media/projects/aicommunity/Homepage.png',
-      brief: 'An AI community platform focused on prompt engineering, conversation sharing & learning, and community events.',
-      heroImage: '/media/projects/aicommunity/Homepage.png',
+      thumbnail: '/media/projects/aicommunity/Hero.jpg',
+      brief: 'An in-app integrated community system designed for AI Tools.',
+      heroImage: '/media/projects/aicommunity/Hero.jpg',
       heroVideo: null,
       
       domain: ['AI Product Design & Development', 'Web Platform', 'Learning Community'],
@@ -263,15 +265,15 @@ export const projects = [
           title: 'User Research & Market Insights',
           icon: '🔍', 
           content: "Through online questionnaires, user interviews, and research, we revealed that AI tool users face three critical challenges: fragmented knowledge sharing across social platforms, lack of specialized spaces for sharing and learning, and difficulty getting accurate/expected answers from AI tools. Users want to share their AI stories and creative AI interactions, learn from others' experiences to put in refined prompts to get the expected response sooner, not just access technical documentation. The platform should focus on human-centered AI knowledge sharing rather than purely technical information.",
-          imageDisplayMode: 'grid',
+          imageDisplayMode: 'two-column',
            images: [
              {
-               src: '/media/projects/ai-community/research/user-interviews.jpg',
-               alt: 'User Interview Insights',
-               caption: 'Key insight: Users want to share "my AI story" not just "how to use AI"'
+               src: '/media/projects/aicommunity/MarketInsights.jpg',
+               alt: 'User Interview & Market Insights',
+               caption: 'Key insight: 90% of participants want to have an in-app community.'
              },
              {
-               src: '/media/projects/ai-community/research/competitive-analysis.jpg',
+               src: '/media/projects/aicommunity/CompetitiveAnalysis.jpg',
                alt: 'Competitive Analysis',
                caption: 'Analysis of existing platforms: Twitter, Reddit, Discord - all lack specialized AI community features'
              },
@@ -281,7 +283,7 @@ export const projects = [
                caption: 'Key user personas'
              },
              {
-               src: '/media/projects/ai-community/research/user-journey.jpg',
+               src: '/media/projects/aicommunity/Userjourneymap.jpg',
                alt: 'User Journey Map',
                caption: 'User journey from discovery to active community participation'
              }
@@ -290,21 +292,30 @@ export const projects = [
         
         {
           id: 'solution-strategy',
-          title: 'Solution & Design Approach',
+          title: 'Solution & Design Process',
           icon: '💡',
-          content: 'Our solution addresses the core insight: users want to share their AI experiences, not just learn techniques. We designed a three-post-type system that accommodates different sharing needs: Share Chat & Thoughts for AI interactions, Share Prompt for technical knowledge, and Community Events for real-time collaboration. The platform emphasizes content discovery through intelligent search and personalized recommendations, while maintaining privacy protection for sensitive AI conversations.',
-          imageDisplayMode: 'single',
+          content: [
+            'We aimed to create an in-app community homepage that is both familiar—leveraging patterns users already know from Reddit, RedNotes, and YouTube—and tailored for AI-specific use cases such as prompt sharing and event discovery. The design evolved from a **three-column layout** inspired by Reddit/YouTube into a **two-panel structure** that better fits AI LLM application design. In addition, the post layout was changed from single-post per row to multi-post previews per row, allowing users to scan content more efficiently. ',
+            'Our solution addresses the core insight: **users want to share their AI experiences, not just learn techniques.** So we designed a **three-post-type** system that accommodates different sharing needs: Share Chat & Thoughts for AI interactions, Share Prompt for technical knowledge, and Community Events for real-time collaboration.',
+            "Our **rating system** enables users to rate prompt effectiveness, creating a **positive feedback loop** that surfaces the most valuable content. High-rated prompts gain visibility, encouraging quality contributions and providing immediate recognition to creators.",
+          ],
+          imageDisplayMode: 'alternating',
           images: [
             {
-              src: '/media/projects/ai-community/strategy/solution-framework.jpg',
-              alt: 'Solution Framework',
-              caption: 'Three-pillar approach: Knowledge Sharing + Community Building + Privacy Protection'
+              src: '/media/projects/aicommunity/Designprocess.jpg',
+              alt: 'Design Process',
+              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
             },
             {
-              src: '/media/projects/ai-community/strategy/design-principles.jpg',
-              alt: 'Design Principles',
-              caption: 'Core design principles: Clean & Clear, Consistency, Accessibility, Modern'
-            }
+              src: '/media/projects/aicommunity/DiagramPost.jpg',
+              alt: 'Three Post Types',
+              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
+            },
+            {
+              src: '/media/projects/aicommunity/Ratingsystem2.jpg',
+              alt: 'Rating System',
+              caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
+            },
           ]
         },
         
@@ -330,16 +341,16 @@ export const projects = [
               detail: 'Online & offline events, workshops, and discussions for community building'
             },
           ],
-          imageDisplayMode: 'grid',
+          imageDisplayMode: 'two-column',
           images: [
             {
-              src: '/media/projects/aicommunity/DiagramPost.jpg',
+              src: '/media/projects/aicommunity/Postingflow.jpg',
               alt: 'Three Post Types',
               caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
             },
             {
-              src: '/media/projects/ai-community/features/voting-system.jpg',
-              alt: 'Voting System',
+              src: '/media/projects/aicommunity/Ratingsystem.jpg',
+              alt: 'Rating System',
               caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
             },
             {
@@ -348,7 +359,7 @@ export const projects = [
               caption: 'Advanced search capabilities with tag filtering and content categorization'
             },
             {
-              src: '/media/projects/aicommunity/features/personal-center.jpg',
+              src: '/media/projects/aicommunity/Mybookmarks.png',
               alt: 'Personal Center',
               caption: 'User dashboard with AI Coins system, bookmarks, and content management'
             }
@@ -357,9 +368,11 @@ export const projects = [
         
          {
            id: 'technical-implementation',
-           title: 'Technical Implementation & Codes',
+           title: 'Technical Implementation & Coding Structure',
            icon: '💻',
-           content: 'Built with modern web technologies, the platform ensures excellent performance and developer experience. Next.js 14 with App Router provides optimal performance, TypeScript ensures type safety, and Tailwind CSS enables rapid development. The application is fully responsive, accessible, and optimized for all devices with a focus on user experience and maintainability.',
+           content:  ['Built with modern web technologies, the platform ensures excellent performance and developer experience. Next.js 14 with App Router provides optimal performance, TypeScript ensures type safety, and Tailwind CSS enables rapid development. The application is fully responsive, accessible, and optimized for all devices with a focus on user experience and maintainability.',
+            'Core code structure is based on INFORMATION_ARCHITECTURE_CN_EN.md, ARCHITECTURE_CN_EN.md andREADME.md',
+           ],
            buttons: [
              {
                text: 'View Full Code & Documentation',
@@ -384,29 +397,7 @@ export const projects = [
               detail: 'Utility-first CSS framework for consistent design and rapid development'
             },
           ],
-          imageDisplayMode: 'grid',
-          images: [
-            {
-              src: '/media/projects/ai-community/tech/code-structure.jpg',
-              alt: 'Code Architecture',
-              caption: 'Clean, modular code structure with TypeScript interfaces and component organization'
-            },
-            {
-              src: '/media/projects/ai-community/tech/component-hierarchy.jpg',
-              alt: 'Component Hierarchy',
-              caption: 'Reusable component system with proper state management and data flow'
-            },
-            {
-              src: '/media/projects/ai-community/tech/performance.jpg',
-              alt: 'Performance Metrics',
-              caption: 'Lighthouse scores: Performance 95+, Accessibility 100, Best Practices 100'
-            },
-            {
-              src: '/media/projects/ai-community/tech/responsive.jpg',
-              alt: 'Responsive Design',
-              caption: 'Mobile, tablet, and desktop layouts with consistent user experience'
-            }
-          ]
+          
         },
 
         {
@@ -414,37 +405,15 @@ export const projects = [
           title: 'Design System & Visual Language',
           icon: '🎨',
           content: 'Rather than creating a completely new design system, we used ChatGPT\'s built-in community as our design reference and foundation. This approach ensures familiarity and reduces user learning curve while maintaining a clean, content-focused aesthetic. The design system is built to be highly customizable, allowing other AI applications to adapt the visual language to match their brand identity—colors, typography, spacing, and component styles can all be easily modified to align with different AI tools\' existing design systems. We followed basic accessibility principles including good color contrast, readable typography, and responsive design to ensure the platform works well across different devices and user needs.',
-         imageDisplayMode: 'grid',
-          images: [
-            {
-              src: '/media/projects/ai-community/design-system/color-palette.jpg',
-              alt: 'Color Palette',
-              caption: 'Customizable color system: ChatGPT-inspired foundation with good contrast and readability'
-            },
-            {
-              src: '/media/projects/ai-community/design-system/typography.jpg',
-              alt: 'Typography System',
-              caption: 'Clear typography: Readable fonts and proper sizing for different screen sizes'
-            },
-            {
-              src: '/media/projects/ai-community/design-system/components.jpg',
-              alt: 'Component Library',
-              caption: 'Modular component library: Easy to customize for different AI applications'
-            },
-            {
-              src: '/media/projects/ai-community/design-system/spacing.jpg',
-              alt: 'Spacing System',
-              caption: 'Responsive spacing: Consistent layout that works across devices'
-            }
-          ]
+         
        },
 
         {
           id: 'final-showcase',
           title: 'Final Showcase & Impact',
           icon: '🚀',
-          content: 'The final platform successfully transforms isolated AI tool usage into collaborative community experiences. Users can easily discover relevant content, share their AI stories, and build meaningful connections. The platform serves as both a knowledge repository and social hub, addressing the critical gap in AI community building.',
-          imageDisplayMode: 'grid',
+          content: 'The final platform successfully transforms isolated AI tool usage into collaborative community experiences. Users can easily discover relevant content, share their AI stories, and build meaningful connections. The platform serves as both a knowledge repository and social hub, addressing the critical gap in AI community building.\n\n**Live Demo:** [https://ai-community-mvp-v2-7y9m.vercel.app/](https://ai-community-mvp-v2-7y9m.vercel.app/)',
+          imageDisplayMode: 'two-column',
           images: [
             {
               src: '/media/projects/aicommunity/Homepage.png',
@@ -476,11 +445,11 @@ export const projects = [
               alt: 'Guidelines & Rules',
               caption: 'Easy to understand guidelines and rules for beginners'
             },
-          ]
-        }
-      ]
-    }, 
-
+        ]
+      }
+    ]
+  },
+  
   // ========== Ziplink UIUX项目示例 ==========
   {
     id: 'ziplink',
@@ -488,6 +457,7 @@ export const projects = [
     subtitle: '',
     categories: ['UIUX','Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
+    techTags: ['#Figma', '#User Research', '#Prototyping'],
     
     thumbnail: '/media/projects/ziplink/Slide27.jpeg',  // 列表页缩略图
     brief: 'Redesign the user experience of future in-car system.',
@@ -515,7 +485,7 @@ export const projects = [
         id: 'problemstatement',
         title: 'Problem Statement',
         content: "In the current urban landscape, drivers face the significant challenge of minimizing distractions and reducing cognitive load while navigating complex in-car systems. This issue is particularly acute for new drivers, who must juggle the demands of traffic, stress, and the pace of driving, all while interacting with electronic screens and in-car navigation. The danger of dividing attention between the road and these systems cannot be overstated, as it not only increases the risk of accidents but also contributes to a heightened sense of anxiety and discomfort.",
-        imageDisplayMode: 'grid', // 网格模式
+        imageDisplayMode: 'two-column', // 网格模式
         images: [
           {
             src: '/media/projects/ziplink/Slide5.jpeg',
@@ -631,7 +601,7 @@ export const projects = [
 
       {
         id: 'final',
-        title: 'Final Display',
+        title: 'Final Showcase',
         icon: '🚀',
         content: 'The final app design showcases a clean, intuitive interface.',
         imageDisplayMode: 'single', // 单图模式
@@ -642,15 +612,380 @@ export const projects = [
           },
           {
             src: '/media/projects/ziplink/Slide25.jpeg',
-            alt: 'Final Display2'
+            alt: 'Final Showcase2'
           },
           {
             src: '/media/projects/ziplink/Slide26.jpeg',
-            alt: 'Final Display3'
+            alt: 'Final Showcase3'
           },
           {
             src: '/media/projects/ziplink/Slide2.jpeg',
-            alt: 'Final Display4'
+            alt: 'Final Showcase4'
+          }
+        ]
+      }
+    ]
+  },
+
+  // ========== Music Encounter 游戏项目 ==========
+  {
+    id: 'music-encounter',
+    title: 'Music Encounter',
+    subtitle: '3D Open World Social Adventure Game',
+    categories: ['Game', '3D', 'Research', 'Programming'],
+    tags: ['Game Design', 'Unity', 'Music Interaction', 'Social Gaming', 'Research'],
+    techTags: ['#Unity', 'C#', '#Interactive Design', '#Research'],
+    
+    thumbnail: '/media/projects/musicencounter/Hero.png',
+    brief: 'Exploring music and sound as primary means of interaction and connection in games.',
+    
+    heroImage: '/media/projects/musicencounter/Hero.png',
+    heroVideo: null,
+    
+    domain: ['Gaming', 'Interactive Design', 'Music Technology', 'Research'],
+    form: ['Game Design & Development', 'C# Programming', 'Interactive Design','Research'],
+    collaborators: ['Solo Project', 'Parsons School of Design'],
+    
+    colors: {
+      heroGradient: 'linear-gradient(135deg,rgb(88, 80, 201) 0%,rgb(231, 135, 103) 100%)',
+      subtitleGradient: 'linear-gradient(135deg,rgb(88, 80, 201) 0%,rgb(254, 142, 73)  100%)',
+      underlineGradient: 'linear-gradient(135deg, #534ea3 0%, #dd8b59 100%)'
+    },
+    
+    overview: {
+      content: "Music Encounter is a groundbreaking Open World 3D world adventure game that explores how music and sound can serve as the primary means of interaction and connection between people.Music moves people. Its kinetic power can affect human emotions and behaviors, and people can feel the bonds between people under certain circumstances across different cultures. The goal of the game is to use music and sound to connect and match people, and to provide people with a good interactive and social experience. ",
+      challenges:[
+        'How can music and sound create deeper, more meaningful connections between people in digital spaces?',
+        'Can music and sound help to build connections between people, and help people find their partners, friends, or even lovers in a more efficient and interesting way?',
+        'How will musical communication be different from traditional text, video, or voice communication?',
+        'How would open world 3D games fit into these interests?'
+      ] 
+    },
+    
+    sections: [
+      {
+        id: 'research-background',
+        title: 'Research Background',
+        icon: '🔬',
+        content: [
+          "This game project emerged from a fundamental question: Can music and sound help build connections between people more effectively than traditional text, video, or voice communication? The research is grounded in scientific evidence showing that music has universal patterns that can indicate personality traits and create emotional resonance across cultures.",
+          "Studies demonstrate that people with similar musical preferences often share personality characteristics, making music an effective tool for matching and connecting individuals. The 2012 research by Sievers et al. proved that emotional expressions in music are universal across cultures, sharing similar dynamic profiles both musically and in movement.",
+          "The project aims to address the gap in current digital social platforms, which lack integrated, immersive environments for emotional-level communication and deep relationship building through music."
+        ],
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/musicencounter/research.jpg',
+            alt: 'Music Research',
+            caption: 'Research showing universal patterns in musical preferences and emotional expression'
+          },
+        ]
+      },
+
+      {
+        id: 'design-process',
+        title: 'Brainstorming & Prototyping',
+        icon: '📋',
+        content: [
+          "Until 2023, most games or social media applications have a relatively single function that contains musical elements. There are music-based audio games like Karaoke Party, Beat Saber, and Taiko no Tatsujin, and music social platforms like Netease Music and Smule, but they lack a diverse, integrated, and immersive platform for people to have communication on an emotional level.",
+          "I created 5 characters on sketch paper and delivered the characters to different people for acting as the characters. The condition was: if people can only use sound effects and music to communicate/interact with each other, what will they do? The result showed several different outcomes when people meet. Some people gave common greeting sounds similar to 'Hello' and mimicked friend voices, trying to reach a resonance. Some people mimicked the sound of fights and attacks. Some people kept silent.",
+          "Inspired by the paper prototype, I created the game design document, storyboards, and UI wireframes of the game. Inspired by games like Sky: Children of the Light and Journey, I decided to abandon/reduce the use of language and text, and use a minimalist and low-poly art style in the game, striving to bring relaxation and comfort to the players."
+        ],
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/musicencounter/paperprototype.jpg',
+            alt: 'Paper Prototype Characters',
+            caption: 'Hand-drawn character sketches used for paper prototype' 
+          },
+        ]
+      },
+
+      {
+        id: 'game-concept',
+        title: 'Game Concept & World Design',
+        icon: '🎵',
+        content: [
+          "Music Encounter is set in a magical world where everyone is a 'Sonorian' - derived from 'sonorous' meaning rich and full in sound. Each character is born with a unique melody representing their persona.",
+          "The world is threatened by 'chaos' - monsters that disturb the harmony of the Sonorians. Players must use music and sound to communicate and connect with others, solve puzzles, and restore balance to their musical world.",
+          "The game is aimed at young people aged between 12-35. These people usually have a strong adventure and social desire, although hypothetically the game may attract more introverted people."
+        ],
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/musicencounter/Story.png',
+            alt: 'Musical Fantasy World',
+            caption: 'The magical world of Sonorians'
+          },
+          {
+            src: '/media/projects/musicencounter/StartScreen.png',
+            alt: 'Game Screen', 
+            caption: 'Game Screen'
+          },
+          {
+            src: '/media/projects/musicencounter/environment.png',
+            alt: 'Low-poly Art Style',
+            caption: 'Minimalist, relaxing visual design inspired by Journey and Sky'
+          }
+        ]
+      },
+
+      {
+        id: 'development-testing',
+        title: 'Iteration & User Testing',
+        icon: '⚙️',
+        content: [
+          "The development followed a rigorous research methodology with two major iterations. Iteration I focused on basic core features including character controller, UI interface, and instrument performance functions. The open world was built using Unity Asset Store assets with basic musical elements integrated.\n\nIteration II implemented most features from the game design document, including a polished game environment, interactable objects, inventory systems, NPCs, and an expanded instrument collection. A text-to-music input field was added, allowing players to convert text into musical notes for communication.",
+          "The user feedback and gaming experience were collected through a survey that was delivered after people exited the game. The survey included questions such as demographic information, player's characteristics, player's satisfaction level with various functions in the game, the difficulties and problems they faced while playing the game, etc. Most of the questions in the survey use a five-point scale, while other questions are short answer questions. The players' in-game data, such as the total time they spent in the game, was collected through Unity Tinylytics. An iterative approach was used to improve players' gaming experience based on their feedback in the survey.\n\nThe research collected data from 105 participants across two iterations. Key findings showed that 52.4% of testers were introverted, 17.1% outgoing, and 29.5% in-between, supporting the hypothesis that Music Encounter would attract introverted players. 62.8% of participants rated their overall gaming experience 3+ out of 5, while 72.3% rated their musical experience 3+ out of 5, describing it as 'fun,' 'interesting,' and 'relaxing.' 82.9 percent of people would like to talk to someone if his surrounding melody is somewhat that they like or enjoy. 78.1 percent of people believe that playing music/sound together with someone increases their connection with others. These all suggest that there is a great possibility to use music to connect, match and build relationships between people. ",
+        ],
+        imageDisplayMode: 'alternating',
+        images: [
+            {
+              src: '/media/projects/musicencounter/iteration.jpg',
+              alt: 'Iteration Screenshot',
+              caption: 'Iteration Screenshot'
+            },
+            {
+              src: '/media/projects/musicencounter/Playerfeedback.jpg',
+              alt: 'User Feedback & Gaming Experience data',
+              caption: 'User Feedback & Gaming Experience data'
+            },
+          ]
+      },
+
+      {
+        id: 'technical-challenges',
+        title: 'Technical Implementation & Future Vision',
+        icon: '💻',
+        content: [
+          "The game was developed in Unity using C# for core mechanics and music integration. Major technical challenges included implementing a text-to-music conversion system, and a knapsnap system to collect different musical instruments and switch them.",
+          "Current limitations include a limited music generation library that selects from pre-composed tracks rather than truly generating music based on personality data. Future improvements would integrate AI music generation APIs like Google's MusicLM for more dynamic, personalized musical experiences.",
+          "The project can also explore connecting external MIDI devices and integrating with music streaming platforms like YouTube Music for enhanced personalization and social sharing capabilities in the future. Future development includes implementing Universal Design principles to accommodate diverse individual differences and ensure the game is accessible to players with various abilities and needs."
+        ],
+        imageDisplayMode: 'two-column',
+        images: [
+          {
+            src: '/media/projects/musicencounter/unity-code.jpg',
+            alt: 'Unity C# Code',
+            caption: 'Core game mechanics and music interaction code'
+          },
+          {
+            src: '/media/projects/musicencounter/music-system.jpg',
+            alt: 'Music Generation System',
+            caption: 'Technical architecture for music generation and interaction'
+          },
+        ]
+      },
+
+      {
+        id: 'showcase',
+        title: 'Final Showcase',
+        icon: '🏆',
+        content: "Music Encounter successfully demonstrates the potential of music as a universal language for digital social interaction. The research proves that music can effectively connect people, with 78.1% of participants reporting increased connection through musical collaboration. This project was developed as part of my Creative and Practice Seminar at Parsons School of Design under Professor John Sharp, culminating in a comprehensive academic paper titled 'Music Encounter: Exploring Sound and Music as Primary Means of Interaction in Games' published in May 2023.\n\nThe work contributes to the growing field of musical human-computer interaction and provides a foundation for future developments in AI-powered music generation and social matching systems.",
+        imageDisplayMode: 'two-column',
+        images: [
+          {
+            src: '/media/projects/musicencounter/StartScreen.png',
+            alt: 'Gameplay Screenshot - Start Screen',
+            caption: 'Game Start Screen'
+          },
+          {
+            src: '/media/projects/musicencounter/personality.png',
+            alt: 'Gameplay Screenshot - Set your personality',
+            caption: 'Players set their personality and a melody will be generated'
+          },
+          {
+            src: '/media/projects/musicencounter/123.png',
+            alt: 'Gameplay Screenshot - Explore the world',
+            caption: 'Players having adventures in the world'
+          },
+          {
+            src: '/media/projects/musicencounter/456.png',
+            alt: 'Gameplay Screenshot - Explore the world2',
+            caption: 'Players having adventures in the world'
+          },
+        
+        
+        ],
+        buttons: [
+          {
+            text: '查看论文',
+            url: '/files/Music Encounter.pdf',
+            type: 'download',
+            downloadName: 'Music Encounter.pdf'
+          },
+          {
+            text: '玩游戏',
+            url: 'https://caoqingyu.itch.io/musicencounter',
+            type: 'external'
+          }
+        ]
+      }
+    ]
+  },
+
+  // ========== Prime Directive 游戏项目 ==========
+  {
+    id: 'prime-directive',
+    title: 'Prime Directive',
+    subtitle: '2D Action-Platformer Game',
+    categories: ['Game', '2D', 'Programming'],
+    tags: ['Game Design', 'Unity', '2D Platformer', 'Action Game'],
+    techTags: ['#Unity', '#C#', '#2D Game Design', '#Vector Graphics'],
+    
+    thumbnail: '/media/projects/primedirective/hero-image.jpg',
+    brief: 'A 2D Action-Platformer game made in Unity. The player acts as a security bot on a space station, defending the station and defeating all enemies.',
+    
+    heroImage: '/media/projects/primedirective/hero-image.jpg',
+    heroVideo: null,
+    
+    domain: ['Gaming', 'Entertainment', '2D Art'],
+    form: ['Game Design', 'Level Design', '2D Art', 'C# Programming'],
+    collaborators: ['University of Florida'],
+    
+    colors: {
+      heroGradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+      subtitleGradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+      underlineGradient: 'linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)'
+    },
+    
+    overview: {
+      content: "As a security robot onboard a deep space station, you were created to stop any threats that may appear. On this fateful day, you have been awoken from stasis sleep to stop a gang of pirates that have overtaken the station. Navigate through the corridors of the Zeta Station, collect weapon upgrades, defeat the invaders, and fulfill your prime directive!",
+      challenge: 'How to create an engaging 2D platformer with unique vector graphics and combat mechanics?'
+    },
+    
+    sections: [
+      {
+        id: 'game-mechanics',
+        title: 'Game Mechanics',
+        icon: '🎮',
+        content: '"Prime Directive" incorporates exploration and combat within 2D platforming levels. Players can collect power-ups and weapon upgrades to enhance their abilities. The unique mechanics allows player to collect different weapons, affecting gameplay and strategy. The final boss encounter suggests a shift in mechanics to a "shoot-em-up" style, adding variety to the core platforming gameplay.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/primedirective/gameplay1.jpg',
+            alt: 'Gameplay Screenshot 1',
+            caption: '2D platforming action with weapon collection mechanics'
+          },
+          {
+            src: '/media/projects/primedirective/gameplay2.jpg',
+            alt: 'Gameplay Screenshot 2',
+            caption: 'Combat system and enemy encounters'
+          }
+        ]
+      },
+
+      {
+        id: 'concept-inspiration',
+        title: 'Concept and Inspiration',
+        icon: '💡',
+        content: 'The core idea of "Prime Directive" is a classic action-platformer experience with a science fiction setting. The game places players in the role of a security robot tasked with defending a space station from a pirate invasion. Inspiration likely comes from classic platformers and sci-fi tropes, such as sentient robots, space stations, and alien pirates, calling back to the golden age of arcade games while incorporating modern game mechanics.',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/primedirective/concept-art.jpg',
+            alt: 'Concept Art',
+            caption: 'Science fiction concept art and character design'
+          }
+        ]
+      },
+
+      {
+        id: 'storyline-narrative',
+        title: 'Storyline and Narrative',
+        icon: '📖',
+        content: 'The narrative follows a security robot activated to defend the Zeta Station against pirates. As the robot progresses through levels, it encounters various enemies. The storyline unfolds through level progression, culminating in a final boss battle.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/primedirective/story1.jpg',
+            alt: 'Story Scene 1',
+            caption: 'Security robot awakening sequence'
+          },
+          {
+            src: '/media/projects/primedirective/story2.jpg',
+            alt: 'Story Scene 2',
+            caption: 'Pirate invasion and station defense'
+          }
+        ]
+      },
+
+      {
+        id: 'level-environment',
+        title: 'Level and Environment Design',
+        icon: '🏗️',
+        content: 'I crafted 2D levels set within the network of passageways that make up Zeta Station. Drawing inspiration from cinematic depictions of space station corridors and spacecraft interiors, I designed the levels with a vector graphic style. To enrich the backdrop and add depth to the environment, numerous windows have been integrated, through which dynamic cosmic scenes are visible, creating a sense of image parallelism. The adversaries are modeled after traditional alien archetypes and spaceships in final boss battle, supplemented with various drones, and flying objects serving as additional enemies. This combination not only enhances the visual appeal but also diversifies the gameplay experience.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/primedirective/level1.jpg',
+            alt: 'Level Design 1',
+            caption: 'Space station corridor design with vector graphics'
+          },
+          {
+            src: '/media/projects/primedirective/level2.jpg',
+            alt: 'Level Design 2',
+            caption: 'Dynamic cosmic scenes visible through windows'
+          },
+          {
+            src: '/media/projects/primedirective/boss-battle.jpg',
+            alt: 'Boss Battle',
+            caption: 'Final boss encounter with alien spaceships and drones'
+          }
+        ]
+      },
+
+      {
+        id: 'challenges-solutions',
+        title: 'Challenges and Solutions',
+        icon: '⚡',
+        content: 'A recurrent challenge in game design is the task of infusing familiar mechanics with a fresh and captivating allure. Many science fiction games conventionally gravitate towards pixel art or 3D photorealistic styles. In our endeavor, we opted for a vector graphic art style, which imparts a vibrant and distinct visual character to the project. This approach yields a cleaner and more individualistic aesthetic, setting our game apart and enhancing its uniqueness.',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/primedirective/art-style.jpg',
+            alt: 'Art Style',
+            caption: 'Vector graphic art style creating unique visual character'
+          }
+        ]
+      },
+
+      {
+        id: 'player-experience',
+        title: 'Player Experience Goals',
+        icon: '🎯',
+        content: 'The primary ambition for players of "Prime Directive" is to deliver an exhilarating combat-centric gaming experience. The game is designed to immerse players in intense shootouts, challenging them to survive onslaughts from multiple enemies and to effectively defend the station. Emphasis is placed on mastering the shooting mechanics, and strategically utilizing the environment to ensure the station\'s security. The aim is to provide a thrilling sense of achievement through overcoming the escalating challenges presented throughout the game.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/primedirective/combat1.jpg',
+            alt: 'Combat Experience 1',
+            caption: 'Intense shootout gameplay mechanics'
+          },
+          {
+            src: '/media/projects/primedirective/combat2.jpg',
+            alt: 'Combat Experience 2',
+            caption: 'Strategic environment utilization for defense'
+          }
+        ]
+      },
+
+      {
+        id: 'final-showcase',
+        title: 'Final Showcase',
+        icon: '🚀',
+        content: 'The objective for players within "Prime Directive" is to revel in a thrilling combat experience, focusing on the satisfaction that comes from engaging shootouts. Players are tasked to protecting the Zeta Station. The design of the game is such that it not only tests the players\' reflexes and tactical skills but also immerses them in a narrative of survival and defense. This player-centric approach to game design ensures that those who embark on the "Prime Directive" journey will find themselves captivated by the intense action and the rewarding feeling of safeguarding their space station against formidable adversaries.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/primedirective/final1.jpg',
+            alt: 'Final Gameplay 1',
+            caption: 'Complete gameplay experience showcasing all mechanics'
+          },
+          {
+            src: '/media/projects/primedirective/final2.jpg',
+            alt: 'Final Gameplay 2',
+            caption: 'Station defense and survival narrative'
           }
         ]
       }
@@ -664,6 +999,7 @@ export const projects = [
     subtitle: 'Third Person Role Playing Game',
     categories: ['Game', '3D', 'Programming'], // 多分类支持
     tags: ['Game Design', 'Unity', '3D Environment Design', 'C#'],
+    techTags: ['#Unity', 'C#', '#Maya', '#Blender', '#3D Modeling'],
     
     thumbnail: '/media/projects/eternaldreams/HeroCover.jpg',
     brief: 'A Third Person 3D Role-playing game made in Unity. You are the chosen adventurer, who came into this fantastic world.',
@@ -710,7 +1046,7 @@ export const projects = [
         title: 'Concept and Inspirations',
         icon: '⚙️',
         content: "The core idea of this game, Eternal Dream,stems from my own dreams, as I am a person with a vivid imagination who frequently experiences fantastical dreams. These dreams often involve battling alongside or against a myriad of mythical creatures, leaving me questioning their reality upon awakening. Inspired by this personal experience, I created a game that encapsulates the essence of navigating through a dreamlike world, offering players the choice to either escape the dream or become engrossed within it.",
-        imageDisplayMode: 'grid', // 网格模式
+        imageDisplayMode: 'two-column', // 网格模式
         images: [
           {
             src: '/media/projects/eternaldreams/0.jpg',
@@ -750,7 +1086,7 @@ export const projects = [
           "The game comprises two distinct levels: a gloomy, dilapidated forest filled with low visibility and skeleton monsters that players must defeat; and a village inhabited by elves and humans, characterized by harmony and beauty. Unique to this game, the elves' homes are built into the mountains with distinctive shapes, made from trees, leaves, and mushrooms, contrasting with the human's more conventional houses. The focus on environmental construction utilized Maya and Blender for building different houses, trees, decorations, and flora, with shaders applied in Unity to render the game world in a cute, two-dimensional style.",
           "I was inspired by the two-dimensional game environment style of Genshin Impact and aimed to achieve a similar effect. However, I had no prior knowledge in this area. Through self-study on YouTube, I learned how to use shaders in Unity to achieve this style of rendering. Completing the entire game construction alone was time-consuming. Initially, my plan also included developing the game's storyline, quests, and combat system, but due to time constraints, I focused mainly on environment design and polishing. I am still satisfied with the outcome.",
         ],
-        imageDisplayMode: 'grid', // 网格模式
+        imageDisplayMode: 'two-column', // 网格模式
         images: [
           {
             src: '/media/projects/eternaldreams/1.png',
@@ -829,54 +1165,9 @@ export const projects = [
             src: '/media/projects/eternaldreams/environment/4.png',
             alt: 'Battle'
           },
-
         ]
       }
     ]
-  },
-
-  // ========== Research 项目示例 ==========
-  {
-    id: 'user-research',
-    title: 'UX Research Study',
-    subtitle: 'Mobile App Usability Analysis',
-    categories: ['Research'], // 多分类支持
-    tags: ['User Research', 'Usability Testing', 'Data Analysis'],
-    
-    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
-    brief: 'Comprehensive user research study analyzing mobile app usability patterns.',
-    
-    heroImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
-    heroVideo: null,
-    
-    domain: ['Research', 'UX', 'Mobile'],
-    form: ['User Research', 'Data Analysis', 'Usability Testing'],
-    collaborators: ['Research Team'],
-    
-    overview: {
-      content: 'A comprehensive research study examining user behavior and usability patterns in mobile applications.',
-      challenge: 'How do users interact with mobile interfaces and what patterns can we identify?'
-    },
-    
-    role: {
-      title: 'UX Researcher',
-      responsibilities: [
-        'Research Design: Methodology and participant recruitment',
-        'Data Collection: User interviews and usability testing',
-        'Analysis: Qualitative and quantitative data analysis',
-        'Reporting: Findings documentation and recommendations'
-      ]
-    },
-    
-    sections: [
-      {
-        id: 'methodology',
-        title: 'Research Methodology',
-        icon: '🔬',
-        content: 'The study employed mixed-methods research approach combining qualitative and quantitative data.',
-        images: []
-      }
-    ],
   },
   
   // ========== Graphic Design 项目示例 ==========
