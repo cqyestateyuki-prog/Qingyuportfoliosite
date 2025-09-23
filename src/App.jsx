@@ -8,9 +8,17 @@ import ProjectDetail from './pages/ProjectDetail';
 import AboutPage from './pages/AboutPage';
 // 新增：导入全局样式文件，包含所有自定义CSS变量和样式
 import './App.css';
+// 新增：导入分析工具
+import { initGA } from './components/Analytics';
+import { useEffect } from 'react';
 
 // 新增：App组件是整个应用的根组件，负责路由配置
 function App() {
+  // 新增：初始化 Google Analytics
+  useEffect(() => {
+    initGA();
+  }, []);
+
   return (
     <div className="App">
       {/* 新增：Routes组件定义所有路由规则 */}

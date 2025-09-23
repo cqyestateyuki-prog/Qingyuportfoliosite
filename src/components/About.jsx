@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Code, Palette, Gamepad2, Search } from 'lucide-react';
+import { Code, Palette, Gamepad2, Search, BarChart3, Instagram } from 'lucide-react';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,12 +24,6 @@ const About = () => {
 
   const skills = [
     {
-      icon: <Code className="w-8 h-8" />,
-      title: 'Frontend Development',
-      description: 'React, JavaScript, HTML/CSS, responsive design and modern web technologies',
-      color: 'var(--main-blue)'
-    },
-    {
       icon: <Palette className="w-8 h-8" />,
       title: 'UI/UX Design',
       description: 'User-centered design, prototyping, wireframing, and visual design systems',
@@ -42,9 +36,15 @@ const About = () => {
       color: 'var(--main-blue)'
     },
     {
-      icon: <Search className="w-8 h-8" />,
-      title: 'Research & Strategy',
-      description: 'User research, data analysis, market research, and strategic planning',
+      icon: <BarChart3 className="w-8 h-8" />,
+      title: 'Digital Marketing',
+      description: 'Social media strategy, content creation, brand development, data analysis, and digital campaigns',
+      color: 'var(--main-blue)'
+    },
+    {
+      icon: <Instagram className="w-8 h-8" />,
+      title: 'Social Media',
+      description: 'Platform management, community engagement, analytics, and social media operations',
       color: 'var(--main-blue)'
     }
   ];
@@ -87,7 +87,7 @@ const About = () => {
                 3+ Years in Design & Programming
               </div>
               <div className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-medium">
-                4+ Years in Social Media & Ecommerce
+                4+ Years in Digital Marketing & Ecommerce
               </div>
               <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-medium">
                 Creative Problem Solver

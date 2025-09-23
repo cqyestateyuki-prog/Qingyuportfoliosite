@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLink, Github, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button.jsx';
 import { projects, getProjectsByCategory } from '../../data/projects.js';
+import { trackProjectClick } from './Analytics';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -39,6 +40,11 @@ const Portfolio = () => {
     return project.categories?.includes(activeFilter);
   });
 
+  // 处理项目点击
+  const handleProjectClick = (project) => {
+    trackProjectClick(project.id, project.title);
+  };
+
   return (
     <section id="work" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -73,11 +79,12 @@ const Portfolio = () => {
         </div>
 
         {/* 项目网格 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredProjects.map((project, index) => (
             <Link
               key={project.id}
               to={`/project/${project.id}`}
+              onClick={() => handleProjectClick(project)}
               className={`project-card bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 block ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
@@ -107,8 +114,8 @@ const Portfolio = () => {
                   {project.brief}
                 </p>
                 
-                {/* Category标签 - 替换原来的灰色标签 */}
-                <div className="flex flex-wrap gap-2">
+                {/* Category标签 */}
+                <div className="flex flex-wrap gap-2 mb-3">
                   {project.categories.map((category) => (
                     <span
                       key={category}
@@ -132,6 +139,26 @@ const Portfolio = () => {
                     </span>
                   ))}
                 </div>
+
+                {/* 技术标签 - 新增的灰色标签行 */}
+                {project.techTags && project.techTags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {project.techTags.slice(0, 5).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                        style={{ fontSize: '12px' }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.techTags.length > 5 && (
+                        <span className="px-2 py-1 text-xs font-medium text-gray-400 bg-gray-50 rounded-md" style={{ fontSize: '12px' }}>
+                        +{project.techTags.length - 5} more
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             </Link>
           ))}

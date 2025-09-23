@@ -303,14 +303,38 @@ const ProjectDetail = () => {
           <div className="relative group rounded-3xl overflow-hidden shadow-2xl mb-12">
             <div className="aspect-[16/10] bg-gradient-to-br from-purple-100 to-blue-100">
               {project.heroVideo ? (
-                <video 
-                  className="w-full h-full object-cover"
-                  controls
-                  poster={project.heroImage}
-                >
-                  <source src={project.heroVideo} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                // 检查是否是 Vimeo 链接
+                project.heroVideo.includes('vimeo.com') ? (
+                  <iframe
+                    src={`https://player.vimeo.com/video/${project.heroVideo.split('/').pop().split('?')[0]}?autoplay=0&loop=0&muted=0`}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    title={project.title}
+                  />
+                ) : 
+                // 检查是否是 YouTube 链接
+                project.heroVideo.includes('youtube.com') || project.heroVideo.includes('youtu.be') ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${project.heroVideo.includes('youtu.be') ? project.heroVideo.split('youtu.be/')[1].split('?')[0] : project.heroVideo.split('v=')[1].split('&')[0]}?autoplay=0&rel=0`}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={project.title}
+                  />
+                ) : (
+                  // 普通视频文件
+                  <video 
+                    className="w-full h-full object-cover"
+                    controls
+                    poster={project.heroImage}
+                  >
+                    <source src={project.heroVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )
               ) : (
                 <>
                   <img 
@@ -419,33 +443,36 @@ const ProjectDetail = () => {
             </h2>
             <div className="h-1 mb-12 w-96" style={{background: project.colors?.underlineGradient || 'var(--gradient-secondary)'}}></div>
             
-            <div className="prose prose-lg max-w-none mb-12">
-              {Array.isArray(section.content) ? (
-                section.content.map((paragraph, index) => (
-                  <div key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
+            {/* 只在非交替模式下显示文字内容 */}
+            {section.imageDisplayMode !== 'alternating' && (
+              <div className="prose prose-lg max-w-none mb-12">
+                {Array.isArray(section.content) ? (
+                  section.content.map((paragraph, index) => (
+                    <div key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
+                      <ReactMarkdown 
+                        components={{
+                          p: ({children}) => <p className="mb-4">{children}</p>,
+                          strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                        }}
+                      >
+                        {paragraph}
+                      </ReactMarkdown>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-lg text-gray-700 leading-relaxed">
                     <ReactMarkdown 
                       components={{
                         p: ({children}) => <p className="mb-4">{children}</p>,
                         strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
                       }}
                     >
-                      {paragraph}
+                      {section.content}
                     </ReactMarkdown>
                   </div>
-                ))
-              ) : (
-                <div className="text-lg text-gray-700 leading-relaxed">
-                  <ReactMarkdown 
-                    components={{
-                      p: ({children}) => <p className="mb-4">{children}</p>,
-                      strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
-                    }}
-                  >
-                    {section.content}
-                  </ReactMarkdown>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
 
             {/* 特性卡片 */}
             {section.features && section.features.length > 0 && (
@@ -481,18 +508,28 @@ const ProjectDetail = () => {
                   <a
                     key={buttonIndex}
                     href={button.url}
-                    target="_blank"
+                    target={button.type === 'download' ? '_self' : '_blank'}
                     rel="noopener noreferrer"
+                    download={button.type === 'download' ? (button.downloadName || true) : false}
                     className={`inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl ${
                       button.type === 'github' 
                         ? 'bg-gray-800 text-white hover:bg-gray-900' 
-                        : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
+                        : 'text-white hover:opacity-90'
                     }`}
+                    style={button.type !== 'github' ? {
+                      background: project.colors?.heroGradient || 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)'
+                    } : {}}
                   >
                     {button.text}
-                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
+                    {button.type === 'download' ? (
+                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    ) : (
+                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    )}
                   </a>
                 ))}
               </div>
@@ -504,6 +541,7 @@ const ProjectDetail = () => {
                 images={section.images}
                 onImageClick={(image) => handleImageClick(image, section.images)}
                 displayMode={section.imageDisplayMode || 'single'}
+                content={section.content}
               />
             )}
           </div>

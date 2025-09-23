@@ -9,7 +9,7 @@ export const projects = [
     subtitle: 'Library Experience for the Future',
     categories: ['UIUX', 'Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
-    techTags: ['#Figma', '#Wireframing & Prototyping', '#Mobile App'],  // 技术标签
+    techTags: ['#Figma', '#Wireframe', '#Prototype','#Visual Design'],  // 技术标签
     
     // ========== 主页展示 ==========
     thumbnail: '/media/projects/stumbldoor/hero/hero-image.jpg',  // 列表页缩略图
@@ -19,9 +19,9 @@ export const projects = [
     heroImage: '/media/projects/stumbldoor/hero/hero-image.jpg',
     heroVideo: null,  // 可选：视频路径
     
-    // ========== 项目标签（参考Reshma的设计）==========
+    // ========== 项目标签==========
     domain: ['Edtech', 'UI/UX', 'Mobile'],
-    form: ['UX Research', 'App Design', 'Prototyping'],
+    form: ['Research', 'Mobile Application Design'],
     collaborators: ['Solo Project'],  // 或其他合作者名字
     
     // ========== 项目颜色配置 ==========
@@ -223,7 +223,7 @@ export const projects = [
       subtitle: 'Modern integrated Community Platform for AI Tools',
       categories: ['UIUX', 'Programming', 'Research'],
       tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
-      techTags: ['#Figma','#React', '#TypeScript', '#Next.js'],
+      techTags: ['#Figma','#React','#TypeScript', '#Next.js','#HTML/CSS'],
       
       thumbnail: '/media/projects/aicommunity/Hero.jpg',
       brief: 'An in-app integrated community system designed for AI Tools.',
@@ -457,7 +457,7 @@ export const projects = [
     subtitle: '',
     categories: ['UIUX','Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
-    techTags: ['#Figma', '#User Research', '#Prototyping'],
+    techTags: ['#Figma', '#Wireframe', '#Prototype'],
     
     thumbnail: '/media/projects/ziplink/Slide27.jpeg',  // 列表页缩略图
     brief: 'Redesign the user experience of future in-car system.',
@@ -465,7 +465,7 @@ export const projects = [
     heroImage: '/media/projects/ziplink/Slide1.jpeg',
     heroVideo: null,  // 可选：视频路径
     domain: ['In-Car System', 'UI/UX'],
-    form: ['UX Research', 'App Design', 'Research'],
+    form: ['Research', 'Wireframing & Prototyping'],
     collaborators: ['Yu Zhou', 'Francisco Guerrero'],  // 或其他合作者名字
   
     colors: {
@@ -632,9 +632,9 @@ export const projects = [
     id: 'music-encounter',
     title: 'Music Encounter',
     subtitle: '3D Open World Social Adventure Game',
-    categories: ['Game', '3D', 'Research', 'Programming'],
+    categories: ['Game', 'Research', 'Programming'],
     tags: ['Game Design', 'Unity', 'Music Interaction', 'Social Gaming', 'Research'],
-    techTags: ['#Unity', 'C#', '#Interactive Design', '#Research'],
+    techTags: ['#Unity', 'C#', '#Interactive Design', '#Music notes from text'],
     
     thumbnail: '/media/projects/musicencounter/Hero.png',
     brief: 'Exploring music and sound as primary means of interaction and connection in games.',
@@ -642,7 +642,7 @@ export const projects = [
     heroImage: '/media/projects/musicencounter/Hero.png',
     heroVideo: null,
     
-    domain: ['Gaming', 'Interactive Design', 'Music Technology', 'Research'],
+    domain: ['Video Game', 'Interactive Design', 'Music Technology', 'Research'],
     form: ['Game Design & Development', 'C# Programming', 'Interactive Design','Research'],
     collaborators: ['Solo Project', 'Parsons School of Design'],
     
@@ -823,174 +823,6 @@ export const projects = [
       }
     ]
   },
-
-  // ========== Prime Directive 游戏项目 ==========
-  {
-    id: 'prime-directive',
-    title: 'Prime Directive',
-    subtitle: '2D Action-Platformer Game',
-    categories: ['Game', '2D', 'Programming'],
-    tags: ['Game Design', 'Unity', '2D Platformer', 'Action Game'],
-    techTags: ['#Unity', '#C#', '#2D Game Design', '#Vector Graphics'],
-    
-    thumbnail: '/media/projects/primedirective/hero-image.jpg',
-    brief: 'A 2D Action-Platformer game made in Unity. The player acts as a security bot on a space station, defending the station and defeating all enemies.',
-    
-    heroImage: '/media/projects/primedirective/hero-image.jpg',
-    heroVideo: null,
-    
-    domain: ['Gaming', 'Entertainment', '2D Art'],
-    form: ['Game Design', 'Level Design', '2D Art', 'C# Programming'],
-    collaborators: ['University of Florida'],
-    
-    colors: {
-      heroGradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-      subtitleGradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-      underlineGradient: 'linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)'
-    },
-    
-    overview: {
-      content: "As a security robot onboard a deep space station, you were created to stop any threats that may appear. On this fateful day, you have been awoken from stasis sleep to stop a gang of pirates that have overtaken the station. Navigate through the corridors of the Zeta Station, collect weapon upgrades, defeat the invaders, and fulfill your prime directive!",
-      challenge: 'How to create an engaging 2D platformer with unique vector graphics and combat mechanics?'
-    },
-    
-    sections: [
-      {
-        id: 'game-mechanics',
-        title: 'Game Mechanics',
-        icon: '🎮',
-        content: '"Prime Directive" incorporates exploration and combat within 2D platforming levels. Players can collect power-ups and weapon upgrades to enhance their abilities. The unique mechanics allows player to collect different weapons, affecting gameplay and strategy. The final boss encounter suggests a shift in mechanics to a "shoot-em-up" style, adding variety to the core platforming gameplay.',
-        imageDisplayMode: 'grid',
-        images: [
-          {
-            src: '/media/projects/primedirective/gameplay1.jpg',
-            alt: 'Gameplay Screenshot 1',
-            caption: '2D platforming action with weapon collection mechanics'
-          },
-          {
-            src: '/media/projects/primedirective/gameplay2.jpg',
-            alt: 'Gameplay Screenshot 2',
-            caption: 'Combat system and enemy encounters'
-          }
-        ]
-      },
-
-      {
-        id: 'concept-inspiration',
-        title: 'Concept and Inspiration',
-        icon: '💡',
-        content: 'The core idea of "Prime Directive" is a classic action-platformer experience with a science fiction setting. The game places players in the role of a security robot tasked with defending a space station from a pirate invasion. Inspiration likely comes from classic platformers and sci-fi tropes, such as sentient robots, space stations, and alien pirates, calling back to the golden age of arcade games while incorporating modern game mechanics.',
-        imageDisplayMode: 'single',
-        images: [
-          {
-            src: '/media/projects/primedirective/concept-art.jpg',
-            alt: 'Concept Art',
-            caption: 'Science fiction concept art and character design'
-          }
-        ]
-      },
-
-      {
-        id: 'storyline-narrative',
-        title: 'Storyline and Narrative',
-        icon: '📖',
-        content: 'The narrative follows a security robot activated to defend the Zeta Station against pirates. As the robot progresses through levels, it encounters various enemies. The storyline unfolds through level progression, culminating in a final boss battle.',
-        imageDisplayMode: 'grid',
-        images: [
-          {
-            src: '/media/projects/primedirective/story1.jpg',
-            alt: 'Story Scene 1',
-            caption: 'Security robot awakening sequence'
-          },
-          {
-            src: '/media/projects/primedirective/story2.jpg',
-            alt: 'Story Scene 2',
-            caption: 'Pirate invasion and station defense'
-          }
-        ]
-      },
-
-      {
-        id: 'level-environment',
-        title: 'Level and Environment Design',
-        icon: '🏗️',
-        content: 'I crafted 2D levels set within the network of passageways that make up Zeta Station. Drawing inspiration from cinematic depictions of space station corridors and spacecraft interiors, I designed the levels with a vector graphic style. To enrich the backdrop and add depth to the environment, numerous windows have been integrated, through which dynamic cosmic scenes are visible, creating a sense of image parallelism. The adversaries are modeled after traditional alien archetypes and spaceships in final boss battle, supplemented with various drones, and flying objects serving as additional enemies. This combination not only enhances the visual appeal but also diversifies the gameplay experience.',
-        imageDisplayMode: 'grid',
-        images: [
-          {
-            src: '/media/projects/primedirective/level1.jpg',
-            alt: 'Level Design 1',
-            caption: 'Space station corridor design with vector graphics'
-          },
-          {
-            src: '/media/projects/primedirective/level2.jpg',
-            alt: 'Level Design 2',
-            caption: 'Dynamic cosmic scenes visible through windows'
-          },
-          {
-            src: '/media/projects/primedirective/boss-battle.jpg',
-            alt: 'Boss Battle',
-            caption: 'Final boss encounter with alien spaceships and drones'
-          }
-        ]
-      },
-
-      {
-        id: 'challenges-solutions',
-        title: 'Challenges and Solutions',
-        icon: '⚡',
-        content: 'A recurrent challenge in game design is the task of infusing familiar mechanics with a fresh and captivating allure. Many science fiction games conventionally gravitate towards pixel art or 3D photorealistic styles. In our endeavor, we opted for a vector graphic art style, which imparts a vibrant and distinct visual character to the project. This approach yields a cleaner and more individualistic aesthetic, setting our game apart and enhancing its uniqueness.',
-        imageDisplayMode: 'single',
-        images: [
-          {
-            src: '/media/projects/primedirective/art-style.jpg',
-            alt: 'Art Style',
-            caption: 'Vector graphic art style creating unique visual character'
-          }
-        ]
-      },
-
-      {
-        id: 'player-experience',
-        title: 'Player Experience Goals',
-        icon: '🎯',
-        content: 'The primary ambition for players of "Prime Directive" is to deliver an exhilarating combat-centric gaming experience. The game is designed to immerse players in intense shootouts, challenging them to survive onslaughts from multiple enemies and to effectively defend the station. Emphasis is placed on mastering the shooting mechanics, and strategically utilizing the environment to ensure the station\'s security. The aim is to provide a thrilling sense of achievement through overcoming the escalating challenges presented throughout the game.',
-        imageDisplayMode: 'grid',
-        images: [
-          {
-            src: '/media/projects/primedirective/combat1.jpg',
-            alt: 'Combat Experience 1',
-            caption: 'Intense shootout gameplay mechanics'
-          },
-          {
-            src: '/media/projects/primedirective/combat2.jpg',
-            alt: 'Combat Experience 2',
-            caption: 'Strategic environment utilization for defense'
-          }
-        ]
-      },
-
-      {
-        id: 'final-showcase',
-        title: 'Final Showcase',
-        icon: '🚀',
-        content: 'The objective for players within "Prime Directive" is to revel in a thrilling combat experience, focusing on the satisfaction that comes from engaging shootouts. Players are tasked to protecting the Zeta Station. The design of the game is such that it not only tests the players\' reflexes and tactical skills but also immerses them in a narrative of survival and defense. This player-centric approach to game design ensures that those who embark on the "Prime Directive" journey will find themselves captivated by the intense action and the rewarding feeling of safeguarding their space station against formidable adversaries.',
-        imageDisplayMode: 'grid',
-        images: [
-          {
-            src: '/media/projects/primedirective/final1.jpg',
-            alt: 'Final Gameplay 1',
-            caption: 'Complete gameplay experience showcasing all mechanics'
-          },
-          {
-            src: '/media/projects/primedirective/final2.jpg',
-            alt: 'Final Gameplay 2',
-            caption: 'Station defense and survival narrative'
-          }
-        ]
-      }
-    ]
-  },
   
   // ========== game项目示例 eternal-dreams==========
   {
@@ -1007,9 +839,9 @@ export const projects = [
     heroImage: '/media/projects/eternaldreams/HeroCover.jpg',
     heroVideo: null,  // 游戏可以有预告片
     
-    domain: ['Gaming', 'Entertainment', '3D Art'],
-    form: ['Game Design', 'Level Design', '3D Modeling', 'C# Programming'],
-    collaborators: ['Solo Project'],
+    domain: ['Video Game', 'Entertainment', '3D Art'],
+    form: ['Game Design & Development', 'Level Design', '3D Modeling', 'C# Programming'],
+    collaborators: ['Solo Project','University of Florida'],
     
     // ========== 项目颜色配置 ==========
     colors: {
@@ -1170,73 +1002,237 @@ export const projects = [
     ]
   },
   
-  // ========== Graphic Design 项目示例 ==========
+  
+
+  // ========== Prime Directive 游戏项目 ==========
   {
-    id: 'brand-identity',
-    title: 'Brand Identity Design',
-    subtitle: 'Complete Visual Identity System',
-    categories: ['Graphic Design'], // 多分类支持
-    tags: ['Branding', 'Logo Design', 'Typography', 'Visual Identity'],
+    id: 'prime-directive',
+    title: 'Prime Directive',
+    subtitle: '2D Action-Platformer Game',
+    categories: ['Game', '2D GameArt'],
+    techTags: ['#Unity', '#Level Design','#Adobe Illustrator','#Adobe Creative Suite'],
     
-    thumbnail: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop',
-    brief: 'Comprehensive brand identity design for a modern tech startup.',
+    thumbnail: '/media/projects/primedirective/Hero3.png',
+    brief: 'A 2D Action-Platformer game made in Unity. The player acts as a security bot on a space station, defending the station and defeating all enemies.',
     
-    heroImage: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=500&fit=crop',
-    heroVideo: null,
+    heroImage: '/media/projects/primedirective/Hero3.png',
+    heroVideo: 'https://vimeo.com/654379482',
     
-    domain: ['Branding', 'Visual Design', 'Marketing'],
-    form: ['Logo Design', 'Typography', 'Color Palette', 'Brand Guidelines'],
-    collaborators: ['Design Team'],
+    domain: ['Video Game', 'Entertainment', 'Art Design'],
+    form: ['Game Design & Development', 'Level Design', '2D Art'],
+    collaborators: ['Qingyu Cao(Lead Artist & Level Designer)', 'Griffin Mckee(Artist)', 'Tyler C.Mueller(Programmer)','Yifan Zhu(Programmer)'],
     
-    overview: {
-      content: 'A complete brand identity system including logo design, typography, color palette, and comprehensive brand guidelines.',
-      challenge: 'How to create a memorable and cohesive brand identity that reflects the company values?'
+    colors: {
+      heroGradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+      subtitleGradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+      underlineGradient: 'linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%)'
     },
     
-    role: {
-      title: 'Graphic Designer',
-      responsibilities: [
-        'Logo Design: Creating multiple logo concepts and final design',
-        'Typography: Selecting and customizing brand fonts',
-        'Color Palette: Developing cohesive color system',
-        'Brand Guidelines: Documenting usage rules and applications'
-      ]
+    overview: {
+      content: "As a security robot onboard a deep space station, you were created to stop any threats that may appear. On this fateful day, you have been awoken from stasis sleep to stop a gang of pirates that have overtaken the station. Navigate through the corridors of the Zeta Station, collect weapon upgrades, defeat the invaders, and fulfill your prime directive!",
+      challenge: 'How to create an engaging 2D platformer with unique vector graphics and combat mechanics?'
     },
     
     sections: [
       {
-        id: 'logo-design',
-        title: 'Logo Design Process',
-        icon: '🎨',
-        content: 'The logo design process involved extensive research, sketching, and digital refinement.',
-        features: [
-          {
-            name: 'Research',
-            description: 'Brand Analysis',
-            detail: 'Understanding company values and target audience'
-          },
-          {
-            name: 'Sketching',
-            description: 'Concept Development',
-            detail: 'Hand-drawn concepts and initial ideas'
-          },
-          {
-            name: 'Digital Design',
-            description: 'Final Execution',
-            detail: 'Vector-based logo design and variations'
-          }
+        id: 'game-mechanics',
+        title: 'Game Concept & Mechanics',
+        icon: '🎮',
+        content:[ '"Prime Directive" incorporates exploration and combat within 2D platforming levels. Players can collect power-ups and weapon upgrades to enhance their abilities. The unique mechanics allows player to collect different weapons, affecting gameplay and strategy. The final boss encounter suggests a shift in mechanics to a "shoot-em-up" style, adding variety to the core platforming gameplay.',
+        'The core idea of "Prime Directive" is a classic action-platformer experience with a science fiction setting. The game places players in the role of a security robot tasked with defending a space station from a pirate invasion. Inspiration likely comes from classic platformers and sci-fi tropes, such as sentient robots, space stations, and alien pirates, calling back to the golden age of arcade games while incorporating modern game mechanics.',
         ],
-        images: []
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/primedirective/Illustration.jpg',
+            alt: 'Concept Art',
+            caption: 'Space Illustration'
+          },
+          {
+            src: '/media/projects/primedirective/CharacterDesign.png',
+            alt: 'Character Design',
+            caption: 'Character Design & Illustration'
+          },
+          {
+            src: '/media/projects/primedirective/EnemyDesign.jpg',
+            alt: 'Enemy Design',
+            caption: 'Enemy Design'
+          },
+        ]
       },
+
       {
-        id: 'brand-guidelines',
-        title: 'Brand Guidelines',
-        icon: '📋',
-        content: 'Comprehensive brand guidelines ensuring consistent application across all touchpoints.',
-        images: []
+        id: 'storyline-narrative',
+        title: 'Storyline and Narrative',
+        icon: '📖',
+        content: 'The narrative follows a security robot activated to defend the Zeta Station against pirates. As the robot progresses through levels, it encounters various enemies. The storyline unfolds through level progression, culminating in a final boss battle.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/primedirective/Narrative.png',
+            alt: 'Story Scene 1',
+          },
+          {
+            src: '/media/projects/primedirective/Narrative2.png',
+            alt: 'Story Scene 2',
+          }
+        ]
+      },
+
+      {
+        id: 'level-environment',
+        title: 'Level and Environment Design',
+        icon: '🏗️',
+        content: 'I crafted 2D levels set within the network of passageways that make up Zeta Station. Drawing inspiration from cinematic depictions of space station corridors and spacecraft interiors, I designed the levels with a vector graphic style. To enrich the backdrop and add depth to the environment, numerous windows have been integrated, through which dynamic cosmic scenes are visible, creating a sense of image parallelism. The adversaries are modeled after traditional alien archetypes and spaceships in final boss battle, supplemented with various drones, and flying objects serving as additional enemies. This combination not only enhances the visual appeal but also diversifies the gameplay experience.',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/primedirective/LevelDesign.png',
+            alt: 'Level Design 1',
+            caption: 'Space station corridor design with vector graphics'
+          },
+          {
+            src: '/media/projects/primedirective/LevelDesign2.png',
+            alt: 'Level Design 2',
+          },
+        ]
+      },
+
+      {
+        id: 'challenges-solutions',
+        title: 'Challenges and Solutions',
+        icon: '⚡',
+        content: 'A recurrent challenge in game design is the task of infusing familiar mechanics with a fresh and captivating allure. Many science fiction games conventionally gravitate towards pixel art or 3D photorealistic styles. In our endeavor, we opted for a vector graphic art style, which imparts a vibrant and distinct visual character to the project. This approach yields a cleaner and more individualistic aesthetic, setting our game apart and enhancing its uniqueness.',
+      },
+
+      {
+        id: 'player-experience',
+        title: 'Player Experience Goals',
+        icon: '🎯',
+        content: 'The primary ambition for players of "Prime Directive" is to deliver an exhilarating combat-centric gaming experience. The game is designed to immerse players in intense shootouts, challenging them to survive onslaughts from multiple enemies and to effectively defend the station. Emphasis is placed on mastering the shooting mechanics, and strategically utilizing the environment to ensure the station\'s security. The aim is to provide a thrilling sense of achievement through overcoming the escalating challenges presented throughout the game.',
+      },
+
+      {
+        id: 'final-showcase',
+        title: 'Final Showcase',
+        icon: '🚀',
+        content: 'The objective for players within "Prime Directive" is to revel in a thrilling combat experience, focusing on the satisfaction that comes from engaging shootouts. Players are tasked to protecting the Zeta Station. The design of the game is such that it not only tests the players\' reflexes and tactical skills but also immerses them in a narrative of survival and defense. This player-centric approach to game design ensures that those who embark on the "Prime Directive" journey will find themselves captivated by the intense action and the rewarding feeling of safeguarding their space station against formidable adversaries.',
+        images: [{
+          src: '/media/projects/primedirective/Hero.png',
+          alt: 'Boss Battle',
+          caption: 'Final boss encounter with alien spaceships and drones'
+        },
+        {
+          src: '/media/projects/primedirective/Hero2.png',
+          alt: 'Finished Gameplay',
+          caption: 'Finished Gameplay'
+        }
+      ]
       }
     ]
   },
+
+  // ========== My Little Fish Tank 游戏项目 ==========
+  {
+    id: 'my-little-fish-tank',
+    title: 'My Little Fish Tank',
+    subtitle: '3D Fish Tank Simulator',
+    categories: ['Game', '3D'],
+    techTags: ['#Unity','#Maya', '#3D Modeling & Animation','Texturing'],
+    
+    thumbnail: '/media/projects/fishtank/Picture2.png',
+    brief: 'A 3D fish tank simulator that taps into childhood nostalgia of owning and caring for a fish tank, allowing players to maintain their own little ecosystem.',
+    
+    heroImage: '/media/projects/fishtank/Picture2.png',
+    heroVideo:'https://vimeo.com/644155060',
+    
+    domain: ['Video Game', '3D Art'],
+    form: ['Game Design', '3D  Modeling & Animation','Texturing'],
+    collaborators: [''],
+    
+    colors: {
+      heroGradient: 'linear-gradient(135deg,rgb(93, 155, 217) 0%,rgb(55, 136, 177) 50%,rgb(7, 70, 101) 100%)',
+      subtitleGradient: 'linear-gradient(135deg,rgb(93, 155, 217) 0%,rgb(55, 136, 177) 50%,rgb(7, 70, 101) 100%',
+      underlineGradient: 'linear-gradient(135deg,rgb(93, 155, 217) 0%,rgb(55, 136, 177) 50%,rgb(7, 70, 101) 100%'
+    },
+    
+    overview: {
+      content: '"My Little Fish Tank" is a 3D fish tank simulator that taps into the childhood nostalgia associated with owning and caring for a fish tank. Inspired by the joy and responsibility of maintaining a miniature aquatic ecosystem, the game offers players the opportunity to nurture fish, decorate their tank, and manage a virtual aquatic environment. The idea is to recreate the sense of accomplishment and attachment that comes from growing and caring for fish, combined with the excitement of collecting and customizing their environment.',
+      challenge: 'How to create an engaging simulation game that captures the nostalgia and joy of fishkeeping?'
+    },
+    
+    sections: [
+      {
+        id: 'game-mechanics',
+        title: 'Game Mechanics',
+        icon: '🎮',
+        content: 'The game employs mechanics centered around ecosystem management, commerce, and progression. Players interact with their tank through a first-person view, utilizing mouse clicks for navigation and selection within the UI. The core mechanics involve purchasing fish and decorations from the pet store, feeding fish, and arranging the tank\'s layout. Fish grow over time and can be sold at a profit, contributing to a currency system that enables the purchase of more exotic items and unlocks achievements. Proficiency levels are introduced as a means to track progress and unlock new options for the player.',
+        buttons: [
+            {
+              text: 'Preview Game Design Document',
+              url: '/files/MyLittleFishTankGDD.pdf',
+              type: 'external'
+            }
+        ]
+      },
+
+      {
+        id: 'level-environment',
+        title: 'Level and Environment Design',
+        icon: '🏗️',
+        content: 'The game is set in two main environments: the player\'s fish tank and the fish store. The fish tank serves as the primary canvas for player interaction, designed in 3D to offer an immersive view of the aquatic life and decorations within. The fish store provides a contrasting scene where players can browse and purchase new fish and accessories, enhancing their tank. The design focuses on realism and detail to create a captivating and authentic fish tank experience.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/fishtank/Picture1.png',
+            alt: 'Fish Tank Environment',
+            caption: '3D fish tank with decoration assets'
+          },
+          {
+            src: '/media/projects/fishtank/fishtank2.jpg',
+            alt: 'Fish Store Environment',
+            caption: 'Pet store interface for browsing and purchasing items'
+          }
+        ]
+      },
+
+      {
+        id: 'player-experience',
+        title: 'Player Experience Goals',
+        icon: '🎯',
+        content: 'The goal is to provide players with a relaxing, engaging experience that combines the joys of fishkeeping with the thrill of collection and customization. The game aims to evoke a sense of nostalgia and accomplishment, encouraging players to invest time in creating their unique aquatic world. By balancing management mechanics with creative freedom, the game seeks to appeal to a broad audience, including those who enjoy casual simulation games and aquarium enthusiasts alike.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/fishtank/model.png',
+          },
+          {
+            src: '/media/projects/fishtank/model2.png',
+          }
+        ]
+      },
+
+      {
+        id: 'final-showcase',
+        title: 'Final Showcase',
+        icon: '🚀',
+        content: '"My Little Fish Tank" represents a unique blend of simulation, management, and creativity, offering players a chance to dive into the serene world of fishkeeping virtually. Through its immersive environments, detailed mechanics, and progression system, the game delivers a fulfilling experience of nurturing and expanding a personal aquarium. This project has not only allowed our team, Unorthodox, to explore innovative game design concepts but also to contribute meaningfully to the genre of simulation games, marking significant growth in our capabilities as game designers.',
+        imageDisplayMode: 'grid',
+        images: [
+          {
+            src: '/media/projects/fishtank/Picture2.png',
+            alt: 'Fish Tank Environment',
+            caption: '3D fish tank with detailed aquatic life and decorations'
+          },
+          {
+            src: '/media/projects/fishtank/fishtank1.jpg',
+            alt: 'Fish Tank Environment',
+            caption: '3D fish tank with detailed aquatic life and decorations'
+          },
+        ]
+      }
+    ]
+  }
   
 ]
 
