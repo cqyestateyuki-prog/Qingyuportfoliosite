@@ -29,26 +29,22 @@ const Portfolio = () => {
 
   const filters = ['All', 'UIUX', 'Game', 'Programming', 'Research', '3D', 'Graphic Design'];
 
-  // 单选筛选逻辑
   const handleFilterSelect = (filter) => {
     setActiveFilter(filter);
   };
 
-  // 筛选项目
   const filteredProjects = projects.filter(project => {
     if (activeFilter === 'All') return true;
     return project.categories?.includes(activeFilter);
   });
 
-  // 处理项目点击
   const handleProjectClick = (project) => {
     trackProjectClick(project.id, project.title);
   };
 
   return (
     <section id="work" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        {/* 标题 */}
+      <div className="container mx-auto px-2">
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
@@ -61,7 +57,6 @@ const Portfolio = () => {
           </p>
         </div>
 
-        {/* 筛选器 */}
         <div className={`flex flex-wrap justify-center gap-4 mb-12 transition-all duration-1000 delay-200 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
@@ -78,19 +73,17 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* 项目网格 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredProjects.map((project, index) => (
             <Link
               key={project.id}
               to={`/project/${project.id}`}
               onClick={() => handleProjectClick(project)}
-              className={`project-card bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 block ${
+              className={`project-card bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 block flex flex-col ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
-              {/* 项目图片 */}
               <div className="relative overflow-hidden aspect-[3/2]">
                 <img
                   src={project.thumbnail || project.heroImage}
@@ -105,8 +98,7 @@ const Portfolio = () => {
                 </div>
               </div>
 
-              {/* 项目信息 主页的卡片样式*/}
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   {project.title}
                 </h3>
@@ -114,12 +106,11 @@ const Portfolio = () => {
                   {project.brief}
                 </p>
                 
-                {/* Category标签 */}
                 <div className="flex flex-wrap gap-2 mb-3">
                   {project.categories.map((category) => (
                     <span
                       key={category}
-                      className={`px-3 py-1 text-sm font-medium rounded-full ${
+                      className={`px-3 py-1 font-medium rounded-full ${
                         category === 'UIUX' 
                           ? 'bg-purple-100 text-purple-700' 
                           : category === 'Game'
@@ -134,37 +125,40 @@ const Portfolio = () => {
                           ? 'bg-indigo-100 text-indigo-700'
                           : 'bg-gray-100 text-gray-700'
                       }`}
+                      style={{ fontSize: '14px', lineHeight: '1.4' }}
                     >
                       {category}
                     </span>
                   ))}
                 </div>
 
-                {/* 技术标签 - 新增的灰色标签行 */}
-                {project.techTags && project.techTags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mt-2">
-                    {project.techTags.slice(0, 5).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 text-xs font-medium text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
-                        style={{ fontSize: '12px' }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.techTags.length > 5 && (
-                        <span className="px-2 py-1 text-xs font-medium text-gray-400 bg-gray-50 rounded-md" style={{ fontSize: '12px' }}>
-                        +{project.techTags.length - 5} more
-                      </span>
-                    )}
-                  </div>
-                )}
+                <div className="mt-auto">
+                  {project.techTags && project.techTags.length > 0 ? (
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.techTags.slice(0, 5).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 font-medium text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                          style={{ fontSize: '12px', lineHeight: '1.2' }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {project.techTags.length > 5 && (
+                        <span className="px-2 py-1 font-medium text-gray-400 bg-gray-50 rounded-md" style={{ fontSize: '12px', lineHeight: '1.2' }}>
+                          +{project.techTags.length - 5} more
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="h-6"></div>
+                  )}
+                </div>
               </div>
             </Link>
           ))}
         </div>
 
-        {/* 查看更多按钮 */}
         <div className="text-center mt-12">
           <Button 
             size="lg"
@@ -183,4 +177,3 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
-

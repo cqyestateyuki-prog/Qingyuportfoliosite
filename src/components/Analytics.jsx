@@ -112,14 +112,4 @@ export const trackTimeOnPage = (timeInSeconds) => {
   }
 };
 
-export default {
-  initGA,
-  trackPageView,
-  trackProjectClick,
-  trackButtonClick,
-  trackDownload,
-  trackExternalLink,
-  trackFormSubmit,
-  trackScrollDepth,
-  trackTimeOnPage,
-};
+// 移除默认导出，只保留命名导出
