@@ -16,6 +16,7 @@ import ReactMarkdown from 'react-markdown'
 import { getProjectById } from '../../data/projects'
 import ImageGallery, { SingleImageDisplay, MultiImageGrid, SmartImageDisplay } from '../components/ImageGallery'
 import Footer from '../components/Footer'
+import FeedbackBot from '../components/FeedbackBot'
 
 //ProjectDetail组件，展示单个项目的详细信息
 const ProjectDetail = () => {
@@ -303,6 +304,7 @@ const ProjectDetail = () => {
           <div className="relative group rounded-3xl overflow-hidden shadow-2xl mb-12">
             <div className="aspect-[16/10] bg-gradient-to-br from-purple-100 to-blue-100">
               {project.heroVideo ? (
+                // 如果有视频，优先显示视频
                 // 检查是否是 Vimeo 链接
                 project.heroVideo.includes('vimeo.com') ? (
                   <iframe
@@ -335,15 +337,19 @@ const ProjectDetail = () => {
                     Your browser does not support the video tag.
                   </video>
                 )
+              ) : project.heroImage ? (
+                // 如果没有视频但有图片，显示图片
+                <img 
+                  src={project.heroImage} 
+                  alt={project.title}
+                  className="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-500"
+                  onClick={() => handleImageClick({ src: project.heroImage, alt: project.title }, [{ src: project.heroImage, alt: project.title }])}
+                />
               ) : (
-                <>
-                  <img 
-                    src={project.heroImage} 
-                    alt={project.title}
-                    className="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-500"
-                    onClick={() => handleImageClick({ src: project.heroImage, alt: project.title }, [{ src: project.heroImage, alt: project.title }])}
-                  />
-                </>
+                // 如果既没有视频也没有图片，显示占位符
+                <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                  <p className="text-gray-500">No image or video available</p>
+                </div>
               )}
             </div>
             
@@ -378,14 +384,64 @@ const ProjectDetail = () => {
             </div>
             
             {(project.overview.challenge || project.overview.challenges) && (
-              <div id="challenge" className="bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-2xl border-l-4 border-purple-500">
+              <div 
+                id="challenge" 
+                className="p-8 rounded-2xl border-l-4 relative overflow-hidden"
+                style={{
+                  background: project.colors?.subtitleGradient 
+                    ? (() => {
+                        // Extract colors from gradient and create light version
+                        const gradient = project.colors.subtitleGradient;
+                        const colorMatches = gradient.match(/#[0-9a-fA-F]{6}/g) || [];
+                        if (colorMatches.length > 0) {
+                          const colors = colorMatches.map(hex => {
+                            const r = parseInt(hex.slice(1, 3), 16);
+                            const g = parseInt(hex.slice(3, 5), 16);
+                            const b = parseInt(hex.slice(5, 7), 16);
+                            return `rgba(${r}, ${g}, ${b}, 0.1)`;
+                          });
+                          return `linear-gradient(to right, ${colors.join(', ')}, rgba(255, 255, 255, 0.5))`;
+                        }
+                        return 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))';
+                      })()
+                    : 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))',
+                  borderLeftColor: project.colors?.heroGradient 
+                    ? (() => {
+                        const match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                        return match ? match[0] : '#8b5cf6';
+                      })()
+                    : '#8b5cf6'
+                }}
+              >
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">The Challenge</h3>
                 {project.overview.challenges ? (
                   <div className="space-y-4">
                     {project.overview.challenges.map((challenge, index) => (
                       <div key={index} className="flex items-start space-x-3">
-                        <div className="flex-shrink-0 w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-1">
-                          <span className="text-purple-600 font-semibold text-sm">{index + 1}</span>
+                        <div 
+                          className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-1"
+                          style={{
+                            background: project.colors?.heroGradient 
+                              ? (() => {
+                                  const match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                                  return match ? `${match[0]}20` : 'rgba(139, 92, 246, 0.2)';
+                                })()
+                              : 'rgba(139, 92, 246, 0.2)'
+                          }}
+                        >
+                          <span 
+                            className="font-semibold text-sm"
+                            style={{
+                              color: project.colors?.heroGradient 
+                                ? (() => {
+                                    const match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                                    return match ? match[0] : '#8b5cf6';
+                                  })()
+                                : '#8b5cf6'
+                            }}
+                          >
+                            {index + 1}
+                          </span>
                         </div>
                         <p className="text-lg text-gray-700 leading-relaxed">
                           {challenge}
@@ -480,10 +536,20 @@ const ProjectDetail = () => {
                 {section.features.map((feature, idx) => (
                   <Card 
                     key={idx} 
-                    className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-gradient-to-br from-white to-purple-50"
+                    className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0"
+                    style={{
+                      background: project.colors?.heroGradient 
+                        ? `linear-gradient(to bottom right, white, ${project.colors.heroGradient.includes('#') ? `${project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/)?.[0] || '#8b5cf6'}15` : 'rgba(139, 92, 246, 0.15)'})`
+                        : 'linear-gradient(to bottom right, white, rgba(139, 92, 246, 0.15))'
+                    }}
                   >
                     <CardContent className="p-6 text-center">
-                      <div className="inline-flex items-center justify-center w-12 h-12 text-white rounded-full mb-4 group-hover:scale-110 transition-transform" style={{backgroundColor: 'var(--custom-purple)'}}>
+                      <div 
+                        className="inline-flex items-center justify-center w-12 h-12 text-white rounded-full mb-4 group-hover:scale-110 transition-transform"
+                        style={{
+                          background: project.colors?.heroGradient || 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)'
+                        }}
+                      >
                         <span className="text-xl font-bold">{idx + 1}</span>
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -574,6 +640,9 @@ const ProjectDetail = () => {
 
       {/* ========== Footer ========== */}
       <Footer />
+      
+      {/* ========== 反馈机器人 ========== */}
+      <FeedbackBot />
     </div>
   )
 }

@@ -2,8 +2,424 @@
 // 简化版项目数据结构 - 移除client和completed，responsibilities可选
 
 export const projects = [
+
+   // ========== Programming 项目示例 ==========
+    // ========== AI Community MVP项目 ==========
+    {
+      id: 'ai-community-platform',
+      title: 'AI Built-in Community Platform',
+      subtitle: 'Modern integrated Community Platform for AI Tools',
+      categories: ['AI', 'UIUX', 'Programming','Product Design', 'Research'],
+      tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
+      techTags: ['#Figma','#React','#TypeScript', '#Next.js','#HTML/CSS'],
+      
+      thumbnail: '/media/projects/aicommunity/Hero.jpg',
+      brief: 'An in-app integrated community system designed for AI Tools.',
+      heroImage: '/media/projects/aicommunity/Hero.jpg',
+      heroVideo: null,
+      
+      domain: ['AI Product Design & Development', 'Web Platform', 'Learning Community'],
+      form: ['UI/UX Design', 'Frontend Development', 'React + TypeScript + Tailwind CSS', 'Next.js'],
+      collaborators: ['Solo Project','Cursor AI + ChatGPT + Claude'],
+      
+      colors: {
+        heroGradient: 'linear-gradient(135deg, #000000 0%, #374151 100%)',
+        subtitleGradient: 'linear-gradient(135deg,#374151 0%,rgb(72, 81, 97) 100%)',
+        underlineGradient: 'linear-gradient(135deg,#374151 0%, #374151 100%)'
+      },
+      
+       overview: {
+         content: 'AI applications such as ChatGPT, Grok, and Claude currently lack built-in communities, leaving everyday users without a dedicated space to learn, share, and connect while using these tools. AI Built-in Community Platform **fills this critical gap by offering an intuitive, accessible experience that transforms isolated AI use into collaborative discovery**. This platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events—along with trending search and a prompt voting system. This combination enables users not only to **learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging**. For product owners, the community **drives user retention, UGC content creation, and continuous feedback loops for their products, making it a strategic addition to any AI tool**. Built with **Next.js 14 + TypeScript + Tailwind CSS**, the platform blends modern design with seamless functionality to make AI learning and sharing accessible for everyone.',
+         challenge: 'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
+         challenges: [
+           'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
+           'How might we enable users to easily share their AI usage experiences and insights?',
+           'How might we help users quickly find relevant, high-quality AI content, prompts, and events?',
+           'How might we lower the barrier to entry for AI users to participate in community learning?',
+           'How might we ensure the quality and reliability of shared AI content and prompts?'
+         ],
+         buttons: [
+           {
+             text: 'Visit Live Community Platform',
+             url: 'https://ai-community-mvp-v2-7y9m.vercel.app/',
+             type: 'external'
+           }
+         ]
+       },
+  
+      sections: [ 
+        {
+          id: 'user-insights',
+          title: 'User Research & Market Insights',
+          icon: '🔍', 
+          content: "Through online questionnaires, user interviews, and research, we revealed that AI tool users face three critical challenges: fragmented knowledge sharing across social platforms, lack of specialized spaces for sharing and learning, and difficulty getting accurate/expected answers from AI tools. Users want to share their AI stories and creative AI interactions, learn from others' experiences to put in refined prompts to get the expected response sooner, not just access technical documentation. The platform should focus on human-centered AI knowledge sharing rather than purely technical information.",
+          imageDisplayMode: 'two-column',
+           images: [
+             {
+               src: '/media/projects/aicommunity/MarketInsights.jpg',
+               alt: 'User Interview & Market Insights',
+               caption: 'Key insight: 90% of participants want to have an in-app community.'
+             },
+             {
+               src: '/media/projects/aicommunity/CompetitiveAnalysis.jpg',
+               alt: 'Competitive Analysis',
+               caption: 'Analysis of existing platforms: Twitter, Reddit, Discord - all lack specialized AI community features'
+             },
+             {
+               src: '/media/projects/aicommunity/UserPersona.jpg',
+               alt: 'User Personas',
+               caption: 'Key user personas'
+             },
+             {
+               src: '/media/projects/aicommunity/Userjourneymap.jpg',
+               alt: 'User Journey Map',
+               caption: 'User journey from discovery to active community participation'
+             }
+           ]
+        },
+        
+        {
+          id: 'solution-strategy',
+          title: 'Solution & Design Process',
+          icon: '💡',
+          content: [
+            'We aimed to create an in-app community homepage that is both familiar—leveraging patterns users already know from Reddit, RedNotes, and YouTube—and tailored for AI-specific use cases such as prompt sharing and event discovery. The design evolved from a **three-column layout** inspired by Reddit/YouTube into a **two-panel structure** that better fits AI LLM application design. In addition, the post layout was changed from single-post per row to multi-post previews per row, allowing users to scan content more efficiently. ',
+            'Our solution addresses the core insight: **users want to share their AI experiences, not just learn techniques.** So we designed a **three-post-type** system that accommodates different sharing needs: Share Chat & Thoughts for AI interactions, Share Prompt for technical knowledge, and Community Events for real-time collaboration.',
+            "Our **rating system** enables users to rate prompt effectiveness, creating a **positive feedback loop** that surfaces the most valuable content. High-rated prompts gain visibility, encouraging quality contributions and providing immediate recognition to creators.",
+          ],
+          imageDisplayMode: 'alternating',
+          images: [
+            {
+              src: '/media/projects/aicommunity/Designprocess.jpg',
+              alt: 'Design Process',
+              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
+            },
+            {
+              src: '/media/projects/aicommunity/DiagramPost.jpg',
+              alt: 'Three Post Types',
+              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
+            },
+            {
+              src: '/media/projects/aicommunity/Ratingsystem2.jpg',
+              alt: 'Rating System',
+              caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
+            },
+          ]
+        },
+        
+        {
+          id: 'features',
+          title: 'Core Features',
+          icon: '✨',
+          content: 'The platform\'s three-post-type system directly addresses our research findings. Share Chat & Thoughts enables users to share their emotional AI interactions with privacy protection, Share Prompt facilitates technical knowledge exchange with voting systems, and Events creates more connection opportunities. Each feature is designed to encourage specific types of engagement while maintaining the platform\'s focus on community building and knowledge sharing.',
+          features: [
+            {
+              name: 'Share Chat & Thoughts',
+              description: 'AI Conversation Sharing',
+              detail: 'Users share their creative AI interactions with built-in privacy protection and content filtering'
+            },
+            {
+              name: 'Share Prompt',
+              description: 'Prompt Engineering Hub',
+              detail: 'Technical knowledge sharing with voting system and effectiveness ratings'
+            },
+            {
+              name: 'Events',
+              description: 'Connect with Others',
+              detail: 'Online & offline events, workshops, and discussions for community building'
+            },
+          ],
+          imageDisplayMode: 'two-column',
+          images: [
+            {
+              src: '/media/projects/aicommunity/Postingflow.jpg',
+              alt: 'Three Post Types',
+              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
+            },
+            {
+              src: '/media/projects/aicommunity/Ratingsystem.jpg',
+              alt: 'Rating System',
+              caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
+            },
+            {
+              src: '/media/projects/aicommunity/Search.png',
+              alt: 'Search & Filter',
+              caption: 'Advanced search capabilities with tag filtering and content categorization'
+            },
+            {
+              src: '/media/projects/aicommunity/Mybookmarks.png',
+              alt: 'Personal Center',
+              caption: 'User dashboard with AI Coins system, bookmarks, and content management'
+            }
+          ]
+        },
+        
+         {
+           id: 'technical-implementation',
+           title: 'Technical Implementation & Coding Structure',
+           icon: '💻',
+           content:  ['Built with modern web technologies, the platform ensures excellent performance and developer experience. Next.js 14 with App Router provides optimal performance, TypeScript ensures type safety, and Tailwind CSS enables rapid development. The application is fully responsive, accessible, and optimized for all devices with a focus on user experience and maintainability.',
+            'Core code structure is based on INFORMATION_ARCHITECTURE_CN_EN.md, ARCHITECTURE_CN_EN.md andREADME.md',
+           ],
+           buttons: [
+             {
+               text: 'View Full Code & Documentation',
+               url: 'https://github.com/cqyestateyuki-prog/AI-Community-MVP-v2',
+               type: 'github'
+             }
+           ],
+          features: [
+            {
+              name: 'Next.js 14',
+              description: 'React Framework',
+              detail: 'App Router, Server Components, and optimized performance with automatic code splitting'
+            },
+            {
+              name: 'TypeScript',
+              description: 'Type Safety',
+              detail: '100% TypeScript coverage ensuring reliable code and better developer experience'
+            },
+            {
+              name: 'Tailwind CSS',
+              description: 'Styling System',
+              detail: 'Utility-first CSS framework for consistent design and rapid development'
+            },
+          ],
+          
+        },
+
+        {
+          id: 'design-system',
+          title: 'Design System & Visual Language',
+          icon: '🎨',
+          content: 'Rather than creating a completely new design system, we used ChatGPT\'s built-in community as our design reference and foundation. This approach ensures familiarity and reduces user learning curve while maintaining a clean, content-focused aesthetic. The design system is built to be highly customizable, allowing other AI applications to adapt the visual language to match their brand identity—colors, typography, spacing, and component styles can all be easily modified to align with different AI tools\' existing design systems. We followed basic accessibility principles including good color contrast, readable typography, and responsive design to ensure the platform works well across different devices and user needs.',
+         
+       },
+
+        {
+          id: 'final-showcase',
+          title: 'Final Showcase & Impact',
+          icon: '🚀',
+          content: 'The final platform successfully transforms isolated AI tool usage into collaborative community experiences. Users can easily discover relevant content, share their AI stories, and build meaningful connections. The platform serves as both a knowledge repository and social hub, addressing the critical gap in AI community building.\n\n**Live Demo:** [https://ai-community-mvp-v2-7y9m.vercel.app/](https://ai-community-mvp-v2-7y9m.vercel.app/)',
+          imageDisplayMode: 'two-column',
+          images: [
+            {
+              src: '/media/projects/aicommunity/Homepage.png',
+              alt: 'Homepage',
+              caption: 'Clean, modern homepage with intelligent content feed and seamless navigation'
+            },
+             {
+              src: '/media/projects/aicommunity/Postingflow.jpg',
+              alt: 'Posting Flow',
+              caption: 'Intuitive posting process with real-time preview and privacy protection'
+            },
+            {
+              src: '/media/projects/aicommunity/Trendingprompts.png',
+              alt: 'Trending Page',
+              caption: 'Smart trending content switched between prompts, posts & events'
+            },
+            {
+              src: '/media/projects/aicommunity/Postdetailpage.jpg',
+              alt: 'Post Detail Page',
+              caption: 'Rich post detail view with voting, comments, and social interactions'
+            },
+            {
+              src: '/media/projects/aicommunity/Mypost.png',
+              alt: 'Personal Data',
+              caption: 'Manage user posts,and bookmarks,and coins'
+            },
+             {
+              src: '/media/projects/aicommunity/Guide.png',
+              alt: 'Guidelines & Rules',
+              caption: 'Easy to understand guidelines and rules for beginners'
+            },
+        ]
+      }
+    ]
+  },
+
+  // AI Project
+  // ========== Excel AI Agent 项目 ==========
   {
-    // ========== 基本信息 ==========
+    id: 'excel-ai-agent',
+    title: 'Excel AI Agent',
+    subtitle: 'Intelligent Data Analysis Assistant',
+    categories: ['AI', 'Programming','Product Design'],
+    tags: ['AI-Powered Tool', 'Data Analysis', 'Voice Input', 'Web Application'],
+    techTags: ['#AI Agent devlopment','#HTML', '#Python', '#WebSocket', '#OpenAI API', '#SSE'],
+    
+    thumbnail: '/media/projects/excel ai agent/hero-image.png',
+    brief: 'A natural language-powered Excel data analysis assistant that enables non-technical users to complete complex data analysis tasks through conversational interaction.',
+    
+    heroImage: '/media/projects/excel ai agent/hero-image.png',
+    heroVideo: 'https://vimeo.com/1144917772?share=copy&fl=sv&fe=ci',
+    
+    domain: ['AI Product Design & Development', 'Data Analysis Tool', 'Web Application'],
+    form: ['UI/UX Design', 'Frontend Development', 'Backend Development', 'AI Integration'],
+    collaborators: ['Solo Project', 'OpenAI API','Cursor'],
+    
+    colors: {
+      heroGradient: 'linear-gradient(135deg, #0D5D2E 0%,rgb(43, 138, 82) 100%)', // Excel 绿色主题
+      subtitleGradient: 'linear-gradient(135deg, #0D5D2E 0%,rgb(43, 138, 82) 100%)', // Excel 绿色渐变
+      underlineGradient: 'linear-gradient(135deg, #0D5D2E 0%,rgb(43, 138, 82) 100%)' // Excel 绿色渐变
+    },
+    
+    overview: {
+      content: 'Excel AI Agent is a lightweight AI agent that serves as a natural language-powered intelligent data analysis assistant, allowing users to complete complex data analysis tasks without writing code. Through AI technology, the system understands users\' natural language questions, automatically generates Python analysis code, executes analysis, and generates visual charts. The project features a clean white background design with Excel green as the primary color theme, supporting real-time streaming output and voice input, providing an efficient and intuitive data analysis experience for everyday users who need to work with Excel data but lack technical expertise.',
+      challenge: 'How might I enable non-technical users to easily complete complex data analysis tasks? How can I make AI\'s working process transparent and understandable?',
+      challenges: [
+        'How might I enable non-technical users to easily complete complex data analysis tasks?',
+        'How can I make AI\'s working process transparent and understandable?',
+        'How to balance feature completeness with simplicity?',
+        'How to provide real-time feedback during analysis to reduce user anxiety?',
+      ]
+    },
+    
+    sections: [
+      {
+        id: 'design-challenge',
+        title: 'Problem Statement',
+        icon: '🔍',
+        content: [
+          'Traditional data analysis tools (such as Excel, Python) have steep learning curves, requiring users to master formulas, functions, or programming languages. The interaction is complex with multi-step operations that are error-prone. Users also face feedback delays and struggle to understand code outputs.',
+          'My design goal was to create a zero-learning-cost experience with natural language interaction, provide instant feedback through real-time streaming output, automatically generate visualizations to display data insights intuitively, and show clear data traceability to enhance trust.'
+        ],
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/excel ai agent/UserJourneyMap.png',
+            alt: 'User Personas',
+            caption: 'User personas and User journey Map'
+          },
+        ]
+      },
+      
+      {
+        id: 'solution-strategy',
+        title: 'Solution & Design Process',
+        icon: '💡',
+        content: [
+          'I adopted a natural language interaction approach to lower the barrier to entry, used streaming output to let users understand analysis progress in real-time, and structured display to make results easier to understand. The design supports both text and voice input methods, automatically generates interactive charts, and provides data traceability to enhance result credibility.',
+          'The interface uses a clean white background (`#ffffff`) with Excel green (`#107C41`) as the primary color, creating a clear and professional appearance. Left panel cards use light gray backgrounds (`#f5f5f5`) to establish visual hierarchy. The left-right panel layout (1:3 ratio) separates input and output logically, allowing the results area to scroll independently without affecting input. Streaming output reduces user waiting anxiety and enhances the sense of interaction and participation.'
+        ],
+        imageDisplayMode: 'alternating',
+        images: [
+          {
+            src: '/media/projects/excel ai agent/information architecture.png',
+            alt: 'Information Architecture',
+            caption: 'Page structure and content hierarchy'
+          }
+        ]
+      },
+      
+      {
+        id: 'features',
+        title: 'Core Features',
+        icon: '✨',
+        content: 'The platform\'s core features directly address user pain points. Natural language interaction (both text and voice) eliminates the need for code, streaming output provides real-time feedback, intelligent chart generation automatically creates appropriate visualizations, and data traceability enhances trust. The main user flow starts with uploading an Excel file, which triggers automatic preprocessing and indexing. Users then input natural language questions and click "Run". The system generates an analysis plan with progress display, generates Python code with streaming output to the UI, executes the code with streaming execution results, generates visualization charts automatically, generates analysis summary with AI, and finally displays data traceability showing used data columns.',
+        features: [
+          {
+            name: 'Natural Language Interaction',
+            description: 'Text & Voice Input',
+            detail: 'Users can ask questions in natural language through text or voice input, with real-time transcription support. No need to learn formulas or programming.'
+          },
+          {
+            name: 'Intelligent Chart Generation',
+            description: 'Auto Visualization',
+            detail: 'Automatically determines chart type and generates interactive visualizations using Plotly'
+          },
+          {
+            name: 'Data Traceability',
+            description: 'Transparency & Trust',
+            detail: 'Clearly shows which data columns were used, enhancing result credibility'
+          }
+        ],
+      },
+      
+      {
+        id: 'technical-implementation',
+        title: 'Technical Implementation & Coding Structure',
+        icon: '💻',
+        content: [
+          'The frontend uses native JavaScript with no framework dependencies for optimal performance. SSE (Server-Sent Events) enables real-time streaming output, WebSocket supports real-time voice input transmission, and responsive CSS implements complex layouts and animations.',
+          'The backend uses Flask + Socket.IO as a lightweight web framework. Jupyter Kernel provides an isolated code execution environment for security. OpenAI API handles code generation, summarization, and voice transcription. The application is a single-page application with no page navigation, providing a smooth experience.'
+        ],
+        features: [
+          {
+            name: 'Preprocessing & Knowledge Base Construction',
+            detail: 'Clean and standardize Excel data, extract headers to build searchable indexes.'
+          },
+          {
+            name: 'Structure Analysis & Code Generation',
+            detail: 'Transform user intent into analysis steps and generate executable code.'
+          },
+          {
+            name: 'Execution & Result Presentation',
+            detail: 'Execute code, provide data traceability, and output visualizations. '
+          }
+        ],
+        buttons: [
+          {
+            text: 'View Full Code & Documentation',
+            url: 'https://github.com/cqyestateyuki-prog/excelaiagent',
+            type: 'github'
+          }
+        ],
+      },
+      
+      {
+        id: 'design-system',
+        title: 'Design System',
+        icon: '🎨',
+        content: [
+          'The design uses a clean white background as the main canvas, with Excel green as the primary brand color for titles, buttons, and emphasis. Left panel cards use light gray backgrounds to create visual hierarchy, while top sections use an even lighter gray.  Text colors follow a clear hierarchy: Excel green for primary text and titles, deep green for body text, and medium gray for secondary information.',
+          'The layout uses CSS Grid with a 1:3 ratio for left and right panels. All cards use consistent border radius, padding with no shadows for a clean, flat design. The design emphasizes simplicity, clarity, and consistency throughout.'
+        ],
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/excel ai agent/DesignSystem.png',
+            alt: 'Design System',
+            caption: 'Color palette, typography, spacing system, and component styles'
+          },
+        ]
+      },
+      
+      {
+        id: 'final-showcase',
+        title: 'Final Showcase & Impact',
+        icon: '🚀',
+        content: 'Excel AI Agent successfully transforms complex data analysis from a technical task requiring coding skills into a conversational experience accessible to everyone. The platform reduces learning costs from needing to learn Excel/Python to simply asking questions in natural language, improves efficiency from manually writing code to automatic generation and execution, and enhances result visualization from plain text output to interactive charts. The design demonstrates how AI technology can be applied to solve real-world problems while maintaining excellent user experience.',
+        imageDisplayMode: 'two-column',
+        images: [
+          {
+            src: '/media/projects/excel ai agent/home.png',
+            alt: 'Homepage',
+            caption: 'Clean, modern homepage with file upload and query input'
+          },
+          {
+            src: '/media/projects/excel ai agent/5.png',
+            alt: 'Analysis Results',
+            caption: 'Structured results display: summary, traceability, code, output, and charts'
+          },
+          {
+            src: '/media/projects/excel ai agent/4.png',
+            alt: 'Charts',
+            caption: 'Automatically generated charts with Plotly'
+          },
+          {
+            src: '/media/projects/excel ai agent/7.png',
+            alt: 'Multiple languages support',
+            caption: 'Support Chinese and English'
+          }
+        ]
+      }
+    ]
+  },
+
+   // ========== UIUX 项目 ==========
+  {
+    // ========== Stumbldoor Project 图书系统==========
     id: 'stumbldoor',
     title: 'Stumbldoor',
     subtitle: 'Library Experience for the Future',
@@ -26,9 +442,9 @@ export const projects = [
     
     // ========== 项目颜色配置 ==========
     colors: {
-      heroGradient: 'var(--gradient-hero)', // 头图背景渐变
-      subtitleGradient: 'var(--gradient-secondary)', // 子标题渐变
-      underlineGradient: 'var(--gradient-secondary)' // 下划线渐变
+      heroGradient: 'linear-gradient(135deg, #000000 0%, #8a81d7 100%)', // 黑色到紫色渐变
+      subtitleGradient: 'linear-gradient(135deg,rgb(65, 27, 118) 0%,rgb(84, 77, 152) 100%)', 
+      underlineGradient: 'linear-gradient(135deg,rgb(65, 27, 118)0%, rgb(84, 77, 152) 100%)' 
     },
     
     // ========== 项目概述 ==========
@@ -215,240 +631,6 @@ export const projects = [
     ]
   },
   
-    // ========== Programming 项目示例 ==========
-    // ========== AI Community MVP项目 ==========
-    {
-      id: 'ai-community-platform',
-      title: 'AI Built-in Community Platform',
-      subtitle: 'Modern integrated Community Platform for AI Tools',
-      categories: ['UIUX', 'Programming', 'Research'],
-      tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
-      techTags: ['#Figma','#React','#TypeScript', '#Next.js','#HTML/CSS'],
-      
-      thumbnail: '/media/projects/aicommunity/Hero.jpg',
-      brief: 'An in-app integrated community system designed for AI Tools.',
-      heroImage: '/media/projects/aicommunity/Hero.jpg',
-      heroVideo: null,
-      
-      domain: ['AI Product Design & Development', 'Web Platform', 'Learning Community'],
-      form: ['UI/UX Design', 'Frontend Development', 'React + TypeScript + Tailwind CSS', 'Next.js'],
-      collaborators: ['Solo Project','Cursor AI + ChatGPT + Claude'],
-      
-      colors: {
-        heroGradient: 'linear-gradient(135deg, #000000 0%, #374151 100%)',
-        subtitleGradient: 'linear-gradient(135deg,#374151 0%,rgb(72, 81, 97) 100%)',
-        underlineGradient: 'linear-gradient(135deg,#374151 0%, #374151 100%)'
-      },
-      
-       overview: {
-         content: 'AI applications such as ChatGPT, Grok, and Claude currently lack built-in communities, leaving everyday users without a dedicated space to learn, share, and connect while using these tools. AI Built-in Community Platform **fills this critical gap by offering an intuitive, accessible experience that transforms isolated AI use into collaborative discovery**. This platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events—along with trending search and a prompt voting system. This combination enables users not only to **learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging**. For product owners, the community **drives user retention, UGC content creation, and continuous feedback loops for their products, making it a strategic addition to any AI tool**. Built with **Next.js 14 + TypeScript + Tailwind CSS**, the platform blends modern design with seamless functionality to make AI learning and sharing accessible for everyone.',
-         challenge: 'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
-         challenges: [
-           'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
-           'How might we enable users to easily share their AI usage experiences and insights?',
-           'How might we help users quickly find relevant, high-quality AI content, prompts, and events?',
-           'How might we lower the barrier to entry for AI users to participate in community learning?',
-           'How might we ensure the quality and reliability of shared AI content and prompts?'
-         ],
-         buttons: [
-           {
-             text: 'Visit Live Community Platform',
-             url: 'https://ai-community-mvp-v2-7y9m.vercel.app/',
-             type: 'external'
-           }
-         ]
-       },
-  
-      sections: [ 
-        {
-          id: 'user-insights',
-          title: 'User Research & Market Insights',
-          icon: '🔍', 
-          content: "Through online questionnaires, user interviews, and research, we revealed that AI tool users face three critical challenges: fragmented knowledge sharing across social platforms, lack of specialized spaces for sharing and learning, and difficulty getting accurate/expected answers from AI tools. Users want to share their AI stories and creative AI interactions, learn from others' experiences to put in refined prompts to get the expected response sooner, not just access technical documentation. The platform should focus on human-centered AI knowledge sharing rather than purely technical information.",
-          imageDisplayMode: 'two-column',
-           images: [
-             {
-               src: '/media/projects/aicommunity/MarketInsights.jpg',
-               alt: 'User Interview & Market Insights',
-               caption: 'Key insight: 90% of participants want to have an in-app community.'
-             },
-             {
-               src: '/media/projects/aicommunity/CompetitiveAnalysis.jpg',
-               alt: 'Competitive Analysis',
-               caption: 'Analysis of existing platforms: Twitter, Reddit, Discord - all lack specialized AI community features'
-             },
-             {
-               src: '/media/projects/aicommunity/UserPersona.jpg',
-               alt: 'User Personas',
-               caption: 'Key user personas'
-             },
-             {
-               src: '/media/projects/aicommunity/Userjourneymap.jpg',
-               alt: 'User Journey Map',
-               caption: 'User journey from discovery to active community participation'
-             }
-           ]
-        },
-        
-        {
-          id: 'solution-strategy',
-          title: 'Solution & Design Process',
-          icon: '💡',
-          content: [
-            'We aimed to create an in-app community homepage that is both familiar—leveraging patterns users already know from Reddit, RedNotes, and YouTube—and tailored for AI-specific use cases such as prompt sharing and event discovery. The design evolved from a **three-column layout** inspired by Reddit/YouTube into a **two-panel structure** that better fits AI LLM application design. In addition, the post layout was changed from single-post per row to multi-post previews per row, allowing users to scan content more efficiently. ',
-            'Our solution addresses the core insight: **users want to share their AI experiences, not just learn techniques.** So we designed a **three-post-type** system that accommodates different sharing needs: Share Chat & Thoughts for AI interactions, Share Prompt for technical knowledge, and Community Events for real-time collaboration.',
-            "Our **rating system** enables users to rate prompt effectiveness, creating a **positive feedback loop** that surfaces the most valuable content. High-rated prompts gain visibility, encouraging quality contributions and providing immediate recognition to creators.",
-          ],
-          imageDisplayMode: 'alternating',
-          images: [
-            {
-              src: '/media/projects/aicommunity/Designprocess.jpg',
-              alt: 'Design Process',
-              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
-            },
-            {
-              src: '/media/projects/aicommunity/DiagramPost.jpg',
-              alt: 'Three Post Types',
-              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
-            },
-            {
-              src: '/media/projects/aicommunity/Ratingsystem2.jpg',
-              alt: 'Rating System',
-              caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
-            },
-          ]
-        },
-        
-        {
-          id: 'features',
-          title: 'Core Features & User Experience',
-          icon: '✨',
-          content: 'The platform\'s three-post-type system directly addresses our research findings. Share Chat & Thoughts enables users to share their emotional AI interactions with privacy protection, Share Prompt facilitates technical knowledge exchange with voting systems, and Events creates more connection opportunities. Each feature is designed to encourage specific types of engagement while maintaining the platform\'s focus on community building and knowledge sharing.',
-          features: [
-            {
-              name: 'Share Chat & Thoughts',
-              description: 'AI Conversation Sharing',
-              detail: 'Users share their creative AI interactions with built-in privacy protection and content filtering'
-            },
-            {
-              name: 'Share Prompt',
-              description: 'Prompt Engineering Hub',
-              detail: 'Technical knowledge sharing with voting system and effectiveness ratings'
-            },
-            {
-              name: 'Events',
-              description: 'Connect with Others',
-              detail: 'Online & offline events, workshops, and discussions for community building'
-            },
-          ],
-          imageDisplayMode: 'two-column',
-          images: [
-            {
-              src: '/media/projects/aicommunity/Postingflow.jpg',
-              alt: 'Three Post Types',
-              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
-            },
-            {
-              src: '/media/projects/aicommunity/Ratingsystem.jpg',
-              alt: 'Rating System',
-              caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
-            },
-            {
-              src: '/media/projects/aicommunity/Search.png',
-              alt: 'Search & Filter',
-              caption: 'Advanced search capabilities with tag filtering and content categorization'
-            },
-            {
-              src: '/media/projects/aicommunity/Mybookmarks.png',
-              alt: 'Personal Center',
-              caption: 'User dashboard with AI Coins system, bookmarks, and content management'
-            }
-          ]
-        },
-        
-         {
-           id: 'technical-implementation',
-           title: 'Technical Implementation & Coding Structure',
-           icon: '💻',
-           content:  ['Built with modern web technologies, the platform ensures excellent performance and developer experience. Next.js 14 with App Router provides optimal performance, TypeScript ensures type safety, and Tailwind CSS enables rapid development. The application is fully responsive, accessible, and optimized for all devices with a focus on user experience and maintainability.',
-            'Core code structure is based on INFORMATION_ARCHITECTURE_CN_EN.md, ARCHITECTURE_CN_EN.md andREADME.md',
-           ],
-           buttons: [
-             {
-               text: 'View Full Code & Documentation',
-               url: 'https://github.com/cqyestateyuki-prog/AI-Community-MVP-v2',
-               type: 'github'
-             }
-           ],
-          features: [
-            {
-              name: 'Next.js 14',
-              description: 'React Framework',
-              detail: 'App Router, Server Components, and optimized performance with automatic code splitting'
-            },
-            {
-              name: 'TypeScript',
-              description: 'Type Safety',
-              detail: '100% TypeScript coverage ensuring reliable code and better developer experience'
-            },
-            {
-              name: 'Tailwind CSS',
-              description: 'Styling System',
-              detail: 'Utility-first CSS framework for consistent design and rapid development'
-            },
-          ],
-          
-        },
-
-        {
-          id: 'design-system',
-          title: 'Design System & Visual Language',
-          icon: '🎨',
-          content: 'Rather than creating a completely new design system, we used ChatGPT\'s built-in community as our design reference and foundation. This approach ensures familiarity and reduces user learning curve while maintaining a clean, content-focused aesthetic. The design system is built to be highly customizable, allowing other AI applications to adapt the visual language to match their brand identity—colors, typography, spacing, and component styles can all be easily modified to align with different AI tools\' existing design systems. We followed basic accessibility principles including good color contrast, readable typography, and responsive design to ensure the platform works well across different devices and user needs.',
-         
-       },
-
-        {
-          id: 'final-showcase',
-          title: 'Final Showcase & Impact',
-          icon: '🚀',
-          content: 'The final platform successfully transforms isolated AI tool usage into collaborative community experiences. Users can easily discover relevant content, share their AI stories, and build meaningful connections. The platform serves as both a knowledge repository and social hub, addressing the critical gap in AI community building.\n\n**Live Demo:** [https://ai-community-mvp-v2-7y9m.vercel.app/](https://ai-community-mvp-v2-7y9m.vercel.app/)',
-          imageDisplayMode: 'two-column',
-          images: [
-            {
-              src: '/media/projects/aicommunity/Homepage.png',
-              alt: 'Homepage',
-              caption: 'Clean, modern homepage with intelligent content feed and seamless navigation'
-            },
-             {
-              src: '/media/projects/aicommunity/Postingflow.jpg',
-              alt: 'Posting Flow',
-              caption: 'Intuitive posting process with real-time preview and privacy protection'
-            },
-            {
-              src: '/media/projects/aicommunity/Trendingprompts.png',
-              alt: 'Trending Page',
-              caption: 'Smart trending content switched between prompts, posts & events'
-            },
-            {
-              src: '/media/projects/aicommunity/Postdetailpage.jpg',
-              alt: 'Post Detail Page',
-              caption: 'Rich post detail view with voting, comments, and social interactions'
-            },
-            {
-              src: '/media/projects/aicommunity/Mypost.png',
-              alt: 'Personal Data',
-              caption: 'Manage user posts,and bookmarks,and coins'
-            },
-             {
-              src: '/media/projects/aicommunity/Guide.png',
-              alt: 'Guidelines & Rules',
-              caption: 'Easy to understand guidelines and rules for beginners'
-            },
-        ]
-      }
-    ]
-  },
   
   // ========== Ziplink UIUX项目示例 ==========
   {
@@ -809,13 +991,13 @@ export const projects = [
         ],
         buttons: [
           {
-            text: '查看论文',
+            text: 'View Research Paper',
             url: '/files/Music Encounter.pdf',
             type: 'download',
             downloadName: 'Music Encounter.pdf'
           },
           {
-            text: '玩游戏',
+            text: 'Play Game',
             url: 'https://caoqingyu.itch.io/musicencounter',
             type: 'external'
           }
@@ -829,7 +1011,7 @@ export const projects = [
     id: 'eternal-dreams',
     title: 'Eternal Dreams',
     subtitle: 'Third Person Role Playing Game',
-    categories: ['Game', '3D', 'Programming'], // 多分类支持
+    categories: ['Game', 'Programming','3D Art',], // 多分类支持
     tags: ['Game Design', 'Unity', '3D Environment Design', 'C#'],
     techTags: ['#Unity', 'C#', '#Maya', '#Blender', '#3D Modeling'],
     
@@ -1009,7 +1191,7 @@ export const projects = [
     id: 'prime-directive',
     title: 'Prime Directive',
     subtitle: '2D Action-Platformer Game',
-    categories: ['Game', '2D GameArt'],
+    categories: ['Game', '2D Art'],
     techTags: ['#Unity', '#Level Design','#Adobe Illustrator','#Adobe Creative Suite'],
     
     thumbnail: '/media/projects/primedirective/Hero3.png',
@@ -1137,7 +1319,7 @@ export const projects = [
     id: 'my-little-fish-tank',
     title: 'My Little Fish Tank',
     subtitle: '3D Fish Tank Simulator',
-    categories: ['Game', '3D'],
+    categories: ['Game', '3D Art'],
     techTags: ['#Unity','#Maya', '#3D Modeling & Animation','Texturing'],
     
     thumbnail: '/media/projects/fishtank/Picture2.png',
@@ -1232,7 +1414,8 @@ export const projects = [
         ]
       }
     ]
-  }
+  },
+
   
 ]
 
