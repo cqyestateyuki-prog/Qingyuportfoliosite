@@ -148,15 +148,15 @@ const FeedbackBot = () => {
     <>
       {/* 机器人按钮和对话框 - 放在返回按钮上面 */}
       <div className="fixed bottom-28 right-8 z-50">
-        <div className="relative">
-          {/* 对话框提示 - 横向长方形 */}
+        <div className="relative flex items-center gap-3">
+          {/* 对话框提示 - 平行于机器人，在左侧 */}
           {showTooltip && (
-            <div className={`absolute bottom-full right-0 mb-4 bg-white rounded-xl shadow-2xl p-4 w-80 border border-gray-200 transition-all duration-500 ease-out ${
+            <div className={`absolute right-full mr-3 bg-white rounded-xl shadow-2xl p-3 w-72 border border-gray-200 transition-all duration-500 ease-out ${
               tooltipVisible 
-                ? 'opacity-100 transform translate-y-0' 
-                : 'opacity-0 transform translate-y-2'
+                ? 'opacity-100 transform translate-x-0' 
+                : 'opacity-0 transform translate-x-2'
             }`}>
-            <p className="text-base text-gray-700 mb-3 leading-relaxed">
+            <p className="text-sm text-gray-700 mb-2 leading-relaxed">
               Would you mind leaving a quick feedback/advice for my portfolio?
             </p>
             <div className="flex justify-end">
@@ -165,14 +165,14 @@ const FeedbackBot = () => {
                   setShowTooltip(false);
                   setIsOpen(true);
                 }}
-                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-md hover:shadow-lg"
+                className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors shadow-md hover:shadow-lg"
                 style={{ background: 'var(--gradient-secondary)' }}
               >
                 Sure!
               </button>
             </div>
-            {/* 对话框小三角 */}
-            <div className="absolute top-full right-6 w-0 h-0 border-l-6 border-r-6 border-t-6 border-transparent border-t-white"></div>
+            {/* 对话框小三角 - 指向右侧（机器人方向） */}
+            <div className="absolute left-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-6 border-b-6 border-l-6 border-transparent border-l-white"></div>
             </div>
           )}
 

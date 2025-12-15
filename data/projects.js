@@ -13,10 +13,10 @@ export const projects = [
       tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
       techTags: ['#Figma','#React','#TypeScript', '#Next.js','#HTML/CSS'],
       
-      thumbnail: '/media/projects/aicommunity/Hero.jpg',
+      thumbnail: '/media/projects/aicommunity/Hero2.png',
       brief: 'An in-app integrated community system designed for AI Tools.',
-      heroImage: '/media/projects/aicommunity/Hero.jpg',
-      heroVideo: null,
+      heroImage: '/media/projects/aicommunity/Hero2.png',
+      heroVideo: 'https://vimeo.com/1145264634?share=copy&fl=sv&fe=ci',
       
       domain: ['AI Product Design & Development', 'Web Platform', 'Learning Community'],
       form: ['UI/UX Design', 'Frontend Development', 'React + TypeScript + Tailwind CSS', 'Next.js'],
@@ -156,7 +156,7 @@ export const projects = [
         
          {
            id: 'technical-implementation',
-           title: 'Technical Implementation & Coding Structure',
+           title: 'Technical Implementation',
            icon: '💻',
            content:  ['Built with modern web technologies, the platform ensures excellent performance and developer experience. Next.js 14 with App Router provides optimal performance, TypeScript ensures type safety, and Tailwind CSS enables rapid development. The application is fully responsive, accessible, and optimized for all devices with a focus on user experience and maintainability.',
             'Core code structure is based on INFORMATION_ARCHITECTURE_CN_EN.md, ARCHITECTURE_CN_EN.md andREADME.md',
@@ -248,10 +248,10 @@ export const projects = [
     tags: ['AI-Powered Tool', 'Data Analysis', 'Voice Input', 'Web Application'],
     techTags: ['#AI Agent devlopment','#HTML', '#Python', '#WebSocket', '#OpenAI API', '#SSE'],
     
-    thumbnail: '/media/projects/excel ai agent/hero-image.png',
+    thumbnail: '/media/projects/excel ai agent/hero.png',
     brief: 'A natural language-powered Excel data analysis assistant that enables non-technical users to complete complex data analysis tasks through conversational interaction.',
     
-    heroImage: '/media/projects/excel ai agent/hero-image.png',
+    heroImage: '/media/projects/excel ai agent/hero.png',
     heroVideo: 'https://vimeo.com/1144917772?share=copy&fl=sv&fe=ci',
     
     domain: ['AI Product Design & Development', 'Data Analysis Tool', 'Web Application'],
@@ -338,7 +338,7 @@ export const projects = [
       
       {
         id: 'technical-implementation',
-        title: 'Technical Implementation & Coding Structure',
+        title: 'Technical Implementation',
         icon: '💻',
         content: [
           'The frontend uses native JavaScript with no framework dependencies for optimal performance. SSE (Server-Sent Events) enables real-time streaming output, WebSocket supports real-time voice input transmission, and responsive CSS implements complex layouts and animations.',
@@ -937,7 +937,7 @@ export const projects = [
 
       {
         id: 'technical-challenges',
-        title: 'Technical Implementation & Future Vision',
+        title: 'Technical Implementation',
         icon: '💻',
         content: [
           "The game was developed in Unity using C# for core mechanics and music integration. Major technical challenges included implementing a text-to-music conversion system, and a knapsnap system to collect different musical instruments and switch them.",
