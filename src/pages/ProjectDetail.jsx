@@ -120,6 +120,31 @@ const preprocessHighlightMarkers = (text) => {
   return text.replace(/\[\[([^\]]+)\]\]/g, '**$1**');
 };
 
+// 辅助函数：将标题中的部分单词渲染为主题色
+const renderTitleWithAccent = (title, themeColor, darkColor) => {
+  if (!title) return null;
+  // 按空格分割单词，保留空格
+  const words = title.split(/(\s+)/);
+  // 使用一个模式：让部分单词使用主题色，创造视觉层次
+  // 大约30-40%的单词使用主题色
+  return words.map((word, index) => {
+    // 如果是空格，保持原色
+    if (word.trim() === '') {
+      return <span key={index} style={{ color: darkColor }}>{word}</span>;
+    }
+    // 使用一个模式：索引能被3整除，或者索引能被5整除且余数为2
+    const shouldHighlight = (index % 3 === 0) || (index % 5 === 2);
+    return (
+      <span 
+        key={index} 
+        style={{ color: shouldHighlight ? themeColor : darkColor }}
+      >
+        {word}
+      </span>
+    );
+  });
+};
+
 // 注意：数字自动高亮功能已移除，只保留 [[文字]] 和 **文字** 的高亮
 
 //ProjectDetail组件，展示单个项目的详细信息
@@ -141,6 +166,12 @@ const ProjectDetail = () => {
   
   // 获取项目的高亮颜色
   const highlightColor = project ? getProjectHighlightColor(project) : '#8B5CF6'
+  // 获取项目的深色（用于日间版标题）
+  const darkColor = project ? getProjectDarkColor(project) : '#0D0D0D'
+  // 获取项目的主题色（用于日间版标签）
+  const themeColor = project ? getProjectHighlightColor(project) : '#8B5CF6'
+  // 检查是否使用日间版 hero
+  const useLightHero = project?.colors?.heroStyle === 'light'
 
   // 创建导航数据（动态构建，根据实际内容）
   const navigationSections = [
@@ -331,76 +362,168 @@ const ProjectDetail = () => {
       </aside>
 
       {/* ========== 顶部标题区域 ========== */}
-      <section className="pt-32 pb-16 px-6" style={{background: project.colors?.heroGradient || 'var(--gradient-hero)'}}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 
-              className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in whitespace-nowrap"
-              style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
-            >
-              {project.title}
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-delay-1">
-              {project.subtitle}
-            </p>
-          </div>
+      {useLightHero ? (
+        // 日间版 hero：浅灰色背景，深灰色标题（部分字符主题色），主题色标签
+        <section className="pt-32 pb-16 px-6" style={{ backgroundColor: '#f7f7f8' }}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h1 
+                className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in whitespace-nowrap"
+                style={{ 
+                  fontFamily: "'Poppins', 'Inter', sans-serif"
+                }}
+              >
+                {renderTitleWithAccent(project.title, themeColor, darkColor)}
+              </h1>
+              
+              <p className="text-xl md:text-2xl mb-8 leading-relaxed animate-fade-in-delay-1" style={{ color: darkColor }}>
+                {project.subtitle}
+              </p>
+            </div>
 
-          {/* 项目标签区域 */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* DOMAIN */}
-            <div className="group">
-              <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span className="text-white">●</span> DOMAIN
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {project.domain.map((item) => (
-                  <Badge 
-                    key={item} 
-                    className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
-                  >
-                    {item}
-                  </Badge>
-                ))}
+            {/* 项目标签区域 */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* DOMAIN */}
+              <div className="group">
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
+                  <span style={{ color: themeColor }}>●</span> DOMAIN
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.domain.map((item) => (
+                    <Badge 
+                      key={item} 
+                      className="transition-all"
+                      style={{ 
+                        backgroundColor: `${themeColor}20`,
+                        color: themeColor,
+                        borderColor: `${themeColor}40`
+                      }}
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-            </div>
-            
-            {/* FORM */}
-            <div className="group">
-              <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span className="text-white">●</span> FORM
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {project.form.map((item) => (
-                  <Badge 
-                    key={item} 
-                    className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
-                  >
-                    {item}
-                  </Badge>
-                ))}
+              
+              {/* FORM */}
+              <div className="group">
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
+                  <span style={{ color: themeColor }}>●</span> FORM
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.form.map((item) => (
+                    <Badge 
+                      key={item} 
+                      className="transition-all"
+                      style={{ 
+                        backgroundColor: `${themeColor}20`,
+                        color: themeColor,
+                        borderColor: `${themeColor}40`
+                      }}
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-            </div>
-            
-            {/* COLLABORATORS */}
-            <div className="group">
-              <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span className="text-white">●</span> COLLABORATORS
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {project.collaborators.map((item) => (
-                  <Badge 
-                    key={item} 
-                    className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
-                  >
-                    {item}
-                  </Badge>
-                ))}
+              
+              {/* COLLABORATORS */}
+              <div className="group">
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
+                  <span style={{ color: themeColor }}>●</span> COLLABORATORS
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.collaborators.map((item) => (
+                    <Badge 
+                      key={item} 
+                      className="transition-all"
+                      style={{ 
+                        backgroundColor: `${themeColor}20`,
+                        color: themeColor,
+                        borderColor: `${themeColor}40`
+                      }}
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        // 原版 hero：渐变背景，白色文字
+        <section className="pt-32 pb-16 px-6" style={{background: project.colors?.heroGradient || 'var(--gradient-hero)'}}>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h1 
+                className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in whitespace-nowrap"
+                style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+              >
+                {project.title}
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-delay-1">
+                {project.subtitle}
+              </p>
+            </div>
+
+            {/* 项目标签区域 */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* DOMAIN */}
+              <div className="group">
+                <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span className="text-white">●</span> DOMAIN
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.domain.map((item) => (
+                    <Badge 
+                      key={item} 
+                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              
+              {/* FORM */}
+              <div className="group">
+                <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span className="text-white">●</span> FORM
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.form.map((item) => (
+                    <Badge 
+                      key={item} 
+                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              
+              {/* COLLABORATORS */}
+              <div className="group">
+                <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span className="text-white">●</span> COLLABORATORS
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.collaborators.map((item) => (
+                    <Badge 
+                      key={item} 
+                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ========== 项目概述区域 ========== */}
       <section id="overview" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 bg-white">

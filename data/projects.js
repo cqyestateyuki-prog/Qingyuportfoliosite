@@ -751,7 +751,8 @@ export const projects = [
       underlineGradient: 'linear-gradient(135deg, #FF7675 0%, #E85C5C 100%)',
       textHighlightColor: '#FF7675',
       darkColor: '#333333',
-      lightColor: '#FF7675'
+      lightColor: '#FF7675',
+      heroStyle: 'light' // 'light' for white background, 'gradient' for gradient background
     },
     
     overview: {
