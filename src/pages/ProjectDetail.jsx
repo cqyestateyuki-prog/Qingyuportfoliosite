@@ -3,6 +3,7 @@
 
 //导入React Hooks，用于管理组件状态和副作用
 import { useState, useEffect } from 'react'
+import React from 'react'
 //导入React Router Hooks，用于获取URL参数和导航
 import { useParams, Link, useNavigate } from 'react-router-dom'
 //导入shadcn/ui组件库的UI组件
@@ -17,6 +18,109 @@ import { getProjectById } from '../../data/projects'
 import ImageGallery, { SingleImageDisplay, MultiImageGrid, SmartImageDisplay } from '../components/ImageGallery'
 import Footer from '../components/Footer'
 import FeedbackBot from '../components/FeedbackBot'
+
+// 辅助函数：从项目的 colors 中提取主色
+const getProjectHighlightColor = (project) => {
+  // 如果项目有 textHighlightColor，直接使用
+  if (project.colors?.textHighlightColor) {
+    return project.colors.textHighlightColor;
+  }
+  // 如果有 heroGradient，尝试提取第一个颜色
+  if (project.colors?.heroGradient) {
+    const match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+    if (match) return match[0];
+  }
+  // 默认使用紫色
+  return '#8B5CF6';
+};
+
+// 辅助函数：将 rgb 格式转换为十六进制
+const rgbToHex = (rgb) => {
+  const match = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+  if (match) {
+    const r = parseInt(match[1]).toString(16).padStart(2, '0');
+    const g = parseInt(match[2]).toString(16).padStart(2, '0');
+    const b = parseInt(match[3]).toString(16).padStart(2, '0');
+    return `#${r}${g}${b}`;
+  }
+  return null;
+};
+
+// 辅助函数：从渐变色中提取深色（第一个颜色）
+const getProjectDarkColor = (project) => {
+  // 如果项目直接指定了 darkColor，优先使用
+  if (project.colors?.darkColor) {
+    return project.colors.darkColor;
+  }
+  if (project.colors?.heroGradient) {
+    // 先尝试匹配十六进制颜色
+    let matches = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/g);
+    if (matches && matches.length > 0) {
+      return matches[0]; // 返回第一个颜色（深色端）
+    }
+    // 如果没有十六进制，尝试匹配 rgb 格式
+    const rgbMatch = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+    if (rgbMatch) {
+      const hex = rgbToHex(rgbMatch[0]);
+      if (hex) return hex;
+    }
+  }
+  if (project.colors?.subtitleGradient) {
+    let matches = project.colors.subtitleGradient.match(/#[0-9a-fA-F]{6}/g);
+    if (matches && matches.length > 0) {
+      return matches[0];
+    }
+    const rgbMatch = project.colors.subtitleGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+    if (rgbMatch) {
+      const hex = rgbToHex(rgbMatch[0]);
+      if (hex) return hex;
+    }
+  }
+  return '#0D0D0D'; // 默认深色
+};
+
+// 辅助函数：从渐变色中提取浅色（最后一个颜色）
+const getProjectLightColor = (project) => {
+  // 如果项目直接指定了 lightColor，优先使用
+  if (project.colors?.lightColor) {
+    return project.colors.lightColor;
+  }
+  if (project.colors?.heroGradient) {
+    // 先尝试匹配十六进制颜色
+    let matches = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/g);
+    if (matches && matches.length > 0) {
+      return matches[matches.length - 1]; // 返回最后一个颜色（浅色端）
+    }
+    // 如果没有十六进制，尝试匹配 rgb 格式（取最后一个）
+    const rgbMatches = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/g);
+    if (rgbMatches && rgbMatches.length > 0) {
+      const hex = rgbToHex(rgbMatches[rgbMatches.length - 1]);
+      if (hex) return hex;
+    }
+  }
+  if (project.colors?.subtitleGradient) {
+    let matches = project.colors.subtitleGradient.match(/#[0-9a-fA-F]{6}/g);
+    if (matches && matches.length > 0) {
+      return matches[matches.length - 1];
+    }
+    const rgbMatches = project.colors.subtitleGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/g);
+    if (rgbMatches && rgbMatches.length > 0) {
+      const hex = rgbToHex(rgbMatches[rgbMatches.length - 1]);
+      if (hex) return hex;
+    }
+  }
+  return '#565869'; // 默认浅灰色
+};
+
+// 辅助函数：预处理文本，将 [[text]] 转换为 Markdown 加粗格式
+const preprocessHighlightMarkers = (text) => {
+  if (typeof text !== 'string') return text;
+  // 将 [[text]] 转换为 **text** 格式，这样 ReactMarkdown 会将其作为加粗处理
+  // 然后在 strong 组件中应用颜色
+  return text.replace(/\[\[([^\]]+)\]\]/g, '**$1**');
+};
+
+// 注意：数字自动高亮功能已移除，只保留 [[文字]] 和 **文字** 的高亮
 
 //ProjectDetail组件，展示单个项目的详细信息
 const ProjectDetail = () => {
@@ -34,11 +138,13 @@ const ProjectDetail = () => {
   const [allImages, setAllImages] = useState([])
   const [activeSection, setActiveSection] = useState('overview')
   const [showBackToTop, setShowBackToTop] = useState(false)
+  
+  // 获取项目的高亮颜色
+  const highlightColor = project ? getProjectHighlightColor(project) : '#8B5CF6'
 
   // 创建导航数据（动态构建，根据实际内容）
   const navigationSections = [
     { id: 'overview', title: 'Overview', icon: '📋' },
-    { id: 'challenge', title: 'Challenge', icon: '🎯' },
     // 只有当role存在时才添加
     ...(project?.role ? [{ id: 'role', title: 'My Role', icon: '👤' }] : []),
     // 添加所有章节
@@ -226,9 +332,12 @@ const ProjectDetail = () => {
 
       {/* ========== 顶部标题区域 ========== */}
       <section className="pt-32 pb-16 px-6" style={{background: project.colors?.heroGradient || 'var(--gradient-hero)'}}>
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
+            <h1 
+              className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in whitespace-nowrap"
+              style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+            >
               {project.title}
             </h1>
             
@@ -294,12 +403,8 @@ const ProjectDetail = () => {
       </section>
 
       {/* ========== 项目概述区域 ========== */}
-      <section id="overview" className="py-20 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center" style={{background: project.colors?.subtitleGradient || 'var(--gradient-secondary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
-            PROJECT OVERVIEW
-          </h2>
-
+      <section id="overview" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
           {/* 主图展示 */}
           <div className="relative group rounded-3xl overflow-hidden shadow-2xl mb-12">
             <div className="aspect-[16/10] bg-gradient-to-br from-purple-100 to-blue-100">
@@ -369,19 +474,115 @@ const ProjectDetail = () => {
                 </a>
               </div>
             )}
+
+            {/* Stumbldoor项目的Figma按钮 */}
+            {project.id === 'stumbldoor' && (
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+                <a
+                  href="https://www.figma.com/proto/XWqBQZuoMeZCWbhwrfaWBP/Final-UI--Copy-?node-id=97-4335&t=4v7H3T97OyRDa3Ds-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
+                >
+                  View in Figma
+                  <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
+
+          {/* Section Header */}
+          <div className="mb-8 md:mb-12 lg:mb-16">
+            {/* Section Tag */}
+            <div 
+              className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
+              style={{ color: getProjectLightColor(project) }}
+            >
+              Project Overview
+            </div>
+            
+            {/* Main Title */}
+            <h2 
+              className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
+              style={{ color: getProjectDarkColor(project) }}
+            >
+              {project.overview.mainTitle || 'Transform AI Learning Into Community Experience'}
+            </h2>
+            
+            {/* Brief Content */}
+            {project.overview.briefContent && (
+              <div className="text-sm md:text-base lg:text-lg text-[#565869] leading-relaxed [&_strong]:!font-bold [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
+                <ReactMarkdown 
+                  components={{
+                    p: ({children}) => {
+                      return <p className="mb-0">{children}</p>;
+                    },
+                    strong: ({children}) => {
+                      return (
+                        <strong 
+                          className="font-bold" 
+                          style={{ 
+                            color: highlightColor, 
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          {children}
+                        </strong>
+                      );
+                    },
+                    highlight: ({children}) => <span className="font-bold" style={{ color: highlightColor }}>{children}</span>
+                  }}
+                  rehypePlugins={[]}
+                  remarkPlugins={[]}
+                >
+                  {preprocessHighlightMarkers(project.overview.briefContent)}
+                </ReactMarkdown>
+              </div>
+            )}
           </div>
           
-          <div className="prose prose-lg max-w-none mb-12">
-            <div className="text-lg text-gray-700 leading-relaxed text-left mb-8">
-              <ReactMarkdown 
-                components={{
-                  p: ({children}) => <p className="mb-4">{children}</p>,
-                  strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
-                }}
-              >
-                {project.overview.content}
-              </ReactMarkdown>
+          {/* Full Content (只在没有 briefContent 时显示) */}
+          {!project.overview.briefContent && (
+            <div className="prose prose-lg max-w-none mb-12 [&_strong]:!text-[var(--highlight-color)]">
+              <div className="text-lg text-gray-700 leading-relaxed text-left mb-8" style={{ '--highlight-color': highlightColor }}>
+                <ReactMarkdown 
+                  components={{
+                    p: ({children}) => {
+                      return <p className="mb-4">{children}</p>;
+                    },
+                    strong: ({children}) => {
+                      return (
+                        <strong 
+                          className="font-bold" 
+                          style={{ 
+                            color: highlightColor, 
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          {children}
+                        </strong>
+                      );
+                    },
+                    highlight: ({children}) => <span className="font-bold" style={{ color: highlightColor }}>{children}</span>
+                  }}
+                  rehypePlugins={[]}
+                  remarkPlugins={[]}
+                >
+                  {Array.isArray(project.overview.content) 
+                    ? project.overview.content
+                        .map((para, idx) => 
+                          typeof para === 'string' ? preprocessHighlightMarkers(para) : String(para)
+                        )
+                        .join('\n\n')
+                    : typeof project.overview.content === 'string' 
+                      ? preprocessHighlightMarkers(project.overview.content)
+                      : String(project.overview.content || '')}
+                </ReactMarkdown>
+              </div>
             </div>
+          )}
             
             {(project.overview.challenge || project.overview.challenges) && (
               <div 
@@ -392,7 +593,18 @@ const ProjectDetail = () => {
                     ? (() => {
                         // Extract colors from gradient and create light version
                         const gradient = project.colors.subtitleGradient;
-                        const colorMatches = gradient.match(/#[0-9a-fA-F]{6}/g) || [];
+                        // Try hex colors first
+                        let colorMatches = gradient.match(/#[0-9a-fA-F]{6}/g) || [];
+                        // If no hex, try RGB
+                        if (colorMatches.length === 0) {
+                          const rgbMatches = gradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/g) || [];
+                          if (rgbMatches.length > 0) {
+                            colorMatches = rgbMatches.map(rgb => {
+                              const hex = rgbToHex(rgb);
+                              return hex || null;
+                            }).filter(Boolean);
+                          }
+                        }
                         if (colorMatches.length > 0) {
                           const colors = colorMatches.map(hex => {
                             const r = parseInt(hex.slice(1, 3), 16);
@@ -407,13 +619,26 @@ const ProjectDetail = () => {
                     : 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))',
                   borderLeftColor: project.colors?.heroGradient 
                     ? (() => {
-                        const match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
-                        return match ? match[0] : '#8b5cf6';
+                        // Try hex first
+                        let match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                        if (match) return match[0];
+                        // Try RGB
+                        const rgbMatch = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+                        if (rgbMatch) {
+                          const hex = rgbToHex(rgbMatch[0]);
+                          if (hex) return hex;
+                        }
+                        return '#8b5cf6';
                       })()
                     : '#8b5cf6'
                 }}
               >
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">The Challenge</h3>
+                <h3 
+                  className="text-xl font-semibold text-gray-900 mb-4"
+                  style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+                >
+                  The Challenge
+                </h3>
                 {project.overview.challenges ? (
                   <div className="space-y-4">
                     {project.overview.challenges.map((challenge, index) => (
@@ -423,8 +648,16 @@ const ProjectDetail = () => {
                           style={{
                             background: project.colors?.heroGradient 
                               ? (() => {
-                                  const match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
-                                  return match ? `${match[0]}20` : 'rgba(139, 92, 246, 0.2)';
+                                  // Try hex first
+                                  let match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                                  if (match) return `${match[0]}20`;
+                                  // Try RGB
+                                  const rgbMatch = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+                                  if (rgbMatch) {
+                                    const hex = rgbToHex(rgbMatch[0]);
+                                    if (hex) return `${hex}20`;
+                                  }
+                                  return 'rgba(139, 92, 246, 0.2)';
                                 })()
                               : 'rgba(139, 92, 246, 0.2)'
                           }}
@@ -434,8 +667,16 @@ const ProjectDetail = () => {
                             style={{
                               color: project.colors?.heroGradient 
                                 ? (() => {
-                                    const match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
-                                    return match ? match[0] : '#8b5cf6';
+                                    // Try hex first
+                                    let match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                                    if (match) return match[0];
+                                    // Try RGB
+                                    const rgbMatch = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+                                    if (rgbMatch) {
+                                      const hex = rgbToHex(rgbMatch[0]);
+                                      if (hex) return hex;
+                                    }
+                                    return '#8b5cf6';
                                   })()
                                 : '#8b5cf6'
                             }}
@@ -456,25 +697,46 @@ const ProjectDetail = () => {
                 )}
               </div>
             )}
-          </div>
         </div>
       </section>
 
       {/* ========== 角色部分（只在存在时渲染）========== */}
       {project.role && (
-        <section id="role" className="py-8 px-6 bg-white">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{background: project.colors?.subtitleGradient || 'var(--gradient-secondary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
-              {project.role.title?.toUpperCase() || 'MY ROLE'}
-            </h2>
-            <div className="h-1 mb-12 w-96" style={{background: project.colors?.underlineGradient || 'var(--gradient-secondary)'}}></div>
+        <section id="role" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 bg-white">
+          <div className="max-w-5xl mx-auto">
+            {/* Section Header */}
+            <div className="mb-8 md:mb-12 lg:mb-16">
+              {/* Section Tag */}
+              <div 
+                className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
+                style={{ color: getProjectLightColor(project) }}
+              >
+                {project.role.title || 'My Role'}
+              </div>
+              
+              {/* Main Title */}
+              <h2 
+                className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 md:mb-6 leading-tight"
+                style={{ 
+                  color: getProjectDarkColor(project),
+                  fontFamily: "'Poppins', 'Inter', sans-serif"
+                }}
+              >
+                {project.role.title?.toUpperCase() || 'MY ROLE'}
+              </h2>
+            </div>
             
             {/* 如果有responsibilities就显示，没有就只显示标题 */}
             {project.role.responsibilities && project.role.responsibilities.length > 0 && (
               <div className="grid gap-6">
                 {project.role.responsibilities.map((responsibility, index) => (
                   <div key={index} className="flex items-start space-x-4 group hover:translate-x-2 transition-transform">
-                    <div className="flex-shrink-0 w-10 h-10 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg" style={{backgroundColor: 'var(--custom-purple)'}}>
+                    <div 
+                      className="flex-shrink-0 w-10 h-10 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg" 
+                      style={{
+                        backgroundColor: getProjectLightColor(project)
+                      }}
+                    >
                       {index + 1}
                     </div>
                     <p className="text-lg text-gray-700 leading-relaxed pt-2">{responsibility}</p>
@@ -491,27 +753,94 @@ const ProjectDetail = () => {
         <section 
           key={section.id} 
           id={section.id}
-          className={`py-20 px-6 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+          className={`py-12 md:py-20 lg:py-24 px-4 md:px-6 ${index % 2 === 0 ? 'bg-[#F7F7F8]' : 'bg-white'}`}
         >
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{background: project.colors?.subtitleGradient || 'var(--gradient-secondary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
-              {section.title.toUpperCase()}
-            </h2>
-            <div className="h-1 mb-12 w-96" style={{background: project.colors?.underlineGradient || 'var(--gradient-secondary)'}}></div>
+          <div className="max-w-5xl mx-auto">
+            {/* Section Header */}
+            <div className="mb-8 md:mb-12 lg:mb-16">
+              {/* Section Tag (小标题) - 如果有 sectionTag 就显示 sectionTag，否则如果有 mainTitle 就用 title 作为小标题 */}
+              {(section.sectionTag || (section.mainTitle && section.title)) && (
+                <div 
+                  className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
+                  style={{ color: getProjectLightColor(project) }}
+                >
+                  {section.sectionTag || section.title}
+                </div>
+              )}
+              
+              {/* Main Title (大标题) - 如果有 mainTitle 就显示 mainTitle，否则显示 title */}
+              <h2 
+                className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
+                style={{ 
+                  color: getProjectDarkColor(project),
+                  fontFamily: "'Poppins', 'Inter', sans-serif"
+                }}
+              >
+                {section.mainTitle || section.title}
+              </h2>
+              
+              {/* Brief Content (100-150字正文) */}
+              {section.briefContent && (
+                <div className="text-sm md:text-base lg:text-lg text-[#565869] leading-relaxed [&_strong]:!font-bold [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
+                  <ReactMarkdown 
+                    components={{
+                      p: ({children}) => {
+                        return <p className="mb-0">{children}</p>;
+                      },
+                      strong: ({children}) => {
+                      return (
+                        <strong 
+                          className="font-bold" 
+                          style={{ 
+                            color: highlightColor, 
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          {children}
+                        </strong>
+                      );
+                    },
+                      highlight: ({children}) => <span className="font-bold" style={{ color: highlightColor }}>{children}</span>
+                    }}
+                    rehypePlugins={[]}
+                    remarkPlugins={[]}
+                  >
+                    {preprocessHighlightMarkers(section.briefContent)}
+                  </ReactMarkdown>
+                </div>
+              )}
+            </div>
             
-            {/* 只在非交替模式下显示文字内容 */}
-            {section.imageDisplayMode !== 'alternating' && (
-              <div className="prose prose-lg max-w-none mb-12">
+            {/* 只在非交替模式下显示完整文字内容（保留原有功能） */}
+            {section.imageDisplayMode !== 'alternating' && section.content && !section.briefContent && (
+              <div className="prose prose-lg max-w-none mb-12 [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
                 {Array.isArray(section.content) ? (
                   section.content.map((paragraph, index) => (
                     <div key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
                       <ReactMarkdown 
                         components={{
-                          p: ({children}) => <p className="mb-4">{children}</p>,
-                          strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                          p: ({children}) => {
+                            return <p className="mb-4">{children}</p>;
+                          },
+                          strong: ({children}) => {
+                      return (
+                        <strong 
+                          className="font-bold" 
+                          style={{ 
+                            color: highlightColor, 
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          {children}
+                        </strong>
+                      );
+                    },
+                          highlight: ({children}) => <span className="font-bold" style={{ color: highlightColor }}>{children}</span>
                         }}
+                        rehypePlugins={[]}
+                        remarkPlugins={[]}
                       >
-                        {paragraph}
+                        {typeof paragraph === 'string' ? preprocessHighlightMarkers(paragraph) : paragraph}
                       </ReactMarkdown>
                     </div>
                   ))
@@ -519,11 +848,28 @@ const ProjectDetail = () => {
                   <div className="text-lg text-gray-700 leading-relaxed">
                     <ReactMarkdown 
                       components={{
-                        p: ({children}) => <p className="mb-4">{children}</p>,
-                        strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                        p: ({children}) => {
+                          return <p className="mb-4">{children}</p>;
+                        },
+                        strong: ({children}) => {
+                      return (
+                        <strong 
+                          className="font-bold" 
+                          style={{ 
+                            color: highlightColor, 
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          {children}
+                        </strong>
+                      );
+                    },
+                        highlight: ({children}) => <span className="font-bold" style={{ color: highlightColor }}>{children}</span>
                       }}
+                      rehypePlugins={[]}
+                      remarkPlugins={[]}
                     >
-                      {section.content}
+                      {typeof section.content === 'string' ? preprocessHighlightMarkers(section.content) : section.content}
                     </ReactMarkdown>
                   </div>
                 )}
@@ -532,39 +878,123 @@ const ProjectDetail = () => {
 
             {/* 特性卡片 */}
             {section.features && section.features.length > 0 && (
-              <div className="grid md:grid-cols-3 gap-6 mb-12">
-                {section.features.map((feature, idx) => (
-                  <Card 
-                    key={idx} 
-                    className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0"
-                    style={{
-                      background: project.colors?.heroGradient 
-                        ? `linear-gradient(to bottom right, white, ${project.colors.heroGradient.includes('#') ? `${project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/)?.[0] || '#8b5cf6'}15` : 'rgba(139, 92, 246, 0.15)'})`
-                        : 'linear-gradient(to bottom right, white, rgba(139, 92, 246, 0.15))'
-                    }}
-                  >
-                    <CardContent className="p-6 text-center">
-                      <div 
-                        className="inline-flex items-center justify-center w-12 h-12 text-white rounded-full mb-4 group-hover:scale-110 transition-transform"
-                        style={{
-                          background: project.colors?.heroGradient || 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)'
-                        }}
-                      >
-                        <span className="text-xl font-bold">{idx + 1}</span>
+              section.featureDisplayMode === 'side-by-side' ? (
+                // 新的左右布局样式：一边是数字和文字，另一边是图片
+                <div className="space-y-16 md:space-y-24 mb-12">
+                  {section.features.map((feature, idx) => (
+                    <div 
+                      key={idx}
+                      className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-12 items-center`}
+                    >
+                      {/* 左侧/右侧：数字和文字描述 */}
+                      <div className="flex-1 space-y-4">
+                        <div 
+                          className="text-5xl md:text-6xl font-bold mb-6"
+                          style={{
+                            color: getProjectLightColor(project)
+                          }}
+                        >
+                          {(idx + 1).toString().padStart(2, '0')}
+                        </div>
+                        <h3 
+                          className="text-2xl md:text-3xl font-bold mb-4"
+                          style={{
+                            color: getProjectDarkColor(project),
+                            fontFamily: "'Poppins', 'Inter', sans-serif"
+                          }}
+                        >
+                          {feature.name}
+                        </h3>
+                        {feature.detail && (
+                          <p className="text-lg text-gray-700 leading-relaxed">
+                            {feature.detail}
+                          </p>
+                        )}
+                        {feature.description && (
+                          <p className="text-base text-gray-600 leading-relaxed">
+                            {feature.description}
+                          </p>
+                        )}
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">
-                        {feature.name}
-                      </h3>
-                      <p className="text-gray-600 font-medium mb-3">
-                        {feature.description}
-                      </p>
-                      <p className="text-gray-700 text-sm leading-relaxed">
-                        {feature.detail}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                      
+                      {/* 右侧/左侧：图片或 GIF */}
+                      {(feature.image || feature.gif) && (
+                        <div className="flex-1 w-full flex items-center justify-center">
+                          <div 
+                            className="relative rounded-2xl overflow-hidden shadow-lg"
+                            style={feature.gif ? { maxWidth: '50%' } : { width: '100%' }}
+                          >
+                            {feature.gif ? (
+                              <img 
+                                src={feature.gif} 
+                                alt={feature.name}
+                                className="w-full h-auto object-cover"
+                              />
+                            ) : (
+                              <img 
+                                src={feature.image} 
+                                alt={feature.name}
+                                className="w-full h-auto object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+                                onClick={() => handleImageClick(
+                                  { src: feature.image, alt: feature.name },
+                                  section.features.filter(f => f.image || f.gif).map(f => ({
+                                    src: f.image || f.gif,
+                                    alt: f.name
+                                  }))
+                                )}
+                              />
+                            )}
+                          </div>
+                          {feature.imageCaption && (
+                            <p className="text-sm text-gray-500 mt-2 text-center">
+                              {feature.imageCaption}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // 原有的三列网格布局
+                <div className="grid md:grid-cols-3 gap-6 mb-12">
+                  {section.features.map((feature, idx) => (
+                    <Card 
+                      key={idx} 
+                      className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0"
+                      style={{
+                        background: project.colors?.heroGradient 
+                          ? `linear-gradient(to bottom right, white, ${project.colors.heroGradient.includes('#') ? `${project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/)?.[0] || '#8b5cf6'}15` : 'rgba(139, 92, 246, 0.15)'})`
+                          : 'linear-gradient(to bottom right, white, rgba(139, 92, 246, 0.15))'
+                      }}
+                    >
+                      <CardContent className="p-6 text-center">
+                        <div 
+                          className="text-4xl font-bold mb-4"
+                          style={{
+                            color: getProjectLightColor(project)
+                          }}
+                        >
+                          {(idx + 1).toString().padStart(2, '0')}
+                        </div>
+                        <div className="mb-3">
+                          <span 
+                            className="inline-block text-xl font-bold"
+                            style={{
+                              color: getProjectLightColor(project)
+                            }}
+                          >
+                            {feature.name}
+                          </span>
+                        </div>
+                        <p className="text-gray-700 text-sm leading-relaxed">
+                          {feature.detail}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )
             )}
 
             {/* 按钮 */}
@@ -577,14 +1007,10 @@ const ProjectDetail = () => {
                     target={button.type === 'download' ? '_self' : '_blank'}
                     rel="noopener noreferrer"
                     download={button.type === 'download' ? (button.downloadName || true) : false}
-                    className={`inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl ${
-                      button.type === 'github' 
-                        ? 'bg-gray-800 text-white hover:bg-gray-900' 
-                        : 'text-white hover:opacity-90'
-                    }`}
-                    style={button.type !== 'github' ? {
+                    className="inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl text-white hover:opacity-90"
+                    style={{
                       background: project.colors?.heroGradient || 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)'
-                    } : {}}
+                    }}
                   >
                     {button.text}
                     {button.type === 'download' ? (
@@ -601,14 +1027,48 @@ const ProjectDetail = () => {
               </div>
             )}
 
-            {/* 图片展示 */}
-            {section.images && section.images.length > 0 && (
-              <SmartImageDisplay 
-                images={section.images}
-                onImageClick={(image) => handleImageClick(image, section.images)}
-                displayMode={section.imageDisplayMode || 'single'}
-                content={section.content}
-              />
+            {/* 图片展示 - 支持多个图片组，每个组可以有不同的 display mode */}
+            {section.imageGroups && section.imageGroups.length > 0 ? (
+              // 如果定义了 imageGroups，渲染多个图片组
+              <div className="space-y-12">
+                {section.imageGroups.map((group, groupIndex) => {
+                  const allImagesInGroup = group.images || [];
+                  return (
+                    <div key={groupIndex}>
+                      {group.title && (
+                        <h3 
+                          className="text-xl font-semibold mb-4" 
+                          style={{ 
+                            color: getProjectDarkColor(project),
+                            fontFamily: "'Poppins', 'Inter', sans-serif"
+                          }}
+                        >
+                          {group.title}
+                        </h3>
+                      )}
+                      {group.description && (
+                        <p className="text-gray-600 mb-6">{group.description}</p>
+                      )}
+                      <SmartImageDisplay 
+                        images={allImagesInGroup}
+                        onImageClick={(image) => handleImageClick(image, allImagesInGroup)}
+                        displayMode={group.displayMode || 'single'}
+                        content={group.content}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              // 向后兼容：如果只有 images 和 imageDisplayMode，使用原有逻辑
+              section.images && section.images.length > 0 && (
+                <SmartImageDisplay 
+                  images={section.images}
+                  onImageClick={(image) => handleImageClick(image, section.images)}
+                  displayMode={section.imageDisplayMode || 'single'}
+                  content={section.content}
+                />
+              )
             )}
           </div>
         </section>
