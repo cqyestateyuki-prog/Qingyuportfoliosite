@@ -11,6 +11,7 @@ const FeedbackBot = () => {
   const [hasShownOnce, setHasShownOnce] = useState(false);
   const [showBot, setShowBot] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
 
   const sendEmail = async (message) => {
     // 使用 EmailJS 发送邮件
@@ -99,8 +100,27 @@ const FeedbackBot = () => {
     setFeedback('');
   };
 
-  // 页面加载后延迟6秒显示机器人和对话框
+  const handleDismissTooltip = () => {
+    setShowTooltip(false);
+    setTooltipVisible(false);
+    setIsDismissed(true);
+    // 保存到 localStorage，记住用户已经关闭过
+    localStorage.setItem('feedback_bot_dismissed', 'true');
+  };
+
+  // 检查用户是否已经关闭过对话框
   useEffect(() => {
+    const dismissed = localStorage.getItem('feedback_bot_dismissed');
+    if (dismissed === 'true') {
+      setIsDismissed(true);
+      return;
+    }
+  }, []);
+
+  // 页面加载后延迟6秒显示机器人和对话框（如果用户没有关闭过）
+  useEffect(() => {
+    if (isDismissed) return;
+    
     const timer = setTimeout(() => {
       setShowBot(true);
       setShowTooltip(true);
@@ -111,7 +131,7 @@ const FeedbackBot = () => {
     }, 6000); // 6秒延迟
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isDismissed]);
 
   // 监听滚动事件，只在滚动到项目区域时显示机器人
   useEffect(() => {
@@ -150,13 +170,22 @@ const FeedbackBot = () => {
       <div className="fixed bottom-28 right-8 z-50">
         <div className="relative flex items-center gap-3">
           {/* 对话框提示 - 平行于机器人，在左侧 */}
-          {showTooltip && (
+          {showTooltip && !isDismissed && (
             <div className={`absolute right-full mr-3 bg-white rounded-xl shadow-2xl p-3 w-72 border border-gray-200 transition-all duration-500 ease-out ${
               tooltipVisible 
                 ? 'opacity-100 transform translate-x-0' 
                 : 'opacity-0 transform translate-x-2'
             }`}>
-            <p className="text-sm text-gray-700 mb-2 leading-relaxed">
+            {/* 关闭按钮 */}
+            <button
+              onClick={handleDismissTooltip}
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors p-1"
+              aria-label="Close"
+            >
+              <X size={16} />
+            </button>
+            
+            <p className="text-sm text-gray-700 mb-2 leading-relaxed pr-6">
               Would you mind leaving a quick feedback/advice for my portfolio?
             </p>
             <div className="flex justify-end">

@@ -634,19 +634,19 @@ export const projects = [
           }
         ],
         
-      },
-      
-      {
-        id: 'technical-implementation',
+        },
+        
+         {
+           id: 'technical-implementation',
         title: 'Technical Implementation',
         sectionTag: 'Technical Implementation',
         mainTitle: 'Three-Phase Intelligent Architecture',
         briefContent: 'I built a lightweight architecture using [[native JavaScript]] for the frontend and [[Flask + Socket.IO]] for the backend. The system operates in three phases: preprocessing and knowledge base construction, structure analysis and code generation, and execution with result presentation. [[SSE]] enables real-time streaming, while [[Jupyter Kernel]] provides secure code execution.',
-        icon: '💻',
+           icon: '💻',
         content: [
           'The frontend uses native JavaScript with no framework dependencies for optimal performance. SSE (Server-Sent Events) enables real-time streaming output, WebSocket supports real-time voice input transmission, and responsive CSS implements complex layouts and animations.',
           'The backend uses Flask + Socket.IO as a lightweight web framework. Jupyter Kernel provides an isolated code execution environment for security. OpenAI API handles code generation, summarization, and voice transcription. The application is a single-page application with no page navigation, providing a smooth experience.'
-        ],
+           ],
           features: [
             {
             name: 'Preprocessing & Knowledge Base Construction',
@@ -756,7 +756,7 @@ export const projects = [
     
     overview: {
       mainTitle: 'Building a Comprehensive Pet Rescue Ecosystem',
-      briefContent: 'With [[90 million stray animals]] in China awaiting help, and [[60% of potential pet owners]] wanting to adopt but unable to, [[Petiboxy]] creates a comprehensive platform connecting people with pets in need.',
+      briefContent: 'Expanding the mission of [[Petiboxy]], a premier pet fresh food brand, I conceptualized and delivered a dedicated charity ecosystem to tackle the crisis of [[90 million stray animals]]. This project creates a vital connection for the [[60% of inhibited adopters]], translating the abstract values of [[Professionalism, Safety, Love, and Responsibility]] into a tangible, user-centric experience.',
       challenges: [
         'How might we connect 90 million stray animals with people who want to help?',
         'How might we reduce the adoption barriers that prevent 60% of willing adopters?',
@@ -777,7 +777,12 @@ export const projects = [
           'Behind every statistic is a life. These animals face abandonment, disease, and uncertain futures. Yet most people don\'t know where to find them or how to help.',
           'The scale of the crisis includes 50 million stray cats, 40 million stray dogs, representing 1/5 of the world\'s stray animal population, with consistent high numbers since 2021.'
         ],
-        images: []
+        images: [
+          {
+            src: '/media/projects/petiboxy/problem2.png',
+            alt: 'user research',
+          }
+        ]
       },
       
       {
@@ -791,37 +796,13 @@ export const projects = [
           'Despite strong adoption intent, structural barriers prevent most people from adopting. The missing link: a trustworthy, accessible platform.',
           '60% of potential pet owners express willingness to adopt if a reliable platform existed. However, 43.9% of current pets come from pet stores, only 35% are acquired through adoption, and 21.1% come from other sources. The problem isn\'t lack of willingness—it\'s lack of access.'
         ],
-        imageDisplayMode: 'two-column',
-        images: []
-      },
-      
-      {
-        id: 'challenges',
-        title: 'Challenges',
-        sectionTag: 'Challenges',
-        mainTitle: 'Three Critical Barriers',
-        briefContent: 'The platform addresses three critical barriers: [[Information Fragmentation]] (lost pet information scattered across WeChat, Weibo, and TikTok), [[Adoption Barriers]] (potential adopters don\'t know where to find adoptable pets), and [[Resource Scarcity]] (rescue organizations struggle for funding and visibility).',
-        icon: '⚡',
-        content: [
-          'Information Fragmentation: Lost pet information scattered across WeChat, Weibo, and TikTok. No centralized discovery mechanism.',
-          'Adoption Barriers: Potential adopters don\'t know where to find adoptable pets. Lack of verified information creates hesitation.',
-          'Resource Scarcity: Rescue organizations struggle for funding and visibility. Individual rescuers lack platforms to showcase work.'
-           ],
-          features: [
-            {
-            name: 'Information Fragmentation',
-            detail: 'Lost pet information scattered across WeChat, Weibo, and TikTok. No centralized discovery mechanism.'
-          },
+        imageDisplayMode: 'single',
+        images: [
           {
-            name: 'Adoption Barriers',
-            detail: 'Potential adopters don\'t know where to find adoptable pets. Lack of verified information creates hesitation.'
-          },
-          {
-            name: 'Resource Scarcity',
-            detail: 'Rescue organizations struggle for funding and visibility. Individual rescuers lack platforms to showcase work.'
+            src: '/media/projects/petiboxy/userresearch.png',
+            alt: 'user research',
           }
-        ],
-        images: []
+        ]
       },
       
       {
@@ -829,38 +810,32 @@ export const projects = [
         title: 'The Solution',
         sectionTag: 'The Solution',
         mainTitle: 'One Platform, Three Functions',
-        briefContent: 'A comprehensive ecosystem designed to connect people with pets in need, support rescue organizations, and build a compassionate community. The platform features [[Baby Come Home]] for lost pet reunification (expected success rate: +45%), [[Adoption & Rescue]] for pet matching (expected adoption rate increase: +60%), and [[Charity Organizations]] for supporting rescue work (expected org support increase: +75%).',
+        briefContent: 'The platform addresses three critical barriers: [[Information Fragmentation]] (lost pet information scattered across WeChat, Weibo, and TikTok), [[Adoption Barriers]] (potential adopters don\'t know where to find adoptable pets), and [[Resource Scarcity]] (rescue organizations struggle for funding and visibility). A comprehensive ecosystem designed to connect people with pets in need, support rescue organizations, and build a compassionate community. The platform features [[Baby Come Home]] for lost pet reunification, [[Adoption & Rescue]] for pet matching, and [[Charity Organizations]] for supporting rescue work.',
         icon: '💡',
-        content: [
-          'A comprehensive ecosystem designed to connect people with pets in need, support rescue organizations, and build a compassionate community.',
-          'Baby Come Home: Centralized lost pet reporting system with community-powered search network and geo-location matching. Help reunite lost pets with their families. Features real-time lost pet alerts, community-powered search network, with expected success rate: +45%.',
-          'Adoption & Rescue: Comprehensive pet profiles with health records, personality descriptions, and photos. Connect adopters with their perfect companion. Support rescue organizations with verified listings. Features rich pet profiles with health records, success stories showcase, with expected adoption rate increase: +60%.',
-          'Charity Organizations: Verified rescue organization directory with integrated fundraising, donation tracking, and impact reporting. Support professional rescue work with transparency and accountability. Features verified organization directory, integrated fundraising platform, with expected org support increase: +75%.'
-        ],
-        imageDisplayMode: 'alternating',
-        images: [
+        featureDisplayMode: 'side-by-side',
+        features: [
           {
-            src: '/media/projects/petiboxy/baby-come-home.png',
-            alt: 'Baby Come Home UI',
-            caption: 'Baby Come Home - Lost pet reunification system'
+            name: 'Baby Come Home',
+            detail: 'Centralized lost pet reporting system with community-powered search network and geo-location matching. Help reunite lost pets with their families. Features real-time lost pet alerts and community-powered search network.',
+            image: '/media/projects/petiboxy/baby-come-home.png',
           },
           {
-            src: '/media/projects/petiboxy/adoption-rescue.png',
-            alt: 'Adoption & Rescue UI',
-            caption: 'Adoption & Rescue - Pet matching platform'
+            name: 'Adoption & Rescue',
+            detail: 'Comprehensive pet profiles with health records, personality descriptions, and photos. Connect adopters with their perfect companion. Support rescue organizations with verified listings. Features rich pet profiles with health records and success stories showcase.',
+            image: '/media/projects/petiboxy/adoption-rescue.png',
           },
           {
-            src: '/media/projects/petiboxy/charity-orgs.png',
-            alt: 'Charity Organizations UI',
-            caption: 'Charity Organizations - Rescue organization support'
+            name: 'Charity Organizations',
+            detail: 'Verified rescue organization directory with integrated fundraising, donation tracking, and impact reporting. Support professional rescue work with transparency and accountability. Features verified organization directory and integrated fundraising platform.',
+            image: '/media/projects/petiboxy/charity-orgs.png',
           }
         ]
       },
       
       {
         id: 'design-philosophy',
-        title: 'Design Philosophy',
-        sectionTag: 'Design Philosophy',
+        title: 'Design Approach & Iteration',
+        sectionTag: 'Design Approach & Iteration',
         mainTitle: 'Built on Three Core Principles',
         briefContent: 'The platform is built on three core principles: [[Integrated Pet Profiles]] (seamless connection between Petiboxy\'s nutrition app and charity features), [[Multi-Channel Rescue]] (lost pet finding + adoption matching + organization support), and [[Community-Driven Growth]] (users share pet stories and success narratives to build trust through emotional storytelling).',
           icon: '🎨',
@@ -880,6 +855,18 @@ export const projects = [
       },
       
       {
+        id: 'final-showcase',
+        title: 'Final Showcase',
+        sectionTag: 'Final Showcase',
+        mainTitle: 'Every Life Matters',
+        briefContent: 'Together, we can transform [[90 million lives]]. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility.',
+        icon: '🚀',
+        content: 'Together, we can transform 90 million lives. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility. The platform represents a shift from purchase-based to adoption-based pet culture, reducing stray animal populations and building a more compassionate society.',
+        imageDisplayMode: 'two-column',
+        images: []
+      },
+      
+      {
         id: 'impact',
         title: 'Expected Impact',
         sectionTag: 'Expected Impact',
@@ -894,7 +881,7 @@ export const projects = [
           '80% Community Engagement - Users participate in platform activities',
           'Long-term vision: Shift China\'s pet culture from purchase-based to adoption-based, reducing stray animal populations and building a more compassionate society.'
         ],
-          imageDisplayMode: 'two-column',
+          imageDisplayMode: 'single',
           images: [
             {
             src: '/media/projects/petiboxy/expected-outcomes.png',
@@ -902,63 +889,6 @@ export const projects = [
             caption: 'Platform success metrics and expected impact'
           }
         ]
-      },
-      
-      {
-        id: 'design-details',
-        title: 'Design Details',
-        sectionTag: 'Design Details',
-        mainTitle: 'Intuitive Interface for Every User',
-        briefContent: 'The interface is designed for accessibility and ease of use: [[Streamlined Onboarding]] (users find their purpose in 3 taps), [[Rich Pet Profiles]] (photos, health records, personality descriptions), and [[Social Integration]] (share stories, follow organizations, build community).',
-        icon: '✨',
-        content: [
-          'Streamlined Onboarding: Users find their purpose in 3 taps. Clear navigation guides them to adopt, help, or support.',
-          'Rich Pet Profiles: Photos, health records, personality descriptions. Everything adopters need to make informed decisions.',
-          'Social Integration: Share stories, follow organizations, build community. Celebrate reunions and adoptions together.'
-        ],
-        features: [
-          {
-            name: 'Streamlined Onboarding',
-            detail: 'Users find their purpose in 3 taps. Clear navigation guides them to adopt, help, or support.'
-          },
-          {
-            name: 'Rich Pet Profiles',
-            detail: 'Photos, health records, personality descriptions. Everything adopters need to make informed decisions.'
-          },
-          {
-            name: 'Social Integration',
-            detail: 'Share stories, follow organizations, build community. Celebrate reunions and adoptions together.'
-          }
-        ],
-        images: []
-      },
-      
-      {
-        id: 'brand-commitment',
-        title: 'Brand Commitment',
-        sectionTag: 'Brand Commitment',
-        mainTitle: 'Petiboxy Stands for Responsibility and Compassion',
-        briefContent: 'Petiboxy is built on four core values: [[Professional]] (verified organizations, vetted information, secure transactions), [[Safe]] (health screening, compatibility matching, accountability), [[Loving]] (community-centered, story-driven, impact-focused), and [[Responsible]] (corporate citizen solving China\'s stray animal crisis).',
-        icon: '❤️',
-        content: [
-          'Professional: Verified organizations, vetted information, secure transactions',
-          'Safe: Health screening, compatibility matching, accountability',
-          'Loving: Community-centered, story-driven, impact-focused',
-          'Responsible: Corporate citizen solving China\'s stray animal crisis'
-        ],
-        images: []
-      },
-      
-      {
-        id: 'final-showcase',
-        title: 'Final Showcase',
-        sectionTag: 'Final Showcase',
-        mainTitle: 'Every Life Matters',
-        briefContent: 'Together, we can transform [[90 million lives]]. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility.',
-        icon: '🚀',
-        content: 'Together, we can transform 90 million lives. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility. The platform represents a shift from purchase-based to adoption-based pet culture, reducing stray animal populations and building a more compassionate society.',
-        imageDisplayMode: 'two-column',
-        images: []
       }
     ]
   },
