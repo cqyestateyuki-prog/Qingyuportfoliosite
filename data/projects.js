@@ -809,7 +809,7 @@ export const projects = [
         id: 'solution',
         title: 'The Solution',
         sectionTag: 'The Solution',
-        mainTitle: 'One Platform, Three Functions',
+        mainTitle: 'Three Core Features to Address the Crisis',
         briefContent: 'The platform addresses three critical barriers: [[Information Fragmentation]] (lost pet information scattered across WeChat, Weibo, and TikTok), [[Adoption Barriers]] (potential adopters don\'t know where to find adoptable pets), and [[Resource Scarcity]] (rescue organizations struggle for funding and visibility). A comprehensive ecosystem designed to connect people with pets in need, support rescue organizations, and build a compassionate community. The platform features [[Baby Come Home]] for lost pet reunification, [[Adoption & Rescue]] for pet matching, and [[Charity Organizations]] for supporting rescue work.',
         icon: '💡',
         featureDisplayMode: 'side-by-side',
@@ -847,9 +847,7 @@ export const projects = [
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/petiboxy/design-principles.png',
-            alt: 'Design Principles',
-            caption: 'Three core design principles'
+            
           }
         ]
       },
@@ -862,7 +860,7 @@ export const projects = [
         briefContent: 'Together, we can transform [[90 million lives]]. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility.',
         icon: '🚀',
         content: 'Together, we can transform 90 million lives. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility. The platform represents a shift from purchase-based to adoption-based pet culture, reducing stray animal populations and building a more compassionate society.',
-        imageDisplayMode: 'two-column',
+        imageDisplayMode: 'single',
         images: []
       },
       
@@ -884,7 +882,7 @@ export const projects = [
           imageDisplayMode: 'single',
           images: [
             {
-            src: '/media/projects/petiboxy/expected-outcomes.png',
+            src: '/media/projects/petiboxy/impact.png',
             alt: 'Expected Outcomes',
             caption: 'Platform success metrics and expected impact'
           }
@@ -918,7 +916,8 @@ export const projects = [
     },
 
     overview: {
-      content: "In the bustling streets of cities, where the rhythm of traffic never ceases, the challenge of maintaining focus while driving is ever-present. Our project, Ziplink, aims to address the critical issue of driver distraction and cognitive overload, particularly when interacting with in-car systems. With a focus on enhancing the driving experience for all, especially those new to the roads, our project seeks to integrate innovative solutions into the existing ZipCar app, making it a more comprehensive tool for drivers.",
+      mainTitle: 'Redesigning the Future of In-Car Experience',
+      briefContent: 'In the bustling streets of cities, where the rhythm of traffic never ceases, the challenge of maintaining focus while driving is ever-present. [[Ziplink]] aims to address the critical issue of [[driver distraction and cognitive overload]], particularly when interacting with in-car systems. With a focus on enhancing the driving experience for all, especially those new to the roads, the project seeks to integrate innovative solutions into the existing ZipCar app, making it a more comprehensive tool for drivers.',
       challenge: 'How might we reduce cognitive overload for new drivers by creating a unified in-car experience that minimizes the need to switch between multiple apps and screens while driving?'
     },
     
@@ -927,6 +926,9 @@ export const projects = [
       {
         id: 'problemstatement',
         title: 'Problem Statement',
+        sectionTag: 'Problem Statement',
+        mainTitle: 'The Challenge of Driver Distraction and Cognitive Overload',
+        briefContent: 'In the current urban landscape, drivers face the significant challenge of [[minimizing distractions and reducing cognitive load]] while navigating complex in-car systems. This issue is particularly acute for [[new drivers]], who must juggle the demands of traffic, stress, and the pace of driving, all while interacting with electronic screens and in-car navigation.',
         content: "In the current urban landscape, drivers face the significant challenge of minimizing distractions and reducing cognitive load while navigating complex in-car systems. This issue is particularly acute for new drivers, who must juggle the demands of traffic, stress, and the pace of driving, all while interacting with electronic screens and in-car navigation. The danger of dividing attention between the road and these systems cannot be overstated, as it not only increases the risk of accidents but also contributes to a heightened sense of anxiety and discomfort.",
         imageDisplayMode: 'two-column', // 网格模式
         images: [
@@ -939,6 +941,9 @@ export const projects = [
       {
         id: 'research',
         title: 'Research',
+        sectionTag: 'User Research',
+        mainTitle: 'Understanding New Drivers\' Challenges',
+        briefContent: 'Our investigation into the new driver\'s driving experience highlights a [[critical gap in the current in-car system interaction paradigm]]. Drivers, especially those new to the city\'s roads, often find themselves overwhelmed by the simultaneous demands of traffic navigation, sign comprehension, and the use of electronic navigation aids. Our competitive analysis focused on [[Zipcar, Google Maps, and Garmin]], identifying gaps in their offerings that impact the driving experience, especially for new drivers in urban settings.',
         icon: '💡',
         content: "Our investigation into the new driver's driving experience highlights a critical gap in the current in-car system interaction paradigm. Drivers, especially those new to the city's roads, often find themselves overwhelmed by the simultaneous demands of traffic navigation, sign comprehension, and the use of electronic navigation aids. Our competitive analysis focused on Zipcar, Google Maps, and Garmin, identifying gaps in their offerings that impact the driving experience, especially for new drivers in urban settings.",
         images: [
@@ -975,6 +980,9 @@ export const projects = [
       {
         id: 'features',
         title: 'Solution & Features',
+        sectionTag: 'The Solution',
+        mainTitle: 'A Unified Platform for Safer Driving',
+        briefContent: 'To address these challenges, we propose a comprehensive enhancement of the existing ZipCar app, transforming it into a [[unified platform]] that integrates essential navigation and AI-assisted driving support. The upgraded app features [[Integrated Navigation]], [[AI Assistant]], and [[Heads-Up Display (HUD)]] to significantly enhance the driving experience, making it safer, more comfortable, and less stressful, particularly for new drivers.',
         icon: '✨',
         content: [
           'To address these challenges, we propose a comprehensive enhancement of the existing ZipCar app, transforming it into a unified platform that not only simplifies car rental but also integrates essential navigation and AI-assisted driving support. The upgraded app will feature:',
@@ -994,6 +1002,9 @@ export const projects = [
       {
         id: 'userflow',
         title: 'User Flow, Personas and Journey Maps',
+        sectionTag: 'User Mapping',
+        mainTitle: 'Mapping the Driver\'s Journey',
+        briefContent: 'The persona and journey maps reveal [[critical decision points]] from initial car rental through navigation setup to driving completion, showing where users needed AI assistance versus manual control. These visualizations exposed [[key friction points where cognitive overload occurs]], particularly when users must decide between different navigation modes or when the system switches between automated and manual controls. This comprehensive mapping directly informed our solution to integrate all functions into a unified interface with contextual AI support.',
         icon: '🎨',
         content: 'The pictures present the persona and mapped out critical decision points from initial car rental through navigation setup to driving completion, revealing where users needed AI assistance versus manual control. The journey maps illustrated how different user types navigate the system - from accessing the Zipcar app, through the AI assistant onboarding, to destination input and route selection. These visualizations exposed key friction points where cognitive overload occurs, particularly when users must decide between different navigation modes or when the system switches between automated and manual controls. This comprehensive mapping directly informed our solution to integrate all functions into a unified interface with contextual AI support.',
         imageDisplayMode: 'single', // 单图模式
@@ -1016,6 +1027,9 @@ export const projects = [
       {
         id: 'prototypes',
         title: 'Wireframes & Prototypes',
+        sectionTag: 'Design Process',
+        mainTitle: 'From Concept to Prototype',
+        briefContent: 'The wireframes and prototypes demonstrate the evolution of the design, from initial concepts to refined interfaces that integrate navigation, AI assistance, and HUD features into a cohesive user experience.',
         icon: '💡',
         content: "",
         images: [
@@ -1045,6 +1059,9 @@ export const projects = [
       {
         id: 'final',
         title: 'Final Showcase',
+        sectionTag: 'Final Showcase',
+        mainTitle: 'A Clean, Intuitive Interface for Safer Driving',
+        briefContent: 'The final app design showcases a [[clean, intuitive interface]] that integrates all essential features into a unified platform, reducing cognitive load and enhancing the driving experience for all users, especially new drivers.',
         icon: '🚀',
         content: 'The final app design showcases a clean, intuitive interface.',
         imageDisplayMode: 'single', // 单图模式

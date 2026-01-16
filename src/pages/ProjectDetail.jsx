@@ -922,7 +922,7 @@ const ProjectDetail = () => {
                         <div className="flex-1 w-full flex items-center justify-center">
                           <div 
                             className="relative rounded-2xl overflow-hidden shadow-lg"
-                            style={feature.gif ? { maxWidth: '50%' } : { width: '100%' }}
+                            style={{ maxWidth: '50%' }}
                           >
                             {feature.gif ? (
                               <img 
