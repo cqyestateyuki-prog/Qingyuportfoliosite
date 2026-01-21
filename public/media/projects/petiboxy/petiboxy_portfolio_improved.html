@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petiboxy Charity Platform - Design Case Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #2D3436;
+            line-height: 1.6;
+            background-color: #F8F9FA;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px 60px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2D3436;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 60px;
+            background: linear-gradient(135deg, #F8F9FA 0%, #F0F1F3 100%);
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero .highlight {
+            color: #FF7675;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #636E72;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+        }
+
+        .hero .meta {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 60px;
+            font-size: 16px;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-item strong {
+            color: #FF7675;
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        /* Section */
+        section {
+            padding: 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section.alt {
+            background-color: white;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+        }
+
+        .section-tag {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #FF7675;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: #636E72;
+            max-width: 800px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        /* Content Card */
+        .content-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-block h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2D3436;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #636E72;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .stat-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .stat-list li {
+            font-size: 16px;
+            color: #2D3436;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .stat-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: #FF7675;
+            border-radius: 50%;
+        }
+
+        /* Image Container */
+        .image-wrapper {
+            width: 100%;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #636E72;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        /* UI Showcase - Progressive Reveal */
+        .ui-showcase {
+            margin-top: 60px;
+        }
+
+        .ui-step {
+            margin-bottom: 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .ui-step:nth-child(even) {
+            direction: rtl;
+        }
+
+        .ui-step:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .ui-step-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ui-step-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: #FF7675;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .ui-step-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2D3436;
+        }
+
+        .ui-step-desc {
+            font-size: 16px;
+            color: #636E72;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .ui-mockup {
+            width: 100%;
+            max-width: 300px;
+            background-color: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border: 6px solid #fff;
+        }
+
+        .ui-mockup img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .feature-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2D3436;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: #636E72;
+            line-height: 1.6;
+        }
+
+        /* Data Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #FF7675;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #2D3436;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #2D3436 0%, #636E72 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 60px;
+            border-radius: 12px;
+            margin: 100px 60px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #FF7675;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #E85C5C;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2D3436;
+            color: white;
+            text-align: center;
+            padding: 40px 60px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .grid-2, .ui-step {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .ui-step:nth-child(even) {
+                direction: ltr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            section {
+                padding: 60px 30px;
+            }
+
+            .hero {
+                padding: 60px 30px;
+                margin-top: 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero .meta {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                margin: 60px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Petiboxy</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Petiboxy <span class="highlight">Charity Platform</span></h1>
+        <p>Connecting Love, Saving Lives</p>
+        <div class="meta">
+            <div class="meta-item">
+                <strong>Project Type</strong>
+                Mobile App Feature Module
+            </div>
+            <div class="meta-item">
+                <strong>Timeline</strong>
+                4 Months
+            </div>
+            <div class="meta-item">
+                <strong>Mission</strong>
+                Building a Comprehensive Pet Rescue Ecosystem
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">The Crisis</div>
+            <h2>90 Million Stray Animals in China Await Our Help</h2>
+            <p class="section-desc">Behind every statistic is a life. These animals face abandonment, disease, and uncertain futures. Yet most people don't know where to find them or how to help.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="content-block">
+                <h3>The Scale of the Crisis</h3>
+                <ul class="stat-list">
+                    <li><strong>50 million</strong> stray cats</li>
+                    <li><strong>40 million</strong> stray dogs</li>
+                    <li><strong>1/5</strong> of world's stray animal population</li>
+                    <li>Consistent high numbers since 2021</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/portfolio_images/02_total_stray_animals.png" alt="Stray Animals Statistics">
+            </div>
+        </div>
+    </section>
+
+    <!-- Adoption Gap Section -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">User Research</div>
+            <h2>Why 60% Want to Adopt But Can't</h2>
+            <p class="section-desc">Despite strong adoption intent, structural barriers prevent most people from adopting. The missing link: a trustworthy, accessible platform.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/portfolio_images/03_adoption_preference.png" alt="Adoption Preference Chart">
+            </div>
+            <div class="content-block">
+                <h3>The Adoption Gap</h3>
+                <p><strong style="font-size: 32px; color: #FF7675;">60%</strong> of potential pet owners express willingness to adopt if a reliable platform existed.</p>
+                <ul class="stat-list">
+                    <li><strong>43.9%</strong> of current pets come from pet stores</li>
+                    <li><strong>Only 35%</strong> are acquired through adoption</li>
+                    <li><strong>21.1%</strong> come from other sources</li>
+                </ul>
+                <p style="margin-top: 30px; font-style: italic; color: #2D3436;">The problem isn't lack of willingness—it's lack of access.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">Challenges</div>
+            <h2>Three Critical Barriers</h2>
+        </div>
+
+        <div class="grid-3">
+            <div class="feature-card">
+                <div style="font-size: 32px; color: #FF7675; margin-bottom: 15px;">01</div>
+                <h4>Information Fragmentation</h4>
+                <p>Lost pet information scattered across WeChat, Weibo, and TikTok. No centralized discovery mechanism.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 32px; color: #FF7675; margin-bottom: 15px;">02</div>
+                <h4>Adoption Barriers</h4>
+                <p>Potential adopters don't know where to find adoptable pets. Lack of verified information creates hesitation.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 32px; color: #FF7675; margin-bottom: 15px;">03</div>
+                <h4>Resource Scarcity</h4>
+                <p>Rescue organizations struggle for funding and visibility. Individual rescuers lack platforms to showcase work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section - Progressive UI Showcase -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">The Solution</div>
+            <h2>One Platform, Three Functions</h2>
+            <p class="section-desc">A comprehensive ecosystem designed to connect people with pets in need, support rescue organizations, and build a compassionate community.</p>
+        </div>
+
+        <div class="ui-showcase">
+            <!-- Step 1: Baby Come Home -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">01</div>
+                    <div class="ui-step-title">Baby Come Home</div>
+                    <p class="ui-step-desc">Centralized lost pet reporting system with community-powered search network and geo-location matching. Help reunite lost pets with their families.</p>
+                    <ul class="stat-list">
+                        <li>Real-time lost pet alerts</li>
+                        <li>Community-powered search network</li>
+                        <li>Expected success rate: +45%</li>
+                    </ul>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-宝贝回家.png" alt="Baby Come Home UI">
+                </div>
+            </div>
+
+            <!-- Step 2: Adoption & Rescue -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">02</div>
+                    <div class="ui-step-title">Adoption & Rescue</div>
+                    <p class="ui-step-desc">Comprehensive pet profiles with health records, personality descriptions, and photos. Connect adopters with their perfect companion. Support rescue organizations with verified listings.</p>
+                    <ul class="stat-list">
+                        <li>Rich pet profiles with health records</li>
+                        <li>Success stories showcase</li>
+                        <li>Expected adoption rate increase: +60%</li>
+                    </ul>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-领养救助.png" alt="Adoption & Rescue UI">
+                </div>
+            </div>
+
+            <!-- Step 3: Charity Organizations -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">03</div>
+                    <div class="ui-step-title">Charity Organizations</div>
+                    <p class="ui-step-desc">Verified rescue organization directory with integrated fundraising, donation tracking, and impact reporting. Support professional rescue work with transparency and accountability.</p>
+                    <ul class="stat-list">
+                        <li>Verified organization directory</li>
+                        <li>Integrated fundraising platform</li>
+                        <li>Expected org support increase: +75%</li>
+                    </ul>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-公益机构.png" alt="Charity Organizations UI">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Philosophy Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">Design Philosophy</div>
+            <h2>Built on Three Core Principles</h2>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/portfolio_images/05_three_functions.png" alt="Design Principles">
+            </div>
+            <div class="content-block">
+                <h3>Integrated, Accessible, Community-Driven</h3>
+                <p><strong>Principle 1: Integrated Pet Profiles</strong></p>
+                <p>Seamless connection between Petiboxy's nutrition app and charity features. Complete pet health records support better adoption matches.</p>
+                
+                <p style="margin-top: 25px;"><strong>Principle 2: Multi-Channel Rescue</strong></p>
+                <p>Lost pet finding + adoption matching + organization support. Users can participate at any comfort level.</p>
+                
+                <p style="margin-top: 25px;"><strong>Principle 3: Community-Driven Growth</strong></p>
+                <p>Users share pet stories and success narratives. Social proof builds trust and encourages participation through emotional storytelling.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">Expected Impact</div>
+            <h2>Platform Success Metrics</h2>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/portfolio_images/06_expected_outcomes.png" alt="Expected Outcomes">
+            </div>
+            <div class="content-block">
+                <h3>Measurable Social Impact</h3>
+                <div class="stat-list">
+                    <li><strong style="font-size: 24px; color: #FF7675;">+45%</strong> Lost Pets Found - Improvement in reunion success rate</li>
+                    <li><strong style="font-size: 24px; color: #FF7675;">+60%</strong> Adoption Rate - Increase in adoption-over-purchase decisions</li>
+                    <li><strong style="font-size: 24px; color: #FF7675;">+75%</strong> Org Support - Growth in funding and resources</li>
+                    <li><strong style="font-size: 24px; color: #FF7675;">80%</strong> Community Engagement - Users participate in platform activities</li>
+                </div>
+                <p style="margin-top: 30px; font-style: italic; color: #2D3436; border-top: 1px solid #E8E8E8; padding-top: 20px;">Long-term vision: Shift China's pet culture from purchase-based to adoption-based, reducing stray animal populations and building a more compassionate society.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI Details Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">Design Details</div>
+            <h2>Intuitive Interface for Every User</h2>
+        </div>
+
+        <div class="grid-3">
+            <div class="feature-card">
+                <div style="font-size: 48px; margin-bottom: 15px;">📝</div>
+                <h4>Streamlined Onboarding</h4>
+                <p>Users find their purpose in 3 taps. Clear navigation guides them to adopt, help, or support.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 48px; margin-bottom: 15px;">🖼️</div>
+                <h4>Rich Pet Profiles</h4>
+                <p>Photos, health records, personality descriptions. Everything adopters need to make informed decisions.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 48px; margin-bottom: 15px;">❤️</div>
+                <h4>Social Integration</h4>
+                <p>Share stories, follow organizations, build community. Celebrate reunions and adoptions together.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Promise Section -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">Brand Commitment</div>
+            <h2>Petiboxy Stands for Responsibility and Compassion</h2>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">✓</div>
+                <div class="stat-label">Professional</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Verified organizations, vetted information, secure transactions</p>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">✓</div>
+                <div class="stat-label">Safe</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Health screening, compatibility matching, accountability</p>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">✓</div>
+                <div class="stat-label">Loving</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Community-centered, story-driven, impact-focused</p>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">✓</div>
+                <div class="stat-label">Responsible</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Corporate citizen solving China's stray animal crisis</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+        <h2>Every Life Matters</h2>
+        <p>Together, we can transform 90 million lives. One adoption, one rescue, one act of kindness at a time.</p>
+        <a href="#" class="cta-button">Download Petiboxy Today</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Petiboxy. Let Love Not Wander.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Built-in Community Platform - Design Case Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #2D3436;
+            line-height: 1.6;
+            background-color: #F8F9FA;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px 60px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2D3436;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 60px;
+            background: linear-gradient(135deg, #F8F9FA 0%, #F0F1F3 100%);
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero .highlight {
+            color: #FF7675;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #636E72;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+        }
+
+        .hero .meta {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 60px;
+            font-size: 16px;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-item strong {
+            color: #FF7675;
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        /* Section */
+        section {
+            padding: 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section.alt {
+            background-color: white;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+        }
+
+        .section-tag {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #FF7675;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: #636E72;
+            max-width: 800px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        /* Content Block */
+        .content-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-block h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2D3436;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #636E72;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .stat-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .stat-list li {
+            font-size: 16px;
+            color: #2D3436;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .stat-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: #FF7675;
+            border-radius: 50%;
+        }
+
+        /* Image Container */
+        .image-wrapper {
+            width: 100%;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #636E72;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        /* UI Showcase - Progressive Reveal */
+        .ui-showcase {
+            margin-top: 60px;
+        }
+
+        .ui-step {
+            margin-bottom: 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .ui-step:nth-child(even) {
+            direction: rtl;
+        }
+
+        .ui-step:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .ui-step-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ui-step-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: #FF7675;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .ui-step-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2D3436;
+        }
+
+        .ui-step-desc {
+            font-size: 16px;
+            color: #636E72;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .ui-mockup {
+            width: 100%;
+            max-width: 300px;
+            background-color: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border: 6px solid #fff;
+        }
+
+        .ui-mockup img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .feature-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2D3436;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: #636E72;
+            line-height: 1.6;
+        }
+
+        /* Data Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #FF7675;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #2D3436;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #2D3436 0%, #636E72 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 60px;
+            border-radius: 12px;
+            margin: 100px 60px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #FF7675;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #E85C5C;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2D3436;
+            color: white;
+            text-align: center;
+            padding: 40px 60px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .grid-2, .ui-step {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .ui-step:nth-child(even) {
+                direction: ltr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            section {
+                padding: 60px 30px;
+            }
+
+            .hero {
+                padding: 60px 30px;
+                margin-top: 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero .meta {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                margin: 60px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">AI Community</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>AI Built-in <span class="highlight">Community Platform</span></h1>
+        <p>Transforming Isolated AI Use Into Collaborative Discovery</p>
+        <div class="meta">
+            <div class="meta-item">
+                <strong>Project Type</strong>
+                Web Platform / Product Design
+            </div>
+            <div class="meta-item">
+                <strong>Tech Stack</strong>
+                Next.js 14, TypeScript, Tailwind CSS
+            </div>
+            <div class="meta-item">
+                <strong>Mission</strong>
+                Building Community for AI Tool Users
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">The Crisis</div>
+            <h2>800 Million Users Learning in Isolation</h2>
+            <p class="section-desc">AI tools like ChatGPT and Claude are powerful, but they create an isolated user experience. Millions are learning, experimenting, and creating in a vacuum with no built-in way to share discoveries or learn from others.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="content-block">
+                <h3>The Problem</h3>
+                <ul class="stat-list">
+                    <li><strong>800M+ users</strong> across major AI platforms</li>
+                    <li><strong>58% barrier</strong> - Prompt engineering blocks adoption</li>
+                    <li><strong>Fragmented knowledge</strong> scattered across Twitter, Reddit, Discord</li>
+                    <li><strong>No specialized space</strong> for AI-specific learning</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/ai_community_images/01_user_retention.png" alt="User Retention Rates">
+            </div>
+        </div>
+    </section>
+
+    <!-- User Research Section -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">User Research</div>
+            <h2>The Demand for Connection is Real</h2>
+            <p class="section-desc">Our research combined user interviews and market analysis to confirm a powerful, unmet need. It's not just about technical skill-building; it's about shared experience and belonging.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/ai_community_images/03_user_barriers.png" alt="User Needs & Barriers">
+            </div>
+            <div class="content-block">
+                <h3>Key Insight: 90% Want Community</h3>
+                <p><strong style="font-size: 32px; color: #FF7675;">90%</strong> of surveyed users expressed a strong desire for in-app community features.</p>
+                <ul class="stat-list">
+                    <li><strong>Share Experiences:</strong> Showcase creative AI conversations</li>
+                    <li><strong>Learn Collaboratively:</strong> See prompts that led to great results</li>
+                    <li><strong>Feel Belonging:</strong> Connect with others in the community</li>
+                </ul>
+                <p style="margin-top: 30px; font-style: italic; color: #2D3436;">The gap: Existing platforms are too generic. AI communities need specialized features.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Context Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">Market Opportunity</div>
+            <h2>Explosive Growth in AI Adoption</h2>
+        </div>
+
+        <div class="grid-2">
+            <div class="content-block">
+                <h3>The Market is Booming</h3>
+                <p>AI tool adoption has skyrocketed, but users struggle with the learning curve. Prompt engineering remains a significant barrier, and users are hungry for community-driven learning.</p>
+                <ul class="stat-list">
+                    <li><strong>+375% growth</strong> in AI adoption (2023-2025)</li>
+                    <li><strong>89% quarterly retention</strong> for ChatGPT</li>
+                    <li><strong>+135.8% job growth</strong> for Prompt Engineers</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/ai_community_images/02_adoption_growth.png" alt="AI Adoption Growth">
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section - Progressive UI Showcase -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">The Solution</div>
+            <h2>Three Core Features, One Integrated Ecosystem</h2>
+            <p class="section-desc">We designed an integrated community module that transforms isolated AI use into a collaborative journey. The design is built on familiar patterns but optimized for AI-specific use cases.</p>
+        </div>
+
+        <div class="ui-showcase">
+            <!-- Step 1: Share Chat & Thoughts -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">01</div>
+                    <div class="ui-step-title">Share Chat & Thoughts</div>
+                    <p class="ui-step-desc">A space for users to share entire AI conversations or personal reflections. Built-in privacy protection and content filtering ensure a safe environment for emotional and creative expression.</p>
+                    <ul class="stat-list">
+                        <li>Privacy protection & content filtering</li>
+                        <li>Emotional & creative expression</li>
+                        <li>Community support & engagement</li>
+                    </ul>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-全部.png" alt="Share Chat & Thoughts UI">
+                </div>
+            </div>
+
+            <!-- Step 2: Share Prompt -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">02</div>
+                    <div class="ui-step-title">Share Prompt</div>
+                    <p class="ui-step-desc">A dedicated hub for prompt engineering. Users can share prompts, see how they were used, and rate their effectiveness. A voting system creates a positive feedback loop, surfacing the most valuable content.</p>
+                    <ul class="stat-list">
+                        <li>Peer-to-peer learning library</li>
+                        <li>Effectiveness rating system</li>
+                        <li>Quality content surfacing</li>
+                    </ul>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-领养救助.png" alt="Share Prompt UI">
+                </div>
+            </div>
+
+            <!-- Step 3: Community Events -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">03</div>
+                    <div class="ui-step-title">Community Events</div>
+                    <p class="ui-step-desc">A feature for organizing and discovering online and offline events, workshops, and discussions. Fosters real-time connection and collaboration, moving the community from passive learning to active participation.</p>
+                    <ul class="stat-list">
+                        <li>Online & offline event discovery</li>
+                        <li>Real-time collaboration</li>
+                        <li>Active community participation</li>
+                    </ul>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-公益机构.png" alt="Community Events UI">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Philosophy Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">Design Philosophy</div>
+            <h2>Familiar Yet Specialized</h2>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/ai_community_images/04_platform_comparison.png" alt="Platform Comparison">
+            </div>
+            <div class="content-block">
+                <h3>Why Our Platform Stands Out</h3>
+                <p><strong>Familiarity:</strong> Leverages UI patterns from Reddit and YouTube to reduce the learning curve.</p>
+                <p style="margin-top: 20px;"><strong>Customizability:</strong> The design system can be adapted to match the brand identity of any host AI application.</p>
+                <p style="margin-top: 20px;"><strong>Accessibility:</strong> Adheres to WCAG standards for color contrast, typography, and responsive design.</p>
+                <p style="margin-top: 20px; font-style: italic; color: #2D3436;">Built with Next.js 14, TypeScript, and Tailwind CSS for optimal performance and developer experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Impact Section -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">Feature Impact</div>
+            <h2>Each Feature Drives Specific Value</h2>
+        </div>
+
+        <div class="grid-2">
+            <div class="content-block">
+                <h3>Addressing Core User Needs</h3>
+                <p>The three-post-type system directly addresses our research findings. Each feature is designed to encourage specific types of engagement while maintaining focus on community building and knowledge sharing.</p>
+                <ul class="stat-list">
+                    <li><strong>Share Chat & Thoughts:</strong> Emotional sharing + privacy</li>
+                    <li><strong>Share Prompt:</strong> Technical knowledge + voting</li>
+                    <li><strong>Events:</strong> Real-time collaboration + connection</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/ai_community_images/05_core_features.png" alt="Core Features Impact">
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="alt">
+        <div class="section-header">
+            <div class="section-tag">Expected Impact</div>
+            <h2>Driving Engagement and Retention</h2>
+        </div>
+
+        <div class="grid-2">
+            <div class="image-wrapper">
+                <img src="/home/ubuntu/ai_community_images/06_expected_impact.png" alt="Expected Impact Metrics">
+            </div>
+            <div class="content-block">
+                <h3>Strategic Business Value</h3>
+                <p>By integrating a community directly within the AI tool, we create a powerful network effect. More users lead to more content, which attracts more users, driving a virtuous cycle of growth.</p>
+                <div class="stat-list">
+                    <li><strong>+40% User Retention</strong> - Community provides reason to return</li>
+                    <li><strong>+80% UGC Content</strong> - Users become creators</li>
+                    <li><strong>+75% Feature Adoption</strong> - Community highlights new tools</li>
+                    <li><strong>+60% Session Duration</strong> - Users stay longer</li>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Promise Section -->
+    <section>
+        <div class="section-header">
+            <div class="section-tag">Design Principles</div>
+            <h2>Built for Connection and Learning</h2>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">🎯</div>
+                <div class="stat-label">User-Centric</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Designed with real user feedback and insights</p>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">🔗</div>
+                <div class="stat-label">Connected</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Seamless integration with host AI tools</p>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">📚</div>
+                <div class="stat-label">Knowledge Sharing</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Peer-to-peer learning at scale</p>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 32px; margin-bottom: 10px;">🌱</div>
+                <div class="stat-label">Growth Focused</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #636E72;">Drives user retention and engagement</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+        <h2>Transform AI Learning Into Community Experience</h2>
+        <p>The platform successfully transforms isolated AI tool usage into collaborative community experiences. Users can easily discover relevant content, share their AI stories, and build meaningful connections.</p>
+        <a href="https://ai-community-mvp-v2-7y9m.vercel.app/" class="cta-button">View Live Demo</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Qingyu Cao. AI Community Platform - Connecting Learners, Sharing Knowledge.</p>
+    </footer>
+</body>
+</html>

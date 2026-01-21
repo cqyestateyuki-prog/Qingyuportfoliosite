@@ -59,7 +59,7 @@ const Hero = () => {
           </h2>
           
           {/* 个人介绍描述文字，使用半透明白色和响应式字体 */}
-          <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-12 leading-snug">
+          <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-12 leading-snug font-['Poppins']">
             Specializing in games, web and UI/UX design. 
             I merge creative expertise with strategic thinking to create 
             innovative solutions that captivate and engage.

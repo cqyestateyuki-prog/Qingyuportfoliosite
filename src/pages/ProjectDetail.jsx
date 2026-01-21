@@ -463,7 +463,7 @@ const ProjectDetail = () => {
                 {project.title}
               </h1>
               
-              <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-delay-1">
+              <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-delay-1 font-['Poppins']">
                 {project.subtitle}
               </p>
             </div>
@@ -1045,19 +1045,20 @@ const ProjectDetail = () => {
                         <div className="flex-1 w-full flex items-center justify-center">
                           <div 
                             className="relative rounded-2xl overflow-hidden shadow-lg"
-                            style={{ maxWidth: '50%' }}
                           >
                             {feature.gif ? (
                               <img 
                                 src={feature.gif} 
                                 alt={feature.name}
-                                className="w-full h-auto object-cover"
+                                className="w-full h-auto object-contain"
+                                style={{ maxHeight: '50vh' }}
                               />
                             ) : (
                               <img 
                                 src={feature.image} 
                                 alt={feature.name}
-                                className="w-full h-auto object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+                                className="w-full h-auto object-contain cursor-pointer hover:scale-105 transition-transform duration-500"
+                                style={{ maxHeight: '50vh' }}
                                 onClick={() => handleImageClick(
                                   { src: feature.image, alt: feature.name },
                                   section.features.filter(f => f.image || f.gif).map(f => ({

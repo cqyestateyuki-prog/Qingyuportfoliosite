@@ -33,7 +33,7 @@ export const projects = [
       
        overview: {
          mainTitle: 'Transform AI Learning Into Community Experience',
-         briefContent: 'AI applications such as ChatGPT, Grok, and Claude currently [[lack built-in communities]], leaving everyday users without a dedicated space to learn, share, and connect. AI Built-in Community Platform fills this critical gap by offering an intuitive, accessible experience that [[transforms isolated AI use into collaborative discovery]]. The platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events along with trending search and a prompt voting system. This combination enables users not only to [[learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging]]. For product owners, the community drives [[user retention]].',
+         briefContent: 'AI applications such as ChatGPT, Grok, and Claude currently [[lack built-in communities]], leaving everyday users without a dedicated space to learn, share, and connect. AI Built-in Community Platform [[fills this critical gap]] by offering an intuitive, accessible experience that [[transforms isolated AI use into collaborative discovery]]. The platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events along with trending search and a prompt voting system. This combination enables users not only to [[learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging]]. For product owners, the community drives [[user retention]].',
          challenge: 'How might I create an ecosystem where users connect, collaborate, and create value for one another?',
          challenges: [
            'How might I create an ecosystem where users connect, collaborate, and create value for one another?',
@@ -57,12 +57,8 @@ export const projects = [
           title: 'Problem Statement',
           sectionTag: 'The Problem',
           mainTitle: 'Isolated Learning in a Connected World',
-          briefContent: 'While AI adoption explodes ([[375% growth from 2023-2025]]), users face a critical challenge: [[they learn alone, struggle with adoption barriers, and have no specialized community to support their journey]]. The AI market has reached critical mass with [[800M+ users]] and [[89% quarterly retention]], yet user engagement plateaus without new drivers. Community is the missing piece.',
+          briefContent: 'While AI adoption explodes ([[375% growth from 2023-2025]]), users face a critical challenge: [[they learn alone, struggle with adoption barriers, and have no specialized community to support their journey]].',
           icon: '💡',
-          content: [
-            'Market Opportunity: The AI market has reached critical mass with 800M+ users and 89% quarterly retention. Yet user engagement plateaus without new drivers. Community is the missing piece that can unlock sustained growth and deeper engagement.',
-            'User Challenges: Our research revealed three critical barriers preventing users from fully engaging with AI tools: Fragmented Knowledge (insights scattered across Twitter, Reddit, Discord), Lack of Specialized Space (generic platforms don\'t serve AI-specific needs), and Difficulty Getting Results (users struggle to replicate success without context).'
-          ],
           imageDisplayMode: 'single',
           images: [
            {
@@ -157,8 +153,16 @@ export const projects = [
           title: 'Design System',
           sectionTag: 'Design System',
           mainTitle: 'Familiar Yet Customizable Visual Language',
-          briefContent: 'Rather than creating a completely new design system, I used ChatGPT\'s built-in community as my design reference and foundation. This approach ensures familiarity and reduces user learning curve while maintaining a clean, content-focused aesthetic. The design system is built to be highly customizable, allowing other AI applications to adapt the visual language to match their brand identity.',
+          briefContent: 'Rather than creating a proprietary visual design system, I designed a [[platform-agnostic community framework]] that adapts to [[existing AI chat interfaces]]. It acts as a functional layer on top of conversational UIs—adding community features without disrupting the core chat experience.',
           icon: '🎨',
+          content: [
+            '- **Leverages familiar patterns**: Users already understand chatbot-style interfaces, so the community layer feels intuitive with minimal learning curve.',
+            '- **Remains content-first**: A clean, minimal structure that doesn’t compete with the AI interaction—community content stays scannable and readable.',
+            '- **Enables white-label implementation**: Any AI application can adopt the framework while keeping their own brand identity and visual style.',
+            '- **Focuses on information architecture**: The value is in [[how content is organized]] (post types, discovery, ranking, and navigation), not decorative styling.',
+            '',
+            'This framework is designed to plug into existing chat products—so teams can ship community capabilities faster while preserving the core conversational experience.'
+          ],
        },
         
          {
@@ -816,18 +820,18 @@ export const projects = [
         featureDisplayMode: 'side-by-side',
         features: [
           {
-            name: 'Baby Come Home',
-            detail: 'Centralized lost pet reporting system with community-powered search network and geo-location matching. Help reunite lost pets with their families. Features real-time lost pet alerts and community-powered search network.',
+            name: 'Find Lost Pets Easily',
+            detail: 'Centralized lost pet reporting system with community-powered search network and geo-location search. Help reunite lost pets with their families.',
             image: '/media/projects/petiboxy/baby-come-home.png',
           },
           {
-            name: 'Adoption & Rescue',
-            detail: 'Comprehensive pet profiles with health records, personality descriptions, and photos. Connect adopters with their perfect companion. Support rescue organizations with verified listings. Features rich pet profiles with health records and success stories showcase.',
+            name: 'Convenient Adoption Process',
+            detail: 'Comprehensive pet profiles with health records, personality descriptions, and photos. Connect adopters with their perfect companion.',
             image: '/media/projects/petiboxy/adoption-rescue.png',
           },
           {
-            name: 'Charity Organizations',
-            detail: 'Verified rescue organization directory with integrated fundraising, donation tracking, and impact reporting. Support professional rescue work with transparency and accountability. Features verified organization directory and integrated fundraising platform.',
+            name: 'Easy Connection to Rescue Organizations',
+            detail: 'Verified rescue organization directory with integrated fundraising. Support professional rescue work with transparency and accountability.',
             image: '/media/projects/petiboxy/charity-orgs.png',
           }
         ]
@@ -862,7 +866,20 @@ export const projects = [
         icon: '🚀',
         content: 'Together, we can transform 90 million lives. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility. The platform represents a shift from purchase-based to adoption-based pet culture, reducing stray animal populations and building a more compassionate society.',
         imageDisplayMode: 'single',
-        images: []
+        images: [
+          {
+            src: '/media/projects/petiboxy/final1.png',
+            alt: 'Final Visual',
+          },
+          {
+            src: '/media/projects/petiboxy/final2.png',
+            alt: 'Final Visual',
+          }, 
+          {
+            src: '/media/projects/petiboxy/final3.png',
+            alt: 'Final Visual',
+          },
+        ]
       },
       
       {

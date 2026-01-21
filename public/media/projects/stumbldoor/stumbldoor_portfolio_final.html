@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stumbldoor - The Future of Reading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #000000;
+            line-height: 1.6;
+            background-color: #FFFFFF;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 20px 60px;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        nav .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #000000;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 60px;
+            background-color: #FFFFFF;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            color: #000000;
+        }
+
+        .hero .highlight {
+            color: #7C3AED;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #555555;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+        }
+
+        .hero .meta {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 60px;
+            font-size: 16px;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-item strong {
+            color: #7C3AED;
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        /* Section */
+        section {
+            padding: 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section.alt {
+            background-color: #F5F5F7;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+        }
+
+        .section-tag {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #555555;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: #555555;
+            max-width: 800px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        /* Content Block */
+        .content-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-block h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #555555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .stat-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .stat-list li {
+            font-size: 16px;
+            color: #000000;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .stat-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: #7C3AED;
+            border-radius: 50%;
+        }
+
+        /* Image Container */
+        .image-wrapper {
+            width: 100%;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #E8E8E8;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #555555;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        /* UI Showcase - Progressive Reveal */
+        .ui-showcase {
+            margin-top: 60px;
+        }
+
+        .ui-step {
+            margin-bottom: 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .ui-step:nth-child(even) {
+            direction: rtl;
+        }
+
+        .ui-step:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .ui-step-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ui-step-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: #7C3AED;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .ui-step-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .ui-step-desc {
+            font-size: 16px;
+            color: #555555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .ui-mockup {
+            width: 100%;
+            max-width: 300px;
+            background-color: #FFFFFF;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 6px solid #fff;
+        }
+
+        .ui-mockup img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background-color: #FFFFFF;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid #E8E8E8;
+        }
+
+        .feature-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: #555555;
+            line-height: 1.6;
+        }
+
+        /* Data Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background-color: #FFFFFF;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #E8E8E8;
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #7C3AED;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            padding: 100px 60px;
+            border-radius: 12px;
+            margin: 100px 60px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #E8E8E8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #7C3AED;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid #7C3AED;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: white;
+            color: #7C3AED;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #F5F5F7;
+            color: #555555;
+            text-align: center;
+            padding: 40px 60px;
+            font-size: 14px;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            .hero {
+                padding: 60px 30px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            section {
+                padding: 60px 30px;
+            }
+
+            .grid-2, .ui-step {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-section {
+                margin: 60px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Stumbldoor</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>The <span class="highlight">Future of Reading</span></h1>
+        <p>How might we make libraries more relevant, inclusive, culturally dynamic & appealing in the future?</p>
+        <div class="meta">
+            <div class="meta-item">
+                <strong>21.2%</strong>
+                <span>Decline in Library Visits (2009-2022)</span>
+            </div>
+            <div class="meta-item">
+                <strong>35</strong>
+                <span>Survey Responses</span>
+            </div>
+            <div class="meta-item">
+                <strong>8</strong>
+                <span>In-Depth Interviews</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Brief -->
+    <section class="alt">
+        <div class="section-header">
+            <span class="section-tag">The Challenge</span>
+            <h2>A Library in Crisis</h2>
+            <p class="section-desc">From 2009 to 2022, physical library visits declined by 21.2%. Yet library card registrations peaked in 2019. This paradox reveals a critical gap: people want to read, but the traditional library experience is failing them.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="content-block">
+                <h3>The Problem</h3>
+                <p>Libraries face an identity crisis. While younger generations still value physical books, they're intimidated by formal library spaces, struggle to navigate complex layouts, and crave a more personalized, social reading experience.</p>
+                <ul class="stat-list">
+                    <li>21.2% decrease in physical visits (2009-2022)</li>
+                    <li>Library card registrations peaked in 2019</li>
+                    <li>Fostering next-generation library-goers is critical</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Our Research</h3>
+                <p>We conducted comprehensive research across 4 NYC libraries, surveying 35 users and conducting 8 in-depth interviews. Our findings revealed three critical barriers: intimidating spaces, confusing navigation, and lack of personalization.</p>
+                <ul class="stat-list">
+                    <li>35 survey responses</li>
+                    <li>8 in-depth interviews</li>
+                    <li>4 library field studies</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Personas -->
+    <section>
+        <div class="section-header">
+            <span class="section-tag">User Research</span>
+            <h2>Meet Our Users</h2>
+            <p class="section-desc">Through interviews and observations, we developed three key personas that guided our design. Each represents a distinct user need and motivation.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="feature-card">
+                <h4>Nerdy Nancy</h4>
+                <p><strong>22, Undergraduate</strong></p>
+                <p style="margin-top: 15px; font-style: italic;">"I appreciate when librarians can help me navigate those overwhelming research databases."</p>
+                <p style="margin-top: 15px; text-align: left;">Nancy needs guidance through complex information systems and values expert support.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Lazy Lucy</h4>
+                <p><strong>23, Graduate</strong></p>
+                <p style="margin-top: 15px; font-style: italic;">"I feel more comfortable studying at home. I can rest when I want to and play when I feel like it."</p>
+                <p style="margin-top: 15px; text-align: left;">Lucy values flexibility and comfort, preferring a personalized experience over rigid library rules.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4>Techie Tony</h4>
+                <p><strong>26, Graduate</strong></p>
+                <p style="margin-top: 15px; font-style: italic;">"I prefer an environment where I am aware of other people working around me. I find it motivating."</p>
+                <p style="margin-top: 15px; text-align: left;">Tony seeks community and social motivation, thriving in collaborative environments.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 80px;">
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 600; margin-bottom: 20px; color: #000000;">Key Insight</h3>
+            <p style="font-size: 18px; color: #555555; line-height: 1.8;">All three personas revealed a common thread: <strong>users want the resources of a library, but with the comfort and convenience of a personalized, digital experience.</strong> They crave guidance, flexibility, and community—not isolation.</p>
+        </div>
+    </section>
+
+    <!-- The Solution -->
+    <section class="alt">
+        <div class="section-header">
+            <span class="section-tag">The Solution</span>
+            <h2>Stumbldoor: Three Pillars of Innovation</h2>
+            <p class="section-desc">Stumbldoor transforms the library experience into an interactive adventure. It's not just a tool; it's a gateway to a world of knowledge and community, seamlessly integrating the digital and physical.</p>
+        </div>
+
+        <div class="ui-showcase">
+            <!-- Feature 1: Scrollstack -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">01</div>
+                    <div class="ui-step-title">Scrollstack</div>
+                    <div class="ui-step-desc">
+                        Hyper-personalized reading playlists, like Spotify for books. Our algorithm analyzes your reading history to deliver curated recommendations. This solves the "what to read next" problem that plagues modern readers.
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <strong style="color: #000000;">Design Insight:</strong>
+                        <ul class="stat-list">
+                            <li>Addresses the discovery problem identified in user research</li>
+                            <li>Personalizes the library experience for each user</li>
+                            <li>Reduces decision paralysis when choosing books</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-全部.png" alt="Scrollstack Feature">
+                </div>
+            </div>
+
+            <!-- Feature 2: Gameful UX -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">02</div>
+                    <div class="ui-step-title">Gameful UX</div>
+                    <div class="ui-step-desc">
+                        Achievements, reading stats, and community leaderboards turn reading into a rewarding game. This feature directly addresses Techie Tony's need for motivation and community, making reading a social and joyful activity.
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <strong style="color: #000000;">Design Insight:</strong>
+                        <ul class="stat-list">
+                            <li>Transforms reading from solitary to social</li>
+                            <li>Provides recognition and achievement</li>
+                            <li>Increases engagement through gamification</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-领养救助.png" alt="Gameful UX Feature">
+                </div>
+            </div>
+
+            <!-- Feature 3: AR Assist -->
+            <div class="ui-step">
+                <div class="ui-step-content">
+                    <div class="ui-step-number">03</div>
+                    <div class="ui-step-title">AR Assist</div>
+                    <div class="ui-step-desc">
+                        An augmented reality navigator for library layouts. Simply point your phone to find the exact location of a book. This solves the navigation nightmare identified in our research, transforming a frustrating search into a magical experience.
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <strong style="color: #000000;">Design Insight:</strong>
+                        <ul class="stat-list">
+                            <li>Eliminates the confusion of navigating large libraries</li>
+                            <li>Reduces time spent searching for books</li>
+                            <li>Makes the physical library visit more enjoyable</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui-mockup">
+                    <img src="/home/ubuntu/upload/主页-公益机构.png" alt="AR Assist Feature">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Process -->
+    <section>
+        <div class="section-header">
+            <span class="section-tag">Design Process</span>
+            <h2>From Insight to Interface</h2>
+            <p class="section-desc">Our design process was iterative and user-centric, moving from research to brainstorming to prototyping to visual design.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="content-block">
+                <h3>Research & Synthesis</h3>
+                <p>We started with affinity mapping to synthesize our research findings. We identified key user pain points and opportunities, then brainstormed solutions focused on three core themes: gamifying knowledge discovery, integrating online-offline experiences, and creating a digital silent zone.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Prototyping & Testing</h3>
+                <p>We created low-fidelity wireframes to test core functionality, then moved to high-fidelity prototypes for user testing. Our information architecture was designed to be intuitive, with clear user flows that make finding and borrowing books effortless.</p>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 60px;">
+            <div class="content-block">
+                <h3>Brand & Visual Design</h3>
+                <p>We developed a brand voice that is <strong>reliable, comfy, and intelligent</strong>. Our tagline—"Curiosity Stumbls, Knowledge Unfolds"—captures the spirit of discovery. The visual design is warm, approachable, and modern, reflecting the brand values.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Final Visuals</h3>
+                <p>The final app design showcases a clean, intuitive interface that makes the library experience feel less intimidating and more inviting. Every design decision was grounded in our user research and brand values.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact -->
+    <section class="alt">
+        <div class="section-header">
+            <span class="section-tag">The Vision</span>
+            <h2>A New Chapter for Libraries</h2>
+            <p class="section-desc">Stumbldoor is more than just an app; it's a vision for the future of libraries. By integrating the digital and physical, we can bridge the 21.2% gap in physical visits and make libraries vital cultural hubs for generations to come.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="content-block">
+                <h3>Addressing the Crisis</h3>
+                <p>We can bridge the 21.2% gap in physical visits by making the library a more appealing destination. By turning peak card registrations into active engagement, we create a virtuous cycle of discovery and community.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Fostering the Next Generation</h3>
+                <p>Stumbldoor makes libraries more relevant, inclusive, and appealing to younger generations. It transforms the intimidating, confusing library into a welcoming, personalized space where everyone can thrive.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Curiosity Stumbls, Knowledge Unfolds</h2>
+        <p>Join us in transforming libraries into vibrant, engaging spaces where readers discover, connect, and grow together.</p>
+        <a href="#" class="cta-button">Explore the Experience</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Stumbldoor. Reimagining the library experience for the future of reading.</p>
+    </footer>
+</body>
+</html>

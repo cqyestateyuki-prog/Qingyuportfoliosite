@@ -40,7 +40,7 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
-  const filters = ['All', 'AI','UIUX','Programming','Product Design',  'Game', 'Research', 'Graphic Design',];
+  const filters = ['All', 'AI','UIUX','Product Design','Programming',  'Game', 'Research'];
 
   const handleFilterSelect = (filter) => {
     setActiveFilter(filter);
