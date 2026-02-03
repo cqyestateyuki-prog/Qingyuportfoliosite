@@ -43,9 +43,9 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-2xl font-bold gradient-text">
-            Qingyu Cao
-          </div>
+          <Link to="/" className="text-2xl font-medium gradient-text">
+            Home
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">

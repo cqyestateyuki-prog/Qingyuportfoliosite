@@ -1,8 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { ChevronDown, Download, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button.jsx';
 import MagicCursor from './MagicCursor';
+import DecryptedText from './DecryptedText';
+import MagneticButton from './MagneticButton';
 
 // Hero组件是主页的顶部横幅区域，包含个人介绍和主要行动按钮
 const Hero = () => {
@@ -38,7 +39,11 @@ const Hero = () => {
 
   return (
     // Hero区域的主容器，使用flexbox居中对齐，相对定位用于装饰元素
-    <section className="hero-section flex items-center justify-center relative">
+    <section className="hero-section flex items-center justify-center relative bg-grain">
+      {/* Aurora 极光背景动效层（保留现有 --gradient-hero 底色） */}
+      <div className="hero-aurora" aria-hidden="true">
+        <div className="hero-aurora-inner" />
+      </div>
       {/* 魔法棒光标效果 */}
       <MagicCursor />
       {/* 内容容器，设置最大宽度、居中对齐和响应式内边距 */}
@@ -49,50 +54,47 @@ const Hero = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`} style={{marginTop: '80px'}}>
           {/* 主标题，使用响应式字体大小和白色文字 */}
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Qingyu Cao
+          <h1 className="text-5xl md:text-7xl text-white mb-6 leading-tight font-normal tracking-wide">
+            <DecryptedText text="Qingyu Cao" className="font-['Poppins']" />
           </h1>
           
           {/* 副标题，描述个人职业身份 */}
-          <h2 className="text-2xl md:text-3xl text-white/90 mb-8 font-light">
+          <h2 className="text-2xl md:text-3xl text-white/90 mb-8 font-light tracking-wide">
             Creative Developer & Designer
           </h2>
           
           {/* 个人介绍描述文字，使用半透明白色和响应式字体 */}
-          <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-12 leading-snug font-['Poppins']">
-            Specializing in games, web and UI/UX design. 
-            I merge creative expertise with strategic thinking to create 
-            innovative solutions that captivate and engage.
+          <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-12 leading-relaxed font-['Poppins'] tracking-normal">
+            A Product Designer who <span className="text-white font-medium">builds, tests, and ships</span>. 
+            I combine design intuition with engineering depth to <span className="text-white font-medium">launch real products</span> in fast-moving environments.
           </p>
           
           {/* 行动按钮区域，使用flexbox布局，响应式排列 */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             {/* 主要CTA按钮，点击后滚动到作品集区域 */}
-            <Button 
-              onClick={scrollToWork}
-              size="lg"
-              style={{ color: "var(--custom-purple)" }}
-              className="bg-white hover:bg-white/90 px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
-            >
-              View My Work
-            </Button>
+            <MagneticButton>
+              <Button 
+                onClick={scrollToWork}
+                size="lg"
+                style={{ color: 'var(--custom-purple)' }}
+                className="rounded-full bg-white hover:bg-white/90 px-8 py-4 text-lg font-medium tracking-wide transition-all duration-300 hover:scale-105"
+              >
+                View My Work
+              </Button>
+            </MagneticButton>
             
             {/* 次要CTA按钮，轮廓样式，用于下载简历 */}
-            <Button 
-              onClick={downloadResume}
-              variant="outline"
-              size="lg"
-              className="border-2 border-white text-white hover:bg-white px-8 py-3 text-lg font-semibold transition-all duration-300 bg-transparent"
-              style={{ 
-                '--hover-text-color': 'var(--custom-purple)',
-                color: 'white'
-              }}
-              onMouseEnter={(e) => e.target.style.color = 'var(--custom-purple)'}
-              onMouseLeave={(e) => e.target.style.color = 'white'}
-            >
-              <Download className="mr-2 h-5 w-5" />
-              Resume
-            </Button>
+            <MagneticButton>
+              <Button 
+                onClick={downloadResume}
+                variant="outline"
+                size="lg"
+                className="rounded-full border-2 border-white text-white hover:bg-white hover:text-[var(--custom-purple)] px-8 py-4 text-lg font-medium tracking-wide transition-all duration-300 bg-transparent"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Resume
+              </Button>
+            </MagneticButton>
           </div>
         </div>
         
@@ -120,4 +122,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

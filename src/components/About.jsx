@@ -57,9 +57,9 @@ const About = () => {
           <div className={`transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-              About Me
-            </h2>
+          <h2 className="text-4xl md:text-5xl font-normal mb-6 gradient-text">
+            About Me
+          </h2>
             
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
               <p>
@@ -137,7 +137,7 @@ const About = () => {
             { number: '3+', label: 'Years of Experience' }
           ].map((stat, index) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
+              <div className="text-3xl md:text-4xl font-normal gradient-text mb-2">
                 {stat.number}
               </div>
               <div className="text-gray-600 font-medium">

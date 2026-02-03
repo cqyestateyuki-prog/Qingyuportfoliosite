@@ -87,7 +87,7 @@ const Contact = () => {
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+          <h2 className="text-4xl md:text-5xl font-normal mb-6 gradient-text">
             Let's Connect
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -228,7 +228,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full text-white font-semibold py-3 transition-all duration-300 hover:opacity-90"
+                  className="w-full rounded-full px-8 py-4 text-lg font-medium tracking-wide text-white transition-all duration-300 hover:opacity-90"
                   style={{ 
                     backgroundColor: 'var(--custom-purple)',
                     border: 'none'

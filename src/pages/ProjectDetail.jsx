@@ -14,10 +14,10 @@ import { ArrowLeft, ArrowUp, ZoomIn } from 'lucide-react'
 //导入Markdown渲染组件
 import ReactMarkdown from 'react-markdown'
 //导入项目数据获取函数
-import { getProjectById } from '../../data/projects'
+import { getProjectById, getNextProject } from '../../data/projects'
 import ImageGallery, { SingleImageDisplay, MultiImageGrid, SmartImageDisplay } from '../components/ImageGallery'
+import NextProject from '../components/NextProject'
 import Footer from '../components/Footer'
-import FeedbackBot from '../components/FeedbackBot'
 
 // 辅助函数：从项目的 colors 中提取主色
 const getProjectHighlightColor = (project) => {
@@ -368,7 +368,7 @@ const ProjectDetail = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h1 
-                className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in whitespace-nowrap"
+                className="text-4xl md:text-6xl font-normal mb-6 animate-fade-in whitespace-nowrap"
                 style={{ 
                   fontFamily: "'Poppins', 'Inter', sans-serif"
                 }}
@@ -457,7 +457,7 @@ const ProjectDetail = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h1 
-                className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in whitespace-nowrap"
+                className="text-4xl md:text-6xl font-normal text-white mb-6 animate-fade-in whitespace-nowrap"
                 style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
               >
                 {project.title}
@@ -1222,11 +1222,13 @@ const ProjectDetail = () => {
         />
       )}
 
+      {/* ========== Next Project ========== */}
+      <NextProject nextProject={getNextProject(id)} />
+
       {/* ========== Footer ========== */}
       <Footer />
       
       {/* ========== 反馈机器人 ========== */}
-      <FeedbackBot />
     </div>
   )
 }

@@ -53,8 +53,8 @@ export const projects = [
   
       sections: [ 
         {
-          id: 'problem-statement',
-          title: 'Problem Statement',
+          id: 'the-problem',
+          title: 'The Problem',
           sectionTag: 'The Problem',
           mainTitle: 'Isolated Learning in a Connected World',
           briefContent: 'While AI adoption explodes ([[375% growth from 2023-2025]]), users face a critical challenge: [[they learn alone, struggle with adoption barriers, and have no specialized community to support their journey]].',
@@ -70,9 +70,9 @@ export const projects = [
         },
         
         {
-          id: 'user-insights',
-          title: 'User Research & Insights',
-          sectionTag: 'User Research & Insights',
+          id: 'process-research',
+          title: 'Research',
+          sectionTag: 'Research',
           mainTitle: 'The Demand for Connection',
           briefContent: 'Through surveys and interviews, I discovered that users don\'t just want to learn techniques—they seek [[emotional connection, recognition, and a sense of belonging]] in the AI era. [[90% of participants]] want an in-app community, and [[58% face prompt engineering barriers]].',
           icon: '🔍', 
@@ -93,84 +93,47 @@ export const projects = [
             },
            ]
         },
-        
+
         {
-          id: 'solution-strategy',
-          title: 'The Solution',
-          sectionTag: 'The Solution',
-          mainTitle: 'One Integrated Ecosystem, Three Core Functions',
-          briefContent: 'I designed a specialized community platform that directly [[addresses user pain points while creating powerful network effects]]. The platform features three post types: Share Chat & Thoughts for emotional expression, Share Prompt for technical knowledge, and Community Events for real-time collaboration.',
-          icon: '💡',
-          featureDisplayMode: 'side-by-side',
-          features: [
-            {
-              name: 'Three Post Types',
-              detail: 'Share Chat & Thoughts enables users to share their emotional AI interactions with privacy protection, Share Prompt facilitates technical knowledge exchange with voting systems, and Events creates more connection opportunities.',
-              image: '/media/projects/aicommunity/Postingflow.jpg',
-            },
-            {
-              name: 'Prompt Rating System',
-              detail: 'Technical knowledge sharing with voting system and effectiveness ratings.',
-              image: '/media/projects/aicommunity/Ratingsystem.jpg',
-            },
-            {
-              name: 'Trending Content',
-              detail: 'Users can discover trending posts, prompts, and events in one place. The trending feed automatically surfaces the most popular and engaging content, helping users stay connected with what\'s happening in the community.',
-              image: '/media/projects/aicommunity/Trendingprompts.png',
-            },
-          ],
-        },
-        
-        {
-          id: 'design-process',
-          title: 'Design Approach & Iteration',
-          sectionTag: 'Design Approach & Iteration',
+          id: 'process-design',
+          title: 'Iteration',
+          sectionTag: 'Iteration',
           mainTitle: 'From Insight to Interface',
-          briefContent: 'I aimed to create an in-app community homepage that is both familiar—leveraging patterns users already know from Reddit, RedNotes, and YouTube—and tailored for AI-specific use cases. The design evolved from a [[three-column layout]] inspired by Reddit/YouTube into a [[two-panel structure]] that better fits AI LLM application design. The post layout was changed from single-post per row to [[multi-post previews per row]], allowing users to scan content more efficiently. Through multiple iteration sessions based on user testing and feedback, I refined the interface to improve usability, enhance the user experience, and ensure the platform addresses the core pain points identified in research.',
+          briefContent: 'I aimed to create an in-app community homepage that is both familiar—leveraging patterns users already know from Reddit, RedNotes, and YouTube—and tailored for AI-specific use cases. The design evolved through multiple rounds of sketching and testing.',
           icon: '🎨',
+          content: [
+            '**Three-column to Two-panel**: The initial design used a standard three-column layout. However, testing revealed that AI generated content required more horizontal space. I pivoted to a two-panel structure that better accommodates the AI chat interface alongside community content.',
+            '',
+            '**Visual System**: Rather than creating a proprietary visual design system, I designed a [[platform-agnostic community framework]]. It acts as a functional layer on top of conversational UIs—adding community features without disrupting the core chat experience.',
+            '',
+            '**Interaction Patterns**: I focused on lowering the barrier to entry by using familiar patterns. The "Share Prompt" flow was simplified from 5 steps to 2 steps based on user feedback.'
+          ],
           imageDisplayMode: 'alternating',
           images: [
             {
               src: '/media/projects/aicommunity/beforeafter.png',
-              alt: 'Design Process',
-              caption: 'Evolved from a three-column layout into a two-panel structure'
+              alt: 'Design Iteration',
+              caption: 'Evolution: From a dense three-column layout to a focused two-panel structure'
             },
             {
               src: '/media/projects/aicommunity/DiagramPost.jpg',
-              alt: 'Three Post Types',
-              caption: 'Share Chat & Thoughts, Share Prompt, and Community Event interfaces with distinct visual treatments'
+              alt: 'Post Types',
+              caption: 'Defining distinct visual treatments for Chat, Prompt, and Event posts'
             },
             {
               src: '/media/projects/aicommunity/Ratingsystem2.jpg',
               alt: 'Rating System',
-              caption: 'Interactive voting and rating system for prompt effectiveness with real-time feedback'
-            },
+              caption: 'Iterating on the voting mechanism to ensure quality content surfaces'
+            }
           ]
         },
         
-        {
-          id: 'design-system',
-          title: 'Design System',
-          sectionTag: 'Design System',
-          mainTitle: 'Familiar Yet Customizable Visual Language',
-          briefContent: 'Rather than creating a proprietary visual design system, I designed a [[platform-agnostic community framework]] that adapts to [[existing AI chat interfaces]]. It acts as a functional layer on top of conversational UIs—adding community features without disrupting the core chat experience.',
-          icon: '🎨',
-          content: [
-            '- **Leverages familiar patterns**: Users already understand chatbot-style interfaces, so the community layer feels intuitive with minimal learning curve.',
-            '- **Remains content-first**: A clean, minimal structure that doesn’t compete with the AI interaction—community content stays scannable and readable.',
-            '- **Enables white-label implementation**: Any AI application can adopt the framework while keeping their own brand identity and visual style.',
-            '- **Focuses on information architecture**: The value is in [[how content is organized]] (post types, discovery, ranking, and navigation), not decorative styling.',
-            '',
-            'This framework is designed to plug into existing chat products—so teams can ship community capabilities faster while preserving the core conversational experience.'
-          ],
-       },
-        
          {
-           id: 'technical-implementation',
-           title: 'Technical Implementation',
-           sectionTag: 'Technical Implementation',
+           id: 'process-tech',
+           title: 'Technical',
+           sectionTag: 'Technical',
            mainTitle: 'Built for Scale and Performance',
-           briefContent: 'Built with modern web technologies, the platform ensures excellent performance and developer experience. Next.js 14 with App Router provides optimal performance, TypeScript ensures type safety, and Tailwind CSS enables rapid development. The application is fully responsive, accessible, and optimized for all devices.',
+           briefContent: 'To bring the design to life, I built a high-performance web application using a modern tech stack. The focus was on component modularity and type safety to ensure the platform could scale.',
            icon: '💻',
            buttons: [
              {
@@ -200,47 +163,74 @@ export const projects = [
         },
 
         {
-          id: 'final-showcase',
-          title: 'Final Showcase & Impact',
-          sectionTag: 'Final Showcase & Impact',
-          mainTitle: 'Community Drives Retention and Engagement',
-          briefContent: 'The final platform successfully transforms [[isolated AI tool usage into collaborative community experiences]]. Users can easily [[discover relevant content, share their AI stories, and build meaningful connections]]. By integrating community directly within AI tools, I create powerful network effects that drive [[retention, engagement, and sustainable growth]].\n\n[Live Demo: https://ai-community-mvp-v2-7y9m.vercel.app/](https://ai-community-mvp-v2-7y9m.vercel.app/)',
+          id: 'the-solution',
+          title: 'Final Solution',
+          sectionTag: 'Final Solution',
+          mainTitle: 'One Integrated Ecosystem',
+          briefContent: 'The final platform successfully transforms [[isolated AI tool usage into collaborative community experiences]]. Users can easily [[discover relevant content, share their AI stories, and build meaningful connections]]. By integrating community directly within AI tools, I create powerful network effects that drive [[retention, engagement, and sustainable growth]].',
           icon: '🚀',
-          imageDisplayMode: 'single',
-          images: [
+          featureDisplayMode: 'side-by-side',
+          features: [
             {
-              src: '/media/projects/aicommunity/Homepage.png',
-              alt: 'Homepage',
-              caption: 'Clean, modern homepage with intelligent content feed and seamless navigation'
-            },
-             {
-              src: '/media/projects/aicommunity/Postingflow.jpg',
-              alt: 'Posting Flow',
-              caption: 'Intuitive posting process with real-time preview and privacy protection'
+              name: 'Three Post Types',
+              detail: 'Share Chat & Thoughts enables users to share their emotional AI interactions with privacy protection, Share Prompt facilitates technical knowledge exchange with voting systems, and Events creates more connection opportunities.',
+              image: '/media/projects/aicommunity/Postingflow.jpg',
             },
             {
-              src: '/media/projects/aicommunity/Trendingprompts.png',
-              alt: 'Trending Page',
-              caption: 'Smart trending content switched between prompts, posts & events'
+              name: 'Prompt Rating System',
+              detail: 'Technical knowledge sharing with voting system and effectiveness ratings.',
+              image: '/media/projects/aicommunity/Ratingsystem.jpg',
             },
             {
-              src: '/media/projects/aicommunity/Postdetailpage.jpg',
-              alt: 'Post Detail Page',
-              caption: 'Rich post detail view with voting, comments, and social interactions'
+              name: 'Trending Content',
+              detail: 'Users can discover trending posts, prompts, and events in one place. The trending feed automatically surfaces the most popular and engaging content, helping users stay connected with what\'s happening in the community.',
+              image: '/media/projects/aicommunity/Trendingprompts.png',
             },
+          ],
+          imageGroups: [
             {
-              src: '/media/projects/aicommunity/Mybookmarks.png',
-              alt: 'Personal Data',
-              caption: 'User dashboard with AI Coins system, bookmarks, and content management'
-            },
-             {
-              src: '/media/projects/aicommunity/Guide.png',
-              alt: 'Guidelines & Rules',
-              caption: 'Easy to understand guidelines and rules for beginners'
-            },
-        ]
-      }
-    ]
+              title: 'Final Visuals',
+              displayMode: 'single',
+              images: [
+                {
+                  src: '/media/projects/aicommunity/Homepage.png',
+                  alt: 'Homepage',
+                  caption: 'Clean, modern homepage with intelligent content feed and seamless navigation'
+                },
+                {
+                  src: '/media/projects/aicommunity/Postdetailpage.jpg',
+                  alt: 'Post Detail Page',
+                  caption: 'Rich post detail view with voting, comments, and social interactions'
+                },
+                {
+                  src: '/media/projects/aicommunity/Mybookmarks.png',
+                  alt: 'Personal Data',
+                  caption: 'User dashboard with AI Coins system, bookmarks, and content management'
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          id: 'impact-reflection',
+          title: 'Impact & Reflection',
+          sectionTag: 'Impact & Reflection',
+          mainTitle: 'Learnings & Future Steps',
+          briefContent: 'This project demonstrated how community features can significantly enhance the value of AI tools. By moving beyond simple chat interfaces to a connected ecosystem, we can create more sticky, engaging products.',
+          icon: '💭',
+          content: [
+            '**Impact**:',
+            '- **Retention**: Community features create a reason for users to return even when they don\'t have a specific task.',
+            '- **Knowledge Sharing**: Lowered the barrier for prompt engineering by allowing users to learn from each other.',
+            '',
+            '**Reflection**:',
+            '- **Simplicity is Key**: Users are already overwhelmed by AI complexity. The community layer must be incredibly simple and intuitive.',
+            '- **Content Moderation**: As the community grows, automated and community-driven moderation tools will be essential.',
+            '- **Next Steps**: I would focus on implementing a "Remix" feature, allowing users to fork and improve shared prompts directly.'
+          ]
+        }
+      ]
   },
 
    // ========== UIUX 项目 ==========
@@ -642,7 +632,7 @@ export const projects = [
         
          {
            id: 'technical-implementation',
-        title: 'Technical Implementation',
+        title: 'Technical',
         sectionTag: 'Technical Implementation',
         mainTitle: 'Three-Phase Intelligent Architecture',
         briefContent: 'I built a lightweight architecture using [[native JavaScript]] for the frontend and [[Flask + Socket.IO]] for the backend. The system operates in three phases: preprocessing and knowledge base construction, structure analysis and code generation, and execution with result presentation. [[SSE]] enables real-time streaming, while [[Jupyter Kernel]] provides secure code execution.',
@@ -1745,6 +1735,14 @@ export const projects = [
 // ========== 辅助函数 ==========
 export const getProjectById = (id) => {
   return projects.find(project => project.id === id)
+}
+
+/** 获取下一个项目（按列表顺序，循环） */
+export const getNextProject = (currentId) => {
+  const i = projects.findIndex(p => p.id === currentId)
+  if (i === -1) return null
+  const nextIndex = (i + 1) % projects.length
+  return projects[nextIndex] || null
 }
 
 export const getProjectsByCategory = (category) => {
