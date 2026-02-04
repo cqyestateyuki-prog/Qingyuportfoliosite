@@ -3,3 +3,6 @@ dist/
 .DS_Store
 *.log
 .env
+
+# Prefer npm (package-lock.json) for CI; ignore pnpm lockfile to avoid frozen-lockfile mismatch
+pnpm-lock.yaml
