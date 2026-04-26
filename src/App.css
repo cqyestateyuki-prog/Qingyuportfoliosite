@@ -292,6 +292,12 @@
   100% { transform: translateX(0); }
 }
 
+/* 深色背景极光动画 */
+@keyframes aurora-flow {
+  0% { transform: rotate(40deg) translateX(-50%); }
+  100% { transform: rotate(40deg) translateX(0); }
+}
+
 @keyframes aurora-curtain-flow-reverse {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -319,6 +325,26 @@
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
   border-color: var(--primary-purple);
+}
+
+/* More Projects 深色板块 - 与 Hero 一致的背景，不对称高光偏左 */
+.more-projects-dark-section {
+  background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(138, 129, 215, 0.18), transparent 50%), linear-gradient(160deg, #1a1530 0%, #2a2450 35%, #433a6b 70%, #3d3560 100%);
+  width: 100%;
+}
+
+/* More Projects 深色板块卡片 - 外发光效果（更明显） */
+.project-card-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(138, 129, 215, 0.4);
+  box-shadow: 0 0 20px rgba(138, 129, 215, 0.12), 0 0 0 1px rgba(138, 129, 215, 0.1), 0 4px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease;
+}
+
+.project-card-dark:hover {
+  transform: translateY(-4px);
+  border-color: rgba(138, 129, 215, 0.85);
+  box-shadow: 0 0 40px rgba(138, 129, 215, 0.45), 0 0 80px rgba(138, 129, 215, 0.2), 0 0 120px rgba(138, 129, 215, 0.08), 0 0 0 1px rgba(138, 129, 215, 0.5), 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* 筛选器按钮样式 UIUX GAMES RESEARCH PROJECTs*/

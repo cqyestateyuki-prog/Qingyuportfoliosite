@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 //导入导航栏组件，包含网站logo和导航链接
 import Navbar from '../components/Navbar';
 //导入Hero组件，主页的顶部横幅区域，包含个人介绍和CTA按钮
-import Hero from '../components/Hero';
+import HeroSpotlight from '../components/HeroSpotlight';
 //导入Portfolio组件，展示项目作品集的部分
 import Portfolio from '../components/Portfolio';
-import About from '../components/About';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import { ArrowUp } from 'lucide-react';
@@ -76,11 +75,9 @@ function HomePage() {
       {/* 主要内容区域，包含所有页面部分 */}
       <main>
         {/* Hero区域，个人介绍和主要CTA */}
-        <Hero />
+        <HeroSpotlight />
         {/* 作品集展示区域 */}
         <Portfolio />
-        {/* 关于我部分，个人介绍和技能 */}
-        <About />
         {/* 联系我部分，联系表单和信息 */}
         <Contact />
       </main>

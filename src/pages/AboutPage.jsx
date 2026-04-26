@@ -248,11 +248,11 @@ const AboutPage = () => {
               </svg>
               <div className="relative z-10 flex flex-wrap justify-center md:justify-between gap-6 md:gap-4">
               {[
-                { label: 'Contextual understanding', text: 'I process complex, ambiguous information quickly.', top: -8, rotate: -3 },
-                { label: 'Judgment over optimization', text: "I know what's worth doing, not just what's possible.", top: 12, rotate: 2 },
-                { label: 'User intuition', text: 'I understand what people need beyond what they say.', top: -4, rotate: -2 },
-                { label: 'Taste', text: 'I recognize quality and can distinguish "technically correct" from "actually good."', top: 16, rotate: 3 },
-                { label: 'Adaptive execution', text: 'I adjust direction mid-work based on what I learn.', top: 4, rotate: -1 },
+                { label: 'Contextual understanding', text: 'I process complex, ambiguous information quickly.', top: -8, rotate: -3, glow: 'radial-gradient(circle, rgba(138, 129, 215, 0.35) 0%, rgba(138, 129, 215, 0.08) 50%, transparent 75%)' },
+                { label: 'Judgment over optimization', text: "I know what's worth doing, not just what's possible.", top: 12, rotate: 2, glow: 'radial-gradient(circle, rgba(99, 102, 241, 0.32) 0%, rgba(99, 102, 241, 0.06) 50%, transparent 75%)' },
+                { label: 'User intuition', text: 'I understand what people need beyond what they say.', top: -4, rotate: -2, glow: 'radial-gradient(circle, rgba(196, 190, 240, 0.38) 0%, rgba(196, 190, 240, 0.08) 50%, transparent 75%)' },
+                { label: 'Taste', text: 'I recognize quality and can distinguish "technically correct" from "actually good."', top: 16, rotate: 3, glow: 'radial-gradient(circle, rgba(139, 92, 246, 0.32) 0%, rgba(139, 92, 246, 0.06) 50%, transparent 75%)' },
+                { label: 'Adaptive execution', text: 'I adjust direction mid-work based on what I learn.', top: 4, rotate: -1, glow: 'radial-gradient(circle, rgba(167, 139, 250, 0.35) 0%, rgba(167, 139, 250, 0.08) 50%, transparent 75%)' },
               ].map((item, i) => (
                 <div
                   key={i}
@@ -260,26 +260,35 @@ const AboutPage = () => {
                   style={{ transform: `translateY(${item.top}px) rotate(${item.rotate}deg)` }}
                 >
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.88 }}
+                    initial={{ opacity: 0, scale: 0.4 }}
                     whileInView={{ 
                       opacity: 1, 
                       scale: 1,
-                      transition: { duration: 0.5, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }
+                      transition: { type: 'spring', stiffness: 340, damping: 13, delay: i * 0.08 }
                     }}
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     whileHover={{ 
                       scale: 1.05, 
                       zIndex: 10,
                       transition: { duration: 0.2 }
                     }}
-                    className="w-full h-full bg-white p-3 rounded-2xl shadow-xl border border-gray-100"
+                    className="w-full h-full relative p-3 rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
                   >
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden relative bg-gray-50/80 p-5 flex flex-col">
-                      <div className="relative z-10 flex-1 flex flex-col">
+                    {/* 每张卡片一个大光晕，叠在卡片上面，强度一致；位置居中偏上（原位置） */}
+                    <div
+                      className="absolute inset-0 pointer-events-none rounded-2xl flex items-center justify-center z-20"
+                      aria-hidden
+                    >
+                      <div
+                        className="w-[140%] h-[140%] rounded-full -translate-y-1/4"
+                        style={{ background: item.glow }}
+                      />
+                    </div>
+                    <div className="relative z-10 aspect-[3/4] rounded-xl overflow-hidden bg-white/90 p-5 flex flex-col">
+                      <div className="flex-1 flex flex-col">
                         <h3 className="font-medium text-gray-900 mb-3 text-base md:text-lg leading-tight">{item.label}</h3>
                         <p className="text-gray-600 text-sm md:text-base leading-relaxed flex-1">{item.text}</p>
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 mix-blend-overlay pointer-events-none" />
                     </div>
                   </motion.div>
                 </div>

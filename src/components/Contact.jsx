@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Mail, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button.jsx';
+import { useLanguage } from '../i18n';
 
 const Contact = () => {
+  const { t, language } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -40,20 +42,20 @@ const Contact = () => {
     e.preventDefault();
     // 这里可以添加表单提交逻辑
     console.log('Form submitted:', formData);
-    alert('Thank you for your message! I\'ll get back to you soon.');
+    alert(t('contact.successMessage'));
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
-      title: 'Email',
+      title: t('contact.email'),
       content: 'cqyestateyuki@gmail.com',
       link: 'mailto:cqyestateyuki@gmail.com'
     },
     {
       icon: <MapPin className="w-6 h-6" />,
-      title: 'Location',
+      title: t('contact.location'),
       content: 'New York, NY',
       link: '#'
     }
@@ -88,11 +90,10 @@ const Contact = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <h2 className="text-4xl md:text-5xl font-normal mb-6 gradient-text">
-            Let's Connect
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have a project in mind or just want to chat? I'd love to hear from you. 
-            Let's create something amazing together.
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -102,7 +103,7 @@ const Contact = () => {
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
             <h3 className="text-2xl font-semibold text-gray-900 mb-8">
-              Get in Touch
+              {t('contact.getInTouch')}
             </h3>
 
             <div className="space-y-6 mb-8">
@@ -136,7 +137,7 @@ const Contact = () => {
             {/* 社交媒体链接 */}
             <div>
               <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                Follow Me
+                {t('contact.followMe')}
               </h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social) => (
@@ -160,14 +161,14 @@ const Contact = () => {
           }`}>
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-                Send Message
+                {t('contact.sendMessage')}
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Name
+                      {t('contact.name')}
                     </label>
                     <input
                       type="text"
@@ -176,12 +177,12 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Your name"
+                      placeholder={t('contact.yourName')}
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email
+                      {t('contact.email')}
                     </label>
                     <input
                       type="email"
@@ -190,14 +191,14 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                      placeholder="your.email@example.com"
+                      placeholder={t('contact.yourEmail')}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Subject
+                    {t('contact.subject')}
                   </label>
                   <input
                     type="text"
@@ -206,13 +207,13 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Project inquiry"
+                    placeholder={t('contact.projectSubject')}
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Message
+                    {t('contact.message')}
                   </label>
                   <textarea
                     name="message"
@@ -221,7 +222,7 @@ const Contact = () => {
                     required
                     rows={5}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
-                    placeholder="Tell me about your project..."
+                    placeholder={t('contact.yourMessage')}
                   />
                 </div>
 
@@ -235,7 +236,7 @@ const Contact = () => {
                   }}
                 >
                   <Send className="mr-2 h-5 w-5" />
-                  Send Message
+                  {t('contact.sendMessage')}
                 </Button>
               </form>
             </div>

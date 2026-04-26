@@ -10,6 +10,7 @@ import AboutPage from './pages/AboutPage';
 import './App.css';
 // 新增：导入分析工具
 import { initGA } from './components/Analytics';
+import SplashCursor from './components/SplashCursor';
 import { useEffect } from 'react';
 
 // 新增：App组件是整个应用的根组件，负责路由配置
@@ -21,6 +22,8 @@ function App() {
 
   return (
     <div className="App">
+      {/* 全局鼠标拖尾特效（与首页一致） */}
+      <SplashCursor color={{ r: 138, g: 129, b: 215 }} />
       {/* 新增：Routes组件定义所有路由规则 */}
       <Routes>
         {/* 新增：根路径"/"对应主页，element属性指定要渲染的组件 */}

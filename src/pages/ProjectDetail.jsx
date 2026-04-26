@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 //导入React Router Hooks，用于获取URL参数和导航
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 //导入shadcn/ui组件库的UI组件
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -18,6 +18,11 @@ import { getProjectById, getNextProject } from '../../data/projects'
 import ImageGallery, { SingleImageDisplay, MultiImageGrid, SmartImageDisplay } from '../components/ImageGallery'
 import NextProject from '../components/NextProject'
 import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import DecryptedText from '../components/DecryptedText'
+// 导入国际化
+import { useLanguage } from '../i18n'
+import { getLocalizedText, getLocalizedArray, localizeProject } from '../utils/localization'
 
 // 辅助函数：从项目的 colors 中提取主色
 const getProjectHighlightColor = (project) => {
@@ -120,33 +125,6 @@ const preprocessHighlightMarkers = (text) => {
   return text.replace(/\[\[([^\]]+)\]\]/g, '**$1**');
 };
 
-// 辅助函数：将标题中的部分单词渲染为主题色
-const renderTitleWithAccent = (title, themeColor, darkColor) => {
-  if (!title) return null;
-  // 按空格分割单词，保留空格
-  const words = title.split(/(\s+)/);
-  // 使用一个模式：让部分单词使用主题色，创造视觉层次
-  // 大约30-40%的单词使用主题色
-  return words.map((word, index) => {
-    // 如果是空格，保持原色
-    if (word.trim() === '') {
-      return <span key={index} style={{ color: darkColor }}>{word}</span>;
-    }
-    // 使用一个模式：索引能被3整除，或者索引能被5整除且余数为2
-    const shouldHighlight = (index % 3 === 0) || (index % 5 === 2);
-    return (
-      <span 
-        key={index} 
-        style={{ color: shouldHighlight ? themeColor : darkColor }}
-      >
-        {word}
-      </span>
-    );
-  });
-};
-
-// 注意：数字自动高亮功能已移除，只保留 [[文字]] 和 **文字** 的高亮
-
 //ProjectDetail组件，展示单个项目的详细信息
 const ProjectDetail = () => {
   /*从URL参数中获取项目ID，用于查找对应的项目数据
@@ -156,22 +134,24 @@ const ProjectDetail = () => {
    管理返回顶部按钮的显示状态
   */
   const { id } = useParams()
-  const navigate = useNavigate()
-  const project = getProjectById(id)
+  const { t, language } = useLanguage()
+  const rawProject = getProjectById(id)
+  // 本地化项目数据
+  const project = rawProject ? localizeProject(rawProject, language) : null
   const [selectedImage, setSelectedImage] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [allImages, setAllImages] = useState([])
   const [activeSection, setActiveSection] = useState('overview')
   const [showBackToTop, setShowBackToTop] = useState(false)
   
-  // 获取项目的高亮颜色
-  const highlightColor = project ? getProjectHighlightColor(project) : '#8B5CF6'
+  // 获取项目的高亮颜色（使用原始数据）
+  const highlightColor = rawProject ? getProjectHighlightColor(rawProject) : '#8B5CF6'
   // 获取项目的深色（用于日间版标题）
-  const darkColor = project ? getProjectDarkColor(project) : '#0D0D0D'
+  const darkColor = rawProject ? getProjectDarkColor(rawProject) : '#0D0D0D'
   // 获取项目的主题色（用于日间版标签）
-  const themeColor = project ? getProjectHighlightColor(project) : '#8B5CF6'
+  const themeColor = rawProject ? getProjectHighlightColor(rawProject) : '#8B5CF6'
   // 检查是否使用日间版 hero
-  const useLightHero = project?.colors?.heroStyle === 'light'
+  const useLightHero = rawProject?.colors?.heroStyle === 'light'
 
   // 创建导航数据（动态构建，根据实际内容）
   const navigationSections = [
@@ -268,12 +248,6 @@ const ProjectDetail = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // 返回主页并滚动到My Projects板块
-  const handleBackToWork = () => {
-    // 导航到主页并添加hash参数
-    navigate('/#work')
-  }
-
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
@@ -291,25 +265,8 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* ========== 顶部导航栏 ========== */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-purple-100 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <button 
-              onClick={handleBackToWork}
-              className="flex items-center space-x-2 text-gray-400 hover:text-gray-600 transition-all duration-300 group px-4 py-2 rounded-lg hover:bg-gray-50"
-            >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <span className="font-medium">Back to Work</span>
-            </button>
-            
-             {/* ========== 更新category为categories 项目标签分类========== */}
-            <Badge className="bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 border-purple-200">
-              {project.categories?.[0]?.toUpperCase() || 'PROJECT'}
-            </Badge>
-          </div>
-        </div>
-      </nav>
+      {/* ========== 顶部导航栏（与首页一致）========== */}
+      <Navbar />
 
       {/* ========== 右侧进度导航 ========== */}
       <aside className="hidden lg:block fixed right-8 top-1/2 -translate-y-1/2 z-30 max-w-[160px]">
@@ -333,10 +290,10 @@ const ProjectDetail = () => {
                       ? 'scale-125'
                       : 'bg-gray-200 hover:bg-gray-300'
                   }`}
-                  style={activeSection === section.id ? {background: project.colors?.heroGradient || 'var(--gradient-hero)'} : {}}
+                  style={activeSection === section.id ? {background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'} : {}}
                 />
                 {activeSection === section.id && (
-                  <div className="absolute inset-0 w-2 h-2 rounded-full animate-ping" style={{background: project.colors?.heroGradient || 'var(--gradient-hero)'}} />
+                  <div className="absolute inset-0 w-2 h-2 rounded-full animate-ping" style={{background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'}} />
                 )}
               </div>
               
@@ -368,12 +325,10 @@ const ProjectDetail = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h1 
-                className="text-4xl md:text-6xl font-normal mb-6 animate-fade-in whitespace-nowrap"
-                style={{ 
-                  fontFamily: "'Poppins', 'Inter', sans-serif"
-                }}
+                className="text-4xl md:text-6xl font-normal mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
+                style={{ color: darkColor }}
               >
-                {renderTitleWithAccent(project.title, themeColor, darkColor)}
+                <DecryptedText text={project.title} />
               </h1>
               
               <p className="text-xl md:text-2xl mb-8 leading-relaxed animate-fade-in-delay-1" style={{ color: darkColor }}>
@@ -386,12 +341,12 @@ const ProjectDetail = () => {
               {/* DOMAIN */}
               <div className="group">
                 <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
-                  <span style={{ color: themeColor }}>●</span> DOMAIN
+                  <span style={{ color: themeColor }}>●</span> {t('project.domain')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.domain.map((item) => (
+                  {project.domain?.map((item, idx) => (
                     <Badge 
-                      key={item} 
+                      key={idx} 
                       className="transition-all"
                       style={{ 
                         backgroundColor: `${themeColor}20`,
@@ -408,12 +363,12 @@ const ProjectDetail = () => {
               {/* FORM */}
               <div className="group">
                 <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
-                  <span style={{ color: themeColor }}>●</span> FORM
+                  <span style={{ color: themeColor }}>●</span> {t('project.form')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.form.map((item) => (
+                  {project.form?.map((item, idx) => (
                     <Badge 
-                      key={item} 
+                      key={idx} 
                       className="transition-all"
                       style={{ 
                         backgroundColor: `${themeColor}20`,
@@ -430,12 +385,12 @@ const ProjectDetail = () => {
               {/* COLLABORATORS */}
               <div className="group">
                 <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
-                  <span style={{ color: themeColor }}>●</span> COLLABORATORS
+                  <span style={{ color: themeColor }}>●</span> {t('project.collaborators')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.collaborators.map((item) => (
+                  {project.collaborators?.map((item, idx) => (
                     <Badge 
-                      key={item} 
+                      key={idx} 
                       className="transition-all"
                       style={{ 
                         backgroundColor: `${themeColor}20`,
@@ -453,14 +408,13 @@ const ProjectDetail = () => {
         </section>
       ) : (
         // 原版 hero：渐变背景，白色文字
-        <section className="pt-32 pb-16 px-6" style={{background: project.colors?.heroGradient || 'var(--gradient-hero)'}}>
+        <section className="pt-32 pb-16 px-6" style={{background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'}}>
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h1 
-                className="text-4xl md:text-6xl font-normal text-white mb-6 animate-fade-in whitespace-nowrap"
-                style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+                className="text-4xl md:text-6xl font-normal text-white mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
               >
-                {project.title}
+                <DecryptedText text={project.title} />
               </h1>
               
               <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-delay-1 font-['Poppins']">
@@ -473,12 +427,12 @@ const ProjectDetail = () => {
               {/* DOMAIN */}
               <div className="group">
                 <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="text-white">●</span> DOMAIN
+                  <span className="text-white">●</span> {t('project.domain')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.domain.map((item) => (
+                  {project.domain?.map((item, idx) => (
                     <Badge 
-                      key={item} 
+                      key={idx} 
                       className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
                     >
                       {item}
@@ -490,12 +444,12 @@ const ProjectDetail = () => {
               {/* FORM */}
               <div className="group">
                 <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="text-white">●</span> FORM
+                  <span className="text-white">●</span> {t('project.form')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.form.map((item) => (
+                  {project.form?.map((item, idx) => (
                     <Badge 
-                      key={item} 
+                      key={idx} 
                       className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
                     >
                       {item}
@@ -507,12 +461,12 @@ const ProjectDetail = () => {
               {/* COLLABORATORS */}
               <div className="group">
                 <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="text-white">●</span> COLLABORATORS
+                  <span className="text-white">●</span> {t('project.collaborators')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.collaborators.map((item) => (
+                  {project.collaborators?.map((item, idx) => (
                     <Badge 
-                      key={item} 
+                      key={idx} 
                       className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
                     >
                       {item}
@@ -616,20 +570,20 @@ const ProjectDetail = () => {
             )}
           </div>
 
-          {/* Section Header */}
-          <div className="mb-8 md:mb-12 lg:mb-16">
+            {/* Section Header */}
+            <div className="mb-8 md:mb-12 lg:mb-16">
             {/* Section Tag */}
             <div 
               className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-              style={{ color: getProjectLightColor(project) }}
+              style={{ color: getProjectLightColor(rawProject) }}
             >
-              Project Overview
+              {t('project.projectOverview')}
             </div>
             
             {/* Main Title */}
             <h2 
               className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
-              style={{ color: getProjectDarkColor(project) }}
+              style={{ color: getProjectDarkColor(rawProject) }}
             >
               {project.overview.mainTitle || 'Transform AI Learning Into Community Experience'}
             </h2>
@@ -712,10 +666,10 @@ const ProjectDetail = () => {
                 id="challenge" 
                 className="p-8 rounded-2xl border-l-4 relative overflow-hidden"
                 style={{
-                  background: project.colors?.subtitleGradient 
+                  background: rawProject?.colors?.subtitleGradient 
                     ? (() => {
                         // Extract colors from gradient and create light version
-                        const gradient = project.colors.subtitleGradient;
+                        const gradient = rawProject.colors.subtitleGradient;
                         // Try hex colors first
                         let colorMatches = gradient.match(/#[0-9a-fA-F]{6}/g) || [];
                         // If no hex, try RGB
@@ -740,13 +694,13 @@ const ProjectDetail = () => {
                         return 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))';
                       })()
                     : 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))',
-                  borderLeftColor: project.colors?.heroGradient 
+                  borderLeftColor: rawProject?.colors?.heroGradient 
                     ? (() => {
                         // Try hex first
-                        let match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                        let match = rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
                         if (match) return match[0];
                         // Try RGB
-                        const rgbMatch = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+                        const rgbMatch = rawProject.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
                         if (rgbMatch) {
                           const hex = rgbToHex(rgbMatch[0]);
                           if (hex) return hex;
@@ -760,22 +714,22 @@ const ProjectDetail = () => {
                   className="text-xl font-semibold text-gray-900 mb-4"
                   style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
                 >
-                  The Challenge
+                  {t('project.challenge')}
                 </h3>
-                {project.overview.challenges ? (
+                {project.overview?.challenges ? (
                   <div className="space-y-4">
                     {project.overview.challenges.map((challenge, index) => (
                       <div key={index} className="flex items-start space-x-3">
                         <div 
                           className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-1"
                           style={{
-                            background: project.colors?.heroGradient 
+                            background: rawProject?.colors?.heroGradient 
                               ? (() => {
                                   // Try hex first
-                                  let match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                                  let match = rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
                                   if (match) return `${match[0]}20`;
                                   // Try RGB
-                                  const rgbMatch = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+                                  const rgbMatch = rawProject.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
                                   if (rgbMatch) {
                                     const hex = rgbToHex(rgbMatch[0]);
                                     if (hex) return `${hex}20`;
@@ -788,13 +742,13 @@ const ProjectDetail = () => {
                           <span 
                             className="font-semibold text-sm"
                             style={{
-                              color: project.colors?.heroGradient 
+                              color: rawProject?.colors?.heroGradient 
                                 ? (() => {
                                     // Try hex first
-                                    let match = project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
+                                    let match = rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
                                     if (match) return match[0];
                                     // Try RGB
-                                    const rgbMatch = project.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
+                                    const rgbMatch = rawProject.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
                                     if (rgbMatch) {
                                       const hex = rgbToHex(rgbMatch[0]);
                                       if (hex) return hex;
@@ -832,7 +786,7 @@ const ProjectDetail = () => {
               {/* Section Tag */}
               <div 
                 className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-                style={{ color: getProjectLightColor(project) }}
+                style={{ color: getProjectLightColor(rawProject) }}
               >
                 {project.role.title || 'My Role'}
               </div>
@@ -841,7 +795,7 @@ const ProjectDetail = () => {
               <h2 
                 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 md:mb-6 leading-tight"
                 style={{ 
-                  color: getProjectDarkColor(project),
+                  color: getProjectDarkColor(rawProject),
                   fontFamily: "'Poppins', 'Inter', sans-serif"
                 }}
               >
@@ -857,7 +811,7 @@ const ProjectDetail = () => {
                     <div 
                       className="flex-shrink-0 w-10 h-10 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg" 
                       style={{
-                        backgroundColor: getProjectLightColor(project)
+                        backgroundColor: getProjectLightColor(rawProject)
                       }}
                     >
                       {index + 1}
@@ -885,7 +839,7 @@ const ProjectDetail = () => {
               {(section.sectionTag || (section.mainTitle && section.title)) && (
                 <div 
                   className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-                  style={{ color: getProjectLightColor(project) }}
+                  style={{ color: getProjectLightColor(rawProject) }}
                 >
                   {section.sectionTag || section.title}
                 </div>
@@ -895,7 +849,7 @@ const ProjectDetail = () => {
               <h2 
                 className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
                 style={{ 
-                  color: getProjectDarkColor(project),
+                  color: getProjectDarkColor(rawProject),
                   fontFamily: "'Poppins', 'Inter', sans-serif"
                 }}
               >
@@ -935,16 +889,16 @@ const ProjectDetail = () => {
             </div>
             
             {/* 只在非交替模式下显示完整文字内容（保留原有功能） */}
-            {section.imageDisplayMode !== 'alternating' && section.content && !section.briefContent && (
-              <div className="prose prose-lg max-w-none mb-12 [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
-                {Array.isArray(section.content) ? (
-                  section.content.map((paragraph, index) => (
-                    <div key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
-                      <ReactMarkdown 
-                        components={{
-                          p: ({children}) => {
-                            return <p className="mb-4">{children}</p>;
-                          },
+                {section.imageDisplayMode !== 'alternating' && section.content && !section.briefContent && (
+                  <div className="prose prose-lg max-w-none mb-12 [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
+                    {Array.isArray(section.content) ? (
+                      section.content.map((paragraph, index) => (
+                        <div key={index} className="text-lg text-gray-700 leading-relaxed mb-4">
+                          <ReactMarkdown 
+                            components={{
+                              p: ({children}) => {
+                                return <p className="mb-4">{children}</p>;
+                              },
                           strong: ({children}) => {
                       return (
                         <strong 
@@ -969,7 +923,7 @@ const ProjectDetail = () => {
                   ))
                 ) : (
                   <div className="text-lg text-gray-700 leading-relaxed">
-                    <ReactMarkdown 
+                    <ReactMarkdown
                       components={{
                         p: ({children}) => {
                           return <p className="mb-4">{children}</p>;
@@ -1014,7 +968,7 @@ const ProjectDetail = () => {
                         <div 
                           className="text-5xl md:text-6xl font-bold mb-6"
                           style={{
-                            color: getProjectLightColor(project)
+                            color: getProjectLightColor(rawProject)
                           }}
                         >
                           {(idx + 1).toString().padStart(2, '0')}
@@ -1022,7 +976,7 @@ const ProjectDetail = () => {
                         <h3 
                           className="text-2xl md:text-3xl font-bold mb-4"
                           style={{
-                            color: getProjectDarkColor(project),
+                            color: getProjectDarkColor(rawProject),
                             fontFamily: "'Poppins', 'Inter', sans-serif"
                           }}
                         >
@@ -1087,8 +1041,8 @@ const ProjectDetail = () => {
                       key={idx} 
                       className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0"
                       style={{
-                        background: project.colors?.heroGradient 
-                          ? `linear-gradient(to bottom right, white, ${project.colors.heroGradient.includes('#') ? `${project.colors.heroGradient.match(/#[0-9a-fA-F]{6}/)?.[0] || '#8b5cf6'}15` : 'rgba(139, 92, 246, 0.15)'})`
+                        background: rawProject?.colors?.heroGradient 
+                          ? `linear-gradient(to bottom right, white, ${rawProject.colors.heroGradient.includes('#') ? `${rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/)?.[0] || '#8b5cf6'}15` : 'rgba(139, 92, 246, 0.15)'})`
                           : 'linear-gradient(to bottom right, white, rgba(139, 92, 246, 0.15))'
                       }}
                     >
@@ -1096,7 +1050,7 @@ const ProjectDetail = () => {
                         <div 
                           className="text-4xl font-bold mb-4"
                           style={{
-                            color: getProjectLightColor(project)
+                            color: getProjectLightColor(rawProject)
                           }}
                         >
                           {(idx + 1).toString().padStart(2, '0')}
@@ -1105,7 +1059,7 @@ const ProjectDetail = () => {
                           <span 
                             className="inline-block text-xl font-bold"
                             style={{
-                              color: getProjectLightColor(project)
+                              color: getProjectLightColor(rawProject)
                             }}
                           >
                             {feature.name}
@@ -1133,7 +1087,7 @@ const ProjectDetail = () => {
                     download={button.type === 'download' ? (button.downloadName || true) : false}
                     className="inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl text-white hover:opacity-90"
                     style={{
-                      background: project.colors?.heroGradient || 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)'
+                      background: rawProject?.colors?.heroGradient || 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)'
                     }}
                   >
                     {button.text}
@@ -1163,7 +1117,7 @@ const ProjectDetail = () => {
                         <h3 
                           className="text-xl font-semibold mb-4" 
                           style={{ 
-                            color: getProjectDarkColor(project),
+                            color: getProjectDarkColor(rawProject),
                             fontFamily: "'Poppins', 'Inter', sans-serif"
                           }}
                         >
@@ -1171,7 +1125,7 @@ const ProjectDetail = () => {
                         </h3>
                       )}
                       {group.description && (
-                        <p className="text-gray-600 mb-6">{group.description}</p>
+                        <p className="text-gray-600 mb-6 leading-relaxed">{group.description}</p>
                       )}
                       <SmartImageDisplay 
                         images={allImagesInGroup}
@@ -1223,7 +1177,7 @@ const ProjectDetail = () => {
       )}
 
       {/* ========== Next Project ========== */}
-      <NextProject nextProject={getNextProject(id)} />
+      <NextProject nextProject={rawProject ? localizeProject(getNextProject(id), language) : null} />
 
       {/* ========== Footer ========== */}
       <Footer />

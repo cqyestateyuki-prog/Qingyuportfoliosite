@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Code, Palette, Gamepad2, Search, BarChart3, Instagram } from 'lucide-react';
+import { useLanguage } from '../i18n';
 
 const About = () => {
+  const { t, language } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -25,26 +27,26 @@ const About = () => {
   const skills = [
     {
       icon: <Palette className="w-8 h-8" />,
-      title: 'UI/UX Design',
-      description: 'User-centered design, prototyping, wireframing, and visual design systems',
+      title: t('about.skillUIUX'),
+      description: t('about.skillUIUXDesc'),
       color: 'var(--main-blue)'
     },
     {
       icon: <Gamepad2 className="w-8 h-8" />,
-      title: 'Game Development',
-      description: 'Unity, C#, game mechanics design, and interactive entertainment experiences',
+      title: t('about.skillGame'),
+      description: t('about.skillGameDesc'),
       color: 'var(--main-blue)'
     },
     {
       icon: <BarChart3 className="w-8 h-8" />,
-      title: 'Digital Marketing',
-      description: 'Social media strategy, content creation, brand development, data analysis, and digital campaigns',
+      title: t('about.skillMarketing'),
+      description: t('about.skillMarketingDesc'),
       color: 'var(--main-blue)'
     },
     {
       icon: <Instagram className="w-8 h-8" />,
-      title: 'Social Media',
-      description: 'Platform management, community engagement, analytics, and social media operations',
+      title: t('about.skillSocial'),
+      description: t('about.skillSocialDesc'),
       color: 'var(--main-blue)'
     }
   ];
@@ -58,39 +60,24 @@ const About = () => {
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
           <h2 className="text-4xl md:text-5xl font-normal mb-6 gradient-text">
-            About Me
+            {t('about.title')}
           </h2>
             
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
-              <p>
-                I'm a passionate creative developer and designer with a diverse skill set 
-                that extends across multiple disciplines. My journey began with a fascination 
-                for how technology can enhance human experiences.
-              </p>
-              
-              <p>
-                With expertise in UI/UX design, game development, and web technologies, 
-                I continually seek to merge creative expertise with strategic thinking. 
-                I believe in creating solutions that not only look beautiful but also 
-                solve real-world problems.
-              </p>
-              
-              <p>
-                My diverse background in creative coding, marketing, and social media 
-                operations allows me to approach projects from multiple perspectives, 
-                ensuring comprehensive and innovative solutions.
-              </p>
+              <p>{t('about.paragraph1')}</p>
+              <p>{t('about.paragraph2')}</p>
+              <p>{t('about.paragraph3')}</p>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <div className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full font-medium">
-                3+ Years in Design & Programming
+                {t('about.tag1')}
               </div>
               <div className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-medium">
-                4+ Years in Digital Marketing & Ecommerce
+                {t('about.tag2')}
               </div>
               <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-medium">
-                Creative Problem Solver
+                {t('about.tag3')}
               </div>
             </div>
           </div>
@@ -133,10 +120,10 @@ const About = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           {[
-            { number: '15+', label: 'Projects Completed' },
-            { number: '3+', label: 'Years of Experience' }
+            { number: '15+', label: t('about.projectsCompleted') },
+            { number: '3+', label: t('about.yearsExperience') }
           ].map((stat, index) => (
-            <div key={stat.label} className="text-center">
+            <div key={index} className="text-center">
               <div className="text-3xl md:text-4xl font-normal gradient-text mb-2">
                 {stat.number}
               </div>

@@ -3,23 +3,262 @@
 
 export const projects = [
 
+  // ========== Spark Up ==========
+  {
+    id: 'sparkup',
+    featured: true, // 首页展示
+    title: 'Spark Up',
+    subtitle: {
+      en: 'Where Ideas Get Their First Spark',
+      zh: '让创意迸发第一道火花'
+    },
+    categories: ['AI', 'Product Design', 'UIUX', 'Programming', 'Research'],
+    tags: ['Product Strategy', 'UX Design', 'UI Design', 'Figma', 'Next.js', 'Tailwind CSS', 'OpenAI API', 'Design System', 'JTBD', 'Kano Model'],
+    techTags: ['#Figma', '#Next.js', '#Tailwind CSS', '#OpenAI API', '#Design System'],
+
+    thumbnail: '/media/projects/sparkup/hero.png',
+    brief: {
+      en: 'A startup readiness tool that helps first-time founders understand where they stand, shape early ideas, and get light validation before they commit too much time or money.',
+      zh: '一个 AI 驱动的共创平台，通过客观评估、创意生成和社区验证，帮助早期创业者从「第一天」的迷茫走向行动。'
+    },
+    heroImage: '/media/projects/sparkup/hero.png',
+    heroVideo: null,
+
+    domain: [
+      { en: 'AI Product', zh: 'AI 产品' },
+      { en: 'Startup Mentorship', zh: '创业辅导' },
+      { en: 'B2B SaaS', zh: 'B2B SaaS' }
+    ],
+    form: [
+      { en: 'Product Strategy', zh: '产品策略' },
+      { en: 'UX/UI Design', zh: 'UX/UI 设计' },
+      { en: 'Design System', zh: '设计系统' },
+      { en: 'User Research', zh: '用户研究' }
+    ],
+    collaborators: ['4-person team', 'Figma', 'Next.js', 'OpenAI API', 'GitHub'],
+
+    colors: {
+      heroGradient: 'linear-gradient(135deg, #0f172a 0%, #0081d4 100%)',
+      subtitleGradient: 'linear-gradient(135deg, #0369a1 0%, #0081d4 100%)',
+      underlineGradient: 'linear-gradient(135deg, #0081d4 0%, #0081d4 100%)',
+      textHighlightColor: '#0081d4',
+      darkColor: '#0369a1',
+      lightColor: '#0081d4'
+    },
+
+    overview: {
+      mainTitle: 'An Honest Starting Point for First-Time Founders',
+      briefContent: '**SparkUp** is an [[AI-powered co-founder platform]] for people who are curious about starting a business but do not know where to begin. I designed it around a simple belief: early founders do not only need encouragement. They also need a clear read on their readiness, their blind spots, and the next step that feels realistic. The product brings together [[self-assessment, idea generation, and lightweight community validation]] so users can move from vague ambition to a more grounded plan.',
+      challenge: 'How might we help first-time founders understand whether they are ready, without making the experience feel intimidating or discouraging?',
+      challenges: [
+        'How might we help first-time founders understand whether they are ready, without making the experience feel intimidating or discouraging?',
+        'How might we make assessment engaging without overwhelming cold traffic?',
+        'How might we give honest feedback while still helping users feel capable of moving forward?',
+        'How might we design for AI latency so wait time feels like anticipation, not anxiety?'
+      ],
+      buttons: []
+    },
+
+    sections: [
+      {
+        id: 'the-problem',
+        title: 'The Problem',
+        sectionTag: 'The Problem',
+        mainTitle: 'People Wanted a Reality Check, Not Another Pep Talk',
+        briefContent: 'During research, I noticed a tension that felt very familiar: people were inspired by startup stories, but also quietly comparing themselves against them. Many were not asking for a founder community yet. They were asking, "Do I even have what it takes?" Existing tools often jump straight into networking, pitch polishing, or motivational content. That skips the earlier emotional moment where someone needs [[a low-pressure way to understand their own readiness]]. The problem became clearer: help users face the gap between interest and execution without turning that gap into shame.',
+        icon: '💡',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/sparkup/sections/problem.png',
+            alt: 'Startup anxiety and readiness gap',
+            caption: 'Users need honest self-assessment, not just encouragement.'
+          }
+        ]
+      },
+
+      {
+        id: 'process-research',
+        title: 'Research',
+        sectionTag: 'Research',
+        mainTitle: 'Data That Changed Everything: From Community to AI-First',
+        briefContent: 'As Product Lead I ran [[151 survey responses and 70 qualitative interviews]] and applied JTBD, Four Forces, and the Kano Model. The pivotal finding: users\' real pain wasn\'t [[lack of connections]] but [[lack of execution capability]]. The core question wasn\'t "Who can help me?" but [["Am I capable?"]]—so we pivoted from a community-matching platform to an AI-first co-founder. I defined a [[Two-Tier Strategy]]: **Lite Diagnostic** (10 questions) as a low-friction hook with instant Readiness Score; **Enhanced Diagnostic** (40 questions) with a 6-dimensional framework and smart routing by user stage. The [[Guest-to-User flow]]—no forced login before value (Kano reverse attribute)—let users try the Lite diagnostic, then prompted "Save your results?" to leverage sunk cost and drive signups. As Design Lead I led end-to-end UX/UI from research to high-fidelity in Figma, including information architecture, wireframes, and the design system.',
+        icon: '🔍',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/sparkup/sections/research.png',
+            alt: 'User research and pivot insight',
+            caption: '151 responses: execution capability, not connections, drove the product pivot.'
+          }
+        ]
+      },
+
+      {
+        id: 'process-design',
+        title: 'Iteration',
+        sectionTag: 'Iteration',
+        mainTitle: 'From Dense Tables to Radar Charts, and From Spinner to Forging',
+        briefContent: 'For the diagnostic UI, I iterated from a dense data table (user feedback: too overwhelming) to linear progress bars (hard to compare dimensions) to a [[Radar Chart]]—clear winner in testing, making abstract metrics instantly actionable. For the Idea Bank, I designed a [[slot-machine interface]] (Budget, Scope, Category) to remove writer\'s block and make AI feel controllable; [[Forging animation]] turned 5–10 second wait time into anticipation with sparks and progress indicators. [[Idea Seeds]] (e.g. "Uber for X") gave users drag-and-drop blueprints. On the UI/UX side: typography hierarchy (page title → section → card title), consistent spacing and touch targets (min 44px), and a [[design system]] with honesty-through-minimalism, Material Design 3 foundation, no false excitement; [[no forced login]] and shareable visual reports (67% willing to share); restrained gamification (badges, not leaderboards).',
+        icon: '🎨',
+        content: [
+          '**6-Dimensional Diagnostic**: Motivation & Goals Fit, Resources & Constraints, Skills & Execution, Market & Customer Understanding, Risk & Resilience, Support & Operations. Smart routing adapts questions by stage ("No Idea" vs "Validating").',
+          '',
+          '**Radar Chart V1→V3**: Dense table → progress bars → radar chart. Makes relative strengths/weaknesses visible at a glance and pairs critique with actionable next steps ("Your Market Score is low → Take Market Research Challenge").',
+          '',
+          '**UI/UX & Design Decisions**: Guest-to-user migration (Kano: forced login = reverse attribute); shareable OG cards (1200×630) for social; accessibility-first, WCAG AA; mobile-first with progressive disclosure (overall score → dimensional breakdown → specific actions). Card-based layouts, clear visual hierarchy, and consistent component patterns (buttons, inputs, badges) kept the interface scannable and trustworthy.'
+        ],
+        imageDisplayMode: 'alternating',
+        images: [
+          {
+            src: '/media/projects/sparkup/sections/design-iteration.png',
+            alt: 'Radar chart iteration and Forging state',
+            caption: 'From data table to Radar Chart; Forging animation turns wait into anticipation'
+          },
+          {
+            src: '/media/projects/sparkup/sections/idea-bank.png',
+            alt: 'Idea Bank and Sparking Engine',
+            caption: 'Slot-machine constraints and Idea Seeds for scaffolding'
+          },
+          {
+            src: '/media/projects/sparkup/sections/design-system.png',
+            alt: 'Design System',
+            caption: 'Material Design 3, honesty through minimalism, no forced login'
+          }
+        ]
+      },
+
+      {
+        id: 'process-tech',
+        title: 'Technical',
+        sectionTag: 'Technical',
+        mainTitle: 'Next.js, OpenAI API, and 3-Month Delivery',
+        briefContent: 'The project was [[delivered in 3 months]] by a 4-person team. Tech stack: **Next.js** (React), **TailwindCSS**, **OpenAI API** for diagnostic analysis and idea generation; i18n for English and Chinese; mobile-first responsive design. I led the UX/UI design in Figma—wireframes, high-fidelity screens, and design system handoff—so that component patterns (cards, buttons, form controls) mapped cleanly to Tailwind. Key flows I designed: **First-time user**—Landing → Lite Diagnostic (10Q) → Readiness Score → CTA "Unlock Full Diagnostic" → Enhanced (40Q) → Radar Chart + Action Plan → "Try Sparking Engine". **Returning user**—Login → Dashboard → Check Sparks on ideas → Community feed → Forge new idea → Save to Stash. GitHub workflow from research to high-fidelity and implementation.',
+        icon: '💻',
+        buttons: [],
+        features: [
+          {
+            name: 'Next.js + TailwindCSS',
+            description: 'Frontend & UI',
+            detail: 'Component-based UI, utility-first styling; design system in Figma aligned with Material Design 3 and Tailwind tokens for fast handoff'
+          },
+          {
+            name: 'OpenAI API',
+            description: 'AI integration',
+            detail: 'Diagnostic analysis and idea generation; UX designed for latency (Forging state, progressive disclosure)'
+          },
+          {
+            name: 'UI/UX & Responsive',
+            description: 'Design & accessibility',
+            detail: 'Figma UX/UI from research to high-fidelity; i18n (EN/ZH); mobile-first with collapsible sections and touch-friendly targets (min 44px)'
+          }
+        ]
+      },
+
+      {
+        id: 'the-solution',
+        title: 'Final Solution',
+        sectionTag: 'Final Solution',
+        mainTitle: 'Diagnostic → Idea Generation → Validation: One Unified Platform',
+        briefContent: 'The solution is three pillars in one journey: **Diagnostic (The GPS)**—know thyself with Lite then Enhanced assessment and a Radar Chart that turns scores into actionable steps. **Idea Generation (Spark Engine)**—concrete ideas via slot-machine constraints and Idea Seeds, with Forging animation for wait time. **Validation (Spark Square)**—lightweight community feedback with single-action "Spark" (like upvote), public idea feed, and "Forged by [Username]" attribution without forcing social interaction. The **Dashboard** is the command center: total Readiness Score, dimensional breakdown, personalized recommendations, Spark Stash, and recent community activity. UI/UX highlights: [[progressive disclosure]] (score → dimensions → actions), card-based layouts and consistent component patterns, mobile-first with collapsible sections and touch-friendly targets, and a design system that kept the interface honest and scannable.',
+        icon: '🚀',
+        featureDisplayMode: 'side-by-side',
+        features: [
+          {
+            name: 'AI Diagnostic (The GPS)',
+            detail: 'Two-tier Lite (10Q) + Enhanced (40Q) with 6-dimensional framework and smart routing. Radar Chart UI makes strengths/weaknesses actionable; always pair critique with next steps. Clear visual hierarchy and card-based layout for scannability.',
+            image: '/media/projects/sparkup/sections/solution-dashboard.png'
+          },
+          {
+            name: 'Idea Bank & Sparking Engine',
+            detail: 'Slot-machine interface (Budget, Scope, Category); Forging animation for latency; Idea Seeds as drag-and-drop blueprints. Turns "black box" AI into controllable, gamified ideation.',
+            image: '/media/projects/sparkup/sections/solution-idea-bank.png'
+          },
+          {
+            name: 'Spark Square & Dashboard',
+            detail: 'Lightweight validation with "Spark" action and card-based feed. Dashboard: Readiness Score, radar breakdown, actionable steps, Spark Stash, community activity—progressive disclosure.',
+            image: '/media/projects/sparkup/sections/solution-design-system.png'
+          }
+        ],
+        imageGroups: [
+          {
+            title: 'Final Visuals',
+            displayMode: 'single',
+            images: [
+              {
+                src: '/media/projects/sparkup/sections/final-dashboard.png',
+                alt: 'Spark Up Dashboard',
+                caption: 'Command center with Radar Chart and personalized action steps'
+              },
+              {
+                src: '/media/projects/sparkup/sections/final-idea-bank.png',
+                alt: 'Idea Bank and Spark Square',
+                caption: 'Idea Bank with Forging flow; Spark Square for lightweight validation'
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: 'impact-reflection',
+        title: 'Impact & Reflection',
+        sectionTag: 'Impact & Reflection',
+        mainTitle: 'Data Trumps Intuition; Reflection Over Blind Action',
+        briefContent: '[[151 survey responses]] led to a full product repositioning—from community matching to AI-first readiness and ideation. North Star: **Readiness-to-Action Conversion** (complete Enhanced Diagnostic and forge ≥1 idea). Targets: Lite completion >70%, Lite→Enhanced >40%, ideas forged per user >3, Spark rate >25%, report share >50%. The best products don\'t always encourage action; sometimes they encourage [[reflection]]. SparkUp doesn\'t tell everyone "You can do this!"—it asks [["Are you ready?"]] and provides an honest answer. In a world full of noise saying "just start," we built the signal that helps them start **smart**.',
+        icon: '💭',
+        content: [
+          '**Impact**:',
+          '- **Research**: 151 responses validated "brutal honesty" positioning; age cohort differences (18–27, 28–34, 35+) informed roadmap.',
+          '- **Design**: Full UX/UI in Figma—wireframes to high-fidelity, design system docs, interactive prototypes, component library (buttons, cards, forms), and social share assets (OG images). Visual hierarchy and interaction patterns (Forging state, slot-machine, Radar Chart) were validated in testing.',
+          '- **Team**: Evidence-based decision culture; achievable success criteria; reusable diagnostic framework.',
+          '',
+          '**Reflection**:',
+          '- **Pivot courage**: Throwing away months of community-platform work was painful; 151 surveys don\'t lie. Data trumps intuition.',
+          '- **Honesty + encouragement**: Always pair critique with actionable next steps (e.g. "Your score is 4/10 → Here\'s how to improve").',
+          '- **Edge cases**: Fallback UI when AI fails; encouraging messaging for low scores; Idea Seeds when user has no ideas.',
+          '- **If I had more time**: Longitudinal study (6 months post-diagnostic); AI model iteration from idea-quality feedback; community features (cautiously); content marketing (Xiaohongshu, Product Hunt).'
+        ]
+      }
+    ]
+  },
+
    // ========== Programming 项目示例 ==========
     // ========== AI Community MVP项目 ==========
     {
       id: 'ai-community-platform',
-      title: 'AI Built-in Community Platform',
-      subtitle: 'Modern integrated Community Platform for AI Tools',
+      featured: true, // 首页展示
+      title: {
+        en: 'AI Built-in Community Platform',
+        zh: 'AI 产品内嵌社区平台'
+      },
+      subtitle: {
+        en: 'Modern integrated Community Platform for AI Tools',
+        zh: '为 AI 工具打造的现代化集成社区平台'
+      },
       categories: ['AI', 'UIUX', 'Programming','Product Design', 'Research'],
       tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
       techTags: ['#Figma','#React','#TypeScript', '#Next.js','#HTML/CSS'],
       
       thumbnail: '/media/projects/aicommunity/Hero2 copy.png',
-      brief: 'An in-app integrated community system designed for AI Tools.',
+      brief: {
+        en: 'An in-app integrated community system designed for AI Tools.',
+        zh: '专为 AI 工具设计的应用内集成社区系统。'
+      },
       heroImage: '/media/projects/aicommunity/Hero2 copy.png',
       heroVideo: 'https://vimeo.com/1145264634?share=copy&fl=sv&fe=ci',
       
-      domain: ['AI Product Design & Development', 'Web Platform', 'Learning Community'],
-      form: ['UI/UX Design', 'Frontend Development', 'React + TypeScript + Tailwind CSS', 'Next.js'],
+      domain: [
+        { en: 'AI Product Design & Development', zh: 'AI 产品设计与开发' },
+        { en: 'Web Platform', zh: 'Web 平台' },
+        { en: 'Learning Community', zh: '学习社区' }
+      ],
+      form: [
+        { en: 'UI/UX Design', zh: 'UI/UX 设计' },
+        { en: 'Frontend Development', zh: '前端开发' },
+        { en: 'React + TypeScript + Tailwind CSS', zh: 'React + TypeScript + Tailwind CSS' },
+        { en: 'Next.js', zh: 'Next.js' }
+      ],
       collaborators: ['Solo Project','Cursor AI + ChatGPT + Claude'],
       
       colors: {
@@ -237,23 +476,37 @@ export const projects = [
   {
     // ========== Stumbldoor Project 图书系统==========
     id: 'stumbldoor',
+    featured: true, // 首页展示
     title: 'Stumbldoor',
-    subtitle: 'Library Experience for the Future',
+    subtitle: {
+      en: 'Library Experience for the Future',
+      zh: '未来图书馆体验'
+    },
     categories: ['UIUX', 'Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
     techTags: ['#Figma', '#Wireframe', '#Prototype','#Visual Design', '#Mobile App','#Design System'],  // 技术标签
     
     // ========== 主页展示 ==========
     thumbnail: '/media/projects/stumbldoor/hero/hero-image@66662x.png',  // 列表页缩略图
-    brief: 'An innovative digital platform that reimagines the traditional library experience.',
+    brief: {
+      en: 'An innovative digital platform that reimagines the traditional library experience.',
+      zh: '一个创新的数字平台，重新定义传统图书馆体验。'
+    },
     
     // ========== 详情页 Hero ==========
     heroImage: '/media/projects/stumbldoor/hero/hero-image@66662x.png',
     heroVideo: null,  // 可选：视频路径
     
     // ========== 项目标签==========
-    domain: ['Edtech', 'UI/UX', 'Mobile'],
-    form: ['Research', 'Mobile Application Design'],
+    domain: [
+      { en: 'Edtech', zh: '教育科技' },
+      { en: 'UI/UX', zh: 'UI/UX' },
+      { en: 'Mobile', zh: '移动端' }
+    ],
+    form: [
+      { en: 'Research', zh: '用户研究' },
+      { en: 'Mobile Application Design', zh: '移动应用设计' }
+    ],
     collaborators: ['Solo Project'],  // 或其他合作者名字
     
     // ========== 项目颜色配置 ==========
@@ -518,20 +771,29 @@ export const projects = [
   // ========== Excel AI Agent 项目 ==========
   {
     id: 'excel-ai-agent',
-    title: 'Excel AI Agent',
-    subtitle: 'Intelligent Data Analysis Assistant',
+    title: { en: 'Excel AI Agent', zh: 'Excel AI 智能体' },
+    subtitle: { en: 'Intelligent Data Analysis Assistant', zh: '智能数据分析助手' },
     categories: ['AI', 'Programming','Product Design'],
     tags: ['AI-Powered Tool', 'Data Analysis', 'Voice Input', 'Web Application'],
     techTags: ['#AI Agent devlopment','#HTML', '#Python', '#WebSocket', '#OpenAI API', '#SSE'],
     
     thumbnail: '/media/projects/excel ai agent/hero.png',
-    brief: 'A natural language-powered Excel data analysis assistant that enables non-technical users to complete complex data analysis tasks through conversational interaction.',
+    brief: { en: 'A natural language-powered Excel data analysis assistant that enables non-technical users to complete complex data analysis tasks through conversational interaction.', zh: '一款基于自然语言的 Excel 数据分析助手，让非技术用户通过对话完成复杂的数据分析任务。' },
     
     heroImage: '/media/projects/excel ai agent/hero.png',
     heroVideo: 'https://vimeo.com/1144917772?share=copy&fl=sv&fe=ci',
     
-    domain: ['AI Product Design & Development', 'Data Analysis Tool', 'Web Application'],
-    form: ['UI/UX Design', 'Frontend Development', 'Backend Development', 'AI Integration'],
+    domain: [
+      { en: 'AI Product Design & Development', zh: 'AI 产品设计与开发' },
+      { en: 'Data Analysis Tool', zh: '数据分析工具' },
+      { en: 'Web Application', zh: 'Web 应用' }
+    ],
+    form: [
+      { en: 'UI/UX Design', zh: 'UI/UX 设计' },
+      { en: 'Frontend Development', zh: '前端开发' },
+      { en: 'Backend Development', zh: '后端开发' },
+      { en: 'AI Integration', zh: 'AI 集成' }
+    ],
     collaborators: ['Solo Project', 'OpenAI API','Cursor'],
       
       colors: {
@@ -542,14 +804,14 @@ export const projects = [
       },
       
        overview: {
-      mainTitle: 'Transform Data Analysis Into Natural Conversation',
-      briefContent: 'Excel AI Agent is a [[lightweight AI agent]] that enables [[non-technical users to complete complex data analysis tasks through natural language interaction]]. By understanding user questions, automatically generating Python code, and creating visual charts, I transformed technical data analysis into an accessible conversational experience.',
-      content: 'Excel AI Agent is a lightweight AI agent that serves as a natural language-powered intelligent data analysis assistant, allowing users to complete complex data analysis tasks without writing code. Through AI technology, the system understands users\' natural language questions, automatically generates Python analysis code, executes analysis, and generates visual charts. The project features a clean white background design with Excel green as the primary color theme, supporting real-time streaming output and voice input, providing an efficient and intuitive data analysis experience for everyday users who need to work with Excel data but lack technical expertise.',
+      mainTitle: { en: 'Transform Data Analysis Into Natural Conversation', zh: '将数据分析转化为自然对话' },
+      briefContent: { en: 'Excel AI Agent is a [[lightweight AI agent]] that enables [[non-technical users to complete complex data analysis tasks through natural language interaction]]. By understanding user questions, automatically generating Python code, and creating visual charts, I transformed technical data analysis into an accessible conversational experience.', zh: 'Excel AI Agent 是一款[[轻量级 AI 智能体]]，让[[非技术用户通过自然语言交互完成复杂数据分析任务]]。通过理解用户问题、自动生成 Python 代码并生成可视化图表，将技术型数据分析转化为易用的对话体验。' },
+      content: { en: 'Excel AI Agent is a lightweight AI agent that serves as a natural language-powered intelligent data analysis assistant, allowing users to complete complex data analysis tasks without writing code. Through AI technology, the system understands users\' natural language questions, automatically generates Python analysis code, executes analysis, and generates visual charts. The project features a clean white background design with Excel green as the primary color theme, supporting real-time streaming output and voice input, providing an efficient and intuitive data analysis experience for everyday users who need to work with Excel data but lack technical expertise.', zh: 'Excel AI Agent 是一款基于自然语言的智能数据分析助手，用户无需写代码即可完成复杂分析。系统理解自然语言问题、自动生成并执行 Python 分析代码、生成可视化图表；界面以白色为主、Excel 绿为主题色，支持实时流式输出与语音输入，为需要处理 Excel 但缺乏技术背景的用户提供高效直观的体验。' },
          challenges: [
-        'How might we enable non-technical users to easily complete complex data analysis tasks?',
-        'How can I make AI\'s working process transparent and understandable?',
-        'How to balance feature completeness with simplicity?',
-        'How to provide real-time feedback during analysis to reduce user anxiety?',
+        { en: 'How might we enable non-technical users to easily complete complex data analysis tasks?', zh: '如何让非技术用户轻松完成复杂的数据分析任务？' },
+        { en: 'How can I make AI\'s working process transparent and understandable?', zh: '如何让 AI 的工作过程透明、可理解？' },
+        { en: 'How to balance feature completeness with simplicity?', zh: '如何在功能完整与简洁之间取得平衡？' },
+        { en: 'How to provide real-time feedback during analysis to reduce user anxiety?', zh: '如何在分析过程中提供实时反馈以降低用户焦虑？' },
          ]
        },
   
@@ -723,20 +985,28 @@ export const projects = [
   // ========== Petiboxy Charity Platform 项目 ==========
   {
     id: 'petiboxy',
-    title: 'Petiboxy Charity Platform',
-    subtitle: 'Connecting Love, Saving Lives',
+    title: { en: 'Petiboxy Charity Platform', zh: 'Petiboxy 宠物救助平台' },
+    subtitle: { en: 'Connecting Love, Saving Lives', zh: '连接爱心，拯救生命' },
     categories: ['UIUX', 'Product Design', 'Research'],
     tags: ['Mobile App', 'Charity Platform', 'Pet Rescue', 'User Experience Design'],
     techTags: ['#Figma', '#UI/UX Design', '#Mobile App', '#Product Design'],
     
     thumbnail: '/media/projects/petiboxy/hero.png',
-    brief: 'A comprehensive pet rescue ecosystem connecting people with pets in need, supporting rescue organizations, and building a compassionate community.',
+    brief: { en: 'A comprehensive pet rescue ecosystem connecting people with pets in need, supporting rescue organizations, and building a compassionate community.', zh: '一个连接求助宠物与领养者、支持救助机构、共建爱心社区的宠物救助生态平台。' },
     
     heroImage: '/media/projects/petiboxy/hero.png',
     heroVideo: null,
     
-    domain: ['Mobile App Feature Module', 'Charity Platform', 'Pet Rescue'],
-    form: ['UI/UX Design', 'Product Design', 'Research'],
+    domain: [
+      { en: 'Mobile App Feature Module', zh: '移动应用功能模块' },
+      { en: 'Charity Platform', zh: '公益平台' },
+      { en: 'Pet Rescue', zh: '宠物救助' }
+    ],
+    form: [
+      { en: 'UI/UX Design', zh: 'UI/UX 设计' },
+      { en: 'Product Design', zh: '产品设计' },
+      { en: 'Research', zh: '用户研究' }
+    ],
     collaborators: ['Solo Project'],
     
     colors: {
@@ -750,13 +1020,13 @@ export const projects = [
     },
     
     overview: {
-      mainTitle: 'Building a Comprehensive Pet Rescue Ecosystem',
-      briefContent: 'Expanding the mission of [[Petiboxy]], a premier pet fresh food brand, I conceptualized and delivered a dedicated charity ecosystem to tackle the crisis of [[90 million stray animals]]. This project creates a vital connection for the [[60% of inhibited adopters]], translating the abstract values of [[Professionalism, Safety, Love, and Responsibility]] into a tangible, user-centric experience.',
+      mainTitle: { en: 'Building a Comprehensive Pet Rescue Ecosystem', zh: '构建完整的宠物救助生态' },
+      briefContent: { en: 'Expanding the mission of [[Petiboxy]], a premier pet fresh food brand, I conceptualized and delivered a dedicated charity ecosystem to tackle the crisis of [[90 million stray animals]]. This project creates a vital connection for the [[60% of inhibited adopters]], translating the abstract values of [[Professionalism, Safety, Love, and Responsibility]] into a tangible, user-centric experience.', zh: '延续高端宠物鲜食品牌 Petiboxy 的使命，我为[[9000 万流浪动物]]危机设计并交付了独立的公益生态，为[[60% 有顾虑的潜在领养者]]建立连接，将[[专业、安全、爱与责任]]转化为可感知的、以用户为中心的体验。' },
       challenges: [
-        'How might we connect 90 million stray animals with people who want to help?',
-        'How might we reduce the adoption barriers that prevent 60% of willing adopters?',
-        'How might we support rescue organizations with funding and visibility?',
-        'How might we create a trustworthy, accessible platform for pet rescue?'
+        { en: 'How might we connect 90 million stray animals with people who want to help?', zh: '如何连接 9000 万流浪动物与愿意帮助的人？' },
+        { en: 'How might we reduce the adoption barriers that prevent 60% of willing adopters?', zh: '如何降低阻碍 60% 有意领养者的门槛？' },
+        { en: 'How might we support rescue organizations with funding and visibility?', zh: '如何从资金与曝光上支持救助机构？' },
+        { en: 'How might we create a trustworthy, accessible platform for pet rescue?', zh: '如何打造可信、易用的宠物救助平台？' }
       ]
     },
     
@@ -902,19 +1172,25 @@ export const projects = [
   // ========== Ziplink UIUX项目示例 ==========
   {
     id: 'ziplink',
-    title: 'Ziplink',
-    subtitle: '',
+    title: { en: 'Ziplink', zh: 'Ziplink' },
+    subtitle: { en: 'In-Car Experience Redesign', zh: '车载体验重设计' },
     categories: ['UIUX','Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
     techTags: ['#Figma', '#Wireframe', '#Prototype'],
     
     thumbnail: '/media/projects/ziplink/Slide27.jpeg',  // 列表页缩略图
-    brief: 'Redesign the user experience of future in-car system.',
+    brief: { en: 'Redesign the user experience of future in-car system.', zh: '面向未来车载系统的用户体验重设计。' },
     
     heroImage: '/media/projects/ziplink/Slide1.jpeg',
     heroVideo: null,  // 可选：视频路径
-    domain: ['In-Car System', 'UI/UX'],
-    form: ['Research', 'Wireframing & Prototyping'],
+    domain: [
+      { en: 'In-Car System', zh: '车载系统' },
+      { en: 'UI/UX', zh: 'UI/UX' }
+    ],
+    form: [
+      { en: 'Research', zh: '用户研究' },
+      { en: 'Wireframing & Prototyping', zh: '线框与原型' }
+    ],
     collaborators: ['Yu Zhou', 'Francisco Guerrero'],  // 或其他合作者名字
   
     colors: {
@@ -924,9 +1200,9 @@ export const projects = [
     },
 
     overview: {
-      mainTitle: 'Redesigning the Future of In-Car Experience',
-      briefContent: 'In the bustling streets of cities, where the rhythm of traffic never ceases, the challenge of maintaining focus while driving is ever-present. [[Ziplink]] aims to address the critical issue of [[driver distraction and cognitive overload]], particularly when interacting with in-car systems. With a focus on enhancing the driving experience for all, especially those new to the roads, the project seeks to integrate innovative solutions into the existing ZipCar app, making it a more comprehensive tool for drivers.',
-      challenge: 'How might we reduce cognitive overload for new drivers by creating a unified in-car experience that minimizes the need to switch between multiple apps and screens while driving?'
+      mainTitle: { en: 'Redesigning the Future of In-Car Experience', zh: '重设计未来车载体验' },
+      briefContent: { en: 'In the bustling streets of cities, where the rhythm of traffic never ceases, the challenge of maintaining focus while driving is ever-present. [[Ziplink]] aims to address the critical issue of [[driver distraction and cognitive overload]], particularly when interacting with in-car systems. With a focus on enhancing the driving experience for all, especially those new to the roads, the project seeks to integrate innovative solutions into the existing ZipCar app, making it a more comprehensive tool for drivers.', zh: '在城市车流中，保持驾驶专注始终是挑战。[[Ziplink]] 针对[[驾驶员分心与认知负荷]]问题，尤其在车载系统交互场景下，为所有人（尤其是新手上路者）提升体验，并将创新方案整合进现有 ZipCar 应用，使其成为更完整的驾驶工具。' },
+      challenge: { en: 'How might we reduce cognitive overload for new drivers by creating a unified in-car experience that minimizes the need to switch between multiple apps and screens while driving?', zh: '如何通过统一的车载体验减少新手驾驶员的认知负荷，从而减少驾驶时在多个应用与屏幕间切换？' }
     },
     
     sections: [
@@ -1098,20 +1374,30 @@ export const projects = [
   // ========== Music Encounter 游戏项目 ==========
   {
     id: 'music-encounter',
-    title: 'Music Encounter',
-    subtitle: '3D Open World Social Adventure Game',
+    title: { en: 'Music Encounter', zh: '音乐邂逅' },
+    subtitle: { en: '3D Open World Social Adventure Game', zh: '3D 开放世界社交冒险游戏' },
     categories: ['Game', 'Research', 'Programming'],
     tags: ['Game Design', 'Unity', 'Music Interaction', 'Social Gaming', 'Research'],
     techTags: ['#Unity', 'C#', '#Interactive Design', '#Music notes from text'],
     
     thumbnail: '/media/projects/musicencounter/Hero.png',
-    brief: 'Exploring music and sound as primary means of interaction and connection in games.',
+    brief: { en: 'Exploring music and sound as primary means of interaction and connection in games.', zh: '探索音乐与声音作为游戏中互动与连接的主要方式。' },
     
     heroImage: '/media/projects/musicencounter/Hero.png',
     heroVideo: null,
     
-    domain: ['Video Game', 'Interactive Design', 'Music Technology', 'Research'],
-    form: ['Game Design & Development', 'C# Programming', 'Interactive Design','Research'],
+    domain: [
+      { en: 'Video Game', zh: '电子游戏' },
+      { en: 'Interactive Design', zh: '交互设计' },
+      { en: 'Music Technology', zh: '音乐技术' },
+      { en: 'Research', zh: '研究' }
+    ],
+    form: [
+      { en: 'Game Design & Development', zh: '游戏设计与开发' },
+      { en: 'C# Programming', zh: 'C# 编程' },
+      { en: 'Interactive Design', zh: '交互设计' },
+      { en: 'Research', zh: '研究' }
+    ],
     collaborators: ['Solo Project', 'Parsons School of Design'],
     
     colors: {
@@ -1121,13 +1407,13 @@ export const projects = [
     },
     
     overview: {
-      mainTitle: 'Music as a Universal Language for Digital Connection',
-      content: "Music Encounter is a groundbreaking Open World 3D world adventure game that explores how music and sound can serve as the primary means of interaction and connection between people.Music moves people. Its kinetic power can affect human emotions and behaviors, and people can feel the bonds between people under certain circumstances across different cultures. The goal of the game is to use music and sound to connect and match people, and to provide people with a good interactive and social experience. ",
+      mainTitle: { en: 'Music as a Universal Language for Digital Connection', zh: '音乐作为数字连接的世界语' },
+      content: { en: "Music Encounter is a groundbreaking Open World 3D world adventure game that explores how music and sound can serve as the primary means of interaction and connection between people.Music moves people. Its kinetic power can affect human emotions and behaviors, and people can feel the bonds between people under certain circumstances across different cultures. The goal of the game is to use music and sound to connect and match people, and to provide people with a good interactive and social experience. ", zh: '《音乐邂逅》是一款以音乐与声音为主要互动与连接方式的 3D 开放世界冒险游戏。音乐能打动人，其动能可影响情绪与行为，在不同文化下让人感受到人与人的纽带。游戏目标是以音乐与声音连接、匹配玩家，提供优质的互动与社交体验。' },
       challenges:[
-        'How can music and sound create deeper, more meaningful connections between people in digital spaces?',
-        'Can music and sound help to build connections between people, and help people find their partners, friends, or even lovers in a more efficient and interesting way?',
-        'How will musical communication be different from traditional text, video, or voice communication?',
-        'How would open world 3D games fit into these interests?'
+        { en: 'How can music and sound create deeper, more meaningful connections between people in digital spaces?', zh: '音乐与声音如何在数字空间中创造更深、更有意义的连接？' },
+        { en: 'Can music and sound help to build connections between people, and help people find their partners, friends, or even lovers in a more efficient and interesting way?', zh: '音乐与声音能否更高效、有趣地帮助人们建立连接，找到伴侣、朋友甚至恋人？' },
+        { en: 'How will musical communication be different from traditional text, video, or voice communication?', zh: '音乐沟通与传统的文字、视频或语音沟通有何不同？' },
+        { en: 'How would open world 3D games fit into these interests?', zh: '开放世界 3D 游戏如何与这些诉求结合？' }
       ] 
     },
     
@@ -1302,20 +1588,29 @@ export const projects = [
   // ========== game项目示例 eternal-dreams==========
   {
     id: 'eternal-dreams',
-    title: 'Eternal Dreams',
-    subtitle: 'Third Person Role Playing Game',
+    title: { en: 'Eternal Dreams', zh: '永恒之梦' },
+    subtitle: { en: 'Third Person Role Playing Game', zh: '第三人称角色扮演游戏' },
     categories: ['Game', 'Programming','3D Art',], // 多分类支持
     tags: ['Game Design', 'Unity', '3D Environment Design', 'C#'],
     techTags: ['#Unity', 'C#', '#Maya', '#Blender', '#3D Modeling'],
     
     thumbnail: '/media/projects/eternaldreams/HeroCover.jpg',
-    brief: 'A Third Person 3D Role-playing game made in Unity. You are the chosen adventurer, who came into this fantastic world.',
+    brief: { en: 'A Third Person 3D Role-playing game made in Unity. You are the chosen adventurer, who came into this fantastic world.', zh: '一款用 Unity 制作的第三人称 3D 角色扮演游戏。你是被选中的冒险者，踏入这片奇幻世界。' },
     
     heroImage: '/media/projects/eternaldreams/HeroCover.jpg',
     heroVideo: null,  // 游戏可以有预告片
     
-    domain: ['Video Game', 'Entertainment', '3D Art'],
-    form: ['Game Design & Development', 'Level Design', '3D Modeling', 'C# Programming'],
+    domain: [
+      { en: 'Video Game', zh: '电子游戏' },
+      { en: 'Entertainment', zh: '娱乐' },
+      { en: '3D Art', zh: '3D 美术' }
+    ],
+    form: [
+      { en: 'Game Design & Development', zh: '游戏设计与开发' },
+      { en: 'Level Design', zh: '关卡设计' },
+      { en: '3D Modeling', zh: '3D 建模' },
+      { en: 'C# Programming', zh: 'C# 编程' }
+    ],
     collaborators: ['Solo Project','University of Florida'],
     
     // ========== 项目颜色配置 ==========
@@ -1328,9 +1623,9 @@ export const projects = [
     },
     
     overview: {
-      mainTitle: 'A Journey Through Fantasy and Dreams',
-      content: "Eternal Dream takes place in a fantasy world known as 'Dream', featuring an art style that leans towards 3D anime and is non-realistic. Players awaken in this fantasy-styled world, as if they are in an eternal nightmare/dream. They need to defeat unknown monsters and travel to towns as beautiful as those in fairy tales. Players will start their journey, and end up going home or being the hero of this world.",
-      challenge: 'How to create an engaging narrative that adapts to player choices?'
+      mainTitle: { en: 'A Journey Through Fantasy and Dreams', zh: '穿越幻想与梦境之旅' },
+      content: { en: "Eternal Dream takes place in a fantasy world known as 'Dream', featuring an art style that leans towards 3D anime and is non-realistic. Players awaken in this fantasy-styled world, as if they are in an eternal nightmare/dream. They need to defeat unknown monsters and travel to towns as beautiful as those in fairy tales. Players will start their journey, and end up going home or being the hero of this world.", zh: '《永恒之梦》发生在名为「梦」的幻想世界，采用偏 3D 动漫的非写实美术风格。玩家在奇幻世界中苏醒，仿佛置身永恒梦魇/美梦，需击败未知怪物、造访如童话般的小镇，开启旅程，最终归家或成为世界英雄。' },
+      challenge: { en: 'How to create an engaging narrative that adapts to player choices?', zh: '如何创造能随玩家选择而变化的引人入胜的叙事？' }
     },
     
     sections: [
@@ -1490,19 +1785,27 @@ export const projects = [
   // ========== Prime Directive 游戏项目 ==========
   {
     id: 'prime-directive',
-    title: 'Prime Directive',
-    subtitle: '2D Action-Platformer Game',
+    title: { en: 'Prime Directive', zh: '首要指令' },
+    subtitle: { en: '2D Action-Platformer Game', zh: '2D 动作平台游戏' },
     categories: ['Game', '2D Art'],
     techTags: ['#Unity', '#Level Design','#Adobe Illustrator','#Adobe Creative Suite'],
     
     thumbnail: '/media/projects/primedirective/Hero3.png',
-    brief: 'A 2D Action-Platformer game made in Unity. The player acts as a security bot on a space station, defending the station and defeating all enemies.',
+    brief: { en: 'A 2D Action-Platformer game made in Unity. The player acts as a security bot on a space station, defending the station and defeating all enemies.', zh: '一款用 Unity 制作的 2D 动作平台游戏。玩家扮演空间站上的安保机器人，保卫站点并消灭所有敌人。' },
     
     heroImage: '/media/projects/primedirective/Hero3.png',
     heroVideo: 'https://vimeo.com/654379482',
     
-    domain: ['Video Game', 'Entertainment', 'Art Design'],
-    form: ['Game Design & Development', 'Level Design', '2D Art'],
+    domain: [
+      { en: 'Video Game', zh: '电子游戏' },
+      { en: 'Entertainment', zh: '娱乐' },
+      { en: 'Art Design', zh: '美术设计' }
+    ],
+    form: [
+      { en: 'Game Design & Development', zh: '游戏设计与开发' },
+      { en: 'Level Design', zh: '关卡设计' },
+      { en: '2D Art', zh: '2D 美术' }
+    ],
     collaborators: ['Qingyu Cao(Lead Artist & Level Designer)', 'Griffin Mckee(Artist)', 'Tyler C.Mueller(Programmer)','Yifan Zhu(Programmer)'],
     
     colors: {
@@ -1512,9 +1815,9 @@ export const projects = [
     },
     
     overview: {
-      mainTitle: 'Defending the Zeta Station',
-      content: "As a security robot onboard a deep space station, you were created to stop any threats that may appear. On this fateful day, you have been awoken from stasis sleep to stop a gang of pirates that have overtaken the station. Navigate through the corridors of the Zeta Station, collect weapon upgrades, defeat the invaders, and fulfill your prime directive!",
-      challenge: 'How to create an engaging 2D platformer with unique vector graphics and combat mechanics?'
+      mainTitle: { en: 'Defending the Zeta Station', zh: '保卫泽塔空间站' },
+      content: { en: "As a security robot onboard a deep space station, you were created to stop any threats that may appear. On this fateful day, you have been awoken from stasis sleep to stop a gang of pirates that have overtaken the station. Navigate through the corridors of the Zeta Station, collect weapon upgrades, defeat the invaders, and fulfill your prime directive!", zh: '你是深空站上的安保机器人，被制造用来消灭一切威胁。在这注定的一天，你从休眠中苏醒，去阻止占领空间站的海盗团伙。穿越泽塔站的走廊、收集武器升级、击败入侵者，完成你的首要指令。' },
+      challenge: { en: 'How to create an engaging 2D platformer with unique vector graphics and combat mechanics?', zh: '如何用独特的矢量美术与战斗机制打造引人入胜的 2D 平台游戏？' }
     },
     
     sections: [
@@ -1625,19 +1928,26 @@ export const projects = [
   // ========== My Little Fish Tank 游戏项目 ==========
   {
     id: 'my-little-fish-tank',
-    title: 'My Little Fish Tank',
-    subtitle: '3D Fish Tank Simulator',
+    title: { en: 'My Little Fish Tank', zh: '我的小鱼缸' },
+    subtitle: { en: '3D Fish Tank Simulator', zh: '3D 鱼缸模拟器' },
     categories: ['Game', '3D Art'],
     techTags: ['#Unity','#Maya', '#3D Modeling & Animation','Texturing'],
     
     thumbnail: '/media/projects/fishtank/Picture2.png',
-    brief: 'A 3D fish tank simulator that taps into childhood nostalgia of owning and caring for a fish tank, allowing players to maintain their own little ecosystem.',
+    brief: { en: 'A 3D fish tank simulator that taps into childhood nostalgia of owning and caring for a fish tank, allowing players to maintain their own little ecosystem.', zh: '一款唤起养鱼童年回忆的 3D 鱼缸模拟器，让玩家经营自己的小生态。' },
     
     heroImage: '/media/projects/fishtank/Picture2.png',
     heroVideo:'https://vimeo.com/644155060',
     
-    domain: ['Video Game', '3D Art'],
-    form: ['Game Design', '3D  Modeling & Animation','Texturing'],
+    domain: [
+      { en: 'Video Game', zh: '电子游戏' },
+      { en: '3D Art', zh: '3D 美术' }
+    ],
+    form: [
+      { en: 'Game Design', zh: '游戏设计' },
+      { en: '3D  Modeling & Animation', zh: '3D 建模与动画' },
+      { en: 'Texturing', zh: '贴图' }
+    ],
     collaborators: [''],
     
     colors: {
@@ -1647,9 +1957,9 @@ export const projects = [
     },
     
     overview: {
-      mainTitle: 'Nostalgic Fish Tank Simulator',
-      content: '"My Little Fish Tank" is a 3D fish tank simulator that taps into the childhood nostalgia associated with owning and caring for a fish tank. Inspired by the joy and responsibility of maintaining a miniature aquatic ecosystem, the game offers players the opportunity to nurture fish, decorate their tank, and manage a virtual aquatic environment. The idea is to recreate the sense of accomplishment and attachment that comes from growing and caring for fish, combined with the excitement of collecting and customizing their environment.',
-      challenge: 'How to create an engaging simulation game that captures the nostalgia and joy of fishkeeping?'
+      mainTitle: { en: 'Nostalgic Fish Tank Simulator', zh: '怀旧鱼缸模拟器' },
+      content: { en: '"My Little Fish Tank" is a 3D fish tank simulator that taps into the childhood nostalgia associated with owning and caring for a fish tank. Inspired by the joy and responsibility of maintaining a miniature aquatic ecosystem, the game offers players the opportunity to nurture fish, decorate their tank, and manage a virtual aquatic environment. The idea is to recreate the sense of accomplishment and attachment that comes from growing and caring for fish, combined with the excitement of collecting and customizing their environment.', zh: '《我的小鱼缸》是一款 3D 鱼缸模拟器，唤起童年养鱼的回忆。玩家可以养鱼、装饰鱼缸、管理虚拟水族环境，在照料与成长中获得成就感与归属感，并结合收集与自定义环境的乐趣。' },
+      challenge: { en: 'How to create an engaging simulation game that captures the nostalgia and joy of fishkeeping?', zh: '如何做出一款能捕捉养鱼怀旧与乐趣的模拟游戏？' }
     },
     
     sections: [
@@ -1751,8 +2061,9 @@ export const getProjectsByCategory = (category) => {
 }
 
 export const getFeaturedProjects = () => {
-  // 可以添加 featured 字段，或者返回前几个项目
-  return projects.slice(0, 3)
+  // 返回标记为 featured 的项目，若无则返回前3个
+  const featured = projects.filter(p => p.featured);
+  return featured.length > 0 ? featured : projects.slice(0, 3);
 }
 
 /* ==========================================
