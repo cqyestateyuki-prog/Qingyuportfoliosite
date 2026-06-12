@@ -12,6 +12,17 @@ export default {
     contact: 'Contact',
   },
 
+  // ============ HUD 章节导航 ============
+  chapters: {
+    vision: 'Vision',
+    work: 'Work',
+    contact: 'Contact',
+  },
+  hud: {
+    scroll: 'Scroll to Explore',
+    archive: 'Archive — All Projects',
+  },
+
   // ============ Hero区域 ============
   hero: {
     title: 'QINGYU',
@@ -21,6 +32,11 @@ export default {
     descriptionHighlight2: 'launch real products',
     viewWorks: 'View Works',
     resume: 'Resume',
+    // 开场叙事(按动画顺序播放,可自由改写)
+    narrative1: 'Between starlight and pixels, I build worlds people can wander.',
+    narrative2: "I'm Qingyu — a product designer who dreams in systems and ships in code.",
+    narrative3: 'From AI platforms to playful experiences, every project is a small universe.',
+    skip: 'Skip',
   },
 
   // ============ 作品集区域 ============

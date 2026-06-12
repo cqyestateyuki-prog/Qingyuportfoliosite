@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Eye } from 'lucide-react';
-import { Button } from '@/components/ui/button.jsx';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../../data/projects.js';
 import { trackProjectClick } from './Analytics';
 import Showcase from './Showcase';
-import BubbleMenu from './BubbleMenu';
+import HudTabs from '../hud/HudTabs';
 import { useLanguage } from '../i18n';
 import { getLocalizedText } from '../utils/localization';
 
 /**
- * Portfolio 组件 - 项目展示网格
+ * Portfolio — 02 WORK 章节
+ *
+ * Selected Work(Showcase)+ HUD 档案库(More Projects):
+ * 透明背景让星云透出,HUD tab 过滤,瞄准式 hover 卡片,序号读数
  */
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -36,21 +37,13 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
-  const filters = ['All', 'AI','UIUX','Product Design','Programming',  'Game', 'Research'];
+  const filters = ['All', 'AI', 'UIUX', 'Product Design', 'Programming', 'Game', 'Research'];
 
-  const handleFilterSelect = (filter) => {
-    setActiveFilter(filter);
-  };
-
-  // Split projects into Showcase (featured) and Standard Grid (non-featured)
-  // If no projects are featured, fall back to first 3
-  const featuredProjects = projects.filter(p => p.featured);
+  // Featured 项目进 Showcase,网格展示全部(按过滤)
+  const featuredProjects = projects.filter((p) => p.featured);
   const showcaseItems = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 3);
-  
-  // For the grid, we show ALL projects that match the filter (including featured ones, usually user expects to see everything in "All")
-  // Or should we exclude featured? The user asked for "Gallery for browsing... then Grid".
-  // Usually "All Projects" grid should contain everything.
-  const filteredProjects = projects.filter(project => {
+
+  const filteredProjects = projects.filter((project) => {
     if (activeFilter === 'All') return true;
     return project.categories?.includes(activeFilter);
   });
@@ -61,134 +54,144 @@ const Portfolio = () => {
 
   return (
     <section id="work" className="relative">
-      
       {/* Selected Work (Showcase) */}
       <Showcase projects={showcaseItems} />
 
-      {/* Standard Grid Section - 深色背景，与 Hero 一致 */}
-      <div 
-        className="more-projects-dark-section py-20 px-5 max-w-full mx-auto"
-      >
-        <div className={`text-center mb-16 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
-          <h2 className="text-4xl md:text-5xl font-normal mb-6 text-white/95">
+      {/* ============ HUD 档案库:More Projects ============ */}
+      <div className="py-20 px-5 max-w-full mx-auto">
+        <div
+          className={`text-center mb-14 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          {/* HUD 区块标签 */}
+          <p
+            className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
+            style={{ color: 'var(--hud-fg-muted)' }}
+          >
+            {'// '}{t('hud.archive')}
+          </p>
+          <h2
+            className="text-4xl md:text-5xl font-normal mb-8"
+            style={{ color: 'var(--text-hero)' }}
+          >
             {t('portfolio.moreProjects')}
           </h2>
-          
-          {/* Bubble Menu Filter */}
-          <BubbleMenu 
-            categories={filters} 
-            activeCategory={activeFilter} 
-            onSelect={handleFilterSelect}
-            variant="dark"
-          />
+
+          {/* HUD tab 过滤条 */}
+          <HudTabs categories={filters} active={activeFilter} onSelect={setActiveFilter} />
         </div>
 
         <motion.div
+          layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="project-card-dark group block flex flex-col rounded-xl overflow-hidden"
-            >
-            <Link
-              to={`/project/${project.id}`}
-              onClick={() => handleProjectClick(project)}
-              className="block flex flex-col flex-grow"
-            >
-              {/* Image Container */}
-              <div className="relative overflow-hidden aspect-[4/3] bg-white/5">
-                <img
-                  src={project.thumbnail || project.heroImage}
-                  alt={getLocalizedText(project.title, language)}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                layout
+                key={project.id}
+                initial={{ opacity: 0, scale: 0.92, y: 18 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.92, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: index * 0.03 }}
+                className="archive-card group block flex flex-col rounded-xl overflow-hidden"
+              >
+                {/* 瞄准角标(hover 锁定) */}
+                <span className="target-corner tl" aria-hidden="true" />
+                <span className="target-corner tr" aria-hidden="true" />
+                <span className="target-corner bl" aria-hidden="true" />
+                <span className="target-corner br" aria-hidden="true" />
 
-              {/* Content Container - 三级层级：类别 → 标题 → 描述/tech */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* 二级：类别标签 - 小字号、次要色 */}
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {project.year && (
+                <Link
+                  to={`/project/${project.id}`}
+                  onClick={() => handleProjectClick(project)}
+                  className="block flex flex-col flex-grow"
+                >
+                  {/* 图片 */}
+                  <div className="relative overflow-hidden aspect-[4/3]" style={{ background: 'var(--card-glass-bg)' }}>
+                    <img
+                      src={project.thumbnail || project.heroImage}
+                      alt={getLocalizedText(project.title, language)}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {/* HUD 序号读数 */}
                     <span
-                      className="px-2.5 py-0.5 text-xs font-medium rounded-full"
+                      className="absolute top-3 right-3 px-2 py-0.5 text-[10px] tracking-[0.25em] tabular-nums font-['Poppins'] rounded backdrop-blur-sm"
                       style={{
-                        backgroundColor: 'rgba(138, 129, 215, 0.2)',
-                        color: 'rgba(196, 190, 240, 0.9)',
-                        border: '1px solid rgba(138, 129, 215, 0.35)'
+                        color: 'var(--hud-fg)',
+                        background: 'var(--surface-scrim)',
+                        border: '1px solid var(--hud-line)',
                       }}
                     >
-                      {project.year}
+                      {String(index + 1).padStart(2, '0')}
                     </span>
-                  )}
-                  {project.categories.map((category) => (
-                    <span
-                      key={category}
-                      className="px-2.5 py-0.5 text-xs font-medium rounded-full"
-                      style={{
-                        backgroundColor: 'rgba(138, 129, 215, 0.2)',
-                        color: 'rgba(196, 190, 240, 0.9)',
-                        border: '1px solid rgba(138, 129, 215, 0.35)'
-                      }}
-                    >
-                      {category}
-                    </span>
-                  ))}
-                </div>
+                  </div>
 
-                {/* 一级：项目标题 */}
-                <h3 className="text-xl font-semibold text-white/95 mb-2 group-hover:text-[#c4bef0] transition-colors">
-                  {getLocalizedText(project.title, language)}
-                </h3>
-
-                {/* 三级：简介 - 小字号、低对比 */}
-                <p className="text-sm text-white/60 line-clamp-2 leading-relaxed mb-4 font-['Poppins']">
-                  {getLocalizedText(project.brief, language)}
-                </p>
-                
-                {/* 三级：Tech Tags */}
-                <div className="mt-auto pt-4 border-t border-white/10">
-                  {project.techTags && project.techTags.length > 0 ? (
-                    <div className="flex flex-wrap gap-x-3 gap-y-1">
-                      {project.techTags.slice(0, 4).map((tag) => (
+                  {/* 内容:类别 → 标题 → 简介 → tech */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {project.year && (
                         <span
-                          key={tag}
-                          className="text-xs text-white/45"
+                          className="px-2.5 py-0.5 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                            color: 'var(--text-accent)',
+                            border: '1px solid var(--card-glass-border)',
+                          }}
                         >
-                          #{tag.replace(/^#/, '')}
+                          {project.year}
+                        </span>
+                      )}
+                      {project.categories.map((category) => (
+                        <span
+                          key={category}
+                          className="px-2.5 py-0.5 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                            color: 'var(--text-accent)',
+                            border: '1px solid var(--card-glass-border)',
+                          }}
+                        >
+                          {category}
                         </span>
                       ))}
                     </div>
-                  ) : (
-                    <div className="h-4"></div>
-                  )}
-                </div>
-              </div>
-            </Link>
-            </div>
-          ))}
-        </motion.div>
 
-        <div className="text-center mt-12">
-          <Button 
-            size="lg"
-            className="rounded-full px-8 py-4 text-lg font-medium tracking-wide text-white transition-all duration-300 hover:scale-105"
-            style={{
-              backgroundColor: '#8a81d7',
-              border: 'none',
-              boxShadow: '0 0 25px rgba(138, 129, 215, 0.4)'
-            }}
-          >
-            {t('portfolio.viewAll')}
-          </Button>
-        </div>
+                    <h3
+                      className="text-xl font-semibold mb-2 transition-colors"
+                      style={{ color: 'var(--text-hero)' }}
+                    >
+                      {getLocalizedText(project.title, language)}
+                    </h3>
+
+                    <p
+                      className="text-sm line-clamp-2 leading-relaxed mb-4 font-['Poppins']"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      {getLocalizedText(project.brief, language)}
+                    </p>
+
+                    <div className="mt-auto pt-4" style={{ borderTop: '1px solid var(--card-glass-border)' }}>
+                      {project.techTags && project.techTags.length > 0 ? (
+                        <div className="flex flex-wrap gap-x-3 gap-y-1">
+                          {project.techTags.slice(0, 4).map((tag) => (
+                            <span key={tag} className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                              #{tag.replace(/^#/, '')}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="h-4"></div>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

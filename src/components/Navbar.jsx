@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../i18n';
+import ThemeToggle from '../hud/ThemeToggle';
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -58,9 +59,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'backdrop-blur-md' : 'bg-transparent'
+      }`}
+      style={isScrolled ? {
+        background: 'var(--surface-scrim)',
+        borderBottom: '1px solid var(--hud-line)',
+      } : undefined}
+    >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -74,11 +81,8 @@ const Navbar = () => {
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className={`nav-link font-medium transition-colors ${
-                  isScrolled 
-                    ? 'text-gray-700 hover:text-purple-600' 
-                    : 'text-white hover:text-purple-200'
-                }`}
+                className="nav-link font-medium transition-colors hover:opacity-80"
+                style={{ color: 'var(--hud-fg)' }}
               >
                 {item.name}
               </button>
@@ -87,16 +91,20 @@ const Navbar = () => {
             {/* 语言切换按钮 */}
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all hover:scale-105 ${
-                isScrolled 
-                  ? 'text-gray-600 hover:text-purple-600 bg-gray-100 hover:bg-purple-50' 
-                  : 'text-white/80 hover:text-white bg-white/10 hover:bg-white/20'
-              }`}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all hover:scale-105"
+              style={{
+                color: 'var(--hud-fg)',
+                border: '1px solid var(--hud-line)',
+                background: 'var(--card-glass-bg)',
+              }}
               title={language === 'en' ? 'Switch to Chinese' : '切换到英文'}
             >
               <Globe size={14} />
               <span>{currentLanguage.shortName}</span>
             </button>
+
+            {/* 日/夜主题切换（与语言切换并列的"世界控制器"） */}
+            <ThemeToggle />
           </div>
 
           {/* Mobile: Language + Menu Button */}
@@ -104,22 +112,18 @@ const Navbar = () => {
             {/* 移动端语言切换 */}
             <button
               onClick={toggleLanguage}
-              className={`p-2 rounded-full text-sm font-medium transition-colors ${
-                isScrolled 
-                  ? 'text-gray-600 bg-gray-100' 
-                  : 'text-white/80 bg-white/10'
-              }`}
+              className="p-2 rounded-full text-sm font-medium transition-colors"
+              style={{ color: 'var(--hud-fg)', background: 'var(--card-glass-bg)', border: '1px solid var(--hud-line)' }}
             >
               {currentLanguage.shortName}
             </button>
-            
+
+            <ThemeToggle />
+
             {/* 菜单按钮 */}
             <button
-              className={`p-2 transition-colors ${
-                isScrolled 
-                  ? 'text-gray-700 hover:text-purple-600' 
-                  : 'text-white hover:text-purple-200'
-              }`}
+              className="p-2 transition-colors hover:opacity-80"
+              style={{ color: 'var(--hud-fg)' }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -130,19 +134,14 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className={`md:hidden mt-4 py-4 border-t ${
-            isScrolled ? 'border-gray-200' : 'border-purple-200/30'
-          }`}>
+          <div className="md:hidden mt-4 py-4 border-t" style={{ borderColor: 'var(--hud-line)' }}>
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className={`text-left font-medium transition-colors ${
-                    isScrolled 
-                      ? 'text-gray-700 hover:text-purple-600' 
-                      : 'text-white hover:text-purple-200'
-                  }`}
+                  className="text-left font-medium transition-colors hover:opacity-80"
+                  style={{ color: 'var(--hud-fg)' }}
                 >
                   {item.name}
                 </button>

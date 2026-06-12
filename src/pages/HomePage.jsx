@@ -2,18 +2,44 @@
 import { useEffect, useState } from 'react';
 //导入导航栏组件，包含网站logo和导航链接
 import Navbar from '../components/Navbar';
-//导入Hero组件，主页的顶部横幅区域，包含个人介绍和CTA按钮
-import HeroSpotlight from '../components/HeroSpotlight';
+//导入Hero组件：游戏开场式叙事 + 星月粒子(替代旧 HeroSpotlight)
+import ChapterHero from '../components/chapters/ChapterHero';
 //导入Portfolio组件，展示项目作品集的部分
 import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import { ArrowUp } from 'lucide-react';
+import { useCosmos } from '../cosmos/CosmosProvider';
 
 
 function HomePage() {
   // 管理返回顶部按钮的显示状态
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const { set } = useCosmos();
+
+  // 全页滚动进度 → 星云 uScroll(滚动时天空在移动),ref 总线零重渲染
+  // 粒子编排:Hero 区(顶部)归 ChapterHero 管;中段星尘漫游;近 Contact 聚合成星
+  useEffect(() => {
+    const handleScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? window.scrollY / max : 0;
+      set('scroll', p);
+      if (p > 0.82) {
+        set('shape', 'star');
+        set('disperse', 0);
+      } else if (p > 0.15) {
+        set('shape', 'scatter');
+        set('disperse', 0.8);
+      } else if (window.scrollY < 10) {
+        // 回到顶部:月亮重新定格(叙事期间该值会被 ChapterHero 覆盖)
+        set('shape', 'moon');
+        set('disperse', 0.12);
+      }
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [set]);
 
   //useEffect Hook在组件挂载时执行，用于设置页面级别的样式和行为
   useEffect(() => {
@@ -74,8 +100,8 @@ function HomePage() {
       <Navbar />
       {/* 主要内容区域，包含所有页面部分 */}
       <main>
-        {/* Hero区域，个人介绍和主要CTA */}
-        <HeroSpotlight />
+        {/* Hero区域：开场叙事 + 星月粒子 */}
+        <ChapterHero />
         {/* 作品集展示区域 */}
         <Portfolio />
         {/* 联系我部分，联系表单和信息 */}
@@ -88,7 +114,13 @@ function HomePage() {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-4 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 z-50 group bg-gray-500 hover:bg-gray-600"
+          className="fixed bottom-8 right-8 p-4 rounded-full transition-all duration-300 hover:scale-110 z-50 group backdrop-blur-sm"
+          style={{
+            color: 'var(--hud-fg)',
+            border: '1px solid var(--hud-line-strong)',
+            background: 'var(--card-glass-bg)',
+            boxShadow: '0 0 16px var(--hud-glow)',
+          }}
           aria-label="返回顶部"
         >
           <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />

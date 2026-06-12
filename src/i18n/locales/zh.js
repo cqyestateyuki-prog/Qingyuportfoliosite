@@ -12,6 +12,17 @@ export default {
     contact: '联系',
   },
 
+  // ============ HUD 章节导航 ============
+  chapters: {
+    vision: '序章',
+    work: '作品',
+    contact: '联系',
+  },
+  hud: {
+    scroll: '滚动探索',
+    archive: '档案库 — 全部项目',
+  },
+
   // ============ Hero区域 ============
   hero: {
     title: 'QINGYU',
@@ -21,6 +32,11 @@ export default {
     descriptionHighlight2: '推出真正的产品',
     viewWorks: '查看作品',
     resume: '简历',
+    // 开场叙事(按动画顺序播放,可自由改写)
+    narrative1: '在星光与像素之间，我搭建可以漫游的世界。',
+    narrative2: '我是 Qingyu——用系统思考、用代码交付的产品设计师。',
+    narrative3: '从 AI 平台到游戏化体验，每个项目都是一个小宇宙。',
+    skip: '跳过',
   },
 
   // ============ 作品集区域 ============

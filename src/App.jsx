@@ -1,39 +1,48 @@
-// 新增：导入React Router的核心组件，用于实现单页应用的路由功能
+// React Router 核心组件,实现单页应用路由
 import { Routes, Route } from 'react-router-dom';
-// 新增：导入主页组件，包含所有主页内容（Hero、Portfolio、About、Contact等）
+import { lazy, Suspense, useEffect } from 'react';
+// 页面组件
 import HomePage from './pages/HomePage';
-// 新增：导入项目详情页组件，用于展示单个项目的详细信息
 import ProjectDetail from './pages/ProjectDetail';
-// 新增：导入About页面组件
 import AboutPage from './pages/AboutPage';
-// 新增：导入全局样式文件，包含所有自定义CSS变量和样式
+// 全局样式(含 cosmos 日/夜主题令牌)
 import './App.css';
-// 新增：导入分析工具
+// 分析工具
 import { initGA } from './components/Analytics';
-import SplashCursor from './components/SplashCursor';
-import { useEffect } from 'react';
+// 宇宙世界:WebGL 画布跨路由持久化
+import { CosmosProvider } from './cosmos/CosmosProvider';
+// 游戏 HUD 层(角框/章节导航/滚动进度)
+import HudLayer from './hud/HudLayer';
 
-// 新增：App组件是整个应用的根组件，负责路由配置
+// ogl 只进 lazy chunk,首屏先画 CSS 降级背景
+const CosmosCanvas = lazy(() => import('./cosmos/CosmosCanvas'));
+
 function App() {
-  // 新增：初始化 Google Analytics
   useEffect(() => {
     initGA();
   }, []);
 
   return (
-    <div className="App">
-      {/* 全局鼠标拖尾特效（与首页一致） */}
-      <SplashCursor color={{ r: 138, g: 129, b: 215 }} />
-      {/* 新增：Routes组件定义所有路由规则 */}
-      <Routes>
-        {/* 新增：根路径"/"对应主页，element属性指定要渲染的组件 */}
-        <Route path="/" element={<HomePage />} />
-        {/* 新增：动态路由"/project/:id"，:id是参数，可以匹配任何项目ID */}
-        <Route path="/project/:id" element={<ProjectDetail />} />
-        {/* 新增：About页面路由 */}
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-    </div>
+    <CosmosProvider>
+      <div className="App">
+        {/* 持久 WebGL 宇宙背景(挂在 Routes 外,路由切换不重建 GL 上下文) */}
+        <Suspense fallback={<div className="cosmos-fallback" aria-hidden="true" />}>
+          <CosmosCanvas />
+        </Suspense>
+
+        {/* 页面内容浮在宇宙之上 */}
+        <div className="relative z-10">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/project/:id" element={<ProjectDetail />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </div>
+
+        {/* 游戏 HUD(z-40,Navbar 之下) */}
+        <HudLayer />
+      </div>
+    </CosmosProvider>
   );
 }
 

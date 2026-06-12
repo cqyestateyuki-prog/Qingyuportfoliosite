@@ -83,7 +83,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
+    <section id="contact" className="py-20">
       <div className="container mx-auto px-6">
         {/* 标题 */}
         <div className={`text-center mb-16 transition-all duration-1000 ${
@@ -92,7 +92,7 @@ const Contact = () => {
           <h2 className="text-4xl md:text-5xl font-normal mb-6 gradient-text">
             {t('contact.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--text-body)' }}>
             {t('contact.subtitle')}
           </p>
         </div>
@@ -102,7 +102,7 @@ const Contact = () => {
           <div className={`transition-all duration-1000 delay-200 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-8">
+            <h3 className="text-2xl font-semibold mb-8" style={{ color: 'var(--text-hero)' }}>
               {t('contact.getInTouch')}
             </h3>
 
@@ -110,10 +110,14 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <div
                   key={info.title}
-                  className={`flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ${
+                  className={`flex items-center space-x-4 p-4 rounded-lg backdrop-blur-sm transition-all duration-300 ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                   }`}
-                  style={{ transitionDelay: `${400 + index * 100}ms` }}
+                  style={{
+                    transitionDelay: `${400 + index * 100}ms`,
+                    background: 'var(--card-glass-bg)',
+                    border: '1px solid var(--card-glass-border)',
+                  }}
                 >
                   <div 
                     className="w-12 h-12 rounded-lg flex items-center justify-center text-white"
@@ -122,10 +126,11 @@ const Contact = () => {
                     {info.icon}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                    <h4 className="font-semibold" style={{ color: 'var(--text-hero)' }}>{info.title}</h4>
                     <a
                       href={info.link}
-                      className="text-gray-600 hover:text-purple-600 transition-colors"
+                      className="hover:text-[var(--text-accent)] transition-colors"
+                      style={{ color: 'var(--text-body)' }}
                     >
                       {info.content}
                     </a>
@@ -136,7 +141,7 @@ const Contact = () => {
 
             {/* 社交媒体链接 */}
             <div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">
+              <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-hero)' }}>
                 {t('contact.followMe')}
               </h4>
               <div className="flex space-x-4">
@@ -146,7 +151,12 @@ const Contact = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center text-gray-600 transition-all duration-300 hover:shadow-md hover:-translate-y-1 ${social.color}`}
+                    className="w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:text-[var(--text-accent)] backdrop-blur-sm"
+                    style={{
+                      color: 'var(--text-body)',
+                      background: 'var(--card-glass-bg)',
+                      border: '1px solid var(--card-glass-border)',
+                    }}
                   >
                     {social.icon}
                   </a>
@@ -159,15 +169,21 @@ const Contact = () => {
           <div className={`transition-all duration-1000 delay-400 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
           }`}>
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+            <div
+              className="rounded-xl p-8 backdrop-blur-md"
+              style={{
+                background: 'var(--surface-scrim)',
+                border: '1px solid var(--card-glass-border)',
+              }}
+            >
+              <h3 className="text-2xl font-semibold mb-6" style={{ color: 'var(--text-hero)' }}>
                 {t('contact.sendMessage')}
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-body)' }}>
                       {t('contact.name')}
                     </label>
                     <input
@@ -176,12 +192,17 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      style={{
+                        background: 'var(--card-glass-bg)',
+                        border: '1px solid var(--card-glass-border)',
+                        color: 'var(--text-hero)',
+                      }}
                       placeholder={t('contact.yourName')}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-body)' }}>
                       {t('contact.email')}
                     </label>
                     <input
@@ -190,14 +211,19 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      style={{
+                        background: 'var(--card-glass-bg)',
+                        border: '1px solid var(--card-glass-border)',
+                        color: 'var(--text-hero)',
+                      }}
                       placeholder={t('contact.yourEmail')}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-body)' }}>
                     {t('contact.subject')}
                   </label>
                   <input
@@ -206,13 +232,18 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      style={{
+                        background: 'var(--card-glass-bg)',
+                        border: '1px solid var(--card-glass-border)',
+                        color: 'var(--text-hero)',
+                      }}
                     placeholder={t('contact.projectSubject')}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-body)' }}>
                     {t('contact.message')}
                   </label>
                   <textarea
@@ -221,7 +252,12 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
+                    style={{
+                      background: 'var(--card-glass-bg)',
+                      border: '1px solid var(--card-glass-border)',
+                      color: 'var(--text-hero)',
+                    }}
                     placeholder={t('contact.yourMessage')}
                   />
                 </div>

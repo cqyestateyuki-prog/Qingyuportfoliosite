@@ -1,0 +1,118 @@
+/**
+ * Cosmos Theme — 日/夜双主题语义令牌
+ *
+ * 夜 = 深夜紫宇宙(默认,.dark)  日 = 梦幻晨曦(淡紫粉云海)
+ * WebGL 调色板的 JS 镜像在 src/cosmos/palettes.js,两边改色要同步。
+ */
+
+:root {
+  /* ---- 梦幻晨曦(day) ---- */
+  --cosmos-fallback-bg:
+    radial-gradient(ellipse 80% 60% at 25% 30%, rgba(255, 255, 255, 0.55), transparent 60%),
+    linear-gradient(160deg, #f6f2fc 0%, #ead9f7 40%, #fbd9e8 75%, #dcd4f5 100%);
+
+  --surface-scrim: rgba(255, 250, 255, 0.55);
+  --surface-scrim-strong: rgba(255, 250, 255, 0.8);
+  --card-glass-bg: rgba(255, 255, 255, 0.45);
+  --card-glass-border: rgba(85, 59, 128, 0.18);
+
+  --hud-line: rgba(85, 59, 128, 0.3);
+  --hud-line-strong: rgba(85, 59, 128, 0.55);
+  --hud-fg: rgba(58, 42, 92, 0.85);
+  --hud-fg-muted: rgba(58, 42, 92, 0.45);
+  --hud-glow: rgba(139, 92, 246, 0.25);
+
+  --text-hero: #2b2050;
+  --text-body: #4b4366;
+  --text-muted: rgba(58, 42, 92, 0.55);
+  --text-accent: #8B5CF6;
+}
+
+.dark {
+  /* ---- 深夜紫宇宙(night) ---- */
+  --cosmos-fallback-bg:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(138, 129, 215, 0.18), transparent 50%),
+    linear-gradient(160deg, #1a1530 0%, #2a2450 35%, #433a6b 70%, #3d3560 100%);
+
+  --surface-scrim: rgba(16, 12, 32, 0.55);
+  --surface-scrim-strong: rgba(16, 12, 32, 0.8);
+  --card-glass-bg: rgba(255, 255, 255, 0.04);
+  --card-glass-border: rgba(138, 129, 215, 0.4);
+
+  --hud-line: rgba(196, 190, 240, 0.35);
+  --hud-line-strong: rgba(196, 190, 240, 0.7);
+  --hud-fg: rgba(232, 228, 252, 0.9);
+  --hud-fg-muted: rgba(232, 228, 252, 0.45);
+  --hud-glow: rgba(138, 129, 215, 0.45);
+
+  --text-hero: #f2eefc;
+  --text-body: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-accent: #C4B5FD;
+}
+
+/* 主题切换时的柔和过渡(themeMix 动画 1.4s,这里跟随) */
+body,
+.cosmos-surface,
+.cosmos-fallback,
+nav,
+footer {
+  transition:
+    background-color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* WebGL 不可用 / reduced-motion 的降级背景层 */
+.cosmos-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--cosmos-fallback-bg);
+}
+
+/* ---- HUD 档案库卡片(日夜双主题玻璃 + 瞄准发光) ---- */
+.archive-card {
+  position: relative;
+  background: var(--card-glass-bg);
+  border: 1px solid var(--card-glass-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.archive-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--hud-line-strong);
+  box-shadow:
+    0 0 40px var(--hud-glow),
+    0 0 80px color-mix(in srgb, var(--hud-glow) 45%, transparent),
+    0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* 瞄准角标:hover 时四角括号收拢锁定 */
+.archive-card .target-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--hud-line-strong);
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.archive-card:hover .target-corner {
+  opacity: 1;
+}
+
+.archive-card .target-corner.tl { top: 14px; left: 14px; border-top: 1px solid; border-left: 1px solid; }
+.archive-card .target-corner.tr { top: 14px; right: 14px; border-top: 1px solid; border-right: 1px solid; }
+.archive-card .target-corner.bl { bottom: 14px; left: 14px; border-bottom: 1px solid; border-left: 1px solid; }
+.archive-card .target-corner.br { bottom: 14px; right: 14px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.archive-card:hover .target-corner.tl { top: 8px; left: 8px; }
+.archive-card:hover .target-corner.tr { top: 8px; right: 8px; }
+.archive-card:hover .target-corner.bl { bottom: 8px; left: 8px; }
+.archive-card:hover .target-corner.br { bottom: 8px; right: 8px; }

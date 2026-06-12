@@ -70,12 +70,20 @@ const Showcase = ({ projects }) => {
   if (!projects || projects.length === 0) return null;
 
   return (
-    <div 
-      className="py-24 px-6 relative"
-      style={{
-        background: 'radial-gradient(ellipse 70% 100% at 0% 50%, rgba(255,255,255,0.7), transparent 45%), linear-gradient(to bottom, rgb(249,250,251), white)'
-      }}
-    >
+    <div className="py-24 px-6 relative">
+      {/* HUD 区块标签 + 标题 */}
+      <div className="text-center mb-20">
+        <p
+          className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
+          style={{ color: 'var(--hud-fg-muted)' }}
+        >
+          {'// '}{t('portfolio.title')}
+        </p>
+        <h2 className="text-4xl md:text-5xl font-normal" style={{ color: 'var(--text-hero)' }}>
+          {t('portfolio.title')}
+        </h2>
+      </div>
+
       <div className="max-w-7xl mx-auto space-y-40 relative" style={{ perspective: '1200px' }}>
         {projects.map((project, index) => (
           <motion.div
@@ -94,10 +102,10 @@ const Showcase = ({ projects }) => {
               <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                 {project.year && (
                   <span
-                    className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider text-gray-500"
-                    style={{ 
-                      backgroundColor: 'rgba(137, 129, 215, 0.1)', 
-                      color: 'var(--custom-purple)' 
+                    className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider"
+                    style={{
+                      backgroundColor: 'color-mix(in srgb, var(--hud-glow) 35%, transparent)',
+                      color: 'var(--text-accent)'
                     }}
                   >
                     {project.year}
@@ -106,10 +114,10 @@ const Showcase = ({ projects }) => {
                 {project.categories?.slice(0, 2).map((cat) => (
                   <span 
                     key={cat}
-                    className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider text-gray-500"
-                    style={{ 
-                      backgroundColor: 'rgba(137, 129, 215, 0.1)', 
-                      color: 'var(--custom-purple)' 
+                    className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider"
+                    style={{
+                      backgroundColor: 'color-mix(in srgb, var(--hud-glow) 35%, transparent)',
+                      color: 'var(--text-accent)'
                     }}
                   >
                     {cat}
@@ -118,12 +126,12 @@ const Showcase = ({ projects }) => {
               </div>
 
               {/* 一级：项目标题 */}
-              <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight tracking-tight">
+              <h3 className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight" style={{ color: 'var(--text-hero)' }}>
                 {getLocalizedText(project.title, language)}
               </h3>
 
               {/* 三级：副标题/简介 - 弱化，行数限制 */}
-              <p className="text-base text-gray-600 font-light leading-snug line-clamp-3 max-w-sm mx-auto lg:mx-0">
+              <p className="text-base font-light leading-snug line-clamp-3 max-w-sm mx-auto lg:mx-0" style={{ color: 'var(--text-body)' }}>
                 {getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)}
               </p>
 
@@ -132,7 +140,8 @@ const Showcase = ({ projects }) => {
                 <Link to={`/project/${project.id}`}>
                   <motion.span
                     whileHover={{ x: 4 }}
-                    className="inline-block text-sm font-medium text-gray-600 hover:text-[var(--custom-purple)] transition-colors underline underline-offset-2"
+                    className="inline-block text-sm font-medium hover:text-[var(--custom-purple)] transition-colors underline underline-offset-2"
+                    style={{ color: 'var(--text-body)' }}
                   >
                     {t('portfolio.viewProject')}
                   </motion.span>
@@ -168,7 +177,7 @@ const Showcase = ({ projects }) => {
 
                   {/* 底部信息条 - 低调不抢图 */}
                   <div className="mt-4 flex items-center justify-between text-xs font-['Poppins']">
-                    <span className="text-gray-600 font-medium">
+                    <span className="font-medium" style={{ color: 'var(--text-body)' }}>
                       {getLocalizedText(project.domain?.[0], language) || project.categories?.[0]}
                     </span>
                     <span 
