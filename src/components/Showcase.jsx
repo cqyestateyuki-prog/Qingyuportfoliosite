@@ -9,9 +9,10 @@
  * @param {Array} projects - Featured 项目列表
  */
 
-import { useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useState, useRef, useMemo } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../i18n';
 import { getLocalizedText, getLocalizedArray } from '../utils/localization';
 
@@ -60,6 +61,113 @@ const TiltCard = ({ children, className = '' }) => {
     >
       {children}
     </motion.div>
+  );
+};
+
+// ============ 同框快翻画廊 ============
+// 主项目卡内左右翻看内容图(hero + 案例章节图,最多 6 张),箭头不触发跳转
+const ProjectGallery = ({ project, language }) => {
+  const images = useMemo(() => {
+    const list = [project.heroImage || project.thumbnail];
+    project.sections?.forEach((s) => {
+      s.images?.forEach((img) => img?.src && list.push(img.src));
+      s.imageGroups?.forEach((g) => g.images?.forEach((img) => img?.src && list.push(img.src)));
+    });
+    return [...new Set(list.filter(Boolean))].slice(0, 6);
+  }, [project]);
+
+  const [[idx, dir], setSlide] = useState([0, 0]);
+  const go = (d) => (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSlide(([i]) => [(i + d + images.length) % images.length, d]);
+  };
+
+  const slideVariants = {
+    enter: (d) => ({ x: d > 0 ? '60%' : d < 0 ? '-60%' : 0, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (d) => ({ x: d > 0 ? '-60%' : '60%', opacity: 0 }),
+  };
+
+  return (
+    <div
+      className="relative rounded-2xl overflow-hidden shadow-xl transition-shadow duration-500 group-hover:shadow-2xl"
+      style={{
+        aspectRatio: '16/10',
+        background: project.colors?.heroGradient || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      }}
+    >
+      <AnimatePresence initial={false} custom={dir} mode="popLayout">
+        <motion.img
+          key={idx}
+          src={images[idx]}
+          alt={getLocalizedText(project.title, language)}
+          custom={dir}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
+      </AnimatePresence>
+
+      {/* 悬停遮罩 */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
+
+      {images.length > 1 && (
+        <>
+          {/* 左右快翻箭头(桌面 hover 浮现,触屏常显) */}
+          {[
+            { d: -1, side: 'left-3', Icon: ChevronLeft, label: 'Previous image' },
+            { d: 1, side: 'right-3', Icon: ChevronRight, label: 'Next image' },
+          ].map(({ d, side, Icon, label }) => (
+            <button
+              key={side}
+              type="button"
+              onClick={go(d)}
+              aria-label={label}
+              className={`absolute ${side} top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:scale-110 md:opacity-0 md:group-hover:opacity-100`}
+              style={{
+                background: 'rgba(16, 12, 32, 0.45)',
+                border: '1px solid rgba(255, 255, 255, 0.25)',
+                color: 'rgba(255, 255, 255, 0.9)',
+              }}
+            >
+              <Icon size={18} />
+            </button>
+          ))}
+
+          {/* HUD 计数读数 */}
+          <span
+            className="absolute top-3 right-3 z-10 px-2 py-0.5 rounded text-[10px] tracking-[0.25em] tabular-nums font-['Poppins'] backdrop-blur-sm md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+            style={{
+              background: 'rgba(16, 12, 32, 0.45)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              color: 'rgba(255, 255, 255, 0.85)',
+            }}
+          >
+            {String(idx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+          </span>
+
+          {/* 进度圆点 */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === idx ? 16 : 5,
+                  height: 5,
+                  background: i === idx ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)',
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
@@ -153,27 +261,8 @@ const Showcase = ({ projects }) => {
             <div className="w-full lg:flex-1 lg:min-w-0">
               <Link to={`/project/${project.id}`} className="block">
                 <TiltCard className="relative group cursor-pointer">
-                  {/* 图片容器 - 大画幅比例，视觉主导 */}
-                  <div 
-                    className="relative rounded-2xl overflow-hidden shadow-xl transition-shadow duration-500 group-hover:shadow-2xl"
-                    style={{ 
-                      aspectRatio: '16/10',
-                      background: project.colors?.heroGradient || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                    }}
-                  >
-                    <motion.img
-                      src={project.heroImage || project.thumbnail}
-                      alt={getLocalizedText(project.title, language)}
-                      className="w-full h-full object-cover"
-                      initial={{ scale: 1 }}
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ duration: 0.6, ease: 'easeOut' }}
-                      loading="lazy"
-                    />
-                    
-                    {/* 悬停遮罩 */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                  </div>
+                  {/* 图片容器:同框左右快翻画廊 */}
+                  <ProjectGallery project={project} language={language} />
 
                   {/* 底部信息条 - 低调不抢图 */}
                   <div className="mt-4 flex items-center justify-between text-xs font-['Poppins']">

@@ -18,13 +18,13 @@ export const NIGHT = {
   starAlpha: 1.0,
 };
 
-// 梦幻晨曦(淡紫粉云海)
+// 梦幻晨曦(白色为主,淡紫粉做点缀)
 export const DAY = {
-  colA: hexToRgb('#efe6fa'),
-  colB: hexToRgb('#d9c6f2'),
-  colC: hexToRgb('#f3c6dd'),
+  colA: hexToRgb('#fbf9fe'),
+  colB: hexToRgb('#ede2f8'),
+  colC: hexToRgb('#f9dcea'),
   colD: hexToRgb('#ffffff'),
-  starAlpha: 0.12,
+  starAlpha: 0.1,
 };
 
 // dayness ∈ [0,1] 时的插值调色板,每帧调用(数组复用避免 GC)

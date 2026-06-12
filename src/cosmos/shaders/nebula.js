@@ -84,19 +84,30 @@ void main() {
   );
   float f = fbm(p + 2.0 * r);
 
-  // 夜:提对比压亮度(深空为主,星云丝缕点睛);日:降对比提亮 → 柔软云海
-  f = mix(pow(f, 1.9) * 1.3, f * 0.5 + 0.42, uDayness);
+  // 夜:提对比压亮度(深空为主,星云丝缕点睛);日:低对比高亮度 → 白色云海
+  f = mix(pow(f, 1.9) * 1.3, f * 0.38 + 0.56, uDayness);
 
   vec3 col = mix(uColA, uColB, clamp(f * 1.5, 0.0, 1.0));
-  col = mix(col, uColC, clamp(length(q) * 0.8, 0.0, 1.0) * mix(0.12 + 0.55 * f, 0.6, uDayness));
+  col = mix(col, uColC, clamp(length(q) * 0.8, 0.0, 1.0) * mix(0.12 + 0.55 * f, 0.4, uDayness));
   col = mix(col, uColD, smoothstep(0.62, 0.95, f) * (0.55 - 0.25 * uDayness));
+
+  // 日:蓬松白云高光(噪声峰值处泛白)
+  col = mix(col, vec3(1.0), smoothstep(0.58, 0.85, f) * uDayness * 0.75);
 
   // 鼠标柔光(夜里更亮)
   col += uColD * exp(-md * md * 2.5) * (0.10 + 0.08 * (1.0 - uDayness));
 
-  // 晨曦:底部暖粉光带
-  float dawn = smoothstep(0.55, 0.0, uv.y) * uDayness;
-  col = mix(col, vec3(0.99, 0.85, 0.88), dawn * 0.45);
+  // 晨曦:底部一抹极淡暖粉
+  float dawn = smoothstep(0.5, 0.0, uv.y) * uDayness;
+  col = mix(col, vec3(1.0, 0.93, 0.95), dawn * 0.3);
+
+  // 夜:亮色流光动线 — 被噪声扭动的发光弧线,贴着画面下沿流过(不压正文)
+  float wob = noise(vec2(p.x * 0.7 + t * 1.6, uTime * 0.05)) - 0.5;
+  float curveY = -0.62 + 0.28 * sin(p.x * 0.45 + uTime * 0.06) + 0.35 * wob;
+  float dRib = abs(p.y - curveY);
+  float ribbon = exp(-dRib * dRib * 110.0) + exp(-dRib * dRib * 12.0) * 0.28;
+  float ribPulse = 0.75 + 0.25 * sin(uTime * 0.25 + p.x * 1.3);
+  col += mix(uColD, vec3(1.0), 0.45) * ribbon * ribPulse * (1.0 - uDayness) * 0.85;
 
   // 夜:底部沉降,顶部留呼吸
   col *= mix(1.0, 0.85 + 0.3 * uv.y, (1.0 - uDayness) * 0.6);
