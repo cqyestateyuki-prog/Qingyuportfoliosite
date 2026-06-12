@@ -69,7 +69,7 @@ const Portfolio = () => {
             className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
             style={{ color: 'var(--hud-fg-muted)' }}
           >
-            {'// '}{t('hud.archive')}
+            ✦ {t('hud.archive')} ☾
           </p>
           <h2
             className="text-4xl md:text-5xl font-normal mb-8"

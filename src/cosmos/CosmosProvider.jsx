@@ -22,16 +22,23 @@ export function CosmosProvider({ children }) {
   const tier = useDeviceTier();
   const sceneRef = useRef(null);
   const daynessRef = useRef(null); // null = 尚未初始化(首帧直接定位,不播动画)
+  // 场景是 idle 时才初始化的:之前的 set 全部缓存,注册时回放(否则首屏指令丢失)
+  const pendingRef = useRef(new Map());
   const { resolvedTheme } = useTheme();
 
   const registerScene = useCallback((scene) => {
     sceneRef.current = scene;
-    if (scene && daynessRef.current != null) {
+    if (!scene) return;
+    for (const [key, value] of pendingRef.current) {
+      scene.set(key, value, true);
+    }
+    if (daynessRef.current != null) {
       scene.set('dayness', daynessRef.current, true);
     }
   }, []);
 
   const set = useCallback((key, value, immediate) => {
+    pendingRef.current.set(key, value);
     sceneRef.current?.set(key, value, immediate);
   }, []);
 

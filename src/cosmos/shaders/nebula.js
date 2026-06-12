@@ -92,7 +92,18 @@ void main() {
   col = mix(col, uColD, smoothstep(0.62, 0.95, f) * (0.55 - 0.25 * uDayness));
 
   // 日:蓬松白云高光(噪声峰值处泛白)
-  col = mix(col, vec3(1.0), smoothstep(0.58, 0.85, f) * uDayness * 0.75);
+  col = mix(col, vec3(1.0), smoothstep(0.58, 0.85, f) * uDayness * 0.8);
+
+  // 日:多巴胺彩色光斑 — 渐变只出现在局部,云层流过时若隐若现
+  if (uDayness > 0.01) {
+    vec2 g1 = p - vec2(-1.05, 0.55);  // 左上 香芋紫
+    vec2 g2 = p - vec2(1.15, 0.05);   // 右中 蜜桃粉
+    vec2 g3 = p - vec2(-0.25, -0.85); // 下方 晴空蓝
+    float cloudGate = 0.55 + 0.45 * f; // 被云层调制,更透亮
+    col = mix(col, vec3(0.72, 0.62, 0.98), exp(-dot(g1, g1) * 1.3) * 0.55 * uDayness * cloudGate);
+    col = mix(col, vec3(1.0, 0.72, 0.84), exp(-dot(g2, g2) * 1.1) * 0.5 * uDayness * cloudGate);
+    col = mix(col, vec3(0.62, 0.84, 1.0), exp(-dot(g3, g3) * 1.4) * 0.45 * uDayness * cloudGate);
+  }
 
   // 鼠标柔光(夜里更亮)
   col += uColD * exp(-md * md * 2.5) * (0.10 + 0.08 * (1.0 - uDayness));

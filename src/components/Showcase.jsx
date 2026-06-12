@@ -185,7 +185,7 @@ const Showcase = ({ projects }) => {
           className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
           style={{ color: 'var(--hud-fg-muted)' }}
         >
-          {'// '}{t('portfolio.title')}
+          ✦ {t('portfolio.title')} ☾
         </p>
         <h2 className="text-4xl md:text-5xl font-normal" style={{ color: 'var(--text-hero)' }}>
           {t('portfolio.title')}

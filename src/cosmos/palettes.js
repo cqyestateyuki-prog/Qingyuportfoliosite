@@ -18,11 +18,11 @@ export const NIGHT = {
   starAlpha: 1.0,
 };
 
-// 梦幻晨曦(白色为主,淡紫粉做点缀)
+// 梦幻晨曦(干净透亮:近白基底,彩色渐变只在局部光斑出现)
 export const DAY = {
-  colA: hexToRgb('#fbf9fe'),
-  colB: hexToRgb('#ede2f8'),
-  colC: hexToRgb('#f9dcea'),
+  colA: hexToRgb('#fdfcff'),
+  colB: hexToRgb('#f1eafb'),
+  colC: hexToRgb('#f8dcec'),
   colD: hexToRgb('#ffffff'),
   starAlpha: 0.1,
 };

@@ -8,8 +8,10 @@
 :root {
   /* ---- 梦幻晨曦(day):白色为主,紫粉点缀 ---- */
   --cosmos-fallback-bg:
-    radial-gradient(ellipse 80% 60% at 25% 30%, rgba(255, 255, 255, 0.85), transparent 60%),
-    linear-gradient(160deg, #fcfaff 0%, #f2eafa 40%, #faeef4 75%, #f1edfa 100%);
+    radial-gradient(ellipse 50% 40% at 18% 25%, rgba(176, 152, 240, 0.35), transparent 65%),
+    radial-gradient(ellipse 45% 38% at 85% 40%, rgba(255, 188, 212, 0.32), transparent 65%),
+    radial-gradient(ellipse 50% 35% at 45% 95%, rgba(165, 210, 255, 0.3), transparent 65%),
+    linear-gradient(160deg, #ffffff 0%, #fbf8fe 45%, #fdf6fa 100%);
 
   --surface-scrim: rgba(255, 255, 255, 0.65);
   --surface-scrim-strong: rgba(255, 255, 255, 0.85);
@@ -22,10 +24,25 @@
   --hud-fg-muted: rgba(58, 42, 92, 0.45);
   --hud-glow: rgba(139, 92, 246, 0.25);
 
-  --text-hero: #241a45;
-  --text-body: #443c61;
-  --text-muted: rgba(50, 36, 84, 0.6);
+  --text-hero: #4b32a8;
+  --text-body: #564a7e;
+  --text-muted: rgba(60, 44, 102, 0.6);
   --text-accent: #8B5CF6;
+}
+
+/* 城堡环绕星光闪烁 */
+@keyframes castle-sparkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* 日:大标题用鲜亮紫→粉渐变(夜保持星光白) */
+html:not(.dark) .hero-title {
+  background: linear-gradient(120deg, #6a48d7 0%, #8b5cf6 40%, #b76de0 72%, #e879a9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
 }
 
 .dark {

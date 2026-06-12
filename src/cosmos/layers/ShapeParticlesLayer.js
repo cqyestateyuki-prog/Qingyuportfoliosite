@@ -48,6 +48,7 @@ export default class ShapeParticlesLayer {
     });
     this.program.setBlendFunc(gl.SRC_ALPHA, gl.ONE);
 
+    this._baseDpr = Math.min(window.devicePixelRatio || 1, config.dprCap);
     this.mesh = new Mesh(gl, { mode: gl.POINTS, geometry, program: this.program });
   }
 
@@ -73,7 +74,20 @@ export default class ShapeParticlesLayer {
   }
 
   resize(w, h, aspect) {
-    this.program.uniforms.uAspect.value = aspect;
+    const u = this.program.uniforms;
+    u.uAspect.value = aspect;
+    // 窄屏(手机竖屏):月亮收进画面内、抬到标题上方、粒子加大
+    if (aspect < 0.9) {
+      u.uMoonOffset.value = [aspect * 0.6, 0.62];
+      u.uMoonScale.value = 0.3;
+      u.uStarScale.value = 0.34;
+      u.uDpr.value = Math.max(this._baseDpr, 1.7);
+    } else {
+      u.uMoonOffset.value = [0.85, 0.3];
+      u.uMoonScale.value = 0.55;
+      u.uStarScale.value = 0.5;
+      u.uDpr.value = this._baseDpr;
+    }
   }
 
   dispose() {
