@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import React from 'react'
 //导入React Router Hooks，用于获取URL参数和导航
 import { useParams, Link } from 'react-router-dom'
+import MoonIcon from '../hud/MoonIcon'
 //导入shadcn/ui组件库的UI组件
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -346,7 +347,7 @@ const ProjectDetail = () => {
                 className="text-[11px] tracking-[0.4em] uppercase mb-5 font-['Poppins']"
                 style={{ color: 'var(--hud-fg-muted)' }}
               >
-                ✦ Case Study ☾
+                ✦ Case Study <MoonIcon />
               </p>
               <h1 
                 className="text-4xl md:text-6xl font-normal mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
@@ -444,7 +445,7 @@ const ProjectDetail = () => {
             <span className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-white/40 pointer-events-none" aria-hidden="true" />
             <div className="text-center mb-12">
               <p className="text-[11px] tracking-[0.4em] uppercase mb-5 text-white/60 font-['Poppins']">
-                ✦ Case Study ☾
+                ✦ Case Study <MoonIcon />
               </p>
               <h1 
                 className="text-4xl md:text-6xl font-normal text-white mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
@@ -609,8 +610,7 @@ const ProjectDetail = () => {
             <div className="mb-8 md:mb-12 lg:mb-16">
             {/* Section Tag */}
             <div 
-              className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-              style={getLightColorStyle(rawProject)}
+              className="detail-accent-text text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
             >
               {t('project.projectOverview')}
             </div>
@@ -820,8 +820,7 @@ const ProjectDetail = () => {
             <div className="mb-8 md:mb-12 lg:mb-16">
               {/* Section Tag */}
               <div
-                className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-                style={getLightColorStyle(rawProject)}
+                className="detail-accent-text text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
               >
                 {project.role.sectionTag || 'My Role'}
               </div>
@@ -873,8 +872,7 @@ const ProjectDetail = () => {
               {/* Section Tag (小标题) - 如果有 sectionTag 就显示 sectionTag，否则如果有 mainTitle 就用 title 作为小标题 */}
               {(section.sectionTag || (section.mainTitle && section.title)) && (
                 <div 
-                  className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-                  style={getLightColorStyle(rawProject)}
+                  className="detail-accent-text text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
                 >
                   {section.sectionTag || section.title}
                 </div>

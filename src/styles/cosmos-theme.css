@@ -152,69 +152,19 @@ footer {
   opacity: 0.55;
 }
 
-/* ---- 星球档案库(每个项目 = 一颗星球) ---- */
-@keyframes planet-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-9px); }
-}
-
-@keyframes planet-orbit {
-  to { transform: rotate(360deg); }
-}
-
-.planet-float {
-  animation: planet-float 6s ease-in-out infinite;
-}
-
-.planet-orbit {
-  animation: planet-orbit 26s linear infinite;
-}
-
-/* 每颗星球的光晕来自项目品牌色(--planet-glow 由 JSX 注入) */
-.planet-body {
-  box-shadow: 0 0 28px var(--planet-glow, var(--hud-glow)), inset 0 0 0 1px var(--card-glass-border);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-}
-
-.planet-item:hover .planet-body,
-.planet-selected .planet-body {
-  transform: scale(1.13);
+/* ---- 塔罗牌阵档案库 ---- */
+.tarot-card {
   box-shadow:
-    0 0 55px var(--planet-glow, var(--hud-glow)),
-    0 0 120px var(--planet-glow-soft, transparent),
-    inset 0 0 0 1px var(--hud-line-strong);
+    0 4px 24px rgba(0, 0, 0, 0.18),
+    0 0 0 1px var(--card-glass-border);
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.planet-item:hover,
-.planet-selected {
-  z-index: 50;
-}
-
-.planet-item:hover .planet-orbit,
-.planet-selected .planet-orbit {
-  border-color: var(--planet-glow, var(--hud-line-strong));
-}
-
-/* 星球资料卡:hover / 点选弹出 */
-.planet-dossier {
-  opacity: 0;
-  transform: translateY(8px) scale(0.97);
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.planet-item:hover .planet-dossier,
-.planet-selected .planet-dossier {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .planet-float,
-  .planet-orbit {
-    animation: none;
-  }
+.tarot-card:hover {
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.3),
+    0 0 44px var(--hud-glow),
+    0 0 0 1px var(--hud-line-strong);
 }
 
 /* ---- 项目详情页:宇宙皮肤(作用域覆写老页面的灰阶工具类) ---- */
@@ -245,6 +195,19 @@ footer {
 /* 硬编码正文灰 #565869 → token */
 .project-detail [class*="565869"] {
   color: var(--text-body);
+}
+
+/* 章节小标题统一字效:夜=Stumbldoor 式淡紫渐变字,日=强调紫(不再每个项目一种颜色) */
+.project-detail .detail-accent-text {
+  color: var(--text-accent);
+}
+
+.dark .project-detail .detail-accent-text {
+  background: linear-gradient(135deg, #d4cdf8 0%, #8a81d7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .project-detail .bg-white {

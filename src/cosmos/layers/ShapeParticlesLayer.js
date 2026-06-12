@@ -43,7 +43,7 @@ export default class ShapeParticlesLayer {
         uStarScale: { value: 0.5 },
         uDuo: { value: 0 },
         uStar2Offset: { value: [-1.05, -0.5] },
-        uStar2Scale: { value: 0.4 },
+        uStar2Scale: { value: 0.26 },
       },
       transparent: true,
       depthTest: false,
@@ -87,15 +87,15 @@ export default class ShapeParticlesLayer {
       u.uStarOffset.value = [0, 0.55]; // 星星抬高,不挡 Contact 文字
       u.uStarScale.value = 0.32;
       u.uStar2Offset.value = [-aspect * 0.5, -0.52];
-      u.uStar2Scale.value = 0.26;
+      u.uStar2Scale.value = 0.18;
       u.uDpr.value = Math.max(this._baseDpr, 1.7);
     } else {
       u.uMoonOffset.value = [1.12, 0.48]; // 月亮右上,避开标题
       u.uMoonScale.value = 0.5;
       u.uStarOffset.value = [0.78, 0.42]; // 星星右侧上方,不压 Contact 标题
       u.uStarScale.value = 0.46;
-      u.uStar2Offset.value = [-1.08, -0.48]; // Hero 对角星(左下)
-      u.uStar2Scale.value = 0.4;
+      u.uStar2Offset.value = [-1.08, -0.48]; // Hero 对角星(左下,比月亮小)
+      u.uStar2Scale.value = 0.26;
       u.uDpr.value = this._baseDpr;
     }
   }

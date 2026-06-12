@@ -101,21 +101,22 @@ void main() {
   // 鼠标柔光(夜里明显,日间近乎无)
   col += uColD * exp(-md * md * 2.5) * (0.10 * (1.0 - uDayness) + 0.08 * (1.0 - uDayness));
 
-  // 夜:地平线大圆弧光 — 像一轮月亮正从画面底部升起,弧顶居中、两侧沉入画外
-  vec2 arcCenter = vec2(0.0, -2.6);
+  // 夜:月牙光弧 — 开口朝上的弯月躺在画面下方,中段饱满、两端收细渐隐
+  vec2 arcCenter = vec2(0.0, 2.3);
   float rad = length(p - arcCenter);
   float arcWob = noise(vec2(p.x * 1.1 + t * 1.2, uTime * 0.04)) - 0.5;
-  float dArc = abs(rad - (2.1 + 0.09 * arcWob));
-  // 弧顶最饱满,沿弧呼吸
-  float widthMod = mix(90.0, 230.0, 0.5 + 0.5 * sin(p.x * 1.3 + uTime * 0.1));
-  float arcGlow = exp(-dArc * dArc * widthMod) + exp(-dArc * dArc * 8.0) * 0.32;
-  float arcPulse = 0.78 + 0.22 * sin(uTime * 0.22 + p.x * 1.1);
-  col += mix(uColD, vec3(1.0), 0.5) * arcGlow * arcPulse * (1.0 - uDayness) * 0.85;
+  float dArc = abs(rad - (3.05 + 0.07 * arcWob));
+  // 月牙质感:|x| 越大越细越淡(末端渐隐)
+  float tipFade = smoothstep(2.0, 0.15, abs(p.x));
+  float thickness = mix(300.0, 95.0, tipFade);
+  float arcGlow = (exp(-dArc * dArc * thickness) + exp(-dArc * dArc * 9.0) * 0.3 * tipFade) * tipFade;
+  float arcPulse = 0.8 + 0.2 * sin(uTime * 0.22 + p.x * 1.1);
+  col += mix(uColD, vec3(1.0), 0.5) * arcGlow * arcPulse * (1.0 - uDayness) * 0.9;
 
-  // 伴弧:外圈一道更细更淡的光晕,像大气层
-  float dArc2 = abs(rad - (2.42 + 0.07 * arcWob));
-  float arcGlow2 = exp(-dArc2 * dArc2 * 260.0);
-  col += uColC * arcGlow2 * (0.7 + 0.3 * sin(uTime * 0.18 + p.x)) * (1.0 - uDayness) * 0.35;
+  // 伴弧:外圈一道更细更淡的光晕
+  float dArc2 = abs(rad - (3.32 + 0.06 * arcWob));
+  float arcGlow2 = exp(-dArc2 * dArc2 * 280.0) * tipFade;
+  col += uColC * arcGlow2 * (0.7 + 0.3 * sin(uTime * 0.18 + p.x)) * (1.0 - uDayness) * 0.32;
 
   // 夜:底部沉降,顶部留呼吸
   col *= mix(1.0, 0.85 + 0.3 * uv.y, (1.0 - uDayness) * 0.6);

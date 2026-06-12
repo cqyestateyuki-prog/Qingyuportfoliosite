@@ -13,6 +13,7 @@ import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import MoonIcon from '../hud/MoonIcon';
 import { useLanguage } from '../i18n';
 import { getLocalizedText, getLocalizedArray } from '../utils/localization';
 
@@ -234,7 +235,7 @@ const Showcase = ({ projects }) => {
           className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
           style={{ color: 'var(--hud-fg-muted)' }}
         >
-          ✦ 02 · {t('chapters.work')} ☾
+          ✦ 02 · {t('chapters.work')} <MoonIcon />
         </p>
         <h2 className="text-4xl md:text-5xl font-normal" style={{ color: 'var(--text-hero)' }}>
           {t('portfolio.title')}

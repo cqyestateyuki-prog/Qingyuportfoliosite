@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import MoonIcon from '../hud/MoonIcon';
 
 const NextProject = ({ nextProject }) => {
   if (!nextProject) return null;
@@ -17,7 +18,7 @@ const NextProject = ({ nextProject }) => {
             className="text-[11px] tracking-[0.4em] uppercase mb-3 md:mb-4 font-['Poppins']"
             style={{ color: 'var(--hud-fg-muted)' }}
           >
-            ✦ Next Project ☾
+            ✦ Next Project <MoonIcon />
           </div>
           <h2
             className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"

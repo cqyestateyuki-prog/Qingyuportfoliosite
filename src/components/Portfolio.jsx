@@ -5,37 +5,25 @@ import { projects } from '../../data/projects.js';
 import { trackProjectClick } from './Analytics';
 import Showcase from './Showcase';
 import HudTabs from '../hud/HudTabs';
+import MoonIcon from '../hud/MoonIcon';
 import { useLanguage } from '../i18n';
 import { getLocalizedText } from '../utils/localization';
 
 /**
  * Portfolio — 02 WORK 章节
  *
- * Selected Work(Showcase)+ HUD 档案库(More Projects):
- * 透明背景让星云透出,HUD tab 过滤,瞄准式 hover 卡片,序号读数
+ * Selected Work(Showcase)+ 塔罗牌阵档案库(More Projects):
+ * 每个项目是一张塔罗牌,扇形牌阵错落排开,hover 抽出端正 + 翻出简介
  */
-// 星球尺寸/错落抬升(循环取用,营造星系错落感)
-const PLANET_SIZES = [225, 160, 205, 148, 240, 178];
-const PLANET_LIFTS = [0, 84, 22, 104, 40, 66];
 
-// 每颗星球用自己项目的品牌色发光
-const getPlanetGlowHex = (project) => {
-  const c = project.colors || {};
-  const src = c.lightColor || c.textHighlightColor || c.heroGradient || '';
-  const m = String(src).match(/#[0-9a-fA-F]{6}/);
-  return m ? m[0] : '#8a81d7';
-};
-
-const hexToRgba = (hex, a) => {
-  const n = parseInt(hex.slice(1), 16);
-  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
-};
+// 牌阵:旋转角与弧形下沉(循环取用,像摊开的手牌)
+const CARD_ROTATIONS = [-7, -4, -1, 2, 5, 8];
+const CARD_DIPS = [26, 10, 0, 4, 14, 30];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX'];
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [isVisible, setIsVisible] = useState(false);
-  // 触屏:第一次点选中(弹资料卡),进入项目走卡内 CTA
-  const [selectedPlanet, setSelectedPlanet] = useState(null);
   const { t, language } = useLanguage();
 
   useEffect(() => {
@@ -58,7 +46,7 @@ const Portfolio = () => {
 
   const filters = ['All', 'AI', 'UIUX', 'Product Design', 'Programming', 'Game', 'Research'];
 
-  // Featured 项目进 Showcase,网格展示全部(按过滤)
+  // Featured 项目进 Showcase,牌阵展示全部(按过滤)
   const featuredProjects = projects.filter((p) => p.featured);
   const showcaseItems = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 3);
 
@@ -76,7 +64,7 @@ const Portfolio = () => {
       {/* Selected Work (Showcase) */}
       <Showcase projects={showcaseItems} />
 
-      {/* ============ HUD 档案库:More Projects ============ */}
+      {/* ============ 塔罗牌阵:More Projects ============ */}
       <div className="py-20 px-5 max-w-full mx-auto">
         <div
           className={`text-center mb-14 transition-all duration-1000 ${
@@ -88,7 +76,7 @@ const Portfolio = () => {
             className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
             style={{ color: 'var(--hud-fg-muted)' }}
           >
-            ✦ {t('hud.archive')} ☾
+            ✦ {t('hud.archive')} <MoonIcon />
           </p>
           <h2
             className="text-4xl md:text-5xl font-normal mb-8"
@@ -101,143 +89,91 @@ const Portfolio = () => {
           <HudTabs categories={filters} active={activeFilter} onSelect={setActiveFilter} />
         </div>
 
-        {/* ============ 星球阵列:错落星系,hover/点选弹出资料卡 ============ */}
         <motion.div
           layout
-          className="flex flex-wrap justify-center items-start gap-x-10 md:gap-x-16 gap-y-10 max-w-7xl mx-auto pb-16"
+          className="flex flex-wrap justify-center items-start gap-x-4 md:gap-x-6 gap-y-10 max-w-6xl mx-auto pb-12"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => {
-              const size = PLANET_SIZES[index % PLANET_SIZES.length];
-              const lift = PLANET_LIFTS[index % PLANET_LIFTS.length];
-              const glowHex = getPlanetGlowHex(project);
-              const isSelected = selectedPlanet === project.id;
+              const rotate = CARD_ROTATIONS[index % CARD_ROTATIONS.length];
+              const dip = CARD_DIPS[index % CARD_DIPS.length];
               return (
                 <motion.div
                   layout
                   key={project.id}
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.6 }}
+                  initial={{ opacity: 0, y: 40, rotate: 0 }}
+                  animate={{ opacity: 1, y: 0, rotate }}
+                  exit={{ opacity: 0, y: -24, rotate: 0 }}
+                  whileHover={{ rotate: 0, y: -16, scale: 1.05, zIndex: 40 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
-                  className={`planet-item relative group flex flex-col items-center ${isSelected ? 'planet-selected' : ''}`}
-                  style={{
-                    paddingTop: lift,
-                    '--planet-glow': hexToRgba(glowHex, 0.55),
-                    '--planet-glow-soft': hexToRgba(glowHex, 0.28),
-                  }}
+                  className="relative"
+                  style={{ marginTop: dip }}
                 >
                   <Link
                     to={`/project/${project.id}`}
-                    onClick={(e) => {
-                      // 触屏:第一次点 = 选中弹资料卡,不跳转
-                      const touchOnly = window.matchMedia('(hover: none)').matches;
-                      if (touchOnly && !isSelected) {
-                        e.preventDefault();
-                        setSelectedPlanet(project.id);
-                        return;
-                      }
-                      handleProjectClick(project);
-                    }}
+                    onClick={() => handleProjectClick(project)}
                     aria-label={getLocalizedText(project.title, language)}
-                    className="planet-float relative block aspect-square"
-                    style={{
-                      width: `min(${size}px, 38vw)`,
-                      animationDelay: `${(index % 5) * 0.8}s`,
-                      animationDuration: `${5.5 + (index % 3)}s`,
-                    }}
+                    className="tarot-card group block w-[42vw] max-w-[190px] md:w-48 rounded-2xl overflow-hidden backdrop-blur-md"
+                    style={{ background: 'var(--card-glass-bg)' }}
                   >
-                    {/* 轨道环(虚线,缓慢自转,品牌色随 hover 点亮) */}
-                    <span
-                      className="planet-orbit absolute -inset-3 rounded-full border border-dashed transition-colors duration-500"
-                      style={{
-                        borderColor: 'var(--hud-line)',
-                        animationDuration: `${20 + (index % 4) * 7}s`,
-                      }}
-                      aria-hidden="true"
-                    />
-                    {/* 星球本体(品牌色光晕) */}
-                    <span className="planet-body absolute inset-0 rounded-full overflow-hidden block">
-                      <img
-                        src={project.thumbnail || project.heroImage}
-                        alt=""
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                      {/* 球面光影:左上受光,右下背光 */}
-                      <span
-                        className="absolute inset-0 rounded-full pointer-events-none"
-                        style={{
-                          background:
-                            'radial-gradient(circle at 32% 26%, rgba(255,255,255,0.38), transparent 46%), radial-gradient(circle at 72% 80%, rgba(10, 5, 28, 0.5), transparent 62%)',
-                        }}
-                      />
-                    </span>
-                  </Link>
+                    {/* 牌框:外缘留白 + 内细线框,塔罗双框 */}
+                    <div
+                      className="m-2 rounded-xl flex flex-col"
+                      style={{ border: '1px solid var(--hud-line)' }}
+                    >
+                      {/* 牌首:✦ 罗马数字 ✦ */}
+                      <p
+                        className="text-center text-[10px] tracking-[0.3em] py-1.5 font-['Poppins']"
+                        style={{ color: 'var(--hud-fg-muted)' }}
+                      >
+                        ✦ {ROMAN[index] || index + 1} ✦
+                      </p>
 
-                  {/* 星球铭牌:序号 + 名称 */}
-                  <p
-                    className="mt-4 max-w-[180px] text-center text-xs leading-snug font-['Poppins'] transition-colors duration-300"
-                    style={{ color: 'var(--text-muted)' }}
-                  >
-                    <span className="tabular-nums tracking-[0.2em]" style={{ color: 'var(--hud-fg-muted)' }}>
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="block mt-0.5 text-sm font-medium" style={{ color: 'var(--text-hero)' }}>
-                      {getLocalizedText(project.title, language)}
-                    </span>
-                  </p>
-
-                  {/* 星球资料卡:hover / 点选时弹出 */}
-                  <div
-                    className="planet-dossier absolute top-full -mt-2 w-72 z-40 rounded-2xl p-4 text-left backdrop-blur-md"
-                    style={{
-                      background: 'var(--surface-scrim-strong)',
-                      border: '1px solid var(--card-glass-border)',
-                      boxShadow: '0 12px 40px rgba(0,0,0,0.25), 0 0 32px var(--hud-glow)',
-                    }}
-                  >
-                    {/* 资料卡抬头:序号 + 标题 */}
-                    <p className="text-[10px] tracking-[0.3em] uppercase mb-1 font-['Poppins']" style={{ color: 'var(--hud-fg-muted)' }}>
-                      ✦ Planet {String(index + 1).padStart(2, '0')}
-                    </p>
-                    <h4 className="text-base font-semibold mb-2" style={{ color: 'var(--text-hero)' }}>
-                      {getLocalizedText(project.title, language)}
-                    </h4>
-                    <div className="flex flex-wrap gap-1.5 mb-2">
-                      {[project.year, ...(project.categories || []).slice(0, 3)].filter(Boolean).map((chip) => (
-                        <span
-                          key={chip}
-                          className="px-2 py-0.5 text-[10px] font-medium rounded-full uppercase tracking-wider"
+                      {/* 牌面图 + hover 翻出简介 */}
+                      <div className="relative mx-1.5 rounded-lg overflow-hidden aspect-[4/3]">
+                        <img
+                          src={project.thumbnail || project.heroImage}
+                          alt=""
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        {/* hover:简介浮现 */}
+                        <div
+                          className="absolute inset-0 flex items-end p-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                           style={{
-                            backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                            color: 'var(--text-accent)',
-                            border: '1px solid var(--card-glass-border)',
+                            background:
+                              'linear-gradient(to top, rgba(14, 10, 31, 0.92) 30%, rgba(14, 10, 31, 0.4) 70%, transparent)',
                           }}
                         >
-                          {chip}
-                        </span>
-                      ))}
+                          <p className="text-[11px] leading-relaxed line-clamp-4 text-white/90">
+                            {getLocalizedText(project.brief, language)}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 牌名 + 年份/类别 */}
+                      <div className="px-2 pt-2 pb-2.5 text-center">
+                        <h3
+                          className="text-[13px] leading-snug font-['Tenor_Sans'] mb-1.5 line-clamp-2"
+                          style={{ color: 'var(--text-hero)' }}
+                        >
+                          {getLocalizedText(project.title, language)}
+                        </h3>
+                        <p
+                          className="text-[9px] tracking-[0.18em] uppercase font-['Poppins']"
+                          style={{ color: 'var(--text-muted)' }}
+                        >
+                          {[project.year, project.categories?.[0]].filter(Boolean).join(' · ')}
+                        </p>
+                        {/* 牌脚饰线 */}
+                        <div className="flex items-center justify-center gap-1.5 mt-1.5" aria-hidden="true">
+                          <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
+                          <MoonIcon size={8} style={{ color: 'var(--hud-fg-muted)' }} />
+                          <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-xs leading-relaxed line-clamp-3 mb-2.5" style={{ color: 'var(--text-body)' }}>
-                      {getLocalizedText(project.brief, language)}
-                    </p>
-                    {project.techTags && project.techTags.length > 0 && (
-                      <p className="text-[10px] mb-3 flex flex-wrap gap-x-2.5 gap-y-0.5" style={{ color: 'var(--text-muted)' }}>
-                        {project.techTags.slice(0, 4).map((tag) => (
-                          <span key={tag}>#{tag.replace(/^#/, '')}</span>
-                        ))}
-                      </p>
-                    )}
-                    <Link
-                      to={`/project/${project.id}`}
-                      onClick={() => handleProjectClick(project)}
-                      className="inline-flex items-center gap-1.5 text-xs font-medium tracking-[0.2em] uppercase transition-all hover:gap-2.5"
-                      style={{ color: 'var(--text-accent)' }}
-                    >
-                      {t('portfolio.viewProject')} <span aria-hidden="true">→</span>
-                    </Link>
-                  </div>
+                  </Link>
                 </motion.div>
               );
             })}
