@@ -233,7 +233,7 @@ const Showcase = ({ projects }) => {
       <div className="text-center mb-20">
         <p
           className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
-          style={{ color: 'var(--hud-fg-muted)' }}
+          style={{ color: 'var(--section-tag)' }}
         >
           ✦ 02 · {t('chapters.work')} <MoonIcon />
         </p>
@@ -250,7 +250,7 @@ const Showcase = ({ projects }) => {
             whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
             viewport={{ once: false, amount: 0.25 }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, delay: index * 0.06 }}
-            className={`flex flex-col ${
+            className={`feature-panel flex flex-col ${
               index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
             } items-center gap-8 lg:gap-12`}
           >

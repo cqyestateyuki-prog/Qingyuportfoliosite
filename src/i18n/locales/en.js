@@ -99,6 +99,10 @@ export default {
 
   // ============ 项目详情页 ============
   project: {
+    metaRole: 'Role',
+    metaDuration: 'Duration',
+    metaTeam: 'Team',
+    metaStack: 'Stack',
     overview: 'Overview',
     challenge: 'The Challenge',
     process: 'Process',

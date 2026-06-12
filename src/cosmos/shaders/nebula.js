@@ -108,8 +108,8 @@ void main() {
   float dArc = abs(rad - (3.05 + 0.07 * arcWob));
   // 月牙质感:|x| 越大越细越淡(末端渐隐)
   float tipFade = smoothstep(2.0, 0.15, abs(p.x));
-  float thickness = mix(300.0, 95.0, tipFade);
-  float arcGlow = (exp(-dArc * dArc * thickness) + exp(-dArc * dArc * 9.0) * 0.3 * tipFade) * tipFade;
+  float thickness = mix(340.0, 175.0, tipFade);
+  float arcGlow = (exp(-dArc * dArc * thickness) + exp(-dArc * dArc * 11.0) * 0.24 * tipFade) * tipFade;
   float arcPulse = 0.8 + 0.2 * sin(uTime * 0.22 + p.x * 1.1);
   col += mix(uColD, vec3(1.0), 0.5) * arcGlow * arcPulse * (1.0 - uDayness) * 0.9;
 

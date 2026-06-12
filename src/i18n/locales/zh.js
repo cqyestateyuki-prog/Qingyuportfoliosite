@@ -99,6 +99,10 @@ export default {
 
   // ============ 项目详情页 ============
   project: {
+    metaRole: '角色',
+    metaDuration: '周期',
+    metaTeam: '团队',
+    metaStack: '技术栈',
     overview: '概述',
     challenge: '挑战',
     process: '过程',

@@ -16,7 +16,7 @@ const NextProject = ({ nextProject }) => {
         <div className="mb-8 md:mb-12 lg:mb-16">
           <div
             className="text-[11px] tracking-[0.4em] uppercase mb-3 md:mb-4 font-['Poppins']"
-            style={{ color: 'var(--hud-fg-muted)' }}
+            style={{ color: 'var(--section-tag)' }}
           >
             ✦ Next Project <MoonIcon />
           </div>

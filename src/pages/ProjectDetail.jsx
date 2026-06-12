@@ -345,7 +345,7 @@ const ProjectDetail = () => {
             <div className="text-center mb-10">
               <p
                 className="text-[11px] tracking-[0.4em] uppercase mb-5 font-['Poppins']"
-                style={{ color: 'var(--hud-fg-muted)' }}
+                style={{ color: 'var(--section-tag)' }}
               >
                 ✦ Case Study <MoonIcon />
               </p>
@@ -435,8 +435,8 @@ const ProjectDetail = () => {
         // 原版 hero：渐变背景，白色文字
         <section className="pt-28 pb-10 px-4 md:px-6">
           <div
-            className="max-w-6xl mx-auto relative overflow-hidden rounded-3xl px-6 md:px-10 py-12 md:py-14"
-            style={{background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'}}
+            className="detail-hero-panel max-w-6xl mx-auto relative overflow-hidden rounded-3xl px-6 md:px-10 py-12 md:py-14 backdrop-blur-md"
+            style={{ '--hero-grad': rawProject?.colors?.heroGradient || 'var(--gradient-hero)' }}
           >
             {/* HUD 角标(常显) */}
             <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-white/40 pointer-events-none" aria-hidden="true" />
@@ -444,7 +444,7 @@ const ProjectDetail = () => {
             <span className="absolute bottom-4 left-4 w-5 h-5 border-b border-l border-white/40 pointer-events-none" aria-hidden="true" />
             <span className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-white/40 pointer-events-none" aria-hidden="true" />
             <div className="text-center mb-12">
-              <p className="text-[11px] tracking-[0.4em] uppercase mb-5 text-white/60 font-['Poppins']">
+              <p className="text-[11px] tracking-[0.4em] uppercase mb-5 text-white/70 font-['Poppins']">
                 ✦ Case Study <MoonIcon />
               </p>
               <h1 
@@ -514,6 +514,48 @@ const ProjectDetail = () => {
           </div>
         </section>
       )}
+
+      {/* ========== ROLE / DURATION / TEAM / STACK 元信息条(大厂案例格式) ========== */}
+      <section className="px-4 md:px-6 pt-8">
+        <div
+          className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 py-7"
+          style={{ borderTop: '1px solid var(--hud-line)', borderBottom: '1px solid var(--hud-line)' }}
+        >
+          {[
+            { label: t('project.metaRole'), value: rawProject?.meta?.role || project.role?.title || project.domain?.[0] },
+            { label: t('project.metaDuration'), value: rawProject?.meta?.duration || project.year },
+            {
+              label: t('project.metaTeam'),
+              value:
+                rawProject?.meta?.team ||
+                (project.collaborators?.length
+                  ? `${project.collaborators.length} ${language === 'zh' ? '人团队' : 'people'}`
+                  : language === 'zh' ? '个人项目' : 'Solo project'),
+            },
+            {
+              label: t('project.metaStack'),
+              value:
+                rawProject?.meta?.stack ||
+                project.techTags?.slice(0, 3).map((tag) => tag.replace(/^#/, '')).join(' · '),
+            },
+          ].map(
+            ({ label, value }) =>
+              value && (
+                <div key={label}>
+                  <p
+                    className="text-[11px] tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
+                    style={{ color: 'var(--hud-fg-muted)' }}
+                  >
+                    {label}
+                  </p>
+                  <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>
+                    {value}
+                  </p>
+                </div>
+              )
+          )}
+        </div>
+      </section>
 
       {/* ========== 项目概述区域 ========== */}
       <section id="overview" className="py-10 md:py-14 lg:py-16 px-4 md:px-6 bg-white">

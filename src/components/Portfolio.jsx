@@ -74,7 +74,7 @@ const Portfolio = () => {
           {/* HUD 区块标签 */}
           <p
             className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
-            style={{ color: 'var(--hud-fg-muted)' }}
+            style={{ color: 'var(--section-tag)' }}
           >
             ✦ {t('hud.archive')} <MoonIcon />
           </p>

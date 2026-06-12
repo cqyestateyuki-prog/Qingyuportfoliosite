@@ -26,6 +26,7 @@
   --text-body: #4b5563;
   --text-muted: #6b7280;
   --text-accent: #8B5CF6;
+  --section-tag: #6d5bd8;
 }
 
 /* 日:大标题用 Design System 的 h2 渐变(--gradient-secondary,沉稳紫) */
@@ -58,6 +59,7 @@ html:not(.dark) .hero-title {
   --text-body: rgba(255, 255, 255, 0.8);
   --text-muted: rgba(255, 255, 255, 0.5);
   --text-accent: #C4B5FD;
+  --section-tag: rgba(212, 205, 248, 0.75);
 }
 
 /* 主题切换时的柔和过渡(themeMix 动画 1.4s,这里跟随) */
@@ -152,6 +154,22 @@ footer {
   opacity: 0.55;
 }
 
+/* Featured 项目面板:日=DS 浅紫圆角大底,夜=透明融入星云 */
+.feature-panel {
+  border-radius: 28px;
+  padding: 1.75rem;
+}
+
+@media (min-width: 1024px) {
+  .feature-panel {
+    padding: 2.75rem;
+  }
+}
+
+html:not(.dark) .feature-panel {
+  background: #EDE8FB;
+}
+
 /* ---- 塔罗牌阵档案库 ---- */
 .tarot-card {
   box-shadow:
@@ -185,6 +203,18 @@ footer {
 /* 区块大标题统一为主题色(双主题一致,不再用项目品牌深色) */
 .project-detail {
   --detail-heading: var(--text-hero);
+}
+
+/* 详情页渐变 hero 面板:品牌渐变铺在 ::before 上,夜版降透明度融入星空 */
+.detail-hero-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-grad);
+}
+
+.dark .detail-hero-panel::before {
+  opacity: 0.5;
 }
 
 /* 章节交替的淡纱带(替代原白/灰交替底) */
