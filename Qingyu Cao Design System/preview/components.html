@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Components — Qingyu Cao Design System</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin:0; padding:48px; background:var(--bg); }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .eyebrow { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg-3); margin-bottom:8px; }
+  h1 { font-size:48px; font-weight:400; letter-spacing:.02em; margin:0 0 8px; }
+  h1 .grad { background:var(--gradient-secondary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .sub { color:var(--fg-2); font-size:18px; max-width:720px; margin:0 0 40px; }
+  h2 { font-size:22px; font-weight:600; margin:48px 0 16px; }
+  .panel { display:flex; gap:16px; flex-wrap:wrap; padding:32px; background:var(--bg-soft); border:1px solid var(--border); border-radius:16px; align-items:center;}
+  .panel.dark { background:var(--dark-section-bg); border:none;}
+
+  /* Buttons */
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:16px 32px; font-family:var(--font-body); font-size:18px; font-weight:500; border-radius:9999px; border:none; cursor:pointer; transition:all .3s ease; letter-spacing:.02em;}
+  .btn:hover { transform:scale(1.05); }
+  .btn-primary-light { background:#fff; color:var(--custom-purple);}
+  .btn-primary-dark { background:var(--custom-purple); color:#fff; box-shadow:var(--glow-cta);}
+  .btn-outline-dark { background:transparent; color:#fff; border:2px solid #fff;}
+  .btn-outline-dark:hover { background:#fff; color:var(--custom-purple);}
+  .btn-dark { background:#1a1530; color:#fff;}
+
+  /* Filter pills */
+  .filter { padding:8px 20px; border-radius:9999px; font-family:var(--font-body); font-size:14px; font-weight:500; border:2px solid var(--custom-purple); color:var(--custom-purple); background:transparent; cursor:pointer; transition:all .3s ease;}
+  .filter.active, .filter:hover { background:var(--custom-purple); color:#fff; transform:translateY(-2px);}
+
+  /* Tag chip */
+  .tag { padding:2px 10px; border-radius:9999px; font-size:12px; font-weight:500;}
+  .tag-purple { background:#f3e8ff; color:#6b21a8;}
+  .tag-blue { background:#dbeafe; color:#1d4ed8;}
+  .tag-green { background:#dcfce7; color:#15803d;}
+  .tag-on-dark { background:rgba(138,129,215,.2); color:rgba(196,190,240,.9); border:1px solid rgba(138,129,215,.35);}
+
+  /* Light project card */
+  .pc { background:#fff; border:1px solid var(--light-lavender); border-radius:12px; overflow:hidden; transition:all .3s ease; width:280px;}
+  .pc:hover { transform:translateY(-8px); box-shadow:var(--shadow-card-hover); border-color:var(--primary-purple);}
+  .pc .img { aspect-ratio:4/3; background:linear-gradient(135deg,#8B5CF6,#4d64e6); position:relative;}
+  .pc .img img { width:100%; height:100%; object-fit:cover;}
+  .pc .body { padding:20px;}
+  .pc .ttl { font-size:18px; font-weight:600; margin:8px 0 6px;}
+  .pc .desc { font-size:13px; color:var(--fg-3); line-height:1.6;}
+
+  /* Dark project card */
+  .pcd { background:rgba(255,255,255,.04); border:1px solid rgba(138,129,215,.4); border-radius:12px; overflow:hidden; transition:all .5s ease; width:280px; box-shadow:var(--glow-rest); color:#fff;}
+  .pcd:hover { transform:translateY(-4px); border-color:rgba(138,129,215,.85); box-shadow:var(--glow-hover);}
+  .pcd .img { aspect-ratio:4/3; background:linear-gradient(135deg,#1a1530,#433a6b); position:relative;}
+  .pcd .img img { width:100%; height:100%; object-fit:cover; opacity:.95;}
+  .pcd .body { padding:20px;}
+  .pcd .ttl { font-size:18px; font-weight:600; color:rgba(255,255,255,.95); margin:8px 0 6px;}
+  .pcd .desc { font-size:13px; color:rgba(255,255,255,.6); line-height:1.6; margin-bottom:14px;}
+  .pcd .techs { padding-top:12px; border-top:1px solid rgba(255,255,255,.1); display:flex; gap:12px; flex-wrap:wrap;}
+  .pcd .techs span { font-size:11px; color:rgba(255,255,255,.45);}
+
+  /* Skill card */
+  .sk { background:#fff; border:1px solid #f1f1f1; border-radius:12px; padding:24px; box-shadow:var(--shadow-lg); width:240px; transition:all .3s ease;}
+  .sk:hover { transform:translateY(-8px); box-shadow:var(--shadow-xl);}
+  .sk .ico { width:64px; height:64px; border-radius:8px; background:var(--main-blue); color:#fff; display:flex; align-items:center; justify-content:center; margin-bottom:16px;}
+  .sk .name { font-weight:600; font-size:18px; color:var(--fg); margin-bottom:8px;}
+  .sk .desc { font-size:14px; color:var(--fg-2); line-height:1.55;}
+
+  /* Form */
+  .form { background:#fff; border-radius:16px; box-shadow:var(--shadow-lg); padding:32px; max-width:480px; width:100%;}
+  .form label { display:block; font-size:14px; font-weight:500; color:#374151; margin-bottom:8px;}
+  .form input, .form textarea { width:100%; padding:12px 16px; border:1px solid #d1d5db; border-radius:8px; font-family:var(--font-body); font-size:15px; box-sizing:border-box;}
+  .form input:focus, .form textarea:focus { outline:none; border-color:var(--primary-purple); box-shadow:0 0 0 3px rgba(139,92,246,.2);}
+
+  /* Nav */
+  .nav { background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border:1px solid var(--border); border-radius:14px; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm);}
+  .nav-logo { font-size:20px; font-weight:500; background:var(--gradient-secondary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+  .nav-items { display:flex; gap:32px; align-items:center;}
+  .nav-link { font-size:15px; font-weight:500; color:#374151; position:relative; cursor:pointer;}
+  .nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--primary-purple); transition:width .3s ease;}
+  .nav-link:hover::after, .nav-link.active::after { width:100%;}
+  .lang { display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:9999px; background:#f1f1f5; font-size:13px; font-weight:500;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Components · 04</div>
+  <h1>Buttons, cards &amp; the <span class="grad">glassy navbar</span></h1>
+  <p class="sub">CTAs always pill-shaped. Cards always 12px radius. Navbar always blur-glass on scroll. The system never breaks these three rules.</p>
+
+  <h2>Buttons</h2>
+  <div class="panel">
+    <button class="btn btn-dark">View My Work</button>
+    <button class="btn btn-primary-light" style="color:var(--custom-purple);background:linear-gradient(135deg,#aa8bf1,#8cb6fa);color:#fff">Send Message</button>
+    <button class="btn btn-primary-dark">Send Message</button>
+  </div>
+  <div class="panel dark">
+    <button class="btn btn-primary-light">View My Work</button>
+    <button class="btn btn-outline-dark">↓ Resume</button>
+    <button class="btn btn-primary-dark">Send Message</button>
+  </div>
+
+  <h2>Filter pills · ALL CAPS</h2>
+  <div class="panel">
+    <button class="filter active">ALL</button>
+    <button class="filter">AI</button>
+    <button class="filter">UIUX</button>
+    <button class="filter">PRODUCT DESIGN</button>
+    <button class="filter">PROGRAMMING</button>
+    <button class="filter">GAME</button>
+    <button class="filter">RESEARCH</button>
+  </div>
+
+  <h2>Tag chips</h2>
+  <div class="panel">
+    <span class="tag tag-purple">UI/UX</span>
+    <span class="tag tag-blue">Game Design</span>
+    <span class="tag tag-green">Research</span>
+    <span class="tag tag-on-dark" style="background:rgba(138,129,215,.2);color:#6b21a8;">AI · on dark</span>
+  </div>
+  <div class="panel dark">
+    <span class="tag tag-on-dark">AI</span>
+    <span class="tag tag-on-dark">UIUX</span>
+    <span class="tag tag-on-dark">Programming</span>
+  </div>
+
+  <h2>Project cards — light &amp; dark</h2>
+  <div class="panel" style="gap:24px;">
+    <div class="pc">
+      <div class="img"><img src="../assets/images/aicommunity-homepage.png" alt=""/></div>
+      <div class="body">
+        <div style="display:flex;gap:6px;margin-bottom:6px"><span class="tag tag-purple">AI</span><span class="tag tag-blue">UIUX</span></div>
+        <div class="ttl">AI Community Platform</div>
+        <div class="desc">A modern AI community focused on conversation sharing, prompt engineering and events.</div>
+      </div>
+    </div>
+    <div class="pc">
+      <div class="img" style="background:var(--grad-game)"><img src="../assets/images/aicommunity-trending.png" alt=""/></div>
+      <div class="body">
+        <div style="display:flex;gap:6px;margin-bottom:6px"><span class="tag tag-blue">Game</span></div>
+        <div class="ttl">Music Encounter</div>
+        <div class="desc">Third-person 3D open-world social adventure set in a fantasy musical world.</div>
+      </div>
+    </div>
+  </div>
+  <div class="panel dark" style="gap:24px;">
+    <div class="pcd">
+      <div class="img"><img src="../assets/images/aicommunity-search.png" alt=""/></div>
+      <div class="body">
+        <div style="display:flex;gap:6px;margin-bottom:6px"><span class="tag tag-on-dark">AI</span><span class="tag tag-on-dark">UIUX</span></div>
+        <div class="ttl">AI Community Platform</div>
+        <div class="desc">Modern AI community for conversation sharing &amp; prompt engineering.</div>
+        <div class="techs"><span>#React</span><span>#Tailwind</span><span>#Next.js</span></div>
+      </div>
+    </div>
+    <div class="pcd">
+      <div class="img" style="background:linear-gradient(135deg,#FF6B6B,#4ECDC4)"></div>
+      <div class="body">
+        <div style="display:flex;gap:6px;margin-bottom:6px"><span class="tag tag-on-dark">Game</span></div>
+        <div class="ttl">Music Encounter</div>
+        <div class="desc">Third-person open-world adventure set in a musical fantasy world.</div>
+        <div class="techs"><span>#Unity</span><span>#C#</span><span>#3D</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Skill cards</h2>
+  <div class="panel" style="gap:20px;">
+    <div class="sk">
+      <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 19l9-7-9-7v14z"/><circle cx="6" cy="12" r="3"/></svg></div>
+      <div class="name">UI/UX Design</div>
+      <div class="desc">Web and mobile interfaces grounded in user research.</div>
+    </div>
+    <div class="sk">
+      <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4M16 12h.01M19 14h.01"/></svg></div>
+      <div class="name">Game Design</div>
+      <div class="desc">3D worlds, social play, and interactive narratives.</div>
+    </div>
+    <div class="sk">
+      <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg></div>
+      <div class="name">Marketing</div>
+      <div class="desc">Brand, positioning, and growth for early-stage products.</div>
+    </div>
+  </div>
+
+  <h2>Navbar — glass on scroll</h2>
+  <div class="nav">
+    <div class="nav-logo">Home</div>
+    <div class="nav-items">
+      <span class="nav-link active">Work</span>
+      <span class="nav-link">About</span>
+      <span class="nav-link">Contact</span>
+      <span class="lang">🌐 EN</span>
+    </div>
+  </div>
+
+  <h2>Form — Contact</h2>
+  <div class="panel">
+    <div class="form">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div><label>Name</label><input placeholder="Your name"/></div>
+        <div><label>Email</label><input placeholder="you@example.com"/></div>
+      </div>
+      <div style="margin-bottom:16px"><label>Subject</label><input placeholder="Project subject"/></div>
+      <div style="margin-bottom:20px"><label>Message</label><textarea rows="4" placeholder="Your message"></textarea></div>
+      <button class="btn btn-primary-dark" style="width:100%;justify-content:center;">→ Send Message</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

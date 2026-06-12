@@ -117,6 +117,20 @@ const getProjectLightColor = (project) => {
   return '#565869'; // 默认浅灰色
 };
 
+// 辅助函数：判断 lightColor 是否为渐变，返回对应的 style 对象
+const getLightColorStyle = (project) => {
+  const lc = getProjectLightColor(project);
+  if (lc && lc.includes('gradient')) {
+    return {
+      background: lc,
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+    };
+  }
+  return { color: lc };
+};
+
 // 辅助函数：预处理文本，将 [[text]] 转换为 Markdown 加粗格式
 const preprocessHighlightMarkers = (text) => {
   if (typeof text !== 'string') return text;
@@ -575,7 +589,7 @@ const ProjectDetail = () => {
             {/* Section Tag */}
             <div 
               className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-              style={{ color: getProjectLightColor(rawProject) }}
+              style={getLightColorStyle(rawProject)}
             >
               {t('project.projectOverview')}
             </div>
@@ -784,17 +798,17 @@ const ProjectDetail = () => {
             {/* Section Header */}
             <div className="mb-8 md:mb-12 lg:mb-16">
               {/* Section Tag */}
-              <div 
+              <div
                 className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-                style={{ color: getProjectLightColor(rawProject) }}
+                style={getLightColorStyle(rawProject)}
               >
-                {project.role.title || 'My Role'}
+                {project.role.sectionTag || 'My Role'}
               </div>
-              
+
               {/* Main Title */}
-              <h2 
+              <h2
                 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 md:mb-6 leading-tight"
-                style={{ 
+                style={{
                   color: getProjectDarkColor(rawProject),
                   fontFamily: "'Poppins', 'Inter', sans-serif"
                 }}
@@ -839,7 +853,7 @@ const ProjectDetail = () => {
               {(section.sectionTag || (section.mainTitle && section.title)) && (
                 <div 
                   className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-                  style={{ color: getProjectLightColor(rawProject) }}
+                  style={getLightColorStyle(rawProject)}
                 >
                   {section.sectionTag || section.title}
                 </div>

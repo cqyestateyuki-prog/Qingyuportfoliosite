@@ -1,0 +1,375 @@
+/* ============================================================
+   site/extras.css — additions on top of bigtech.css + site.css
+   New patterns: more-projects galleries, AI visuals, page shell.
+   ============================================================ */
+
+/* ---------- Cross-page transitions / page shell ---------- */
+html { scroll-behavior: smooth; }
+.bt-page { min-height: 100vh; display: flex; flex-direction: column; }
+.bt-page-body { flex: 1; }
+
+/* Nav: active state per-page is set by [data-active] */
+.bt-nav-items a { cursor: pointer; }
+.bt-nav-cta { padding: 6px 14px; border-radius: 9999px; background: #1d1d1f; color: #fff !important;
+  font-size: 13px; font-weight: 500; opacity: 1 !important; transition: background .2s ease; }
+.bt-nav-cta:hover { background: #424245; }
+
+/* ---------- HERO TWEAKS for separate home page ---------- */
+.bt-hero-pills { display: inline-flex; gap: 8px; padding: 6px; background: rgba(0,0,0,.04);
+  border-radius: 9999px; margin-bottom: 32px; font-size: 12px; }
+.bt-hero-pills span { padding: 6px 14px; border-radius: 9999px; color: #1d1d1f; font-weight: 500;
+  letter-spacing: .01em; }
+.bt-hero-pills span.is-on { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.08); color: var(--custom-purple); }
+
+/* ---------- "MORE PROJECTS" — 4 alternative gallery patterns ---------- */
+.bt-more-page { padding-top: 0; }
+.bt-more-section { max-width: 1280px; margin: 0 auto; padding: 80px 24px; }
+.bt-more-section + .bt-more-section { border-top: 1px solid rgba(0,0,0,.08); }
+.bt-more-h { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px; }
+.bt-more-label { font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--custom-purple); }
+.bt-more-title { font-size: clamp(28px, 3.5vw, 44px); font-weight: 600;
+  letter-spacing: -.02em; line-height: 1.1; margin: 8px 0 12px; }
+.bt-more-blurb { font-size: 15px; color: #6e6e73; max-width: 600px; line-height: 1.55; }
+
+/* ============================================================
+   Pattern 1 — MARQUEE TICKER
+   Auto-scrolling horizontal row of large project chips.
+   ============================================================ */
+.bt-marquee { overflow: hidden; position: relative; padding: 16px 0;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.bt-marquee-track { display: flex; gap: 16px; width: max-content;
+  animation: btMarquee 40s linear infinite; }
+.bt-marquee:hover .bt-marquee-track { animation-play-state: paused; }
+@keyframes btMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.bt-chip { flex: 0 0 auto; padding: 14px 24px; border-radius: 9999px; background: #f5f5f7;
+  display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: all .25s ease; border: 1px solid transparent; }
+.bt-chip:hover { background: #fff; border-color: rgba(0,0,0,.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,.04); transform: translateY(-2px); }
+.bt-chip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.bt-chip-dot.c-purple { background: var(--custom-purple); }
+.bt-chip-dot.c-blue { background: #6ea5f8; }
+.bt-chip-dot.c-mint { background: #57b388; }
+.bt-chip-dot.c-pink { background: #e788a8; }
+.bt-chip-dot.c-amber { background: #e8a857; }
+.bt-chip-meta { color: #86868b; font-weight: 400; font-size: 13px; }
+.bt-chip-arrow { width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,.06);
+  display: flex; align-items: center; justify-content: center; transition: all .3s ease; }
+.bt-chip:hover .bt-chip-arrow { background: var(--custom-purple); color: #fff; transform: rotate(-45deg); }
+
+/* ============================================================
+   Pattern 2 — LIST INDEX (Linear/Read.cv table)
+   Hover: project image fades in to right side.
+   ============================================================ */
+.bt-list { border-top: 1px solid rgba(0,0,0,.08); }
+.bt-list-row { position: relative; display: grid; grid-template-columns: 60px 1.5fr 1fr 100px 40px;
+  align-items: center; padding: 24px 8px; border-bottom: 1px solid rgba(0,0,0,.08);
+  cursor: pointer; transition: background .25s ease; }
+.bt-list-row:hover { background: rgba(0,0,0,.02); }
+.bt-list-row:hover .bt-list-arrow { transform: rotate(-45deg); background: var(--custom-purple); color: #fff; }
+.bt-list-row:hover .bt-list-thumb { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.bt-list-num { font-size: 13px; color: #86868b; font-variant-numeric: tabular-nums; }
+.bt-list-title { font-size: 22px; font-weight: 500; letter-spacing: -.01em; }
+.bt-list-tag { font-size: 13px; color: #6e6e73; }
+.bt-list-year { font-size: 13px; color: #86868b; font-variant-numeric: tabular-nums; text-align: right; }
+.bt-list-arrow { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,0,0,.06);
+  display: flex; align-items: center; justify-content: center; transition: all .35s ease; margin-left: auto; }
+/* Floating thumbnail follows hovered row */
+.bt-list-thumb { position: absolute; top: 50%; right: 80px; left: auto; transform: translate(0, -50%) scale(.92);
+  width: 240px; height: 160px; border-radius: 16px; overflow: hidden;
+  background: #f5f5f7; box-shadow: 0 20px 40px -10px rgba(0,0,0,.15);
+  pointer-events: none; opacity: 0; transition: opacity .3s ease, transform .35s cubic-bezier(.16,1,.3,1); z-index: 5; }
+.bt-list-thumb img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 760px) {
+  .bt-list-row { grid-template-columns: 30px 1fr 60px 30px; }
+  .bt-list-row .bt-list-tag { display: none; }
+  .bt-list-thumb { display: none; }
+}
+
+/* ============================================================
+   Pattern 3 — TIMELINE
+   Vertical year-anchored timeline.
+   ============================================================ */
+.bt-timeline { position: relative; padding: 32px 0 0 200px; }
+.bt-timeline::before { content: ''; position: absolute; left: 130px; top: 32px; bottom: 0;
+  width: 1px; background: rgba(0,0,0,.1); }
+.bt-tl-row { position: relative; padding: 24px 0 40px; }
+.bt-tl-year { position: absolute; left: -200px; top: 24px; font-size: 13px; font-weight: 500;
+  color: #86868b; letter-spacing: .04em; text-transform: uppercase; width: 70px; }
+.bt-tl-dot { position: absolute; left: -76px; top: 28px; width: 12px; height: 12px;
+  border-radius: 50%; background: #fff; border: 2px solid #1d1d1f; z-index: 1; }
+.bt-tl-row.is-current .bt-tl-dot { background: var(--custom-purple); border-color: var(--custom-purple);
+  box-shadow: 0 0 0 6px rgba(138,129,215,.15); }
+.bt-tl-eyebrow { font-size: 12px; font-weight: 500; color: var(--custom-purple);
+  letter-spacing: .04em; margin-bottom: 6px; }
+.bt-tl-title { font-size: 24px; font-weight: 500; letter-spacing: -.01em; margin: 0 0 8px; cursor: pointer; }
+.bt-tl-title:hover { color: var(--custom-purple); }
+.bt-tl-blurb { font-size: 15px; color: #6e6e73; line-height: 1.55; max-width: 580px; margin: 0 0 16px; }
+.bt-tl-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.bt-tl-tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px;
+  background: rgba(0,0,0,.06); color: #1d1d1f; font-weight: 500; }
+@media (max-width: 700px) {
+  .bt-timeline { padding-left: 60px; }
+  .bt-timeline::before { left: 16px; }
+  .bt-tl-year { position: static; margin-bottom: 4px; }
+  .bt-tl-dot { left: -50px; }
+}
+
+/* ============================================================
+   Pattern 4 — POSTER WALL (masonry-ish gallery)
+   Mixed-height tiles, more visual, less text.
+   ============================================================ */
+.bt-wall { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.bt-wall-tile { border-radius: 24px; overflow: hidden; position: relative;
+  cursor: pointer; min-height: 220px;
+  transition: transform .5s cubic-bezier(.16,1,.3,1); }
+.bt-wall-tile:hover { transform: translateY(-4px); }
+.bt-wall-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+.bt-wall-tile:hover img { transform: scale(1.04); }
+.bt-wall-tile.s-2x2 { grid-column: span 2; grid-row: span 2; min-height: 460px; }
+.bt-wall-tile.s-2x1 { grid-column: span 2; }
+.bt-wall-tile.s-3x1 { grid-column: span 3; }
+.bt-wall-tile.s-1x2 { grid-column: span 1; grid-row: span 2; min-height: 460px; }
+.bt-wall-tile.s-3x2 { grid-column: span 3; grid-row: span 2; min-height: 460px; }
+.bt-wall-overlay { position: absolute; inset: 0; padding: 24px;
+  background: linear-gradient(0deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 50%);
+  display: flex; flex-direction: column; justify-content: flex-end; color: #fff;
+  opacity: 0; transition: opacity .35s ease; }
+.bt-wall-tile:hover .bt-wall-overlay { opacity: 1; }
+.bt-wall-tile.is-text { background: linear-gradient(180deg, #efeaff 0%, #d8e3f9 100%);
+  display: flex; align-items: center; justify-content: center; padding: 32px; text-align: center; }
+.bt-wall-tile.is-text.fill-dark { background: linear-gradient(180deg, #1d1d1f, #161618); color: #fff; }
+.bt-wall-tile.is-text.fill-mint { background: linear-gradient(180deg, #e8f5ee, #d6ebde); }
+.bt-wall-tile-poster { font-size: 32px; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; color: #1d1d1f; }
+.bt-wall-tile.fill-dark .bt-wall-tile-poster { color: #fff; }
+.bt-wall-tile-eyebrow { font-size: 12px; color: #6e6e73; margin-bottom: 8px;
+  letter-spacing: .04em; text-transform: uppercase; font-weight: 500; }
+.bt-wall-tile-title { font-size: 18px; font-weight: 500; }
+.bt-wall-tile-meta { font-size: 12px; opacity: .8; margin-top: 4px; }
+@media (max-width: 800px) {
+  .bt-wall { grid-template-columns: repeat(2, 1fr); }
+  .bt-wall-tile.s-2x2, .bt-wall-tile.s-2x1, .bt-wall-tile.s-3x1, .bt-wall-tile.s-1x2, .bt-wall-tile.s-3x2 {
+    grid-column: span 2; grid-row: auto; min-height: 280px; }
+}
+
+/* ============================================================
+   AI VISUALS LAB — playground / generative imagery section
+   ============================================================ */
+.bt-ai-section { background: linear-gradient(180deg, #0d0a1f 0%, #1a1530 60%, #1a1530 100%);
+  color: #f5f5f7; padding: 160px 24px; position: relative; overflow: hidden; }
+.bt-ai-section::before { content: ''; position: absolute; top: -200px; left: 30%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(138,129,215,.35), transparent 70%); filter: blur(40px); pointer-events: none; }
+.bt-ai-inner { max-width: 1280px; margin: 0 auto; position: relative; }
+.bt-ai-eyebrow { font-size: 13px; font-weight: 500; color: #c4b5fd; letter-spacing: .02em; margin-bottom: 16px; }
+.bt-ai-h { font-size: clamp(40px, 5vw, 72px); font-weight: 600; letter-spacing: -.025em;
+  line-height: 1.05; margin: 0 0 24px; max-width: 880px; }
+.bt-ai-h .accent { background: linear-gradient(135deg, #c4b5fd 0%, #6ea5f8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.bt-ai-sub { font-size: 19px; line-height: 1.55; color: rgba(255,255,255,.7);
+  max-width: 640px; margin: 0 0 64px; letter-spacing: -.005em; }
+
+/* AI prompt card — fake "input" to hint generative origin */
+.bt-ai-prompt { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(20px); border-radius: 20px; padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px; max-width: 640px; margin-bottom: 48px; }
+.bt-ai-prompt-icon { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #c4b5fd 0%, #6ea5f8 100%); display: flex; align-items: center; justify-content: center; }
+.bt-ai-prompt-text { flex: 1; font-size: 15px; color: #fff; font-family: var(--font-mono); }
+.bt-ai-prompt-text .ai-cur { display: inline-block; width: 8px; height: 1.1em;
+  background: #c4b5fd; vertical-align: text-bottom; animation: btBlink 1s steps(2) infinite; margin-left: 2px; }
+@keyframes btBlink { 50% { opacity: 0; } }
+.bt-ai-prompt-tag { font-size: 11px; padding: 4px 10px; border-radius: 9999px;
+  background: rgba(196,181,253,.18); color: #c4b5fd; font-family: var(--font-mono); letter-spacing: .04em; }
+
+/* AI image grid — irregular, showing variety */
+.bt-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 800px) { .bt-ai-grid { grid-template-columns: repeat(2, 1fr); } }
+.bt-ai-tile { aspect-ratio: 1; border-radius: 20px; overflow: hidden; position: relative;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); transition: all .35s ease; }
+.bt-ai-tile:hover { transform: translateY(-3px); border-color: rgba(196,181,253,.3); }
+.bt-ai-tile.is-tall { grid-row: span 2; aspect-ratio: 1/2; }
+/* Placeholder generative-feel art using gradients (cheap, evocative) */
+.bt-ai-tile.art-1 { background: conic-gradient(from 45deg at 60% 40%, #6ea5f8, #c4b5fd, #e788a8, #6ea5f8); }
+.bt-ai-tile.art-2 { background:
+  radial-gradient(ellipse 60% 60% at 30% 30%, #e788a8, transparent),
+  radial-gradient(ellipse 80% 60% at 70% 70%, #6ea5f8, transparent),
+  linear-gradient(135deg, #1a1530, #2d2358); }
+.bt-ai-tile.art-3 { background:
+  radial-gradient(circle at 50% 100%, #c4b5fd, transparent 50%),
+  radial-gradient(circle at 30% 30%, #e8a857, transparent 60%),
+  linear-gradient(180deg, #1a1530, #0d0a1f); }
+.bt-ai-tile.art-4 { background:
+  conic-gradient(from 180deg at 50% 50%, #c4b5fd, #6ea5f8, #57b388, #e8a857, #c4b5fd); filter: blur(.3px); }
+.bt-ai-tile.art-5 { background:
+  radial-gradient(ellipse at 50% 0%, #fff 0%, #c4b5fd 30%, #1a1530 80%); }
+.bt-ai-tile.art-6 { background:
+  radial-gradient(ellipse 100% 50% at 50% 50%, #e788a8, transparent),
+  linear-gradient(135deg, #2d2358, #0d0a1f); }
+.bt-ai-tile.art-7 { background:
+  conic-gradient(from 90deg at 30% 60%, #1a1530, #6ea5f8, #c4b5fd, #1a1530); }
+.bt-ai-tile.art-8 { background:
+  radial-gradient(circle at 70% 30%, #57b388, transparent 50%),
+  radial-gradient(circle at 30% 70%, #c4b5fd, transparent 50%),
+  #0d0a1f; }
+.bt-ai-tile-meta { position: absolute; bottom: 12px; left: 12px; right: 12px;
+  display: flex; justify-content: space-between; font-family: var(--font-mono);
+  font-size: 10px; color: rgba(255,255,255,.7); letter-spacing: .04em;
+  background: rgba(0,0,0,.4); backdrop-filter: blur(20px); padding: 6px 10px; border-radius: 9999px; }
+.bt-ai-tile-meta .seed { color: #c4b5fd; }
+
+/* Toolbox — list of AI tools used */
+.bt-ai-tools { margin-top: 64px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,.1);
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.bt-ai-tools-label { font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: .04em;
+  text-transform: uppercase; font-weight: 500; margin-right: 12px; }
+.bt-ai-tools span { font-size: 13px; padding: 6px 14px; border-radius: 9999px;
+  background: rgba(255,255,255,.08); color: #fff; font-family: var(--font-mono); letter-spacing: .01em; }
+
+
+/* ============================================================
+   GALLERY-DENSE patterns — designed so you SEE MANY at once.
+   No carousels, no marquees, no one-row-at-a-time.
+   ============================================================ */
+
+/* ---------- A · Mosaic Grid (6-col asymmetric) ---------- */
+.bt-mosaic { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; grid-auto-rows: 180px; }
+.bt-mosaic-tile { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer;
+  background: #f5f5f7; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+.bt-mosaic-tile:hover { transform: translateY(-3px); }
+.bt-mosaic-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+.bt-mosaic-tile:hover img { transform: scale(1.05); }
+.bt-mosaic-tile.s-3x2 { grid-column: span 3; grid-row: span 2; }
+.bt-mosaic-tile.s-2x2 { grid-column: span 2; grid-row: span 2; }
+.bt-mosaic-tile.s-2x1 { grid-column: span 2; }
+.bt-mosaic-tile.s-3x1 { grid-column: span 3; }
+.bt-mosaic-tile.s-1x1 { grid-column: span 1; }
+.bt-mosaic-text { padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+  background: linear-gradient(135deg, #efeaff, #d8e3f9); }
+.bt-mosaic-text.fill-dark { background: linear-gradient(135deg, #1d1d1f, #161618); color: #fff; }
+.bt-mosaic-text.fill-mint { background: linear-gradient(135deg, #e8f5ee, #c2e0d0); }
+.bt-mosaic-text.fill-pink { background: linear-gradient(135deg, #ffe4ec, #fad0e0); }
+.bt-mosaic-text.fill-amber { background: linear-gradient(135deg, #fff3da, #f5dfb3); }
+.bt-mosaic-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(0,0,0,.55); }
+.bt-mosaic-text.fill-dark .bt-mosaic-eyebrow { color: rgba(255,255,255,.55); }
+.bt-mosaic-title { font-size: 24px; font-weight: 600; letter-spacing: -.015em; line-height: 1.1; }
+.bt-mosaic-text.s-3x2-text .bt-mosaic-title, .bt-mosaic-text.s-2x2-text .bt-mosaic-title { font-size: 36px; }
+.bt-mosaic-foot { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: rgba(0,0,0,.5); }
+.bt-mosaic-text.fill-dark .bt-mosaic-foot { color: rgba(255,255,255,.5); }
+.bt-mosaic-arrow { width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,.08); color: #1d1d1f;
+  display: flex; align-items: center; justify-content: center; transition: all .35s; }
+.bt-mosaic-text.fill-dark .bt-mosaic-arrow { background: rgba(255,255,255,.12); color: #fff; }
+.bt-mosaic-tile:hover .bt-mosaic-arrow { background: var(--custom-purple); color: #fff; transform: rotate(-45deg); }
+
+/* Image-tile overlay (always on, soft) */
+.bt-mosaic-overlay { position: absolute; inset: 0; padding: 20px;
+  background: linear-gradient(0deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,0) 50%);
+  display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
+.bt-mosaic-overlay .bt-mosaic-eyebrow { color: rgba(255,255,255,.7); margin-bottom: 4px; }
+.bt-mosaic-overlay .bt-mosaic-title { font-size: 20px; }
+.bt-mosaic-tile.s-3x2 .bt-mosaic-overlay .bt-mosaic-title,
+.bt-mosaic-tile.s-2x2 .bt-mosaic-overlay .bt-mosaic-title { font-size: 32px; }
+
+@media (max-width: 900px) {
+  .bt-mosaic { grid-template-columns: repeat(2, 1fr); }
+  .bt-mosaic-tile.s-3x2, .bt-mosaic-tile.s-2x2, .bt-mosaic-tile.s-3x1, .bt-mosaic-tile.s-2x1 {
+    grid-column: span 2; grid-row: span 1; }
+  .bt-mosaic-tile.s-1x1 { grid-column: span 1; }
+}
+
+/* ---------- B · Index Wall (dense card grid, all same size, lots visible) ---------- */
+.bt-index-wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1100px) { .bt-index-wall { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) { .bt-index-wall { grid-template-columns: repeat(2, 1fr); } }
+.bt-iw-card { background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 20px;
+  overflow: hidden; cursor: pointer; transition: all .3s ease;
+  display: flex; flex-direction: column; }
+.bt-iw-card:hover { border-color: rgba(0,0,0,.18); transform: translateY(-2px);
+  box-shadow: 0 12px 28px -12px rgba(0,0,0,.12); }
+.bt-iw-thumb { aspect-ratio: 4/3; background: #f5f5f7; position: relative; overflow: hidden; }
+.bt-iw-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.bt-iw-card:hover .bt-iw-thumb img { transform: scale(1.04); }
+.bt-iw-thumb.is-text { display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+.bt-iw-thumb.is-text.fill-purple { background: linear-gradient(135deg, #efeaff, #d8e3f9); }
+.bt-iw-thumb.is-text.fill-dark { background: linear-gradient(135deg, #1d1d1f, #2d2358); color: #fff; }
+.bt-iw-thumb.is-text.fill-mint { background: linear-gradient(135deg, #e8f5ee, #c2e0d0); }
+.bt-iw-thumb.is-text.fill-pink { background: linear-gradient(135deg, #ffe4ec, #fad0e0); }
+.bt-iw-thumb.is-text.fill-amber { background: linear-gradient(135deg, #fff3da, #f5dfb3); }
+.bt-iw-thumb-text { font-size: 22px; font-weight: 600; letter-spacing: -.015em; line-height: 1.15; color: #1d1d1f; }
+.bt-iw-thumb.fill-dark .bt-iw-thumb-text { color: #fff; }
+.bt-iw-body { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.bt-iw-eyebrow { font-size: 11px; font-weight: 500; color: var(--custom-purple); letter-spacing: .04em; text-transform: uppercase; }
+.bt-iw-title { font-size: 16px; font-weight: 500; letter-spacing: -.01em; margin: 0; line-height: 1.25; }
+.bt-iw-meta { margin-top: auto; padding-top: 8px; display: flex; justify-content: space-between;
+  align-items: center; font-size: 12px; color: #86868b; }
+.bt-iw-tags { display: flex; gap: 4px; }
+.bt-iw-tag { font-size: 10px; padding: 2px 8px; border-radius: 9999px; background: rgba(0,0,0,.06);
+  color: #1d1d1f; font-weight: 500; letter-spacing: .02em; }
+
+/* ---------- C · Pinterest-style Masonry (variable column heights) ---------- */
+.bt-pin { columns: 4; column-gap: 16px; }
+@media (max-width: 1100px) { .bt-pin { columns: 3; } }
+@media (max-width: 760px) { .bt-pin { columns: 2; } }
+@media (max-width: 480px) { .bt-pin { columns: 1; } }
+.bt-pin-tile { break-inside: avoid; margin-bottom: 16px; border-radius: 20px; overflow: hidden;
+  position: relative; cursor: pointer; transition: transform .4s ease; display: block; }
+.bt-pin-tile:hover { transform: translateY(-3px); }
+.bt-pin-tile img { width: 100%; height: auto; display: block; transition: transform .8s ease; }
+.bt-pin-tile:hover img { transform: scale(1.04); }
+.bt-pin-tile.is-text { padding: 32px 24px; min-height: 220px;
+  display: flex; flex-direction: column; justify-content: center; }
+.bt-pin-tile.is-text.fill-purple { background: linear-gradient(135deg, #efeaff, #d8e3f9); }
+.bt-pin-tile.is-text.fill-dark { background: linear-gradient(135deg, #1d1d1f, #2d2358); color: #fff; }
+.bt-pin-tile.is-text.fill-mint { background: linear-gradient(135deg, #e8f5ee, #c2e0d0); }
+.bt-pin-tile.is-text.fill-pink { background: linear-gradient(135deg, #ffe4ec, #fad0e0); }
+.bt-pin-tile.is-text.fill-amber { background: linear-gradient(135deg, #fff3da, #f5dfb3); }
+.bt-pin-tile.is-tall { min-height: 380px; }
+.bt-pin-tile.is-extra-tall { min-height: 480px; }
+.bt-pin-tile-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(0,0,0,.55); margin-bottom: 8px; }
+.bt-pin-tile.fill-dark .bt-pin-tile-eyebrow { color: rgba(255,255,255,.6); }
+.bt-pin-tile-title { font-size: 24px; font-weight: 600; letter-spacing: -.015em; line-height: 1.1; color: #1d1d1f; }
+.bt-pin-tile.fill-dark .bt-pin-tile-title { color: #fff; }
+.bt-pin-tile-overlay { position: absolute; inset: 0; padding: 16px;
+  background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 60%);
+  display: flex; flex-direction: column; justify-content: flex-end; color: #fff;
+  opacity: 0; transition: opacity .3s ease; }
+.bt-pin-tile:hover .bt-pin-tile-overlay { opacity: 1; }
+.bt-pin-tile-overlay .bt-pin-tile-eyebrow { color: rgba(255,255,255,.7); }
+.bt-pin-tile-overlay .bt-pin-tile-title { color: #fff; font-size: 18px; }
+
+/* ---------- D · Sticker Sheet (overlapping cards on a wall) ---------- */
+.bt-sticker { position: relative; padding: 80px 24px; min-height: 920px;
+  background-image: radial-gradient(rgba(0,0,0,.06) 1px, transparent 1px);
+  background-size: 24px 24px; border-radius: 32px; }
+.bt-sticker-tile { position: absolute; border-radius: 16px; overflow: hidden;
+  background: #fff; box-shadow: 0 12px 28px -12px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.06);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s; cursor: pointer; }
+.bt-sticker-tile:hover { transform: scale(1.04) rotate(0deg) !important; z-index: 100;
+  box-shadow: 0 28px 56px -16px rgba(0,0,0,.25); }
+.bt-sticker-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bt-sticker-tile.is-text { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+.bt-sticker-tile.is-text.fill-purple { background: linear-gradient(135deg, #efeaff, #d8e3f9); }
+.bt-sticker-tile.is-text.fill-dark { background: linear-gradient(135deg, #1d1d1f, #2d2358); color: #fff; }
+.bt-sticker-tile.is-text.fill-mint { background: linear-gradient(135deg, #e8f5ee, #c2e0d0); }
+.bt-sticker-tile.is-text.fill-pink { background: linear-gradient(135deg, #ffe4ec, #fad0e0); }
+.bt-sticker-tile-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(0,0,0,.55); }
+.bt-sticker-tile.fill-dark .bt-sticker-tile-eyebrow { color: rgba(255,255,255,.55); }
+.bt-sticker-tile-title { font-size: 22px; font-weight: 600; letter-spacing: -.015em; line-height: 1.15; color: #1d1d1f; }
+.bt-sticker-tile.fill-dark .bt-sticker-tile-title { color: #fff; }
+.bt-sticker-overlay { position: absolute; inset: 0; padding: 16px;
+  background: linear-gradient(0deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,0) 50%);
+  display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
+.bt-sticker-overlay .bt-sticker-tile-eyebrow { color: rgba(255,255,255,.7); }
+.bt-sticker-overlay .bt-sticker-tile-title { font-size: 16px; color: #fff; }
+@media (max-width: 760px) {
+  .bt-sticker { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; min-height: 0; padding: 24px; }
+  .bt-sticker-tile { position: static !important; width: auto !important; height: 200px !important; transform: none !important; }
+}
+
+
+/* Anchor reset for gallery tiles */
+.bt-mosaic-tile, .bt-iw-card, .bt-pin-tile, .bt-sticker-tile { text-decoration: none; color: inherit; }

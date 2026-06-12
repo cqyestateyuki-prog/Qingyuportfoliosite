@@ -116,6 +116,18 @@ const Portfolio = () => {
               <div className="p-6 flex flex-col flex-grow">
                 {/* 二级：类别标签 - 小字号、次要色 */}
                 <div className="flex flex-wrap gap-2 mb-2">
+                  {project.year && (
+                    <span
+                      className="px-2.5 py-0.5 text-xs font-medium rounded-full"
+                      style={{
+                        backgroundColor: 'rgba(138, 129, 215, 0.2)',
+                        color: 'rgba(196, 190, 240, 0.9)',
+                        border: '1px solid rgba(138, 129, 215, 0.35)'
+                      }}
+                    >
+                      {project.year}
+                    </span>
+                  )}
                   {project.categories.map((category) => (
                     <span
                       key={category}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Type — Qingyu Cao Design System</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin:0; padding:48px; background:var(--bg); }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .eyebrow { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg-3); margin-bottom:8px; }
+  .intro h1 { font-size:60px; font-weight:400; line-height:1.05; letter-spacing:.02em; margin:0; }
+  .intro h1 .grad { background:var(--gradient-secondary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .sub { color:var(--fg-2); font-size:20px; line-height:1.6; max-width:720px; margin:16px 0 56px; }
+
+  .specimen-row { display:grid; grid-template-columns: 220px 1fr; gap:32px; padding:28px 0; border-top:1px solid var(--border); align-items:baseline; }
+  .specimen-row:last-child { border-bottom:1px solid var(--border); }
+  .label { font-family:var(--font-mono); font-size:12px; color:var(--fg-3); }
+  .label .name { display:block; color:var(--fg); font-family:var(--font-display); font-size:15px; font-weight:600; margin-bottom:6px; letter-spacing:0;}
+  .specimen { color:var(--fg); }
+
+  .h-display { font-family:var(--font-display); font-size:72px; font-weight:400; letter-spacing:.02em; line-height:1.05;}
+  .h-section { font-family:var(--font-display); font-size:48px; font-weight:400; letter-spacing:.02em; line-height:1.15;}
+  .h-section .grad { background:var(--gradient-secondary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .h-card    { font-family:var(--font-display); font-size:20px; font-weight:600; letter-spacing:.01em;}
+  .h-sub     { font-family:var(--font-display); font-size:30px; font-weight:300; color:var(--fg-2); letter-spacing:.02em;}
+  .body-l    { font-family:var(--font-body); font-size:18px; line-height:1.7; color:var(--fg-2); max-width:600px;}
+  .body-m    { font-family:var(--font-body); font-size:16px; line-height:1.6; color:var(--fg-2); max-width:560px;}
+  .caption   { font-family:var(--font-body); font-size:14px; color:var(--fg-3);}
+  .meta      { font-family:var(--font-body); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg-3);}
+  .serif     { font-family:'Tenor Sans', serif; font-size:42px; letter-spacing:.04em; color:var(--fg);}
+  .cta       { display:inline-block; padding:16px 32px; font-size:18px; font-weight:500; border-radius:9999px; background:#1a1530; color:#fff; letter-spacing:.02em;}
+
+  .pair { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px;}
+  .stack-card { padding:32px; border-radius:16px; border:1px solid var(--border); background:#fff;}
+  .stack-card.dark { background:var(--dark-section-solid); color:#fff; border:none;}
+  .stack-card.dark .body-m { color:rgba(255,255,255,.75);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Foundations · 02</div>
+  <div class="intro">
+    <h1>Display type, set in <span class="grad">Poppins · 400</span></h1>
+    <p class="sub">Big titles ride on weight 400, never bold. The size carries the heft, and tracking-wide gives every heading a breath of air. Component titles step up to 600. Tenor Sans appears for cinematic moments only.</p>
+  </div>
+
+  <div class="specimen-row">
+    <div class="label"><span class="name">Hero h1</span>72px · 400 · tracking-wide</div>
+    <div class="specimen h-display">Qingyu Cao</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Hero subtitle</span>30px · 300 · 80% white in product</div>
+    <div class="specimen h-sub">Creative Developer &amp; Designer</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Section h2 · gradient</span>48px · 400 · gradient-text</div>
+    <div class="specimen h-section"><span class="grad">More Projects</span></div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Card title</span>20px · 600 · semibold</div>
+    <div class="specimen h-card">AI Community Platform</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Body L · lede</span>18px · 400 · gray-600 · 1.7</div>
+    <div class="specimen body-l">A Product Designer who <strong style="color:var(--fg);font-weight:500">builds, tests, and ships</strong>. I combine design intuition with engineering depth to <strong style="color:var(--fg);font-weight:500">launch real products</strong> in fast-moving environments.</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Body M</span>16px · 400 · gray-600 · 1.6</div>
+    <div class="specimen body-m">An intelligent document question-answering system based on Retrieval-Augmented Generation. Extracts text, images, and tables from PDFs.</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Caption</span>14px · 400 · gray-500</div>
+    <div class="specimen caption">Built with React 19 + Vite + Tailwind CSS</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Meta · eyebrow</span>12px · uppercase · 0.18em</div>
+    <div class="specimen meta">Selected Work · 2024</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">Serif accent</span>Tenor Sans · 42px · cinematic moments</div>
+    <div class="specimen serif">Builds, ships, learns.</div>
+  </div>
+  <div class="specimen-row">
+    <div class="label"><span class="name">CTA pill</span>18px · 500 · rounded-full</div>
+    <div class="specimen"><span class="cta">View My Work</span></div>
+  </div>
+
+  <div class="pair">
+    <div class="stack-card">
+      <div class="meta" style="margin-bottom:16px">On light</div>
+      <div class="h-section" style="font-size:36px; margin-bottom:12px"><span class="grad">Get in Touch</span></div>
+      <div class="body-m">Let's create something amazing together.</div>
+    </div>
+    <div class="stack-card dark">
+      <div class="meta" style="margin-bottom:16px; color:rgba(255,255,255,.55)">On dark</div>
+      <div style="font-size:36px;font-weight:400;letter-spacing:.02em;line-height:1.15;color:rgba(255,255,255,.95);margin-bottom:12px;">More Projects</div>
+      <div class="body-m">Explore everything across UIUX, AI, games, and research.</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1920px;height:1080px;overflow:hidden;background:#0F1B2D;font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;color:#F2F6F7}
+.canvas{width:1920px;height:1080px;padding:64px 80px;display:flex;flex-direction:column;position:relative}
+
+/* Subtle grid bg */
+.canvas::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(156,122,58,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(156,122,58,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+
+/* Top bar */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:16px}
+.brand-icon{width:48px;height:48px;background:#9C7A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC','Songti SC',serif;font-size:24px;font-weight:700;color:#0F1B2D}
+.brand-name{font-family:'Cormorant Garamond','Times New Roman',serif;font-size:28px;font-weight:600;letter-spacing:0.04em}
+.brand-tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:#7C95AE;letter-spacing:0.2em;text-transform:uppercase}
+
+/* Hero text */
+.hero{text-align:center;margin-bottom:44px;position:relative;z-index:1}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.3em;color:#9C7A3A;text-transform:uppercase;margin-bottom:14px}
+.hero-title{font-family:'Cormorant Garamond','Times New Roman',serif;font-size:52px;font-weight:600;letter-spacing:0.02em;line-height:1.2;margin-bottom:10px}
+.hero-sub{font-size:18px;color:#7C95AE;max-width:800px;margin:0 auto;line-height:1.6}
+
+/* Pipeline */
+.pipeline{display:grid;grid-template-columns:240px 40px 320px 40px 320px 40px 240px;align-items:start;justify-content:center;gap:0;flex:1;position:relative;z-index:1}
+.arrow-col{display:flex;align-items:center;justify-content:center;padding-top:80px}
+.arrow-line{font-family:'JetBrains Mono',monospace;font-size:28px;color:#9C7A3A}
+
+/* Stage card */
+.stage{display:flex;flex-direction:column;gap:12px}
+.stage-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:#9C7A3A;letter-spacing:0.2em;text-transform:uppercase}
+.stage-card{background:rgba(26,45,69,0.7);border:1px solid rgba(156,122,58,0.25);padding:24px;display:flex;flex-direction:column;gap:14px;backdrop-filter:blur(4px)}
+.stage-icon{font-size:36px}
+.stage-title{font-family:'Noto Serif SC','Songti SC',serif;font-size:22px;font-weight:600;letter-spacing:0.04em}
+.stage-en{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:#7C95AE}
+.stage-details{display:flex;flex-direction:column;gap:6px}
+.stage-detail{font-family:'JetBrains Mono',monospace;font-size:12px;color:#7C95AE;letter-spacing:0.06em;display:flex;align-items:center;gap:8px}
+.stage-detail::before{content:'';width:4px;height:4px;background:#9C7A3A;border-radius:50%;flex-shrink:0}
+.stage-highlight{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border:1px solid rgba(156,122,58,0.4);color:#9C7A3A;letter-spacing:0.1em;text-transform:uppercase;text-align:center;margin-top:4px}
+
+/* Wide stage (engine & AI) */
+.stage-wide .stage-card{padding:28px}
+.stage-wide .stage-title{font-size:24px}
+.stage-wide .stage-detail{font-size:13px}
+
+/* Output special */
+.output-signals{display:flex;gap:8px;margin-top:4px}
+.signal-badge{padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;font-weight:500}
+.bull-badge{background:rgba(168,57,46,0.2);color:#D4544A;border:1px solid rgba(168,57,46,0.3)}
+.bear-badge{background:rgba(110,147,135,0.2);color:#8BB8A9;border:1px solid rgba(110,147,135,0.3)}
+.pivot-badge{background:rgba(156,122,58,0.2);color:#C9A44E;border:1px solid rgba(156,122,58,0.3)}
+
+/* Bottom stats */
+.bottom{display:flex;justify-content:center;gap:60px;padding-top:20px;border-top:1px solid rgba(156,122,58,0.15);margin-top:auto;position:relative;z-index:1}
+.stat{text-align:center}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#9C7A3A}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:12px;color:#7C95AE;letter-spacing:0.15em;text-transform:uppercase;margin-top:4px}
+
+/* Glow accents */
+.glow-1{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(168,57,46,0.08) 0%,transparent 70%);top:30%;left:10%;pointer-events:none}
+.glow-2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(156,122,58,0.1) 0%,transparent 70%);top:20%;left:35%;pointer-events:none}
+.glow-3{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(110,147,135,0.08) 0%,transparent 70%);top:30%;right:10%;pointer-events:none}
+</style></head>
+<body>
+<div class="canvas">
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="glow-3"></div>
+
+  <div class="top">
+    <div class="brand">
+      <div class="brand-icon">卦</div>
+      <div class="brand-name">HexaEdge</div>
+    </div>
+    <div class="brand-tag">Full-Stack Signal Engine · Solo Build</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">PRODUCT ARCHITECTURE</div>
+    <div class="hero-title">From Ancient I Ching to Quantitative Signals</div>
+    <div class="hero-sub">A full-stack financial signal engine — from proprietary divination algorithm to neo-Chinese UI, designed and shipped solo.</div>
+  </div>
+
+  <div class="pipeline">
+    <!-- INPUT -->
+    <div class="stage">
+      <div class="stage-num">01 · INPUT</div>
+      <div class="stage-card">
+        <div class="stage-icon">☰</div>
+        <div class="stage-title">六爻卦象</div>
+        <div class="stage-en">Hexagram Input</div>
+        <div class="stage-details">
+          <div class="stage-detail">3-step wizard</div>
+          <div class="stage-detail">Manual / number cast</div>
+          <div class="stage-detail">Date + earthly branches</div>
+        </div>
+        <div class="stage-highlight">64 hexagrams</div>
+      </div>
+    </div>
+
+    <div class="arrow-col"><div class="arrow-line">→</div></div>
+
+    <!-- ENGINE -->
+    <div class="stage stage-wide">
+      <div class="stage-num">02 · PROPRIETARY ENGINE</div>
+      <div class="stage-card">
+        <div class="stage-icon">⚙️</div>
+        <div class="stage-title">多阶段分析引擎</div>
+        <div class="stage-en">9-Stage Scoring Pipeline</div>
+        <div class="stage-details">
+          <div class="stage-detail">Wang-Shuai strength scoring</div>
+          <div class="stage-detail">Transformation chain analysis</div>
+          <div class="stage-detail">Six-relative positioning</div>
+          <div class="stage-detail">Multi-line interaction model</div>
+          <div class="stage-detail">Direction voting system</div>
+          <div class="stage-detail">Ying-Qi timing engine</div>
+        </div>
+        <div class="stage-highlight">2+ years research data</div>
+      </div>
+    </div>
+
+    <div class="arrow-col"><div class="arrow-line">→</div></div>
+
+    <!-- AI -->
+    <div class="stage stage-wide">
+      <div class="stage-num">03 · AI INTERPRETATION</div>
+      <div class="stage-card">
+        <div class="stage-icon">🤖</div>
+        <div class="stage-title">大模型解读层</div>
+        <div class="stage-en">LLM + RAG Knowledge Layer</div>
+        <div class="stage-details">
+          <div class="stage-detail">LLM plain-language translation</div>
+          <div class="stage-detail">RAG hexagram knowledge base</div>
+          <div class="stage-detail">Structured signal output</div>
+          <div class="stage-detail">Headline + 3 key signals</div>
+          <div class="stage-detail">Daily rhythm narrative</div>
+        </div>
+        <div class="stage-highlight">Claude Code + API</div>
+      </div>
+    </div>
+
+    <div class="arrow-col"><div class="arrow-line">→</div></div>
+
+    <!-- OUTPUT -->
+    <div class="stage">
+      <div class="stage-num">04 · SIGNAL OUTPUT</div>
+      <div class="stage-card">
+        <div class="stage-icon">📊</div>
+        <div class="stage-title">标准化信号</div>
+        <div class="stage-en">Actionable Signals</div>
+        <div class="stage-details">
+          <div class="stage-detail">Direction + confidence</div>
+          <div class="stage-detail">Mon–Fri daily calendar</div>
+          <div class="stage-detail">Key pivot dates</div>
+          <div class="stage-detail">Export PNG / PDF</div>
+        </div>
+        <div class="output-signals">
+          <div class="signal-badge bull-badge">BULL</div>
+          <div class="signal-badge bear-badge">BEAR</div>
+          <div class="signal-badge pivot-badge">PIVOT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="stat"><div class="stat-val">9</div><div class="stat-label">Engine Stages</div></div>
+    <div class="stat"><div class="stat-val">64</div><div class="stat-label">Hexagrams</div></div>
+    <div class="stat"><div class="stat-val">4</div><div class="stat-label">Font Families</div></div>
+    <div class="stat"><div class="stat-val">7</div><div class="stat-label">Color Tokens</div></div>
+    <div class="stat"><div class="stat-val">1</div><div class="stat-label">Solo Builder</div></div>
+  </div>
+</div>
+</body></html>

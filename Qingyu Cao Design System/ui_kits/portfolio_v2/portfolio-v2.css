@@ -1,0 +1,208 @@
+/* ============================================================
+   v2 overrides — match the live qingyucao.com surfaces.
+   Loads AFTER portfolio.css; only deltas here.
+   ============================================================ */
+
+/* ---------- Spacing rhythm: more breathing room ---------- */
+.qy-showcase, .qy-dark, .qy-about, .qy-contact { padding-top: 160px; padding-bottom: 160px; }
+
+/* =========================================================
+   HERO v2 — word constellation + giant QINGYU
+   ========================================================= */
+.qy-hero { background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(151,152,238,.18), transparent 60%), linear-gradient(180deg, #1f1838 0%, #2a2350 50%, #322861 100%); }
+.qy-hero .qy-aurora { display: none; } /* drop the bright aurora */
+.qy-pulse-a, .qy-pulse-b, .qy-pulse-c { display: none; }
+
+.qy-hero-v2 { position: relative; min-height: 100vh; margin-top: -72px; padding: 160px 32px 80px;
+  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(151,152,238,.20), transparent 60%),
+              linear-gradient(180deg, #1f1838 0%, #2a2350 50%, #322861 100%);
+  overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.qy-hero-v2 .qy-hero-grain { position: absolute; inset: 0; opacity: .12; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Floating word constellation */
+.qy-words { position: absolute; inset: 0; pointer-events: none; }
+.qy-word { position: absolute; font-family: var(--font-display); font-weight: 300;
+  letter-spacing: .25em; text-transform: uppercase; color: rgba(196,181,253,.18);
+  white-space: nowrap; transition: color .6s ease; }
+
+/* Particle blobs (small, soft, purple) */
+.qy-particles { position: absolute; inset: 0; pointer-events: none; }
+.qy-particle { position: absolute; width: 24px; height: 24px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,139,250,.55), rgba(139,92,246,.15) 60%, transparent 80%);
+  filter: blur(6px); }
+
+/* Giant QINGYU + caption */
+.qy-hero-v2-inner { position: relative; max-width: 1100px; text-align: center; z-index: 2; }
+.qy-marquee { font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(72px, 14vw, 192px); line-height: .95;
+  color: #fff; letter-spacing: -.01em; margin: 0 0 28px;
+  text-shadow: 0 8px 60px rgba(99, 76, 175, .45); }
+.qy-marquee-cap { font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(18px, 1.8vw, 24px); letter-spacing: .55em;
+  color: rgba(255,255,255,.85); text-transform: uppercase; margin-bottom: 40px; padding-left: .55em; }
+.qy-hero-v2-lede { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,.78);
+  max-width: 600px; margin: 0 auto 40px; }
+.qy-hero-v2-lede b { color: #fff; font-weight: 500; }
+.qy-hero-v2 .qy-hero-chevron { color: rgba(255,255,255,.55); }
+
+/* CTAs on v2 hero — match the live "View Works" pill */
+.qy-hero-v2 .qy-btn-light { background: var(--custom-purple); color: #fff;
+  box-shadow: 0 8px 32px rgba(138,129,215,.45); }
+.qy-hero-v2 .qy-btn-light:hover { background: #9890e0; }
+
+/* =========================================================
+   SHOWCASE v2 — asymmetric editorial layout
+   Left text / right framed mockup, alternating sides.
+   ========================================================= */
+.qy-showcase-v2 { padding: 160px 32px; max-width: 1280px; margin: 0 auto; }
+.qy-showcase-v2 .qy-section-head { text-align: left; margin-bottom: 96px; padding: 0; max-width: none; }
+.qy-showcase-v2 .qy-section-head h2 { font-size: clamp(48px, 7vw, 88px); font-weight: 500; letter-spacing: -.02em; margin-bottom: 24px; }
+.qy-showcase-v2 .qy-section-head .qy-eyebrow { font-family: var(--font-display); font-weight: 500; color: var(--custom-purple); font-size: 13px; letter-spacing: .25em; text-transform: uppercase; margin-bottom: 20px; display: block; }
+
+.qy-feature-row { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center; padding: 80px 0; }
+.qy-feature-row + .qy-feature-row { border-top: 1px solid var(--border); }
+.qy-feature-row.is-flipped { grid-template-columns: 1.4fr 1fr; }
+.qy-feature-row.is-flipped .qy-feature-text { order: 2; padding-left: 40px; }
+.qy-feature-row.is-flipped .qy-feature-art { order: 1; }
+
+.qy-feature-text { padding-right: 40px; }
+.qy-feature-eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--fg-3); margin-bottom: 20px; }
+.qy-feature-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.qy-feature-tags .qy-tag { padding: 6px 14px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; }
+.qy-feature-title { font-family: var(--font-display); font-size: clamp(40px, 5vw, 68px); font-weight: 600;
+  line-height: 1.05; letter-spacing: -.02em; color: var(--fg); margin: 0 0 20px; }
+.qy-feature-tagline { font-size: 18px; line-height: 1.6; color: var(--fg-2); margin: 0 0 32px; max-width: 460px; }
+.qy-feature-link { display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 500; color: var(--fg); border-bottom: 1.5px solid var(--fg);
+  padding-bottom: 4px; transition: all .3s ease; }
+.qy-feature-link:hover { color: var(--custom-purple); border-color: var(--custom-purple); gap: 14px; }
+
+.qy-feature-art { position: relative; aspect-ratio: 16/11; border-radius: 18px; overflow: hidden;
+  background: #0a0a14; box-shadow: 0 30px 80px rgba(20, 16, 50, .25); display: flex; align-items: center; justify-content: center; padding: 64px; }
+.qy-feature-art img { width: 100%; height: 100%; object-fit: cover; }
+.qy-feature-art-headline { font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(32px, 4.5vw, 64px); line-height: .95; color: rgba(255,255,255,.92);
+  letter-spacing: -.02em; text-transform: uppercase; }
+.qy-feature-art-headline span { display: block; }
+.qy-feature-art-glow { position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+  width: 160px; height: 120px; background: radial-gradient(circle, rgba(255,255,255,.45), transparent 70%); filter: blur(20px); }
+.qy-feature-art-particle { position: absolute; width: 12px; height: 12px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,139,250,.7), transparent 70%); filter: blur(4px); }
+.qy-feature-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 20px;
+  font-size: 13px; color: var(--fg-3); font-weight: 500; }
+.qy-feature-foot .qy-link { color: var(--fg); border-bottom: 1px solid var(--fg); padding-bottom: 2px; }
+
+/* =========================================================
+   MORE PROJECTS v2 — stacked tags, hashtag techs, square-ish filters
+   ========================================================= */
+.qy-dark { padding: 160px 32px; }
+.qy-dark .qy-section-head h2 { font-size: clamp(48px, 6vw, 72px); font-weight: 500; -webkit-text-fill-color: #fff; background: none; color: #fff; }
+
+/* Filter chips — rounded-rect, not pills, with active = solid purple oval */
+.qy-filter-row-v2 { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; margin-top: 32px;
+  padding: 6px; background: rgba(255,255,255,.04); border-radius: 9999px; width: fit-content; margin-left: auto; margin-right: auto; border: 1px solid rgba(255,255,255,.08); }
+.qy-filter-v2 { padding: 10px 22px; border-radius: 9999px; border: none; background: transparent;
+  color: rgba(255,255,255,.7); font-family: var(--font-display); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all .3s ease; letter-spacing: .01em; }
+.qy-filter-v2:hover { color: #fff; }
+.qy-filter-v2.is-active { background: var(--custom-purple); color: #fff; box-shadow: 0 4px 16px rgba(138,129,215,.4); }
+
+/* Grid + cards */
+.qy-dark-grid-v2 { max-width: 1280px; margin: 56px auto 0; display: grid;
+  grid-template-columns: repeat(4, 1fr); gap: 24px; }
+@media (max-width: 1100px) { .qy-dark-grid-v2 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .qy-dark-grid-v2 { grid-template-columns: 1fr; } }
+
+.qy-dark-card-v2 { background: rgba(255,255,255,.03); border: 1px solid rgba(138,129,215,.25);
+  border-radius: 16px; overflow: hidden; box-shadow: var(--glow-rest); transition: all .5s ease;
+  color: #fff; display: flex; flex-direction: column; }
+.qy-dark-card-v2:hover { transform: translateY(-6px); border-color: rgba(138,129,215,.7); box-shadow: var(--glow-hover); }
+.qy-dark-card-v2-art { aspect-ratio: 1/.78; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #1a1530 0%, #2d2358 100%); display: flex; align-items: flex-end; padding: 20px; }
+.qy-dark-card-v2-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.qy-dark-card-v2-art-label { position: relative; z-index: 1; font-family: var(--font-display); font-weight: 600;
+  font-size: 22px; color: rgba(255,255,255,.7); letter-spacing: -.01em; }
+.qy-dark-card-v2-body { padding: 22px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.qy-dark-card-v2-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.qy-dark-card-v2-tags .qy-tag { padding: 4px 12px; font-size: 11px; font-weight: 500; letter-spacing: .01em;
+  background: rgba(196,181,253,.12); color: rgba(196,181,253,.95); border: 1px solid rgba(196,181,253,.25); border-radius: 9999px; }
+.qy-dark-card-v2-title { font-family: var(--font-display); font-size: 20px; font-weight: 600;
+  color: rgba(255,255,255,.95); margin: 4px 0 0; line-height: 1.25; }
+.qy-dark-card-v2-brief { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.55; flex: 1; }
+.qy-dark-card-v2-techs { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,.08); }
+.qy-dark-card-v2-techs span { font-size: 11px; color: rgba(196,181,253,.65); font-weight: 500; }
+
+/* =========================================================
+   PROJECT DETAIL surface (numbered sections + sticky TOC + callouts)
+   ========================================================= */
+.qy-detail { max-width: 1240px; margin: 0 auto; padding: 120px 32px; display: grid;
+  grid-template-columns: 1fr 200px; gap: 80px; }
+
+.qy-detail-eyebrow { font-family: var(--font-display); font-size: 13px; font-weight: 600;
+  letter-spacing: .25em; text-transform: uppercase; color: var(--main-blue); margin: 0 0 24px; }
+.qy-detail-h1 { font-family: var(--font-display); font-size: clamp(36px, 4.5vw, 56px); font-weight: 700;
+  line-height: 1.15; letter-spacing: -.02em; margin: 0 0 32px; color: var(--fg); }
+.qy-detail-overview p { font-size: 17px; line-height: 1.75; color: var(--fg-2); margin: 0 0 16px; }
+.qy-detail-overview p .qy-em-link { color: var(--main-blue); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.qy-detail-overview p b { color: var(--fg); font-weight: 600; }
+
+/* Numbered section header */
+.qy-detail-section { margin-top: 96px; scroll-margin-top: 100px; }
+.qy-detail-num { font-family: var(--font-display); font-size: clamp(72px, 8vw, 112px);
+  font-weight: 700; line-height: 1; color: var(--custom-purple); margin: 0 0 12px; letter-spacing: -.04em; }
+.qy-detail-h2 { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 44px);
+  font-weight: 700; line-height: 1.15; letter-spacing: -.02em; color: var(--fg); margin: 0 0 12px; }
+.qy-detail-sublab { font-size: 14px; color: var(--fg-3); font-weight: 500; margin-bottom: 24px; }
+.qy-detail-section p { font-size: 17px; line-height: 1.75; color: var(--fg-2); margin: 0 0 16px; max-width: 720px; }
+
+/* Pull-quote / challenge box (left-border accent) */
+.qy-callout { border-left: 3px solid var(--fg); background: #f7f7fb;
+  border-radius: 6px; padding: 28px 32px; margin: 28px 0; max-width: 720px; }
+.qy-callout-h { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin: 0 0 16px; color: var(--fg); }
+.qy-callout ol { padding-left: 0; margin: 0; counter-reset: q; list-style: none; }
+.qy-callout ol li { counter-increment: q; position: relative; padding: 8px 0 8px 36px;
+  font-size: 15px; line-height: 1.65; color: var(--fg-2); }
+.qy-callout ol li::before { content: counter(q); position: absolute; left: 0; top: 8px;
+  width: 22px; height: 22px; border-radius: 50%; background: rgba(20,16,50,.08);
+  font-size: 11px; font-weight: 600; color: var(--fg); display: flex; align-items: center; justify-content: center; }
+
+/* Sticky TOC */
+.qy-toc { position: sticky; top: 100px; align-self: start; }
+.qy-toc-list { display: flex; flex-direction: column; gap: 14px; padding: 0; margin: 0; list-style: none; }
+.qy-toc-list li { font-size: 13px; color: var(--fg-3); display: flex; align-items: center; gap: 10px;
+  cursor: pointer; transition: color .3s ease; }
+.qy-toc-list li::before { content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: transparent; border: 1.5px solid var(--fg-muted); transition: all .3s ease; flex-shrink: 0; }
+.qy-toc-list li:hover, .qy-toc-list li.is-active { color: var(--fg); }
+.qy-toc-list li.is-active::before { background: var(--fg); border-color: var(--fg); }
+
+/* Detail page footer "Back to Top" */
+.qy-detail-foot { display: flex; justify-content: center; padding: 80px 0 0; }
+.qy-back-top { width: 48px; height: 48px; border-radius: 50%; background: #fff;
+  border: 1px solid var(--border); box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .3s ease; color: var(--fg); }
+.qy-back-top:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+/* =========================================================
+   Section divider headers (eyebrow + larger title)
+   ========================================================= */
+.qy-section-head-v2 { max-width: 1280px; margin: 0 auto 64px; padding: 0 32px; }
+.qy-section-head-v2 .qy-eyebrow { display: block; font-family: var(--font-display); font-weight: 500;
+  font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--custom-purple); margin-bottom: 20px; }
+.qy-section-head-v2 h2 { font-size: clamp(48px, 6vw, 80px); font-weight: 500; letter-spacing: -.02em; margin: 0; }
+.qy-section-head-v2.is-centered { text-align: center; }
+.qy-section-head-v2.is-on-dark h2 { color: rgba(255,255,255,.95); -webkit-text-fill-color: #fff; background: none; }
+.qy-section-head-v2.is-on-dark .qy-eyebrow { color: rgba(196,181,253,.85); }
+
+/* =========================================================
+   Surface label chips between sections (so the kit reads as a kit)
+   ========================================================= */
+.qy-kit-label { max-width: 1280px; margin: 0 auto; padding: 80px 32px 0;
+  display: flex; align-items: baseline; gap: 16px; border-top: 1px solid var(--border); }
+.qy-kit-label.is-on-dark { border-top-color: rgba(255,255,255,.08); }
+.qy-kit-label-num { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--custom-purple); letter-spacing: .15em; }
+.qy-kit-label-name { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--fg-3); letter-spacing: .15em; text-transform: uppercase; }
+.qy-kit-label.is-on-dark .qy-kit-label-name { color: rgba(255,255,255,.55); }

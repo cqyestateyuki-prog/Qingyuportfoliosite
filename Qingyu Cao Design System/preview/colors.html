@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Colors — Qingyu Cao Design System</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin:0; padding:48px; background:var(--bg-soft); }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .eyebrow { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg-3); margin-bottom:8px; }
+  h1 { font-size:48px; font-weight:400; letter-spacing:.02em; margin:0 0 8px; }
+  h1 .grad { background:var(--gradient-secondary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .sub { color:var(--fg-2); font-size:18px; max-width:720px; margin:0 0 40px; }
+  h2 { font-size:24px; font-weight:600; margin:48px 0 16px; letter-spacing:.01em; }
+  .swatches { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
+  .sw { border-radius:12px; overflow:hidden; border:1px solid var(--border); background:#fff; }
+  .sw .chip { height:120px; }
+  .sw .meta { padding:14px 16px; }
+  .sw .name { font-weight:600; font-size:14px; color:var(--fg); margin-bottom:2px; letter-spacing:0; text-transform:none;}
+  .sw .token { font-family:var(--font-mono); font-size:12px; color:var(--fg-3); }
+  .sw .hex { font-family:var(--font-mono); font-size:12px; color:var(--fg-2); margin-top:6px;}
+  .grads { display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .gradcard { border-radius:16px; overflow:hidden; border:1px solid var(--border); }
+  .gradcard .preview { height:180px; position:relative; }
+  .gradcard .preview .grain { position:absolute; inset:0; opacity:.15;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .gradcard .meta { padding:14px 18px; background:#fff; }
+  .gradcard .name { font-weight:600; font-size:15px; }
+  .gradcard .token { font-family:var(--font-mono); font-size:12px; color:var(--fg-3); margin-top:4px; }
+  .row3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .alpha { display:flex; gap:12px; align-items:center; padding:14px 18px; border-radius:12px; border:1px solid var(--border); background:#fff;}
+  .alpha .dot { width:36px; height:36px; border-radius:50%; flex-shrink:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Foundations · 01</div>
+  <h1>Color, in <span class="grad">five voices</span> of purple</h1>
+  <p class="sub">A single bold idea — purple — surrounded by white and a near-black <code>#1a1530</code> with a purple cast. The signature mid-tone <code>#8981d7</code> anchors every primary CTA and the SplashCursor trail.</p>
+
+  <h2>Brand purples</h2>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#8B5CF6"></div><div class="meta"><div class="name">Primary</div><div class="token">--primary-purple</div><div class="hex">#8B5CF6</div></div></div>
+    <div class="sw"><div class="chip" style="background:#a15fdf"></div><div class="meta"><div class="name">Secondary</div><div class="token">--secondary-purple</div><div class="hex">#a15fdf</div></div></div>
+    <div class="sw"><div class="chip" style="background:#8981d7"></div><div class="meta"><div class="name">Custom · workhorse</div><div class="token">--custom-purple</div><div class="hex">#8981d7</div></div></div>
+    <div class="sw"><div class="chip" style="background:#553b80"></div><div class="meta"><div class="name">Dark</div><div class="token">--dark-purple</div><div class="hex">#553b80</div></div></div>
+    <div class="sw"><div class="chip" style="background:#C4B5FD"></div><div class="meta"><div class="name">Light highlight</div><div class="token">--light-purple</div><div class="hex">#C4B5FD</div></div></div>
+    <div class="sw"><div class="chip" style="background:#E0E7FF"></div><div class="meta"><div class="name">Light lavender · borders</div><div class="token">--light-lavender</div><div class="hex">#E0E7FF</div></div></div>
+    <div class="sw"><div class="chip" style="background:#8bccb3"></div><div class="meta"><div class="name">Lavender green · accent</div><div class="token">--lavender-green</div><div class="hex">#8bccb3</div></div></div>
+    <div class="sw"><div class="chip" style="background:#4d64e6"></div><div class="meta"><div class="name">Main blue · skill tile</div><div class="token">--main-blue</div><div class="hex">#4d64e6</div></div></div>
+  </div>
+
+  <h2>Signature gradients <span style="font-weight:400; color:var(--fg-3); font-size:14px;">— always 135°</span></h2>
+  <div class="grads">
+    <div class="gradcard"><div class="preview" style="background:var(--gradient-hero)"><div class="grain"></div></div><div class="meta"><div class="name">--gradient-hero</div><div class="token">#271e3d → #9798ee → #233c63</div></div></div>
+    <div class="gradcard"><div class="preview" style="background:var(--gradient-secondary)"></div><div class="meta"><div class="name">--gradient-secondary <span style="font-weight:400;color:var(--fg-3)">· default text gradient</span></div><div class="token">#9288e3 → #594f93</div></div></div>
+    <div class="gradcard"><div class="preview" style="background:var(--gradient-primary)"></div><div class="meta"><div class="name">--gradient-primary</div><div class="token">#aa8bf1 → #8cb6fa</div></div></div>
+    <div class="gradcard"><div class="preview" style="background:var(--gradient-background)"></div><div class="meta"><div class="name">--gradient-background</div><div class="token">#667eea → #af94f1</div></div></div>
+  </div>
+
+  <h2>Per-project accents <span style="font-weight:400;color:var(--fg-3);font-size:14px">— overrideable per case study</span></h2>
+  <div class="row3">
+    <div class="gradcard"><div class="preview" style="background:var(--grad-game);height:120px"></div><div class="meta"><div class="name">Game</div><div class="token">#FF6B6B → #4ECDC4</div></div></div>
+    <div class="gradcard"><div class="preview" style="background:var(--grad-green);height:120px"></div><div class="meta"><div class="name">Green</div><div class="token">#10B981 → #059669</div></div></div>
+    <div class="gradcard"><div class="preview" style="background:var(--grad-pink);height:120px"></div><div class="meta"><div class="name">Pink</div><div class="token">#EC4899 → #BE185D</div></div></div>
+  </div>
+
+  <h2>Surfaces & ink</h2>
+  <div class="row3">
+    <div class="alpha"><div class="dot" style="background:#fff;border:1px solid var(--border)"></div><div><div class="name" style="font-weight:600">Background</div><div class="token">#ffffff</div></div></div>
+    <div class="alpha"><div class="dot" style="background:#1a1530"></div><div><div class="name" style="font-weight:600">Ink (purple-cast)</div><div class="token">#1a1530</div></div></div>
+    <div class="alpha"><div class="dot" style="background:#f8f7fc;border:1px solid var(--border)"></div><div><div class="name" style="font-weight:600">Soft surface</div><div class="token">#f8f7fc</div></div></div>
+  </div>
+</div>
+</body>
+</html>

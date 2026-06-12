@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Brand — Qingyu Cao Design System</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin:0; padding:0; background:#000; color:#fff; font-family:var(--font-body); }
+  .stage { position:relative; min-height:780px; background:var(--gradient-hero); overflow:hidden; padding:64px 56px; }
+  .grain { position:absolute; inset:0; opacity:.18; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .aurora { position:absolute; inset:-50%; transform:rotate(35deg); pointer-events:none; }
+  .aurora::before, .aurora::after { content:''; position:absolute; inset:0;
+    background:linear-gradient(90deg, transparent 0%, rgba(151,152,238,.4) 18%, rgba(139,92,246,.3) 26%, transparent 38%, transparent 56%, rgba(167,139,250,.35) 70%, transparent 84%); }
+  .aurora::after { background:linear-gradient(90deg, transparent 0%, rgba(139,92,246,.25) 12%, transparent 30%, rgba(151,152,238,.28) 50%, transparent 70%, rgba(115,99,234,.25) 88%, transparent 100%); opacity:.7;}
+  .wrap { position:relative; max-width:1100px; margin:0 auto; }
+  .eyebrow { font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:24px; }
+  .name { font-family:var(--font-display); font-size:88px; font-weight:400; letter-spacing:.02em; line-height:1; margin:0;}
+  .title { font-family:var(--font-display); font-size:30px; font-weight:300; letter-spacing:.04em; color:rgba(255,255,255,.85); margin:16px 0 0;}
+  .tag { font-family:'Tenor Sans', serif; font-size:24px; color:rgba(255,255,255,.85); letter-spacing:.06em; margin-top:64px;}
+  .lede { max-width:640px; font-size:17px; line-height:1.7; color:rgba(255,255,255,.78); margin:24px 0 56px; }
+  .lede b { color:#fff; font-weight:500; }
+  .ctas { display:flex; gap:16px; flex-wrap:wrap;}
+  .btn { padding:14px 28px; font-size:16px; font-weight:500; border-radius:9999px; cursor:pointer; transition:all .3s ease;}
+  .btn:hover { transform:scale(1.05); }
+  .btn-primary { background:#fff; color:var(--custom-purple); border:none;}
+  .btn-outline { background:transparent; color:#fff; border:2px solid #fff;}
+  .pulse { position:absolute; border-radius:50%; background:rgba(255,255,255,.08); filter:blur(20px); }
+  .pulse.a { width:120px; height:120px; top:60px; right:120px;}
+  .pulse.b { width:200px; height:200px; bottom:80px; left:60px; background:rgba(151,152,238,.18); filter:blur(60px);}
+  .meta-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:80px; padding-top:40px; border-top:1px solid rgba(255,255,255,.15);}
+  .meta-strip > div .lab { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:6px;}
+  .meta-strip > div .val { font-family:var(--font-display); font-weight:400; font-size:22px; letter-spacing:.02em;}
+  .meta-strip > div .val .grad { background:linear-gradient(135deg,#aa8bf1,#8cb6fa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+  .badges { display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;}
+  .badge { font-size:12px; padding:4px 12px; border-radius:9999px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.85); letter-spacing:.04em;}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="grain"></div>
+  <div class="aurora"></div>
+  <div class="pulse a"></div>
+  <div class="pulse b"></div>
+  <div class="wrap">
+    <div class="eyebrow">Personal portfolio · est. 2025</div>
+    <h1 class="name">Qingyu Cao</h1>
+    <div class="title">Creative Developer &amp; Designer</div>
+    <div class="tag">Builds, ships, learns.</div>
+    <p class="lede">A Product Designer who <b>builds, tests, and ships</b>. I combine design intuition with engineering depth to <b>launch real products</b> in fast-moving environments.</p>
+    <div class="ctas">
+      <button class="btn btn-primary">View My Work</button>
+      <button class="btn btn-outline">↓ Resume</button>
+    </div>
+
+    <div class="meta-strip">
+      <div>
+        <div class="lab">Stack</div>
+        <div class="val"><span class="grad">React 19 · Vite · Tailwind v4</span></div>
+      </div>
+      <div>
+        <div class="lab">Disciplines</div>
+        <div class="badges"><span class="badge">UIUX</span><span class="badge">Game</span><span class="badge">AI</span><span class="badge">Research</span></div>
+      </div>
+      <div>
+        <div class="lab">Languages</div>
+        <div class="val">EN · 中文</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

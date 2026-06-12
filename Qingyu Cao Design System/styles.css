@@ -1,0 +1,5 @@
+/* ============================================================
+   Qingyu Cao Design System — global entry stylesheet.
+   Consumers link THIS single file; it pulls in all token layers.
+   ============================================================ */
+@import url('colors_and_type.css');

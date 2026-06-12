@@ -1,0 +1,175 @@
+/* ============================================================
+   More Projects — Card direction explorations
+   5 distinct design directions on a dark slab canvas.
+   Each card is sized to fit a single-column artboard.
+   ============================================================ */
+
+* { box-sizing: border-box; }
+body { margin: 0; background: #0a0814; color: #fff; font-family: var(--font-display); }
+
+/* Canvas dark backdrop matches the More Projects section */
+.exp-bg { background:
+  radial-gradient(ellipse 80% 60% at 20% 50%, rgba(138,129,215,0.18), transparent 50%),
+  linear-gradient(160deg, #1a1530 0%, #2a2450 35%, #433a6b 70%, #3d3560 100%);
+  min-height: 100vh; }
+
+/* ---------- Common card frame for all directions ---------- */
+.exp-card { width: 320px; cursor: pointer; transition: all .35s var(--ease-out); }
+
+/* ============================================================
+   A — EDITORIAL MAGAZINE
+   Big serial number, generous type, hairline divider, no chrome.
+   ============================================================ */
+.exp-a { background: rgba(255,255,255,.02); padding: 32px 28px; border-radius: 0;
+  border-top: 1px solid rgba(255,255,255,.18); border-bottom: 1px solid rgba(255,255,255,.05);
+  display: flex; flex-direction: column; gap: 16px; height: 480px; }
+.exp-a-num { font-family: var(--font-serif); font-size: 14px; font-weight: 400;
+  color: rgba(196,181,253,.65); letter-spacing: .25em; }
+.exp-a-img { aspect-ratio: 4/3; background: #1a1530; overflow: hidden; }
+.exp-a-img img { width: 100%; height: 100%; object-fit: cover; }
+.exp-a-title { font-family: var(--font-serif); font-size: 28px; font-weight: 400;
+  line-height: 1.1; color: #fff; letter-spacing: -.01em; margin-top: auto; }
+.exp-a-meta { display: flex; gap: 16px; font-size: 11px; letter-spacing: .15em;
+  text-transform: uppercase; color: rgba(255,255,255,.5); padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.1); }
+.exp-a-tags { display: flex; gap: 12px; }
+.exp-a-tags span { color: rgba(196,181,253,.7); }
+.exp-a:hover { background: rgba(255,255,255,.04); }
+.exp-a:hover .exp-a-num { color: #c4b5fd; }
+
+/* ============================================================
+   B — BRUTALIST MONO
+   Sharp borders, monospaced metadata, alarming color block.
+   ============================================================ */
+.exp-b { background: #0d0a1f; padding: 0; border: 2px solid rgba(196,181,253,.85);
+  height: 480px; display: flex; flex-direction: column; transition: all .2s ease; }
+.exp-b:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 0 var(--custom-purple); }
+.exp-b-bar { background: var(--custom-purple); padding: 8px 16px; display: flex;
+  justify-content: space-between; align-items: center; font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: #fff; }
+.exp-b-bar .dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; }
+.exp-b-img { aspect-ratio: 16/10; background: #1a1530; overflow: hidden;
+  border-bottom: 2px solid rgba(196,181,253,.85); }
+.exp-b-img img { width: 100%; height: 100%; object-fit: cover; }
+.exp-b-body { padding: 24px 20px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.exp-b-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.exp-b-tags span { font-family: var(--font-mono); font-size: 10px; padding: 2px 8px;
+  border: 1px solid rgba(196,181,253,.5); color: rgba(196,181,253,.95);
+  letter-spacing: .1em; text-transform: uppercase; }
+.exp-b-title { font-family: var(--font-display); font-size: 22px; font-weight: 700;
+  line-height: 1.15; color: #fff; letter-spacing: -.02em; text-transform: uppercase; }
+.exp-b-meta { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.45);
+  letter-spacing: .1em; margin-top: auto; padding-top: 12px;
+  border-top: 1px dashed rgba(255,255,255,.15); display: flex; justify-content: space-between; }
+
+/* ============================================================
+   C — GLASS STACK
+   Frosted glass with subtle inner glow, layered tags.
+   ============================================================ */
+.exp-c { position: relative; height: 480px; border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.02) 100%);
+  border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(20px);
+  overflow: hidden; transition: all .4s var(--ease-out); }
+.exp-c::before { content: ''; position: absolute; top: 0; left: 30%; right: 30%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196,181,253,.6), transparent); }
+.exp-c:hover { transform: translateY(-6px) scale(1.01); border-color: rgba(196,181,253,.45);
+  box-shadow: 0 30px 60px -20px rgba(138,129,215,.5), inset 0 1px 0 rgba(255,255,255,.15); }
+.exp-c-img { aspect-ratio: 16/10; margin: 16px 16px 0; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(135deg, #2d2358 0%, #1a1530 100%); position: relative; }
+.exp-c-img img { width: 100%; height: 100%; object-fit: cover; }
+.exp-c-img-glow { position: absolute; top: -20%; left: 30%; width: 60%; height: 80%;
+  background: radial-gradient(ellipse, rgba(196,181,253,.35), transparent 70%); filter: blur(20px); }
+.exp-c-body { padding: 20px 22px; }
+.exp-c-tags { display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 14px;
+  background: rgba(0,0,0,.25); border-radius: 9999px; border: 1px solid rgba(255,255,255,.06); }
+.exp-c-tags span { font-size: 10px; padding: 4px 10px; border-radius: 9999px;
+  color: rgba(196,181,253,.95); font-weight: 500; letter-spacing: .04em;
+  background: rgba(196,181,253,.12); }
+.exp-c-title { font-size: 20px; font-weight: 600; color: #fff; margin: 0 0 8px; line-height: 1.25; }
+.exp-c-brief { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.55; margin-bottom: 16px; }
+.exp-c-foot { display: flex; justify-content: space-between; align-items: center;
+  padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08); }
+.exp-c-techs { font-family: var(--font-mono); font-size: 10px; color: rgba(196,181,253,.55); }
+.exp-c-arrow { width: 28px; height: 28px; border-radius: 50%; background: var(--custom-purple);
+  display: flex; align-items: center; justify-content: center; color: #fff; transition: transform .3s ease; }
+.exp-c:hover .exp-c-arrow { transform: rotate(-45deg); }
+
+/* ============================================================
+   D — ASYMMETRIC POSTER
+   Image floats above card, big title rotated text accent.
+   ============================================================ */
+.exp-d { position: relative; height: 480px; padding: 80px 24px 24px;
+  background: rgba(20,16,50,.6); border: 1px solid rgba(196,181,253,.18);
+  border-radius: 8px; transition: all .4s ease; display: flex; flex-direction: column; }
+.exp-d:hover { background: rgba(30,24,70,.85); border-color: rgba(196,181,253,.4); }
+.exp-d-float { position: absolute; top: -40px; left: 24px; right: 24px; height: 220px;
+  border-radius: 8px; overflow: hidden; box-shadow: 0 20px 50px -10px rgba(0,0,0,.7),
+  0 0 0 1px rgba(196,181,253,.2); transition: transform .4s var(--ease-out);
+  background: #1a1530; }
+.exp-d-float img { width: 100%; height: 100%; object-fit: cover; }
+.exp-d:hover .exp-d-float { transform: translateY(-8px); }
+.exp-d-side { position: absolute; top: 80px; right: -12px; transform: rotate(90deg);
+  transform-origin: right top; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .35em; color: rgba(196,181,253,.5); text-transform: uppercase; white-space: nowrap; }
+.exp-d-num { font-family: var(--font-display); font-size: 48px; font-weight: 700;
+  color: rgba(196,181,253,.18); line-height: 1; letter-spacing: -.03em;
+  margin-top: 180px; margin-bottom: 12px; }
+.exp-d-title { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.2;
+  letter-spacing: -.01em; margin: 0 0 10px; }
+.exp-d-brief { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.exp-d-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.exp-d-tags span { font-size: 10px; padding: 3px 9px; border-radius: 9999px;
+  background: rgba(196,181,253,.1); color: rgba(196,181,253,.9);
+  border: 1px solid rgba(196,181,253,.2); letter-spacing: .04em; }
+
+/* ============================================================
+   E — HOVER REVEAL MINIMAL
+   Title only at rest. Hover slides up the rest of the card.
+   ============================================================ */
+.exp-e { position: relative; height: 480px; border-radius: 16px; overflow: hidden;
+  background: #0d0a1f; border: 1px solid rgba(196,181,253,.15); transition: all .4s ease; }
+.exp-e:hover { border-color: rgba(196,181,253,.5); }
+.exp-e-img { position: absolute; inset: 0; }
+.exp-e-img img { width: 100%; height: 100%; object-fit: cover; opacity: .55;
+  transition: opacity .4s ease, transform 1.2s var(--ease-out); }
+.exp-e:hover .exp-e-img img { opacity: .85; transform: scale(1.05); }
+.exp-e-img-fallback { position: absolute; inset: 0;
+  background: linear-gradient(160deg, #2d2358 0%, #1a1530 60%, #1a1530 100%); }
+.exp-e-img-label { position: absolute; bottom: 24px; left: 24px; right: 24px;
+  font-family: var(--font-display); font-weight: 700; font-size: 36px;
+  letter-spacing: -.02em; color: rgba(255,255,255,.18); line-height: .95;
+  text-transform: uppercase; }
+.exp-e-overlay { position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(13,10,31,.95) 0%, rgba(13,10,31,.7) 50%, transparent 100%); }
+.exp-e-body { position: absolute; inset: 0; padding: 24px;
+  display: flex; flex-direction: column; justify-content: flex-end; }
+.exp-e-tags { display: flex; gap: 6px; flex-wrap: wrap; opacity: 0;
+  transform: translateY(8px); transition: all .35s ease; margin-bottom: 12px; }
+.exp-e:hover .exp-e-tags { opacity: 1; transform: translateY(0); }
+.exp-e-tags span { font-size: 10px; padding: 3px 10px; border-radius: 9999px;
+  background: rgba(196,181,253,.18); color: #fff; letter-spacing: .04em; }
+.exp-e-title { font-family: var(--font-display); font-size: 24px; font-weight: 600;
+  color: #fff; margin: 0 0 8px; line-height: 1.2; transition: transform .35s ease; }
+.exp-e:hover .exp-e-title { transform: translateY(-2px); }
+.exp-e-brief { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.55;
+  max-height: 0; overflow: hidden; transition: max-height .4s ease, margin .4s ease; }
+.exp-e:hover .exp-e-brief { max-height: 80px; margin-bottom: 14px; }
+.exp-e-cta { font-size: 12px; color: rgba(196,181,253,.95); letter-spacing: .15em;
+  text-transform: uppercase; font-weight: 500; opacity: 0; transition: opacity .35s ease .1s; }
+.exp-e:hover .exp-e-cta { opacity: 1; }
+
+/* ============================================================
+   Direction labels and details sub-text on canvas
+   ============================================================ */
+.exp-label { font-family: var(--font-display); font-size: 13px; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase; color: rgba(196,181,253,.85);
+  margin-bottom: 8px; }
+.exp-desc { font-size: 12px; color: rgba(255,255,255,.55); line-height: 1.6;
+  max-width: 320px; margin-bottom: 24px; }
+.exp-stack { display: flex; flex-direction: column; gap: 24px; padding: 32px;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(138,129,215,0.22), transparent 60%),
+    linear-gradient(160deg, #1a1530 0%, #221c45 50%, #2d2456 100%);
+  height: 100%; }
+.exp-stack .exp-label { color: #fff; }
+.exp-stack .exp-desc { color: rgba(255,255,255,.7); }

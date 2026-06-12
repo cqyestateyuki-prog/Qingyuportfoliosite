@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hero Motion Lab — Qingyu Cao</title>
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<link rel="stylesheet" href="hero.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="hero.jsx"></script>
+<script type="text/babel">
+const { useTweaks, TweaksPanel, TweakSection, TweakSlider, TweakToggle, TweakRadio, TweakSelect } = window;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "bgMode": "fluid",
+  "nameReveal": "decrypt",
+  "cursorTrail": true,
+  "magnetic": true,
+  "parallax": true,
+  "grain": true,
+  "intensity": 60
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  return (
+    <div className="hm-stage">
+      <window.Hero t={t} />
+      <window.CursorTrail enabled={t.cursorTrail} intensity={t.intensity} />
+
+      <TweaksPanel>
+        <TweakSection label="Background" />
+        <TweakSelect label="Aurora style" value={t.bgMode}
+          options={[
+            { value: "fluid", label: "Fluid (follows cursor)" },
+            { value: "curtain", label: "Curtain (light bands)" },
+            { value: "mesh", label: "Mesh (gradient drift)" },
+          ]}
+          onChange={(v) => setTweak("bgMode", v)} />
+        <TweakToggle label="Film grain" value={t.grain} onChange={(v) => setTweak("grain", v)} />
+
+        <TweakSection label="Headline reveal" />
+        <TweakSelect label="Name effect" value={t.nameReveal}
+          options={[
+            { value: "decrypt", label: "Decrypt (letter scramble)" },
+            { value: "typewriter", label: "Typewriter" },
+            { value: "fadeup", label: "Blur fade-up" },
+            { value: "shimmer", label: "Shimmer sweep" },
+          ]}
+          onChange={(v) => setTweak("nameReveal", v)} />
+
+        <TweakSection label="Cursor & depth" />
+        <TweakToggle label="Particle trail" value={t.cursorTrail} onChange={(v) => setTweak("cursorTrail", v)} />
+        <TweakToggle label="Magnetic buttons" value={t.magnetic} onChange={(v) => setTweak("magnetic", v)} />
+        <TweakToggle label="Parallax depth" value={t.parallax} onChange={(v) => setTweak("parallax", v)} />
+
+        <TweakSection label="Motion" />
+        <TweakSlider label="Intensity" value={t.intensity} min={20} max={100} step={5} unit="%"
+          onChange={(v) => setTweak("intensity", v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

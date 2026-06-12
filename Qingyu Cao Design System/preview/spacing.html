@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Spacing & Elevation — Qingyu Cao Design System</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin:0; padding:48px; background:var(--bg-soft); }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .eyebrow { font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg-3); margin-bottom:8px; }
+  h1 { font-size:48px; font-weight:400; letter-spacing:.02em; margin:0 0 8px; }
+  h1 .grad { background:var(--gradient-secondary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .sub { color:var(--fg-2); font-size:18px; max-width:720px; margin:0 0 40px; }
+  h2 { font-size:24px; font-weight:600; margin:48px 0 16px; }
+
+  .scale { display:flex; align-items:flex-end; gap:18px; padding:32px; background:#fff; border:1px solid var(--border); border-radius:16px;}
+  .step { display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .step .bar { background:var(--gradient-secondary); width:24px; border-radius:6px;}
+  .step .name { font-family:var(--font-mono); font-size:11px; color:var(--fg-3);}
+  .step .val { font-family:var(--font-mono); font-size:13px; color:var(--fg);}
+
+  .radii { display:grid; grid-template-columns:repeat(6,1fr); gap:16px;}
+  .rcard { background:#fff; border:1px solid var(--border); padding:20px; text-align:center;}
+  .rcard .box { background:var(--gradient-primary); height:64px; margin-bottom:12px;}
+  .rcard .name { font-weight:600; font-size:13px;}
+  .rcard .token { font-family:var(--font-mono); font-size:11px; color:var(--fg-3);}
+
+  .shadows { display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .scard { padding:32px; border-radius:12px; background:#fff;}
+  .scard .label { font-weight:600; font-size:14px; margin-bottom:6px;}
+  .scard .desc { font-size:12px; color:var(--fg-3); font-family:var(--font-mono);}
+
+  .glow-row { background:var(--dark-section-bg); padding:48px; border-radius:16px;}
+  .glow-row .grid { display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .gcard { background:rgba(255,255,255,.04); border:1px solid var(--on-dark-border); border-radius:12px; padding:32px; color:#fff; box-shadow:var(--glow-rest); transition:all .5s ease;}
+  .gcard.hover { box-shadow:var(--glow-hover); border-color:var(--on-dark-border-strong); transform:translateY(-4px);}
+  .gcard .lab { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:8px;}
+  .gcard .ttl { font-size:20px; font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Foundations · 03</div>
+  <h1>Spacing, radii &amp; <span class="grad">the signature glow</span></h1>
+  <p class="sub">Layouts breathe at <code>py-20</code> (80px). Cards round to <code>12px</code>. CTAs round to a pill. The system's most distinctive elevation is a 3-layer purple glow on dark cards — used sparingly, but unmistakable.</p>
+
+  <h2>Spacing scale (8pt)</h2>
+  <div class="scale">
+    <div class="step"><div class="bar" style="height:4px"></div><div class="name">space-1</div><div class="val">4px</div></div>
+    <div class="step"><div class="bar" style="height:8px"></div><div class="name">space-2</div><div class="val">8px</div></div>
+    <div class="step"><div class="bar" style="height:12px"></div><div class="name">space-3</div><div class="val">12px</div></div>
+    <div class="step"><div class="bar" style="height:16px"></div><div class="name">space-4</div><div class="val">16px</div></div>
+    <div class="step"><div class="bar" style="height:24px"></div><div class="name">space-5</div><div class="val">24px</div></div>
+    <div class="step"><div class="bar" style="height:32px"></div><div class="name">space-6</div><div class="val">32px</div></div>
+    <div class="step"><div class="bar" style="height:48px"></div><div class="name">space-8</div><div class="val">48px</div></div>
+    <div class="step"><div class="bar" style="height:64px"></div><div class="name">space-10</div><div class="val">64px</div></div>
+    <div class="step"><div class="bar" style="height:80px"></div><div class="name">space-12</div><div class="val">80px · py-20</div></div>
+    <div class="step"><div class="bar" style="height:128px"></div><div class="name">space-16</div><div class="val">128px</div></div>
+  </div>
+
+  <h2>Radii</h2>
+  <div class="radii">
+    <div class="rcard" style="border-radius:6px"><div class="box" style="border-radius:6px"></div><div class="name">sm</div><div class="token">6px</div></div>
+    <div class="rcard" style="border-radius:8px"><div class="box" style="border-radius:8px"></div><div class="name">md</div><div class="token">8px</div></div>
+    <div class="rcard" style="border-radius:10px"><div class="box" style="border-radius:10px"></div><div class="name">base</div><div class="token">10px</div></div>
+    <div class="rcard" style="border-radius:12px"><div class="box" style="border-radius:12px"></div><div class="name">lg · cards</div><div class="token">12px</div></div>
+    <div class="rcard" style="border-radius:16px"><div class="box" style="border-radius:16px"></div><div class="name">xl</div><div class="token">16px</div></div>
+    <div class="rcard" style="border-radius:9999px"><div class="box" style="border-radius:9999px"></div><div class="name">pill · CTAs</div><div class="token">9999px</div></div>
+  </div>
+
+  <h2>Light shadows</h2>
+  <div class="shadows">
+    <div class="scard" style="box-shadow:var(--shadow-sm)"><div class="label">Subtle</div><div class="desc">--shadow-sm</div></div>
+    <div class="scard" style="box-shadow:var(--shadow-md)"><div class="label">Base</div><div class="desc">--shadow-md</div></div>
+    <div class="scard" style="box-shadow:var(--shadow-card-hover)"><div class="label">Card hover · purple-tinted</div><div class="desc">0 20px 40px rgba(139,92,246,.15)</div></div>
+  </div>
+
+  <h2>Signature glow — dark card hover</h2>
+  <div class="glow-row">
+    <div class="grid">
+      <div class="gcard">
+        <div class="lab">Rest</div>
+        <div class="ttl">Music Encounter</div>
+      </div>
+      <div class="gcard hover">
+        <div class="lab">Hover</div>
+        <div class="ttl">Music Encounter</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

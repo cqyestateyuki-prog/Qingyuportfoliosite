@@ -92,6 +92,17 @@ const Showcase = ({ projects }) => {
             <div className="w-full lg:w-[32%] lg:min-w-[280px] flex-shrink-0 space-y-4 text-center lg:text-left font-['Poppins']">
               {/* 二级：项目类型标签 - 小且克制 */}
               <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                {project.year && (
+                  <span
+                    className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider text-gray-500"
+                    style={{ 
+                      backgroundColor: 'rgba(137, 129, 215, 0.1)', 
+                      color: 'var(--custom-purple)' 
+                    }}
+                  >
+                    {project.year}
+                  </span>
+                )}
                 {project.categories?.slice(0, 2).map((cat) => (
                   <span 
                     key={cat}
@@ -112,8 +123,8 @@ const Showcase = ({ projects }) => {
               </h3>
 
               {/* 三级：副标题/简介 - 弱化，行数限制 */}
-              <p className="text-base text-gray-600 font-light leading-snug line-clamp-2 max-w-sm mx-auto lg:mx-0">
-                {getLocalizedText(project.subtitle, language) || getLocalizedText(project.brief, language)?.substring(0, 80)}
+              <p className="text-base text-gray-600 font-light leading-snug line-clamp-3 max-w-sm mx-auto lg:mx-0">
+                {getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)}
               </p>
 
               {/* 行动链接 - 极简 */}

@@ -1,0 +1,144 @@
+/* Hero Motion Lab — styles. Tokens from ../../colors_and_type.css */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #0f0b1e; }
+#root { min-height: 100vh; }
+
+.hm-stage { position: relative; min-height: 100vh; }
+
+/* ---------- Hero shell ---------- */
+.hm-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 32px 96px;
+  background: var(--gradient-hero);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Film grain */
+.hm-hero.has-grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .16; z-index: 4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Background mode: curtain (CSS aurora bands) ---------- */
+.hm-curtain { position: absolute; inset: -50%; transform: rotate(40deg); pointer-events: none; overflow: hidden; z-index: 0; }
+.hm-curtain-inner {
+  position: absolute; inset: 0; width: 200%;
+  background: linear-gradient(90deg, transparent 0%, transparent 12%, rgba(151,152,238,.45) 18%, rgba(139,92,246,.35) 22%, transparent 32%, transparent 42%, rgba(167,139,250,.4) 48%, rgba(139,92,246,.3) 52%, transparent 58%, transparent 68%, rgba(115,99,234,.35) 74%, rgba(151,152,238,.4) 78%, transparent 84%, transparent 100%);
+  animation: hm-curtain 20s linear infinite;
+}
+@keyframes hm-curtain { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+/* ---------- Background mode: mesh (animated gradient mesh) ---------- */
+.hm-mesh {
+  position: absolute; inset: -20%; z-index: 0; pointer-events: none; filter: blur(40px);
+  background:
+    radial-gradient(40% 50% at 20% 30%, rgba(151,152,238,.55), transparent 60%),
+    radial-gradient(35% 45% at 80% 25%, rgba(139,92,246,.5), transparent 60%),
+    radial-gradient(45% 55% at 70% 80%, rgba(77,100,230,.45), transparent 60%),
+    radial-gradient(40% 50% at 25% 75%, rgba(161,95,223,.45), transparent 60%);
+  background-size: 200% 200%;
+  animation: hm-mesh 24s ease-in-out infinite alternate;
+}
+@keyframes hm-mesh {
+  0%   { background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%; }
+  100% { background-position: 30% 20%, 70% 30%, 60% 70%, 40% 80%; }
+}
+
+/* ---------- Fluid aurora canvas ---------- */
+.hm-aurora-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .9; }
+
+/* ---------- Cursor trail (viewport-fixed) ---------- */
+.hm-trail-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 60; pointer-events: none; }
+
+/* ---------- Decorative pulses ---------- */
+.hm-pulse { position: absolute; border-radius: 50%; filter: blur(40px); z-index: 1; pointer-events: none; }
+.hm-pulse-a { width: 90px; height: 90px; top: 12%; left: 8%; background: rgba(255,255,255,.10); animation: hm-pulse 3s ease-in-out infinite; }
+.hm-pulse-b { width: 140px; height: 140px; bottom: 14%; right: 9%; background: rgba(196,181,253,.10); animation: hm-pulse 3s ease-in-out 1s infinite; }
+.hm-pulse-c { width: 70px; height: 70px; top: 48%; right: 14%; background: rgba(255,255,255,.10); animation: hm-pulse 3s ease-in-out .5s infinite; }
+@keyframes hm-pulse { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+
+/* ---------- Hero content ---------- */
+.hm-hero-inner {
+  position: relative; z-index: 5; max-width: 920px; text-align: center;
+  --px: 0px; --py: 0px;
+}
+.hm-hero-inner > * { transform: translate(calc(var(--px) * var(--depth, 0.5)), calc(var(--py) * var(--depth, 0.5))); transition: transform .05s linear; }
+
+.hm-eyebrow {
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); margin-bottom: 28px;
+  animation: hm-rise .8s var(--ease-out) both;
+}
+.hm-h1 {
+  font-family: var(--font-display); font-weight: 400; line-height: 1;
+  font-size: clamp(54px, 9vw, 96px); color: #fff; margin: 0 0 22px; letter-spacing: .02em;
+  cursor: pointer; user-select: none; min-height: 1em;
+}
+.hm-sub {
+  font-family: var(--font-display); font-size: clamp(22px, 3.2vw, 32px); font-weight: 300;
+  color: rgba(255,255,255,.9); letter-spacing: .04em; margin-bottom: 30px;
+  animation: hm-rise 1s var(--ease-out) .15s both;
+}
+.hm-lede {
+  font-family: var(--font-body); font-size: clamp(16px, 2vw, 19px); line-height: 1.7;
+  color: rgba(255,255,255,.78); max-width: 640px; margin: 0 auto 44px;
+  animation: hm-rise 1s var(--ease-out) .3s both;
+}
+.hm-lede b { color: #fff; font-weight: 500; }
+
+.hm-cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: hm-rise 1s var(--ease-out) .45s both; }
+
+@keyframes hm-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; } }
+
+/* ---------- Name reveal effects ---------- */
+.hm-decrypt { display: inline-flex; }
+.hm-decrypt .hm-d-off { color: var(--light-purple); opacity: .85; }
+.hm-decrypt .hm-d-on { color: #fff; }
+
+.hm-typer .hm-caret { color: var(--light-purple); font-weight: 300; margin-left: 2px; animation: hm-blink 1s step-end infinite; }
+@keyframes hm-blink { 50% { opacity: 0 !important; } }
+
+.hm-fadeup { display: inline-block; animation: hm-namefade 1s var(--ease-out) both; }
+@keyframes hm-namefade { from { opacity: 0; transform: translateY(36px); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+
+.hm-shimmer {
+  background: linear-gradient(100deg, #fff 30%, #C4B5FD 45%, #fff 60%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: hm-shimmer 3.5s linear infinite;
+}
+@keyframes hm-shimmer { 0% { background-position: 180% 0; } 100% { background-position: -80% 0; } }
+
+/* ---------- Buttons ---------- */
+.hm-btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px;
+  border: none; border-radius: 9999px; font-family: var(--font-body); font-size: 17px; font-weight: 500;
+  letter-spacing: .02em; cursor: pointer; transition: transform .3s var(--ease-out), box-shadow .3s ease, background .3s ease, color .3s ease;
+}
+.hm-btn.hm-magnetic { transition: transform .12s var(--ease-out), box-shadow .3s ease, background .3s ease, color .3s ease; }
+.hm-btn-light { background: #fff; color: var(--custom-purple); }
+.hm-btn-light:hover { box-shadow: 0 0 30px rgba(255,255,255,.35); }
+.hm-btn-outline { background: rgba(255,255,255,.04); color: #fff; border: 2px solid rgba(255,255,255,.65); }
+.hm-btn-outline:hover { background: rgba(255,255,255,.12); border-color: #fff; box-shadow: var(--glow-cta); }
+.hm-btn:not(.hm-magnetic):hover { transform: scale(1.05); }
+
+.hm-replay {
+  display: inline-block; margin-top: 26px; background: none; border: none; cursor: pointer;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.4); transition: color .3s ease;
+}
+.hm-replay:hover { color: rgba(255,255,255,.85); }
+
+/* ---------- Chevron ---------- */
+.hm-chevron { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.6); z-index: 5; animation: hm-bounce 2.2s ease-in-out infinite; }
+@keyframes hm-bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-12px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-curtain-inner, .hm-mesh, .hm-pulse, .hm-chevron, .hm-shimmer, .hm-eyebrow, .hm-sub, .hm-lede, .hm-cta-row { animation: none !important; }
+}

@@ -1,0 +1,239 @@
+/* ============================================================
+   Qingyu Cao Portfolio — Colors & Type
+   Source of truth for color tokens, type tokens, and semantic
+   text styles. Mirrors src/App.css from the portfolio repo.
+   ============================================================ */
+
+/* ---------- Fonts (Google Fonts CDN) ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tenor+Sans&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ============== COLOR TOKENS ============== */
+
+  /* Brand purples (the system's identity) */
+  --primary-purple: #8B5CF6;     /* primary CTA / accent */
+  --secondary-purple: #a15fdf;   /* secondary accent */
+  --dark-purple: #553b80;        /* deep wells */
+  --light-purple: #C4B5FD;       /* lavender highlights */
+  --light-lavender: #E0E7FF;     /* tints / borders */
+  --custom-purple: #8981d7;      /* signature mid-tone, used in CTAs and cursor */
+  --lavender-green: #8bccb3;     /* organic accent */
+  --main-blue: #4d64e6;          /* skill icon backgrounds */
+
+  /* Signature gradients (always 135deg) */
+  --gradient-primary:    linear-gradient(135deg, #aa8bf1 0%, #8cb6fa 100%); /* @kind color */
+  --gradient-secondary:  linear-gradient(135deg, #9288e3 0%, #594f93 100%); /* @kind color */
+  --gradient-background: linear-gradient(135deg, #667eea 0%, #af94f1 100%); /* @kind color */
+  --gradient-hero:       linear-gradient(135deg, #271e3d 0%, #9798ee 60%, #233c63 100%); /* @kind color */
+
+  /* Dark "More Projects" surface — deep purple-navy */
+  --dark-section-bg: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(138,129,215,0.18), transparent 50%),
+                     linear-gradient(160deg, #1a1530 0%, #2a2450 35%, #433a6b 70%, #3d3560 100%); /* @kind color */
+  --dark-section-solid: #1a1530; /* @kind color */
+
+  /* Foreground / background neutrals (light mode) */
+  --bg:        #ffffff;
+  --bg-soft:   #f8f7fc;
+  --fg:        #1a1530;       /* near-black with a purple cast */
+  --fg-2:      #4b5563;       /* gray-600, body */
+  --fg-3:      #6b7280;       /* gray-500, captions */
+  --fg-muted:  #9ca3af;       /* gray-400 */
+  --border:    var(--light-lavender);
+  --border-soft: rgba(138, 129, 215, 0.2);
+
+  /* On-dark overlays (used over hero / dark section) */
+  --on-dark-fg:        rgba(255, 255, 255, 0.95);
+  --on-dark-fg-2:      rgba(255, 255, 255, 0.80);
+  --on-dark-fg-3:      rgba(255, 255, 255, 0.60);
+  --on-dark-fg-muted:  rgba(255, 255, 255, 0.45);
+  --on-dark-border:    rgba(138, 129, 215, 0.4);
+  --on-dark-border-strong: rgba(138, 129, 215, 0.85);
+  --on-dark-card-bg:   rgba(255, 255, 255, 0.04);
+
+  /* Tag / chip palettes (from About.jsx) */
+  --tag-purple-bg: #f3e8ff;  --tag-purple-fg: #6b21a8;
+  --tag-blue-bg:   #dbeafe;  --tag-blue-fg:   #1d4ed8;
+  --tag-green-bg:  #dcfce7;  --tag-green-fg:  #15803d;
+
+  /* Per-project accent gradients (from PROJECT_COLOR_THEME_README) */
+  --grad-game:   linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%); /* @kind color */
+  --grad-green:  linear-gradient(135deg, #10B981 0%, #059669 100%); /* @kind color */
+  --grad-pink:   linear-gradient(135deg, #EC4899 0%, #BE185D 100%); /* @kind color */
+  --grad-blue:   linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); /* @kind color */
+
+  /* Shadows */
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 20px 40px rgba(139, 92, 246, 0.15);
+
+  /* Glow shadows for dark cards (signature look) */
+  --glow-rest: 0 0 20px rgba(138, 129, 215, 0.12),
+               0 0 0 1px rgba(138, 129, 215, 0.10),
+               0 4px 24px rgba(0, 0, 0, 0.40);
+  --glow-hover: 0 0 40px rgba(138, 129, 215, 0.45),
+                0 0 80px rgba(138, 129, 215, 0.20),
+                0 0 120px rgba(138, 129, 215, 0.08),
+                0 0 0 1px rgba(138, 129, 215, 0.50),
+                0 8px 32px rgba(0, 0, 0, 0.50);
+  --glow-cta: 0 0 25px rgba(138, 129, 215, 0.4);
+
+  /* ============== RADII ============== */
+  --radius-sm:  6px;
+  --radius-md:  8px;
+  --radius:     10px;       /* 0.625rem from --radius */
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-pill: 9999px;    /* CTAs, chips, dots */
+
+  /* ============== SPACING (8pt scale) ============== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+  --space-10: 64px;
+  --space-12: 80px;
+  --space-16: 128px;
+
+  /* ============== TYPE TOKENS ============== */
+  --font-display: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body:    'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif:   'Tenor Sans', Georgia, serif;       /* used in HeroSpotlight */
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Sizes (matches Tailwind utility scale used across pages) */
+  --text-xs:    12px;
+  --text-sm:    14px;
+  --text-base:  16px;
+  --text-lg:    18px;
+  --text-xl:    20px;
+  --text-2xl:   24px;
+  --text-3xl:   30px;
+  --text-4xl:   36px;     /* h2 mobile */
+  --text-5xl:   48px;     /* h1 mobile, h2 desktop */
+  --text-6xl:   60px;
+  --text-7xl:   72px;     /* h1 desktop hero */
+
+  /* Weights — note: portfolio uses font-normal (400) for big display titles
+     intentionally, with semibold (600) for component titles. */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line heights */
+  --lh-tight:   1.1; /* @kind font */    /* hero h1 */
+  --lh-snug:    1.25; /* @kind font */
+  --lh-normal:  1.5; /* @kind font */
+  --lh-relaxed: 1.625; /* @kind font */
+
+  /* Tracking */
+  --track-tight:  -0.01em; /* @kind font */
+  --track-normal: 0; /* @kind font */
+  --track-wide:   0.02em; /* @kind font */
+
+  /* ============== MOTION ============== */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --duration-fast:   150ms; /* @kind other */
+  --duration-base:   300ms; /* @kind other */
+  --duration-slow:   600ms; /* @kind other */
+  --duration-page:   1000ms; /* @kind other */ /* hero fade-in */
+}
+
+/* ============== SEMANTIC ELEMENT STYLES ============== */
+body {
+  font-family: var(--font-body);
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--fg);
+  letter-spacing: var(--track-wide);
+}
+
+/* Hero h1: 5xl mobile / 7xl desktop, font-normal, leading-tight */
+.h1, h1 {
+  font-size: var(--text-5xl);
+  font-weight: var(--weight-regular);
+  line-height: var(--lh-tight);
+}
+@media (min-width: 768px) {
+  .h1, h1 { font-size: var(--text-7xl); }
+}
+
+/* Section h2: 4xl mobile / 5xl desktop, font-normal */
+.h2, h2 {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-regular);
+  line-height: var(--lh-snug);
+  margin-bottom: var(--space-5);
+}
+@media (min-width: 768px) {
+  .h2, h2 { font-size: var(--text-5xl); }
+}
+
+/* Sub-heading h3 — used on cards */
+.h3, h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-snug);
+}
+
+/* Body */
+p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-2);
+}
+.lede {
+  font-size: var(--text-xl);
+  color: var(--fg-2);
+  line-height: var(--lh-relaxed);
+}
+.caption {
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}
+.meta {
+  font-size: var(--text-xs);
+  color: var(--fg-3);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+/* Hero subtitle treatment (Creative Developer & Designer) */
+.hero-subtitle {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-light);
+  color: var(--on-dark-fg-2);
+  letter-spacing: var(--track-wide);
+}
+
+/* Signature gradient text (used on Logo, h2 section titles) */
+.gradient-text {
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+code, kbd, pre {
+  font-family: var(--font-mono);
+}

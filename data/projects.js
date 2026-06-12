@@ -8,18 +8,19 @@ export const projects = [
     id: 'sparkup',
     featured: true, // 首页展示
     title: 'Spark Up',
+    year: '2026',
     subtitle: {
       en: 'Where Ideas Get Their First Spark',
       zh: '让创意迸发第一道火花'
     },
     categories: ['AI', 'Product Design', 'UIUX', 'Programming', 'Research'],
-    tags: ['Product Strategy', 'UX Design', 'UI Design', 'Figma', 'Next.js', 'Tailwind CSS', 'OpenAI API', 'Design System', 'JTBD', 'Kano Model'],
-    techTags: ['#Figma', '#Next.js', '#Tailwind CSS', '#OpenAI API', '#Design System'],
+    tags: ['Product Strategy', 'UX Design', 'UI Design', 'Figma Make', 'Google AI Studio', 'Next.js', 'Tailwind CSS', 'FastAPI', 'Firebase', 'OpenAI API', 'AWS', 'JTBD', 'Kano Model'],
+    techTags: ['#Figma Make', '#Google AI Studio', '#Next.js', '#Tailwind CSS', '#FastAPI', '#Firebase', '#OpenAI API', '#AWS'],
 
     thumbnail: '/media/projects/sparkup/hero.png',
     brief: {
-      en: 'A startup readiness tool that helps first-time founders understand where they stand, shape early ideas, and get light validation before they commit too much time or money.',
-      zh: '一个 AI 驱动的共创平台，通过客观评估、创意生成和社区验证，帮助早期创业者从「第一天」的迷茫走向行动。'
+      en: 'An AI platform that diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback.',
+      zh: '一个用于诊断创业准备度、AI 生成创业想法，并通过社区反馈验证想法的平台。'
     },
     heroImage: '/media/projects/sparkup/hero.png',
     heroVideo: null,
@@ -35,26 +36,37 @@ export const projects = [
       { en: 'Design System', zh: '设计系统' },
       { en: 'User Research', zh: '用户研究' }
     ],
-    collaborators: ['4-person team', 'Figma', 'Next.js', 'OpenAI API', 'GitHub'],
+    collaborators: ['Yi Bao (Team Lead)', 'Qingyu Cao (Designer)', 'Peixin Gao (Developer)', 'Jinjing Yi (Developer)'],
+
+    role: {
+      sectionTag: '4-person team · 3 months',
+      title: 'Product Lead & Design Lead',
+      responsibilities: [
+        'Led product strategy: user research (151 surveys, 10+ interviews), JTBD / Four Forces / Kano analysis, and the pivot from community platform to AI-first diagnostic',
+        'Owned end-to-end UX/UI: Figma sketches → Figma Make for prototyping and iteration → Google AI Studio for finalizing the component library and design system',
+        'Defined the Two-Tier Diagnostic framework (Lite 10Q + Enhanced 30Q+) and Guest-to-User conversion flow',
+        'Designed the Spark Forge interaction: constrained AI generation with drag-and-drop Idea Seeds, budget/scope inputs, and Forging animation',
+      ]
+    },
 
     colors: {
       heroGradient: 'linear-gradient(135deg, #0f172a 0%, #0081d4 100%)',
-      subtitleGradient: 'linear-gradient(135deg, #0369a1 0%, #0081d4 100%)',
+      subtitleGradient: 'linear-gradient(135deg, #0081d4 0%, #0081d4 100%)',
       underlineGradient: 'linear-gradient(135deg, #0081d4 0%, #0081d4 100%)',
       textHighlightColor: '#0081d4',
-      darkColor: '#0369a1',
+      darkColor: '#1a1a2e',
       lightColor: '#0081d4'
     },
 
     overview: {
-      mainTitle: 'An Honest Starting Point for First-Time Founders',
-      briefContent: '**SparkUp** is an [[AI-powered co-founder platform]] for people who are curious about starting a business but do not know where to begin. I designed it around a simple belief: early founders do not only need encouragement. They also need a clear read on their readiness, their blind spots, and the next step that feels realistic. The product brings together [[self-assessment, idea generation, and lightweight community validation]] so users can move from vague ambition to a more grounded plan.',
-      challenge: 'How might we help first-time founders understand whether they are ready, without making the experience feel intimidating or discouraging?',
+      mainTitle: 'A Reality Check for People With Startup Anxiety',
+      briefContent: '**SparkUp** is an [[AI-powered pre-entrepreneurship platform]] that [[diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback]]. It targets a specific audience: people who scroll through startup success stories on social media and feel a mix of envy and anxiety—wondering, "Could I do this too?" Instead of offering motivational platitudes, SparkUp gives users an [[honest diagnostic of where they stand]] across six dimensions, then uses AI to [[forge business ideas tailored to their strengths and constraints]]. The core loop: diagnose your readiness, forge ideas with AI, and validate them with the community.',
+      challenge: 'How might we help people with vague startup ambitions get an honest, low-pressure read on their readiness—without discouraging them or wasting their time?',
       challenges: [
-        'How might we help first-time founders understand whether they are ready, without making the experience feel intimidating or discouraging?',
-        'How might we make assessment engaging without overwhelming cold traffic?',
-        'How might we give honest feedback while still helping users feel capable of moving forward?',
-        'How might we design for AI latency so wait time feels like anticipation, not anxiety?'
+        'How might we help people with vague startup ambitions get an honest read on their readiness without discouraging them?',
+        'How might we make a diagnostic assessment feel low-stakes enough for cold traffic to complete?',
+        'How might we bridge the gap between "I want to start something" and "Here is something concrete I could start"?',
+        'How might we design around AI latency so wait time feels productive, not frustrating?'
       ],
       buttons: []
     },
@@ -64,15 +76,15 @@ export const projects = [
         id: 'the-problem',
         title: 'The Problem',
         sectionTag: 'The Problem',
-        mainTitle: 'People Wanted a Reality Check, Not Another Pep Talk',
-        briefContent: 'During research, I noticed a tension that felt very familiar: people were inspired by startup stories, but also quietly comparing themselves against them. Many were not asking for a founder community yet. They were asking, "Do I even have what it takes?" Existing tools often jump straight into networking, pitch polishing, or motivational content. That skips the earlier emotional moment where someone needs [[a low-pressure way to understand their own readiness]]. The problem became clearer: help users face the gap between interest and execution without turning that gap into shame.',
+        mainTitle: '"Am I Even Capable?"—The Question No One Was Answering',
+        briefContent: 'Our JTBD research surfaced a core tension: when people see startup stories on social media, their first question is not "Who can help me?"—it is [["Am I even capable?"]] Existing tools skip this entirely, jumping to networking, pitch decks, or motivational content. But the real anxiety is personal: wanting to know, at low cost, whether it is worth pursuing at all. The [[Four Forces model]] made this sharp—the push was income ceilings and meaning loss at work; the pull was wanting honest self-knowledge instead of guesswork; the anxiety was fear of wasting time on an unvalidated path; the habit was endless research without structured self-reflection. The design problem: build a tool that [[replaces vague self-doubt with a structured, honest readiness picture]].',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/sparkup/sections/problem.png',
-            alt: 'Startup anxiety and readiness gap',
-            caption: 'Users need honest self-assessment, not just encouragement.'
+            src: '/media/projects/sparkup/problemstatement.png',
+            alt: 'Problem Statement — The "Day One" Paralysis',
+            caption: '90% of aspiring founders never launch. The biggest hurdle is the lack of structured guidance.'
           }
         ]
       },
@@ -81,15 +93,20 @@ export const projects = [
         id: 'process-research',
         title: 'Research',
         sectionTag: 'Research',
-        mainTitle: 'Data That Changed Everything: From Community to AI-First',
-        briefContent: 'As Product Lead I ran [[151 survey responses and 70 qualitative interviews]] and applied JTBD, Four Forces, and the Kano Model. The pivotal finding: users\' real pain wasn\'t [[lack of connections]] but [[lack of execution capability]]. The core question wasn\'t "Who can help me?" but [["Am I capable?"]]—so we pivoted from a community-matching platform to an AI-first co-founder. I defined a [[Two-Tier Strategy]]: **Lite Diagnostic** (10 questions) as a low-friction hook with instant Readiness Score; **Enhanced Diagnostic** (40 questions) with a 6-dimensional framework and smart routing by user stage. The [[Guest-to-User flow]]—no forced login before value (Kano reverse attribute)—let users try the Lite diagnostic, then prompted "Save your results?" to leverage sunk cost and drive signups. As Design Lead I led end-to-end UX/UI from research to high-fidelity in Figma, including information architecture, wireframes, and the design system.',
+        mainTitle: '151 Surveys Killed Our First Idea—and Gave Us a Better One',
+        briefContent: 'As Product Lead I ran [[151 survey responses and 70+ qualitative interviews]], applying JTBD, Four Forces, and the Kano Model. The pivotal finding: users\' core pain was not [[lack of connections or mentorship]]—it was [[not knowing whether they were ready to start]]. This killed our original community-matching concept and drove a full pivot to an AI-first diagnostic tool. From Kano analysis, forced login before value delivery was a [[reverse attribute]]—so I designed a [[Guest-to-User flow]] where anyone can complete the Lite Diagnostic (10 questions) without signing up, then gets prompted to save results. The [[Two-Tier Strategy]] emerged: a quick Lite assessment as a low-friction hook with instant Readiness Score, and an Enhanced version (30+ questions) with a [[6-dimensional radar breakdown]], AI-generated action plans, and pattern analysis. As Design Lead I owned the full UX/UI pipeline—Figma sketches → Figma Make for prototyping and iteration → Google AI Studio for finalizing the component library and design system.',
         icon: '🔍',
-        imageDisplayMode: 'single',
+        imageDisplayMode: 'alternating',
         images: [
           {
-            src: '/media/projects/sparkup/sections/research.png',
-            alt: 'User research and pivot insight',
-            caption: '151 responses: execution capability, not connections, drove the product pivot.'
+            src: '/media/projects/sparkup/marketresearch.png',
+            alt: 'Market Research — Global Side Hustle Trend',
+            caption: '72% of Americans and 73% of Chinese consumers are engaged in or considering side hustles.'
+          },
+          {
+            src: '/media/projects/sparkup/userresearch.png',
+            alt: 'User Research — JTBD, Four Forces, and Kano Model',
+            caption: '151 surveys and 10+ interviews revealed the core pain: not knowing whether they are ready.'
           }
         ]
       },
@@ -98,32 +115,25 @@ export const projects = [
         id: 'process-design',
         title: 'Iteration',
         sectionTag: 'Iteration',
-        mainTitle: 'From Dense Tables to Radar Charts, and From Spinner to Forging',
-        briefContent: 'For the diagnostic UI, I iterated from a dense data table (user feedback: too overwhelming) to linear progress bars (hard to compare dimensions) to a [[Radar Chart]]—clear winner in testing, making abstract metrics instantly actionable. For the Idea Bank, I designed a [[slot-machine interface]] (Budget, Scope, Category) to remove writer\'s block and make AI feel controllable; [[Forging animation]] turned 5–10 second wait time into anticipation with sparks and progress indicators. [[Idea Seeds]] (e.g. "Uber for X") gave users drag-and-drop blueprints. On the UI/UX side: typography hierarchy (page title → section → card title), consistent spacing and touch targets (min 44px), and a [[design system]] with honesty-through-minimalism, Material Design 3 foundation, no false excitement; [[no forced login]] and shareable visual reports (67% willing to share); restrained gamification (badges, not leaderboards).',
+        mainTitle: 'From Boring Survey to 3D Command Deck',
+        briefContent: '**Phase 1 (Dashboard)**: flat layout → [["Future Lab"]] style with Bento Grid, Glassmorphism cards, and 3D parallax mouse tracking. **Phase 2 (AI Diagnostic)**: Google Forms survey → [[3D grid background]] with radar-scan iconography and Quick/Full dual-path selection. **Phase 3 (Idea Bank → Spark Forge)**: static card grid → [[Spark Forge]] where users drag seeds, set constraints, and Ignite to generate ideas.',
         icon: '🎨',
-        content: [
-          '**6-Dimensional Diagnostic**: Motivation & Goals Fit, Resources & Constraints, Skills & Execution, Market & Customer Understanding, Risk & Resilience, Support & Operations. Smart routing adapts questions by stage ("No Idea" vs "Validating").',
-          '',
-          '**Radar Chart V1→V3**: Dense table → progress bars → radar chart. Makes relative strengths/weaknesses visible at a glance and pairs critique with actionable next steps ("Your Market Score is low → Take Market Research Challenge").',
-          '',
-          '**UI/UX & Design Decisions**: Guest-to-user migration (Kano: forced login = reverse attribute); shareable OG cards (1200×630) for social; accessibility-first, WCAG AA; mobile-first with progressive disclosure (overall score → dimensional breakdown → specific actions). Card-based layouts, clear visual hierarchy, and consistent component patterns (buttons, inputs, badges) kept the interface scannable and trustworthy.'
-        ],
         imageDisplayMode: 'alternating',
         images: [
           {
-            src: '/media/projects/sparkup/sections/design-iteration.png',
-            alt: 'Radar chart iteration and Forging state',
-            caption: 'From data table to Radar Chart; Forging animation turns wait into anticipation'
+            src: '/media/projects/sparkup/sections/phase1-dashboard.png',
+            alt: 'Phase 1: Dashboard — flat layout to Future Lab style',
+            caption: 'Phase 1: Flat layout → Bento Grid + Glassmorphism + 3D parallax'
           },
           {
-            src: '/media/projects/sparkup/sections/idea-bank.png',
-            alt: 'Idea Bank and Sparking Engine',
-            caption: 'Slot-machine constraints and Idea Seeds for scaffolding'
+            src: '/media/projects/sparkup/sections/phase2-diagnostic.png',
+            alt: 'Phase 2: AI Diagnostic — Google Forms to lab-grade interface',
+            caption: 'Phase 2: Plain survey → 3D grid background + dual-path selection'
           },
           {
-            src: '/media/projects/sparkup/sections/design-system.png',
-            alt: 'Design System',
-            caption: 'Material Design 3, honesty through minimalism, no forced login'
+            src: '/media/projects/sparkup/sections/phase3-forge.png',
+            alt: 'Phase 3: Idea Bank to Spark Forge',
+            caption: 'Phase 3: Static card grid → Spark Forge generation platform'
           }
         ]
       },
@@ -132,25 +142,25 @@ export const projects = [
         id: 'process-tech',
         title: 'Technical',
         sectionTag: 'Technical',
-        mainTitle: 'Next.js, OpenAI API, and 3-Month Delivery',
-        briefContent: 'The project was [[delivered in 3 months]] by a 4-person team. Tech stack: **Next.js** (React), **TailwindCSS**, **OpenAI API** for diagnostic analysis and idea generation; i18n for English and Chinese; mobile-first responsive design. I led the UX/UI design in Figma—wireframes, high-fidelity screens, and design system handoff—so that component patterns (cards, buttons, form controls) mapped cleanly to Tailwind. Key flows I designed: **First-time user**—Landing → Lite Diagnostic (10Q) → Readiness Score → CTA "Unlock Full Diagnostic" → Enhanced (40Q) → Radar Chart + Action Plan → "Try Sparking Engine". **Returning user**—Login → Dashboard → Check Sparks on ideas → Community feed → Forge new idea → Save to Stash. GitHub workflow from research to high-fidelity and implementation.',
+        mainTitle: 'Next.js + AWS, Delivered in 3 Months',
+        briefContent: 'The project was [[delivered in 3 months]] by a 4-person team. Tech stack: **Next.js** + **TypeScript** + **Tailwind CSS** for the frontend, **FastAPI (Python)** for the backend, **Firebase** for auth and data, **OpenAI API** for AI features, and **AWS** (ECR + App Runner + Terraform) for deployment. Bilingual i18n (EN/ZH); mobile-first responsive design.',
         icon: '💻',
         buttons: [],
         features: [
           {
-            name: 'Next.js + TailwindCSS',
+            name: 'Next.js + Tailwind CSS',
             description: 'Frontend & UI',
-            detail: 'Component-based UI, utility-first styling; design system in Figma aligned with Material Design 3 and Tailwind tokens for fast handoff'
+            detail: 'Next.js + TypeScript; Tailwind CSS + Radix UI components; bilingual i18n (EN/ZH); mobile-first responsive design'
           },
           {
-            name: 'OpenAI API',
-            description: 'AI integration',
-            detail: 'Diagnostic analysis and idea generation; UX designed for latency (Forging state, progressive disclosure)'
+            name: 'FastAPI + Firebase + OpenAI',
+            description: 'Backend & AI',
+            detail: 'Python FastAPI backend; Firebase Auth + Firestore for persistence; OpenAI API for diagnostic analysis, idea generation, business plans, and challenge paths'
           },
           {
-            name: 'UI/UX & Responsive',
-            description: 'Design & accessibility',
-            detail: 'Figma UX/UI from research to high-fidelity; i18n (EN/ZH); mobile-first with collapsible sections and touch-friendly targets (min 44px)'
+            name: 'AWS Deployment',
+            description: 'Infrastructure & CI/CD',
+            detail: 'Docker → AWS ECR → AWS App Runner; Terraform for infrastructure; GitHub Actions CI/CD with version-tag triggered deploys'
           }
         ]
       },
@@ -159,24 +169,24 @@ export const projects = [
         id: 'the-solution',
         title: 'Final Solution',
         sectionTag: 'Final Solution',
-        mainTitle: 'Diagnostic → Idea Generation → Validation: One Unified Platform',
-        briefContent: 'The solution is three pillars in one journey: **Diagnostic (The GPS)**—know thyself with Lite then Enhanced assessment and a Radar Chart that turns scores into actionable steps. **Idea Generation (Spark Engine)**—concrete ideas via slot-machine constraints and Idea Seeds, with Forging animation for wait time. **Validation (Spark Square)**—lightweight community feedback with single-action "Spark" (like upvote), public idea feed, and "Forged by [Username]" attribution without forcing social interaction. The **Dashboard** is the command center: total Readiness Score, dimensional breakdown, personalized recommendations, Spark Stash, and recent community activity. UI/UX highlights: [[progressive disclosure]] (score → dimensions → actions), card-based layouts and consistent component patterns, mobile-first with collapsible sections and touch-friendly targets, and a design system that kept the interface honest and scannable.',
+        mainTitle: 'Diagnose → Forge → Validate: One Continuous Journey',
+        briefContent: 'Three capabilities, one continuous flow: [[Diagnose]] your readiness, [[Forge]] personalized ideas with AI, and [[Validate]] them through community feedback. Launched on [[Product Hunt]].',
         icon: '🚀',
         featureDisplayMode: 'side-by-side',
         features: [
           {
-            name: 'AI Diagnostic (The GPS)',
-            detail: 'Two-tier Lite (10Q) + Enhanced (40Q) with 6-dimensional framework and smart routing. Radar Chart UI makes strengths/weaknesses actionable; always pair critique with next steps. Clear visual hierarchy and card-based layout for scannability.',
+            name: 'AI Readiness Diagnostic',
+            detail: 'Lite (10Q) + Enhanced (30Q+) across 6 dimensions with smart routing. Radar Chart makes strengths and gaps actionable at a glance.',
             image: '/media/projects/sparkup/sections/solution-dashboard.png'
           },
           {
-            name: 'Idea Bank & Sparking Engine',
-            detail: 'Slot-machine interface (Budget, Scope, Category); Forging animation for latency; Idea Seeds as drag-and-drop blueprints. Turns "black box" AI into controllable, gamified ideation.',
+            name: 'Spark Forge',
+            detail: 'Set keywords, budget, and scope—optionally drag an Idea Seed—and AI generates business ideas matched to your diagnostic profile.',
             image: '/media/projects/sparkup/sections/solution-idea-bank.png'
           },
           {
-            name: 'Spark Square & Dashboard',
-            detail: 'Lightweight validation with "Spark" action and card-based feed. Dashboard: Readiness Score, radar breakdown, actionable steps, Spark Stash, community activity—progressive disclosure.',
+            name: 'Validation & Dashboard',
+            detail: 'Publish ideas to Spark Square for community feedback. Dashboard ties it together: Readiness Score, radar breakdown, Spark Stash, and recommendations.',
             image: '/media/projects/sparkup/sections/solution-design-system.png'
           }
         ],
@@ -204,20 +214,20 @@ export const projects = [
         id: 'impact-reflection',
         title: 'Impact & Reflection',
         sectionTag: 'Impact & Reflection',
-        mainTitle: 'Data Trumps Intuition; Reflection Over Blind Action',
-        briefContent: '[[151 survey responses]] led to a full product repositioning—from community matching to AI-first readiness and ideation. North Star: **Readiness-to-Action Conversion** (complete Enhanced Diagnostic and forge ≥1 idea). Targets: Lite completion >70%, Lite→Enhanced >40%, ideas forged per user >3, Spark rate >25%, report share >50%. The best products don\'t always encourage action; sometimes they encourage [[reflection]]. SparkUp doesn\'t tell everyone "You can do this!"—it asks [["Are you ready?"]] and provides an honest answer. In a world full of noise saying "just start," we built the signal that helps them start **smart**.',
+        mainTitle: 'Data Over Intuition; Honest Assessment Over Empty Encouragement',
+        briefContent: '[[151 survey responses]] drove a complete product pivot—from community matching to AI-first diagnostic and ideation. North Star metric: **Readiness-to-Action Conversion** (user completes Enhanced Diagnostic and forges ≥1 personalized idea). Design targets: Lite completion rate >70%, Lite→Enhanced conversion >40%, ideas forged per user >3, community share rate >50%. The deeper lesson: the best products don\'t always encourage action—sometimes they encourage [[honest reflection]]. SparkUp doesn\'t tell everyone "You can do this!"—it asks [["Are you ready?"]] and gives an evidence-based answer. In a space full of noise saying "just start," we designed the signal that helps people start [[with clarity]].',
         icon: '💭',
         content: [
           '**Impact**:',
-          '- **Research**: 151 responses validated "brutal honesty" positioning; age cohort differences (18–27, 28–34, 35+) informed roadmap.',
-          '- **Design**: Full UX/UI in Figma—wireframes to high-fidelity, design system docs, interactive prototypes, component library (buttons, cards, forms), and social share assets (OG images). Visual hierarchy and interaction patterns (Forging state, slot-machine, Radar Chart) were validated in testing.',
-          '- **Team**: Evidence-based decision culture; achievable success criteria; reusable diagnostic framework.',
+          '- **Research**: 151 responses validated the "honest readiness check" positioning and killed the original community-matching concept; age cohort differences (18–27, 28–34, 35+) informed roadmap priorities.',
+          '- **Design**: AI-augmented pipeline (Figma sketches → Figma Make for prototyping → Google AI Studio for component library and design system). Radar Chart, Forge Engine drag-and-drop, and Forging animation were all validated in user testing.',
+          '- **Team**: Evidence-based decision culture; achievable success criteria; reusable 6-dimensional diagnostic framework.',
           '',
           '**Reflection**:',
           '- **Pivot courage**: Throwing away months of community-platform work was painful; 151 surveys don\'t lie. Data trumps intuition.',
-          '- **Honesty + encouragement**: Always pair critique with actionable next steps (e.g. "Your score is 4/10 → Here\'s how to improve").',
-          '- **Edge cases**: Fallback UI when AI fails; encouraging messaging for low scores; Idea Seeds when user has no ideas.',
-          '- **If I had more time**: Longitudinal study (6 months post-diagnostic); AI model iteration from idea-quality feedback; community features (cautiously); content marketing (Xiaohongshu, Product Hunt).'
+          '- **Honesty + encouragement**: Always pair critique with actionable next steps (e.g. "Your Market score is low → Take Market Research Challenge").',
+          '- **Edge cases**: Fallback UI when AI fails; encouraging messaging for low scores; Idea Seeds as scaffolding when users have no starting point.',
+          '- **If I had more time**: Longitudinal study (6 months post-diagnostic); AI model iteration from idea-quality feedback; deeper community features (cautiously); content marketing (Xiaohongshu, Product Hunt).'
         ]
       }
     ]
@@ -227,6 +237,7 @@ export const projects = [
     // ========== AI Community MVP项目 ==========
     {
       id: 'ai-community-platform',
+      year: '2025',
       featured: true, // 首页展示
       title: {
         en: 'AI Built-in Community Platform',
@@ -476,6 +487,7 @@ export const projects = [
   {
     // ========== Stumbldoor Project 图书系统==========
     id: 'stumbldoor',
+    year: '2024',
     featured: true, // 首页展示
     title: 'Stumbldoor',
     subtitle: {
@@ -771,6 +783,7 @@ export const projects = [
   // ========== Excel AI Agent 项目 ==========
   {
     id: 'excel-ai-agent',
+    year: '2025',
     title: { en: 'Excel AI Agent', zh: 'Excel AI 智能体' },
     subtitle: { en: 'Intelligent Data Analysis Assistant', zh: '智能数据分析助手' },
     categories: ['AI', 'Programming','Product Design'],
@@ -985,6 +998,7 @@ export const projects = [
   // ========== Petiboxy Charity Platform 项目 ==========
   {
     id: 'petiboxy',
+    year: '2025',
     title: { en: 'Petiboxy Charity Platform', zh: 'Petiboxy 宠物救助平台' },
     subtitle: { en: 'Connecting Love, Saving Lives', zh: '连接爱心，拯救生命' },
     categories: ['UIUX', 'Product Design', 'Research'],
@@ -1172,6 +1186,7 @@ export const projects = [
   // ========== Ziplink UIUX项目示例 ==========
   {
     id: 'ziplink',
+    year: '2024',
     title: { en: 'Ziplink', zh: 'Ziplink' },
     subtitle: { en: 'In-Car Experience Redesign', zh: '车载体验重设计' },
     categories: ['UIUX','Research'],  // 多分类支持
@@ -1374,6 +1389,7 @@ export const projects = [
   // ========== Music Encounter 游戏项目 ==========
   {
     id: 'music-encounter',
+    year: '2024',
     title: { en: 'Music Encounter', zh: '音乐邂逅' },
     subtitle: { en: '3D Open World Social Adventure Game', zh: '3D 开放世界社交冒险游戏' },
     categories: ['Game', 'Research', 'Programming'],
@@ -1588,6 +1604,7 @@ export const projects = [
   // ========== game项目示例 eternal-dreams==========
   {
     id: 'eternal-dreams',
+    year: '2024',
     title: { en: 'Eternal Dreams', zh: '永恒之梦' },
     subtitle: { en: 'Third Person Role Playing Game', zh: '第三人称角色扮演游戏' },
     categories: ['Game', 'Programming','3D Art',], // 多分类支持
@@ -1785,6 +1802,7 @@ export const projects = [
   // ========== Prime Directive 游戏项目 ==========
   {
     id: 'prime-directive',
+    year: '2024',
     title: { en: 'Prime Directive', zh: '首要指令' },
     subtitle: { en: '2D Action-Platformer Game', zh: '2D 动作平台游戏' },
     categories: ['Game', '2D Art'],
@@ -1928,6 +1946,7 @@ export const projects = [
   // ========== My Little Fish Tank 游戏项目 ==========
   {
     id: 'my-little-fish-tank',
+    year: '2024',
     title: { en: 'My Little Fish Tank', zh: '我的小鱼缸' },
     subtitle: { en: '3D Fish Tank Simulator', zh: '3D 鱼缸模拟器' },
     categories: ['Game', '3D Art'],
@@ -2039,7 +2058,514 @@ export const projects = [
     ]
   },
 
-  
+  // ========== Kogna AI ==========
+  {
+    id: 'kogna',
+    year: '2026',
+    featured: true,
+    title: 'Kogna AI',
+    subtitle: {
+      en: 'AI-Powered Strategic Command Center',
+      zh: 'AI 驱动的战略决策指挥中心'
+    },
+    categories: ['AI', 'Product Design', 'UIUX', 'Design System'],
+    tags: ['Design System', 'UI Design', 'Product Design', 'SaaS', 'B2B', 'AI Platform', 'Dark Mode', 'Component Library'],
+    techTags: ['#Design System', '#Next.js', '#Tailwind CSS', '#React', '#TypeScript', '#Dark Mode'],
+
+    thumbnail: '/media/projects/kogna/hero/hero.png',
+    brief: {
+      en: 'Led the design system and UI/UX for an AI decision-support platform that unifies fragmented business data into real-time strategic intelligence for leadership teams.',
+      zh: '主导了一个 AI 决策支持平台的设计系统与 UI/UX——将碎片化的企业数据统一为面向管理层的实时战略洞察。'
+    },
+    heroImage: '/media/projects/kogna/hero/hero.png',
+    heroVideo: null,
+
+    domain: [
+      { en: 'AI Platform', zh: 'AI 平台' },
+      { en: 'B2B SaaS', zh: 'B2B SaaS' },
+      { en: 'Enterprise', zh: '企业级产品' }
+    ],
+    form: [
+      { en: 'Design System', zh: '设计系统' },
+      { en: 'UI/UX Design', zh: 'UI/UX 设计' },
+      { en: 'Product Design', zh: '产品设计' }
+    ],
+    collaborators: ['5-person startup team', 'Claude AI', 'Next.js', 'TypeScript'],
+
+    colors: {
+      heroGradient: 'linear-gradient(135deg, #0B0716 0%, #0a1628 50%, #0D3B66 100%)',
+      subtitleGradient: 'linear-gradient(135deg, #0D5FC2 0%, #0D8CE2 100%)',
+      underlineGradient: 'linear-gradient(135deg, #0D5FC2 0%, #0D8CE2 100%)',
+      textHighlightColor: '#0D8CE2',
+      darkColor: '#0D8CE2',
+      lightColor: '#0D3B66'
+    },
+
+    role: {
+      title: 'UI/UX Designer & Design System Lead',
+      responsibilities: [
+        'Owned the end-to-end visual language—from token definitions to production page design',
+        'Built the component library with Radix UI + Tailwind, shipping directly as the product UI',
+        'Used Gemini & Google Stitch for rapid style exploration; Claude Design for structured prototyping; Claude Code to ship directly into the codebase',
+        'Ran design audits with AI-assisted reviews to maintain consistency across 15+ pages',
+        'Collaborated with a 5-person cross-functional team—no separate design-to-dev handoff'
+      ]
+    },
+
+    overview: {
+      mainTitle: 'From Feature UI to Product Design System',
+      briefContent: '[[Kogna]] helps leadership teams make faster decisions by pulling fragmented business data into one place. Executives today toggle between CRM, PM tools, BI dashboards, and spreadsheets—by the time they piece together a picture, it\'s already outdated. I joined as the [[design system lead]] at a stage where the product was growing fast but the UI wasn\'t keeping up: every new page looked slightly different, and the experience felt like [[a patchwork instead of one product]]. My job was to bring it all together—define a shared visual language, build components the team could reuse, and make the product feel as trustworthy as the decisions it supports.',
+      challenge: 'How might we build a unified, trust-inspiring visual system for a complex AI platform—while the product is still rapidly iterating?',
+      challenges: [
+        'How do you keep 15+ pages visually consistent when the product ships new features every week?',
+        'How do you present dense, data-heavy views without overwhelming users?',
+        'How do you make an early-stage product feel polished enough for executive buyers?'
+      ],
+      mainImage: {
+        src: '/media/projects/kogna/overview/main-image.png',
+        alt: 'Kogna AI Dashboard Overview',
+        caption: 'The unified command center for strategic decision-making'
+      }
+    },
+
+    sections: [
+      // ── Section 1: Problem ──
+      {
+        id: 'problem',
+        title: 'Problem Statement',
+        sectionTag: 'Problem Statement',
+        mainTitle: 'Two Kinds of Fragmentation',
+        briefContent: 'The business problem was clear: executives were losing hours each week switching between tools, trying to assemble a picture that was already stale by the time they saw it. But there was a [[parallel design problem]] I noticed when I joined—the product itself was fragmenting. New pages were being built fast, each with slightly different button styles, card layouts, and color choices. To the user, it felt like [[switching between three different apps]]. I realized both problems had the same root: no shared system to hold things together.',
+        icon: '💡',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/sections/problem-fragmentation.png',
+            alt: 'The fragmented tool landscape executives face',
+            caption: 'Executives toggle between dozens of tools, creating dangerous visibility gaps'
+          }
+        ]
+      },
+
+      // ── Section 2: User Research ──
+      {
+        id: 'research',
+        title: 'User Research & Discovery',
+        sectionTag: 'User Research & Discovery',
+        mainTitle: 'Listening Before Designing',
+        briefContent: 'We interviewed CEOs, COOs, Chiefs of Staff, and management consultants to understand how they actually work. Three patterns kept coming up: the executive who wanted a [[\"panoramic view\"]] instead of drilling into five different tools, the ops team spending more time [[collecting data than acting on it]], and the fractional COO juggling multiple clients with no unified view. The insight that shaped everything: people didn\'t want another dashboard. They wanted [[decisions surfaced, not data displayed]].',
+        icon: '🔍',
+        imageGroups: [
+          {
+            displayMode: 'single',
+            images: [
+              {
+                src: '/media/projects/kogna/sections/research-overview.png',
+                alt: 'Customer discovery research overview',
+                caption: 'Customer discovery across CEOs, COOs, and management consultants'
+              }
+            ]
+          },
+          {
+            displayMode: 'two-column',
+            images: [
+              {
+                src: '/media/projects/kogna/sections/research-persona.png',
+                alt: 'User persona: CEO/Founder',
+                caption: 'Primary persona: The executive seeking a panoramic view'
+              },
+              {
+                src: '/media/projects/kogna/sections/research-interview.png',
+                alt: 'Interview synthesis',
+                caption: 'Key insights from executive interviews'
+              },
+              {
+                src: '/media/projects/kogna/sections/research-affinity.png',
+                alt: 'Affinity mapping',
+                caption: 'Affinity mapping of user pain points and needs'
+              },
+              {
+                src: '/media/projects/kogna/sections/research-competitive.png',
+                alt: 'Competitive analysis',
+                caption: 'Competitive landscape analysis'
+              }
+            ]
+          }
+        ]
+      },
+
+      // ── Section 3: Design Highlights ──
+      {
+        id: 'design-highlights',
+        title: 'Design Highlights',
+        sectionTag: 'Design Highlights',
+        mainTitle: 'The Details That Make It Feel Right',
+        briefContent: 'A product for executives has to feel considered in every interaction. Rather than listing components, here are the design decisions that shaped how Kogna actually feels to use.',
+        icon: '✦',
+        featureDisplayMode: 'side-by-side',
+        features: [
+          {
+            name: 'Apple-Inspired Tile Dashboard',
+            description: 'Drag, resize, and personalize your command center',
+            detail: 'The Insights dashboard works like Apple\'s home screen widgets. Executives can drag tiles to rearrange their view, resize cards to prioritize what matters, and remove tiles with a familiar wobble-and-shake animation. Pinned tiles (like Kogna Insights) stay locked so critical data never gets accidentally hidden. The goal: every executive sees their own version of the truth.',
+            image: '/media/projects/kogna/sections/hl-tiles.png'
+          },
+          {
+            name: 'Where Does the AI Live?',
+            description: 'Two homes for one assistant—contextual vs. focused',
+            detail: 'We debated this for weeks: should the AI chat be a sidebar, a floating bubble, or a full page? The answer was both. A slide-in panel on the right gives contextual answers while you\'re looking at data. A dedicated /chat page gives space for deeper strategy sessions. The AI adapts its suggestions based on which view you\'re in—dashboard context vs. open-ended planning.',
+            image: '/media/projects/kogna/sections/hl-chat-placement.png'
+          },
+          {
+            name: 'The Wobble Delete',
+            description: 'Removing a tile should feel intentional, not scary',
+            detail: 'When you enter edit mode, tiles start a subtle 0.6-second wobble (±0.2° rotation)—just enough to signal "you can move things now" without feeling chaotic. A red × appears on removable tiles, but pinned tiles show a lock icon instead. It\'s a direct nod to iOS, and in testing, users immediately understood what to do without any onboarding.',
+            image: '/media/projects/kogna/sections/hl-wobble.gif'
+          }
+        ]
+      },
+
+      // ── Section 4: AI-Powered Workflow & Iteration ──
+      {
+        id: 'design-iteration',
+        title: 'Workflow & Iteration',
+        sectionTag: 'Workflow & Iteration',
+        mainTitle: 'Designing at Startup Speed with AI',
+        briefContent: 'This product is still actively iterating from MVP—and [[the way we design is the story]]. A 5-person startup can\'t afford a traditional Figma→spec→build pipeline. Instead, I built an AI-augmented workflow where each tool has a clear role, and the output is production code, not mockups.',
+        icon: '🔄',
+        content: [
+          '**Explore → Gemini & Google Stitch**: I use Gemini to research competitive UI patterns and color systems. Google Stitch generates rapid page variations—testing dark vs. light hero treatments, card densities, pricing layouts—so I can evaluate 10 directions in the time it takes to manually design one.',
+          '',
+          '**Prototype → Claude Design**: The strongest directions go to Claude Design with specific constraints: "use our token system, match this spacing scale, follow this information hierarchy." It\'s not AI-generates-a-page—it\'s me directing the design with a system-aware copilot.',
+          '',
+          '**Ship → Claude Code**: Prototypes connect directly to the codebase. Claude Code knows our existing components and tokens, so output respects the design system. What I design in the morning ships in the afternoon.',
+          '',
+          '**Real iteration examples**: The navigation sidebar went through three versions—from a flat list, to grouped sections with role-based visibility, to the current collapsible sidebar with "Quick Actions" (Kogna Assistant + Connect Data) pinned at the top. Each version was prototyped and shipped in the same day using this workflow.'
+        ],
+        imageGroups: [
+          {
+            displayMode: 'single',
+            images: [
+              {
+                src: '/media/projects/kogna/sections/ai-workflow.png',
+                alt: 'AI-augmented design workflow',
+                caption: 'Gemini (explore) → Stitch (variations) → Claude Design (prototype) → Claude Code (ship)'
+              }
+            ]
+          },
+          {
+            displayMode: 'two-column',
+            images: [
+              {
+                src: '/media/projects/kogna/sections/page-landing.png',
+                alt: 'Landing Page — dark theme',
+                caption: 'Landing: dark palette sets executive tone from the first touchpoint'
+              },
+              {
+                src: '/media/projects/kogna/sections/page-auth.png',
+                alt: 'Split-panel authentication flow',
+                caption: 'Auth: split-panel with brand storytelling'
+              },
+              {
+                src: '/media/projects/kogna/sections/page-dashboard.png',
+                alt: 'Dashboard with draggable tiles',
+                caption: 'Dashboard: Apple-style draggable insight tiles'
+              },
+              {
+                src: '/media/projects/kogna/sections/page-connectors.png',
+                alt: 'Data source connectors',
+                caption: 'Connectors: making a technical task visual'
+              }
+            ]
+          },
+          {
+            displayMode: 'two-column',
+            images: [
+              {
+                src: '/media/projects/kogna/sections/nav-iteration.png',
+                alt: 'Navigation sidebar evolution',
+                caption: 'Sidebar: from flat list → grouped nav → collapsible with Quick Actions'
+              },
+              {
+                src: '/media/projects/kogna/sections/chat-placement.png',
+                alt: 'AI chat dual placement',
+                caption: 'AI chat: contextual side panel vs. dedicated full-page mode'
+              }
+            ]
+          }
+        ]
+      },
+
+      // ── Section 6: Pricing & Product Design ──
+      {
+        id: 'product-design',
+        title: 'Product Design',
+        sectionTag: 'Product Design',
+        mainTitle: 'Thinking Beyond Screens',
+        briefContent: 'Some of the most impactful design work wasn\'t about pixels. I helped shape the [[three-tier pricing model]] (Solo → Business → Enterprise), designing how features progressively unlock so free users see a clear upgrade path without feeling restricted. I also designed the [[tile-based dashboard architecture]]—how insight cards adapt based on user role, so a CEO sees strategic summaries while an ops lead sees actionable signals. The pricing page uses visual hierarchy to gently guide attention toward the recommended plan.',
+        icon: '📊',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/sections/pricing-page.png',
+            alt: 'Kogna pricing tier design',
+            caption: 'Three-tier pricing with progressive feature unlocking'
+          },
+          {
+            src: '/media/projects/kogna/sections/tile-system.png',
+            alt: 'Dashboard tile information architecture',
+            caption: 'Tile-based dashboard adapting to user roles and data context'
+          }
+        ]
+      },
+
+      // ── Section 7: Final Showcase ──
+      {
+        id: 'final-showcase',
+        title: 'Final Showcase & Impact',
+        sectionTag: 'Final Showcase & Impact',
+        mainTitle: 'What It Looks Like Now',
+        briefContent: 'The design system covers [[15+ pages]]—marketing, auth, and the full product. Pages that used to take days to design now take hours to build. The dark theme became the [[primary brand identity]], and the team stopped saying "make this look like that other page" because the system already handles it. The biggest win wasn\'t visual consistency—it was that everyone on the team started [[speaking the same design language]].',
+        icon: '🚀',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/sections/final-1.png',
+            alt: 'Kogna full product showcase',
+            caption: 'The complete Kogna experience: from landing to dashboard'
+          },
+          {
+            src: '/media/projects/kogna/sections/final-2.png',
+            alt: 'Design system in action',
+            caption: 'Design system components working together across pages'
+          },
+          {
+            src: '/media/projects/kogna/sections/final-3.png',
+            alt: 'Mobile responsive views',
+            caption: 'Responsive design maintaining consistency at every breakpoint'
+          }
+        ]
+      },
+
+      // ── Section 8: Reflection ──
+      {
+        id: 'reflection',
+        title: 'Reflection',
+        sectionTag: 'Reflection',
+        mainTitle: 'What I Learned',
+        briefContent: 'The biggest takeaway: [[a design system is a product, not a document]]. It only works if the team actually uses it—which means it has to be easier to use the system than to go around it. Going token-first was the right call; it forced us to make decisions about hierarchy and meaning before drawing a single screen. Using [[Claude AI to prototype directly in code]] was an experiment that paid off—I could test real component behavior instantly instead of handing off static specs. Next: build a Figma-to-code mapping so the system lives in both worlds, and start tracking metrics like component reuse and token adoption.',
+        icon: '💭',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/sections/reflection.png',
+            alt: 'Design system maturity roadmap',
+            caption: 'Design system roadmap: from Level 1 tokens to Level 3 governance'
+          }
+        ]
+      }
+    ]
+  },
+
+  // ========== HexaEdge 点卦 ==========
+  {
+    id: 'hexaedge',
+    year: '2026',
+    featured: true,
+    title: 'HexaEdge',
+    subtitle: {
+      en: 'Ancient Logic, Modern Signals',
+      zh: '古法新用 · 六爻金融信号'
+    },
+    categories: ['AI', 'Product Design', 'UIUX', 'Programming'],
+    tags: ['Product Design', 'Design Engineering', 'AI/LLM', 'Financial Signal', 'Neo-Chinese Aesthetic', 'SaaS'],
+    techTags: ['#Next.js 16', '#React 19', '#TypeScript', '#Claude Code', '#Figma', '#LLM API'],
+
+    thumbnail: '/media/projects/hexaedge/hero.png',
+    brief: {
+      en: 'A full-stack financial tool that turns I Ching logic into quantitative market signals through a Neo-Chinese design system.',
+      zh: '一款把中国传统文化《易经》改写成金融量化信号的工具。'
+    },
+    heroImage: '/media/projects/hexaedge/hero.png',
+    heroVideo: null,
+
+    domain: [
+      { en: 'FinTech Signal Tool', zh: '金融信号工具' },
+      { en: 'Cultural Tech', zh: '文化科技' },
+      { en: 'B2C SaaS', zh: 'B2C SaaS' }
+    ],
+    form: [
+      { en: 'Product Design', zh: '产品设计' },
+      { en: 'Design Engineering', zh: '设计工程' },
+      { en: 'AI Integration', zh: 'AI 集成' },
+      { en: 'Visual System', zh: '视觉体系' }
+    ],
+    collaborators: ['Solo Project', 'Claude Code', 'Figma', 'Google Stitch'],
+
+    colors: {
+      heroGradient: 'linear-gradient(135deg, #14233A 0%, #243E66 50%, #9C7A3A 100%)',
+      subtitleGradient: 'linear-gradient(135deg, #243E66 0%, #9C7A3A 100%)',
+      underlineGradient: 'linear-gradient(135deg, #9C7A3A 0%, #A8392E 100%)',
+      textHighlightColor: '#9C7A3A',
+      darkColor: '#14233A',
+      lightColor: '#9C7A3A'
+    },
+
+    role: {
+      title: 'Product Designer & Design Engineer (Solo)',
+      responsibilities: [
+        'End-to-end product design: research, UX/UI, visual system, implementation',
+        'Proprietary Liuyao analysis engine development',
+        '2+ years structured data collection & RAG knowledge base',
+        'AI interpretation pipeline (LLM API integration)',
+        'Neo-Chinese design system: color tokens from traditional materials'
+      ]
+    },
+
+    overview: {
+      mainTitle: 'Reshaping Unstructured Classical Logic into Quantitative Signals',
+      briefContent: '**HexaEdge (点卦)** is a financial signal tool that deeply integrates traditional Liuyao logic. Built on the I Ching as its underlying architecture, it uses a modern SaaS interface to [[deconstruct and extract]] the complex, multidimensional variables embedded within the 64 hexagrams — such as Five Elements interactions and moving-line transformations — reshaping unstructured classical logic into [[standardized quantitative signals]]. This highly integrated pipeline delivers a seamless flow from raw hexagram input to Bull/Bear signal generation on a [[calendar timeline]], transforming an intricate ancient analytical system into a decision-support view that modern traders can consume directly.',
+      challenge: 'How might we transform a 3,000-year-old analytical framework into a modern financial product — without losing its logical rigor or alienating either traditional practitioners or new investors?',
+      buttons: [
+        { label: 'Live Site', url: 'https://hexaedge.vercel.app', type: 'primary' },
+        { label: 'GitHub', url: 'https://github.com/cqyestateyuki-prog/LiuyaoSaaSProject', type: 'secondary' }
+      ]
+    },
+
+    sections: [
+      {
+        id: 'the-problem',
+        title: 'The Problem',
+        sectionTag: 'The Problem',
+        mainTitle: 'Two Failures and One Untouched Opportunity',
+        briefContent: 'Traditional I Ching and Liuyao websites are stuck in the early 2000s — dense forum layouts, walls of classical Chinese jargon, and zero onboarding for newcomers.\n\n**Accessibility failure.** Young users bounce immediately. The terminology barrier is too high, the UI is unreadable, and there\'s no progressive disclosure. A rigorous analytical system stays locked inside a shrinking niche community.\n\n**Cultural failure.** When the interface looks like a relic, the logic within is dismissed as superstition. This [[\"time-gap\" in design]] prevents ancient analytical frameworks from going global or being taken seriously by a modern audience.\n\n**Opportunity.** The use cases haven\'t evolved — still love, career, and health. But today\'s young generation cares about [[investing, crypto, and stock markets]]. Meanwhile, AI-powered fortune-telling products focus on BaZi (八字) and Ziwei Doushu (紫微斗数) — no one has applied AI to Liuyao signal analysis. A redesigned interface + a new domain = an untouched market.',
+        icon: '💡',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/problem.png',
+            alt: 'Traditional Liuyao tools vs modern expectations',
+            caption: 'The "time-gap" in design: traditional tools stuck in the 2000s while user expectations have evolved.'
+          }
+        ]
+      },
+
+      {
+        id: 'concept',
+        title: 'Concept',
+        sectionTag: 'Concept',
+        mainTitle: 'Ancient Methods, Modern Use — 古法新用',
+        briefContent: 'Liuyao is not fortune-telling. At its core, it\'s a [[structured decision-analysis framework]]: you define a question, generate a hexagram through a controlled random process, then systematically evaluate relationships between six lines (爻) using rules about elemental interaction, timing, and transformation.\n\nHexaEdge takes this framework and points it at a new domain — the stock market. The question becomes "will this stock go up or down this week?", and the output becomes a [[bull/bear signal calendar]] instead of a vague prose prediction.\n\nThis isn\'t about whether divination "works" for stocks. It\'s about demonstrating that [[traditional philosophical systems can find new life in digital products]] — if someone bothers to redesign the experience.',
+        icon: '🧭',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/concept.png',
+            alt: 'From hexagram to signal calendar',
+            caption: 'Transforming classical hexagram analysis into actionable trading signals.'
+          }
+        ]
+      },
+
+      {
+        id: 'design-direction',
+        title: 'Design Direction',
+        sectionTag: 'Design Direction',
+        mainTitle: 'Neo-Chinese Aesthetic — 新中式',
+        briefContent: 'I collected reference images of jade, celadon porcelain, blue-and-white ceramics (青花瓷), ink-wash paintings, and cinnabar seals — assembled into a moodboard and used as the foundation for color extraction, working with AI (Claude) to translate material qualities into digital design tokens.\n\nThe goal: **warm and refined, never cold or sterile.** The interface should feel like holding a piece of jade — smooth, substantial, alive with subtle color — not like using a fintech dashboard.\n\nThe palette is drawn entirely from traditional Chinese materials: Jade White (#F2F6F7), Celadon Glaze (#E4ECEE), Blue-and-White (#243E66), Ink Black (#14233A), Cinnabar (#A8392E), Gilding (#9C7A3A), and Bamboo Green (#6E9387). Five Elements semantic mappings reuse the same palette.',
+        icon: '🎨',
+        imageDisplayMode: 'alternating',
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/moodboard.png',
+            alt: 'Neo-Chinese moodboard and color extraction',
+            caption: 'Ancient materials → digital tokens: jade, celadon, cinnabar, gilding.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/color-system.png',
+            alt: 'Color system and typography',
+            caption: 'Seven color tokens from traditional materials + dual-script type system.'
+          }
+        ]
+      },
+
+      {
+        id: 'design-solutions',
+        title: 'Design Solutions',
+        sectionTag: 'Design Solutions',
+        mainTitle: 'From Dense Symbols to Consumable Signals',
+        briefContent: 'Traditional Liuyao tools only generate the hexagram plate — they don\'t analyze, don\'t interpret, and have zero AI involvement. HexaEdge breaks this into [[three progressive steps]] — every label, every interpretation is written in plain language that any trader or investor can understand:\n\n**1. Cast (起卦)** — Enter your numbers and select the date. The system calculates the hexagram automatically. No knowledge required.\n\n**2. Read (排盘)** — The hexagram plate appears as a structured table: six lines with elements, relatives, spirits, and transformations. Color-coded by Five Elements for instant scanning.\n\n**3. Predict (预测)** — AI-generated plain-language interpretation + bull/bear signals rendered on a calendar timeline. Exportable as image or PDF.',
+        icon: '✨',
+        content: [
+          '**Hexagram Plate Redesign**: Preserved the traditional top-to-bottom structure but added Five-element color coding, visual hierarchy (moving lines in gilding gold), and spatial grouping for elemental relationships.',
+          '',
+          '**Prediction Calendar**: The core output — daily cells colored by signal strength (bull red, bear green, neutral gray), key events marked with badges, weekly/monthly/quarterly timeline tabs, one-click export.',
+          '',
+          '**64 Hexagram Encyclopedia**: Reference library with classical text, modern commentary, six-line analysis, traditional readings, and historical scholar interpretations. Progressive disclosure: overview → detail → scholarly depth.'
+        ],
+        imageDisplayMode: 'alternating',
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/3-step-wizard.png',
+            alt: '3-step wizard: Cast, Read, Predict',
+            caption: 'Three progressive steps — each reduces complexity for the user.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/prediction-calendar.png',
+            alt: 'Prediction calendar with signal timeline',
+            caption: 'Bull/Bear signals mapped to specific dates with level badges and event tags.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/encyclopedia.png',
+            alt: '64 Hexagram Encyclopedia',
+            caption: 'All 64 hexagrams with classical text, commentary, and progressive disclosure.'
+          }
+        ]
+      },
+
+      {
+        id: 'technical',
+        title: 'Technical',
+        sectionTag: 'Technical',
+        mainTitle: 'Claude Code + Proprietary Engine + LLM Pipeline',
+        briefContent: '**Design & Frontend**: The entire UI was built with [[Claude Code]] (AI pair-programming) + [[Figma]] + [[Google Stitch]] for rapid design exploration and high-fidelity implementation. Frontend: Next.js 16, React 19, TypeScript. All 64 hexagram pages statically generated via SSG.\n\n**Proprietary Analysis Engine**: 2+ years of structured data collection via custom auto-entry pipeline. RAG knowledge base indexing classical texts and historical cases. A multi-stage scoring engine evaluating line vitality, elemental interactions, transformation chains, and timing windows to produce weighted Bull/Bear signals. LLM interpretation layer transforms raw engine output into plain-language market analysis.',
+        icon: '⚙️',
+        features: [
+          {
+            name: 'Claude Code + Figma + Google Stitch',
+            description: 'Design & Frontend',
+            detail: 'AI pair-programming for rapid implementation; Figma for visual design; Google Stitch for design exploration. Next.js 16 + React 19 + SSG.'
+          },
+          {
+            name: '2+ Years Structured Data',
+            description: 'Data Foundation',
+            detail: 'Custom Liuyao auto-entry pipeline accumulating hexagram records with tagged market outcomes for pattern recognition and back-testing.'
+          },
+          {
+            name: 'Multi-Stage Scoring Engine',
+            description: 'Proprietary Algorithm',
+            detail: 'Evaluates line vitality, elemental interactions, transformation chains, and timing windows. Produces weighted Bull/Bear voting signals.'
+          },
+          {
+            name: 'RAG + LLM Interpretation',
+            description: 'AI Pipeline',
+            detail: 'Classical texts indexed for retrieval-augmented generation. LLM API transforms engine output into plain-language market analysis.'
+          }
+        ]
+      },
+
+      {
+        id: 'reflection',
+        title: 'Reflection',
+        sectionTag: 'Reflection & Next Steps',
+        mainTitle: 'What Worked, and Where We\'re Going',
+        briefContent: '**What worked:**\n- The "ancient material → digital token" color process produced a palette that feels genuinely different from typical SaaS blue-gray. The result is warm, refined, and distinctly [[Eastern-elegant]] — never cold or sterile.\n- The 3-step wizard successfully got non-practitioners through the casting process without documentation.\n- Working with AI as a design collaborator (moodboard → tokens → implementation) compressed what would normally be weeks of iteration into days.\n\n**What\'s next:**\n- [[English translation layer]] — full bilingual hexagram encyclopedia and AI interpretation for global reach.\n- [[Deeper RAG & data feeding]] — expanding the knowledge base with more classical texts and real-market outcome data.\n- [[Signal visualization & accuracy]] — confidence heatmaps, trend overlays, and iterative scoring engine refinement.\n- [[User testing with young investors]] — usability studies with 18–30 year-old users with no Liuyao background.',
+        icon: '💭'
+      }
+    ]
+  },
+
+
 ]
 
 // ========== 辅助函数 ==========

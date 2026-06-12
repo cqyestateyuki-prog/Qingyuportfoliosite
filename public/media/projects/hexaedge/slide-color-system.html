@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1920px;height:1080px;overflow:hidden;background:#F2F6F7;font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;color:#14233A}
+.canvas{width:1920px;height:1080px;padding:72px 100px;display:flex;flex-direction:column;gap:40px}
+.header{display:flex;justify-content:space-between;align-items:flex-end}
+.eyebrow{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:16px;letter-spacing:0.28em;color:#9C7A3A;text-transform:uppercase}
+.title{font-family:'Cormorant Garamond','Noto Serif SC','Times New Roman',serif;font-size:64px;font-weight:600;letter-spacing:0.03em;margin-top:8px}
+.subtitle{font-family:'Cormorant Garamond','Noto Serif SC','Times New Roman',serif;font-size:26px;font-style:italic;color:#7C95AE}
+.main{display:grid;grid-template-columns:1fr 1fr;gap:60px;flex:1}
+.colors-grid{display:flex;flex-direction:column;gap:14px}
+.color-row{display:grid;grid-template-columns:100px 1fr;gap:24px;align-items:center}
+.color-swatch{height:80px;border-radius:4px;position:relative;display:flex;align-items:flex-end;padding:10px 14px}
+.color-swatch-label{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;letter-spacing:0.1em;opacity:0.8}
+.color-info{display:flex;flex-direction:column;gap:3px}
+.color-name-main{font-family:'Cormorant Garamond','Noto Serif SC','Times New Roman',serif;font-size:26px;font-weight:600}
+.color-name-sub{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:14px;color:#7C95AE;letter-spacing:0.06em}
+.color-desc{font-size:16px;color:#7C95AE}
+.right-col{display:flex;flex-direction:column;gap:28px}
+.section-label{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;letter-spacing:0.22em;color:#9C7A3A;text-transform:uppercase;margin-bottom:12px}
+.wuxing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.wuxing-card{text-align:center;padding:22px 8px;border:1px solid #D6DFE2;background:#fff}
+.wuxing-glyph{font-family:'Noto Serif SC','Songti SC','STSong','SimSun',serif;font-size:44px;font-weight:700;margin-bottom:6px}
+.wuxing-label{font-size:16px;color:#14233A;margin-bottom:2px;font-weight:500}
+.wuxing-color{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;color:#7C95AE}
+.palette-strip{display:flex;height:56px;overflow:hidden;border-radius:4px;border:1px solid #D6DFE2}
+.palette-cell{flex:1;display:flex;align-items:center;justify-content:center}
+.palette-cell span{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;letter-spacing:0.06em}
+.material-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.material-card{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid #D6DFE2;background:#fff}
+.material-icon{font-size:48px}
+.material-label{font-family:'Cormorant Garamond','Noto Serif SC','Times New Roman',serif;font-size:19px;font-weight:600}
+.material-sub{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#7C95AE;letter-spacing:0.08em}
+.footer{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid #D6DFE2}
+.footer-left{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:14px;color:#7C95AE;letter-spacing:0.1em}
+.footer-right{font-family:'Cormorant Garamond','Noto Serif SC','Times New Roman',serif;font-size:18px;font-style:italic;color:#9C7A3A}
+</style></head>
+<body>
+<div class="canvas">
+  <div class="header">
+    <div>
+      <div class="eyebrow">DESIGN SYSTEM · COLOR</div>
+      <div class="title">Color System — Inspired by Traditional Materials</div>
+    </div>
+    <div class="subtitle">Neo-Chinese Aesthetic · Warm, Never Sterile</div>
+  </div>
+  <div class="main">
+    <div class="colors-grid">
+      <div class="color-row">
+        <div class="color-swatch" style="background:#F2F6F7;border:1px solid #D6DFE2"><span class="color-swatch-label" style="color:#7C95AE">#F2F6F7</span></div>
+        <div class="color-info"><div class="color-name-main">Jade White</div><div class="color-name-sub">Yu Bai · Hetian jade lustre</div><div class="color-desc">Background base — warm, paper-like surface</div></div>
+      </div>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#E4ECEE;border:1px solid #D6DFE2"><span class="color-swatch-label" style="color:#7C95AE">#E4ECEE</span></div>
+        <div class="color-info"><div class="color-name-main">Celadon Glaze</div><div class="color-name-sub">Qing Ci · Ru-kiln celadon</div><div class="color-desc">Sunken surfaces, card backgrounds</div></div>
+      </div>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#243E66"><span class="color-swatch-label" style="color:#B6C3C7">#243E66</span></div>
+        <div class="color-info"><div class="color-name-main">Blue-and-White</div><div class="color-name-sub">Qing Hua · Porcelain cobalt</div><div class="color-desc">Brand primary, body text</div></div>
+      </div>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#14233A"><span class="color-swatch-label" style="color:#B6C3C7">#14233A</span></div>
+        <div class="color-info"><div class="color-name-main">Ink Black</div><div class="color-name-sub">Mo Qing · Dense ink wash</div><div class="color-desc">Headings, deepest ink tone</div></div>
+      </div>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#A8392E"><span class="color-swatch-label" style="color:#F2F6F7">#A8392E</span></div>
+        <div class="color-info"><div class="color-name-main">Cinnabar</div><div class="color-name-sub">Zhu Sha · Seal-paste red</div><div class="color-desc">Bull signals, emphasis, CTA</div></div>
+      </div>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#9C7A3A"><span class="color-swatch-label" style="color:#F2F6F7">#9C7A3A</span></div>
+        <div class="color-info"><div class="color-name-main">Gilding</div><div class="color-name-sub">Liu Jin · Bronze gilt</div><div class="color-desc">Active highlights, pivot markers</div></div>
+      </div>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#6E9387"><span class="color-swatch-label" style="color:#F2F6F7">#6E9387</span></div>
+        <div class="color-info"><div class="color-name-main">Bamboo Green</div><div class="color-name-sub">Qing Zhu · Forest bamboo</div><div class="color-desc">Bear signals, secondary accent</div></div>
+      </div>
+    </div>
+    <div class="right-col">
+      <div>
+        <div class="section-label">FIVE ELEMENTS MAPPING</div>
+        <div class="wuxing-grid">
+          <div class="wuxing-card"><div class="wuxing-glyph" style="color:#9C7A3A">金</div><div class="wuxing-label">Metal</div><div class="wuxing-color">#9C7A3A</div></div>
+          <div class="wuxing-card"><div class="wuxing-glyph" style="color:#6E9387">木</div><div class="wuxing-label">Wood</div><div class="wuxing-color">#6E9387</div></div>
+          <div class="wuxing-card"><div class="wuxing-glyph" style="color:#243E66">水</div><div class="wuxing-label">Water</div><div class="wuxing-color">#243E66</div></div>
+          <div class="wuxing-card"><div class="wuxing-glyph" style="color:#A8392E">火</div><div class="wuxing-label">Fire</div><div class="wuxing-color">#A8392E</div></div>
+          <div class="wuxing-card"><div class="wuxing-glyph" style="color:#7A6A4D">土</div><div class="wuxing-label">Earth</div><div class="wuxing-color">#7A6A4D</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">FULL PALETTE</div>
+        <div class="palette-strip">
+          <div class="palette-cell" style="background:#F2F6F7"><span style="color:#7C95AE">Jade</span></div>
+          <div class="palette-cell" style="background:#E4ECEE"><span style="color:#7C95AE">Celadon</span></div>
+          <div class="palette-cell" style="background:#243E66"><span style="color:#F2F6F7">Blue</span></div>
+          <div class="palette-cell" style="background:#14233A"><span style="color:#F2F6F7">Ink</span></div>
+          <div class="palette-cell" style="background:#A8392E"><span style="color:#F2F6F7">Cinnabar</span></div>
+          <div class="palette-cell" style="background:#9C7A3A"><span style="color:#F2F6F7">Gilt</span></div>
+          <div class="palette-cell" style="background:#6E9387"><span style="color:#F2F6F7">Bamboo</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">MATERIAL INSPIRATION</div>
+        <div class="material-grid">
+          <div class="material-card"><div class="material-icon">🫧</div><div class="material-label">Hetian Jade</div><div class="material-sub">NEPHRITE</div></div>
+          <div class="material-card"><div class="material-icon">🏺</div><div class="material-label">Celadon</div><div class="material-sub">RU WARE</div></div>
+          <div class="material-card"><div class="material-icon">🖌️</div><div class="material-label">Ink Wash</div><div class="material-sub">SUMI-E</div></div>
+          <div class="material-card"><div class="material-icon">🔴</div><div class="material-label">Cinnabar Seal</div><div class="material-sub">VERMILION</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-left">HEXAEDGE — DESIGN SYSTEM</div>
+    <div class="footer-right">"Warm and refined, never cold or sterile."</div>
+  </div>
+</div>
+</body></html>
