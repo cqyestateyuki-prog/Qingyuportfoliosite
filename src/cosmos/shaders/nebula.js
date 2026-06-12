@@ -124,13 +124,23 @@ void main() {
   float dawn = smoothstep(0.5, 0.0, uv.y) * uDayness;
   col = mix(col, vec3(1.0, 0.93, 0.95), dawn * 0.3);
 
-  // 夜:亮色流光动线 — 被噪声扭动的发光弧线,贴着画面下沿流过(不压正文)
+  // 夜:亮色流光动线 — 斜向上扬的弧线,粗细沿途呼吸,带一条暗淡伴线
   float wob = noise(vec2(p.x * 0.7 + t * 1.6, uTime * 0.05)) - 0.5;
-  float curveY = -0.62 + 0.28 * sin(p.x * 0.45 + uTime * 0.06) + 0.35 * wob;
+  // 主线:左低右高的对角弧 + 大波浪 + 噪声扭动
+  float curveY = -0.8 + 0.22 * p.x + 0.34 * sin(p.x * 0.7 + uTime * 0.07) + 0.32 * wob;
   float dRib = abs(p.y - curveY);
-  float ribbon = exp(-dRib * dRib * 110.0) + exp(-dRib * dRib * 12.0) * 0.28;
+  // 粗细沿 x 渐变(中段最饱满,两端收细)
+  float widthMod = mix(70.0, 200.0, 0.5 + 0.5 * sin(p.x * 0.9 + uTime * 0.09));
+  float ribbon = exp(-dRib * dRib * widthMod) + exp(-dRib * dRib * 10.0) * 0.3;
   float ribPulse = 0.75 + 0.25 * sin(uTime * 0.25 + p.x * 1.3);
-  col += mix(uColD, vec3(1.0), 0.45) * ribbon * ribPulse * (1.0 - uDayness) * 0.85;
+  col += mix(uColD, vec3(1.0), 0.5) * ribbon * ribPulse * (1.0 - uDayness) * 0.85;
+
+  // 伴线:更细更淡,反相位漂在主线上方,营造层次
+  float wob2 = noise(vec2(p.x * 0.5 - t * 1.1 + 7.0, uTime * 0.04)) - 0.5;
+  float curveY2 = -0.42 + 0.16 * p.x + 0.26 * sin(p.x * 0.5 - uTime * 0.05 + 2.4) + 0.3 * wob2;
+  float dRib2 = abs(p.y - curveY2);
+  float ribbon2 = exp(-dRib2 * dRib2 * 240.0);
+  col += uColC * ribbon2 * (0.7 + 0.3 * sin(uTime * 0.2 + p.x)) * (1.0 - uDayness) * 0.35;
 
   // 夜:底部沉降,顶部留呼吸
   col *= mix(1.0, 0.85 + 0.3 * uv.y, (1.0 - uDayness) * 0.6);

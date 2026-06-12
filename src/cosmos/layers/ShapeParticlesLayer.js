@@ -80,12 +80,14 @@ export default class ShapeParticlesLayer {
     if (aspect < 0.9) {
       u.uMoonOffset.value = [aspect * 0.6, 0.62];
       u.uMoonScale.value = 0.3;
-      u.uStarScale.value = 0.34;
+      u.uStarOffset.value = [0, 0.55]; // 星星抬高,不挡 Contact 文字
+      u.uStarScale.value = 0.32;
       u.uDpr.value = Math.max(this._baseDpr, 1.7);
     } else {
-      u.uMoonOffset.value = [0.85, 0.3];
-      u.uMoonScale.value = 0.55;
-      u.uStarScale.value = 0.5;
+      u.uMoonOffset.value = [1.12, 0.48]; // 月亮右上,避开标题
+      u.uMoonScale.value = 0.5;
+      u.uStarOffset.value = [0.78, 0.42]; // 星星右侧上方,不压 Contact 标题
+      u.uStarScale.value = 0.46;
       u.uDpr.value = this._baseDpr;
     }
   }

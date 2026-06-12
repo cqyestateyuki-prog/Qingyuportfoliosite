@@ -9,7 +9,7 @@
  * @param {Array} projects - Featured 项目列表
  */
 
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -84,7 +84,8 @@ const ReelItem = ({ children }) => {
 };
 
 // ============ 同框快翻画廊 ============
-// 主项目卡内左右翻看内容图(hero + 案例章节图,最多 6 张),箭头不触发跳转
+// 主项目卡内浏览内容图(hero + 案例章节图,最多 6 张):
+// 鼠标悬在图上滚动 = 左右翻页;翻到头继续滚 = 放行页面滚到下一个项目
 const ProjectGallery = ({ project, language }) => {
   const images = useMemo(() => {
     const list = [project.heroImage || project.thumbnail];
@@ -96,11 +97,38 @@ const ProjectGallery = ({ project, language }) => {
   }, [project]);
 
   const [[idx, dir], setSlide] = useState([0, 0]);
+  const boxRef = useRef(null);
+  const idxRef = useRef(0);
+  const wheelLockRef = useRef(0);
+  idxRef.current = idx;
+
   const go = (d) => (e) => {
     e.preventDefault();
     e.stopPropagation();
     setSlide(([i]) => [(i + d + images.length) % images.length, d]);
   };
+
+  // 滚轮翻页(非 passive 才能拦截页面滚动;React 合成 wheel 是 passive 的)
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el || images.length <= 1) return undefined;
+    const onWheel = (e) => {
+      // 触控板横滑优先,普通滚轮用纵向
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (delta === 0) return;
+      const forward = delta > 0;
+      const i = idxRef.current;
+      // 边界:不拦截,放行页面滚动去下一个项目
+      if (forward ? i >= images.length - 1 : i <= 0) return;
+      e.preventDefault();
+      const now = Date.now();
+      if (now - wheelLockRef.current < 550) return;
+      wheelLockRef.current = now;
+      setSlide([i + (forward ? 1 : -1), forward ? 1 : -1]);
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [images.length]);
 
   const slideVariants = {
     enter: (d) => ({ x: d > 0 ? '60%' : d < 0 ? '-60%' : 0, opacity: 0 }),
@@ -110,6 +138,7 @@ const ProjectGallery = ({ project, language }) => {
 
   return (
     <div
+      ref={boxRef}
       className="relative rounded-2xl overflow-hidden shadow-xl transition-shadow duration-500 group-hover:shadow-2xl"
       style={{
         aspectRatio: '16/10',
@@ -146,8 +175,9 @@ const ProjectGallery = ({ project, language }) => {
               key={side}
               type="button"
               onClick={go(d)}
+              onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
               aria-label={label}
-              className={`absolute ${side} top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:scale-110 md:opacity-0 md:group-hover:opacity-100`}
+              className={`absolute ${side} top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:scale-110 md:opacity-0 md:group-hover:opacity-100`}
               style={{
                 background: 'rgba(16, 12, 32, 0.45)',
                 border: '1px solid rgba(255, 255, 255, 0.25)',
@@ -167,7 +197,7 @@ const ProjectGallery = ({ project, language }) => {
               color: 'rgba(255, 255, 255, 0.85)',
             }}
           >
-            {String(idx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+            {String(idx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')} ⇅
           </span>
 
           {/* 进度圆点 */}
@@ -204,7 +234,7 @@ const Showcase = ({ projects }) => {
           className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
           style={{ color: 'var(--hud-fg-muted)' }}
         >
-          ✦ {t('portfolio.title')} ☾
+          ✦ 02 · {t('chapters.work')} ☾
         </p>
         <h2 className="text-4xl md:text-5xl font-normal" style={{ color: 'var(--text-hero)' }}>
           {t('portfolio.title')}
