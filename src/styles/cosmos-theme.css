@@ -234,9 +234,19 @@ footer {
   color: var(--text-body);
 }
 
-/* 夜版:区块大标题从项目品牌深色切换为星光浅色(日版保留品牌色) */
-.dark .project-detail {
+/* 区块大标题统一为主题色(双主题一致,不再用项目品牌深色) */
+.project-detail {
   --detail-heading: var(--text-hero);
+}
+
+/* 章节交替的淡纱带(替代原白/灰交替底) */
+.detail-section-alt {
+  background: color-mix(in srgb, var(--surface-scrim) 55%, transparent);
+}
+
+/* 硬编码正文灰 #565869 → token */
+.project-detail [class*="565869"] {
+  color: var(--text-body);
 }
 
 .project-detail .bg-white {

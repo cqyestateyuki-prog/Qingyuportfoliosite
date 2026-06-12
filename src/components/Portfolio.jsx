@@ -201,8 +201,8 @@ const Portfolio = () => {
                     className="planet-dossier absolute top-full -mt-2 w-72 z-40 rounded-2xl p-4 text-left backdrop-blur-md"
                     style={{
                       background: 'var(--surface-scrim-strong)',
-                      border: `1px solid ${hexToRgba(glowHex, 0.45)}`,
-                      boxShadow: `0 12px 40px rgba(0,0,0,0.25), 0 0 32px ${hexToRgba(glowHex, 0.35)}`,
+                      border: '1px solid var(--card-glass-border)',
+                      boxShadow: '0 12px 40px rgba(0,0,0,0.25), 0 0 32px var(--hud-glow)',
                     }}
                   >
                     {/* 资料卡抬头:序号 + 标题 */}
@@ -218,9 +218,9 @@ const Portfolio = () => {
                           key={chip}
                           className="px-2 py-0.5 text-[10px] font-medium rounded-full uppercase tracking-wider"
                           style={{
-                            backgroundColor: hexToRgba(glowHex, 0.16),
-                            color: glowHex,
-                            border: `1px solid ${hexToRgba(glowHex, 0.3)}`,
+                            backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                            color: 'var(--text-accent)',
+                            border: '1px solid var(--card-glass-border)',
                           }}
                         >
                           {chip}
@@ -241,7 +241,7 @@ const Portfolio = () => {
                       to={`/project/${project.id}`}
                       onClick={() => handleProjectClick(project)}
                       className="inline-flex items-center gap-1.5 text-xs font-medium tracking-[0.2em] uppercase transition-all hover:gap-2.5"
-                      style={{ color: glowHex }}
+                      style={{ color: 'var(--text-accent)' }}
                     >
                       {t('portfolio.viewProject')} <span aria-hidden="true">→</span>
                     </Link>

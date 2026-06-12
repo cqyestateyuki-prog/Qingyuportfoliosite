@@ -159,7 +159,8 @@ const ProjectDetail = () => {
   const [showBackToTop, setShowBackToTop] = useState(false)
   
   // 获取项目的高亮颜色（使用原始数据）
-  const highlightColor = rawProject ? getProjectHighlightColor(rawProject) : '#8B5CF6'
+  // 统一高亮色:全站主题强调紫(原 per-project 高亮色对比度不稳)
+  const highlightColor = 'var(--text-accent)'
   // 获取项目的深色（用于日间版标题）
   const darkColor = rawProject ? getProjectDarkColor(rawProject) : '#0D0D0D'
   // 获取项目的主题色（用于日间版标签）
@@ -363,18 +364,18 @@ const ProjectDetail = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {/* DOMAIN */}
               <div className="group">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
-                  <span style={{ color: themeColor }}>●</span> {t('project.domain')}
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: 'var(--text-accent)' }}>
+                  <span style={{ color: 'var(--text-accent)' }}>✦</span> {t('project.domain')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.domain?.map((item, idx) => (
                     <Badge 
                       key={idx} 
                       className="transition-all"
-                      style={{ 
-                        backgroundColor: `${themeColor}20`,
-                        color: themeColor,
-                        borderColor: `${themeColor}40`
+                      style={{
+                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                        color: 'var(--text-accent)',
+                        borderColor: 'var(--card-glass-border)'
                       }}
                     >
                       {item}
@@ -385,18 +386,18 @@ const ProjectDetail = () => {
               
               {/* FORM */}
               <div className="group">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
-                  <span style={{ color: themeColor }}>●</span> {t('project.form')}
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: 'var(--text-accent)' }}>
+                  <span style={{ color: 'var(--text-accent)' }}>✦</span> {t('project.form')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.form?.map((item, idx) => (
                     <Badge 
                       key={idx} 
                       className="transition-all"
-                      style={{ 
-                        backgroundColor: `${themeColor}20`,
-                        color: themeColor,
-                        borderColor: `${themeColor}40`
+                      style={{
+                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                        color: 'var(--text-accent)',
+                        borderColor: 'var(--card-glass-border)'
                       }}
                     >
                       {item}
@@ -407,18 +408,18 @@ const ProjectDetail = () => {
               
               {/* COLLABORATORS */}
               <div className="group">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: themeColor }}>
-                  <span style={{ color: themeColor }}>●</span> {t('project.collaborators')}
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: 'var(--text-accent)' }}>
+                  <span style={{ color: 'var(--text-accent)' }}>✦</span> {t('project.collaborators')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.collaborators?.map((item, idx) => (
                     <Badge 
                       key={idx} 
                       className="transition-all"
-                      style={{ 
-                        backgroundColor: `${themeColor}20`,
-                        color: themeColor,
-                        borderColor: `${themeColor}40`
+                      style={{
+                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                        color: 'var(--text-accent)',
+                        borderColor: 'var(--card-glass-border)'
                       }}
                     >
                       {item}
@@ -864,7 +865,7 @@ const ProjectDetail = () => {
         <section 
           key={section.id} 
           id={section.id}
-          className={`py-10 md:py-14 lg:py-16 px-4 md:px-6 ${index % 2 === 0 ? 'bg-[#F7F7F8]' : 'bg-white'}`}
+          className={`py-10 md:py-14 lg:py-16 px-4 md:px-6 ${index % 2 === 0 ? 'detail-section-alt' : ''}`}
         >
           <div className="max-w-5xl mx-auto">
             {/* Section Header */}

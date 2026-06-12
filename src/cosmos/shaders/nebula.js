@@ -91,18 +91,30 @@ void main() {
   col = mix(col, uColC, clamp(length(q) * 0.8, 0.0, 1.0) * mix(0.12 + 0.55 * f, 0.4, uDayness));
   col = mix(col, uColD, smoothstep(0.62, 0.95, f) * (0.55 - 0.25 * uDayness));
 
-  // 日:蓬松白云高光(噪声峰值处泛白)
-  col = mix(col, vec3(1.0), smoothstep(0.58, 0.85, f) * uDayness * 0.8);
+  // 日:蓬松白云(更大朵、更亮,梦核棉花感)
+  col = mix(col, vec3(1.0), smoothstep(0.5, 0.8, f) * uDayness * 0.9);
 
   // 日:多巴胺彩色光斑 — 渐变只出现在局部,云层流过时若隐若现
   if (uDayness > 0.01) {
     vec2 g1 = p - vec2(-1.05, 0.55);  // 左上 香芋紫
     vec2 g2 = p - vec2(1.15, 0.05);   // 右中 蜜桃粉
     vec2 g3 = p - vec2(-0.25, -0.85); // 下方 晴空蓝
-    float cloudGate = 0.55 + 0.45 * f; // 被云层调制,更透亮
-    col = mix(col, vec3(0.72, 0.62, 0.98), exp(-dot(g1, g1) * 1.3) * 0.55 * uDayness * cloudGate);
-    col = mix(col, vec3(1.0, 0.72, 0.84), exp(-dot(g2, g2) * 1.1) * 0.5 * uDayness * cloudGate);
-    col = mix(col, vec3(0.62, 0.84, 1.0), exp(-dot(g3, g3) * 1.4) * 0.45 * uDayness * cloudGate);
+    float cloudGate = 0.5 + 0.5 * f; // 被云层调制,更透亮
+    col = mix(col, vec3(0.70, 0.60, 0.99), exp(-dot(g1, g1) * 1.2) * 0.65 * uDayness * cloudGate);
+    col = mix(col, vec3(1.0, 0.70, 0.84), exp(-dot(g2, g2) * 1.0) * 0.6 * uDayness * cloudGate);
+    col = mix(col, vec3(0.60, 0.84, 1.0), exp(-dot(g3, g3) * 1.3) * 0.55 * uDayness * cloudGate);
+
+    // 梦核虹彩微光:云缘处一层缓慢游移的淡彩(透亮感)
+    float irid = smoothstep(0.42, 0.58, f) * (1.0 - smoothstep(0.58, 0.75, f));
+    vec3 iridCol = vec3(
+      0.85 + 0.15 * sin(uTime * 0.12 + p.x * 1.5),
+      0.82 + 0.15 * sin(uTime * 0.15 + p.y * 1.7 + 2.0),
+      0.95 + 0.05 * sin(uTime * 0.1 + 4.0)
+    );
+    col = mix(col, iridCol, irid * uDayness * 0.35);
+
+    // 日:鼠标位置一圈柔白光环(像云间透下的光)
+    col += vec3(1.0, 0.97, 0.95) * exp(-md * md * 3.5) * uDayness * 0.18;
   }
 
   // 鼠标柔光(夜里更亮)
