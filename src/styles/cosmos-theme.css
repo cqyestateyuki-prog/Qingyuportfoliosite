@@ -172,21 +172,44 @@ footer {
   animation: planet-orbit 26s linear infinite;
 }
 
+/* 每颗星球的光晕来自项目品牌色(--planet-glow 由 JSX 注入) */
 .planet-body {
-  box-shadow: 0 0 22px var(--hud-glow), inset 0 0 0 1px var(--card-glass-border);
+  box-shadow: 0 0 28px var(--planet-glow, var(--hud-glow)), inset 0 0 0 1px var(--card-glass-border);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
 }
 
-.planet-item:hover .planet-body {
-  transform: scale(1.07);
+.planet-item:hover .planet-body,
+.planet-selected .planet-body {
+  transform: scale(1.13);
   box-shadow:
-    0 0 42px var(--hud-glow),
-    0 0 90px color-mix(in srgb, var(--hud-glow) 50%, transparent),
+    0 0 55px var(--planet-glow, var(--hud-glow)),
+    0 0 120px var(--planet-glow-soft, transparent),
     inset 0 0 0 1px var(--hud-line-strong);
 }
 
-.planet-item:hover .planet-orbit {
-  border-color: var(--hud-line-strong);
+.planet-item:hover,
+.planet-selected {
+  z-index: 50;
+}
+
+.planet-item:hover .planet-orbit,
+.planet-selected .planet-orbit {
+  border-color: var(--planet-glow, var(--hud-line-strong));
+}
+
+/* 星球资料卡:hover / 点选弹出 */
+.planet-dossier {
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planet-item:hover .planet-dossier,
+.planet-selected .planet-dossier {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
