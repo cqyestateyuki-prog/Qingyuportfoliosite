@@ -83,6 +83,11 @@ footer {
   background: var(--cosmos-fallback-bg);
 }
 
+/* 日版不渲染星云:canvas 淡出,露出 DS 干净白的 fallback 底 */
+html:not(.dark) .cosmos-canvas-el {
+  opacity: 0;
+}
+
 /* ---- HUD 档案库卡片(日夜双主题玻璃 + 瞄准发光) ---- */
 .archive-card {
   position: relative;

@@ -137,6 +137,9 @@ export default class SceneManager {
 
     lerpPalette(s.palette, NIGHT, DAY, s.dayness);
 
+    // 日版不渲染(canvas 已淡出,省 GPU);过渡中间态仍渲染
+    if (s.dayness > 0.985) return;
+
     for (let i = 0; i < this.layers.length; i++) {
       this.layers[i].update(s);
       this.renderer.render({ scene: this.layers[i].mesh, clear: i === 0 });

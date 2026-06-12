@@ -18,7 +18,7 @@ import { useLanguage } from '../i18n';
 import { getLocalizedText, getLocalizedArray } from '../utils/localization';
 
 // ============ 3D 倾斜卡片组件 ============
-const TiltCard = ({ children, className = '' }) => {
+const TiltCard = ({ children, className = '', max = 8 }) => {
   const ref = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -28,8 +28,8 @@ const TiltCard = ({ children, className = '' }) => {
 
   // 弹簧动画配置
   const springConfig = { damping: 20, stiffness: 300 };
-  const rotateX = useSpring(useTransform(y, [0, 1], [8, -8]), springConfig);
-  const rotateY = useSpring(useTransform(x, [0, 1], [-8, 8]), springConfig);
+  const rotateX = useSpring(useTransform(y, [0, 1], [max, -max]), springConfig);
+  const rotateY = useSpring(useTransform(x, [0, 1], [-max, max]), springConfig);
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
@@ -142,7 +142,7 @@ const ProjectGallery = ({ project, language }) => {
       ref={boxRef}
       className="relative rounded-2xl overflow-hidden shadow-xl transition-shadow duration-500 group-hover:shadow-2xl"
       style={{
-        aspectRatio: '16/10',
+        aspectRatio: '16/9',
         background: project.colors?.heroGradient || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       }}
     >
@@ -246,87 +246,67 @@ const Showcase = ({ projects }) => {
         {projects.map((project, index) => (
           <ReelItem key={project.id}>
           <motion.div
-            initial={{ opacity: 0, y: 48, rotateY: index % 2 === 0 ? -4 : 4 }}
-            whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-            viewport={{ once: false, amount: 0.25 }}
-            transition={{ type: 'spring', stiffness: 180, damping: 22, delay: index * 0.06 }}
-            className={`feature-panel flex flex-col ${
-              index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-            } items-center gap-8 lg:gap-12`}
+            initial={{ opacity: 0, y: 48 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ type: 'spring', stiffness: 180, damping: 22, delay: index * 0.05 }}
+            className="feature-panel"
           >
-            {/* ====== 文字区域（三级层级：类别 → 标题 → 描述） ====== */}
-            <div className="w-full lg:w-[32%] lg:min-w-[280px] flex-shrink-0 space-y-4 text-center lg:text-left font-['Poppins']">
-              {/* 二级：项目类型标签 - 小且克制 */}
-              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                {project.year && (
+            {/* ====== 抬头:类别标签 + 项目标题 + 年份 chips ====== */}
+            <div className="flex flex-wrap items-end justify-between gap-3 mb-6 font-['Poppins']">
+              <div>
+                <p
+                  className="text-[11px] tracking-[0.35em] uppercase mb-2"
+                  style={{ color: 'var(--section-tag)' }}
+                >
+                  ✦ {getLocalizedText(project.domain?.[0], language) || project.categories?.[0]}
+                </p>
+                <h3
+                  className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight"
+                  style={{ color: 'var(--text-hero)' }}
+                >
+                  {getLocalizedText(project.title, language)}
+                </h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).map((chip) => (
                   <span
+                    key={chip}
                     className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider"
                     style={{
                       backgroundColor: 'color-mix(in srgb, var(--hud-glow) 35%, transparent)',
-                      color: 'var(--text-accent)'
+                      color: 'var(--text-accent)',
                     }}
                   >
-                    {project.year}
-                  </span>
-                )}
-                {project.categories?.slice(0, 2).map((cat) => (
-                  <span 
-                    key={cat}
-                    className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider"
-                    style={{
-                      backgroundColor: 'color-mix(in srgb, var(--hud-glow) 35%, transparent)',
-                      color: 'var(--text-accent)'
-                    }}
-                  >
-                    {cat}
+                    {chip}
                   </span>
                 ))}
               </div>
-
-              {/* 一级：项目标题 */}
-              <h3 className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight" style={{ color: 'var(--text-hero)' }}>
-                {getLocalizedText(project.title, language)}
-              </h3>
-
-              {/* 三级：副标题/简介 - 弱化，行数限制 */}
-              <p className="text-base font-light leading-snug line-clamp-3 max-w-sm mx-auto lg:mx-0" style={{ color: 'var(--text-body)' }}>
-                {getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)}
-              </p>
-
-              {/* 行动链接 - 极简 */}
-              <div className="pt-2">
-                <Link to={`/project/${project.id}`}>
-                  <motion.span
-                    whileHover={{ x: 4 }}
-                    className="inline-block text-sm font-medium hover:text-[var(--custom-purple)] transition-colors underline underline-offset-2"
-                    style={{ color: 'var(--text-body)' }}
-                  >
-                    {t('portfolio.viewProject')}
-                  </motion.span>
-                </Link>
-              </div>
             </div>
 
-            {/* ====== 图片区域（大占比，视觉主导） ====== */}
-            <div className="w-full lg:flex-1 lg:min-w-0">
-              <Link to={`/project/${project.id}`} className="block">
-                <TiltCard className="relative group cursor-pointer">
-                  {/* 图片容器:同框左右快翻画廊 */}
-                  <ProjectGallery project={project} language={language} />
+            {/* ====== 通栏大图画廊(16:9,滚轮/箭头翻页) ====== */}
+            <Link to={`/project/${project.id}`} className="block">
+              <TiltCard max={4} className="relative group cursor-pointer">
+                <ProjectGallery project={project} language={language} />
+              </TiltCard>
+            </Link>
 
-                  {/* 底部信息条 - 低调不抢图 */}
-                  <div className="mt-4 flex items-center justify-between text-xs font-['Poppins']">
-                    <span className="font-medium" style={{ color: 'var(--text-body)' }}>
-                      {getLocalizedText(project.domain?.[0], language) || project.categories?.[0]}
-                    </span>
-                    <span 
-                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
-                      style={{ color: 'var(--custom-purple)' }}
-                    >
-                      {t('portfolio.clickToExplore')}
-                    </span>
-                  </div>
-                </TiltCard>
+            {/* ====== 底行:简介 + View Project ====== */}
+            <div className="mt-6 flex flex-col md:flex-row md:items-center justify-between gap-3 font-['Poppins']">
+              <p
+                className="text-base font-light leading-snug line-clamp-2 max-w-2xl"
+                style={{ color: 'var(--text-body)' }}
+              >
+                {getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)}
+              </p>
+              <Link to={`/project/${project.id}`} className="shrink-0">
+                <motion.span
+                  whileHover={{ x: 4 }}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium tracking-[0.15em] uppercase transition-colors"
+                  style={{ color: 'var(--section-tag)' }}
+                >
+                  {t('portfolio.viewProject')} <span aria-hidden="true">→</span>
+                </motion.span>
               </Link>
             </div>
           </motion.div>

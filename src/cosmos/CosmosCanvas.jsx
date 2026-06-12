@@ -63,6 +63,7 @@ const CosmosCanvas = () => {
       <canvas
         ref={canvasRef}
         aria-hidden="true"
+        className="cosmos-canvas-el"
         style={{
           position: 'fixed',
           inset: 0,
@@ -70,8 +71,8 @@ const CosmosCanvas = () => {
           height: '100%',
           zIndex: 1,
           pointerEvents: 'none',
-          opacity: ready ? 1 : 0,
-          transition: 'opacity 0.6s ease',
+          opacity: ready ? undefined : 0,
+          transition: 'opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       />
     </>

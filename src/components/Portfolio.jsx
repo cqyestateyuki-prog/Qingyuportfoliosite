@@ -16,10 +16,26 @@ import { getLocalizedText } from '../utils/localization';
  * 每个项目是一张塔罗牌,扇形牌阵错落排开,hover 抽出端正 + 翻出简介
  */
 
-// 牌阵:旋转角与弧形下沉(循环取用,像摊开的手牌)
-const CARD_ROTATIONS = [-7, -4, -1, 2, 5, 8];
-const CARD_DIPS = [26, 10, 0, 4, 14, 30];
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX'];
+
+// 倒金字塔牌阵:顶行最多,逐行递减(如 12 张 → 5-4-3),规整居中
+const buildPyramidRows = (items) => {
+  const n = items.length;
+  if (n === 0) return [];
+  // 找最小的顶行宽 k,使 k + (k-1) + ... 能装下全部
+  let k = 1;
+  while ((k * (k + 1)) / 2 < n) k++;
+  k = Math.min(k, 5); // 顶行最多 5 张
+  const rows = [];
+  let i = 0;
+  let size = k;
+  while (i < n) {
+    rows.push(items.slice(i, i + size));
+    i += size;
+    size = Math.max(size - 1, 2); // 逐行递减,最少 2 张一行
+  }
+  return rows;
+};
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -89,96 +105,95 @@ const Portfolio = () => {
           <HudTabs categories={filters} active={activeFilter} onSelect={setActiveFilter} />
         </div>
 
-        <motion.div
-          layout
-          className="flex flex-wrap justify-center items-start gap-x-4 md:gap-x-6 gap-y-10 max-w-6xl mx-auto pb-12"
-        >
+        <div className="max-w-7xl mx-auto pb-12 space-y-8">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => {
-              const rotate = CARD_ROTATIONS[index % CARD_ROTATIONS.length];
-              const dip = CARD_DIPS[index % CARD_DIPS.length];
-              return (
-                <motion.div
-                  layout
-                  key={project.id}
-                  initial={{ opacity: 0, y: 40, rotate: 0 }}
-                  animate={{ opacity: 1, y: 0, rotate }}
-                  exit={{ opacity: 0, y: -24, rotate: 0 }}
-                  whileHover={{ rotate: 0, y: -16, scale: 1.05, zIndex: 40 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
-                  className="relative"
-                  style={{ marginTop: dip }}
-                >
-                  <Link
-                    to={`/project/${project.id}`}
-                    onClick={() => handleProjectClick(project)}
-                    aria-label={getLocalizedText(project.title, language)}
-                    className="tarot-card group block w-[42vw] max-w-[190px] md:w-48 rounded-2xl overflow-hidden backdrop-blur-md"
-                    style={{ background: 'var(--card-glass-bg)' }}
-                  >
-                    {/* 牌框:外缘留白 + 内细线框,塔罗双框 */}
-                    <div
-                      className="m-2 rounded-xl flex flex-col"
-                      style={{ border: '1px solid var(--hud-line)' }}
+            {buildPyramidRows(filteredProjects).map((row, rowIdx) => (
+              <motion.div
+                layout
+                key={`row-${rowIdx}-${activeFilter}`}
+                className="flex flex-wrap justify-center gap-6 md:gap-8"
+              >
+                {row.map((project, colIdx) => {
+                  const index = buildPyramidRows(filteredProjects)
+                    .slice(0, rowIdx)
+                    .reduce((acc, r) => acc + r.length, 0) + colIdx;
+                  return (
+                    <motion.div
+                      layout
+                      key={project.id}
+                      initial={{ opacity: 0, y: 32 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      whileHover={{ y: -10, scale: 1.03, zIndex: 40 }}
+                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
+                      className="relative"
                     >
-                      {/* 牌首:✦ 罗马数字 ✦ */}
-                      <p
-                        className="text-center text-[10px] tracking-[0.3em] py-1.5 font-['Poppins']"
-                        style={{ color: 'var(--hud-fg-muted)' }}
+                      <Link
+                        to={`/project/${project.id}`}
+                        onClick={() => handleProjectClick(project)}
+                        aria-label={getLocalizedText(project.title, language)}
+                        className="tarot-card group block w-[86vw] max-w-[230px] md:w-[230px] rounded-2xl overflow-hidden backdrop-blur-md"
+                        style={{ background: 'var(--card-glass-bg)' }}
                       >
-                        ✦ {ROMAN[index] || index + 1} ✦
-                      </p>
-
-                      {/* 牌面图 + hover 翻出简介 */}
-                      <div className="relative mx-1.5 rounded-lg overflow-hidden aspect-[4/3]">
-                        <img
-                          src={project.thumbnail || project.heroImage}
-                          alt=""
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                        {/* hover:简介浮现 */}
+                        {/* 牌框:外缘留白 + 内细线框,塔罗双框 */}
                         <div
-                          className="absolute inset-0 flex items-end p-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={{
-                            background:
-                              'linear-gradient(to top, rgba(14, 10, 31, 0.92) 30%, rgba(14, 10, 31, 0.4) 70%, transparent)',
-                          }}
+                          className="m-2 rounded-xl flex flex-col"
+                          style={{ border: '1px solid var(--hud-line)' }}
                         >
-                          <p className="text-[11px] leading-relaxed line-clamp-4 text-white/90">
-                            {getLocalizedText(project.brief, language)}
+                          {/* 牌首:✦ 罗马数字 ✦ */}
+                          <p
+                            className="text-center text-[11px] tracking-[0.35em] py-2 font-['Poppins']"
+                            style={{ color: 'var(--hud-fg-muted)' }}
+                          >
+                            ✦ {ROMAN[index] || index + 1} ✦
                           </p>
-                        </div>
-                      </div>
 
-                      {/* 牌名 + 年份/类别 */}
-                      <div className="px-2 pt-2 pb-2.5 text-center">
-                        <h3
-                          className="text-[13px] leading-snug font-['Tenor_Sans'] mb-1.5 line-clamp-2"
-                          style={{ color: 'var(--text-hero)' }}
-                        >
-                          {getLocalizedText(project.title, language)}
-                        </h3>
-                        <p
-                          className="text-[9px] tracking-[0.18em] uppercase font-['Poppins']"
-                          style={{ color: 'var(--text-muted)' }}
-                        >
-                          {[project.year, project.categories?.[0]].filter(Boolean).join(' · ')}
-                        </p>
-                        {/* 牌脚饰线 */}
-                        <div className="flex items-center justify-center gap-1.5 mt-1.5" aria-hidden="true">
-                          <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
-                          <MoonIcon size={8} style={{ color: 'var(--hud-fg-muted)' }} />
-                          <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
+                          {/* 牌面图(3:4 大幅) */}
+                          <div className="relative mx-2 rounded-lg overflow-hidden aspect-[3/4]">
+                            <img
+                              src={project.thumbnail || project.heroImage}
+                              alt=""
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                          </div>
+
+                          {/* 牌名 + 简介(常显)+ 年份/类别 */}
+                          <div className="px-3 pt-2.5 pb-2.5 text-center">
+                            <h3
+                              className="text-[15px] leading-snug font-['Tenor_Sans'] mb-1 line-clamp-1"
+                              style={{ color: 'var(--text-hero)' }}
+                            >
+                              {getLocalizedText(project.title, language)}
+                            </h3>
+                            <p
+                              className="text-[11px] leading-relaxed line-clamp-2 mb-1.5 font-['Poppins']"
+                              style={{ color: 'var(--text-muted)' }}
+                            >
+                              {getLocalizedText(project.brief, language)}
+                            </p>
+                            <p
+                              className="text-[9px] tracking-[0.2em] uppercase font-['Poppins']"
+                              style={{ color: 'var(--section-tag)' }}
+                            >
+                              {[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).join(' · ')}
+                            </p>
+                            {/* 牌脚饰线 */}
+                            <div className="flex items-center justify-center gap-1.5 mt-1.5" aria-hidden="true">
+                              <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
+                              <MoonIcon size={8} style={{ color: 'var(--hud-fg-muted)' }} />
+                              <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
