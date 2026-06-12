@@ -6,20 +6,23 @@ const NextProject = ({ nextProject }) => {
   if (!nextProject) return null;
 
   return (
-    <section className="py-12 md:py-20 lg:py-24 px-4 md:px-6 bg-[#F7F7F8] border-t border-gray-100">
+    <section
+      className="py-10 md:py-14 px-4 md:px-6"
+      style={{ borderTop: '1px solid var(--hud-line)' }}
+    >
       <div className="max-w-5xl mx-auto">
         {/* Section Header — same structure as ProjectDetail sections (Section Tag + Main Title + Brief) */}
         <div className="mb-8 md:mb-12 lg:mb-16">
           <div
-            className="text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
-            style={{ color: 'var(--custom-purple)' }}
+            className="text-[11px] tracking-[0.4em] uppercase mb-3 md:mb-4 font-['Poppins']"
+            style={{ color: 'var(--hud-fg-muted)' }}
           >
-            Next
+            ✦ Next Project ☾
           </div>
           <h2
             className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
             style={{
-              color: '#0D0D0D',
+              color: 'var(--text-hero)',
               fontFamily: "'Poppins', 'Inter', sans-serif"
             }}
           >
@@ -30,11 +33,16 @@ const NextProject = ({ nextProject }) => {
         {/* Next project card: horizontal (image left, text right), same content format as project sections */}
         <Link
           to={`/project/${nextProject.id}`}
-          className="group flex flex-col md:flex-row w-full overflow-hidden rounded-2xl bg-white shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300"
+          className="group flex flex-col md:flex-row w-full overflow-hidden rounded-2xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1"
+          style={{
+            background: 'var(--card-glass-bg)',
+            border: '1px solid var(--card-glass-border)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.15), 0 0 24px var(--hud-glow)',
+          }}
           onClick={() => window.scrollTo(0, 0)}
         >
           {/* 左侧：缩略图 */}
-          <div className="md:w-[45%] aspect-[16/10] md:aspect-auto md:min-h-[280px] flex-shrink-0 overflow-hidden bg-gray-100">
+          <div className="md:w-[45%] aspect-[16/10] md:aspect-auto md:min-h-[280px] flex-shrink-0 overflow-hidden">
             <img
               src={nextProject.heroImage || nextProject.thumbnail}
               alt={nextProject.title}
@@ -43,10 +51,10 @@ const NextProject = ({ nextProject }) => {
           </div>
           {/* 右侧：标题 + 副标题 + CTA */}
           <div className="flex-1 flex flex-col justify-center p-8 md:p-10 text-left">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-[var(--custom-purple)] transition-colors" style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}>
+            <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-[var(--custom-purple)] transition-colors" style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}>
               {nextProject.title}
             </h3>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6 line-clamp-2">
+            <p className="text-base md:text-lg leading-relaxed mb-6 line-clamp-2" style={{ color: 'var(--text-body)' }}>
               {nextProject.subtitle}
             </p>
             <span className="inline-flex items-center gap-2 text-sm font-medium text-[var(--custom-purple)] group-hover:gap-3 transition-all">

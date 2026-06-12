@@ -44,54 +44,6 @@ const DESIGNER_VALUES = [
   { text: 'STORYTELLING', bottom: '16%', left: '58%', size: 'text-lg md:text-xl' },
 ];
 
-// 梦幻城堡剪影(迪士尼开场感,仅日版浮现)+ 环绕星光
-const CastleSilhouette = () => (
-  <div
-    className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[2] pointer-events-none select-none w-[min(92vw,680px)] opacity-100 dark:opacity-0 transition-opacity duration-1000"
-    aria-hidden="true"
-  >
-    <svg viewBox="0 0 640 262" className="w-full h-auto" fill="none">
-      <defs>
-        <linearGradient id="castleFade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#9d82e0" stopOpacity="0.75" />
-          <stop offset="1" stopColor="#d9c9f5" stopOpacity="0.15" />
-        </linearGradient>
-      </defs>
-      {/* 城堡主体剪影:五塔尖顶 */}
-      <path
-        fill="url(#castleFade)"
-        d="M40,262 V150 L65,105 L90,150 V200 H180 V120 L210,70 L240,120 V190 H280 V90 L320,18 L360,90 V190 H400 V120 L430,70 L460,120 V200 H550 V150 L575,105 L600,150 V262 Z"
-      />
-      {/* 中央塔旗帜 */}
-      <path d="M320,18 V4 L336,10 L320,16" stroke="#9d82e0" strokeWidth="2.5" fill="#b89bf0" opacity="0.8" />
-      {/* 侧塔旗帜 */}
-      <path d="M210,70 V58 L222,63 L210,68" fill="#c4aef2" opacity="0.7" />
-      <path d="M430,70 V58 L442,63 L430,68" fill="#c4aef2" opacity="0.7" />
-      {/* 环绕星光 ✦ */}
-      {[
-        [120, 60, 7, '0s'],
-        [255, 30, 5, '0.8s'],
-        [395, 42, 6, '1.6s'],
-        [520, 70, 5, '0.4s'],
-      ].map(([x, y, r, delay], i) => (
-        <path
-          key={i}
-          d={`M${x},${y - r} Q${x + r * 0.18},${y - r * 0.18} ${x + r},${y} Q${x + r * 0.18},${y + r * 0.18} ${x},${y + r} Q${x - r * 0.18},${y + r * 0.18} ${x - r},${y} Q${x - r * 0.18},${y - r * 0.18} ${x},${y - r} Z`}
-          fill="#b89bf0"
-          opacity="0.9"
-          style={{ animation: `castle-sparkle 2.4s ease-in-out ${delay} infinite` }}
-        />
-      ))}
-      {/* 城堡上方一弯新月 */}
-      <path
-        d="M488,28 a16,16 0 1,0 14,24 a12.5,12.5 0 1,1 -14,-24 Z"
-        fill="#c9b4f5"
-        opacity="0.85"
-      />
-    </svg>
-  </div>
-);
-
 const DESIGN_QUOTES = [
   { en: 'Design is not just what it looks like. Design is how it works.', zh: '设计不只是看起来怎样，设计关乎如何运作。' },
   { en: 'Simplicity is the ultimate sophistication.', zh: '简约是复杂的终极形式。' },
@@ -188,9 +140,6 @@ const ChapterHero = () => {
       {/* ============ 定格态 ============ */}
       {isFinal && (
         <>
-          {/* 梦幻城堡(日版限定) */}
-          <CastleSilhouette />
-
           {/* 星座标签(可悬停/点击出格言) */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             {DESIGNER_VALUES.map((value, index) => (

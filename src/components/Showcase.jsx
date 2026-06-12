@@ -10,7 +10,7 @@
  */
 
 import { useState, useRef, useMemo } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../i18n';
@@ -59,6 +59,25 @@ const TiltCard = ({ children, className = '' }) => {
         perspective: 1000,
       }}
     >
+      {children}
+    </motion.div>
+  );
+};
+
+// ============ 胶卷景深 ============
+// 电影卷轴感:项目滑出视口上方时缩小、后退、变暗,滑入时从远处浮现
+const ReelItem = ({ children }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.68, 1], [0.93, 1, 1, 0.84]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.72, 1], [0.45, 1, 1, 0.25]);
+  const y = useTransform(scrollYProgress, [0.68, 1], [0, -48]);
+
+  return (
+    <motion.div ref={ref} style={{ scale, opacity, y }}>
       {children}
     </motion.div>
   );
@@ -192,10 +211,10 @@ const Showcase = ({ projects }) => {
         </h2>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-40 relative" style={{ perspective: '1200px' }}>
+      <div className="max-w-7xl mx-auto space-y-28 relative" style={{ perspective: '1200px' }}>
         {projects.map((project, index) => (
+          <ReelItem key={project.id}>
           <motion.div
-            key={project.id}
             initial={{ opacity: 0, y: 48, rotateY: index % 2 === 0 ? -4 : 4 }}
             whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
             viewport={{ once: true, margin: "-80px" }}
@@ -280,6 +299,7 @@ const Showcase = ({ projects }) => {
               </Link>
             </div>
           </motion.div>
+          </ReelItem>
         ))}
       </div>
     </div>

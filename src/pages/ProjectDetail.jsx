@@ -264,9 +264,12 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Project Not Found</h1>
+      <div className="min-h-screen flex items-center justify-center">
+        <div
+          className="text-center rounded-2xl px-10 py-12 backdrop-blur-md"
+          style={{ background: 'var(--surface-scrim)', border: '1px solid var(--card-glass-border)' }}
+        >
+          <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-hero)' }}>Project Not Found</h1>
           <Link to="/">
             <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
               Back to Home
@@ -278,7 +281,7 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="project-detail min-h-screen">
       {/* ========== 顶部导航栏（与首页一致）========== */}
       <Navbar />
 
@@ -335,17 +338,23 @@ const ProjectDetail = () => {
       {/* ========== 顶部标题区域 ========== */}
       {useLightHero ? (
         // 日间版 hero：浅灰色背景，深灰色标题（部分字符主题色），主题色标签
-        <section className="pt-32 pb-16 px-6" style={{ backgroundColor: '#f7f7f8' }}>
+        <section className="pt-28 pb-10 px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
+              <p
+                className="text-[11px] tracking-[0.4em] uppercase mb-5 font-['Poppins']"
+                style={{ color: 'var(--hud-fg-muted)' }}
+              >
+                ✦ Case Study ☾
+              </p>
               <h1 
                 className="text-4xl md:text-6xl font-normal mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
-                style={{ color: darkColor }}
+                style={{ color: 'var(--text-hero)' }}
               >
                 <DecryptedText text={project.title} />
               </h1>
               
-              <p className="text-xl md:text-2xl mb-8 leading-relaxed animate-fade-in-delay-1" style={{ color: darkColor }}>
+              <p className="text-xl md:text-2xl mb-8 leading-relaxed animate-fade-in-delay-1" style={{ color: 'var(--text-body)' }}>
                 {project.subtitle}
               </p>
             </div>
@@ -422,9 +431,20 @@ const ProjectDetail = () => {
         </section>
       ) : (
         // 原版 hero：渐变背景，白色文字
-        <section className="pt-32 pb-16 px-6" style={{background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'}}>
-          <div className="max-w-6xl mx-auto">
+        <section className="pt-28 pb-10 px-4 md:px-6">
+          <div
+            className="max-w-6xl mx-auto relative overflow-hidden rounded-3xl px-6 md:px-10 py-12 md:py-14"
+            style={{background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'}}
+          >
+            {/* HUD 角标(常显) */}
+            <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-white/40 pointer-events-none" aria-hidden="true" />
+            <span className="absolute top-4 right-4 w-5 h-5 border-t border-r border-white/40 pointer-events-none" aria-hidden="true" />
+            <span className="absolute bottom-4 left-4 w-5 h-5 border-b border-l border-white/40 pointer-events-none" aria-hidden="true" />
+            <span className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-white/40 pointer-events-none" aria-hidden="true" />
             <div className="text-center mb-12">
+              <p className="text-[11px] tracking-[0.4em] uppercase mb-5 text-white/60 font-['Poppins']">
+                ✦ Case Study ☾
+              </p>
               <h1 
                 className="text-4xl md:text-6xl font-normal text-white mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
               >
@@ -494,7 +514,7 @@ const ProjectDetail = () => {
       )}
 
       {/* ========== 项目概述区域 ========== */}
-      <section id="overview" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 bg-white">
+      <section id="overview" className="py-10 md:py-14 lg:py-16 px-4 md:px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           {/* 主图展示 */}
           <div className="relative group rounded-3xl overflow-hidden shadow-2xl mb-12">
@@ -556,7 +576,7 @@ const ProjectDetail = () => {
                   href="https://ai-community-mvp-v2-7y9m.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
+                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-[#2d2356] font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
                 >
                   Visit AI Community Platform
                   <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -573,7 +593,7 @@ const ProjectDetail = () => {
                   href="https://www.figma.com/proto/XWqBQZuoMeZCWbhwrfaWBP/Final-UI--Copy-?node-id=97-4335&t=4v7H3T97OyRDa3Ds-1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-800 font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
+                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-[#2d2356] font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
                 >
                   View in Figma
                   <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -597,7 +617,7 @@ const ProjectDetail = () => {
             {/* Main Title */}
             <h2 
               className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
-              style={{ color: getProjectDarkColor(rawProject) }}
+              style={{ color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})` }}
             >
               {project.overview.mainTitle || 'Transform AI Learning Into Community Experience'}
             </h2>
@@ -793,7 +813,7 @@ const ProjectDetail = () => {
 
       {/* ========== 角色部分（只在存在时渲染）========== */}
       {project.role && (
-        <section id="role" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 bg-white">
+        <section id="role" className="py-10 md:py-14 lg:py-16 px-4 md:px-6 bg-white">
           <div className="max-w-5xl mx-auto">
             {/* Section Header */}
             <div className="mb-8 md:mb-12 lg:mb-16">
@@ -809,7 +829,7 @@ const ProjectDetail = () => {
               <h2
                 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 md:mb-6 leading-tight"
                 style={{
-                  color: getProjectDarkColor(rawProject),
+                  color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})`,
                   fontFamily: "'Poppins', 'Inter', sans-serif"
                 }}
               >
@@ -844,7 +864,7 @@ const ProjectDetail = () => {
         <section 
           key={section.id} 
           id={section.id}
-          className={`py-12 md:py-20 lg:py-24 px-4 md:px-6 ${index % 2 === 0 ? 'bg-[#F7F7F8]' : 'bg-white'}`}
+          className={`py-10 md:py-14 lg:py-16 px-4 md:px-6 ${index % 2 === 0 ? 'bg-[#F7F7F8]' : 'bg-white'}`}
         >
           <div className="max-w-5xl mx-auto">
             {/* Section Header */}
@@ -863,7 +883,7 @@ const ProjectDetail = () => {
               <h2 
                 className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
                 style={{ 
-                  color: getProjectDarkColor(rawProject),
+                  color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})`,
                   fontFamily: "'Poppins', 'Inter', sans-serif"
                 }}
               >
@@ -990,7 +1010,7 @@ const ProjectDetail = () => {
                         <h3 
                           className="text-2xl md:text-3xl font-bold mb-4"
                           style={{
-                            color: getProjectDarkColor(rawProject),
+                            color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})`,
                             fontFamily: "'Poppins', 'Inter', sans-serif"
                           }}
                         >
@@ -1131,7 +1151,7 @@ const ProjectDetail = () => {
                         <h3 
                           className="text-xl font-semibold mb-4" 
                           style={{ 
-                            color: getProjectDarkColor(rawProject),
+                            color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})`,
                             fontFamily: "'Poppins', 'Inter', sans-serif"
                           }}
                         >

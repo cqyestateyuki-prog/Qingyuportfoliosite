@@ -31,7 +31,7 @@ export function detectTier() {
 
 export const TIER_CONFIG = {
   high: { octaves: 4, dprCap: 1.5, starCount: 800, morphParticles: 4000 },
-  mid: { octaves: 3, dprCap: 1, starCount: 300, morphParticles: 2200 },
+  mid: { octaves: 3, dprCap: 1, starCount: 300, morphParticles: 0 },
   low: { octaves: 0, dprCap: 1, starCount: 0, morphParticles: 0 },
 };
 
