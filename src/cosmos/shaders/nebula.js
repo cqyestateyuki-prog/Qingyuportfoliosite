@@ -91,56 +91,31 @@ void main() {
   col = mix(col, uColC, clamp(length(q) * 0.8, 0.0, 1.0) * mix(0.12 + 0.55 * f, 0.4, uDayness));
   col = mix(col, uColD, smoothstep(0.62, 0.95, f) * (0.55 - 0.25 * uDayness));
 
-  // 日:蓬松白云(更大朵、更亮,梦核棉花感)
-  col = mix(col, vec3(1.0), smoothstep(0.5, 0.8, f) * uDayness * 0.9);
-
-  // 日:多巴胺彩色光斑 — 渐变只出现在局部,云层流过时若隐若现
+  // 日:大厂干净白 — 极淡的云纹理 + 左上一处含蓄薰衣草柔光,无彩色光斑
+  col = mix(col, vec3(1.0), smoothstep(0.5, 0.8, f) * uDayness * 0.45);
   if (uDayness > 0.01) {
-    vec2 g1 = p - vec2(-1.05, 0.55);  // 左上 香芋紫
-    vec2 g2 = p - vec2(1.15, 0.05);   // 右中 蜜桃粉
-    vec2 g3 = p - vec2(-0.25, -0.85); // 下方 晴空蓝
-    float cloudGate = 0.5 + 0.5 * f; // 被云层调制,更透亮
-    col = mix(col, vec3(0.70, 0.60, 0.99), exp(-dot(g1, g1) * 1.2) * 0.65 * uDayness * cloudGate);
-    col = mix(col, vec3(1.0, 0.70, 0.84), exp(-dot(g2, g2) * 1.0) * 0.6 * uDayness * cloudGate);
-    col = mix(col, vec3(0.60, 0.84, 1.0), exp(-dot(g3, g3) * 1.3) * 0.55 * uDayness * cloudGate);
-
-    // 梦核虹彩微光:云缘处一层缓慢游移的淡彩(透亮感)
-    float irid = smoothstep(0.42, 0.58, f) * (1.0 - smoothstep(0.58, 0.75, f));
-    vec3 iridCol = vec3(
-      0.85 + 0.15 * sin(uTime * 0.12 + p.x * 1.5),
-      0.82 + 0.15 * sin(uTime * 0.15 + p.y * 1.7 + 2.0),
-      0.95 + 0.05 * sin(uTime * 0.1 + 4.0)
-    );
-    col = mix(col, iridCol, irid * uDayness * 0.35);
-
-    // 日:鼠标位置一圈柔白光环(像云间透下的光)
-    col += vec3(1.0, 0.97, 0.95) * exp(-md * md * 3.5) * uDayness * 0.18;
+    vec2 g1 = p - vec2(-1.0, 0.7);
+    col = mix(col, vec3(0.90, 0.87, 0.98), exp(-dot(g1, g1) * 0.9) * 0.35 * uDayness);
   }
 
-  // 鼠标柔光(夜里更亮)
-  col += uColD * exp(-md * md * 2.5) * (0.10 + 0.08 * (1.0 - uDayness));
+  // 鼠标柔光(夜里明显,日间近乎无)
+  col += uColD * exp(-md * md * 2.5) * (0.10 * (1.0 - uDayness) + 0.08 * (1.0 - uDayness));
 
-  // 晨曦:底部一抹极淡暖粉
-  float dawn = smoothstep(0.5, 0.0, uv.y) * uDayness;
-  col = mix(col, vec3(1.0, 0.93, 0.95), dawn * 0.3);
+  // 夜:地平线大圆弧光 — 像一轮月亮正从画面底部升起,弧顶居中、两侧沉入画外
+  vec2 arcCenter = vec2(0.0, -2.6);
+  float rad = length(p - arcCenter);
+  float arcWob = noise(vec2(p.x * 1.1 + t * 1.2, uTime * 0.04)) - 0.5;
+  float dArc = abs(rad - (2.1 + 0.09 * arcWob));
+  // 弧顶最饱满,沿弧呼吸
+  float widthMod = mix(90.0, 230.0, 0.5 + 0.5 * sin(p.x * 1.3 + uTime * 0.1));
+  float arcGlow = exp(-dArc * dArc * widthMod) + exp(-dArc * dArc * 8.0) * 0.32;
+  float arcPulse = 0.78 + 0.22 * sin(uTime * 0.22 + p.x * 1.1);
+  col += mix(uColD, vec3(1.0), 0.5) * arcGlow * arcPulse * (1.0 - uDayness) * 0.85;
 
-  // 夜:亮色流光动线 — 斜向上扬的弧线,粗细沿途呼吸,带一条暗淡伴线
-  float wob = noise(vec2(p.x * 0.7 + t * 1.6, uTime * 0.05)) - 0.5;
-  // 主线:左低右高的对角弧 + 大波浪 + 噪声扭动
-  float curveY = -0.8 + 0.22 * p.x + 0.34 * sin(p.x * 0.7 + uTime * 0.07) + 0.32 * wob;
-  float dRib = abs(p.y - curveY);
-  // 粗细沿 x 渐变(中段最饱满,两端收细)
-  float widthMod = mix(70.0, 200.0, 0.5 + 0.5 * sin(p.x * 0.9 + uTime * 0.09));
-  float ribbon = exp(-dRib * dRib * widthMod) + exp(-dRib * dRib * 10.0) * 0.3;
-  float ribPulse = 0.75 + 0.25 * sin(uTime * 0.25 + p.x * 1.3);
-  col += mix(uColD, vec3(1.0), 0.5) * ribbon * ribPulse * (1.0 - uDayness) * 0.85;
-
-  // 伴线:更细更淡,反相位漂在主线上方,营造层次
-  float wob2 = noise(vec2(p.x * 0.5 - t * 1.1 + 7.0, uTime * 0.04)) - 0.5;
-  float curveY2 = -0.42 + 0.16 * p.x + 0.26 * sin(p.x * 0.5 - uTime * 0.05 + 2.4) + 0.3 * wob2;
-  float dRib2 = abs(p.y - curveY2);
-  float ribbon2 = exp(-dRib2 * dRib2 * 240.0);
-  col += uColC * ribbon2 * (0.7 + 0.3 * sin(uTime * 0.2 + p.x)) * (1.0 - uDayness) * 0.35;
+  // 伴弧:外圈一道更细更淡的光晕,像大气层
+  float dArc2 = abs(rad - (2.42 + 0.07 * arcWob));
+  float arcGlow2 = exp(-dArc2 * dArc2 * 260.0);
+  col += uColC * arcGlow2 * (0.7 + 0.3 * sin(uTime * 0.18 + p.x)) * (1.0 - uDayness) * 0.35;
 
   // 夜:底部沉降,顶部留呼吸
   col *= mix(1.0, 0.85 + 0.3 * uv.y, (1.0 - uDayness) * 0.6);

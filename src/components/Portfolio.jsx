@@ -173,14 +173,6 @@ const Portfolio = () => {
                         }}
                       />
                     </span>
-                    {/* 卫星小星(品牌色) */}
-                    <span
-                      className="absolute -top-1 right-1 text-base transition-transform duration-500 group-hover:rotate-45 group-hover:scale-125"
-                      style={{ color: glowHex, textShadow: `0 0 10px ${hexToRgba(glowHex, 0.8)}` }}
-                      aria-hidden="true"
-                    >
-                      ✦
-                    </span>
                   </Link>
 
                   {/* 星球铭牌:序号 + 名称 */}

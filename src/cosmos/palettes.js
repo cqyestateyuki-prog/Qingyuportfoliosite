@@ -18,13 +18,13 @@ export const NIGHT = {
   starAlpha: 1.0,
 };
 
-// 梦幻晨曦(干净透亮:近白基底,彩色渐变只在局部光斑出现)
+// 日版(对齐 Design System:白底 + bg-soft #f8f7fc,克制的薰衣草点缀)
 export const DAY = {
-  colA: hexToRgb('#fdfcff'),
-  colB: hexToRgb('#f1eafb'),
-  colC: hexToRgb('#f8dcec'),
+  colA: hexToRgb('#ffffff'),
+  colB: hexToRgb('#f5f3fb'),
+  colC: hexToRgb('#ebe6f7'),
   colD: hexToRgb('#ffffff'),
-  starAlpha: 0.1,
+  starAlpha: 0.06,
 };
 
 // dayness ∈ [0,1] 时的插值调色板,每帧调用(数组复用避免 GC)

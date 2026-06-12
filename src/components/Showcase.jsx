@@ -72,9 +72,9 @@ const ReelItem = ({ children }) => {
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.68, 1], [0.93, 1, 1, 0.84]);
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.72, 1], [0.45, 1, 1, 0.25]);
-  const y = useTransform(scrollYProgress, [0.68, 1], [0, -48]);
+  const scale = useTransform(scrollYProgress, [0, 0.32, 0.68, 1], [0.86, 1, 1, 0.84]);
+  const opacity = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0.15, 1, 1, 0.2]);
+  const y = useTransform(scrollYProgress, [0, 0.32, 0.68, 1], [90, 0, 0, -48]);
 
   return (
     <motion.div ref={ref} style={{ scale, opacity, y }}>
@@ -131,9 +131,9 @@ const ProjectGallery = ({ project, language }) => {
   }, [images.length]);
 
   const slideVariants = {
-    enter: (d) => ({ x: d > 0 ? '60%' : d < 0 ? '-60%' : 0, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (d) => ({ x: d > 0 ? '-60%' : '60%', opacity: 0 }),
+    enter: (d) => ({ x: d > 0 ? '38%' : d < 0 ? '-38%' : 0, opacity: 0, scale: 1.04 }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (d) => ({ x: d > 0 ? '-30%' : '30%', opacity: 0, scale: 0.98 }),
   };
 
   return (
@@ -155,7 +155,7 @@ const ProjectGallery = ({ project, language }) => {
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 w-full h-full object-cover"
           loading="lazy"
         />
@@ -247,7 +247,7 @@ const Showcase = ({ projects }) => {
           <motion.div
             initial={{ opacity: 0, y: 48, rotateY: index % 2 === 0 ? -4 : 4 }}
             whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: false, amount: 0.25 }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, delay: index * 0.06 }}
             className={`flex flex-col ${
               index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'

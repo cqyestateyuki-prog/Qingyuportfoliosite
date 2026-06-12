@@ -80,11 +80,13 @@ const ChapterHero = () => {
       } catch { /* 隐私模式忽略 */ }
       set('shape', 'moon');
       set('disperse', 0.12);
+      set('duo', 1); // 月亮右上 + 星星左下,对角呼应
       return undefined;
     }
     const stage = STAGES[phase];
     set('shape', stage.shape);
     set('disperse', stage.disperse);
+    set('duo', 0);
     const id = setTimeout(
       () => setPhase((p) => (p + 1 < STAGES.length ? p + 1 : 'final')),
       stage.dur

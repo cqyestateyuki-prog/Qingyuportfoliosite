@@ -27,13 +27,16 @@ function HomePage() {
       if (p > 0.82) {
         set('shape', 'star');
         set('disperse', 0);
+        set('duo', 0);
       } else if (p > 0.15) {
         set('shape', 'scatter');
         set('disperse', 0.8);
+        set('duo', 0);
       } else if (window.scrollY < 10) {
-        // 回到顶部:月亮重新定格(叙事期间该值会被 ChapterHero 覆盖)
+        // 回到顶部:星月对角重新定格(叙事期间该值会被 ChapterHero 覆盖)
         set('shape', 'moon');
         set('disperse', 0.12);
+        set('duo', 1);
       }
     };
     handleScroll();

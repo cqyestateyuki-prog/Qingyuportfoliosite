@@ -42,6 +42,8 @@ export default class SceneManager {
       morphTarget: 0,
       disperse: 1,
       disperseTarget: 1,
+      duo: 0,
+      duoTarget: 0,
       palette: createPaletteBuffer(),
     };
 
@@ -94,6 +96,10 @@ export default class SceneManager {
         s.disperseTarget = value;
         if (immediate) s.disperse = value;
         break;
+      case 'duo':
+        s.duoTarget = value;
+        if (immediate) s.duo = value;
+        break;
       default: {
         // 透传给图层(如形状摆位)
         for (const layer of this.layers) layer.setParam?.(key, value);
@@ -127,6 +133,7 @@ export default class SceneManager {
     s.scroll += (s.scrollTarget - s.scroll) * 0.08;
     s.morph += (s.morphTarget - s.morph) * 0.035;
     s.disperse += (s.disperseTarget - s.disperse) * 0.03;
+    s.duo += (s.duoTarget - s.duo) * 0.03;
 
     lerpPalette(s.palette, NIGHT, DAY, s.dayness);
 

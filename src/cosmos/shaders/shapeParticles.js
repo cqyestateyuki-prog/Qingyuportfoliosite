@@ -21,6 +21,9 @@ uniform vec2 uMoonOffset;
 uniform float uMoonScale;
 uniform vec2 uStarOffset;
 uniform float uStarScale;
+uniform float uDuo;        // 1 = 一半粒子分流到对角星星(Hero 定格态)
+uniform vec2 uStar2Offset; // 对角星星位置(左下)
+uniform float uStar2Scale;
 
 varying float vAlpha;
 varying float vSeed;
@@ -33,6 +36,10 @@ void main() {
   vec2 starPos = aStar * uStarScale + uStarOffset;
   vec2 shaped = mix(moonPos, starPos, mStar);
   vec2 pos = mix(aScatter, shaped, mShape);
+
+  // duo 态:一半粒子改投左下的星星,与月亮形成对角
+  vec2 star2 = aStar * uStar2Scale + uStar2Offset;
+  pos = mix(pos, star2, uDuo * step(0.5, aSeed) * mShape);
 
   // 漂散:廉价伪 curl 漂移 + 个体相位
   vec2 drift = vec2(

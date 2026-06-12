@@ -6,33 +6,31 @@
  */
 
 :root {
-  /* ---- 梦幻晨曦(day):白色为主,紫粉点缀 ---- */
+  /* ---- 日版:Design System 干净白(大厂 UX 感,克制) ---- */
   --cosmos-fallback-bg:
-    radial-gradient(ellipse 50% 40% at 18% 25%, rgba(176, 152, 240, 0.35), transparent 65%),
-    radial-gradient(ellipse 45% 38% at 85% 40%, rgba(255, 188, 212, 0.32), transparent 65%),
-    radial-gradient(ellipse 50% 35% at 45% 95%, rgba(165, 210, 255, 0.3), transparent 65%),
-    linear-gradient(160deg, #ffffff 0%, #fbf8fe 45%, #fdf6fa 100%);
+    radial-gradient(ellipse 50% 40% at 15% 20%, rgba(176, 152, 240, 0.14), transparent 65%),
+    linear-gradient(170deg, #ffffff 0%, #fbfafe 50%, #f8f7fc 100%);
 
-  --surface-scrim: rgba(255, 255, 255, 0.65);
-  --surface-scrim-strong: rgba(255, 255, 255, 0.85);
-  --card-glass-bg: rgba(255, 255, 255, 0.6);
-  --card-glass-border: rgba(85, 59, 128, 0.18);
+  --surface-scrim: rgba(255, 255, 255, 0.8);
+  --surface-scrim-strong: rgba(255, 255, 255, 0.94);
+  --card-glass-bg: rgba(255, 255, 255, 0.85);
+  --card-glass-border: #E0E7FF;
 
-  --hud-line: rgba(85, 59, 128, 0.3);
-  --hud-line-strong: rgba(85, 59, 128, 0.55);
-  --hud-fg: rgba(58, 42, 92, 0.85);
-  --hud-fg-muted: rgba(58, 42, 92, 0.45);
-  --hud-glow: rgba(139, 92, 246, 0.25);
+  --hud-line: rgba(85, 59, 128, 0.22);
+  --hud-line-strong: rgba(85, 59, 128, 0.45);
+  --hud-fg: #4b5563;
+  --hud-fg-muted: #9ca3af;
+  --hud-glow: rgba(139, 92, 246, 0.16);
 
-  --text-hero: #4b32a8;
-  --text-body: #564a7e;
-  --text-muted: rgba(60, 44, 102, 0.6);
+  --text-hero: #1a1530;
+  --text-body: #4b5563;
+  --text-muted: #6b7280;
   --text-accent: #8B5CF6;
 }
 
-/* 日:大标题用鲜亮紫→粉渐变(夜保持星光白) */
+/* 日:大标题用 Design System 的 h2 渐变(--gradient-secondary,沉稳紫) */
 html:not(.dark) .hero-title {
-  background: linear-gradient(120deg, #6a48d7 0%, #8b5cf6 40%, #b76de0 72%, #e879a9 100%);
+  background: linear-gradient(135deg, #9288e3 0%, #594f93 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
