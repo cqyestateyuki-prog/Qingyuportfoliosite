@@ -35,6 +35,7 @@ export default class SceneManager {
       dayness: 0,
       mouseUv: [0.5, 0.5],
       mouseUvTarget: [0.5, 0.5],
+      mouseVel: [0, 0], // uv 空间速度(流星拖尾)
       mouseSq: [0, 0], // square 坐标(y∈[-1,1], x∈[-aspect,aspect])
       scroll: 0,
       scrollTarget: 0,
@@ -125,9 +126,14 @@ export default class SceneManager {
     this._lastT = now;
     s.time += dt;
 
-    // 平滑插值
-    s.mouseUv[0] += (s.mouseUvTarget[0] - s.mouseUv[0]) * 0.05;
-    s.mouseUv[1] += (s.mouseUvTarget[1] - s.mouseUv[1]) * 0.05;
+    // 平滑插值(0.12:比之前更跟手,云雾丝滑而非粘稠)
+    const prevX = s.mouseUv[0];
+    const prevY = s.mouseUv[1];
+    s.mouseUv[0] += (s.mouseUvTarget[0] - s.mouseUv[0]) * 0.12;
+    s.mouseUv[1] += (s.mouseUvTarget[1] - s.mouseUv[1]) * 0.12;
+    // 速度(再平滑一层,流星尾不抖)
+    s.mouseVel[0] = s.mouseVel[0] * 0.82 + (s.mouseUv[0] - prevX) * 0.18;
+    s.mouseVel[1] = s.mouseVel[1] * 0.82 + (s.mouseUv[1] - prevY) * 0.18;
     s.mouseSq[0] = (s.mouseUv[0] - 0.5) * 2 * s.aspect;
     s.mouseSq[1] = (s.mouseUv[1] - 0.5) * 2;
     s.scroll += (s.scrollTarget - s.scroll) * 0.08;

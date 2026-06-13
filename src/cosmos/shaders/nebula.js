@@ -24,6 +24,7 @@ precision highp float;
 uniform float uTime;
 uniform vec2 uResolution;
 uniform vec2 uMouse;       // 0..1, y 向上
+uniform vec2 uMouseVel;    // uv 空间速度(流星拖尾方向)
 uniform float uScroll;     // 全页滚动进度
 uniform float uDayness;    // 0 夜 → 1 日
 uniform vec3 uColA;
@@ -68,10 +69,11 @@ void main() {
   p.y += uScroll * 1.6;
   float t = uTime * 0.04;
 
-  // 鼠标局部域扭曲
+  // 鼠标局部域扭曲(云雾感:范围更大、力道更轻,不粘稠)
   vec2 m = (uMouse - 0.5) * vec2(aspect, 1.0) * 2.2;
-  float md = length(p - m);
-  vec2 mw = (p - m) * 0.35 * exp(-md * md * 1.4);
+  vec2 pScreen = (uv - 0.5) * vec2(aspect, 1.0) * 2.2; // 不含滚动偏移的屏幕坐标
+  float md = length(pScreen - m);
+  vec2 mw = (pScreen - m) * 0.14 * exp(-md * md * 0.65);
 
   // 域扭曲 fbm(q → r → f)
   vec2 q = vec2(
@@ -98,14 +100,24 @@ void main() {
     col = mix(col, vec3(0.90, 0.87, 0.98), exp(-dot(g1, g1) * 0.9) * 0.35 * uDayness);
   }
 
-  // 鼠标柔光(夜里明显,日间近乎无)
-  col += uColD * exp(-md * md * 2.5) * (0.10 * (1.0 - uDayness) + 0.08 * (1.0 - uDayness));
+  // 鼠标柔光(轻薄一层,夜里可见)
+  col += uColD * exp(-md * md * 2.2) * 0.09 * (1.0 - uDayness);
 
-  // 夜:月牙光弧 — 开口朝上的弯月躺在画面下方,中段饱满、两端收细渐隐
-  vec2 arcCenter = vec2(0.0, 2.3);
+  // 流星拖尾:鼠标滑动时拉出彗尾,头亮尾隐(夜)
+  vec2 mv = uMouseVel * vec2(aspect, 1.0) * 2.2;
+  float mvLen = length(mv);
+  vec2 tailDir = -mv * 16.0;
+  vec2 pa = pScreen - m;
+  float hSeg = clamp(dot(pa, tailDir) / max(dot(tailDir, tailDir), 1e-6), 0.0, 1.0);
+  float dSeg = length(pa - tailDir * hSeg);
+  float meteor = exp(-dSeg * dSeg * 1400.0) * (1.0 - hSeg * hSeg) * smoothstep(0.0006, 0.008, mvLen);
+  col += vec3(1.0, 0.98, 0.95) * meteor * (1.0 - uDayness) * 1.1;
+
+  // 夜:月牙光弧 — 开口朝上的弯月躺在画面下方,弧度大、两端上翘渐隐
+  vec2 arcCenter = vec2(0.0, 1.2);
   float rad = length(p - arcCenter);
   float arcWob = noise(vec2(p.x * 1.1 + t * 1.2, uTime * 0.04)) - 0.5;
-  float dArc = abs(rad - (3.05 + 0.07 * arcWob));
+  float dArc = abs(rad - (2.0 + 0.06 * arcWob));
   // 月牙质感:|x| 越大越细越淡(末端渐隐)
   float tipFade = smoothstep(2.0, 0.15, abs(p.x));
   float thickness = mix(340.0, 175.0, tipFade);
@@ -114,7 +126,7 @@ void main() {
   col += mix(uColD, vec3(1.0), 0.5) * arcGlow * arcPulse * (1.0 - uDayness) * 0.9;
 
   // 伴弧:外圈一道更细更淡的光晕
-  float dArc2 = abs(rad - (3.32 + 0.06 * arcWob));
+  float dArc2 = abs(rad - (2.24 + 0.05 * arcWob));
   float arcGlow2 = exp(-dArc2 * dArc2 * 280.0) * tipFade;
   col += uColC * arcGlow2 * (0.7 + 0.3 * sin(uTime * 0.18 + p.x)) * (1.0 - uDayness) * 0.32;
 

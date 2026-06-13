@@ -164,6 +164,26 @@ const ProjectDetail = () => {
   const highlightColor = 'var(--text-accent)'
   // 获取项目的深色（用于日间版标题）
   const darkColor = rawProject ? getProjectDarkColor(rawProject) : '#0D0D0D'
+
+  // ROLE / DURATION / TEAM / STACK 元信息(优先读 projects.js 的 meta 字段,缺省自动推断)
+  const metaItems = project ? [
+    { label: t('project.metaRole'), value: rawProject?.meta?.role || project.role?.title || project.domain?.[0] },
+    { label: t('project.metaDuration'), value: rawProject?.meta?.duration || project.year },
+    {
+      label: t('project.metaTeam'),
+      value:
+        rawProject?.meta?.team ||
+        (project.collaborators?.length
+          ? `${project.collaborators.length} ${language === 'zh' ? '人团队' : 'people'}`
+          : language === 'zh' ? '个人项目' : 'Solo project'),
+    },
+    {
+      label: t('project.metaStack'),
+      value:
+        rawProject?.meta?.stack ||
+        project.techTags?.slice(0, 3).map((tag) => tag.replace(/^#/, '')).join(' · '),
+    },
+  ].filter((m) => m.value) : []
   // 获取项目的主题色（用于日间版标签）
   const themeColor = rawProject ? getProjectHighlightColor(rawProject) : '#8B5CF6'
   // 检查是否使用日间版 hero
@@ -429,6 +449,28 @@ const ProjectDetail = () => {
                 </div>
               </div>
             </div>
+
+            {/* 元信息条:ROLE / DURATION / TEAM / STACK(并入 hero) */}
+            {metaItems.length > 0 && (
+              <div
+                className="mt-10 pt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
+                style={{ borderTop: '1px solid var(--hud-line)' }}
+              >
+                {metaItems.map(({ label, value }) => (
+                  <div key={label}>
+                    <p
+                      className="text-[11px] tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
+                      style={{ color: 'var(--hud-fg-muted)' }}
+                    >
+                      {label}
+                    </p>
+                    <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>
+                      {value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       ) : (
@@ -511,51 +553,26 @@ const ProjectDetail = () => {
                 </div>
               </div>
             </div>
+
+            {/* 元信息条:ROLE / DURATION / TEAM / STACK(并入 hero) */}
+            {metaItems.length > 0 && (
+              <div
+                className="mt-10 pt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
+                style={{ borderTop: '1px solid rgba(255,255,255,0.25)' }}
+              >
+                {metaItems.map(({ label, value }) => (
+                  <div key={label}>
+                    <p className="text-[11px] tracking-[0.25em] uppercase mb-1.5 text-white/55 font-['Poppins']">
+                      {label}
+                    </p>
+                    <p className="text-base md:text-lg font-medium text-white/95">{value}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
-
-      {/* ========== ROLE / DURATION / TEAM / STACK 元信息条(大厂案例格式) ========== */}
-      <section className="px-4 md:px-6 pt-8">
-        <div
-          className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 py-7"
-          style={{ borderTop: '1px solid var(--hud-line)', borderBottom: '1px solid var(--hud-line)' }}
-        >
-          {[
-            { label: t('project.metaRole'), value: rawProject?.meta?.role || project.role?.title || project.domain?.[0] },
-            { label: t('project.metaDuration'), value: rawProject?.meta?.duration || project.year },
-            {
-              label: t('project.metaTeam'),
-              value:
-                rawProject?.meta?.team ||
-                (project.collaborators?.length
-                  ? `${project.collaborators.length} ${language === 'zh' ? '人团队' : 'people'}`
-                  : language === 'zh' ? '个人项目' : 'Solo project'),
-            },
-            {
-              label: t('project.metaStack'),
-              value:
-                rawProject?.meta?.stack ||
-                project.techTags?.slice(0, 3).map((tag) => tag.replace(/^#/, '')).join(' · '),
-            },
-          ].map(
-            ({ label, value }) =>
-              value && (
-                <div key={label}>
-                  <p
-                    className="text-[11px] tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
-                    style={{ color: 'var(--hud-fg-muted)' }}
-                  >
-                    {label}
-                  </p>
-                  <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>
-                    {value}
-                  </p>
-                </div>
-              )
-          )}
-        </div>
-      </section>
 
       {/* ========== 项目概述区域 ========== */}
       <section id="overview" className="py-10 md:py-14 lg:py-16 px-4 md:px-6 bg-white">
@@ -1043,7 +1060,7 @@ const ProjectDetail = () => {
                         <div 
                           className="text-5xl md:text-6xl font-bold mb-6"
                           style={{
-                            color: getProjectLightColor(rawProject)
+                            color: 'var(--text-accent)'
                           }}
                         >
                           {(idx + 1).toString().padStart(2, '0')}
@@ -1125,7 +1142,7 @@ const ProjectDetail = () => {
                         <div 
                           className="text-4xl font-bold mb-4"
                           style={{
-                            color: getProjectLightColor(rawProject)
+                            color: 'var(--text-accent)'
                           }}
                         >
                           {(idx + 1).toString().padStart(2, '0')}
@@ -1134,7 +1151,7 @@ const ProjectDetail = () => {
                           <span 
                             className="inline-block text-xl font-bold"
                             style={{
-                              color: getProjectLightColor(rawProject)
+                              color: 'var(--text-accent)'
                             }}
                           >
                             {feature.name}

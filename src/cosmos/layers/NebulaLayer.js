@@ -16,6 +16,7 @@ export default class NebulaLayer {
         uTime: { value: 0 },
         uResolution: { value: [1, 1] },
         uMouse: { value: [0.5, 0.5] },
+        uMouseVel: { value: [0, 0] },
         uScroll: { value: 0 },
         uDayness: { value: 0 },
         uColA: { value: [...NIGHT.colA] },
@@ -33,6 +34,7 @@ export default class NebulaLayer {
     const u = this.program.uniforms;
     u.uTime.value = state.time;
     u.uMouse.value = state.mouseUv;
+    u.uMouseVel.value = state.mouseVel;
     u.uScroll.value = state.scroll;
     u.uDayness.value = state.dayness;
     u.uColA.value = state.palette.colA;
