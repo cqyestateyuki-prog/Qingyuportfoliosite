@@ -160,8 +160,10 @@ const ProjectDetail = () => {
   const [showBackToTop, setShowBackToTop] = useState(false)
   
   // 获取项目的高亮颜色（使用原始数据）
-  // 统一高亮色:全站主题强调紫(原 per-project 高亮色对比度不稳)
-  const highlightColor = 'var(--text-accent)'
+  // 高亮色:夜版统一紫(--detail-highlight),日版回退到项目自己的高亮色
+  const highlightColor = rawProject
+    ? `var(--detail-highlight, ${getProjectHighlightColor(rawProject)})`
+    : 'var(--text-accent)'
   // 获取项目的深色（用于日间版标题）
   const darkColor = rawProject ? getProjectDarkColor(rawProject) : '#0D0D0D'
 
@@ -477,8 +479,7 @@ const ProjectDetail = () => {
         // 原版 hero：渐变背景，白色文字
         <section className="pt-28 pb-10 px-4 md:px-6">
           <div
-            className="detail-hero-panel max-w-6xl mx-auto relative overflow-hidden rounded-3xl px-6 md:px-10 py-12 md:py-14 backdrop-blur-md"
-            style={{ '--hero-grad': rawProject?.colors?.heroGradient || 'var(--gradient-hero)' }}
+            className="detail-hero-panel max-w-6xl mx-auto relative overflow-hidden rounded-3xl px-6 md:px-10 py-12 md:py-14 backdrop-blur-xl"
           >
             {/* HUD 角标(常显) */}
             <span className="absolute top-4 left-4 w-5 h-5 border-t border-l pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
@@ -836,39 +837,13 @@ const ProjectDetail = () => {
                         <div 
                           className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-1"
                           style={{
-                            background: rawProject?.colors?.heroGradient 
-                              ? (() => {
-                                  // Try hex first
-                                  let match = rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
-                                  if (match) return `${match[0]}20`;
-                                  // Try RGB
-                                  const rgbMatch = rawProject.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
-                                  if (rgbMatch) {
-                                    const hex = rgbToHex(rgbMatch[0]);
-                                    if (hex) return `${hex}20`;
-                                  }
-                                  return 'rgba(139, 92, 246, 0.2)';
-                                })()
-                              : 'rgba(139, 92, 246, 0.2)'
+                            background: `var(--detail-badge-bg, ${getProjectHighlightColor(rawProject)}20)`
                           }}
                         >
                           <span 
                             className="font-semibold text-sm"
                             style={{
-                              color: rawProject?.colors?.heroGradient 
-                                ? (() => {
-                                    // Try hex first
-                                    let match = rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
-                                    if (match) return match[0];
-                                    // Try RGB
-                                    const rgbMatch = rawProject.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
-                                    if (rgbMatch) {
-                                      const hex = rgbToHex(rgbMatch[0]);
-                                      if (hex) return hex;
-                                    }
-                                    return '#8b5cf6';
-                                  })()
-                                : '#8b5cf6'
+                              color: `var(--detail-badge, ${getProjectHighlightColor(rawProject)})`
                             }}
                           >
                             {index + 1}
@@ -923,7 +898,7 @@ const ProjectDetail = () => {
                     <div 
                       className="flex-shrink-0 w-10 h-10 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg" 
                       style={{
-                        backgroundColor: getProjectLightColor(rawProject)
+                        backgroundColor: `var(--detail-badge, ${getProjectHighlightColor(rawProject)})`
                       }}
                     >
                       {index + 1}
@@ -1078,9 +1053,7 @@ const ProjectDetail = () => {
                       <div className="flex-1 space-y-4">
                         <div 
                           className="text-5xl md:text-6xl font-bold mb-6"
-                          style={{
-                            color: 'var(--text-accent)'
-                          }}
+                          style={{ color: highlightColor }}
                         >
                           {(idx + 1).toString().padStart(2, '0')}
                         </div>
@@ -1145,42 +1118,35 @@ const ProjectDetail = () => {
                   ))}
                 </div>
               ) : (
-                // 原有的三列网格布局
+                // 三列玻璃卡(HUD 序号 + 左对齐)
                 <div className="grid md:grid-cols-3 gap-6 mb-12">
                   {section.features.map((feature, idx) => (
-                    <Card 
-                      key={idx} 
-                      className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0"
+                    <div
+                      key={idx}
+                      className="group relative rounded-2xl p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5"
                       style={{
-                        background: rawProject?.colors?.heroGradient 
-                          ? `linear-gradient(to bottom right, white, ${rawProject.colors.heroGradient.includes('#') ? `${rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/)?.[0] || '#8b5cf6'}15` : 'rgba(139, 92, 246, 0.15)'})`
-                          : 'linear-gradient(to bottom right, white, rgba(139, 92, 246, 0.15))'
+                        background: 'var(--card-glass-bg)',
+                        border: '1px solid var(--card-glass-border)',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.1), 0 0 18px var(--hud-glow)',
                       }}
                     >
-                      <CardContent className="p-6 text-center">
-                        <div 
-                          className="text-4xl font-bold mb-4"
-                          style={{
-                            color: 'var(--text-accent)'
-                          }}
-                        >
-                          {(idx + 1).toString().padStart(2, '0')}
-                        </div>
-                        <div className="mb-3">
-                          <span 
-                            className="inline-block text-xl font-bold"
-                            style={{
-                              color: 'var(--text-accent)'
-                            }}
-                          >
-                            {feature.name}
-                          </span>
-                        </div>
-                        <p className="text-gray-700 text-sm leading-relaxed">
-                          {feature.detail}
-                        </p>
-                      </CardContent>
-                    </Card>
+                      <p
+                        className="text-[11px] font-medium tracking-[0.3em] uppercase mb-3 font-['Poppins']"
+                        style={{ color: 'var(--section-tag)' }}
+                      >
+                        ✦ {(idx + 1).toString().padStart(2, '0')}
+                      </p>
+                      <h4
+                        className="text-lg font-semibold mb-2.5 leading-snug"
+                        style={{ color: highlightColor, fontFamily: "'Poppins', 'Inter', sans-serif" }}
+                      >
+                        {feature.name}
+                      </h4>
+                      <span className="block h-px w-10 mb-3" style={{ background: 'var(--hud-line)' }} aria-hidden="true" />
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--text-body)' }}>
+                        {feature.detail}
+                      </p>
+                    </div>
                   ))}
                 </div>
               )

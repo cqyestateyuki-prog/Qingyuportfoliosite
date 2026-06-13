@@ -24,7 +24,7 @@ void main() {
   vLife = aLife;
   vSeed = aSeed;
   gl_Position = vec4(position.x / uAspect, position.y, 0.0, 1.0);
-  gl_PointSize = mix(1.6, 4.6, aSeed) * uDpr * (0.35 + 0.65 * aLife);
+  gl_PointSize = mix(2.8, 8.0, aSeed) * uDpr * (0.35 + 0.65 * aLife);
 }
 `;
 
@@ -41,7 +41,7 @@ void main() {
   vec2 d = gl_PointCoord - 0.5;
   float a = smoothstep(0.5, 0.05, length(d));
   vec3 col = mix(vec3(0.78, 0.73, 0.95), vec3(0.95, 0.92, 1.0), vSeed);
-  gl_FragColor = vec4(col, a * vLife * vLife * 0.65 * (1.0 - uDayness));
+  gl_FragColor = vec4(col, a * vLife * vLife * 0.95 * (1.0 - uDayness));
 }
 `;
 
@@ -92,8 +92,8 @@ export default class TrailLayer {
     const dx = mx - this._prev[0];
     const dy = my - this._prev[1];
     const dist = Math.hypot(dx, dy);
-    if (dist > 0.0035) {
-      const n = Math.min(4, Math.max(1, Math.round(dist / 0.018)));
+    if (dist > 0.0025) {
+      const n = Math.min(5, Math.max(1, Math.round(dist / 0.013)));
       for (let k = 0; k < n; k++) {
         const i = this.head;
         this.head = (this.head + 1) % COUNT;
@@ -112,7 +112,7 @@ export default class TrailLayer {
     // 老化 + 漂移
     for (let i = 0; i < COUNT; i++) {
       if (this.lifes[i] <= 0) continue;
-      this.lifes[i] -= dt * 0.85;
+      this.lifes[i] -= dt * 0.66;
       if (this.lifes[i] < 0) this.lifes[i] = 0;
       this.positions[i * 2] += this.vels[i * 2] * dt;
       this.positions[i * 2 + 1] += this.vels[i * 2 + 1] * dt;
