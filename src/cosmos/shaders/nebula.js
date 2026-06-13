@@ -103,21 +103,23 @@ void main() {
   // 鼠标柔光(轻薄一层,夜里可见)
   col += uColD * exp(-md * md * 2.2) * 0.09 * (1.0 - uDayness);
 
-  // 流星拖尾:鼠标滑动时拉出彗尾,头亮尾隐(夜)
+  // 仙雾拖尾:鼠标滑过拉出一缕淡紫烟霭,被噪声揉碎,缥缈不刺眼(夜)
   vec2 mv = uMouseVel * vec2(aspect, 1.0) * 2.2;
   float mvLen = length(mv);
-  vec2 tailDir = -mv * 16.0;
+  vec2 tailDir = -mv * 18.0;
   vec2 pa = pScreen - m;
   float hSeg = clamp(dot(pa, tailDir) / max(dot(tailDir, tailDir), 1e-6), 0.0, 1.0);
   float dSeg = length(pa - tailDir * hSeg);
-  float meteor = exp(-dSeg * dSeg * 1400.0) * (1.0 - hSeg * hSeg) * smoothstep(0.0006, 0.008, mvLen);
-  col += vec3(1.0, 0.98, 0.95) * meteor * (1.0 - uDayness) * 1.1;
+  // 宽而柔的雾带 + 烟纹理(噪声沿途揉碎边缘)
+  float smoke = 0.6 + 0.4 * noise(pScreen * 4.5 + vec2(uTime * 0.5, -uTime * 0.3));
+  float mist = exp(-dSeg * dSeg * 220.0) * (1.0 - hSeg * 0.85) * smoothstep(0.0005, 0.007, mvLen);
+  col += mix(uColC, uColD, 0.45) * mist * smoke * (1.0 - uDayness) * 0.4;
 
   // 夜:月牙光弧 — 开口朝上的弯月躺在画面下方,弧度大、两端上翘渐隐
-  vec2 arcCenter = vec2(0.0, 1.2);
+  vec2 arcCenter = vec2(0.0, 1.45);
   float rad = length(p - arcCenter);
   float arcWob = noise(vec2(p.x * 1.1 + t * 1.2, uTime * 0.04)) - 0.5;
-  float dArc = abs(rad - (2.0 + 0.06 * arcWob));
+  float dArc = abs(rad - (2.3 + 0.06 * arcWob));
   // 月牙质感:|x| 越大越细越淡(末端渐隐)
   float tipFade = smoothstep(2.0, 0.15, abs(p.x));
   float thickness = mix(340.0, 175.0, tipFade);
@@ -126,7 +128,7 @@ void main() {
   col += mix(uColD, vec3(1.0), 0.5) * arcGlow * arcPulse * (1.0 - uDayness) * 0.9;
 
   // 伴弧:外圈一道更细更淡的光晕
-  float dArc2 = abs(rad - (2.24 + 0.05 * arcWob));
+  float dArc2 = abs(rad - (2.56 + 0.05 * arcWob));
   float arcGlow2 = exp(-dArc2 * dArc2 * 280.0) * tipFade;
   col += uColC * arcGlow2 * (0.7 + 0.3 * sin(uTime * 0.18 + p.x)) * (1.0 - uDayness) * 0.32;
 

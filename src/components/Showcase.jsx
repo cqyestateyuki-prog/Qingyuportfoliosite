@@ -235,7 +235,7 @@ const Showcase = ({ projects }) => {
           className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
           style={{ color: 'var(--section-tag)' }}
         >
-          ✦ 02 · {t('chapters.work')} <MoonIcon />
+          <MoonIcon /> 02 · {t('chapters.work')} ✦
         </p>
         <h2 className="text-4xl md:text-5xl font-normal" style={{ color: 'var(--text-hero)' }}>
           {t('portfolio.title')}

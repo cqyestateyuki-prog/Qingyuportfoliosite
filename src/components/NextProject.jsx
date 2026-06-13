@@ -18,7 +18,7 @@ const NextProject = ({ nextProject }) => {
             className="text-[11px] tracking-[0.4em] uppercase mb-3 md:mb-4 font-['Poppins']"
             style={{ color: 'var(--section-tag)' }}
           >
-            ✦ Next Project <MoonIcon />
+            <MoonIcon /> Next Project ✦
           </div>
           <h2
             className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"

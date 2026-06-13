@@ -76,7 +76,7 @@ const AboutPage = () => {
             className="text-[11px] tracking-[0.4em] uppercase mb-10 font-['Poppins']"
             style={{ color: 'var(--section-tag)' }}
           >
-            ✦ {c.tag} <MoonIcon />
+            <MoonIcon /> {c.tag} ✦
           </motion.p>
 
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">

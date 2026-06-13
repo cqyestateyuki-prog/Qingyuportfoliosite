@@ -152,7 +152,7 @@ const ChapterHero = () => {
                   right: value.right,
                   bottom: value.bottom,
                   color: 'var(--text-hero)',
-                  opacity: hoveredValueIndex === index ? 0.45 : 0.08,
+                  opacity: hoveredValueIndex === index ? 0.55 : 0.16,
                   textShadow: hoveredValueIndex === index ? '0 0 20px var(--hud-glow)' : 'none',
                 }}
               >

@@ -367,10 +367,10 @@ const ProjectDetail = () => {
                 className="text-[11px] tracking-[0.4em] uppercase mb-5 font-['Poppins']"
                 style={{ color: 'var(--section-tag)' }}
               >
-                ✦ Case Study <MoonIcon />
+                <MoonIcon /> Case Study ✦
               </p>
-              <h1 
-                className="text-4xl md:text-6xl font-normal mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
+              <h1
+                className="text-4xl md:text-6xl font-semibold mb-5 leading-tight tracking-tight animate-fade-in font-['Poppins']"
                 style={{ color: 'var(--text-hero)' }}
               >
                 <DecryptedText text={project.title} />
@@ -385,8 +385,8 @@ const ProjectDetail = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {/* DOMAIN */}
               <div className="group">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: 'var(--text-accent)' }}>
-                  <span style={{ color: 'var(--text-accent)' }}>✦</span> {t('project.domain')}
+                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--text-accent)' }}>
+                  <span>✦</span> {t('project.domain')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.domain?.map((item, idx) => (
@@ -407,8 +407,8 @@ const ProjectDetail = () => {
               
               {/* FORM */}
               <div className="group">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: 'var(--text-accent)' }}>
-                  <span style={{ color: 'var(--text-accent)' }}>✦</span> {t('project.form')}
+                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--text-accent)' }}>
+                  <span>✦</span> {t('project.form')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.form?.map((item, idx) => (
@@ -429,8 +429,8 @@ const ProjectDetail = () => {
               
               {/* COLLABORATORS */}
               <div className="group">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: 'var(--text-accent)' }}>
-                  <span style={{ color: 'var(--text-accent)' }}>✦</span> {t('project.collaborators')}
+                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--text-accent)' }}>
+                  <span>✦</span> {t('project.collaborators')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.collaborators?.map((item, idx) => (
@@ -487,15 +487,15 @@ const ProjectDetail = () => {
             <span className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-white/40 pointer-events-none" aria-hidden="true" />
             <div className="text-center mb-12">
               <p className="text-[11px] tracking-[0.4em] uppercase mb-5 text-white/70 font-['Poppins']">
-                ✦ Case Study <MoonIcon />
+                <MoonIcon /> Case Study ✦
               </p>
-              <h1 
-                className="text-4xl md:text-6xl font-normal text-white mb-6 animate-fade-in whitespace-nowrap font-['Poppins']"
+              <h1
+                className="text-4xl md:text-6xl font-semibold text-white mb-5 leading-tight tracking-tight animate-fade-in font-['Poppins']"
               >
                 <DecryptedText text={project.title} />
               </h1>
-              
-              <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-delay-1 font-['Poppins']">
+
+              <p className="text-lg md:text-xl text-white/85 font-light mb-8 leading-relaxed animate-fade-in-delay-1 font-['Poppins']">
                 {project.subtitle}
               </p>
             </div>
@@ -504,8 +504,8 @@ const ProjectDetail = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {/* DOMAIN */}
               <div className="group">
-                <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="text-white">●</span> {t('project.domain')}
+                <h3 className="text-[11px] font-medium text-white/65 uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']">
+                  <span className="text-white/80">✦</span> {t('project.domain')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.domain?.map((item, idx) => (
@@ -521,8 +521,8 @@ const ProjectDetail = () => {
               
               {/* FORM */}
               <div className="group">
-                <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="text-white">●</span> {t('project.form')}
+                <h3 className="text-[11px] font-medium text-white/65 uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']">
+                  <span className="text-white/80">✦</span> {t('project.form')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.form?.map((item, idx) => (
@@ -538,8 +538,8 @@ const ProjectDetail = () => {
               
               {/* COLLABORATORS */}
               <div className="group">
-                <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <span className="text-white">●</span> {t('project.collaborators')}
+                <h3 className="text-[11px] font-medium text-white/65 uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']">
+                  <span className="text-white/80">✦</span> {t('project.collaborators')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.collaborators?.map((item, idx) => (
