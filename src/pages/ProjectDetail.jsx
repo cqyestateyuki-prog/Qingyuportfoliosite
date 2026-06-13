@@ -364,7 +364,7 @@ const ProjectDetail = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <p
-                className="text-[11px] tracking-[0.4em] uppercase mb-5 font-['Poppins']"
+                className="text-[11px] font-medium tracking-[0.3em] uppercase mb-5 font-['Poppins']"
                 style={{ color: 'var(--section-tag)' }}
               >
                 <MoonIcon /> Case Study ✦
@@ -481,21 +481,22 @@ const ProjectDetail = () => {
             style={{ '--hero-grad': rawProject?.colors?.heroGradient || 'var(--gradient-hero)' }}
           >
             {/* HUD 角标(常显) */}
-            <span className="absolute top-4 left-4 w-5 h-5 border-t border-l border-white/40 pointer-events-none" aria-hidden="true" />
-            <span className="absolute top-4 right-4 w-5 h-5 border-t border-r border-white/40 pointer-events-none" aria-hidden="true" />
-            <span className="absolute bottom-4 left-4 w-5 h-5 border-b border-l border-white/40 pointer-events-none" aria-hidden="true" />
-            <span className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-white/40 pointer-events-none" aria-hidden="true" />
+            <span className="absolute top-4 left-4 w-5 h-5 border-t border-l pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
+            <span className="absolute top-4 right-4 w-5 h-5 border-t border-r pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
+            <span className="absolute bottom-4 left-4 w-5 h-5 border-b border-l pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
+            <span className="absolute bottom-4 right-4 w-5 h-5 border-b border-r pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
             <div className="text-center mb-12">
-              <p className="text-[11px] tracking-[0.4em] uppercase mb-5 text-white/70 font-['Poppins']">
+              <p className="text-[11px] font-medium tracking-[0.3em] uppercase mb-5 font-['Poppins']" style={{ color: 'var(--section-tag)' }}>
                 <MoonIcon /> Case Study ✦
               </p>
               <h1
-                className="text-4xl md:text-6xl font-semibold text-white mb-5 leading-tight tracking-tight animate-fade-in font-['Poppins']"
+                className="text-4xl md:text-6xl font-semibold mb-5 leading-tight tracking-tight animate-fade-in font-['Poppins']"
+                style={{ color: 'var(--text-hero)' }}
               >
                 <DecryptedText text={project.title} />
               </h1>
 
-              <p className="text-lg md:text-xl text-white/85 font-light mb-8 leading-relaxed animate-fade-in-delay-1 font-['Poppins']">
+              <p className="text-lg md:text-xl font-light mb-8 leading-relaxed animate-fade-in-delay-1 font-['Poppins']" style={{ color: 'var(--text-body)' }}>
                 {project.subtitle}
               </p>
             </div>
@@ -504,14 +505,19 @@ const ProjectDetail = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {/* DOMAIN */}
               <div className="group">
-                <h3 className="text-[11px] font-medium text-white/65 uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']">
-                  <span className="text-white/80">✦</span> {t('project.domain')}
+                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--hud-fg-muted)' }}>
+                  <span style={{ color: 'var(--section-tag)' }}>✦</span> {t('project.domain')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.domain?.map((item, idx) => (
                     <Badge 
                       key={idx} 
-                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                      className="transition-all"
+                      style={{
+                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                        color: 'var(--text-accent)',
+                        borderColor: 'var(--card-glass-border)',
+                      }}
                     >
                       {item}
                     </Badge>
@@ -521,14 +527,19 @@ const ProjectDetail = () => {
               
               {/* FORM */}
               <div className="group">
-                <h3 className="text-[11px] font-medium text-white/65 uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']">
-                  <span className="text-white/80">✦</span> {t('project.form')}
+                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--hud-fg-muted)' }}>
+                  <span style={{ color: 'var(--section-tag)' }}>✦</span> {t('project.form')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.form?.map((item, idx) => (
                     <Badge 
                       key={idx} 
-                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                      className="transition-all"
+                      style={{
+                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                        color: 'var(--text-accent)',
+                        borderColor: 'var(--card-glass-border)',
+                      }}
                     >
                       {item}
                     </Badge>
@@ -538,14 +549,19 @@ const ProjectDetail = () => {
               
               {/* COLLABORATORS */}
               <div className="group">
-                <h3 className="text-[11px] font-medium text-white/65 uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']">
-                  <span className="text-white/80">✦</span> {t('project.collaborators')}
+                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--hud-fg-muted)' }}>
+                  <span style={{ color: 'var(--section-tag)' }}>✦</span> {t('project.collaborators')}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.collaborators?.map((item, idx) => (
                     <Badge 
                       key={idx} 
-                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 transition-all"
+                      className="transition-all"
+                      style={{
+                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                        color: 'var(--text-accent)',
+                        borderColor: 'var(--card-glass-border)',
+                      }}
                     >
                       {item}
                     </Badge>
@@ -558,14 +574,17 @@ const ProjectDetail = () => {
             {metaItems.length > 0 && (
               <div
                 className="mt-10 pt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
-                style={{ borderTop: '1px solid rgba(255,255,255,0.25)' }}
+                style={{ borderTop: '1px solid var(--hud-line)' }}
               >
                 {metaItems.map(({ label, value }) => (
                   <div key={label}>
-                    <p className="text-[11px] tracking-[0.25em] uppercase mb-1.5 text-white/55 font-['Poppins']">
+                    <p
+                      className="text-[11px] font-medium tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
+                      style={{ color: 'var(--hud-fg-muted)' }}
+                    >
                       {label}
                     </p>
-                    <p className="text-base md:text-lg font-medium text-white/95">{value}</p>
+                    <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>{value}</p>
                   </div>
                 ))}
               </div>

@@ -199,16 +199,21 @@ html:not(.dark) .cosmos-canvas-el {
   --detail-heading: var(--text-hero);
 }
 
-/* 详情页渐变 hero 面板:品牌渐变铺在 ::before 上,夜版降透明度融入星空 */
+/* 详情页 hero 面板:玻璃底 + 主题字色,品牌渐变只做顶部一条光带 */
+.detail-hero-panel {
+  background: var(--surface-scrim);
+  border: 1px solid var(--card-glass-border);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18), 0 0 36px var(--hud-glow);
+}
+
 .detail-hero-panel::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
   background: var(--hero-grad);
-}
-
-.dark .detail-hero-panel::before {
-  opacity: 0.5;
 }
 
 /* 章节交替的淡纱带(替代原白/灰交替底) */

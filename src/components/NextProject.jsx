@@ -15,7 +15,7 @@ const NextProject = ({ nextProject }) => {
         {/* Section Header — same structure as ProjectDetail sections (Section Tag + Main Title + Brief) */}
         <div className="mb-8 md:mb-12 lg:mb-16">
           <div
-            className="text-[11px] tracking-[0.4em] uppercase mb-3 md:mb-4 font-['Poppins']"
+            className="text-[11px] font-medium tracking-[0.3em] uppercase mb-3 md:mb-4 font-['Poppins']"
             style={{ color: 'var(--section-tag)' }}
           >
             <MoonIcon /> Next Project ✦

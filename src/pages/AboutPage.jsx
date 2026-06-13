@@ -73,7 +73,7 @@ const AboutPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-[11px] tracking-[0.4em] uppercase mb-10 font-['Poppins']"
+            className="text-[11px] font-medium tracking-[0.3em] uppercase mb-10 font-['Poppins']"
             style={{ color: 'var(--section-tag)' }}
           >
             <MoonIcon /> {c.tag} ✦

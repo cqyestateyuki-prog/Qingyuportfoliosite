@@ -11,6 +11,7 @@ import { TIER_CONFIG } from './useDeviceTier';
 import NebulaLayer from './layers/NebulaLayer';
 import StarfieldLayer from './layers/StarfieldLayer';
 import ShapeParticlesLayer from './layers/ShapeParticlesLayer';
+import TrailLayer from './layers/TrailLayer';
 
 const SHAPE_TO_MORPH = { scatter: 0, moon: 1, star: 2 };
 
@@ -54,6 +55,10 @@ export default class SceneManager {
     }
     if (this.config.morphParticles > 0) {
       this.layers.push(new ShapeParticlesLayer(this.gl, this.config));
+    }
+    // 鼠标仙尘拖尾(桌面 high 档,触屏无鼠标)
+    if (tier === 'high') {
+      this.layers.push(new TrailLayer(this.gl, this.config));
     }
 
     this._raf = null;

@@ -232,7 +232,7 @@ const Showcase = ({ projects }) => {
       {/* HUD 区块标签 + 标题 */}
       <div className="text-center mb-20">
         <p
-          className="text-[11px] tracking-[0.4em] uppercase mb-4 font-['Poppins']"
+          className="text-[11px] font-medium tracking-[0.3em] uppercase mb-4 font-['Poppins']"
           style={{ color: 'var(--section-tag)' }}
         >
           <MoonIcon /> 02 · {t('chapters.work')} ✦
@@ -256,7 +256,7 @@ const Showcase = ({ projects }) => {
             <div className="flex flex-wrap items-end justify-between gap-3 mb-6 font-['Poppins']">
               <div>
                 <p
-                  className="text-[11px] tracking-[0.35em] uppercase mb-2"
+                  className="text-[11px] font-medium tracking-[0.3em] uppercase mb-2"
                   style={{ color: 'var(--section-tag)' }}
                 >
                   ✦ {getLocalizedText(project.domain?.[0], language) || project.categories?.[0]}
