@@ -9,7 +9,6 @@ import { useParams, Link } from 'react-router-dom'
 import MoonIcon from '../hud/MoonIcon'
 //导入shadcn/ui组件库的UI组件
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowLeft, ArrowUp, ZoomIn } from 'lucide-react'
 //导入Markdown渲染组件
@@ -167,7 +166,7 @@ const ProjectDetail = () => {
   // 获取项目的深色（用于日间版标题）
   const darkColor = rawProject ? getProjectDarkColor(rawProject) : '#0D0D0D'
 
-  // ROLE / DURATION / TEAM / STACK 元信息(优先读 projects.js 的 meta 字段,缺省自动推断)
+  // ROLE / DURATION / TEAM / STACK 元信息(真实项目数据:优先 projects.js 的 meta 字段,缺省自动推断)
   const metaItems = project ? [
     { label: t('project.metaRole'), value: rawProject?.meta?.role || project.role?.title || project.domain?.[0] },
     { label: t('project.metaDuration'), value: rawProject?.meta?.duration || project.year },
@@ -186,6 +185,10 @@ const ProjectDetail = () => {
         project.techTags?.slice(0, 3).map((tag) => tag.replace(/^#/, '')).join(' · '),
     },
   ].filter((m) => m.value) : []
+
+  // TL;DR 速览:取项目 brief(简短事实型一句话,与下方 Overview 长简介区分)
+  const tldr = project ? (getLocalizedText(project.brief, language) || '') : ''
+
   // 获取项目的主题色（用于日间版标签）
   const themeColor = rawProject ? getProjectHighlightColor(rawProject) : '#8B5CF6'
 
@@ -401,47 +404,28 @@ const ProjectDetail = () => {
             </p>
           )}
 
-          {/* 标签组:DOMAIN / FORM / COLLABORATORS(空的自动省略) */}
-          {(project.domain?.length > 0 || project.form?.length > 0 || project.collaborators?.length > 0) && (
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-              {[
-                { label: t('project.domain'), items: project.domain },
-                { label: t('project.form'), items: project.form },
-                { label: t('project.collaborators'), items: project.collaborators },
-              ]
-                .filter((g) => g.items?.length > 0)
-                .map(({ label, items }) => (
-                  <div key={label}>
-                    <h3
-                      className="text-[11px] font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
-                      style={{ color: 'var(--hud-fg-muted)' }}
-                    >
-                      <span style={{ color: 'var(--section-tag)' }}>✦</span> {label}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {items.map((item, idx) => (
-                        <Badge
-                          key={idx}
-                          className="transition-all"
-                          style={{
-                            backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                            color: 'var(--text-accent)',
-                            borderColor: 'var(--card-glass-border)',
-                          }}
-                        >
-                          {item}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+          {/* TL;DR 一段速览(替代原 DOMAIN/FORM/COLLABORATORS 标签组) */}
+          {tldr && (
+            <div className="mt-9 max-w-3xl">
+              <p
+                className="text-[11px] font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
+                style={{ color: 'var(--hud-fg-muted)' }}
+              >
+                <span style={{ color: 'var(--section-tag)' }}>✦</span> TL;DR
+              </p>
+              <p
+                className="text-base md:text-lg leading-relaxed font-['Poppins']"
+                style={{ color: 'var(--text-body)' }}
+              >
+                {tldr}
+              </p>
             </div>
           )}
 
-          {/* 元信息条:ROLE / DURATION / TEAM / STACK */}
+          {/* 元信息条:ROLE / DURATION / TEAM / STACK(真实项目数据) */}
           {metaItems.length > 0 && (
             <div
-              className="mt-10 pt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
+              className="mt-12 pt-8 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
               style={{ borderTop: '1px solid var(--hud-line)' }}
             >
               {metaItems.map(({ label, value }) => (
