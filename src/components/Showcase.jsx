@@ -228,7 +228,7 @@ const Showcase = ({ projects }) => {
   if (!projects || projects.length === 0) return null;
 
   return (
-    <div className="py-24 px-6 relative">
+    <div className="py-24 px-6 md:px-20 lg:px-28 relative">
       {/* HUD 区块标签 + 标题 */}
       <div className="text-center mb-20">
         <p

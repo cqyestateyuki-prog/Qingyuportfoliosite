@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Mail, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button.jsx';
+import MoonIcon from '../hud/MoonIcon';
 import { useLanguage } from '../i18n';
 
 const Contact = () => {
@@ -84,12 +85,22 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-20 lg:px-28">
         {/* 标题 */}
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <h2 className="text-4xl md:text-5xl font-normal mb-6 gradient-text">
+          {/* HUD 区块标签(与 Work 章节统一) */}
+          <p
+            className="text-[11px] font-medium tracking-[0.3em] uppercase mb-4 font-['Poppins']"
+            style={{ color: 'var(--section-tag)' }}
+          >
+            <MoonIcon /> 03 · {t('chapters.contact')} ✦
+          </p>
+          <h2
+            className="text-4xl md:text-5xl font-normal mb-6"
+            style={{ color: 'var(--text-hero)' }}
+          >
             {t('contact.title')}
           </h2>
           <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--text-body)' }}>
