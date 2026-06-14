@@ -64,14 +64,17 @@ float fbm(vec2 p) {
 void main() {
   vec2 uv = vUv;
   float aspect = uResolution.x / uResolution.y;
-  vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * 2.2;
+  // 取景:横屏锁定纵向跨度,竖屏改为锁定横向跨度并让纵向延展
+  // ——保证为横构图设计的月牙/星云在竖屏手机上也完整入画(contain),像素仍保持等比
+  vec2 scale = aspect >= 1.0 ? vec2(aspect, 1.0) : vec2(1.0, 1.0 / aspect);
+  vec2 p = (uv - 0.5) * scale * 2.2;
   // 滚动 = 镜头在天空中移动
   p.y += uScroll * 1.6;
   float t = uTime * 0.04;
 
   // 鼠标局部域扭曲(云雾感:范围更大、力道更轻,不粘稠)
-  vec2 m = (uMouse - 0.5) * vec2(aspect, 1.0) * 2.2;
-  vec2 pScreen = (uv - 0.5) * vec2(aspect, 1.0) * 2.2; // 不含滚动偏移的屏幕坐标
+  vec2 m = (uMouse - 0.5) * scale * 2.2;
+  vec2 pScreen = (uv - 0.5) * scale * 2.2; // 不含滚动偏移的屏幕坐标
   float md = length(pScreen - m);
   vec2 mw = (pScreen - m) * 0.14 * exp(-md * md * 0.65);
 
