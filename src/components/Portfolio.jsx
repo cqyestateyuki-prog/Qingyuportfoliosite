@@ -49,7 +49,9 @@ const Portfolio = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      // #work 含 Showcase + 牌阵,远高于视口;阈值必须为 0,
+      // 否则可见占比够不到 0.1,观察器永不触发 → 标题卡在 opacity-0
+      { threshold: 0 }
     );
 
     const section = document.querySelector('#work');

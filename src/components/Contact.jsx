@@ -21,7 +21,8 @@ const Contact = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      // 阈值 0:移动端区块高于视口时也能可靠触发淡入(避免标题/表单卡在 opacity-0)
+      { threshold: 0 }
     );
 
     const section = document.querySelector('#contact');

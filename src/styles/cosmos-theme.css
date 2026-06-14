@@ -74,10 +74,16 @@ footer {
     border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* WebGL 不可用 / reduced-motion 的降级背景层 */
+/* WebGL 不可用 / reduced-motion 的降级背景层
+   也作为 canvas 之下的兜底:移动端地址栏收起、视口变高时,
+   用 100lvh(最大视口)兜住底部,避免露出纯色 body 背景("背景看不全") */
 .cosmos-fallback {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* 老浏览器回退 */
+  height: 100lvh; /* 始终覆盖最大视口,地址栏收起也不露底 */
   z-index: 0;
   pointer-events: none;
   background: var(--cosmos-fallback-bg);
