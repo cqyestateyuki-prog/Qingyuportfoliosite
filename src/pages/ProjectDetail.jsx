@@ -188,8 +188,6 @@ const ProjectDetail = () => {
   ].filter((m) => m.value) : []
   // 获取项目的主题色（用于日间版标签）
   const themeColor = rawProject ? getProjectHighlightColor(rawProject) : '#8B5CF6'
-  // 检查是否使用日间版 hero
-  const useLightHero = rawProject?.colors?.heroStyle === 'light'
 
   // 创建导航数据（动态构建，根据实际内容）
   const navigationSections = [
@@ -359,240 +357,108 @@ const ProjectDetail = () => {
         </nav>
       </aside>
 
-      {/* ========== 顶部标题区域 ========== */}
-      {useLightHero ? (
-        // 日间版 hero：浅灰色背景，深灰色标题（部分字符主题色），主题色标签
-        <section className="pt-28 pb-10 px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-10">
-              <p
-                className="text-[11px] font-medium tracking-[0.3em] uppercase mb-5 font-['Poppins']"
-                style={{ color: 'var(--section-tag)' }}
-              >
-                <MoonIcon /> Case Study ✦
-              </p>
-              <h1
-                className="text-4xl md:text-6xl font-semibold mb-5 leading-tight tracking-tight animate-fade-in font-['Poppins']"
-                style={{ color: 'var(--text-hero)' }}
-              >
-                <DecryptedText text={project.title} />
-              </h1>
-              
-              <p className="text-xl md:text-2xl mb-8 leading-relaxed animate-fade-in-delay-1" style={{ color: 'var(--text-body)' }}>
-                {project.subtitle}
-              </p>
-            </div>
+      {/* ========== 顶部标题区域:Case Study 头部 ==========
+          左对齐、容器与下方所有章节统一(max-w-5xl + px-4 md:px-6),
+          边距像素级对齐;日/夜全靠 token,不再分浅/深两套 hero */}
+      <section className="pt-28 pb-12 md:pb-16 px-4 md:px-6">
+        <div className="relative max-w-5xl mx-auto">
+          {/* HUD 角标:贴合内容框上沿两角,与下方章节左右边距对齐(移动端隐藏) */}
+          <span className="hidden md:block absolute -top-4 -left-3 w-5 h-5 border-t border-l pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
+          <span className="hidden md:block absolute -top-4 -right-3 w-5 h-5 border-t border-r pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
 
-            {/* 项目标签区域 */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* DOMAIN */}
-              <div className="group">
-                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--text-accent)' }}>
-                  <span>✦</span> {t('project.domain')}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.domain?.map((item, idx) => (
-                    <Badge 
-                      key={idx} 
-                      className="transition-all"
-                      style={{
-                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                        color: 'var(--text-accent)',
-                        borderColor: 'var(--card-glass-border)'
-                      }}
-                    >
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              
-              {/* FORM */}
-              <div className="group">
-                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--text-accent)' }}>
-                  <span>✦</span> {t('project.form')}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.form?.map((item, idx) => (
-                    <Badge 
-                      key={idx} 
-                      className="transition-all"
-                      style={{
-                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                        color: 'var(--text-accent)',
-                        borderColor: 'var(--card-glass-border)'
-                      }}
-                    >
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              
-              {/* COLLABORATORS */}
-              <div className="group">
-                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--text-accent)' }}>
-                  <span>✦</span> {t('project.collaborators')}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.collaborators?.map((item, idx) => (
-                    <Badge 
-                      key={idx} 
-                      className="transition-all"
-                      style={{
-                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                        color: 'var(--text-accent)',
-                        borderColor: 'var(--card-glass-border)'
-                      }}
-                    >
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* 元信息条:ROLE / DURATION / TEAM / STACK(并入 hero) */}
-            {metaItems.length > 0 && (
-              <div
-                className="mt-10 pt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
-                style={{ borderTop: '1px solid var(--hud-line)' }}
+          {/* 顶栏读数:Case Study ✦ ——————— 年份 */}
+          <div className="flex items-center gap-4 mb-7">
+            <p
+              className="text-[11px] font-medium tracking-[0.3em] uppercase whitespace-nowrap font-['Poppins']"
+              style={{ color: 'var(--section-tag)' }}
+            >
+              <MoonIcon /> Case Study ✦
+            </p>
+            <span className="h-px flex-1" style={{ background: 'var(--hud-line)' }} aria-hidden="true" />
+            {project.year && (
+              <span
+                className="text-[11px] tracking-[0.3em] tabular-nums font-['Poppins']"
+                style={{ color: 'var(--hud-fg-muted)' }}
               >
-                {metaItems.map(({ label, value }) => (
-                  <div key={label}>
-                    <p
-                      className="text-[11px] tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
-                      style={{ color: 'var(--hud-fg-muted)' }}
-                    >
-                      {label}
-                    </p>
-                    <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>
-                      {value}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                {project.year}
+              </span>
             )}
           </div>
-        </section>
-      ) : (
-        // 原版 hero：渐变背景，白色文字
-        <section className="pt-28 pb-10 px-4 md:px-6">
-          <div
-            className="detail-hero-panel max-w-6xl mx-auto relative overflow-hidden rounded-3xl px-6 md:px-10 py-12 md:py-14 backdrop-blur-xl"
+
+          {/* 标题(柔光)+ 副标题,左对齐贴合下方章节节奏 */}
+          <h1
+            className="text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight mb-5 animate-fade-in font-['Poppins']"
+            style={{ color: 'var(--text-hero)', textShadow: '0 0 40px var(--hud-glow)' }}
           >
-            {/* HUD 角标(常显) */}
-            <span className="absolute top-4 left-4 w-5 h-5 border-t border-l pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
-            <span className="absolute top-4 right-4 w-5 h-5 border-t border-r pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
-            <span className="absolute bottom-4 left-4 w-5 h-5 border-b border-l pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
-            <span className="absolute bottom-4 right-4 w-5 h-5 border-b border-r pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
-            <div className="text-center mb-12">
-              <p className="text-[11px] font-medium tracking-[0.3em] uppercase mb-5 font-['Poppins']" style={{ color: 'var(--section-tag)' }}>
-                <MoonIcon /> Case Study ✦
-              </p>
-              <h1
-                className="text-4xl md:text-6xl font-semibold mb-5 leading-tight tracking-tight animate-fade-in font-['Poppins']"
-                style={{ color: 'var(--text-hero)' }}
-              >
-                <DecryptedText text={project.title} />
-              </h1>
+            <DecryptedText text={project.title} />
+          </h1>
+          {project.subtitle && (
+            <p
+              className="text-lg md:text-xl font-light leading-relaxed max-w-2xl animate-fade-in-delay-1 font-['Poppins']"
+              style={{ color: 'var(--text-body)' }}
+            >
+              {project.subtitle}
+            </p>
+          )}
 
-              <p className="text-lg md:text-xl font-light mb-8 leading-relaxed animate-fade-in-delay-1 font-['Poppins']" style={{ color: 'var(--text-body)' }}>
-                {project.subtitle}
-              </p>
-            </div>
-
-            {/* 项目标签区域 */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* DOMAIN */}
-              <div className="group">
-                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--hud-fg-muted)' }}>
-                  <span style={{ color: 'var(--section-tag)' }}>✦</span> {t('project.domain')}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.domain?.map((item, idx) => (
-                    <Badge 
-                      key={idx} 
-                      className="transition-all"
-                      style={{
-                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                        color: 'var(--text-accent)',
-                        borderColor: 'var(--card-glass-border)',
-                      }}
-                    >
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              
-              {/* FORM */}
-              <div className="group">
-                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--hud-fg-muted)' }}>
-                  <span style={{ color: 'var(--section-tag)' }}>✦</span> {t('project.form')}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.form?.map((item, idx) => (
-                    <Badge 
-                      key={idx} 
-                      className="transition-all"
-                      style={{
-                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                        color: 'var(--text-accent)',
-                        borderColor: 'var(--card-glass-border)',
-                      }}
-                    >
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              
-              {/* COLLABORATORS */}
-              <div className="group">
-                <h3 className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']" style={{ color: 'var(--hud-fg-muted)' }}>
-                  <span style={{ color: 'var(--section-tag)' }}>✦</span> {t('project.collaborators')}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.collaborators?.map((item, idx) => (
-                    <Badge 
-                      key={idx} 
-                      className="transition-all"
-                      style={{
-                        backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
-                        color: 'var(--text-accent)',
-                        borderColor: 'var(--card-glass-border)',
-                      }}
-                    >
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* 元信息条:ROLE / DURATION / TEAM / STACK(并入 hero) */}
-            {metaItems.length > 0 && (
-              <div
-                className="mt-10 pt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
-                style={{ borderTop: '1px solid var(--hud-line)' }}
-              >
-                {metaItems.map(({ label, value }) => (
+          {/* 标签组:DOMAIN / FORM / COLLABORATORS(空的自动省略) */}
+          {(project.domain?.length > 0 || project.form?.length > 0 || project.collaborators?.length > 0) && (
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+              {[
+                { label: t('project.domain'), items: project.domain },
+                { label: t('project.form'), items: project.form },
+                { label: t('project.collaborators'), items: project.collaborators },
+              ]
+                .filter((g) => g.items?.length > 0)
+                .map(({ label, items }) => (
                   <div key={label}>
-                    <p
-                      className="text-[11px] font-medium tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
+                    <h3
+                      className="text-[11px] font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
                       style={{ color: 'var(--hud-fg-muted)' }}
                     >
-                      {label}
-                    </p>
-                    <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>{value}</p>
+                      <span style={{ color: 'var(--section-tag)' }}>✦</span> {label}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {items.map((item, idx) => (
+                        <Badge
+                          key={idx}
+                          className="transition-all"
+                          style={{
+                            backgroundColor: 'color-mix(in srgb, var(--hud-glow) 40%, transparent)',
+                            color: 'var(--text-accent)',
+                            borderColor: 'var(--card-glass-border)',
+                          }}
+                        >
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 ))}
-              </div>
-            )}
-          </div>
-        </section>
-      )}
+            </div>
+          )}
+
+          {/* 元信息条:ROLE / DURATION / TEAM / STACK */}
+          {metaItems.length > 0 && (
+            <div
+              className="mt-10 pt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
+              style={{ borderTop: '1px solid var(--hud-line)' }}
+            >
+              {metaItems.map(({ label, value }) => (
+                <div key={label}>
+                  <p
+                    className="text-[11px] font-medium tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
+                    style={{ color: 'var(--hud-fg-muted)' }}
+                  >
+                    {label}
+                  </p>
+                  <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>{value}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* ========== 项目概述区域 ========== */}
       <section id="overview" className="py-10 md:py-14 lg:py-16 px-4 md:px-6 bg-white">
