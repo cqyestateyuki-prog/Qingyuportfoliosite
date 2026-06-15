@@ -172,11 +172,14 @@ const ProjectDetail = () => {
     { label: t('project.metaDuration'), value: rawProject?.meta?.duration || project.year },
     {
       label: t('project.metaTeam'),
-      value:
-        rawProject?.meta?.team ||
-        (project.collaborators?.length
-          ? `${project.collaborators.length} ${language === 'zh' ? '人团队' : 'people'}`
-          : language === 'zh' ? '个人项目' : 'Solo project'),
+      // 列出每位协作者及角色(取代"N 人团队");每个人名整体不换行,逐人折行如名单
+      value: project.collaborators?.length ? (
+        <span className="flex flex-col gap-0.5">
+          {project.collaborators.map((c, i) => (
+            <span key={i} className="whitespace-nowrap">{c}</span>
+          ))}
+        </span>
+      ) : (rawProject?.meta?.team || (language === 'zh' ? '个人项目' : 'Solo project')),
     },
     {
       label: t('project.metaStack'),
