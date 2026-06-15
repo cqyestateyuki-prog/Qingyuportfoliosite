@@ -29,9 +29,9 @@
   --section-tag: #8880d7;
 }
 
-/* 日:大标题 = 深墨 → 品牌紫的低调渐变(替代原先发白的浅紫,提升对比与质感) */
+/* 日:大标题 = 干净的浅紫渐变(整段待在浅紫/品牌紫区间,去掉原先发闷的深紫末端) */
 html:not(.dark) .hero-title {
-  background: linear-gradient(135deg, #1a1530 0%, #3a3270 52%, #6b5fc0 100%);
+  background: linear-gradient(135deg, #b3a6f7 0%, #9485e6 50%, #8174d6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
