@@ -21,7 +21,7 @@ export default {
   },
   hud: {
     scroll: '滚动探索',
-    archive: '工作之余',
+    archive: '独立创作',
   },
 
   // ============ Hero区域 ============

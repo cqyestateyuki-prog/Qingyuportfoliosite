@@ -21,7 +21,7 @@ export default {
   },
   hud: {
     scroll: 'Scroll to Explore',
-    archive: 'Off the Clock',
+    archive: 'Self-Initiated',
   },
 
   // ============ Hero区域 ============
