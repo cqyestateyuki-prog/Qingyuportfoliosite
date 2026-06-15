@@ -2186,30 +2186,22 @@ export const projects = [
         mainTitle: 'Three Pillars, One Panoramic View',
         briefContent: 'From fragmented data to a panoramic, actionable view — built on three pillars: a 24/7 strategic radar, a dashboard that builds itself, and a platform that connects the [[what]] to the [[why]].',
         icon: '✦',
-        imageGroups: [
+        featureDisplayMode: 'side-by-side',
+        features: [
           {
-            displayMode: 'single',
-            images: [
-              { src: '/media/projects/kogna/slides/slide-06.png', alt: 'Three solution pillars', caption: 'Kogna Insight · Smart Tiles · What → Why' }
-            ]
+            name: 'Kogna Insight',
+            detail: 'A strategic early-warning system — a 24/7 radar that surfaces insight through proven frameworks (SWOT · SOAR · VRIO · TOWS) with live severity, so the most urgent signal rises to the top.',
+            image: '/media/projects/kogna/pillars/insight.png'
           },
           {
-            displayMode: 'single',
-            images: [
-              { src: '/media/projects/kogna/slides/slide-07.png', alt: 'Pillar 1 — Kogna Insight', caption: 'Pillar 01 · Kogna Insight — a strategic early-warning system (SWOT / SOAR / VRIO / TOWS) with live severity' }
-            ]
+            name: 'Smart Tiles',
+            detail: 'A dashboard that builds itself around the leader — adaptive KPI tiles for Salesforce, HubSpot, Jira and Asana snap into a 12-column grid; pin an AI insight to the board and the layout persists.',
+            image: '/media/projects/kogna/pillars/smart-tiles.png'
           },
           {
-            displayMode: 'single',
-            images: [
-              { src: '/media/projects/kogna/slides/slide-08.png', alt: 'Pillar 2 — Smart Tiles', caption: 'Pillar 02 · Smart Tiles — a draggable 12-column grid of adaptive KPI tiles' }
-            ]
-          },
-          {
-            displayMode: 'single',
-            images: [
-              { src: '/media/projects/kogna/slides/slide-09.png', alt: 'Pillar 3 — What to Why', caption: 'Pillar 03 · What → Why — connect your stack, then see what changed and why' }
-            ]
+            name: 'What → Why',
+            detail: 'Connect the stack, then see what changed and why — 10+ sources linked with real-world market shifts, and a RAG assistant answering questions over your connected data.',
+            image: '/media/projects/kogna/pillars/what-why.png'
           }
         ]
       },
@@ -2274,14 +2266,14 @@ export const projects = [
         title: 'Outcomes & What\'s Next',
         sectionTag: '08 · Outcomes',
         mainTitle: 'From Idea to a Live, Validated Platform',
-        briefContent: 'A live V1 with [[10+ managed connectors]], a RAG assistant and four pricing tiers — validated by 180+ discovery contacts and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
+        briefContent: 'A live V1 with [[10+ managed connectors]] and a RAG assistant — validated by 180+ discovery contacts and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
           {
             src: '/media/projects/kogna/slides/slide-13.png',
             alt: 'Outcomes — live V1 and what is next',
-            caption: 'V1 live · 10+ connectors · 180+ discovery outreach · 4 pricing tiers'
+            caption: 'V1 live · 10+ connectors · 180+ discovery outreach · first paying customers'
           }
         ]
       },
