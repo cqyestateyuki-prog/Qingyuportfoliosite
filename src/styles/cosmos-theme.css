@@ -238,9 +238,11 @@ html:not(.dark) .cosmos-canvas-el {
   color: transparent;
 }
 
-/* Kogna 亮色版:小标题用品牌渐变字(对齐 deck 的 eyebrow gradient,而非站点默认紫) */
+/* Kogna 亮色版:小标题用品牌渐变字(对齐 deck eyebrow)。
+   inline-block 关键:让渐变只铺满文字本身,短文字也能从蓝走到品红,而不是停在蓝色起点 */
 html:not(.dark) .project-detail--kogna .detail-accent-text {
-  background: linear-gradient(100deg, #0D8CE2 0%, #115DF4 30%, #814AE9 64%, #E932DD 100%);
+  display: inline-block;
+  background: linear-gradient(90deg, #0D8CE2 0%, #115DF4 28%, #814AE9 64%, #E932DD 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

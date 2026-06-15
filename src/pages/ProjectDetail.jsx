@@ -631,50 +631,11 @@ const ProjectDetail = () => {
             {(project.overview.challenge || project.overview.challenges) && (
               <div 
                 id="challenge" 
-                className="p-8 rounded-2xl border-l-4 relative overflow-hidden"
+                className="p-8 rounded-2xl relative overflow-hidden backdrop-blur-md"
                 style={{
-                  background: rawProject?.colors?.subtitleGradient 
-                    ? (() => {
-                        // Extract colors from gradient and create light version
-                        const gradient = rawProject.colors.subtitleGradient;
-                        // Try hex colors first
-                        let colorMatches = gradient.match(/#[0-9a-fA-F]{6}/g) || [];
-                        // If no hex, try RGB
-                        if (colorMatches.length === 0) {
-                          const rgbMatches = gradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/g) || [];
-                          if (rgbMatches.length > 0) {
-                            colorMatches = rgbMatches.map(rgb => {
-                              const hex = rgbToHex(rgb);
-                              return hex || null;
-                            }).filter(Boolean);
-                          }
-                        }
-                        if (colorMatches.length > 0) {
-                          const colors = colorMatches.map(hex => {
-                            const r = parseInt(hex.slice(1, 3), 16);
-                            const g = parseInt(hex.slice(3, 5), 16);
-                            const b = parseInt(hex.slice(5, 7), 16);
-                            return `rgba(${r}, ${g}, ${b}, 0.1)`;
-                          });
-                          return `linear-gradient(to right, ${colors.join(', ')}, rgba(255, 255, 255, 0.5))`;
-                        }
-                        return 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))';
-                      })()
-                    : 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1))',
-                  borderLeftColor: rawProject?.colors?.heroGradient 
-                    ? (() => {
-                        // Try hex first
-                        let match = rawProject.colors.heroGradient.match(/#[0-9a-fA-F]{6}/);
-                        if (match) return match[0];
-                        // Try RGB
-                        const rgbMatch = rawProject.colors.heroGradient.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
-                        if (rgbMatch) {
-                          const hex = rgbToHex(rgbMatch[0]);
-                          if (hex) return hex;
-                        }
-                        return '#8b5cf6';
-                      })()
-                    : '#8b5cf6'
+                  background: 'var(--card-glass-bg)',
+                  border: '1px solid var(--card-glass-border)',
+                  borderLeft: `3px solid ${highlightColor}`,
                 }}
               >
                 <h3 
