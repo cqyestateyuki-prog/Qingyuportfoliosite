@@ -29,9 +29,9 @@
   --section-tag: #8880d7;
 }
 
-/* 日:大标题用 Design System 的 h2 渐变(--gradient-secondary,沉稳紫) */
+/* 日:大标题 = 深墨 → 品牌紫的低调渐变(替代原先发白的浅紫,提升对比与质感) */
 html:not(.dark) .hero-title {
-  background: linear-gradient(135deg, #9288e3 0%, #594f93 100%);
+  background: linear-gradient(135deg, #1a1530 0%, #3a3270 52%, #6b5fc0 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -232,6 +232,15 @@ html:not(.dark) .cosmos-canvas-el {
 
 .dark .project-detail .detail-accent-text {
   background: linear-gradient(135deg, #d4cdf8 0%, #8a81d7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Kogna 亮色版:小标题用品牌渐变字(对齐 deck 的 eyebrow gradient,而非站点默认紫) */
+html:not(.dark) .project-detail--kogna .detail-accent-text {
+  background: linear-gradient(100deg, #0D8CE2 0%, #115DF4 30%, #814AE9 64%, #E932DD 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

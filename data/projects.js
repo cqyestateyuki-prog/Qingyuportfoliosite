@@ -2102,7 +2102,7 @@ export const projects = [
       heroGradient: 'linear-gradient(135deg, #0B0716 0%, #0a1628 50%, #0D3B66 100%)',
       subtitleGradient: 'linear-gradient(135deg, #0D5FC2 0%, #0D8CE2 100%)',
       underlineGradient: 'linear-gradient(135deg, #0D5FC2 0%, #0D8CE2 100%)',
-      textHighlightColor: '#0D8CE2',
+      textHighlightColor: '#6B3FC4',
       darkColor: '#0D8CE2',
       lightColor: '#0D3B66'
     },

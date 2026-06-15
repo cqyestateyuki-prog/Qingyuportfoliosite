@@ -309,7 +309,7 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="project-detail min-h-screen">
+    <div className={`project-detail project-detail--${id} min-h-screen`}>
       {/* ========== 顶部导航栏（与首页一致）========== */}
       <Navbar />
 
