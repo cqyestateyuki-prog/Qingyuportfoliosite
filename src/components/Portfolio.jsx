@@ -66,7 +66,9 @@ const Portfolio = () => {
 
   // Featured = Professional Work(进 Showcase 大卡);其余 = Personal Projects(牌阵)
   // 两个版块互不重复:牌阵只展示非 featured 的个人项目
-  const featuredProjects = projects.filter((p) => p.featured);
+  const featuredProjects = projects
+    .filter((p) => p.featured)
+    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
   const showcaseItems = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 3);
   const personalProjects = projects.filter((p) => !p.featured);
 

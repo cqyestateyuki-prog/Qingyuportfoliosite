@@ -6,7 +6,7 @@ export const projects = [
   // ========== Spark Up ==========
   {
     id: 'sparkup',
-    featured: true, // 首页展示
+    featured: true, order: 2, // Selected Work · 第 2 位
     title: 'Spark Up',
     year: '2026',
     subtitle: {
@@ -238,7 +238,7 @@ export const projects = [
     {
       id: 'ai-community-platform',
       year: '2025',
-      featured: true, // 首页展示
+      featured: false, // 移至 Passion Projects
       title: {
         en: 'AI Built-in Community Platform',
         zh: 'AI 产品内嵌社区平台'
@@ -488,7 +488,7 @@ export const projects = [
     // ========== Stumbldoor Project 图书系统==========
     id: 'stumbldoor',
     year: '2024',
-    featured: true, // 首页展示
+    featured: false, // 移至 Passion Projects
     title: 'Stumbldoor',
     subtitle: {
       en: 'Library Experience for the Future',
@@ -999,6 +999,7 @@ export const projects = [
   {
     id: 'petiboxy',
     year: '2025',
+    featured: true, order: 4, // 提进 Selected Work · 第 4 位
     title: { en: 'Petiboxy Charity Platform', zh: 'Petiboxy 宠物救助平台' },
     subtitle: { en: 'Connecting Love, Saving Lives', zh: '连接爱心，拯救生命' },
     categories: ['UIUX', 'Product Design', 'Research'],
@@ -2062,7 +2063,7 @@ export const projects = [
   {
     id: 'kogna',
     year: '2026',
-    featured: true,
+    featured: true, order: 1,
     title: 'Kogna AI',
     subtitle: {
       en: 'Strategic Business Insight, For All',
@@ -2302,7 +2303,7 @@ export const projects = [
   {
     id: 'hexaedge',
     year: '2026',
-    featured: true,
+    featured: true, order: 3,
     title: 'HexaEdge',
     subtitle: {
       en: 'Ancient Logic, Modern Signals',
