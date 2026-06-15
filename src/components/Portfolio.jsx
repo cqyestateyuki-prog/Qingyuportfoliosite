@@ -64,11 +64,13 @@ const Portfolio = () => {
 
   const filters = ['All', 'AI', 'UIUX', 'Product Design', 'Programming', 'Game', 'Research'];
 
-  // Featured 项目进 Showcase,牌阵展示全部(按过滤)
+  // Featured = Professional Work(进 Showcase 大卡);其余 = Personal Projects(牌阵)
+  // 两个版块互不重复:牌阵只展示非 featured 的个人项目
   const featuredProjects = projects.filter((p) => p.featured);
   const showcaseItems = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 3);
+  const personalProjects = projects.filter((p) => !p.featured);
 
-  const filteredProjects = projects.filter((project) => {
+  const filteredProjects = personalProjects.filter((project) => {
     if (activeFilter === 'All') return true;
     return project.categories?.includes(activeFilter);
   });

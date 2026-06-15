@@ -20,7 +20,7 @@ export default {
   },
   hud: {
     scroll: '滚动探索',
-    archive: '档案库 — 全部项目',
+    archive: '个人 · 业余项目',
   },
 
   // ============ Hero区域 ============
@@ -41,8 +41,8 @@ export default {
 
   // ============ 作品集区域 ============
   portfolio: {
-    title: '精选作品',
-    moreProjects: '更多项目',
+    title: '专业作品',
+    moreProjects: '个人项目',
     viewProject: '查看项目',
     viewCaseStudy: '查看案例',
     clickToExplore: '点击探索',

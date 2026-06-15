@@ -20,7 +20,7 @@ export default {
   },
   hud: {
     scroll: 'Scroll to Explore',
-    archive: 'Archive — All Projects',
+    archive: 'Personal · Side Projects',
   },
 
   // ============ Hero区域 ============
@@ -41,8 +41,8 @@ export default {
 
   // ============ 作品集区域 ============
   portfolio: {
-    title: 'Selected Work',
-    moreProjects: 'More Projects',
+    title: 'Professional Work',
+    moreProjects: 'Personal Projects',
     viewProject: 'View Project',
     viewCaseStudy: 'View Case Study',
     clickToExplore: 'Click to explore',
