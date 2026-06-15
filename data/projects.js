@@ -2110,7 +2110,12 @@ export const projects = [
     overview: {
       mainTitle: 'From a 1,000-Tab Stack to One AI Command Center',
       briefContent: '[[Kogna]] unifies CRM, project, finance and BI data into one place — and turns it into real-time strategic insight. I build it end-to-end: [[product strategy, the design system, and the live frontend]], with AI in the loop at every step.',
-      challenge: 'How do you give every leader a 60,000-foot view of the business — without losing the detail behind any single metric?',
+      challenge: 'How do you give every leader a 60,000-foot view of the whole business — without losing the detail behind any single metric?',
+      challenges: [
+        'Serve two users on the same screens — a time-poor executive who wants one-glance signal, and an operator who needs to drill all the way down.',
+        'Make dense, data-heavy views feel calm and trustworthy enough for executive buyers.',
+        'Keep every screen coherent inside a product still shipping new features every week.'
+      ],
       mainImage: {
         src: '/media/projects/kogna/slides/slide-02.png',
         alt: 'What Kogna does — fragmented tools converging into one command center',
@@ -2125,7 +2130,7 @@ export const projects = [
         title: 'Problem Statement',
         sectionTag: '01 · Problem',
         mainTitle: 'The 1,000-Tab Nightmare',
-        briefContent: 'Leaders drown in fragmented data yet fly blind on strategy — by the time a report is stitched together, the business has already moved on.',
+        briefContent: 'Every leader was paying a hidden [[fragmentation tax]] — hours each week clicking between CRM, project, finance and BI tools just to piece together where the business stands, only to act on a picture that\'s already weeks out of date.',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
@@ -2161,14 +2166,14 @@ export const projects = [
         title: 'User Research & Discovery',
         sectionTag: '03 · Research',
         mainTitle: 'Validated Before Designing',
-        briefContent: 'Demand was validated through outreach, interviews and pipeline — and one insight shaped everything: leaders don\'t want another dashboard, they want [[decisions surfaced, not data displayed]].',
+        briefContent: 'Demand was validated through [[180+ discovery contacts]], [[15+ executive interviews]] and [[3 validated personas]] — and one insight shaped everything: leaders don\'t want another dashboard, they want decisions surfaced, not data displayed.',
         icon: '🔍',
         imageDisplayMode: 'single',
         images: [
           {
             src: '/media/projects/kogna/slides/slide-05.png',
             alt: 'Research — outreach, interviews, personas',
-            caption: '180+ discovery outreach · 15+ executive interviews · 3 validated personas'
+            caption: 'Customer discovery across CEOs, COOs and chiefs of staff'
           }
         ]
       },
