@@ -2108,8 +2108,8 @@ export const projects = [
     },
 
     overview: {
-      mainTitle: 'From a 1,000-Tab Stack to One AI Command Center',
-      briefContent: '[[Kogna]] unifies CRM, project, finance and BI data into one place — and turns it into real-time strategic insight. I build it end-to-end: [[product strategy, the design system, and the live frontend]], with AI in the loop at every step.',
+      mainTitle: 'From Feature UI to Product Design System',
+      briefContent: '[[Kogna]] helps leadership teams make faster decisions by pulling fragmented business data into one place. Executives today toggle between CRM, PM tools, BI dashboards, and spreadsheets—by the time they piece together a picture, it\'s already outdated. I joined as the [[design system lead]] at a stage where the product was growing fast but the UI wasn\'t keeping up: every new page looked slightly different, and the experience felt like [[a patchwork instead of one product]]. My job was to bring it all together—define a shared visual language, build components the team could reuse, and make the product feel as trustworthy as the decisions it supports.',
       challenge: 'How do you give every leader a 60,000-foot view of the whole business — without losing the detail behind any single metric?',
       challenges: [
         'Surface decisions, not just data — turn dozens of disconnected metrics into a signal the leader can act on at a glance, with the detail still one click away.',
