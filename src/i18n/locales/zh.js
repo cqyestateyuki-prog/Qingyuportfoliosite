@@ -16,11 +16,12 @@ export default {
   chapters: {
     vision: '序章',
     work: '作品',
+    projects: '项目',
     contact: '联系',
   },
   hud: {
     scroll: '滚动探索',
-    archive: '个人 · 业余项目',
+    archive: '工作之余',
   },
 
   // ============ Hero区域 ============
@@ -41,8 +42,8 @@ export default {
 
   // ============ 作品集区域 ============
   portfolio: {
-    title: '专业作品',
-    moreProjects: '个人项目',
+    title: '精选作品',
+    moreProjects: '热爱之作',
     viewProject: '查看项目',
     viewCaseStudy: '查看案例',
     clickToExplore: '点击探索',

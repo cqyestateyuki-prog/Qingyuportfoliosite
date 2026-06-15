@@ -54,7 +54,7 @@ const Portfolio = () => {
       { threshold: 0 }
     );
 
-    const section = document.querySelector('#work');
+    const section = document.querySelector('#projects');
     if (section) {
       observer.observe(section);
     }
@@ -80,11 +80,14 @@ const Portfolio = () => {
   };
 
   return (
-    <section id="work" className="relative">
-      {/* Selected Work (Showcase) */}
-      <Showcase projects={showcaseItems} />
+    <>
+      {/* ============ Selected Work(Showcase 大卡)============ */}
+      <section id="work" className="relative">
+        <Showcase projects={showcaseItems} />
+      </section>
 
-      {/* ============ 塔罗牌阵:More Projects ============ */}
+      {/* ============ Passion Projects(塔罗牌阵)============ */}
+      <section id="projects" className="relative">
       <div className="py-20 px-5 max-w-full mx-auto">
         <div
           className={`text-center mb-14 transition-all duration-1000 ${
@@ -199,7 +202,8 @@ const Portfolio = () => {
           </AnimatePresence>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 };
 

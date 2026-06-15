@@ -12,7 +12,7 @@ import HudFrame from './HudFrame';
 import ChapterNav from './ChapterNav';
 import { useLanguage } from '../i18n';
 
-const CHAPTER_IDS = ['vision', 'work', 'contact'];
+const CHAPTER_IDS = ['vision', 'work', 'projects', 'contact'];
 
 const HudLayer = () => {
   const { pathname } = useLocation();
@@ -52,6 +52,7 @@ const HudLayer = () => {
   const chapters = [
     { id: 'vision', label: t('chapters.vision') },
     { id: 'work', label: t('chapters.work') },
+    { id: 'projects', label: t('chapters.projects') },
     { id: 'contact', label: t('chapters.contact') },
   ];
 

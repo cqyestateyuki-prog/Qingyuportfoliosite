@@ -16,11 +16,12 @@ export default {
   chapters: {
     vision: 'Vision',
     work: 'Work',
+    projects: 'Projects',
     contact: 'Contact',
   },
   hud: {
     scroll: 'Scroll to Explore',
-    archive: 'Personal · Side Projects',
+    archive: 'Off the Clock',
   },
 
   // ============ Hero区域 ============
@@ -41,8 +42,8 @@ export default {
 
   // ============ 作品集区域 ============
   portfolio: {
-    title: 'Professional Work',
-    moreProjects: 'Personal Projects',
+    title: 'Selected Work',
+    moreProjects: 'Passion Projects',
     viewProject: 'View Project',
     viewCaseStudy: 'View Case Study',
     clickToExplore: 'Click to explore',
