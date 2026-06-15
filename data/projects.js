@@ -2065,32 +2065,38 @@ export const projects = [
     featured: true,
     title: 'Kogna AI',
     subtitle: {
-      en: 'AI-Powered Strategic Command Center',
-      zh: 'AI 驱动的战略决策指挥中心'
+      en: 'Strategic Business Insight, For All',
+      zh: '战略洞察 · 人人可及'
     },
     categories: ['AI', 'Product Design', 'UIUX', 'Design System'],
     tags: ['Design System', 'UI Design', 'Product Design', 'SaaS', 'B2B', 'AI Platform', 'Dark Mode', 'Component Library'],
     techTags: ['#Design System', '#Next.js', '#Tailwind CSS', '#React', '#TypeScript', '#Dark Mode'],
 
-    thumbnail: '/media/projects/kogna/hero/hero.png',
+    thumbnail: '/media/projects/kogna/slides/slide-01.png',
     brief: {
-      en: 'Led the design system and UI/UX for an AI decision-support platform that unifies fragmented business data into real-time strategic intelligence for leadership teams.',
-      zh: '主导了一个 AI 决策支持平台的设计系统与 UI/UX——将碎片化的企业数据统一为面向管理层的实时战略洞察。'
+      en: 'Led the design system and UI/UX for an AI decision-support platform that turns fragmented business data into real-time strategic intelligence for the C-suite — now a live V1 with its first paying customers onboard.',
+      zh: '主导一个 AI 决策支持平台的设计系统与 UI/UX——将碎片化的企业数据转化为面向 C-suite 高管的实时战略洞察;V1 已上线,并已拿下首批付费客户。'
     },
-    heroImage: '/media/projects/kogna/hero/hero.png',
+    heroImage: '/media/projects/kogna/slides/slide-01.png',
     heroVideo: null,
 
     domain: [
       { en: 'AI Platform', zh: 'AI 平台' },
       { en: 'B2B SaaS', zh: 'B2B SaaS' },
-      { en: 'Enterprise', zh: '企业级产品' }
+      { en: 'Strategy Intelligence', zh: '战略智能' }
     ],
     form: [
       { en: 'Design System', zh: '设计系统' },
       { en: 'UI/UX Design', zh: 'UI/UX 设计' },
-      { en: 'Product Design', zh: '产品设计' }
+      { en: 'Frontend', zh: '前端开发' }
     ],
-    collaborators: ['5-person startup team', 'Claude AI', 'Next.js', 'TypeScript'],
+    collaborators: [],
+    meta: {
+      role: 'Product & Frontend Designer',
+      duration: 'Jan 2026 – Present',
+      team: '10-person team',
+      stack: 'Figma · Claude Code · Next.js · React · Supabase',
+    },
 
     colors: {
       heroGradient: 'linear-gradient(135deg, #0B0716 0%, #0a1628 50%, #0D3B66 100%)',
@@ -2101,266 +2107,194 @@ export const projects = [
       lightColor: '#0D3B66'
     },
 
-    role: {
-      title: 'UI/UX Designer & Design System Lead',
-      responsibilities: [
-        'Owned the end-to-end visual language—from token definitions to production page design',
-        'Built the component library with Radix UI + Tailwind, shipping directly as the product UI',
-        'Used Gemini & Google Stitch for rapid style exploration; Claude Design for structured prototyping; Claude Code to ship directly into the codebase',
-        'Ran design audits with AI-assisted reviews to maintain consistency across 15+ pages',
-        'Collaborated with a 5-person cross-functional team—no separate design-to-dev handoff'
-      ]
-    },
-
     overview: {
-      mainTitle: 'From Feature UI to Product Design System',
-      briefContent: '[[Kogna]] helps leadership teams make faster decisions by pulling fragmented business data into one place. Executives today toggle between CRM, PM tools, BI dashboards, and spreadsheets—by the time they piece together a picture, it\'s already outdated. I joined as the [[design system lead]] at a stage where the product was growing fast but the UI wasn\'t keeping up: every new page looked slightly different, and the experience felt like [[a patchwork instead of one product]]. My job was to bring it all together—define a shared visual language, build components the team could reuse, and make the product feel as trustworthy as the decisions it supports.',
-      challenge: 'How might we build a unified, trust-inspiring visual system for a complex AI platform—while the product is still rapidly iterating?',
-      challenges: [
-        'How do you keep 15+ pages visually consistent when the product ships new features every week?',
-        'How do you present dense, data-heavy views without overwhelming users?',
-        'How do you make an early-stage product feel polished enough for executive buyers?'
-      ],
+      mainTitle: 'From a 1,000-Tab Stack to One AI Command Center',
+      briefContent: '[[Kogna]] unifies CRM, project, finance and BI data into one place — and turns it into real-time strategic insight. I build it end-to-end: [[product strategy, the design system, and the live frontend]], with AI in the loop at every step.',
+      challenge: 'How do you give every leader a 60,000-foot view of the business — without losing the detail behind any single metric?',
       mainImage: {
-        src: '/media/projects/kogna/overview/main-image.png',
-        alt: 'Kogna AI Dashboard Overview',
-        caption: 'The unified command center for strategic decision-making'
+        src: '/media/projects/kogna/slides/slide-02.png',
+        alt: 'What Kogna does — fragmented tools converging into one command center',
+        caption: 'TL;DR — every tool fans into one AI command center'
       }
     },
 
     sections: [
-      // ── Section 1: Problem ──
+      // ── 01 · Problem ──
       {
         id: 'problem',
         title: 'Problem Statement',
-        sectionTag: 'Problem Statement',
-        mainTitle: 'Two Kinds of Fragmentation',
-        briefContent: 'The business problem was clear: executives were losing hours each week switching between tools, trying to assemble a picture that was already stale by the time they saw it. But there was a [[parallel design problem]] I noticed when I joined—the product itself was fragmenting. New pages were being built fast, each with slightly different button styles, card layouts, and color choices. To the user, it felt like [[switching between three different apps]]. I realized both problems had the same root: no shared system to hold things together.',
+        sectionTag: '01 · Problem',
+        mainTitle: 'The 1,000-Tab Nightmare',
+        briefContent: 'Leaders drown in fragmented data yet fly blind on strategy — by the time a report is stitched together, the business has already moved on.',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/kogna/sections/problem-fragmentation.png',
-            alt: 'The fragmented tool landscape executives face',
-            caption: 'Executives toggle between dozens of tools, creating dangerous visibility gaps'
+            src: '/media/projects/kogna/slides/slide-03.png',
+            alt: 'The problem — fragmented tools, stale reporting',
+            caption: 'Dozens of disconnected tools · 2–4 week reporting lag · 20+ hours a week synthesizing'
           }
         ]
       },
 
-      // ── Section 2: User Research ──
+      // ── 02 · My Role ──
       {
-        id: 'research',
-        title: 'User Research & Discovery',
-        sectionTag: 'User Research & Discovery',
-        mainTitle: 'Listening Before Designing',
-        briefContent: 'We interviewed CEOs, COOs, Chiefs of Staff, and management consultants to understand how they actually work. Three patterns kept coming up: the executive who wanted a [[\"panoramic view\"]] instead of drilling into five different tools, the ops team spending more time [[collecting data than acting on it]], and the fractional COO juggling multiple clients with no unified view. The insight that shaped everything: people didn\'t want another dashboard. They wanted [[decisions surfaced, not data displayed]].',
-        icon: '🔍',
-        imageGroups: [
-          {
-            displayMode: 'single',
-            images: [
-              {
-                src: '/media/projects/kogna/sections/research-overview.png',
-                alt: 'Customer discovery research overview',
-                caption: 'Customer discovery across CEOs, COOs, and management consultants'
-              }
-            ]
-          },
-          {
-            displayMode: 'two-column',
-            images: [
-              {
-                src: '/media/projects/kogna/sections/research-persona.png',
-                alt: 'User persona: CEO/Founder',
-                caption: 'Primary persona: The executive seeking a panoramic view'
-              },
-              {
-                src: '/media/projects/kogna/sections/research-interview.png',
-                alt: 'Interview synthesis',
-                caption: 'Key insights from executive interviews'
-              },
-              {
-                src: '/media/projects/kogna/sections/research-affinity.png',
-                alt: 'Affinity mapping',
-                caption: 'Affinity mapping of user pain points and needs'
-              },
-              {
-                src: '/media/projects/kogna/sections/research-competitive.png',
-                alt: 'Competitive analysis',
-                caption: 'Competitive landscape analysis'
-              }
-            ]
-          }
-        ]
-      },
-
-      // ── Section 3: Design Highlights ──
-      {
-        id: 'design-highlights',
-        title: 'Design Highlights',
-        sectionTag: 'Design Highlights',
-        mainTitle: 'The Details That Make It Feel Right',
-        briefContent: 'A product for executives has to feel considered in every interaction. Rather than listing components, here are the design decisions that shaped how Kogna actually feels to use.',
-        icon: '✦',
-        featureDisplayMode: 'side-by-side',
-        features: [
-          {
-            name: 'Apple-Inspired Tile Dashboard',
-            description: 'Drag, resize, and personalize your command center',
-            detail: 'The Insights dashboard works like Apple\'s home screen widgets. Executives can drag tiles to rearrange their view, resize cards to prioritize what matters, and remove tiles with a familiar wobble-and-shake animation. Pinned tiles (like Kogna Insights) stay locked so critical data never gets accidentally hidden. The goal: every executive sees their own version of the truth.',
-            image: '/media/projects/kogna/sections/hl-tiles.png'
-          },
-          {
-            name: 'Where Does the AI Live?',
-            description: 'Two homes for one assistant—contextual vs. focused',
-            detail: 'We debated this for weeks: should the AI chat be a sidebar, a floating bubble, or a full page? The answer was both. A slide-in panel on the right gives contextual answers while you\'re looking at data. A dedicated /chat page gives space for deeper strategy sessions. The AI adapts its suggestions based on which view you\'re in—dashboard context vs. open-ended planning.',
-            image: '/media/projects/kogna/sections/hl-chat-placement.png'
-          },
-          {
-            name: 'The Wobble Delete',
-            description: 'Removing a tile should feel intentional, not scary',
-            detail: 'When you enter edit mode, tiles start a subtle 0.6-second wobble (±0.2° rotation)—just enough to signal "you can move things now" without feeling chaotic. A red × appears on removable tiles, but pinned tiles show a lock icon instead. It\'s a direct nod to iOS, and in testing, users immediately understood what to do without any onboarding.',
-            image: '/media/projects/kogna/sections/hl-wobble.gif'
-          }
-        ]
-      },
-
-      // ── Section 4: AI-Powered Workflow & Iteration ──
-      {
-        id: 'design-iteration',
-        title: 'Workflow & Iteration',
-        sectionTag: 'Workflow & Iteration',
-        mainTitle: 'Designing at Startup Speed with AI',
-        briefContent: 'This product is still actively iterating from MVP—and [[the way we design is the story]]. A 5-person startup can\'t afford a traditional Figma→spec→build pipeline. Instead, I built an AI-augmented workflow where each tool has a clear role, and the output is production code, not mockups.',
-        icon: '🔄',
-        content: [
-          '**Explore → Gemini & Google Stitch**: I use Gemini to research competitive UI patterns and color systems. Google Stitch generates rapid page variations—testing dark vs. light hero treatments, card densities, pricing layouts—so I can evaluate 10 directions in the time it takes to manually design one.',
-          '',
-          '**Prototype → Claude Design**: The strongest directions go to Claude Design with specific constraints: "use our token system, match this spacing scale, follow this information hierarchy." It\'s not AI-generates-a-page—it\'s me directing the design with a system-aware copilot.',
-          '',
-          '**Ship → Claude Code**: Prototypes connect directly to the codebase. Claude Code knows our existing components and tokens, so output respects the design system. What I design in the morning ships in the afternoon.',
-          '',
-          '**Real iteration examples**: The navigation sidebar went through three versions—from a flat list, to grouped sections with role-based visibility, to the current collapsible sidebar with "Quick Actions" (Kogna Assistant + Connect Data) pinned at the top. Each version was prototyped and shipped in the same day using this workflow.'
-        ],
-        imageGroups: [
-          {
-            displayMode: 'single',
-            images: [
-              {
-                src: '/media/projects/kogna/sections/ai-workflow.png',
-                alt: 'AI-augmented design workflow',
-                caption: 'Gemini (explore) → Stitch (variations) → Claude Design (prototype) → Claude Code (ship)'
-              }
-            ]
-          },
-          {
-            displayMode: 'two-column',
-            images: [
-              {
-                src: '/media/projects/kogna/sections/page-landing.png',
-                alt: 'Landing Page — dark theme',
-                caption: 'Landing: dark palette sets executive tone from the first touchpoint'
-              },
-              {
-                src: '/media/projects/kogna/sections/page-auth.png',
-                alt: 'Split-panel authentication flow',
-                caption: 'Auth: split-panel with brand storytelling'
-              },
-              {
-                src: '/media/projects/kogna/sections/page-dashboard.png',
-                alt: 'Dashboard with draggable tiles',
-                caption: 'Dashboard: Apple-style draggable insight tiles'
-              },
-              {
-                src: '/media/projects/kogna/sections/page-connectors.png',
-                alt: 'Data source connectors',
-                caption: 'Connectors: making a technical task visual'
-              }
-            ]
-          },
-          {
-            displayMode: 'two-column',
-            images: [
-              {
-                src: '/media/projects/kogna/sections/nav-iteration.png',
-                alt: 'Navigation sidebar evolution',
-                caption: 'Sidebar: from flat list → grouped nav → collapsible with Quick Actions'
-              },
-              {
-                src: '/media/projects/kogna/sections/chat-placement.png',
-                alt: 'AI chat dual placement',
-                caption: 'AI chat: contextual side panel vs. dedicated full-page mode'
-              }
-            ]
-          }
-        ]
-      },
-
-      // ── Section 6: Pricing & Product Design ──
-      {
-        id: 'product-design',
-        title: 'Product Design',
-        sectionTag: 'Product Design',
-        mainTitle: 'Thinking Beyond Screens',
-        briefContent: 'Some of the most impactful design work wasn\'t about pixels. I helped shape the [[three-tier pricing model]] (Solo → Business → Enterprise), designing how features progressively unlock so free users see a clear upgrade path without feeling restricted. I also designed the [[tile-based dashboard architecture]]—how insight cards adapt based on user role, so a CEO sees strategic summaries while an ops lead sees actionable signals. The pricing page uses visual hierarchy to gently guide attention toward the recommended plan.',
-        icon: '📊',
+        id: 'role',
+        title: 'My Role',
+        sectionTag: '02 · My Role',
+        mainTitle: 'A Designer Who Codes',
+        briefContent: 'Kogna is an early-stage AI startup I help build end-to-end — [[product strategy, the design system, and the live frontend]] — taking a screen from idea to shipped UI without a handoff gap.',
+        icon: '👤',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/kogna/sections/pricing-page.png',
-            alt: 'Kogna pricing tier design',
-            caption: 'Three-tier pricing with progressive feature unlocking'
-          },
-          {
-            src: '/media/projects/kogna/sections/tile-system.png',
-            alt: 'Dashboard tile information architecture',
-            caption: 'Tile-based dashboard adapting to user roles and data context'
+            src: '/media/projects/kogna/slides/slide-04.png',
+            alt: 'My role — strategy, design system, and frontend',
+            caption: 'One maker across product strategy, the design system, and the live frontend'
           }
         ]
       },
 
-      // ── Section 7: Final Showcase ──
+      // ── 03 · User Research ──
       {
-        id: 'final-showcase',
-        title: 'Final Showcase & Impact',
-        sectionTag: 'Final Showcase & Impact',
-        mainTitle: 'What It Looks Like Now',
-        briefContent: 'The design system covers [[15+ pages]]—marketing, auth, and the full product. Pages that used to take days to design now take hours to build. The dark theme became the [[primary brand identity]], and the team stopped saying "make this look like that other page" because the system already handles it. The biggest win wasn\'t visual consistency—it was that everyone on the team started [[speaking the same design language]].',
+        id: 'research',
+        title: 'User Research & Discovery',
+        sectionTag: '03 · Research',
+        mainTitle: 'Validated Before Designing',
+        briefContent: 'Demand was validated through outreach, interviews and pipeline — and one insight shaped everything: leaders don\'t want another dashboard, they want [[decisions surfaced, not data displayed]].',
+        icon: '🔍',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/slides/slide-05.png',
+            alt: 'Research — outreach, interviews, personas',
+            caption: '180+ discovery outreach · 15+ executive interviews · 3 validated personas'
+          }
+        ]
+      },
+
+      // ── 04 · The Solution: 3 Pillars ──
+      {
+        id: 'solution',
+        title: 'The Solution',
+        sectionTag: '04 · The Solution',
+        mainTitle: 'Three Pillars, One Panoramic View',
+        briefContent: 'From fragmented data to a panoramic, actionable view — built on three pillars: a 24/7 strategic radar, a dashboard that builds itself, and a platform that connects the [[what]] to the [[why]].',
+        icon: '✦',
+        imageGroups: [
+          {
+            displayMode: 'single',
+            images: [
+              { src: '/media/projects/kogna/slides/slide-06.png', alt: 'Three solution pillars', caption: 'Kogna Insight · Smart Tiles · What → Why' }
+            ]
+          },
+          {
+            displayMode: 'single',
+            images: [
+              { src: '/media/projects/kogna/slides/slide-07.png', alt: 'Pillar 1 — Kogna Insight', caption: 'Pillar 01 · Kogna Insight — a strategic early-warning system (SWOT / SOAR / VRIO / TOWS) with live severity' }
+            ]
+          },
+          {
+            displayMode: 'single',
+            images: [
+              { src: '/media/projects/kogna/slides/slide-08.png', alt: 'Pillar 2 — Smart Tiles', caption: 'Pillar 02 · Smart Tiles — a draggable 12-column grid of adaptive KPI tiles' }
+            ]
+          },
+          {
+            displayMode: 'single',
+            images: [
+              { src: '/media/projects/kogna/slides/slide-09.png', alt: 'Pillar 3 — What to Why', caption: 'Pillar 03 · What → Why — connect your stack, then see what changed and why' }
+            ]
+          }
+        ]
+      },
+
+      // ── 05 · Design System ──
+      {
+        id: 'design-system',
+        title: 'Design System',
+        sectionTag: '05 · Design System',
+        mainTitle: 'One Source of Truth',
+        briefContent: 'A [[token-first]] system — logo, color, an Inter type ramp and components — that every screen is built from. Even this case-study deck is built in it.',
+        icon: '🎨',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/slides/slide-10.png',
+            alt: 'Design system — logo, color, typography',
+            caption: 'Tokens, color and an Inter type ramp — one language across the whole product'
+          }
+        ]
+      },
+
+      // ── 06 · Iteration ──
+      {
+        id: 'iteration',
+        title: 'Iteration',
+        sectionTag: '06 · Iteration',
+        mainTitle: 'How the Design Evolved',
+        briefContent: 'The details earned their place through iteration — the personalizable tile dashboard, [[where the AI assistant lives]] (contextual side panel vs. a dedicated page), and the navigation sidebar across three versions.',
+        icon: '🔄',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/slides/slide-11.png',
+            alt: 'Iteration — before and after',
+            caption: 'Before → after: tile dashboard, AI placement, and sidebar navigation'
+          }
+        ]
+      },
+
+      // ── 07 · How We Build ──
+      {
+        id: 'how-we-build',
+        title: 'How We Build',
+        sectionTag: '07 · How We Build',
+        mainTitle: 'Shipping on an AI-Accelerated Loop',
+        briefContent: 'No design-to-dev handoff: the system is one source of truth in code [[and]] Figma, so the maker who designs a screen also ships it. Figma over MCP feeds [[Claude Code]], which writes token-correct React — then page-diffs and an AI agent review catch drift before it ships.',
+        icon: '⚡',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/slides/slide-12.png',
+            alt: 'How we build — designer who codes, AI-accelerated loop',
+            caption: 'Design → build with AI → review → ship — every day'
+          }
+        ]
+      },
+
+      // ── 08 · Outcomes ──
+      {
+        id: 'outcomes',
+        title: 'Outcomes & What\'s Next',
+        sectionTag: '08 · Outcomes',
+        mainTitle: 'From Idea to a Live, Validated Platform',
+        briefContent: 'A live V1 with [[10+ managed connectors]], a RAG assistant and four pricing tiers — validated by 180+ discovery contacts and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/kogna/sections/final-1.png',
-            alt: 'Kogna full product showcase',
-            caption: 'The complete Kogna experience: from landing to dashboard'
-          },
-          {
-            src: '/media/projects/kogna/sections/final-2.png',
-            alt: 'Design system in action',
-            caption: 'Design system components working together across pages'
-          },
-          {
-            src: '/media/projects/kogna/sections/final-3.png',
-            alt: 'Mobile responsive views',
-            caption: 'Responsive design maintaining consistency at every breakpoint'
+            src: '/media/projects/kogna/slides/slide-13.png',
+            alt: 'Outcomes — live V1 and what is next',
+            caption: 'V1 live · 10+ connectors · 180+ discovery outreach · 4 pricing tiers'
           }
         ]
       },
 
-      // ── Section 8: Reflection ──
+      // ── 09 · Reflection ──
       {
         id: 'reflection',
         title: 'Reflection',
-        sectionTag: 'Reflection',
-        mainTitle: 'What I Learned',
-        briefContent: 'The biggest takeaway: [[a design system is a product, not a document]]. It only works if the team actually uses it—which means it has to be easier to use the system than to go around it. Going token-first was the right call; it forced us to make decisions about hierarchy and meaning before drawing a single screen. Using [[Claude AI to prototype directly in code]] was an experiment that paid off—I could test real component behavior instantly instead of handing off static specs. Next: build a Figma-to-code mapping so the system lives in both worlds, and start tracking metrics like component reuse and token adoption.',
+        sectionTag: '09 · Reflection',
+        mainTitle: 'A Design System Is Leverage',
+        briefContent: 'The biggest lesson: [[a design system is a product, not a document]] — it only works when it\'s easier to use than to go around. Going token-first, with AI building straight from it, let a small team ship like a much bigger one.',
         icon: '💭',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/kogna/sections/reflection.png',
-            alt: 'Design system maturity roadmap',
-            caption: 'Design system roadmap: from Level 1 tokens to Level 3 governance'
+            src: '/media/projects/kogna/slides/slide-14.png',
+            alt: 'Closing — strategic business insight, for all',
+            caption: 'Kogna — strategic business insight, for all'
           }
         ]
       }
