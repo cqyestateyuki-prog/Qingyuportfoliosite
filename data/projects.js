@@ -2112,7 +2112,7 @@ export const projects = [
       briefContent: '[[Kogna]] unifies CRM, project, finance and BI data into one place — and turns it into real-time strategic insight. I build it end-to-end: [[product strategy, the design system, and the live frontend]], with AI in the loop at every step.',
       challenge: 'How do you give every leader a 60,000-foot view of the whole business — without losing the detail behind any single metric?',
       challenges: [
-        'Serve two users on the same screens — a time-poor executive who wants one-glance signal, and an operator who needs to drill all the way down.',
+        'Surface decisions, not just data — turn dozens of disconnected metrics into a signal the leader can act on at a glance, with the detail still one click away.',
         'Make dense, data-heavy views feel calm and trustworthy enough for executive buyers.',
         'Keep every screen coherent inside a product still shipping new features every week.'
       ],
