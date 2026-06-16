@@ -2236,7 +2236,7 @@ export const projects = [
         title: 'Outcomes & What\'s Next',
         sectionTag: '06 · Outcomes',
         mainTitle: 'From Idea to a Live, Validated Platform',
-        briefContent: 'A live V1 with [[10+ managed connectors]] and a RAG assistant — validated by 180+ discovery contacts and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
+        briefContent: 'A live V1 with [[10+ managed connectors]] and a RAG assistant — validated by [[15+ leaders]] and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
