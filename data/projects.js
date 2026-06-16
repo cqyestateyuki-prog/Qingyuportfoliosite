@@ -2256,7 +2256,7 @@ export const projects = [
         title: 'Reflection',
         sectionTag: '07 · Reflection',
         mainTitle: 'A Design System Is Leverage',
-        briefContent: 'Building Kogna end-to-end [[changed how I design]] — when you also ship the code, you stop drawing things you can\'t build, and every choice gets pressure-tested against what\'s real. The design system turned out to be the quiet leverage: it let me move from Figma to production without a handoff, and let AI build straight from it without drifting off-brand. The lesson I\'m keeping isn\'t that a system is a product, not a document — it\'s that [[a system only becomes leverage when using it is easier than working around it]], for the whole team and the AI alike.',
+        briefContent: 'Building Kogna end-to-end [[changed how I design]]: when you also ship the code, you stop drawing things you can\'t build, and every decision gets tested against what\'s real. The design system was what made speed possible — it carried one visual language from Figma to production, and gave AI a foundation to build from without going off-brand. My real takeaway is simpler: [[a design system only works when people actually reach for it]]. The day using it became easier than working around it, a small team started shipping like a much larger one.',
         icon: '💭',
         imageDisplayMode: 'single',
         images: [
