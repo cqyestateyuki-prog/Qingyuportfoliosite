@@ -2194,7 +2194,7 @@ export const projects = [
         id: 'how-we-build',
         title: 'How We Build',
         sectionTag: '04 · How We Build',
-        mainTitle: 'One Source of Truth, Shipped by AI',
+        mainTitle: 'One Source of Truth, an AI-Accelerated Loop',
         briefContent: 'A [[token-first design system]] — logo, color, an Inter type ramp and components — is the single source of truth in code and Figma. The maker who designs a screen also ships it: Figma over MCP feeds [[Claude Code]], which builds token-correct React, then page-diffs and an AI review catch drift before it ships. Even this case-study deck is built in the system.',
         icon: '⚡',
         imageDisplayMode: 'single',
