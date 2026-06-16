@@ -2218,14 +2218,14 @@ export const projects = [
         title: 'Iteration',
         sectionTag: '05 · Iteration',
         mainTitle: 'How the Design Evolved',
-        briefContent: 'The details earned their place through iteration — the personalizable tile dashboard, [[where the AI assistant lives]] (contextual side panel vs. a dedicated page), and the navigation sidebar across three versions.',
+        briefContent: 'I inherited a patchwork product — and through cycles of [[executive and team feedback]], three core experiences earned their final form: [[where the AI assistant lives]] (a contextual side panel vs. a dedicated page), how the dashboard organizes a leader\'s KPIs, and how an insight card went from [[showing data to surfacing a decision]] — a risk plus the action to take.',
         icon: '🔄',
         imageDisplayMode: 'single',
         images: [
           {
             src: '/media/projects/kogna/slides/slide-11.png',
             alt: 'Iteration — before and after',
-            caption: 'Before → after: tile dashboard, AI placement, and sidebar navigation'
+            caption: 'Before → after: AI placement · the dashboard · from data to decision'
           }
         ]
       },
