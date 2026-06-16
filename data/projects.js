@@ -2123,7 +2123,7 @@ export const projects = [
         caption: 'TL;DR — every tool fans into one AI command center'
       },
       // Why I'm building this:案例头部 meta 之下的 POV 段落
-      whyIBuild: 'I\'m fascinated by how leaders actually decide — the tools they live in, what they trust, what they\'re missing. Today that means building for the [[C-suite]], who feel the pain most and can act on it. But we\'re entering an age where AI makes almost anyone a kind of CEO — solo founders, one-person companies, small teams punching above their weight. Strategic clarity shouldn\'t stay a privilege of the C-suite; the mission is to make it [[for all]].'
+      whyIBuild: 'I\'m fascinated by [[how leaders actually decide]] — the tools they live in, what they trust, what they\'re missing. Today that means building for the [[C-suite]], who feel the pain most and can act on it. But we\'re entering an age where AI makes [[almost anyone a kind of CEO]] — solo founders, one-person companies, small teams punching above their weight. Strategic clarity shouldn\'t stay a privilege of the few; the mission is to make it [[for all]].'
     },
 
     sections: [

@@ -145,7 +145,7 @@ const renderManifestoLine = (line, color) =>
   String(line).split(/(\[\[.+?\]\])/g).map((part, i) => {
     const m = part.match(/^\[\[(.+?)\]\]$/);
     return m
-      ? <span key={i} style={{ color }}>{m[1]}</span>
+      ? <span key={i} style={{ color, fontWeight: 600 }}>{m[1]}</span>
       : <React.Fragment key={i}>{part}</React.Fragment>;
   });
 
@@ -471,7 +471,7 @@ const ProjectDetail = () => {
                 <span style={{ color: 'var(--section-tag)' }}>✦</span> Why I&apos;m building this
               </p>
               <p
-                className="text-base md:text-lg leading-relaxed font-['Poppins']"
+                className="text-lg md:text-2xl leading-relaxed font-['Poppins']"
                 style={{ color: 'var(--text-body)' }}
               >
                 {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
