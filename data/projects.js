@@ -2143,29 +2143,11 @@ export const projects = [
         ]
       },
 
-      // ── 02 · My Role ──
-      {
-        id: 'role',
-        title: 'My Role',
-        sectionTag: '02 · My Role',
-        mainTitle: 'A Designer Who Codes',
-        briefContent: 'Kogna is an early-stage AI startup I help build end-to-end — [[product strategy, the design system, and the live frontend]] — taking a screen from idea to shipped UI without a handoff gap.',
-        icon: '👤',
-        imageDisplayMode: 'single',
-        images: [
-          {
-            src: '/media/projects/kogna/slides/slide-04.png',
-            alt: 'My role — strategy, design system, and frontend',
-            caption: 'One maker across product strategy, the design system, and the live frontend'
-          }
-        ]
-      },
-
-      // ── 03 · User Research ──
+      // ── 02 · User Research ──
       {
         id: 'research',
         title: 'User Research & Discovery',
-        sectionTag: '03 · Research',
+        sectionTag: '02 · Research',
         mainTitle: 'Validated Before Designing',
         briefContent: 'Demand was validated through [[180+ discovery contacts]], [[15+ executive interviews]] and [[3 validated personas]] — and one insight shaped everything: leaders don\'t want another dashboard, they want decisions surfaced, not data displayed.',
         icon: '🔍',
@@ -2179,11 +2161,11 @@ export const projects = [
         ]
       },
 
-      // ── 04 · The Solution: 3 Pillars ──
+      // ── 03 · The Solution: 3 Pillars ──
       {
         id: 'solution',
         title: 'The Solution',
-        sectionTag: '04 · The Solution',
+        sectionTag: '03 · The Solution',
         mainTitle: 'Three Pillars, One Panoramic View',
         briefContent: 'From fragmented data to a panoramic, actionable view — built on three pillars: a 24/7 strategic radar, a dashboard that builds itself, and a platform that connects the [[what]] to the [[why]].',
         icon: '✦',
@@ -2207,11 +2189,11 @@ export const projects = [
         ]
       },
 
-      // ── 05 · Design System ──
+      // ── 04 · Design System ──
       {
         id: 'design-system',
         title: 'Design System',
-        sectionTag: '05 · Design System',
+        sectionTag: '04 · Design System',
         mainTitle: 'One Source of Truth',
         briefContent: 'A [[token-first]] system — logo, color, an Inter type ramp and components — that every screen is built from. Even this case-study deck is built in it.',
         icon: '🎨',
@@ -2225,11 +2207,11 @@ export const projects = [
         ]
       },
 
-      // ── 06 · Iteration ──
+      // ── 05 · Iteration ──
       {
         id: 'iteration',
         title: 'Iteration',
-        sectionTag: '06 · Iteration',
+        sectionTag: '05 · Iteration',
         mainTitle: 'How the Design Evolved',
         briefContent: 'The details earned their place through iteration — the personalizable tile dashboard, [[where the AI assistant lives]] (contextual side panel vs. a dedicated page), and the navigation sidebar across three versions.',
         icon: '🔄',
@@ -2243,11 +2225,11 @@ export const projects = [
         ]
       },
 
-      // ── 07 · How We Build ──
+      // ── 06 · How We Build ──
       {
         id: 'how-we-build',
         title: 'How We Build',
-        sectionTag: '07 · How We Build',
+        sectionTag: '06 · How We Build',
         mainTitle: 'Shipping on an AI-Accelerated Loop',
         briefContent: 'No design-to-dev handoff: the system is one source of truth in code [[and]] Figma, so the maker who designs a screen also ships it. Figma over MCP feeds [[Claude Code]], which writes token-correct React — then page-diffs and an AI agent review catch drift before it ships.',
         icon: '⚡',
@@ -2261,11 +2243,11 @@ export const projects = [
         ]
       },
 
-      // ── 08 · Outcomes ──
+      // ── 07 · Outcomes ──
       {
         id: 'outcomes',
         title: 'Outcomes & What\'s Next',
-        sectionTag: '08 · Outcomes',
+        sectionTag: '07 · Outcomes',
         mainTitle: 'From Idea to a Live, Validated Platform',
         briefContent: 'A live V1 with [[10+ managed connectors]] and a RAG assistant — validated by 180+ discovery contacts and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
         icon: '🚀',
@@ -2279,11 +2261,11 @@ export const projects = [
         ]
       },
 
-      // ── 09 · Reflection ──
+      // ── 08 · Reflection ──
       {
         id: 'reflection',
         title: 'Reflection',
-        sectionTag: '09 · Reflection',
+        sectionTag: '08 · Reflection',
         mainTitle: 'A Design System Is Leverage',
         briefContent: 'Building Kogna end-to-end [[changed how I design]] — when you also ship the code, you stop drawing things you can\'t build, and every choice gets pressure-tested against what\'s real. The design system turned out to be the quiet leverage: it let me move from Figma to production without a handoff, and let AI build straight from it without drifting off-brand. The lesson I\'m keeping isn\'t that a system is a product, not a document — it\'s that [[a system only becomes leverage when using it is easier than working around it]], for the whole team and the AI alike.',
         icon: '💭',
