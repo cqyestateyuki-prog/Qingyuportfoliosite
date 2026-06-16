@@ -2122,15 +2122,8 @@ export const projects = [
         alt: 'What Kogna does — fragmented tools converging into one command center',
         caption: 'TL;DR — every tool fans into one AI command center'
       },
-      // POV 宣言(大字 + 滚动动画):放在 Overview 之后,讲「我为什么信它」
-      manifesto: {
-        eyebrow: 'Why I\'m building this',
-        lines: [
-          'In the AI age, almost anyone becomes a kind of CEO.',
-          'Strategic clarity shouldn\'t stay a privilege of the [[C-suite]].',
-          'So I\'m designing it — [[for all]].'
-        ]
-      }
+      // Why I'm building this:案例头部 meta 之下的 POV 段落
+      whyIBuild: 'I\'m fascinated by how leaders actually decide — the tools they live in, what they trust, what they\'re missing. Today that means building for the [[C-suite]], who feel the pain most and can act on it. But we\'re entering an age where AI makes almost anyone a kind of CEO — solo founders, one-person companies, small teams punching above their weight. Strategic clarity shouldn\'t stay a privilege of the C-suite; the mission is to make it [[for all]].'
     },
 
     sections: [

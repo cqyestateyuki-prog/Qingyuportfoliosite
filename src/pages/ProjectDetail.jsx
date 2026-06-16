@@ -454,6 +454,30 @@ const ProjectDetail = () => {
               ))}
             </div>
           )}
+
+          {/* Why I'm building this:案例头部收尾的 POV 段落(meta 之下) */}
+          {project.overview?.whyIBuild && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-11 pt-8 max-w-3xl"
+              style={{ borderTop: '1px solid var(--hud-line)' }}
+            >
+              <p
+                className="text-[11px] font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
+                style={{ color: 'var(--hud-fg-muted)' }}
+              >
+                <span style={{ color: 'var(--section-tag)' }}>✦</span> Why I&apos;m building this
+              </p>
+              <p
+                className="text-base md:text-lg leading-relaxed font-['Poppins']"
+                style={{ color: 'var(--text-body)' }}
+              >
+                {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
+              </p>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -688,40 +712,6 @@ const ProjectDetail = () => {
             )}
         </div>
       </section>
-
-      {/* ========== POV 宣言:大字 + 滚动逐行浮现(透出星空) ========== */}
-      {project.overview?.manifesto && (
-        <section className="relative px-4 md:px-6 py-24 md:py-36">
-          <div className="max-w-5xl mx-auto">
-            {project.overview.manifesto.eyebrow && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0.6 }}
-                transition={{ duration: 0.6 }}
-                className="detail-accent-text text-xs md:text-sm font-semibold uppercase tracking-[0.28em] mb-8 md:mb-12"
-              >
-                {project.overview.manifesto.eyebrow}
-              </motion.p>
-            )}
-            <div className="space-y-1 md:space-y-2">
-              {project.overview.manifesto.lines.map((line, i) => (
-                <motion.p
-                  key={i}
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.15 }}
-                  className="text-3xl md:text-5xl lg:text-6xl font-semibold leading-[1.12] tracking-tight"
-                  style={{ color: 'var(--text-hero)', textShadow: '0 0 40px var(--hud-glow)' }}
-                >
-                  {renderManifestoLine(line, highlightColor)}
-                </motion.p>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* ========== 角色部分（只在存在时渲染）========== */}
       {project.role && (
