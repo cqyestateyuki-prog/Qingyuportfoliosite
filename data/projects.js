@@ -2173,12 +2173,12 @@ export const projects = [
         features: [
           {
             name: 'Kogna Insight',
-            detail: 'A strategic early-warning system — a 24/7 radar that surfaces insight through proven frameworks (SWOT · SOAR · VRIO · TOWS) with live severity, so the most urgent signal rises to the top.',
+            detail: 'A smart radar for the business — it scans strengths, weaknesses, opportunities and threats 24/7, surfaces the most urgent signal first, and shows the path forward.',
             image: '/media/projects/kogna/pillars/insight.png'
           },
           {
             name: 'Smart Tiles',
-            detail: 'A dashboard that builds itself around the leader — adaptive KPI tiles for Salesforce, HubSpot, Jira and Asana snap into a 12-column grid; pin an AI insight to the board and the layout persists.',
+            detail: 'Beautifully simple visuals — mix and match adaptive KPI tiles to build exactly the view a leader needs, pulling live from Salesforce, HubSpot, Jira and Asana, with an AI insight pinned right to the board.',
             image: '/media/projects/kogna/pillars/smart-tiles.png'
           },
           {
