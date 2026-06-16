@@ -215,7 +215,7 @@ const ChapterHero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 1 }}
-              className="max-w-2xl mx-auto mt-10 mb-10 text-base md:text-lg font-light leading-relaxed font-['Poppins']"
+              className="max-w-2xl mx-auto mt-10 mb-5 text-base md:text-lg font-light leading-relaxed font-['Poppins']"
               style={{ color: 'var(--text-body)' }}
             >
               {language === 'zh' ? (
@@ -227,6 +227,25 @@ const ChapterHero = () => {
                 <>
                   A Product Designer who <span className="font-medium" style={{ color: 'var(--text-hero)' }}>{t('hero.descriptionHighlight1')}</span>.
                   I combine design intuition with engineering depth to <span className="font-medium" style={{ color: 'var(--text-hero)' }}>{t('hero.descriptionHighlight2')}</span> in fast-moving environments.
+                </>
+              )}
+            </motion.p>
+
+            {/* "Currently" 钩子:第一眼抛出最硬的战绩(Kogna · C-suite · 付费客户) */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 1 }}
+              className="max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed font-['Poppins']"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {language === 'zh' ? (
+                <>
+                  正在打造 <span className="font-semibold" style={{ color: 'var(--text-hero)' }}>Kogna</span>——一个面向 <span className="font-semibold" style={{ color: 'var(--text-hero)' }}>C-suite 高管</span>的实时 AI 决策平台，已拿下首批付费客户。
+                </>
+              ) : (
+                <>
+                  Currently building <span className="font-semibold" style={{ color: 'var(--text-hero)' }}>Kogna</span> — a live AI command center for the <span className="font-semibold" style={{ color: 'var(--text-hero)' }}>C-suite</span>, with its first paying customers.
                 </>
               )}
             </motion.p>
