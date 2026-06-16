@@ -2189,20 +2189,25 @@ export const projects = [
         ]
       },
 
-      // ── 04 · Design System ──
+      // ── 04 · How We Build (Design System + AI loop) ──
       {
-        id: 'design-system',
-        title: 'Design System',
-        sectionTag: '04 · Design System',
-        mainTitle: 'One Source of Truth',
-        briefContent: 'A [[token-first]] system — logo, color, an Inter type ramp and components — that every screen is built from. Even this case-study deck is built in it.',
-        icon: '🎨',
+        id: 'how-we-build',
+        title: 'How We Build',
+        sectionTag: '04 · How We Build',
+        mainTitle: 'One Source of Truth, Shipped by AI',
+        briefContent: 'A [[token-first design system]] — logo, color, an Inter type ramp and components — is the single source of truth in code and Figma. The maker who designs a screen also ships it: Figma over MCP feeds [[Claude Code]], which builds token-correct React, then page-diffs and an AI review catch drift before it ships. Even this case-study deck is built in the system.',
+        icon: '⚡',
         imageDisplayMode: 'single',
         images: [
           {
             src: '/media/projects/kogna/slides/slide-10.png',
             alt: 'Design system — logo, color, typography',
-            caption: 'Tokens, color and an Inter type ramp — one language across the whole product'
+            caption: 'One source of truth — tokens, color and an Inter type ramp across the whole product'
+          },
+          {
+            src: '/media/projects/kogna/slides/slide-12.png',
+            alt: 'How we build — designer who codes, AI-accelerated loop',
+            caption: 'Design → build with AI → review → ship — the same system, every day'
           }
         ]
       },
@@ -2225,29 +2230,11 @@ export const projects = [
         ]
       },
 
-      // ── 06 · How We Build ──
-      {
-        id: 'how-we-build',
-        title: 'How We Build',
-        sectionTag: '06 · How We Build',
-        mainTitle: 'Shipping on an AI-Accelerated Loop',
-        briefContent: 'No design-to-dev handoff: the system is one source of truth in code [[and]] Figma, so the maker who designs a screen also ships it. Figma over MCP feeds [[Claude Code]], which writes token-correct React — then page-diffs and an AI agent review catch drift before it ships.',
-        icon: '⚡',
-        imageDisplayMode: 'single',
-        images: [
-          {
-            src: '/media/projects/kogna/slides/slide-12.png',
-            alt: 'How we build — designer who codes, AI-accelerated loop',
-            caption: 'Design → build with AI → review → ship — every day'
-          }
-        ]
-      },
-
-      // ── 07 · Outcomes ──
+      // ── 06 · Outcomes ──
       {
         id: 'outcomes',
         title: 'Outcomes & What\'s Next',
-        sectionTag: '07 · Outcomes',
+        sectionTag: '06 · Outcomes',
         mainTitle: 'From Idea to a Live, Validated Platform',
         briefContent: 'A live V1 with [[10+ managed connectors]] and a RAG assistant — validated by 180+ discovery contacts and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
         icon: '🚀',
@@ -2261,11 +2248,11 @@ export const projects = [
         ]
       },
 
-      // ── 08 · Reflection ──
+      // ── 07 · Reflection ──
       {
         id: 'reflection',
         title: 'Reflection',
-        sectionTag: '08 · Reflection',
+        sectionTag: '07 · Reflection',
         mainTitle: 'A Design System Is Leverage',
         briefContent: 'Building Kogna end-to-end [[changed how I design]] — when you also ship the code, you stop drawing things you can\'t build, and every choice gets pressure-tested against what\'s real. The design system turned out to be the quiet leverage: it let me move from Figma to production without a handoff, and let AI build straight from it without drifting off-brand. The lesson I\'m keeping isn\'t that a system is a product, not a document — it\'s that [[a system only becomes leverage when using it is easier than working around it]], for the whole team and the AI alike.',
         icon: '💭',
