@@ -26,7 +26,7 @@ export default {
 
   // ============ Hero区域 ============
   hero: {
-    title: 'QINGYU',
+    title: 'SERENA',
     subtitle: 'Product Designer',
     description: 'A Product Designer who builds, tests, and ships. I combine design intuition with engineering depth to launch real products in fast-moving environments.',
     descriptionHighlight1: 'builds, tests, and ships',
@@ -34,7 +34,7 @@ export default {
     viewWorks: 'View Works',
     resume: 'Resume',
     // 开场叙事(按动画顺序播放,可自由改写)
-    narrative1: "I'm Qingyu — a product designer who codes, with a builder's hands and a nose for business.",
+    narrative1: "I'm Serena — a product designer who codes, with a builder's hands and a nose for business.",
     narrative2: 'I believe the AI age rewards taste, judgment, and the will to build.',
     narrative3: 'And I want to build alongside people who share the values — and turn technology toward good.',
     skip: 'Skip',

@@ -26,7 +26,7 @@ export default {
 
   // ============ Hero区域 ============
   hero: {
-    title: 'QINGYU',
+    title: '曹清瑜',
     subtitle: '产品设计师',
     description: '一位能够构建、测试并交付产品的设计师。我将设计直觉与工程深度相结合，在快节奏的环境中推出真正的产品。',
     descriptionHighlight1: '构建、测试并交付',
@@ -34,7 +34,7 @@ export default {
     viewWorks: '查看作品',
     resume: '简历',
     // 开场叙事(按动画顺序播放,可自由改写)
-    narrative1: '我是 Qingyu——一个会写代码的产品设计师，有 builder 的手感，也有商业嗅觉。',
+    narrative1: '我是曹清瑜——一个会写代码的产品设计师，有 builder 的手感，也有商业嗅觉。',
     narrative2: '我相信 AI 时代奖励的是品味、判断力和动手做的勇气。',
     narrative3: '也想和价值观相近的人并肩，把技术用在向善的地方。',
     skip: '跳过',

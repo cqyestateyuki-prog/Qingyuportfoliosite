@@ -143,7 +143,7 @@ const AboutPage = () => {
                     }}
                   >
                     <div className="aspect-[16/10] rounded-xl overflow-hidden relative">
-                      <img src={card.src} alt="Qingyu Cao" className="w-full h-full object-cover" />
+                      <img src={card.src} alt="Serena Cao" className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 mix-blend-overlay" />
                     </div>
                   </motion.div>

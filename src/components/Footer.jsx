@@ -21,7 +21,7 @@ const Footer = () => {
           {/* Logo和描述 */}
           <div>
             <h3 className="text-2xl font-bold gradient-text mb-4">
-              Qingyu Cao
+              Serena Cao
             </h3>
             <p className="leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               Creative Developer & Designer specializing in innovative digital experiences. 
@@ -69,7 +69,7 @@ const Footer = () => {
         <div className="pt-8" style={{ borderTop: '1px solid var(--card-glass-border)' }}>
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm mb-4 md:mb-0" style={{ color: 'var(--text-muted)' }}>
-              © {currentYear} Qingyu Cao. Made with{' '}
+              © {currentYear} Serena Cao. Made with{' '}
               <Heart className="inline w-4 h-4 text-red-500 mx-1" />
               and lots of coffee.
             </p>

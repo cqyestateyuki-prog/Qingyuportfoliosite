@@ -36,7 +36,7 @@ export const projects = [
       { en: 'Design System', zh: '设计系统' },
       { en: 'User Research', zh: '用户研究' }
     ],
-    collaborators: ['Yi Bao (Team Lead)', 'Qingyu Cao (Designer)', 'Peixin Gao (Developer)', 'Jinjing Yi (Developer)'],
+    collaborators: ['Yi Bao (Team Lead)', 'Serena Cao (Designer)', 'Peixin Gao (Developer)', 'Jinjing Yi (Developer)'],
 
     role: {
       sectionTag: '4-person team · 3 months',
@@ -1825,7 +1825,7 @@ export const projects = [
       { en: 'Level Design', zh: '关卡设计' },
       { en: '2D Art', zh: '2D 美术' }
     ],
-    collaborators: ['Qingyu Cao(Lead Artist & Level Designer)', 'Griffin Mckee(Artist)', 'Tyler C.Mueller(Programmer)','Yifan Zhu(Programmer)'],
+    collaborators: ['Serena Cao(Lead Artist & Level Designer)', 'Griffin Mckee(Artist)', 'Tyler C.Mueller(Programmer)','Yifan Zhu(Programmer)'],
     
     colors: {
       heroGradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',

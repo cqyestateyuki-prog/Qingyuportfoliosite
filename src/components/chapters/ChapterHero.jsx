@@ -201,7 +201,7 @@ const ChapterHero = () => {
                 className="hero-title text-[15vw] md:text-[12vw] font-normal leading-none tracking-wide select-none"
                 style={{ color: 'var(--text-hero)' }}
               >
-                <DecryptedText text="QINGYU" className="font-['Poppins']" />
+                <DecryptedText text={t('hero.title')} className="font-['Poppins']" />
               </h1>
               <h2
                 className="text-xl md:text-3xl font-light tracking-[0.5em] md:tracking-[0.8em] mt-6 md:mt-8 uppercase select-none"
