@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import React from 'react'
 //导入React Router Hooks，用于获取URL参数和导航
 import { useParams, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import MoonIcon from '../hud/MoonIcon'
 //导入shadcn/ui组件库的UI组件
 import { Button } from '@/components/ui/button'
@@ -138,6 +139,15 @@ const preprocessHighlightMarkers = (text) => {
   // 然后在 strong 组件中应用颜色
   return text.replace(/\[\[([^\]]+)\]\]/g, '**$1**');
 };
+
+// 宣言大字:把 [[高亮]] 渲染成高亮色 span(关键词上品牌色)
+const renderManifestoLine = (line, color) =>
+  String(line).split(/(\[\[.+?\]\])/g).map((part, i) => {
+    const m = part.match(/^\[\[(.+?)\]\]$/);
+    return m
+      ? <span key={i} style={{ color }}>{m[1]}</span>
+      : <React.Fragment key={i}>{part}</React.Fragment>;
+  });
 
 //ProjectDetail组件，展示单个项目的详细信息
 const ProjectDetail = () => {
@@ -678,6 +688,40 @@ const ProjectDetail = () => {
             )}
         </div>
       </section>
+
+      {/* ========== POV 宣言:大字 + 滚动逐行浮现(透出星空) ========== */}
+      {project.overview?.manifesto && (
+        <section className="relative px-4 md:px-6 py-24 md:py-36">
+          <div className="max-w-5xl mx-auto">
+            {project.overview.manifesto.eyebrow && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: 0.6 }}
+                className="detail-accent-text text-xs md:text-sm font-semibold uppercase tracking-[0.28em] mb-8 md:mb-12"
+              >
+                {project.overview.manifesto.eyebrow}
+              </motion.p>
+            )}
+            <div className="space-y-1 md:space-y-2">
+              {project.overview.manifesto.lines.map((line, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.15 }}
+                  className="text-3xl md:text-5xl lg:text-6xl font-semibold leading-[1.12] tracking-tight"
+                  style={{ color: 'var(--text-hero)', textShadow: '0 0 40px var(--hud-glow)' }}
+                >
+                  {renderManifestoLine(line, highlightColor)}
+                </motion.p>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ========== 角色部分（只在存在时渲染）========== */}
       {project.role && (

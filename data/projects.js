@@ -2121,6 +2121,15 @@ export const projects = [
         src: '/media/projects/kogna/slides/slide-02.png',
         alt: 'What Kogna does — fragmented tools converging into one command center',
         caption: 'TL;DR — every tool fans into one AI command center'
+      },
+      // POV 宣言(大字 + 滚动动画):放在 Overview 之后,讲「我为什么信它」
+      manifesto: {
+        eyebrow: 'Why I\'m building this',
+        lines: [
+          'In the AI age, almost anyone becomes a kind of CEO.',
+          'Strategic clarity shouldn\'t stay a privilege of the [[C-suite]].',
+          'So I\'m designing it — [[for all]].'
+        ]
       }
     },
 
