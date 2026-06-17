@@ -2332,7 +2332,11 @@ export const projects = [
       buttons: [
         { label: 'Live Site', url: 'https://hexaedge.vercel.app', type: 'primary' },
         { label: 'GitHub', url: 'https://github.com/cqyestateyuki-prog/LiuyaoSaaSProject', type: 'secondary' }
-      ]
+      ],
+      // Why I'm building this(hero meta 之下)+ 六爻线条母题(新中式鎏金)
+      whyIBuild: 'Everything today feels [[optimized, monetized, and expensive]]. HexaEdge began from a quieter idea: three coins and an honest question, and a 3,000-year-old system still gives you somewhere to think. I wanted to carry that — one of the world\'s oldest pieces of decision logic, [[binary long before Leibniz]] — to a modern, global audience through design, not superstition. Less about predicting the future, more about [[a way to look inward]] in an age that rarely makes room for it.',
+      whyIBuildHexagram: [1, 0, 1, 1, 0, 1], // 1=阳(整) 0=阴(断),自下而上
+      whyIBuildHexagramLabel: '古法新用'
     },
 
     sections: [

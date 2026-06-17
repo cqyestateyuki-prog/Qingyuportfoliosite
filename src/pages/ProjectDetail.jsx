@@ -173,6 +173,8 @@ const ProjectDetail = () => {
   const highlightColor = rawProject
     ? `var(--detail-highlight, ${getProjectHighlightColor(rawProject)})`
     : 'var(--text-accent)'
+  // 六爻母题等装饰用的「项目本色」(不走主题 var,日夜都保持项目调色,如 HexaEdge 鎏金)
+  const projectAccent = rawProject ? getProjectHighlightColor(rawProject) : '#8B5CF6'
   // 获取项目的深色（用于日间版标题）
   const darkColor = rawProject ? getProjectDarkColor(rawProject) : '#0D0D0D'
 
@@ -461,21 +463,59 @@ const ProjectDetail = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-11 pt-8 max-w-3xl"
+              className="mt-11 pt-8 max-w-4xl"
               style={{ borderTop: '1px solid var(--hud-line)' }}
             >
               <p
-                className="text-[11px] font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
+                className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']"
                 style={{ color: 'var(--hud-fg-muted)' }}
               >
                 <span style={{ color: 'var(--section-tag)' }}>✦</span> Why I&apos;m building this
               </p>
-              <p
-                className="text-lg md:text-2xl leading-relaxed font-['Poppins']"
-                style={{ color: 'var(--text-body)' }}
-              >
-                {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
-              </p>
+              <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
+                <p
+                  className="text-lg md:text-2xl leading-relaxed font-['Poppins'] flex-1 max-w-3xl"
+                  style={{ color: 'var(--text-body)' }}
+                >
+                  {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
+                </p>
+                {/* 可选:六爻线条母题(自下而上绘入,用项目本色) */}
+                {project.overview.whyIBuildHexagram && (
+                  <div className="shrink-0 flex flex-col items-center gap-3 mx-auto md:mx-0" aria-hidden="true">
+                    <div className="flex flex-col gap-2.5" style={{ width: 168 }}>
+                      {[...project.overview.whyIBuildHexagram].reverse().map((yao, p) => (
+                        <div key={p} className="flex items-center justify-between" style={{ height: 12 }}>
+                          {yao === 1 ? (
+                            <motion.span
+                              initial={{ scaleX: 0, opacity: 0 }}
+                              whileInView={{ scaleX: 1, opacity: 1 }}
+                              viewport={{ once: true, amount: 0.6 }}
+                              transition={{ delay: (5 - p) * 0.13, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                              style={{ width: '100%', height: '100%', background: projectAccent, borderRadius: 3, transformOrigin: 'center' }}
+                            />
+                          ) : (
+                            [0, 1].map((s) => (
+                              <motion.span
+                                key={s}
+                                initial={{ scaleX: 0, opacity: 0 }}
+                                whileInView={{ scaleX: 1, opacity: 1 }}
+                                viewport={{ once: true, amount: 0.6 }}
+                                transition={{ delay: (5 - p) * 0.13, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                                style={{ width: '44%', height: '100%', background: projectAccent, borderRadius: 3, transformOrigin: 'center' }}
+                              />
+                            ))
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    {project.overview.whyIBuildHexagramLabel && (
+                      <p className="text-[12px] tracking-[0.4em] font-['Poppins']" style={{ color: projectAccent }}>
+                        {project.overview.whyIBuildHexagramLabel}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
             </motion.div>
           )}
         </div>
