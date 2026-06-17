@@ -2256,7 +2256,7 @@ export const projects = [
         title: 'Reflection',
         sectionTag: '07 · Reflection',
         mainTitle: 'A Design System Is Leverage',
-        briefContent: 'At Kogna, I both design and write the code. Doing both made me a sharper designer — I stopped designing things I couldn\'t build. The design system was the key to moving fast: [[one shared language from Figma all the way to production]]. My biggest lesson is simple: [[a design system only works if it\'s easier to use than to ignore]]. Once it was, our small team started shipping like a much bigger one.',
+        briefContent: 'At Kogna I design the screens and write the code that ships them, so I design what I can actually build and ship it the same week. The product is young and changes constantly, so I get the flow and logic solid first and let the visual polish catch up release by release. [[I\'d rather put a working version in front of real users than hold back a perfect one]]. The design system is what makes that pace possible: one shared language across Figma and the code, so a small team moves like a larger one. The lesson I\'ll keep: [[a system only earns its place when reaching for it is the easy choice]].',
         icon: '💭',
         imageDisplayMode: 'single',
         images: [
