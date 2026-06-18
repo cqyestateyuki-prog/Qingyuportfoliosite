@@ -2238,7 +2238,7 @@ export const projects = [
         title: 'Outcomes & What\'s Next',
         sectionTag: '06 · Outcomes',
         mainTitle: 'From Idea to a Live, Validated Platform',
-        briefContent: 'A live V1 with [[10+ managed connectors]] and a RAG assistant — validated by [[15+ leaders]] and its first paying customers. Next: custom model training, more connectors, and multi-step agents.',
+        briefContent: 'Kogna went from idea to a [[shipped, validated product]] in months. What ships next is just as deliberate as what shipped already.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
@@ -2257,15 +2257,7 @@ export const projects = [
         sectionTag: '07 · Reflection',
         mainTitle: 'A Design System Is Leverage',
         briefContent: 'At Kogna I design the screens and write the code that ships them, so I design what I can actually build and ship it the same week. The product is young and changes constantly, so I get the flow and logic solid first and let the visual polish catch up release by release. [[I\'d rather put a working version in front of real users than hold back a perfect one]]. The design system is what makes that pace possible: one shared language across Figma and the code, so a small team moves like a larger one. The lesson I\'ll keep: [[a system only earns its place when reaching for it is the easy choice]].',
-        icon: '💭',
-        imageDisplayMode: 'single',
-        images: [
-          {
-            src: '/media/projects/kogna/slides/slide-14.png',
-            alt: 'Closing — strategic business insight, for all',
-            caption: 'Kogna — strategic business insight, for all'
-          }
-        ]
+        icon: '💭'
       }
     ]
   },

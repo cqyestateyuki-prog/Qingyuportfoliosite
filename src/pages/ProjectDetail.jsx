@@ -526,7 +526,7 @@ const ProjectDetail = () => {
         <div className="max-w-5xl mx-auto">
           {/* 主图展示 */}
           <div className="relative group rounded-3xl overflow-hidden shadow-2xl mb-12">
-            <div className="aspect-[16/10] bg-gradient-to-br from-purple-100 to-blue-100">
+            <div className="aspect-[16/9] bg-gradient-to-br from-purple-100 to-blue-100">
               {project.heroVideo ? (
                 // 如果有视频，优先显示视频
                 // 检查是否是 Vimeo 链接
