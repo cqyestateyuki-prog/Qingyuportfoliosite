@@ -429,7 +429,7 @@ const ProjectDetail = () => {
                 <span style={{ color: 'var(--section-tag)' }}>✦</span> TL;DR
               </p>
               <p
-                className="text-base md:text-lg leading-relaxed font-['Poppins']"
+                className="text-base md:text-lg leading-relaxed tracking-[0.01em] font-['Poppins']"
                 style={{ color: 'var(--text-body)' }}
               >
                 {tldr}
@@ -451,7 +451,7 @@ const ProjectDetail = () => {
                   >
                     {label}
                   </p>
-                  <p className="text-base md:text-lg font-medium" style={{ color: 'var(--text-hero)' }}>{value}</p>
+                  <p className="text-base md:text-lg font-normal tracking-[0.01em]" style={{ color: 'var(--text-hero)' }}>{value}</p>
                 </div>
               ))}
             </div>
@@ -474,7 +474,7 @@ const ProjectDetail = () => {
               </p>
               <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
                 <p
-                  className="text-lg md:text-2xl leading-relaxed font-['Poppins'] flex-1 max-w-3xl"
+                  className="text-base md:text-lg leading-relaxed tracking-[0.01em] font-['Poppins'] flex-1 max-w-3xl"
                   style={{ color: 'var(--text-body)' }}
                 >
                   {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
