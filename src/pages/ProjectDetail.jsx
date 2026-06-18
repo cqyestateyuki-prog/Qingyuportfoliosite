@@ -610,6 +610,23 @@ const ProjectDetail = () => {
                 </a>
               </div>
             )}
+
+            {/* Kogna:首图跳转线上产品 */}
+            {project.id === 'kogna' && (
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+                <a
+                  href="https://kogna.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-[#0a1628] font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
+                >
+                  Visit Kogna
+                  <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
 
             {/* Section Header */}

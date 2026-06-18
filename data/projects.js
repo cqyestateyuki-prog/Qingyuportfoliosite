@@ -2093,9 +2093,9 @@ export const projects = [
     ],
     collaborators: [],
     meta: {
-      role: 'Product & Frontend Designer',
+      role: 'Lead Product Designer & Design Engineer',
       duration: 'Jan 2026 – Present',
-      team: '10-person team',
+      team: '10-person startup · CEO, COO, 3 frontend, 5 backend',
       stack: 'Figma · Claude Code · Next.js · React · Supabase',
     },
 
