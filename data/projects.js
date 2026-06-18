@@ -2202,14 +2202,14 @@ export const projects = [
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/kogna/slides/slide-10.png',
-            alt: 'Design system — logo, color, typography',
-            caption: 'One source of truth — tokens, color and an Inter type ramp across the whole product'
-          },
-          {
             src: '/media/projects/kogna/slides/slide-12.png',
             alt: 'How we build — designer who codes, AI-accelerated loop',
             caption: 'Design → build with AI → review → ship — the same system, every day'
+          },
+          {
+            src: '/media/projects/kogna/slides/slide-10.png',
+            alt: 'Design system — logo, color, typography',
+            caption: 'One source of truth — tokens, color and an Inter type ramp across the whole product'
           }
         ]
       },
