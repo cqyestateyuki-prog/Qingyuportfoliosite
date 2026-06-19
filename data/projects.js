@@ -6,7 +6,7 @@ export const projects = [
   // ========== Spark Up ==========
   {
     id: 'sparkup',
-    featured: true, order: 2, // Selected Work · 第 2 位
+    featured: false, // 移至 Passion Projects
     title: 'Spark Up',
     year: '2026',
     subtitle: {
@@ -488,7 +488,7 @@ export const projects = [
     // ========== Stumbldoor Project 图书系统==========
     id: 'stumbldoor',
     year: '2024',
-    featured: false, // 移至 Passion Projects
+    featured: true, order: 2, // Selected Work · 第 2 位
     title: 'Stumbldoor',
     subtitle: {
       en: 'Library Experience for the Future',
