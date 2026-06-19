@@ -2295,7 +2295,12 @@ export const projects = [
       { en: 'AI Integration', zh: 'AI 集成' },
       { en: 'Visual System', zh: '视觉体系' }
     ],
-    collaborators: ['Solo Project', 'Claude Code', 'Figma', 'Google Stitch'],
+    collaborators: [],
+    meta: {
+      duration: 'Feb 2026 – Present',
+      team: 'Solo',
+      stack: 'Figma · Claude Code · Next.js · React · TypeScript · RAG + LLM',
+    },
 
     colors: {
       heroGradient: 'linear-gradient(135deg, #14233A 0%, #243E66 50%, #9C7A3A 100%)',
@@ -2307,7 +2312,7 @@ export const projects = [
     },
 
     role: {
-      title: 'Product Designer & Design Engineer (Solo)',
+      title: 'Product Designer & Design Engineer',
       responsibilities: [
         'End-to-end product design: research, UX/UI, visual system, implementation',
         'Proprietary Liuyao analysis engine development',
