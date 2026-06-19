@@ -550,8 +550,9 @@ export const projects = [
       mainImage: {
         src: '/media/projects/stumbldoor/overview/main-image.jpg',
         alt: 'Stumbldoor App Overview',
-        caption: 'The Stumbldoor app interface showcasing the library experience transformation'
-      }
+        caption: 'Stumbldoor — from home screen to in-library discovery'
+      },
+      whyIBuild: 'I grew up loving libraries, and it bothered me to watch my generation drift away from them. The books are still good; the experience just stopped speaking to people who live on their phones. Stumbldoor is my attempt to [[make a library feel worth walking into again]], by making discovery feel a bit more like play.'
     },
     
     // ========== 角色（可选）==========
@@ -1027,8 +1028,13 @@ export const projects = [
       { en: 'Product Design', zh: '产品设计' },
       { en: 'Research', zh: '用户研究' }
     ],
-    collaborators: ['Solo Project'],
-    
+    collaborators: [],
+    meta: {
+      role: 'UX/UI & Product Designer',
+      team: 'Solo',
+      stack: 'Figma · UX Research · Prototyping',
+    },
+
     colors: {
       heroGradient: 'linear-gradient(135deg,rgb(146, 51, 75) 0%,rgb(231, 74, 74)  100%)',
       subtitleGradient: 'linear-gradient(135deg, #FF7675 0%, #E85C5C 100%)',
@@ -1041,7 +1047,7 @@ export const projects = [
     
     overview: {
       mainTitle: { en: 'Building a Comprehensive Pet Rescue Ecosystem', zh: '构建完整的宠物救助生态' },
-      briefContent: { en: 'Expanding the mission of [[Petiboxy]], a premier pet fresh food brand, I conceptualized and delivered a dedicated charity ecosystem to tackle the crisis of [[90 million stray animals]]. This project creates a vital connection for the [[60% of inhibited adopters]], translating the abstract values of [[Professionalism, Safety, Love, and Responsibility]] into a tangible, user-centric experience.', zh: '延续高端宠物鲜食品牌 Petiboxy 的使命，我为[[9000 万流浪动物]]危机设计并交付了独立的公益生态，为[[60% 有顾虑的潜在领养者]]建立连接，将[[专业、安全、爱与责任]]转化为可感知的、以用户为中心的体验。' },
+      briefContent: { en: 'Petiboxy is a pet fresh-food brand; I extended it into a charity platform aimed at China\'s [[90 million stray animals]]. Most people who would adopt never do, because there is no trustworthy place to start. The app gives the [[60% who want to adopt]] a real way in, and gives rescue groups the visibility and funding they struggle to find.', zh: '延续宠物鲜食品牌 Petiboxy,我把它扩展成一个面向中国 [[9000 万流浪动物]]的公益平台。很多想领养的人最终没有领养,只因为没有一个可信赖的入口。这个 App 给那 [[60% 想领养的人]]一条真正可行的路径,也给救助机构它们一直缺的曝光与资金。' },
       challenges: [
         { en: 'How might we connect 90 million stray animals with people who want to help?', zh: '如何连接 9000 万流浪动物与愿意帮助的人？' },
         { en: 'How might we reduce the adoption barriers that prevent 60% of willing adopters?', zh: '如何降低阻碍 60% 有意领养者的门槛？' },
@@ -1075,7 +1081,7 @@ export const projects = [
         title: 'User Research',
         sectionTag: 'User Research',
         mainTitle: 'Why 60% Want to Adopt But Can\'t',
-        briefContent: 'Despite strong adoption intent, structural barriers prevent most people from adopting. [[60% of potential pet owners]] express willingness to adopt if a reliable platform existed. However, [[43.9% of current pets]] come from pet stores, [[only 35%]] are acquired through adoption, and [[21.1%]] come from other sources. The problem isn\'t lack of willingness—[[it\'s lack of access.]]',
+        briefContent: 'People want to adopt; the path just doesn\'t exist. [[60% of potential pet owners]] say they would adopt if a reliable platform existed, yet [[43.9%]] of pets still come from pet stores and [[only 35%]] from adoption. The willingness is there. What\'s missing is [[access]].',
         icon: '🔍',
         content: [
           'Despite strong adoption intent, structural barriers prevent most people from adopting. The missing link: a trustworthy, accessible platform.',
@@ -1095,7 +1101,7 @@ export const projects = [
         title: 'The Solution',
         sectionTag: 'The Solution',
         mainTitle: 'Three Core Features to Address the Crisis',
-        briefContent: 'The platform addresses three critical barriers: [[Information Fragmentation]] (lost pet information scattered across WeChat, Weibo, and TikTok), [[Adoption Barriers]] (potential adopters don\'t know where to find adoptable pets), and [[Resource Scarcity]] (rescue organizations struggle for funding and visibility). A comprehensive ecosystem designed to connect people with pets in need, support rescue organizations, and build a compassionate community. The platform features [[Baby Come Home]] for lost pet reunification, [[Adoption & Rescue]] for pet matching, and [[Charity Organizations]] for supporting rescue work.',
+        briefContent: 'The platform tackles three barriers: [[information is scattered]] across WeChat, Weibo and TikTok; [[adopters don\'t know where to look]]; and [[rescue groups lack funding and visibility]]. Three features answer them: [[Baby Come Home]] reunites lost pets, [[Adoption & Rescue]] matches pets with people, and [[Charity Organizations]] connects donors to verified rescues.',
         icon: '💡',
         featureDisplayMode: 'side-by-side',
         features: [
@@ -1122,7 +1128,7 @@ export const projects = [
         title: 'Design Approach & Iteration',
         sectionTag: 'Design Approach & Iteration',
         mainTitle: 'Built on Three Core Principles',
-        briefContent: 'The platform is built on three core principles: [[Integrated Pet Profiles]] (seamless connection between Petiboxy\'s nutrition app and charity features), [[Multi-Channel Rescue]] (lost pet finding + adoption matching + organization support), and [[Community-Driven Growth]] (users share pet stories and success narratives to build trust through emotional storytelling).',
+        briefContent: 'Three principles shaped it: [[Integrated Pet Profiles]] tie the charity features to Petiboxy\'s existing nutrition app, so one health record follows a pet through adoption; [[Multi-Channel Rescue]] lets people help at any level — finding, adopting, or supporting an org; and [[Community-Driven Growth]] leans on real adoption stories to build trust.',
           icon: '🎨',
         content: [
           'Principle 1: Integrated Pet Profiles - Seamless connection between Petiboxy\'s nutrition app and charity features. Complete pet health records support better adoption matches.',
@@ -1142,7 +1148,7 @@ export const projects = [
         title: 'Final Showcase',
         sectionTag: 'Final Showcase',
         mainTitle: 'Every Life Matters',
-        briefContent: 'Together, we can transform [[90 million lives]]. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility.',
+        briefContent: 'The bigger goal is a shift in how China gets its pets: from buying to adopting. If even a fraction of the [[60% who want to adopt]] find their way in, the [[90 million strays]] number starts to move. That is what the platform is built to make possible.',
         icon: '🚀',
         content: 'Together, we can transform 90 million lives. One adoption, one rescue, one act of kindness at a time. Petiboxy creates a platform where love connects, lives are saved, and communities grow stronger through compassion and responsibility. The platform represents a shift from purchase-based to adoption-based pet culture, reducing stray animal populations and building a more compassionate society.',
         imageDisplayMode: 'single',
