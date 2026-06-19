@@ -501,8 +501,8 @@ export const projects = [
     // ========== 主页展示 ==========
     thumbnail: '/media/projects/stumbldoor/hero/hero-image@66662x.png',  // 列表页缩略图
     brief: {
-      en: 'An innovative digital platform that reimagines the traditional library experience.',
-      zh: '一个创新的数字平台，重新定义传统图书馆体验。'
+      en: 'A mobile app that rethinks the library experience for a generation that reads on screens: track your reading, find your next book, and explore a library in person.',
+      zh: '一款为「在屏幕上长大的一代」重新设计图书馆体验的 App:记录阅读、找到下一本书、把逛图书馆变成探索。'
     },
     
     // ========== 详情页 Hero ==========
@@ -519,8 +519,13 @@ export const projects = [
       { en: 'Research', zh: '用户研究' },
       { en: 'Mobile Application Design', zh: '移动应用设计' }
     ],
-    collaborators: ['Solo Project'],  // 或其他合作者名字
-    
+    collaborators: [],
+    meta: {
+      role: 'UX/UI Designer & Researcher',
+      team: 'Solo',
+      stack: 'Figma · Prototyping · Design System',
+    },
+
     // ========== 项目颜色配置 ==========
     colors: {
       heroGradient: 'linear-gradient(135deg,rgb(28, 1, 65)0%, #8a81d7 100%)', // 黑色到紫色渐变
@@ -534,7 +539,7 @@ export const projects = [
     // ========== 项目概述 ==========
     overview: {
       mainTitle: 'Reimagining the Library Experience',
-      briefContent: '[[STUMBLEDOOR]] is an innovative digital platform app that [[reimagines the traditional library experience, transforming it into an interactive and captivating journey.]] It enables users to document their reading adventures, providing personalized book recommendations and locating nearby libraries. Moreover, it transforms the in-person library visit into an exploratory adventure, encouraging users to discover new genres and authors.',
+      briefContent: '[[Stumbldoor]] is a mobile app that [[rethinks the library experience]] for people who grew up reading on screens. You track what you read, get recommendations that fit your taste, and find a library nearby. The bigger idea is to make a library visit feel like exploring, so people stumble onto genres and authors they would never have searched for.',
       challenge: 'How might I make libraries more relevant, inclusive, culturally dynamic & appealing in the future?',
       challenges: [
         'How might we make libraries more relevant, inclusive, culturally dynamic & appealing in the future?',
@@ -633,7 +638,7 @@ export const projects = [
         title: 'The Solution',
         sectionTag: 'The Solution',
         mainTitle: 'Stumbldoor: Three Pillars of Innovation',
-        briefContent: 'Stumbldoor transforms the library experience into an [[interactive adventure]]. [[It\'s not just a tool; it\'s a gateway to a world of knowledge and community, seamlessly integrating the digital and physical]]. The solution features three core innovations: [[Scrollstack]] for hyper-personalized reading playlists, [[Gameful UX]] for achievements and community, and [[AR Assist]] for navigating library layouts.',
+        briefContent: 'Stumbldoor makes browsing something you actually enjoy, and ties the app to the physical library instead of treating them as separate worlds. It rests on three features: [[Scrollstack]] for personalized reading lists, [[Gameful UX]] for achievements and a sense of community, and [[AR Assist]] for finding a book on the shelf.',
         featureDisplayMode: 'side-by-side',
         features: [
           {
@@ -740,7 +745,7 @@ export const projects = [
         title: 'Final Showcase & Impact',
         sectionTag: 'Final Showcase & Impact',
         mainTitle: 'A New Chapter for Libraries',
-        briefContent: 'Stumbldoor is more than just an app; [[it\'s a vision for the future of libraries.]] By integrating the digital and physical, I can bridge the [[21.2% gap in physical visits and make libraries vital cultural hubs for generations to come.]] The solution addresses the crisis by turning peak card registrations into active engagement, creating a virtuous cycle of discovery and community, and fostering the next generation of library-goers.',
+        briefContent: 'The aim is simple: turn the record number of library-card sign-ups into people who actually walk back in. By tying the digital and physical together, Stumbldoor gives a screen-native generation a reason to close the [[21.2% gap]] in physical visits, and a way to enjoy the library once they do.',
         icon: '🚀',
         imageDisplayMode: 'single', // 单图模式
         images: [
