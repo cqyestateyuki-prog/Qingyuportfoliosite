@@ -767,6 +767,23 @@ const ProjectDetail = () => {
                 )}
               </div>
             )}
+
+            {/* Overview 独立主图（data 中 overview.mainImage: {src, alt, caption}） */}
+            {project.overview.mainImage && (
+              <figure className="mt-10">
+                <img
+                  src={project.overview.mainImage.src}
+                  alt={project.overview.mainImage.alt || ''}
+                  className="w-full rounded-2xl"
+                  style={{ border: '1px solid var(--card-glass-border)' }}
+                />
+                {project.overview.mainImage.caption && (
+                  <figcaption className="mt-3 text-sm text-gray-500 text-center leading-relaxed">
+                    {project.overview.mainImage.caption}
+                  </figcaption>
+                )}
+              </figure>
+            )}
         </div>
       </section>
 

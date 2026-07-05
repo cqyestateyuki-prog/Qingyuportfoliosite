@@ -12,13 +12,13 @@ export const sparkup = {
     tags: ['Product Strategy', 'UX Design', 'UI Design', 'Figma Make', 'Google AI Studio', 'Next.js', 'Tailwind CSS', 'FastAPI', 'Firebase', 'OpenAI API', 'AWS', 'JTBD', 'Kano Model'],
     techTags: ['#Figma Make', '#Google AI Studio', '#Next.js', '#Tailwind CSS', '#FastAPI', '#Firebase', '#OpenAI API', '#AWS'],
 
-    // 首图/缩略图改用真实存在的资产(原 hero.png 及所有 sections/* 图在仓库中缺失)
-    thumbnail: '/media/projects/sparkup/problemstatement.png',
+    // hero/缩略图 = 真实产品截图(Diagnostic Dashboard); problemstatement 单独放在 Problem 节
+    thumbnail: '/media/projects/sparkup/sections/final-dashboard.png',
     brief: {
       en: 'An AI platform that diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback.',
       zh: '一个用于诊断创业准备度、AI 生成创业想法，并通过社区反馈验证想法的平台。'
     },
-    heroImage: '/media/projects/sparkup/problemstatement.png',
+    heroImage: '/media/projects/sparkup/sections/final-dashboard.png',
     heroVideo: null,
 
     // 元信息一行 stack(Technical 段已并入此处,不再单列章节)
@@ -71,45 +71,53 @@ export const sparkup = {
         'How might we bridge the gap between "I want to start something" and "Here is something concrete I could start"?',
         'How might we design around AI latency so wait time feels productive, not frustrating?'
       ],
+      mainImage: {
+        src: '/media/projects/sparkup/problemstatement.png',
+        alt: 'Problem statement: 90% of aspiring founders never launch',
+        caption: '90% of aspiring founders never launch. The biggest hurdle is the lack of structured guidance.'
+      },
       buttons: []
     },
 
     sections: [
-      // Research(pivot 叙事保留,决策部分已抽到 Key Decisions)
+      // Research(三个发现各配一段文字+一张图,分开放)
       {
         id: 'process-research',
         title: 'Research',
         sectionTag: 'Research',
         mainTitle: '151 Surveys Killed Our First Idea, Then Gave Us a Better One',
-        briefContent: 'As Product Lead I ran [[151 survey responses and 10+ interviews]], reading them through JTBD, the Four Forces, and the Kano Model. The Four Forces made the tension concrete. People were pushed by income ceilings and work that had stopped meaning much, and pulled by a wish for honest self-knowledge over guesswork. What held them back was the fear of sinking months into an unvalidated path, plus a habit of researching endlessly without ever reflecting in a structured way. Then came the finding that reset the project: the core pain wasn\'t [[a lack of connections or mentorship]], it was [[not knowing whether they were ready to start]]. That one insight killed our original community-matching concept. How we acted on it is in the decisions below.',
+        briefContent: 'As Product Lead I ran [[151 survey responses and 10+ interviews]], reading them through JTBD, the Four Forces, and the Kano Model. Three findings set the direction.',
         icon: '🔍',
-        imageDisplayMode: 'alternating',
-        images: [
+        featureDisplayMode: 'side-by-side',
+        features: [
           {
-            src: '/media/projects/sparkup/userresearch.png',
-            alt: 'User Research: JTBD & Kano Model, Four Forces breakdown',
-            caption: 'JTBD and Kano analysis across 151 surveys and 10+ interviews. The core job: an honest, low-cost read on whether they are ready.'
+            name: 'The push, the pull, and the fear',
+            detail: 'The Four Forces made the tension concrete. People were pushed by income ceilings and work that had stopped meaning much, and pulled by a wish for honest self-knowledge over guesswork. What held them back was the fear of sinking months into an unvalidated path, plus a habit of researching endlessly without ever reflecting in a structured way.',
+            image: '/media/projects/sparkup/userresearch.png',
+            imageCaption: 'JTBD and Kano analysis across 151 surveys and 10+ interviews.'
           },
           {
-            src: '/media/projects/sparkup/marketresearch.png',
-            alt: 'Market Research: global shift toward side hustles',
-            caption: 'Market context: 72% of Americans and 73% of Chinese consumers run or are considering a side hustle. Sources: SurveyMonkey 2025, Mastercard 2023.'
+            name: 'The ambition is mainstream',
+            detail: 'The market told the same story from the outside: 72% of Americans and 73% of Chinese consumers run or are considering a side hustle. Wanting to start something is no longer a niche dream. The confidence to start it is what\'s scarce.',
+            image: '/media/projects/sparkup/marketresearch.png',
+            imageCaption: 'Sources: SurveyMonkey 2025, Mastercard 2023.'
           },
           {
-            src: '/media/projects/sparkup/userpersona.png',
-            alt: 'User Persona: the curious but uncertain',
-            caption: 'Primary persona, curious but uncertain: scrolls founder stories, takes courses, and never launches.'
+            name: 'The finding that reset the project',
+            detail: 'The core pain wasn\'t [[a lack of connections or mentorship]]. It was [[not knowing whether they were ready to start]]. That one insight killed our original community-matching concept; how we acted on it is in the iteration below.',
+            image: '/media/projects/sparkup/userpersona.png',
+            imageCaption: 'Primary persona, curious but uncertain: scrolls founder stories, takes courses, and never launches.'
           }
         ]
       },
 
-      // ★ Key Decisions(三个岔路口各成一张决策卡)
+      // ★ Iteration(三个岔路口决策卡 + 老虎机→锻造炉迭代实录)
       {
-        id: 'key-decisions',
-        title: 'Key Decisions',
-        sectionTag: 'Key Decisions',
+        id: 'iteration',
+        title: 'Iteration',
+        sectionTag: 'Iteration',
         mainTitle: 'Three Forks That Shaped the Product',
-        briefContent: 'A few moments decided what SparkUp became. These are the three forks that mattered most, and why the evidence pushed each one.',
+        briefContent: 'SparkUp wasn\'t designed in one pass. It went through a full concept pivot and a rebuilt core feature, and each round came down to a fork in the road. These are the three that mattered, and why the evidence pushed each one.',
         icon: '🧭',
         features: [
           {
@@ -122,7 +130,15 @@ export const sparkup = {
           },
           {
             name: 'Open-ended AI vs constrained generation',
-            detail: 'Left open, an idea generator drifts into generic advice. We chose to box the model in. Users set budget and scope and can drag in an Idea Seed before anything generates, so every idea Spark Forge returns ties back to their diagnostic profile instead of a blank prompt.'
+            detail: 'Our Demo Day MVP was an idea slot machine: it generated at random, users watched the show and left. Left open, a generator drifts into generic advice. So we boxed the model in. Users set budget and scope and can drag in an Idea Seed before anything generates, so every idea Spark Forge returns ties back to their diagnostic profile instead of a blank prompt. Ideas you helped forge are ideas you keep.'
+          }
+        ],
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/sparkup/sections/iteration-mvp-to-forge.png',
+            alt: 'Iteration: from the Demo Day idea slot machine to the Spark Forge',
+            caption: 'The rebuild in one picture, from the concept deck: the Demo Day "idea slot machine" (random output, no ownership) versus the Forge (your input, your constraints). Retention across the two phases as reported in the deck: 12% to 45%.'
           }
         ]
       },
@@ -147,6 +163,14 @@ export const sparkup = {
           {
             name: 'A miss you can steer',
             detail: 'When a batch lands flat, you adjust one constraint and re-forge rather than rerolling blindly. Low diagnostic scores get specific, encouraging next steps, and a fallback UI covers the case where the model returns nothing.'
+          }
+        ],
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/sparkup/sections/forging-ritual.png',
+            alt: 'The Forging ritual: each step of the wait names the work in progress',
+            caption: 'The Forging sequence: instead of a spinner, each step names the work the model is doing, so the wait reads as thinking, not stalling.'
           }
         ]
       },
@@ -173,8 +197,20 @@ export const sparkup = {
             name: 'Validation & Dashboard',
             detail: 'Publish ideas to Spark Square for lightweight community feedback. The dashboard ties it together: Readiness Score, radar breakdown, Spark Stash, and next-step recommendations.'
           }
+        ],
+        imageDisplayMode: 'alternating',
+        images: [
+          {
+            src: '/media/projects/sparkup/sections/final-dashboard.png',
+            alt: 'Diagnostic Dashboard: readiness score, AI analysis log, recommended actions',
+            caption: 'The Diagnostic Dashboard: Readiness Score with dimension breakdown, a live AI analysis log, and recommended next actions.'
+          },
+          {
+            src: '/media/projects/sparkup/sections/forge-card.png',
+            alt: 'A SparkUp challenge card generated by Spark Forge',
+            caption: 'A generated challenge card: difficulty, potential, time and stack at a glance. Accepting one is a zero-risk first act of entrepreneurship.'
+          }
         ]
-        // NOTE: 原 solution/final 系列产品截图在仓库中缺失,如需"终图"请补真实成品图后加回 imageGroups
       },
 
       // Impact(targets vs 实测)& Reflection(honesty 教训保留)
