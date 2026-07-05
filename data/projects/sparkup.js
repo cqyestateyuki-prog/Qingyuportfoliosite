@@ -55,8 +55,8 @@ export const sparkup = {
 
     overview: {
       mainTitle: 'A Reality Check for People With Startup Anxiety',
-      briefContent: '**SparkUp** is an [[AI-powered pre-entrepreneurship platform]] that [[diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback]]. It targets a specific audience: people who scroll through startup success stories on social media and feel a mix of envy and anxiety—wondering, "Could I do this too?" Instead of offering motivational platitudes, SparkUp gives users an [[honest diagnostic of where they stand]] across six dimensions, then uses AI to [[forge business ideas tailored to their strengths and constraints]]. The core loop: diagnose your readiness, forge ideas with AI, and validate them with the community.',
-      challenge: 'How might we help people with vague startup ambitions get an honest, low-pressure read on their readiness—without discouraging them or wasting their time?',
+      briefContent: '**SparkUp** is an [[AI-powered pre-entrepreneurship platform]] that [[diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback]]. It targets a specific audience: people who scroll through startup success stories on social media and feel a mix of envy and anxiety, wondering, "Could I do this too?" Rather than hand out generic encouragement, SparkUp gives users an [[honest diagnostic of where they stand]] across six dimensions, then uses AI to [[forge business ideas tailored to their strengths and constraints]]. The core loop is simple: diagnose your readiness, forge ideas with AI, and validate them with the community.',
+      challenge: 'How might we help people with vague startup ambitions get an honest, low-pressure read on their readiness without discouraging them or wasting their time?',
       challenges: [
         'How might we help people with vague startup ambitions get an honest read on their readiness without discouraging them?',
         'How might we make a diagnostic assessment feel low-stakes enough for cold traffic to complete?',
@@ -71,14 +71,14 @@ export const sparkup = {
         id: 'the-problem',
         title: 'The Problem',
         sectionTag: 'The Problem',
-        mainTitle: '"Am I Even Capable?"—The Question No One Was Answering',
-        briefContent: 'Our JTBD research surfaced a core tension: when people see startup stories on social media, their first question is not "Who can help me?"—it is [["Am I even capable?"]] Existing tools skip this entirely, jumping to networking, pitch decks, or motivational content. But the real anxiety is personal: wanting to know, at low cost, whether it is worth pursuing at all. The [[Four Forces model]] made this sharp—the push was income ceilings and meaning loss at work; the pull was wanting honest self-knowledge instead of guesswork; the anxiety was fear of wasting time on an unvalidated path; the habit was endless research without structured self-reflection. The design problem: build a tool that [[replaces vague self-doubt with a structured, honest readiness picture]].',
+        mainTitle: '"Am I Even Capable?" Was the Question No One Answered',
+        briefContent: 'Our JTBD research surfaced a core tension. When people see startup stories on social media, their first question isn\'t "Who can help me?" It\'s [["Am I even capable?"]] Existing tools skip past this and jump straight to networking, pitch decks, or motivational content. But the real anxiety is personal: people want to know, at low cost, whether the whole thing is even worth pursuing. The [[Four Forces model]] made it concrete. The push was income ceilings and a loss of meaning at work; the pull was a wish for honest self-knowledge instead of guesswork; the anxiety was the fear of wasting time on an unvalidated path; the habit was endless research with no structured self-reflection. So the design problem was clear: build a tool that [[replaces vague self-doubt with a structured, honest readiness picture]].',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
           {
             src: '/media/projects/sparkup/problemstatement.png',
-            alt: 'Problem Statement — The "Day One" Paralysis',
+            alt: 'Problem Statement: The "Day One" Paralysis',
             caption: '90% of aspiring founders never launch. The biggest hurdle is the lack of structured guidance.'
           }
         ]
@@ -88,19 +88,19 @@ export const sparkup = {
         id: 'process-research',
         title: 'Research',
         sectionTag: 'Research',
-        mainTitle: '151 Surveys Killed Our First Idea—and Gave Us a Better One',
-        briefContent: 'As Product Lead I ran [[151 survey responses and 70+ qualitative interviews]], applying JTBD, Four Forces, and the Kano Model. The pivotal finding: users\' core pain was not [[lack of connections or mentorship]]—it was [[not knowing whether they were ready to start]]. This killed our original community-matching concept and drove a full pivot to an AI-first diagnostic tool. From Kano analysis, forced login before value delivery was a [[reverse attribute]]—so I designed a [[Guest-to-User flow]] where anyone can complete the Lite Diagnostic (10 questions) without signing up, then gets prompted to save results. The [[Two-Tier Strategy]] emerged: a quick Lite assessment as a low-friction hook with instant Readiness Score, and an Enhanced version (30+ questions) with a [[6-dimensional radar breakdown]], AI-generated action plans, and pattern analysis. As Design Lead I owned the full UX/UI pipeline—Figma sketches → Figma Make for prototyping and iteration → Google AI Studio for finalizing the component library and design system.',
+        mainTitle: '151 Surveys Killed Our First Idea, Then Gave Us a Better One',
+        briefContent: 'As Product Lead, I ran [[151 survey responses and 70+ qualitative interviews]], drawing on JTBD, Four Forces, and the Kano Model. The finding that changed everything: users\' core pain wasn\'t [[lack of connections or mentorship]]. It was [[not knowing whether they were ready to start]]. That killed our original community-matching concept and pushed us to pivot fully to an AI-first diagnostic tool. Kano analysis also showed that forcing people to log in before they got any value was a [[reverse attribute]], so I designed a [[Guest-to-User flow]] where anyone can finish the Lite Diagnostic (10 questions) without signing up, then gets a nudge to save their results. That\'s where the [[Two-Tier Strategy]] came from: a quick Lite assessment as a low-friction hook with an instant Readiness Score, plus an Enhanced version (30+ questions) with a [[6-dimensional radar breakdown]], AI-generated action plans, and pattern analysis. As Design Lead, I owned the full UX/UI pipeline, taking it from Figma sketches to Figma Make for prototyping and iteration, then to Google AI Studio to finalize the component library and design system.',
         icon: '🔍',
         imageDisplayMode: 'alternating',
         images: [
           {
             src: '/media/projects/sparkup/marketresearch.png',
-            alt: 'Market Research — Global Side Hustle Trend',
+            alt: 'Market Research: Global Side Hustle Trend',
             caption: '72% of Americans and 73% of Chinese consumers are engaged in or considering side hustles.'
           },
           {
             src: '/media/projects/sparkup/userresearch.png',
-            alt: 'User Research — JTBD, Four Forces, and Kano Model',
+            alt: 'User Research: JTBD, Four Forces, and Kano Model',
             caption: '151 surveys and 10+ interviews revealed the core pain: not knowing whether they are ready.'
           }
         ]
@@ -117,12 +117,12 @@ export const sparkup = {
         images: [
           {
             src: '/media/projects/sparkup/sections/phase1-dashboard.png',
-            alt: 'Phase 1: Dashboard — flat layout to Future Lab style',
+            alt: 'Phase 1: Dashboard, flat layout to Future Lab style',
             caption: 'Phase 1: Flat layout → Bento Grid + Glassmorphism + 3D parallax'
           },
           {
             src: '/media/projects/sparkup/sections/phase2-diagnostic.png',
-            alt: 'Phase 2: AI Diagnostic — Google Forms to lab-grade interface',
+            alt: 'Phase 2: AI Diagnostic, Google Forms to lab-grade interface',
             caption: 'Phase 2: Plain survey → 3D grid background + dual-path selection'
           },
           {
@@ -176,7 +176,7 @@ export const sparkup = {
           },
           {
             name: 'Spark Forge',
-            detail: 'Set keywords, budget, and scope—optionally drag an Idea Seed—and AI generates business ideas matched to your diagnostic profile.',
+            detail: 'Set keywords, budget, and scope, optionally drag in an Idea Seed, and AI generates business ideas matched to your diagnostic profile.',
             image: '/media/projects/sparkup/sections/solution-idea-bank.png'
           },
           {
@@ -209,8 +209,8 @@ export const sparkup = {
         id: 'impact-reflection',
         title: 'Impact & Reflection',
         sectionTag: 'Impact & Reflection',
-        mainTitle: 'Data Over Intuition; Honest Assessment Over Empty Encouragement',
-        briefContent: '[[151 survey responses]] drove a complete product pivot—from community matching to AI-first diagnostic and ideation. North Star metric: **Readiness-to-Action Conversion** (user completes Enhanced Diagnostic and forges ≥1 personalized idea). Design targets: Lite completion rate >70%, Lite→Enhanced conversion >40%, ideas forged per user >3, community share rate >50%. The deeper lesson: the best products don\'t always encourage action—sometimes they encourage [[honest reflection]]. SparkUp doesn\'t tell everyone "You can do this!"—it asks [["Are you ready?"]] and gives an evidence-based answer. In a space full of noise saying "just start," we designed the signal that helps people start [[with clarity]].',
+        mainTitle: 'Trusting Data Over Instinct, Honesty Over Empty Encouragement',
+        briefContent: '[[151 survey responses]] drove a complete product pivot, from community matching to an AI-first diagnostic and ideation tool. Our North Star metric was **Readiness-to-Action Conversion** (a user completes the Enhanced Diagnostic and forges at least one personalized idea). Design targets: Lite completion rate >70%, Lite→Enhanced conversion >40%, ideas forged per user >3, community share rate >50%. The lesson that stuck with me: the best products don\'t always push people to act. Sometimes they encourage [[honest reflection]] instead. SparkUp doesn\'t tell everyone "You can do this!" It asks [["Are you ready?"]] and backs the answer with evidence. In a space crowded with "just start" advice, we built something that helps people start [[with clarity]].',
         icon: '💭',
         content: [
           '**Impact**:',
