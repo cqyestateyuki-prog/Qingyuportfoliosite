@@ -208,6 +208,11 @@ html:not(.dark) .cosmos-canvas-el {
   --detail-badge-bg: rgba(138, 129, 215, 0.22);
 }
 
+/* HexaEdge: 夜版高亮用玉白 Jade White(不随统一紫); 日版用青花蓝(见 hexaedge.js textHighlightColor #243E66) */
+.dark .project-detail.project-detail--hexaedge {
+  --detail-highlight: #F2F6F7;
+}
+
 /* 详情页 hero 面板:窗户玻璃 — 透出星空,只靠 blur 和细边成形 */
 .detail-hero-panel {
   background: color-mix(in srgb, var(--surface-scrim) 32%, transparent);

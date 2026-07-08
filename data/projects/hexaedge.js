@@ -9,21 +9,21 @@ export const hexaedge = {
       zh: '古法新用 · 六爻金融信号'
     },
     categories: ['AI', 'Product Design', 'UIUX', 'Programming'],
-    tags: ['Product Design', 'Design Engineering', 'AI/LLM', 'Financial Signal', 'Neo-Chinese Aesthetic', 'SaaS'],
-    techTags: ['#Next.js 16', '#React 19', '#TypeScript', '#Claude Code', '#Figma', '#LLM API'],
+    tags: ['Product Design', 'Design Engineering', 'AI/LLM', 'Decision-support UX', 'Neo-Chinese Aesthetic', 'SaaS'],
+    techTags: ['#Next.js 16', '#React 19', '#TypeScript', '#FastAPI', '#Claude Code', '#Figma', '#LLM API'],
 
-    thumbnail: '/media/projects/hexaedge/hero.png',
+    thumbnail: '/media/projects/hexaedge/sections/s01-cover.png',
     brief: {
-      en: 'A full-stack financial tool that turns I Ching logic into quantitative market signals through a Neo-Chinese design system.',
-      zh: '一款把中国传统文化《易经》改写成金融量化信号的工具。'
+      en: 'Rebuilding a 3,000-year-old symbolic system into a deterministic engine. HexaEdge turns an ancient method into a decision-support tool for reading a market or a personal decision from multiple angles.',
+      zh: '把三千年的符号系统重建为一台确定性推理引擎。HexaEdge 把这套古法变成一款决策辅助工具，让你从多个角度审视一笔市场行情或一个个人决策。'
     },
-    heroImage: '/media/projects/hexaedge/hero.png',
+    heroImage: '/media/projects/hexaedge/sections/s01-cover.png',
     heroVideo: null,
 
     domain: [
-      { en: 'FinTech Signal Tool', zh: '金融信号工具' },
-      { en: 'Cultural Tech', zh: '文化科技' },
-      { en: 'B2C SaaS', zh: 'B2C SaaS' }
+      { en: 'Symbolic AI × LLM', zh: '符号智能 × 大模型' },
+      { en: 'Decision-support UX', zh: '决策辅助 UX' },
+      { en: 'Cultural Tech · B2C SaaS', zh: '文化科技 · B2C SaaS' }
     ],
     form: [
       { en: 'Product Design', zh: '产品设计' },
@@ -33,163 +33,186 @@ export const hexaedge = {
     ],
     collaborators: [],
     meta: {
-      duration: 'Feb 2026 – Present',
+      duration: '2026 – Present',
       team: 'Solo',
-      stack: 'Figma · Claude Code · Next.js · React · TypeScript · RAG + LLM',
+      role: 'Product Designer & Design Engineer',
+      stack: 'Figma · Claude Code · Next.js 16 · React 19 · TypeScript · FastAPI · RAG + LLM',
     },
 
     colors: {
       heroGradient: 'linear-gradient(135deg, #14233A 0%, #243E66 50%, #9C7A3A 100%)',
       subtitleGradient: 'linear-gradient(135deg, #243E66 0%, #9C7A3A 100%)',
       underlineGradient: 'linear-gradient(135deg, #9C7A3A 0%, #A8392E 100%)',
-      textHighlightColor: '#9C7A3A',
+      textHighlightColor: '#243E66',
       darkColor: '#14233A',
       lightColor: '#9C7A3A'
     },
 
-    role: {
-      title: 'Product Designer & Design Engineer',
-      responsibilities: [
-        'End-to-end product design: research, UX/UI, visual system, implementation',
-        'Proprietary Liuyao analysis engine development',
-        '2+ years structured data collection & RAG knowledge base',
-        'AI interpretation pipeline (LLM API integration)',
-        'Neo-Chinese design system: color tokens from traditional materials'
-      ]
-    },
-
     overview: {
-      mainTitle: 'Reshaping Unstructured Classical Logic into Quantitative Signals',
-      briefContent: '**HexaEdge (点卦)** is a financial signal tool that deeply integrates traditional Liuyao logic. Built on the I Ching as its underlying architecture, it uses a modern SaaS interface to [[deconstruct and extract]] the complex, multidimensional variables embedded within the 64 hexagrams — such as Five Elements interactions and moving-line transformations — reshaping unstructured classical logic into [[standardized quantitative signals]]. This highly integrated pipeline delivers a seamless flow from raw hexagram input to Bull/Bear signal generation on a [[calendar timeline]], transforming an intricate ancient analytical system into a decision-support view that modern traders can consume directly.',
-      challenge: 'How might we transform a 3,000-year-old analytical framework into a modern financial product — without losing its logical rigor or alienating either traditional practitioners or new investors?',
+      mainTitle: 'I Rebuilt a 3,000-Year-Old Symbolic System into a Deterministic Engine',
+      briefContent: '**HexaEdge (点卦)** re-engineers **Liuyao (六爻)**, one of the world\'s oldest decision frameworks and [[binary long before Leibniz]], into a modern decision-support product. Through intuitive UI/UX, I turn an ancient stochastic method into a [[clean, testable inference model]]. The 64 hexagrams and their tangle of variables, from Five-Element interactions to moving-line transformations and timing windows, are [[deconstructed into standardized signals]] and rendered on a calendar timeline. The whole pipeline runs from a single cast to a readable, plain-language reading, shifting the experience from [["magic" to "method"]].',
       buttons: [
         { label: 'Live Site', url: 'https://hexaedge.vercel.app', type: 'primary' },
         { label: 'GitHub', url: 'https://github.com/cqyestateyuki-prog/LiuyaoSaaSProject', type: 'secondary' }
       ],
       // Why I'm building this(hero meta 之下)+ 六爻线条母题(新中式鎏金)
-      whyIBuild: 'Everything today feels [[optimized, monetized, and expensive]]. HexaEdge began from a quieter idea: three coins and an honest question, and a 3,000-year-old system still gives you somewhere to think. I wanted to carry that — one of the world\'s oldest pieces of decision logic, [[binary long before Leibniz]] — to a modern, global audience through design, not superstition. Less about predicting the future, more about [[a way to look inward]] in an age that rarely makes room for it.',
+      whyIBuild: 'HexaEdge began with a simple premise: three coins, an honest question, and a 3,000-year-old decision logic. Our goal is to scale this ancient framework for a global audience, treating it as an [[objective logic system]] rather than an occult superstition. HexaEdge serves as a tool for [[cognitive friction]] that lets you unpack a complex market or a personal decision from [[multiple dimensions]], instead of rushing toward a single, forced answer.',
       whyIBuildHexagram: [1, 0, 1, 1, 0, 1], // 1=阳(整) 0=阴(断),自下而上
+      whyIBuildHexagramColor: '#F2F6F7', // 六爻线条颜色(近白,压在深色 hero 上)
       whyIBuildHexagramLabel: '古法新用'
     },
 
     sections: [
       {
-        id: 'the-problem',
+        id: 'the-provocation',
         title: 'The Problem',
         sectionTag: 'The Problem',
-        mainTitle: 'Two Failures and One Untouched Opportunity',
-        briefContent: 'Traditional I Ching and Liuyao websites are stuck in the early 2000s — dense forum layouts, walls of classical Chinese jargon, and zero onboarding for newcomers.\n\n**Accessibility failure.** Young users bounce immediately. The terminology barrier is too high, the UI is unreadable, and there\'s no progressive disclosure. A rigorous analytical system stays locked inside a shrinking niche community.\n\n**Cultural failure.** When the interface looks like a relic, the logic within is dismissed as superstition. This [[\"time-gap\" in design]] prevents ancient analytical frameworks from going global or being taken seriously by a modern audience.\n\n**Opportunity.** The use cases haven\'t evolved — still love, career, and health. But today\'s young generation cares about [[investing, crypto, and stock markets]]. Meanwhile, AI-powered fortune-telling products focus on BaZi (八字) and Ziwei Doushu (紫微斗数) — no one has applied AI to Liuyao signal analysis. A redesigned interface + a new domain = an untouched market.',
+        mainTitle: 'Legacy Usability Crisis',
+        briefContent: 'Outdated and chaotic layouts force users to view a rigorous logic system as [[mere superstition]]. HexaEdge introduces new design to eliminate this [[visual friction]].',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/hexaedge/sections/problem.png',
-            alt: 'Traditional Liuyao tools vs modern expectations',
-            caption: 'The "time-gap" in design: traditional tools stuck in the 2000s while user expectations have evolved.'
+            src: '/media/projects/hexaedge/sections/s02-provocation.png',
+            alt: 'Outdated Liuyao tools versus the HexaEdge redesign',
+            caption: 'Left: the category today, a mess of dated layouts and jargon. Right: HexaEdge, method over magic.'
           }
         ]
       },
 
       {
-        id: 'concept',
-        title: 'Concept',
-        sectionTag: 'Concept',
-        mainTitle: 'Ancient Methods, Modern Use — 古法新用',
-        briefContent: 'Liuyao is not fortune-telling. At its core, it\'s a [[structured decision-analysis framework]]: you define a question, generate a hexagram through a controlled random process, then systematically evaluate relationships between six lines (爻) using rules about elemental interaction, timing, and transformation.\n\nHexaEdge takes this framework and points it at a new domain — the stock market. The question becomes "will this stock go up or down this week?", and the output becomes a [[bull/bear signal calendar]] instead of a vague prose prediction.\n\nThis isn\'t about whether divination "works" for stocks. It\'s about demonstrating that [[traditional philosophical systems can find new life in digital products]] — if someone bothers to redesign the experience.',
+        id: 'market-opportunity',
+        title: 'Market & Opportunity',
+        sectionTag: 'Market & Opportunity',
+        mainTitle: 'The Intersection of Two Appetites',
+        briefContent: 'HexaEdge captures a rare psychological convergence in today\'s young demographic: [[the deep emotional need for clarity]] and [[the high-stakes thrill of financial trading]]. While users turn to traditional tools for mindfulness, they navigate modern markets with aggressive speculation.\n\nUnderneath both appetites sits [[a market worth hundreds of billions]], and no one is building it with taste. We bridge that gap through [[design]].',
+        icon: '📈',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/s05-market-appetites.png',
+            alt: 'Divination revival meets speculation appetite',
+            caption: 'Two appetites rising together: the seeker\'s need for narrative and the speculator\'s appetite for probability.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/s06-market-tam.png',
+            alt: 'Market sizing: spiritual, astrology, and Chinese-astrology TAM',
+            caption: 'A global market, fatally underserved. The Chinese-astrology vertical alone is scaling at 43.7% CAGR.'
+          }
+        ]
+      },
+
+      {
+        id: 'highlights',
+        title: 'Project Highlights',
+        sectionTag: 'Project Highlights',
+        mainTitle: 'A Generational Leap in UI/UX',
+        icon: '✨',
+        imageDisplayMode: 'alternating',
+        content: [
+          'All screens shown are taken directly from the shipped production environment. This includes the onboarding flow, the 64-hexagram index, the casting wizard, and the market-signal dashboard.',
+          'High-fidelity refinement is our strategic entry point. While the AI-divination sector is crowded with cliché mysticism and generic chat boxes, the intersection of Liuyao and equity trading is completely open ground. I replace vague conversational text with visualized market signals. HexaEdge establishes high-end design leadership where it is starved most.'
+        ],
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/s03-highlights.png',
+            alt: 'Six core HexaEdge product screens',
+            caption: 'Six core surfaces from the shipped product, unified by one design system.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/s04-competitive.png',
+            alt: 'Competitive landscape of AI fortune and divination products',
+            caption: 'The field everyone else crowds: cliché mysticism and generic chat boxes. Nobody serves Liuyao × equity trading with premium design.'
+          }
+        ]
+      },
+
+      {
+        id: 'design-philosophy',
+        title: 'Design System',
+        sectionTag: 'Design System & Philosophy',
+        mainTitle: 'Materializing Warmth, Then Meaning',
+        briefContent: 'The palette is drawn entirely from traditional Chinese materials. The goal was [[warm and refined, never cold or sterile]]. It should feel like holding a piece of jade, not using a fintech dashboard.\n\n**Materializing warmth.** Jade White (#F2F6F7) as a paper-like base, Celadon Glaze (#E4ECEE) for sunken card surfaces, Porcelain Blue (#243E66) as brand primary and body text, Ink Black (#14233A) for headings, plus a six-step ink scale.\n\n**Materializing meaning.** The same palette carries semantics: Cinnabar for bull signals and emphasis, Celadon Jade for bear, Gilding for active pivot signals, Ochre for neutral ground, all mapped onto the Five Elements. The system lives as [[tokens → components → products.]]',
+        icon: '🎨',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/s07-palette.png',
+            alt: 'The tactile minerals palette: jade, celadon, porcelain blue, ink',
+            caption: 'Ancient materials → digital tokens: a warm, tactile minerals palette.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/s08-elements.png',
+            alt: 'Signals and Five-Element color semantics',
+            caption: 'The same materials carry meaning: bull, bear, and pivot signals mapped onto the Five Elements.'
+          }
+        ]
+      },
+
+      {
+        id: 'information-architecture',
+        title: 'User Flow',
+        sectionTag: 'User Flow',
+        mainTitle: 'Cast → Board → Read → Ask',
+        briefContent: 'The core flow breaks a dense, expert-only ritual into four progressive steps. Each one strips out complexity, so a complete newcomer can get through without documentation.',
         icon: '🧭',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/hexaedge/sections/concept.png',
-            alt: 'From hexagram to signal calendar',
-            caption: 'Transforming classical hexagram analysis into actionable trading signals.'
+            src: '/media/projects/hexaedge/sections/s09-ia-flow.png',
+            alt: 'Cast, Board, Read, Ask: the four-step flow',
+            caption: 'Four progressive steps, from a raw question to a plain-language reading and an AI consultant.'
           }
         ]
       },
 
       {
-        id: 'design-direction',
-        title: 'Design Direction',
-        sectionTag: 'Design Direction',
-        mainTitle: 'Neo-Chinese Aesthetic — 新中式',
-        briefContent: 'I collected reference images of jade, celadon porcelain, blue-and-white ceramics (青花瓷), ink-wash paintings, and cinnabar seals — assembled into a moodboard and used as the foundation for color extraction, working with AI (Claude) to translate material qualities into digital design tokens.\n\nThe goal: **warm and refined, never cold or sterile.** The interface should feel like holding a piece of jade — smooth, substantial, alive with subtle color — not like using a fintech dashboard.\n\nThe palette is drawn entirely from traditional Chinese materials: Jade White (#F2F6F7), Celadon Glaze (#E4ECEE), Blue-and-White (#243E66), Ink Black (#14233A), Cinnabar (#A8392E), Gilding (#9C7A3A), and Bamboo Green (#6E9387). Five Elements semantic mappings reuse the same palette.',
-        icon: '🎨',
-        imageDisplayMode: 'alternating',
+        id: 'iteration',
+        title: 'Iteration',
+        sectionTag: 'Iteration',
+        mainTitle: 'I Removed the Verdict',
+        briefContent: 'The hardest design call wasn\'t visual. It was ethical. Telling users their "fate" ruins the UX and crosses a compliance line.\n\n**Shi (势) is momentum, not destiny.** So I rewrote every output: [["Yes, you will get it" → "momentum runs favorable"]]; "No" → "resistance runs high"; "Partly" → "favorable, with friction." HexaEdge analyzes current tendencies and always hands back a point of leverage: minimize the downside, adapt, keep control.\n\nFor personal-wealth readings, the result is [[a mirror held up to you, not a decision made for you]]. For market readings, the narrative drops away entirely and the app shifts into pure, hard-coded quant analysis. Either way, [[the decision always stays yours.]]',
+        icon: '🔁',
+        imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/hexaedge/sections/moodboard.png',
-            alt: 'Neo-Chinese moodboard and color extraction',
-            caption: 'Ancient materials → digital tokens: jade, celadon, cinnabar, gilding.'
-          },
-          {
-            src: '/media/projects/hexaedge/sections/color-system.png',
-            alt: 'Color system and typography',
-            caption: 'Seven color tokens from traditional materials + dual-script type system.'
+            src: '/media/projects/hexaedge/sections/s10-iteration.png',
+            alt: 'Rewriting verdicts into momentum language',
+            caption: 'From verdict to momentum: the same reading, reframed to keep agency with the user.'
           }
         ]
       },
 
       {
-        id: 'design-solutions',
-        title: 'Design Solutions',
-        sectionTag: 'Design Solutions',
-        mainTitle: 'From Dense Symbols to Consumable Signals',
-        briefContent: 'Traditional Liuyao tools only generate the hexagram plate — they don\'t analyze, don\'t interpret, and have zero AI involvement. HexaEdge breaks this into [[three progressive steps]] — every label, every interpretation is written in plain language that any trader or investor can understand:\n\n**1. Cast (起卦)** — Enter your numbers and select the date. The system calculates the hexagram automatically. No knowledge required.\n\n**2. Read (排盘)** — The hexagram plate appears as a structured table: six lines with elements, relatives, spirits, and transformations. Color-coded by Five Elements for instant scanning.\n\n**3. Predict (预测)** — AI-generated plain-language interpretation + bull/bear signals rendered on a calendar timeline. Exportable as image or PDF.',
-        icon: '✨',
-        content: [
-          '**Hexagram Plate Redesign**: Preserved the traditional top-to-bottom structure but added Five-element color coding, visual hierarchy (moving lines in gilding gold), and spatial grouping for elemental relationships.',
-          '',
-          '**Prediction Calendar**: The core output — daily cells colored by signal strength (bull red, bear green, neutral gray), key events marked with badges, weekly/monthly/quarterly timeline tabs, one-click export.',
-          '',
-          '**64 Hexagram Encyclopedia**: Reference library with classical text, modern commentary, six-line analysis, traditional readings, and historical scholar interpretations. Progressive disclosure: overview → detail → scholarly depth.'
-        ],
-        imageDisplayMode: 'alternating',
-        images: [
-          {
-            src: '/media/projects/hexaedge/sections/3-step-wizard.png',
-            alt: '3-step wizard: Cast, Read, Predict',
-            caption: 'Three progressive steps — each reduces complexity for the user.'
-          },
-          {
-            src: '/media/projects/hexaedge/sections/prediction-calendar.png',
-            alt: 'Prediction calendar with signal timeline',
-            caption: 'Bull/Bear signals mapped to specific dates with level badges and event tags.'
-          },
-          {
-            src: '/media/projects/hexaedge/sections/encyclopedia.png',
-            alt: '64 Hexagram Encyclopedia',
-            caption: 'All 64 hexagrams with classical text, commentary, and progressive disclosure.'
-          }
-        ]
-      },
-
-      {
-        id: 'technical',
-        title: 'Technical',
-        sectionTag: 'Technical',
-        mainTitle: 'Claude Code + Proprietary Engine + LLM Pipeline',
-        briefContent: '**Design & Frontend**: The entire UI was built with [[Claude Code]] (AI pair-programming) + [[Figma]] + [[Google Stitch]] for rapid design exploration and high-fidelity implementation. Frontend: Next.js 16, React 19, TypeScript. All 64 hexagram pages statically generated via SSG.\n\n**Proprietary Analysis Engine**: 2+ years of structured data collection via custom auto-entry pipeline. RAG knowledge base indexing classical texts and historical cases. A multi-stage scoring engine evaluating line vitality, elemental interactions, transformation chains, and timing windows to produce weighted Bull/Bear signals. LLM interpretation layer transforms raw engine output into plain-language market analysis.',
+        id: 'ai-ux',
+        title: 'AI UX',
+        sectionTag: 'AI UX',
+        mainTitle: 'The Prompt Is the Product\'s Ethics',
+        briefContent: 'The compliance boundary between metaphysics and finance isn\'t a footnote. It lives in the prompt. I treated the prompt as a [[design artifact]], versioned like code, and evolved it from [["answer the fate" → "describe the momentum."]]',
         icon: '⚙️',
-        features: [
+        imageDisplayMode: 'single',
+        images: [
           {
-            name: 'Claude Code + Figma + Google Stitch',
-            description: 'Design & Frontend',
-            detail: 'AI pair-programming for rapid implementation; Figma for visual design; Google Stitch for design exploration. Next.js 16 + React 19 + SSG.'
-          },
+            src: '/media/projects/hexaedge/sections/ai-ux.png',
+            alt: 'Prompt as design artifact: ban-list, output contract, evaluation',
+            caption: 'The prompt is versioned like code, from V1 compliance to V3 "describe the momentum."'
+          }
+        ]
+      },
+
+      {
+        id: 'outcome',
+        title: 'Outcome',
+        sectionTag: 'Outcome',
+        mainTitle: 'Design to Deploy, No Handoff',
+        briefContent: 'There was no design-to-engineering handoff. I designed it, and I built it. The system implied a full product, so I shipped the full product: [[3 modules (market readings, personal wealth, encyclopedia), 17 API routes, 387 bilingual UI keys, 21 editorial articles, plus payments, auth, and tiering.]] Every screen in this deck is the deployed product.',
+        icon: '🚀',
+        imageDisplayMode: 'single',
+        images: [
           {
-            name: '2+ Years Structured Data',
-            description: 'Data Foundation',
-            detail: 'Custom Liuyao auto-entry pipeline accumulating hexagram records with tagged market outcomes for pattern recognition and back-testing.'
-          },
-          {
-            name: 'Multi-Stage Scoring Engine',
-            description: 'Proprietary Algorithm',
-            detail: 'Evaluates line vitality, elemental interactions, transformation chains, and timing windows. Produces weighted Bull/Bear voting signals.'
-          },
-          {
-            name: 'RAG + LLM Interpretation',
-            description: 'AI Pipeline',
-            detail: 'Classical texts indexed for retrieval-augmented generation. LLM API transforms engine output into plain-language market analysis.'
+            src: '/media/projects/hexaedge/sections/s12-outcome.png',
+            alt: 'Shipped outcome: four-tier pricing and productized system',
+            caption: 'Membership, entitlements, i18n, and export: a productized system, not a prototype.'
           }
         ]
       },
@@ -198,8 +221,8 @@ export const hexaedge = {
         id: 'reflection',
         title: 'Reflection',
         sectionTag: 'Reflection & Next Steps',
-        mainTitle: 'What Worked, and Where We\'re Going',
-        briefContent: '**What worked:**\n- The "ancient material → digital token" color process produced a palette that feels genuinely different from typical SaaS blue-gray. The result is warm, refined, and distinctly [[Eastern-elegant]] — never cold or sterile.\n- The 3-step wizard successfully got non-practitioners through the casting process without documentation.\n- Working with AI as a design collaborator (moodboard → tokens → implementation) compressed what would normally be weeks of iteration into days.\n\n**What\'s next:**\n- [[English translation layer]] — full bilingual hexagram encyclopedia and AI interpretation for global reach.\n- [[Deeper RAG & data feeding]] — expanding the knowledge base with more classical texts and real-market outcome data.\n- [[Signal visualization & accuracy]] — confidence heatmaps, trend overlays, and iterative scoring engine refinement.\n- [[User testing with young investors]] — usability studies with 18–30 year-old users with no Liuyao background.',
+        mainTitle: 'Give the Decision Back to Users',
+        briefContent: 'The compliance red line between metaphysics and finance set the brief, and it forced the core decision: [[stop predicting, start describing]]. The constraint became the spine of the whole product. Liuyao could have been fortune-telling. I chose not to go that way. Give it modern product design and it earns a second life: [[calmer decisions, agency intact.]]\n\n**What\'s next:**\n- [[Signal visualization & rigor]]: confidence heatmaps, trend overlays, and continued tuning of the deterministic scoring engine.\n- [[Deeper RAG & data feeding]]: expanding the knowledge base with more classical texts and real-market outcome data.\n- [[Traction & the share loop]]: leaning on the export/share cards as an organic growth surface, then user testing with 18–30 investors who have no Liuyao background.\n\nAncient method, modern use. More clarity, never less agency.',
         icon: '💭'
       }
     ]
