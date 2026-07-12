@@ -326,7 +326,9 @@ const ProjectDetail = () => {
       <Navbar />
 
       {/* ========== 右侧进度导航 ========== */}
-      <aside className="hidden lg:block fixed right-8 top-1/2 -translate-y-1/2 z-30 max-w-[160px]">
+      {/* translate="no":滚动会重渲染这块 UI。若浏览器翻译改写了它的文本节点,
+          React 的节点引用就会失效并抛 insertBefore 错误,整棵树被卸载。正文不受影响,仍可翻译。 */}
+      <aside translate="no" className="notranslate hidden lg:block fixed right-8 top-1/2 -translate-y-1/2 z-30 max-w-[160px]">
         <nav className="flex flex-col gap-4">
           {navigationSections.map((section, index) => (
             <button
@@ -349,9 +351,10 @@ const ProjectDetail = () => {
                   }`}
                   style={activeSection === section.id ? {background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'} : {}}
                 />
-                {activeSection === section.id && (
-                  <div className="absolute inset-0 w-2 h-2 rounded-full animate-ping" style={{background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'}} />
-                )}
+                <div
+                  className={`absolute inset-0 w-2 h-2 rounded-full ${activeSection === section.id ? 'animate-ping' : 'opacity-0'}`}
+                  style={{background: rawProject?.colors?.heroGradient || 'var(--gradient-hero)'}}
+                />
               </div>
               
               {/* 标签文字 - 始终显示 */}
@@ -1169,16 +1172,21 @@ const ProjectDetail = () => {
       ))}
 
 
-      {/* ========== 返回顶部按钮 ========== */}
-      {showBackToTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-4 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 z-50 group bg-gray-500 hover:bg-gray-600"
-          aria-label="返回顶部"
-        >
-          <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
-        </button>
-      )}
+      {/* ========== 返回顶部按钮 ==========
+          常驻 DOM,只用 CSS 显隐。之前这里是条件渲染,滚过 400px 时插入节点;
+          一旦浏览器翻译改写过页面文本,这次插入就会抛 insertBefore 错误并卸载整棵树。 */}
+      <button
+        onClick={scrollToTop}
+        translate="no"
+        className={`notranslate fixed bottom-8 right-8 p-4 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 z-50 group bg-gray-500 hover:bg-gray-600 ${
+          showBackToTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!showBackToTop}
+        tabIndex={showBackToTop ? 0 : -1}
+        aria-label="返回顶部"
+      >
+        <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
+      </button>
 
       {/* ========== 图片画廊 ========== */}
       {selectedImage && (

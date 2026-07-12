@@ -13,6 +13,8 @@ import { initGA } from './components/Analytics';
 import { CosmosProvider } from './cosmos/CosmosProvider';
 // 游戏 HUD 层(角框/章节导航/滚动进度)
 import HudLayer from './hud/HudLayer';
+// 兜底:浏览器翻译等扩展改写 DOM 后,React 的一次渲染错误不该白掉整页
+import ErrorBoundary from './components/ErrorBoundary';
 
 // ogl 只进 lazy chunk,首屏先画 CSS 降级背景
 const CosmosCanvas = lazy(() => import('./cosmos/CosmosCanvas'));
@@ -32,11 +34,13 @@ function App() {
 
         {/* 页面内容浮在宇宙之上 */}
         <div className="relative z-10">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/project/:id" element={<ProjectDetail />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/project/:id" element={<ProjectDetail />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </ErrorBoundary>
         </div>
 
         {/* 游戏 HUD(z-40,Navbar 之下) */}
