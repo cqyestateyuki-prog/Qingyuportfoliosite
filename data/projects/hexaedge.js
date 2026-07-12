@@ -51,6 +51,7 @@ export const hexaedge = {
     overview: {
       mainTitle: 'I Rebuilt a 3,000-Year-Old Symbolic System into a Deterministic Engine',
       briefContent: '**HexaEdge (点卦)** re-engineers **Liuyao (六爻)**, one of the world\'s oldest decision frameworks and [[binary long before Leibniz]], into a modern decision-support product. Through intuitive UI/UX, I turn an ancient stochastic method into a [[clean, testable inference model]]. The 64 hexagrams and their tangle of variables, from Five-Element interactions to moving-line transformations and timing windows, are [[deconstructed into standardized signals]] and rendered on a calendar timeline. The whole pipeline runs from a single cast to a readable, plain-language reading, shifting the experience from [["magic" to "method"]].',
+      challenge: 'How do you carry a rigorous 3,000-year-old framework into a modern financial product without losing its logic, and without it reading as superstition to a generation that has only ever seen the ritual?',
       buttons: [
         { label: 'Live Site', url: 'https://hexaedge.vercel.app', type: 'primary' },
         { label: 'GitHub', url: 'https://github.com/cqyestateyuki-prog/LiuyaoSaaSProject', type: 'secondary' }
@@ -153,15 +154,15 @@ export const hexaedge = {
         id: 'information-architecture',
         title: 'User Flow',
         sectionTag: 'User Flow',
-        mainTitle: 'Cast → Board → Read → Ask',
-        briefContent: 'The core flow breaks a dense, expert-only ritual into four progressive steps. Each one strips out complexity, so a complete newcomer can get through without documentation.',
+        mainTitle: 'The Flow Used to Stop at the Answer',
+        briefContent: 'Normally, users would cast a hexagram, read the result, and still have no idea where it came from. [[So I added an AI Consultant on top of the deterministic engine.]] Users can ask why a line moves, what an elemental clash means, or how the changing hexagram affects the answer. Read gives the result; Ask helps users understand it.',
         icon: '🧭',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/hexaedge/sections/s09-ia-flow.png',
-            alt: 'Cast, Board, Read, Ask: the four-step flow',
-            caption: 'Four progressive steps, from a raw question to a plain-language reading and an AI consultant.'
+            src: '/media/projects/hexaedge/sections/s09-user-flow.png',
+            alt: 'Cast, Board, Read, Ask: the four-step flow, with Ask added in the second iteration',
+            caption: 'Cast → Board → Read → Ask. The fourth step was not in v1; it exists because people needed to interrogate the reading, not just receive it.'
           }
         ]
       },
@@ -171,7 +172,7 @@ export const hexaedge = {
         title: 'Iteration',
         sectionTag: 'Iteration',
         mainTitle: 'I Removed the Verdict',
-        briefContent: 'The hardest design call wasn\'t visual. It was ethical. Telling users their "fate" ruins the UX and crosses a compliance line.\n\n**Shi (势) is momentum, not destiny.** So I rewrote every output: [["Yes, you will get it" → "momentum runs favorable"]]; "No" → "resistance runs high"; "Partly" → "favorable, with friction." HexaEdge analyzes current tendencies and always hands back a point of leverage: minimize the downside, adapt, keep control.\n\nFor personal-wealth readings, the result is [[a mirror held up to you, not a decision made for you]]. For market readings, the narrative drops away entirely and the app shifts into pure, hard-coded quant analysis. Either way, [[the decision always stays yours.]]',
+        briefContent: 'The hardest call here wasn\'t visual, it was ethical. Telling users their fate is bad UX, and a compliance problem in most markets I want to ship in.\n\n**Shi (势) is momentum, not destiny.** The source material already said so, which gave me the way out. Every verdict became a description of tendency. Personal readings turned into [[a mirror, not a decision]]. Market readings run on hard quant underneath, but the narrative stays on top: raw numbers only read to people who already know the system, and the story is what makes them [[legible to everyone else]]. [[The decision stays yours.]]',
         icon: '🔁',
         imageDisplayMode: 'single',
         images: [
@@ -205,7 +206,7 @@ export const hexaedge = {
         title: 'Outcome',
         sectionTag: 'Outcome',
         mainTitle: 'Design to Deploy, No Handoff',
-        briefContent: 'There was no design-to-engineering handoff. I designed it, and I built it. The system implied a full product, so I shipped the full product: [[3 modules (market readings, personal wealth, encyclopedia), 17 API routes, 387 bilingual UI keys, 21 editorial articles, plus payments, auth, and tiering.]] Every screen in this deck is the deployed product.',
+        briefContent: 'No design-to-engineering handoff, because the designer and the engineer were the same person. That is why the scoring engine, the reading UI, and the compliance layer never drifted: nothing got translated across a wall and lost. It shipped as a real product with [[three modules, payments, auth, and tiering]], not a prototype. Every screen in this deck is the deployed build.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
