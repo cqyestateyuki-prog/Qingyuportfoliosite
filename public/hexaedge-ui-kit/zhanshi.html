@@ -1,0 +1,600 @@
+<!doctype html>
+<!-- @dsCard group="Brand" name="占事 · Inquiry Page" subtitle="8 categories, casting desk, sample reading, recent inquiries" -->
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>HexaEdge · 占事</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans-sc);min-height:100vh}
+
+/* === NAV === */
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 64px;border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:14px}
+.logo .seal{width:38px;height:38px;background:var(--indigo-deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:22px;font-weight:700}
+.logo .lock{display:flex;flex-direction:column;line-height:1}
+.logo .en{font-family:var(--font-serif-latin);font-style:italic;font-size:20px;font-weight:600;color:var(--indigo)}
+.logo .cn{font-family:var(--font-serif-sc);font-size:13px;letter-spacing:0.4em;color:var(--ink-soft);margin-top:3px}
+nav ul{display:flex;gap:36px;list-style:none;margin:0;padding:0;font-size:14px}
+nav a{color:var(--ink-soft);text-decoration:none}
+nav a.active{color:var(--ink);position:relative}
+nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-26px;height:2px;background:var(--zhu-sha)}
+nav .right{display:flex;gap:14px;align-items:center}
+.btn{font-family:var(--font-sans-sc);font-size:14px;padding:10px 22px;border:1px solid transparent;cursor:pointer;border-radius:2px;background:none;letter-spacing:0.02em}
+.btn-pri{background:var(--indigo);color:var(--paper)}
+.btn-pri:hover{background:var(--indigo-deep)}
+.btn-zhu{background:var(--zhu-sha);color:var(--paper)}
+.btn-zhu:hover{background:var(--zhu-sha-dim)}
+.btn-ghost{color:var(--ink);border-color:var(--rule-strong);background:var(--paper-raised)}
+.btn-ghost:hover{border-color:var(--ink)}
+
+/* === HERO === */
+.hero{position:relative;padding:96px 64px 240px;text-align:center;overflow:hidden;background:linear-gradient(180deg, var(--paper) 0%, var(--paper-mist) 100%)}
+.hero .eye{font-family:var(--font-sans-latin);font-size:11px;letter-spacing:0.32em;color:var(--indigo-soft);text-transform:uppercase;margin-bottom:22px;position:relative;z-index:2}
+.hero .eye .dot{color:var(--zhu-sha);margin:0 10px}
+.hero h1{font-family:var(--font-serif-sc);font-size:84px;font-weight:600;letter-spacing:0.32em;margin:0 0 18px;color:var(--ink);line-height:1.05;position:relative;z-index:2;text-indent:0.32em}
+.hero .sub{font-family:var(--font-serif-sc);font-size:19px;color:var(--ink-soft);letter-spacing:0.18em;margin:0 0 14px;position:relative;z-index:2}
+.hero .sub .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:18px;color:var(--zhu-sha);letter-spacing:0.04em;margin:0 14px}
+.hero .lede{font-family:var(--font-serif-sc);font-size:15px;color:var(--ink-mute);max-width:480px;margin:0 auto;line-height:1.85;letter-spacing:0.04em;position:relative;z-index:2;text-wrap:pretty}
+
+.hero-bagua{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:580px;height:580px;color:var(--ink-700);opacity:0.045;z-index:1;pointer-events:none}
+.hero-plum-l{position:absolute;left:32px;top:24px;width:200px;color:var(--zhu-sha);opacity:0.55;transform:scaleX(-1);z-index:2}
+.hero-plum-r{position:absolute;right:32px;bottom:280px;width:200px;color:var(--zhu-sha);opacity:0.55;z-index:2}
+.hero-mountains{position:absolute;left:0;right:0;bottom:0;height:260px;color:var(--ink-900);z-index:1}
+.hero-mountains svg{width:100%;height:100%;display:block}
+
+/* Today strip */
+.today-strip{position:absolute;left:0;right:0;bottom:140px;display:flex;justify-content:center;gap:56px;align-items:center;padding:18px 0;font-size:13px;color:var(--ink-mute);font-family:var(--font-mono);z-index:3;border-top:1px solid rgba(122,140,160,0.22);border-bottom:1px solid rgba(122,140,160,0.22);background:rgba(255,255,255,0.55);backdrop-filter:blur(3px)}
+.today-strip .it{display:flex;gap:10px;align-items:center}
+.today-strip .l{text-transform:uppercase;letter-spacing:0.22em;font-size:10px;color:var(--ink-mute);font-family:var(--font-sans-latin)}
+.today-strip .v{font-family:var(--font-serif-sc);color:var(--ink);font-size:14px;font-weight:600;letter-spacing:0.06em}
+.today-strip .v .lt{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink-mute);font-size:12px;margin-left:6px}
+
+/* === BREATHER LINE === */
+.breather{padding:48px 0 14px;display:flex;justify-content:center}
+.breather svg{width:360px;color:var(--ink-300)}
+
+/* === WRAP === */
+.wrap{max-width:1280px;margin:0 auto;padding:0 64px}
+
+/* === SECTION HEAD === */
+.shead{display:flex;align-items:baseline;gap:22px;padding:18px 0 28px}
+.shead .num{font-family:var(--font-serif-latin);font-style:italic;font-size:40px;color:var(--zhu-sha);font-weight:500;line-height:1}
+.shead .ttl-grp{display:flex;flex-direction:column;gap:4px}
+.shead h2{font-family:var(--font-serif-sc);font-size:32px;font-weight:600;letter-spacing:0.1em;color:var(--ink);margin:0}
+.shead .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-mute);letter-spacing:0.04em}
+.shead .right{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);text-align:right;line-height:1.7;letter-spacing:0.04em}
+.shead .right b{font-family:var(--font-serif-sc);color:var(--ink);font-weight:600;display:block;font-size:13px;margin-bottom:3px;letter-spacing:0.08em}
+
+/* === 8 CATEGORY CARDS === */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised)}
+.cat{padding:36px 28px 32px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;min-height:340px;text-decoration:none;color:inherit;cursor:pointer;transition:background var(--d-base) var(--ease)}
+.cat:nth-child(4n){border-right:0}
+.cat:nth-last-child(-n+4){border-bottom:0}
+.cat:hover{background:linear-gradient(180deg, var(--paper-raised) 0%, var(--paper-mist) 100%)}
+.cat:hover .om-frame{transform:translateY(-2px)}
+
+.cat .roman{position:absolute;top:18px;left:24px;font-family:var(--font-serif-latin);font-style:italic;font-size:20px;color:var(--ink-300);font-weight:500;letter-spacing:0.04em}
+.cat .heat{position:absolute;top:18px;right:24px;font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.06em}
+.cat .heat b{color:var(--zhu-sha);font-family:var(--font-serif-sc);font-weight:600;letter-spacing:0.04em}
+
+.cat .om-frame{width:108px;height:140px;display:flex;align-items:center;justify-content:center;margin-top:18px;transition:transform var(--d-base) var(--ease)}
+.cat .om-frame svg{width:100%;height:100%;display:block}
+
+.cat .cn{font-family:var(--font-serif-sc);font-size:24px;font-weight:600;color:var(--ink);letter-spacing:0.32em;margin-top:8px;text-indent:0.32em}
+.cat .en{font-family:var(--font-serif-latin);font-style:italic;font-size:13px;color:var(--ink-mute);letter-spacing:0.04em}
+.cat .desc{font-family:var(--font-sans-sc);font-size:12.5px;color:var(--ink-soft);text-align:center;line-height:1.65;margin-top:6px;letter-spacing:0.02em;max-width:200px;text-wrap:pretty}
+
+/* per-category color */
+.cat.c-cai .om-frame{color:var(--liu-jin)}
+.cat.c-shi .om-frame{color:var(--ink-700)}
+.cat.c-yuan .om-frame{color:var(--zhu-sha)}
+.cat.c-xing .om-frame{color:var(--ink-700)}
+.cat.c-jian .om-frame{color:var(--celadon)}
+.cat.c-song .om-frame{color:var(--ink-700)}
+.cat.c-xue .om-frame{color:var(--celadon)}
+.cat.c-xun .om-frame{color:var(--ink-700)}
+
+/* === CASTING DESK ===  the actual question + cast UI */
+.desk{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-top:48px;position:relative;overflow:hidden}
+.desk .left{padding:48px 44px;border-right:1px solid var(--rule);background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%);position:relative;overflow:hidden}
+.desk .left .corner-knot{position:absolute;right:-30px;bottom:-30px;width:200px;color:var(--ink-300);opacity:0.32;pointer-events:none}
+
+.desk-eye{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--zhu-sha);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.desk-eye::before{content:"";width:18px;height:1px;background:var(--zhu-sha)}
+.desk h3{font-family:var(--font-serif-sc);font-size:28px;font-weight:600;letter-spacing:0.14em;color:var(--ink);margin:0 0 14px}
+.desk h3 .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:18px;color:var(--ink-mute);letter-spacing:0.04em;margin-left:10px}
+.desk .left p{font-family:var(--font-serif-sc);font-size:14.5px;color:var(--ink-soft);line-height:1.85;letter-spacing:0.02em;text-wrap:pretty;max-width:460px}
+
+/* picked category chips */
+.cat-chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 24px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-soft);padding:6px 14px;border:1px solid var(--rule-strong);border-radius:14px;cursor:pointer;background:var(--paper-raised);letter-spacing:0.08em}
+.chip.on{background:var(--zhu-sha);color:var(--paper);border-color:var(--zhu-sha)}
+.chip .om-chip{width:14px;height:14px;display:inline-block}
+.chip .om-chip svg{width:100%;height:100%;display:block}
+
+/* question textarea */
+.q-input{margin-top:18px;background:var(--paper-sunken);border:1px solid var(--rule-strong);padding:18px 22px;display:flex;flex-direction:column;gap:8px}
+.q-input .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.22em;color:var(--ink-mute);text-transform:uppercase}
+.q-input textarea{background:transparent;border:0;outline:0;resize:none;width:100%;min-height:52px;font-family:var(--font-serif-sc);font-size:18px;color:var(--ink);letter-spacing:0.04em;line-height:1.7}
+.q-input .meta{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--rule);padding-top:8px;margin-top:4px}
+.q-input .meta .hint{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em}
+.q-input .meta .ct{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute)}
+
+/* desk right — numbers input + cast */
+.desk .right-panel{padding:48px 44px;display:flex;flex-direction:column;gap:18px}
+.num-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:end;margin-top:8px}
+.num-cell{display:flex;flex-direction:column;gap:8px}
+.num-cell .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.22em;color:var(--ink-mute);text-transform:uppercase}
+.num-cell .l .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.1em;color:var(--ink-soft);margin-left:6px;font-size:12px}
+.num-cell .input-box{padding:18px 20px;background:var(--paper-sunken);border:1px solid var(--rule-strong);font-family:var(--font-serif-sc);font-size:40px;color:var(--ink);text-align:center;font-weight:600;letter-spacing:0.04em;line-height:1}
+.num-cell .input-box.zhu{color:var(--zhu-sha)}
+.num-cell .input-box.gold{color:var(--liu-jin)}
+.num-cell .hint{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em;text-align:center}
+.num-sep{font-family:var(--font-serif-sc);font-size:28px;color:var(--ink-mute);padding-bottom:24px}
+
+/* method radio */
+.method{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.method .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.22em;color:var(--ink-mute);text-transform:uppercase}
+.method .opts{display:flex;gap:0;border:1px solid var(--rule-strong);background:var(--paper)}
+.method .opt{flex:1;padding:13px 12px;text-align:center;font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-soft);border-right:1px solid var(--rule);cursor:pointer;letter-spacing:0.06em;background:var(--paper-raised)}
+.method .opt:last-child{border-right:0}
+.method .opt.on{background:var(--ink-700);color:var(--paper)}
+.method .opt .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:11px;color:var(--ink-mute);display:block;margin-top:2px;letter-spacing:0.02em}
+.method .opt.on .lt{color:var(--ink-300)}
+
+/* cast button */
+.cast{display:flex;gap:12px;margin-top:auto;padding-top:24px}
+.cast .btn{flex:1;font-size:15px;padding:16px 24px;letter-spacing:0.1em}
+.cast .arr{font-family:var(--font-serif-latin);font-style:italic;margin-left:8px}
+
+/* === SAMPLE READING PREVIEW === */
+.preview-row{margin-top:64px;display:grid;grid-template-columns:240px 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);position:relative;overflow:hidden}
+.preview-row .seal-side{padding:36px 28px;background:var(--ink-900);color:var(--paper);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.preview-row .seal-side .yi{width:64px;height:64px;background:var(--zhu-sha);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:36px;font-weight:600;letter-spacing:0.04em}
+.preview-row .seal-side .label{font-family:var(--font-serif-latin);font-style:italic;font-size:12px;letter-spacing:0.22em;color:var(--ink-300);text-transform:uppercase;margin-bottom:6px}
+.preview-row .seal-side .ttl{font-family:var(--font-serif-sc);font-size:22px;font-weight:500;letter-spacing:0.1em;line-height:1.4}
+.preview-row .seal-side .waves{position:absolute;left:0;right:0;bottom:0;height:80px;color:var(--liu-jin);opacity:0.5}
+
+.preview-row .body{padding:36px 40px;display:flex;flex-direction:column;gap:16px}
+.preview-row .gua-line{display:flex;align-items:baseline;gap:14px}
+.preview-row .gua-line .main{font-family:var(--font-serif-sc);font-size:36px;font-weight:600;color:var(--ink);letter-spacing:0.1em}
+.preview-row .gua-line .arr{font-size:22px;color:var(--ink-mute)}
+.preview-row .gua-line .vary{font-family:var(--font-serif-sc);font-size:28px;color:var(--liu-jin);letter-spacing:0.1em;font-weight:500}
+.preview-row .gua-en{font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-mute);letter-spacing:0.02em}
+.preview-row .verdict{font-family:var(--font-serif-sc);font-size:16px;color:var(--ink);line-height:1.85;letter-spacing:0.02em;text-wrap:pretty;padding:14px 18px;background:var(--zhu-sha-wash);border-left:3px solid var(--zhu-sha);margin-top:8px}
+.preview-row .verdict b{font-weight:600;color:var(--zhu-sha)}
+.preview-row .meta-row{display:flex;gap:24px;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);padding-top:14px;border-top:1px dashed var(--rule);letter-spacing:0.04em;align-items:center}
+.preview-row .meta-row .tag{font-family:var(--font-serif-sc);color:var(--ink);font-weight:600;font-size:13px;padding:4px 10px;background:var(--paper-mist);letter-spacing:0.06em}
+.preview-row .meta-row .tag.zhu{background:var(--zhu-sha);color:var(--paper)}
+
+/* === RECENT INQUIRIES === */
+.recent{margin-top:48px}
+.recent-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised)}
+.recent-item{padding:24px 26px;border-right:1px solid var(--rule);position:relative;display:flex;flex-direction:column;gap:8px;min-height:160px}
+.recent-item:last-child{border-right:0}
+.recent-item .top{display:flex;justify-content:space-between;align-items:flex-start}
+.recent-item .cat-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-sans-latin);font-size:10px;color:var(--ink-mute);letter-spacing:0.22em;text-transform:uppercase}
+.recent-item .cat-tag .cn{font-family:var(--font-serif-sc);letter-spacing:0.12em;color:var(--ink-soft);text-transform:none;margin-left:4px}
+.recent-item .cat-tag .om-mini{width:16px;height:16px;display:inline-block;color:var(--zhu-sha)}
+.recent-item .when{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em}
+.recent-item .q{font-family:var(--font-serif-sc);font-size:16px;color:var(--ink);line-height:1.6;letter-spacing:0.02em;margin-top:4px;text-wrap:pretty}
+.recent-item .answer{display:flex;align-items:center;gap:10px;font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-soft);margin-top:auto;padding-top:12px;border-top:1px dashed var(--rule);letter-spacing:0.04em}
+.recent-item .answer .gua{font-weight:600;color:var(--ink)}
+.recent-item .answer .verdict{padding:2px 8px;font-size:11px;background:var(--paper-mist);font-weight:500;letter-spacing:0.06em}
+.recent-item .answer .verdict.yes{background:var(--zhu-sha-wash);color:var(--zhu-sha)}
+.recent-item .answer .verdict.no{background:var(--celadon-wash);color:var(--celadon)}
+.recent-item .answer .verdict.wait{background:var(--liu-jin-wash);color:var(--liu-jin)}
+
+/* === METHOD STEPS (3 stages) === */
+.method-strip{margin-top:64px;padding:48px 48px 36px;background:linear-gradient(180deg, var(--paper-raised) 0%, var(--paper-mist) 100%);border:1px solid var(--rule-strong);position:relative;overflow:hidden}
+.method-strip .lantern-wm{position:absolute;right:36px;top:-20px;width:140px;color:var(--zhu-sha);opacity:0.18;pointer-events:none}
+.method-strip h3{font-family:var(--font-serif-sc);font-size:24px;font-weight:600;letter-spacing:0.12em;color:var(--ink);margin:0 0 6px;position:relative;z-index:2}
+.method-strip .h3-lt{font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-mute);margin-bottom:32px;letter-spacing:0.04em;display:block;position:relative;z-index:2}
+.steps3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;align-items:start;position:relative;z-index:2}
+.step{display:flex;flex-direction:column;gap:10px;position:relative;padding-top:14px;border-top:2px solid var(--ink-300)}
+.step .nm{font-family:var(--font-serif-latin);font-style:italic;font-size:32px;color:var(--zhu-sha);font-weight:600;line-height:1}
+.step h4{font-family:var(--font-serif-sc);font-size:18px;font-weight:600;letter-spacing:0.1em;color:var(--ink);margin:6px 0 0}
+.step p{font-family:var(--font-serif-sc);font-size:13.5px;color:var(--ink-soft);line-height:1.75;margin:4px 0 0;letter-spacing:0.02em;text-wrap:pretty}
+.step .stride{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.18em;text-transform:uppercase}
+
+/* === FOOTER STRIP === */
+.cta-strip{margin-top:80px;padding:80px 56px 96px;background:var(--ink-900);color:var(--paper);text-align:center;position:relative;overflow:hidden}
+.cta-strip .yi{width:46px;height:46px;background:var(--zhu-sha);color:var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:24px;font-weight:600;letter-spacing:0.04em;margin-bottom:24px}
+.cta-strip h2{font-family:var(--font-serif-sc);font-size:38px;font-weight:600;letter-spacing:0.16em;margin:0 0 14px;color:var(--paper);position:relative;z-index:2}
+.cta-strip h2 .lt{display:block;font-family:var(--font-serif-latin);font-style:italic;font-size:22px;color:var(--ink-300);letter-spacing:0.04em;margin-top:8px;font-weight:500}
+.cta-strip p{font-family:var(--font-serif-sc);color:var(--ink-300);max-width:540px;margin:8px auto 30px;font-size:15px;line-height:1.85;letter-spacing:0.02em;text-wrap:pretty;position:relative;z-index:2}
+.cta-strip .btn{background:var(--zhu-sha);color:var(--paper);border:0;font-size:15px;padding:16px 36px;letter-spacing:0.1em;position:relative;z-index:2}
+.cta-strip .waves-foot{position:absolute;left:0;right:0;bottom:0;height:130px;color:var(--liu-jin);opacity:0.55;z-index:1}
+.cta-strip .waves-foot svg{width:100%;height:100%}
+
+/* === FOOTER === */
+footer{padding:36px 64px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;color:var(--ink-mute);font-size:12px;font-family:var(--font-mono);background:var(--paper)}
+footer .l{display:flex;gap:18px;align-items:center}
+footer .l .s{font-family:var(--font-serif-sc);color:var(--ink-soft);font-size:13px;letter-spacing:0.3em}
+footer .roman{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink-soft);letter-spacing:0.12em}
+footer a{color:var(--ink-soft);text-decoration:none;margin-left:24px;letter-spacing:0.04em}
+</style></head><body>
+
+<nav>
+  <div class="logo">
+    <div class="seal">点</div>
+    <div class="lock"><div class="en">HexaEdge</div><div class="cn">点卦</div></div>
+  </div>
+  <ul>
+    <li><a href="index.html">主页</a></li>
+    <li><a class="active" href="zhanshi.html">占事</a></li>
+    <li><a href="fortune.html">每日财运</a></li>
+    <li><a href="ornaments.html">纹饰</a></li>
+    <li><a href="#">历史</a></li>
+  </ul>
+  <div class="right">
+    <a href="zhanshi-en.html" style="font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-soft);letter-spacing:0.06em;text-decoration:none">EN</a>
+    <button class="btn btn-ghost">登录</button>
+    <button class="btn btn-pri">起卦</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-bagua" viewBox="0 0 120 120"><use href="#om-bagua"/></svg>
+
+
+  <div class="eye">EST. 2026 <span class="dot">·</span> CLASSICAL LIUYAO <span class="dot">·</span> INQUIRY OF MATTERS</div>
+  <h1>占 事</h1>
+  <div class="sub">问 事 之 道 <span class="lt">·  Inquiry of Matters  ·</span> 古 法 六 爻</div>
+  <p class="lede">心有所惑，则以两数起卦——<br>一问，一卦，一辞。古法所言：「心诚则灵，卦不二占。」</p>
+
+  <div class="today-strip">
+    <div class="it"><span class="l">Today</span><span class="v">丙午 · 庚午<span class="lt">2026·04·28</span></span></div>
+    <div class="it"><span class="l">本月卦</span><span class="v">山天大畜</span></div>
+    <div class="it"><span class="l">月气</span><span class="v" style="color:var(--zhu-sha)">谷雨末 · 火气当令</span></div>
+    <div class="it"><span class="l">值日</span><span class="v" style="color:var(--liu-jin)">朱雀 · 巳午吉</span></div>
+  </div>
+
+  <div class="hero-mountains">
+    <svg viewBox="0 0 1400 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" opacity="0.10"><polygon points="0,260 220,140 400,230 600,130 820,210 1050,135 1240,210 1400,170 1400,260"/></g>
+      <g fill="currentColor" opacity="0.18"><polygon points="0,260 130,180 320,220 510,170 720,220 920,175 1100,220 1300,185 1400,215 1400,260"/></g>
+      <g fill="currentColor" opacity="0.30"><polygon points="0,260 100,210 250,230 420,205 600,230 780,210 950,232 1150,210 1320,230 1400,220 1400,260"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- BREATHER -->
+<div class="breather">
+  <svg viewBox="0 0 400 24"><use href="#om-divider"/></svg>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ I · 八类问事 ============ -->
+  <div class="shead">
+    <span class="num">i</span>
+    <div class="ttl-grp">
+      <h2>所 问 何 事</h2>
+      <span class="lt">Eight kinds of matter · 古法八类</span>
+    </div>
+    <div class="right">
+      <b>八件</b>
+      tap any card to choose<br>
+      classical six-line method
+    </div>
+  </div>
+
+  <div class="cats">
+
+    <a class="cat c-cai" href="#cast">
+      <span class="roman">i</span>
+      <span class="heat"><b>★★★★★</b> 本周 1,284 问</span>
+      <div class="om-frame"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></div>
+      <div class="cn">财</div>
+      <div class="en">Wealth</div>
+      <div class="desc">求财 · 投资 · 合作<br>能否如愿，何时进账</div>
+    </a>
+
+    <a class="cat c-shi" href="#cast">
+      <span class="roman">ii</span>
+      <span class="heat"><b>★★★★</b> 本周 902 问</span>
+      <div class="om-frame"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></div>
+      <div class="cn">事</div>
+      <div class="en">Career</div>
+      <div class="desc">求职 · 升迁 · 创业<br>事业方向，进退之机</div>
+    </a>
+
+    <a class="cat c-yuan" href="#cast">
+      <span class="roman">iii</span>
+      <span class="heat"><b>★★★★★</b> 本周 1,538 问</span>
+      <div class="om-frame"><svg viewBox="0 0 120 170"><use href="#om-knot"/></svg></div>
+      <div class="cn">缘</div>
+      <div class="en">Bonds</div>
+      <div class="desc">姻缘 · 感情 · 合婚<br>能否成就，宜进宜退</div>
+    </a>
+
+    <a class="cat c-xing" href="#cast">
+      <span class="roman">iv</span>
+      <span class="heat"><b>★★★</b> 本周 446 问</span>
+      <div class="om-frame"><svg viewBox="0 0 140 100" style="margin-top:30px"><use href="#om-carriage"/></svg></div>
+      <div class="cn">行</div>
+      <div class="en">Travel</div>
+      <div class="desc">出行 · 搬迁 · 远程<br>路途吉凶，归期可期</div>
+    </a>
+
+    <a class="cat c-jian" href="#cast">
+      <span class="roman">v</span>
+      <span class="heat"><b>★★★★</b> 本周 718 问</span>
+      <div class="om-frame"><svg viewBox="0 0 100 100"><use href="#om-peach"/></svg></div>
+      <div class="cn">健</div>
+      <div class="en">Health</div>
+      <div class="desc">疾病 · 调养 · 医道<br>病情几许，何方可解</div>
+    </a>
+
+    <a class="cat c-song" href="#cast">
+      <span class="roman">vi</span>
+      <span class="heat"><b>★★</b> 本周 224 问</span>
+      <div class="om-frame"><svg viewBox="0 0 100 110"><use href="#om-scales"/></svg></div>
+      <div class="cn">讼</div>
+      <div class="en">Disputes</div>
+      <div class="desc">官司 · 诉讼 · 争端<br>胜负之机，宜和宜战</div>
+    </a>
+
+    <a class="cat c-xue" href="#cast">
+      <span class="roman">vii</span>
+      <span class="heat"><b>★★★</b> 本周 612 问</span>
+      <div class="om-frame"><svg viewBox="0 0 100 110"><use href="#om-scroll"/></svg></div>
+      <div class="cn">学</div>
+      <div class="en">Study</div>
+      <div class="desc">考试 · 升学 · 进修<br>能否得中，名次几何</div>
+    </a>
+
+    <a class="cat c-xun" href="#cast">
+      <span class="roman">viii</span>
+      <span class="heat"><b>★★</b> 本周 338 问</span>
+      <div class="om-frame"><svg viewBox="0 0 100 100"><use href="#om-moon"/></svg></div>
+      <div class="cn">寻</div>
+      <div class="en">Lost</div>
+      <div class="desc">寻人 · 失物 · 走失<br>何方可寻，何日可见</div>
+    </a>
+
+  </div>
+
+  <!-- ============ II · 起卦案 ============ -->
+  <div class="shead" id="cast">
+    <span class="num">ii</span>
+    <div class="ttl-grp">
+      <h2>起 卦 之 案</h2>
+      <span class="lt">The casting desk · ask in earnest, cast just once</span>
+    </div>
+    <div class="right">
+      <b>报数法</b>
+      two numbers → one hexagram<br>
+      classical Wenwang method
+    </div>
+  </div>
+
+  <div class="desk">
+    <div class="left">
+      <svg class="corner-knot" viewBox="0 0 120 170"><use href="#om-knot"/></svg>
+
+      <div class="desk-eye">STEP I · 立 问</div>
+      <h3>所问何事<span class="lt">Frame the matter</span></h3>
+      <p>先择一类，再以一句话立你的问。问得越具体，卦象的回应越清晰——「能否」、「何时」、「宜进宜退」皆为有形之问。</p>
+
+      <div class="cat-chips">
+        <span class="chip"><span class="om-chip" style="color:var(--liu-jin)"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></span>财</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></span>事</span>
+        <span class="chip on"><span class="om-chip" style="color:var(--paper)"><svg viewBox="0 0 120 170"><use href="#om-knot"/></svg></span>缘</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 140 100"><use href="#om-carriage"/></svg></span>行</span>
+        <span class="chip"><span class="om-chip" style="color:var(--celadon)"><svg viewBox="0 0 100 100"><use href="#om-peach"/></svg></span>健</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 100 110"><use href="#om-scales"/></svg></span>讼</span>
+        <span class="chip"><span class="om-chip" style="color:var(--celadon)"><svg viewBox="0 0 100 110"><use href="#om-scroll"/></svg></span>学</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 100 100"><use href="#om-moon"/></svg></span>寻</span>
+      </div>
+
+      <div class="q-input">
+        <span class="l">YOUR QUESTION · 立问</span>
+        <textarea>这段缘分能否成就？若有成，应在何时？</textarea>
+        <div class="meta">
+          <span class="hint">·  一卦一问 · 不可二占 · 心诚则灵  ·</span>
+          <span class="ct">22 / 80</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="desk-eye">STEP II · 报 数</div>
+      <h3>报 二 数<span class="lt">Call two numbers</span></h3>
+      <p style="font-family:var(--font-serif-sc);font-size:14.5px;color:var(--ink-soft);line-height:1.85;letter-spacing:0.02em;margin:0;text-wrap:pretty">心中默念问句，自然报出两个数——上为上卦，下为下卦。一为乾，二为兑，三为离，四为震，五为巽，六为坎，七为艮，八为坤。</p>
+
+      <div class="num-pair">
+        <div class="num-cell">
+          <span class="l">UPPER<span class="cn">·上卦</span></span>
+          <div class="input-box zhu">7</div>
+          <span class="hint">艮 ☶ · 山</span>
+        </div>
+        <span class="num-sep">·</span>
+        <div class="num-cell">
+          <span class="l">LOWER<span class="cn">·下卦</span></span>
+          <div class="input-box gold">2</div>
+          <span class="hint">兑 ☱ · 泽</span>
+        </div>
+      </div>
+
+      <div class="method">
+        <span class="l">METHOD · 起卦法</span>
+        <div class="opts">
+          <div class="opt on">报数<span class="lt">Two numbers</span></div>
+          <div class="opt">截图<span class="lt">OCR cast</span></div>
+          <div class="opt">摇钱<span class="lt">Three coins</span></div>
+          <div class="opt">手动<span class="lt">Manual</span></div>
+        </div>
+      </div>
+
+      <div class="cast">
+        <button class="btn btn-ghost" style="flex:0 0 auto;padding:16px 22px">清除</button>
+        <button class="btn btn-zhu">起 卦 解 读<span class="arr">→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ III · 卦例 ============ -->
+  <div class="shead" style="margin-top:64px">
+    <span class="num">iii</span>
+    <div class="ttl-grp">
+      <h2>样 卦 · 一 例</h2>
+      <span class="lt">A sample reading · how the engine answers</span>
+    </div>
+    <div class="right">
+      <b>示例</b>
+      free-tier preview<br>
+      full reading on Pro
+    </div>
+  </div>
+
+  <div class="preview-row">
+    <div class="seal-side">
+      <svg class="waves" viewBox="0 0 400 120" preserveAspectRatio="xMidYEnd slice"><use href="#om-waves"/></svg>
+      <div>
+        <div class="label">Sample Cast · 缘</div>
+        <div class="ttl">第 三 爻 动<br>妻 财 化 进</div>
+      </div>
+      <div class="yi" style="position:relative;z-index:2">易</div>
+    </div>
+    <div class="body">
+      <div style="font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.22em;color:var(--zhu-sha);text-transform:uppercase">YOUR INQUIRY · 立问</div>
+      <div style="font-family:var(--font-serif-sc);font-size:18px;color:var(--ink);letter-spacing:0.04em;line-height:1.6">这段缘分能否成就？若有成，应在何时？</div>
+
+      <div class="gua-line" style="margin-top:6px">
+        <span class="main">山泽损</span>
+        <span class="arr">→</span>
+        <span class="vary">山天大畜</span>
+      </div>
+      <div class="gua-en">Sun · Decrease becoming Da Xu · Great Accumulation</div>
+
+      <div class="verdict">
+        <b>偏成 · B 级。</b>损己以益人之卦，世应相生而三爻动——彼有意，你亦愿迎，但需让一步、忍一时。化卦得大畜，三月之后渐有蓄积之象，应期在<b>夏至前后</b>。
+      </div>
+
+      <div class="meta-row">
+        <span class="tag zhu">▲ 偏成</span>
+        <span class="tag">B · 中上</span>
+        <span>应期 · 2026-06-20 前后</span>
+        <span>用神 · 妻财亥水</span>
+        <span style="margin-left:auto;color:var(--zhu-sha)">查看完整解读 →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ IV · 近期 ============ -->
+  <div class="shead recent" style="margin-top:64px">
+    <span class="num">iv</span>
+    <div class="ttl-grp">
+      <h2>近 期 所 问</h2>
+      <span class="lt">Recent inquiries · the chamber speaks daily</span>
+    </div>
+    <div class="right">
+      <b>14:32</b>
+      anonymized · last hour<br>
+      with your permission
+    </div>
+  </div>
+
+  <div class="recent-list">
+    <div class="recent-item">
+      <div class="top">
+        <span class="cat-tag"><span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></span>财 <span class="cn">· Wealth</span></span>
+        <span class="when">14:28 · 6m ago</span>
+      </div>
+      <div class="q">近期是否适合追入 SPY 仓位？</div>
+      <div class="answer">
+        <span class="gua">天泽履</span>
+        <span>→</span>
+        <span class="gua">风泽中孚</span>
+        <span class="verdict yes">▲ 宜</span>
+      </div>
+    </div>
+
+    <div class="recent-item">
+      <div class="top">
+        <span class="cat-tag"><span class="om-mini"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></span>事 <span class="cn">· Career</span></span>
+        <span class="when">14:21 · 13m ago</span>
+      </div>
+      <div class="q">面试已过一周，是否能拿到 Offer？</div>
+      <div class="answer">
+        <span class="gua">水雷屯</span>
+        <span>→</span>
+        <span class="gua">水火既济</span>
+        <span class="verdict wait">◆ 待</span>
+      </div>
+    </div>
+
+    <div class="recent-item">
+      <div class="top">
+        <span class="cat-tag"><span class="om-mini" style="color:var(--celadon)"><svg viewBox="0 0 100 100"><use href="#om-peach"/></svg></span>健 <span class="cn">· Health</span></span>
+        <span class="when">14:18 · 16m ago</span>
+      </div>
+      <div class="q">家父咳症日久，宜西医或中调？</div>
+      <div class="answer">
+        <span class="gua">风火家人</span>
+        <span>→</span>
+        <span class="gua">风山渐</span>
+        <span class="verdict yes">▲ 中调</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ V · METHOD STRIP ============ -->
+  <div class="method-strip">
+    <svg class="lantern-wm" viewBox="0 0 120 200"><use href="#om-lantern"/></svg>
+    <h3>三 步 起 卦</h3>
+    <span class="h3-lt">Three steps · cast in under a minute</span>
+    <div class="steps3">
+      <div class="step">
+        <span class="stride">STEP I</span>
+        <span class="nm">i</span>
+        <h4>立 问 · 择 类</h4>
+        <p>从八类中选一，再以一句话立你的问。古法重<b>「一事一占」</b>——心中若有二三事，需分而起卦，不可混淆。</p>
+      </div>
+      <div class="step">
+        <span class="stride">STEP II</span>
+        <span class="nm">ii</span>
+        <h4>报 数 · 起 卦</h4>
+        <p>心念问句，自然报出两个数。上数为上卦，下数为下卦。两数之和余六为动爻——简单，纯粹，可复现。</p>
+      </div>
+      <div class="step">
+        <span class="stride">STEP III</span>
+        <span class="nm">iii</span>
+        <h4>读 卦 · 应 期</h4>
+        <p>引擎排盘：纳甲、六亲、世应、动爻、化卦、应期——全套古法图表渲染。你看得到，也看得懂。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ CTA STRIP ============ -->
+<section class="cta-strip">
+  <svg class="waves-foot" viewBox="0 0 400 120" preserveAspectRatio="xMidYEnd slice">
+    <use href="#om-waves"/>
+  </svg>
+
+  <div class="yi">易</div>
+  <h2>心 中 既 有 所 问<span class="lt">Cast your question · clearly, once.</span></h2>
+  <p>古法易学不为虚妄，而为澄心。一次起卦的代价是两个数——你换回的，是这个时刻一份清晰的视角，承自三千年的方法。</p>
+  <button class="btn">立 即 起 卦 →</button>
+</section>
+
+<footer>
+  <div class="l">
+    <span class="s">点 卦</span>
+    <span>© 2026 HexaEdge</span>
+  </div>
+  <span class="roman">EST. MMXXVI · 丙午年 · 庚午日</span>
+  <span>
+    <a href="ornaments.html">纹饰</a>
+    <a href="fortune.html">财运</a>
+    <a href="zhanshi-en.html">EN</a>
+  </span>
+</footer>
+
+<script src="ornaments.js"></script>
+</body></html>

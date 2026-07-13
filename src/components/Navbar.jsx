@@ -33,15 +33,21 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
 
-  // 导航项
+  // 导航项(Resume 是 PDF,新标签打开;Contact 留在最后,保持最靠右)
   const navItems = [
     { name: t('nav.work'), href: '#work' },
     { name: t('nav.about'), href: '/about' },
+    { name: t('nav.resume'), href: '/files/Qingyu_Cao_Resume.pdf', external: true },
     { name: t('nav.contact'), href: '#contact' }
   ];
 
   // 导航点击处理
-  const handleNavClick = (href) => {
+  const handleNavClick = (href, external) => {
+    if (external) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+      setIsMobileMenuOpen(false);
+      return;
+    }
     if (href.startsWith('#')) {
       // 非首页时，hash 链接需先跳转到首页对应区块
       if (!isHomePage) {
@@ -84,14 +90,14 @@ const Navbar = () => {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => handleNavClick(item.href)}
+                onClick={() => handleNavClick(item.href, item.external)}
                 className="nav-link font-medium transition-colors hover:opacity-80"
                 style={{ color: 'var(--hud-fg)' }}
               >
                 {item.name}
               </button>
             ))}
-            
+
             {/* 语言切换按钮 */}
             <button
               onClick={toggleLanguage}
@@ -143,7 +149,7 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={() => handleNavClick(item.href, item.external)}
                   className="text-left font-medium transition-colors hover:opacity-80"
                   style={{ color: 'var(--hud-fg)' }}
                 >

@@ -1,6 +1,7 @@
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ReactMarkdown from 'react-markdown';
+import { preprocessHighlightMarkers } from '../utils/highlight';
 
 const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext }) => {
   if (!image) return null;
@@ -154,7 +155,7 @@ export const TwoColumnGrid = ({ images, onImageClick }) => {
 };
 
 // 新增：交替展示组件 - 文字和图片交替显示
-export const AlternatingDisplay = ({ content, images, onImageClick }) => {
+export const AlternatingDisplay = ({ content, images, onImageClick, highlightColor }) => {
   if (!content || !images) return null;
 
   const items = [];
@@ -186,13 +187,15 @@ export const AlternatingDisplay = ({ content, images, onImageClick }) => {
         <div key={idx}>
           {item.type === 'text' ? (
             <div className="text-lg text-gray-700 leading-relaxed">
-              <ReactMarkdown 
+              <ReactMarkdown
                 components={{
                   p: ({children}) => <p className="mb-4">{children}</p>,
-                  strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>
+                  strong: ({children}) => (
+                    <strong className="font-bold" style={{ color: highlightColor }}>{children}</strong>
+                  )
                 }}
               >
-                {item.content}
+                {preprocessHighlightMarkers(item.content)}
               </ReactMarkdown>
             </div>
           ) : (
@@ -208,12 +211,12 @@ export const AlternatingDisplay = ({ content, images, onImageClick }) => {
 };
 
 // 新增：智能图片展示组件 - 根据配置选择展示模式
-export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single', content = null }) => {
+export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single', content = null, highlightColor }) => {
   if (!images || images.length === 0) return null;
 
   // 如果指定为交替模式，使用交替布局
   if (displayMode === 'alternating' && content) {
-    return <AlternatingDisplay content={content} images={images} onImageClick={onImageClick} />;
+    return <AlternatingDisplay content={content} images={images} onImageClick={onImageClick} highlightColor={highlightColor} />;
   }
 
   // 如果指定为两列模式，使用两列布局

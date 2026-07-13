@@ -1,0 +1,599 @@
+<!doctype html>
+<!-- @dsCard group="Brand" name="Inquiry · English" subtitle="English-led inquiry page · all 8 matter categories, casting desk" -->
+<html lang="en"><head><meta charset="utf-8">
+<title>HexaEdge · Inquiry of Matters</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans-latin);min-height:100vh}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 64px;border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:14px}
+.logo .seal{width:38px;height:38px;background:var(--indigo-deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:22px;font-weight:700}
+.logo .lock{display:flex;flex-direction:column;line-height:1}
+.logo .en{font-family:var(--font-serif-latin);font-style:italic;font-size:22px;font-weight:600;color:var(--indigo)}
+.logo .cn{font-family:var(--font-serif-sc);font-size:11px;letter-spacing:0.32em;color:var(--ink-mute);margin-top:5px;text-transform:uppercase}
+nav ul{display:flex;gap:36px;list-style:none;margin:0;padding:0;font-size:14px;font-family:var(--font-sans-latin)}
+nav a{color:var(--ink-soft);text-decoration:none;letter-spacing:0.04em}
+nav a.active{color:var(--ink);position:relative}
+nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-26px;height:2px;background:var(--zhu-sha)}
+nav .right{display:flex;gap:14px;align-items:center}
+.btn{font-family:var(--font-sans-latin);font-size:14px;padding:10px 22px;border:1px solid transparent;cursor:pointer;border-radius:2px;background:none;letter-spacing:0.04em;font-weight:500}
+.btn-pri{background:var(--indigo);color:var(--paper)}
+.btn-zhu{background:var(--zhu-sha);color:var(--paper);font-weight:600}
+.btn-ghost{color:var(--ink);border-color:var(--rule-strong);background:var(--paper-raised)}
+
+/* HERO */
+.hero{position:relative;padding:96px 64px 240px;text-align:center;overflow:hidden;background:linear-gradient(180deg, var(--paper) 0%, var(--paper-mist) 100%)}
+.hero .eye{font-family:var(--font-sans-latin);font-size:11px;letter-spacing:0.36em;color:var(--indigo-soft);text-transform:uppercase;margin-bottom:30px;position:relative;z-index:2;font-weight:600}
+.hero .eye .dot{color:var(--zhu-sha);margin:0 12px}
+.hero h1{font-family:var(--font-serif-latin);font-style:italic;font-size:116px;font-weight:600;letter-spacing:0;margin:0 0 12px;color:var(--indigo);line-height:1;position:relative;z-index:2}
+.hero .sub{font-family:var(--font-serif-latin);font-style:italic;font-size:24px;color:var(--ink);letter-spacing:0.02em;margin:0 0 8px;position:relative;z-index:2;font-weight:500}
+.hero .sub .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:14px;color:var(--ink-mute);letter-spacing:0.34em;display:block;margin-top:14px;font-weight:500}
+.hero .lede{font-family:var(--font-sans-latin);font-size:16px;color:var(--ink-soft);max-width:600px;margin:24px auto 0;line-height:1.85;letter-spacing:0.01em;position:relative;z-index:2;text-wrap:pretty}
+.hero .lede em{font-family:var(--font-serif-latin);font-style:italic;color:var(--zhu-sha);font-weight:600}
+
+.hero-bagua{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:580px;height:580px;color:var(--ink-700);opacity:0.045;z-index:1;pointer-events:none}
+.hero-plum-l{position:absolute;left:32px;top:24px;width:200px;color:var(--zhu-sha);opacity:0.55;transform:scaleX(-1);z-index:2}
+.hero-plum-r{position:absolute;right:32px;bottom:280px;width:200px;color:var(--zhu-sha);opacity:0.55;z-index:2}
+.hero-mountains{position:absolute;left:0;right:0;bottom:0;height:260px;color:var(--ink-900);z-index:1}
+.hero-mountains svg{width:100%;height:100%;display:block}
+
+.today-strip{position:absolute;left:0;right:0;bottom:140px;display:flex;justify-content:center;gap:48px;align-items:center;padding:18px 0;font-size:13px;color:var(--ink-mute);font-family:var(--font-mono);z-index:3;border-top:1px solid rgba(122,140,160,0.22);border-bottom:1px solid rgba(122,140,160,0.22);background:rgba(255,255,255,0.55);backdrop-filter:blur(3px)}
+.today-strip .it{display:flex;gap:10px;align-items:center}
+.today-strip .l{text-transform:uppercase;letter-spacing:0.24em;font-size:10px;color:var(--ink-mute);font-family:var(--font-sans-latin);font-weight:600}
+.today-strip .v{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink);font-size:15px;font-weight:600;letter-spacing:0.01em}
+.today-strip .v .zhu{color:var(--zhu-sha)}
+.today-strip .v .gold{color:var(--liu-jin)}
+
+.breather{padding:48px 0 14px;display:flex;justify-content:center}
+.breather svg{width:360px;color:var(--ink-300)}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 64px}
+
+.shead{display:flex;align-items:baseline;gap:22px;padding:18px 0 28px}
+.shead .num{font-family:var(--font-serif-latin);font-style:italic;font-size:40px;color:var(--zhu-sha);font-weight:500;line-height:1}
+.shead .ttl-grp{display:flex;flex-direction:column;gap:4px}
+.shead h2{font-family:var(--font-serif-latin);font-style:italic;font-size:42px;font-weight:600;color:var(--ink);margin:0;letter-spacing:0;line-height:1.1}
+.shead h2 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:16px;color:var(--ink-mute);margin-left:14px;letter-spacing:0.18em;font-weight:500;vertical-align:middle}
+.shead .lt{font-family:var(--font-sans-latin);font-size:13px;color:var(--ink-mute);letter-spacing:0.02em;font-weight:500}
+.shead .right{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);text-align:right;line-height:1.7;letter-spacing:0.04em}
+.shead .right b{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink);font-weight:600;display:block;font-size:14px;margin-bottom:3px;letter-spacing:0.02em}
+
+/* 8 CATEGORIES */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised)}
+.cat{padding:36px 28px 32px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;min-height:340px;text-decoration:none;color:inherit;cursor:pointer;transition:background var(--d-base) var(--ease)}
+.cat:nth-child(4n){border-right:0}
+.cat:nth-last-child(-n+4){border-bottom:0}
+.cat:hover{background:linear-gradient(180deg, var(--paper-raised) 0%, var(--paper-mist) 100%)}
+.cat:hover .om-frame{transform:translateY(-2px)}
+
+.cat .roman{position:absolute;top:18px;left:24px;font-family:var(--font-serif-latin);font-style:italic;font-size:20px;color:var(--ink-300);font-weight:500;letter-spacing:0.04em}
+.cat .heat{position:absolute;top:18px;right:24px;font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em;text-align:right;line-height:1.5}
+.cat .heat b{color:var(--zhu-sha);font-family:var(--font-serif-latin);font-style:italic;font-weight:600;letter-spacing:0;font-size:11px;display:block}
+
+.cat .om-frame{width:108px;height:140px;display:flex;align-items:center;justify-content:center;margin-top:18px;transition:transform var(--d-base) var(--ease)}
+.cat .om-frame svg{width:100%;height:100%;display:block}
+
+.cat .name{font-family:var(--font-serif-latin);font-style:italic;font-size:30px;font-weight:600;color:var(--ink);letter-spacing:0;margin-top:8px;line-height:1.1}
+.cat .cn{font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-mute);letter-spacing:0.22em;font-weight:500;margin-top:2px}
+.cat .desc{font-family:var(--font-sans-latin);font-size:13px;color:var(--ink-soft);text-align:center;line-height:1.65;margin-top:8px;letter-spacing:0.01em;max-width:200px;text-wrap:pretty}
+
+.cat.c-cai .om-frame{color:var(--liu-jin)}
+.cat.c-shi .om-frame{color:var(--ink-700)}
+.cat.c-yuan .om-frame{color:var(--zhu-sha)}
+.cat.c-xing .om-frame{color:var(--ink-700)}
+.cat.c-jian .om-frame{color:var(--celadon)}
+.cat.c-song .om-frame{color:var(--ink-700)}
+.cat.c-xue .om-frame{color:var(--celadon)}
+.cat.c-xun .om-frame{color:var(--ink-700)}
+
+/* CASTING DESK */
+.desk{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-top:48px;position:relative;overflow:hidden}
+.desk .left{padding:48px 44px;border-right:1px solid var(--rule);background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%);position:relative;overflow:hidden}
+.desk .left .corner-knot{position:absolute;right:-30px;bottom:-30px;width:200px;color:var(--ink-300);opacity:0.32;pointer-events:none}
+
+.desk-eye{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--zhu-sha);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-weight:600}
+.desk-eye::before{content:"";width:18px;height:1px;background:var(--zhu-sha)}
+.desk h3{font-family:var(--font-serif-latin);font-style:italic;font-size:32px;font-weight:600;color:var(--ink);margin:0 0 14px;letter-spacing:0.01em}
+.desk h3 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:15px;color:var(--ink-mute);margin-left:14px;letter-spacing:0.18em;font-weight:500;vertical-align:middle}
+.desk .left p{font-family:var(--font-sans-latin);font-size:14.5px;color:var(--ink-soft);line-height:1.85;letter-spacing:0.01em;text-wrap:pretty;max-width:480px}
+.desk .left p em{font-family:var(--font-serif-latin);font-style:italic;color:var(--zhu-sha);font-weight:600}
+
+.cat-chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 24px}
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-soft);padding:6px 14px;border:1px solid var(--rule-strong);border-radius:14px;cursor:pointer;background:var(--paper-raised);letter-spacing:0.01em;font-weight:500}
+.chip.on{background:var(--zhu-sha);color:var(--paper);border-color:var(--zhu-sha)}
+.chip .om-chip{width:14px;height:14px;display:inline-block}
+.chip .om-chip svg{width:100%;height:100%;display:block}
+
+.q-input{margin-top:18px;background:var(--paper-sunken);border:1px solid var(--rule-strong);padding:18px 22px;display:flex;flex-direction:column;gap:8px}
+.q-input .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;font-weight:600}
+.q-input textarea{background:transparent;border:0;outline:0;resize:none;width:100%;min-height:52px;font-family:var(--font-serif-latin);font-style:italic;font-size:19px;color:var(--ink);letter-spacing:0.01em;line-height:1.55;font-weight:500}
+.q-input .meta{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--rule);padding-top:8px;margin-top:4px}
+.q-input .meta .hint{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em}
+.q-input .meta .ct{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute)}
+
+.desk .right-panel{padding:48px 44px;display:flex;flex-direction:column;gap:18px}
+.desk .right-panel p{font-family:var(--font-sans-latin);font-size:14.5px;color:var(--ink-soft);line-height:1.85;letter-spacing:0.01em;margin:0;text-wrap:pretty}
+.desk .right-panel p .term{font-family:var(--font-serif-sc);color:var(--ink);font-size:13px;letter-spacing:0.04em}
+
+.num-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:end;margin-top:8px}
+.num-cell{display:flex;flex-direction:column;gap:8px}
+.num-cell .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;font-weight:600}
+.num-cell .l .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.12em;color:var(--ink-soft);margin-left:6px;font-size:11px;font-weight:500}
+.num-cell .input-box{padding:18px 20px;background:var(--paper-sunken);border:1px solid var(--rule-strong);font-family:var(--font-serif-latin);font-style:italic;font-size:46px;color:var(--ink);text-align:center;font-weight:600;letter-spacing:0;line-height:1}
+.num-cell .input-box.zhu{color:var(--zhu-sha)}
+.num-cell .input-box.gold{color:var(--liu-jin)}
+.num-cell .hint{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em;text-align:center}
+.num-cell .hint .cn{font-family:var(--font-serif-sc);color:var(--ink-soft);font-size:12px;letter-spacing:0.06em;margin-right:4px}
+.num-sep{font-family:var(--font-serif-latin);font-style:italic;font-size:32px;color:var(--ink-mute);padding-bottom:24px}
+
+.method{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.method .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;font-weight:600}
+.method .opts{display:flex;gap:0;border:1px solid var(--rule-strong);background:var(--paper)}
+.method .opt{flex:1;padding:13px 12px;text-align:center;font-family:var(--font-serif-latin);font-style:italic;font-size:13.5px;color:var(--ink-soft);border-right:1px solid var(--rule);cursor:pointer;letter-spacing:0.01em;background:var(--paper-raised);font-weight:500}
+.method .opt:last-child{border-right:0}
+.method .opt.on{background:var(--ink-700);color:var(--paper);font-weight:600}
+.method .opt .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:10px;color:var(--ink-mute);display:block;margin-top:3px;letter-spacing:0.14em;font-weight:500}
+.method .opt.on .cn{color:var(--ink-300)}
+
+.cast{display:flex;gap:12px;margin-top:auto;padding-top:24px}
+.cast .btn{flex:1;font-size:15px;padding:16px 24px;letter-spacing:0.04em}
+.cast .arr{font-family:var(--font-serif-latin);font-style:italic;margin-left:8px}
+
+/* PREVIEW */
+.preview-row{margin-top:64px;display:grid;grid-template-columns:240px 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);position:relative;overflow:hidden}
+.preview-row .seal-side{padding:36px 28px;background:var(--ink-900);color:var(--paper);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.preview-row .seal-side .yi{width:64px;height:64px;background:var(--zhu-sha);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:36px;font-weight:600;letter-spacing:0.04em}
+.preview-row .seal-side .label{font-family:var(--font-serif-latin);font-style:italic;font-size:13px;letter-spacing:0.06em;color:var(--ink-300);margin-bottom:6px;font-weight:600}
+.preview-row .seal-side .ttl{font-family:var(--font-serif-latin);font-style:italic;font-size:22px;font-weight:500;letter-spacing:0.01em;line-height:1.4}
+.preview-row .seal-side .ttl .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:12px;color:var(--ink-300);letter-spacing:0.18em;display:block;margin-top:6px;font-weight:500}
+.preview-row .seal-side .waves{position:absolute;left:0;right:0;bottom:0;height:80px;color:var(--liu-jin);opacity:0.5}
+
+.preview-row .body{padding:36px 40px;display:flex;flex-direction:column;gap:16px}
+.preview-row .body .you{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--zhu-sha);text-transform:uppercase;font-weight:600}
+.preview-row .body .q-text{font-family:var(--font-serif-latin);font-style:italic;font-size:22px;color:var(--ink);letter-spacing:0;line-height:1.5;font-weight:500}
+.preview-row .gua-line{display:flex;align-items:baseline;gap:14px;margin-top:8px;flex-wrap:wrap}
+.preview-row .gua-line .main{font-family:var(--font-serif-latin);font-style:italic;font-size:36px;font-weight:600;color:var(--ink);letter-spacing:0.01em}
+.preview-row .gua-line .arr{font-size:22px;color:var(--ink-mute);font-family:var(--font-serif-latin)}
+.preview-row .gua-line .vary{font-family:var(--font-serif-latin);font-style:italic;font-size:30px;color:var(--liu-jin);letter-spacing:0.01em;font-weight:500}
+.preview-row .gua-line .cn{font-family:var(--font-serif-sc);font-size:14px;color:var(--ink-mute);letter-spacing:0.14em;width:100%;font-weight:500}
+.preview-row .gua-en{font-family:var(--font-sans-latin);font-size:13.5px;color:var(--ink-mute);letter-spacing:0.01em;line-height:1.6}
+.preview-row .verdict{font-family:var(--font-sans-latin);font-size:15px;color:var(--ink);line-height:1.85;letter-spacing:0.01em;text-wrap:pretty;padding:14px 18px;background:var(--zhu-sha-wash);border-left:3px solid var(--zhu-sha);margin-top:8px}
+.preview-row .verdict b{font-weight:600;color:var(--zhu-sha)}
+.preview-row .verdict em{font-style:italic;font-family:var(--font-serif-latin);color:var(--ink);font-weight:600}
+.preview-row .meta-row{display:flex;gap:16px;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);padding-top:14px;border-top:1px dashed var(--rule);letter-spacing:0.04em;align-items:center;flex-wrap:wrap}
+.preview-row .meta-row .tag{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink);font-weight:600;font-size:13px;padding:4px 10px;background:var(--paper-mist);letter-spacing:0.01em}
+.preview-row .meta-row .tag.zhu{background:var(--zhu-sha);color:var(--paper)}
+
+/* RECENT */
+.recent-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-top:8px}
+.recent-item{padding:24px 26px;border-right:1px solid var(--rule);position:relative;display:flex;flex-direction:column;gap:8px;min-height:170px}
+.recent-item:last-child{border-right:0}
+.recent-item .top{display:flex;justify-content:space-between;align-items:flex-start}
+.recent-item .cat-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-sans-latin);font-size:10px;color:var(--ink-mute);letter-spacing:0.28em;text-transform:uppercase;font-weight:600}
+.recent-item .cat-tag .nm{font-family:var(--font-serif-latin);font-style:italic;font-size:13px;color:var(--ink-soft);letter-spacing:0;text-transform:none;margin-left:4px;font-weight:500}
+.recent-item .cat-tag .om-mini{width:16px;height:16px;display:inline-block;color:var(--zhu-sha)}
+.recent-item .when{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em}
+.recent-item .q{font-family:var(--font-serif-latin);font-style:italic;font-size:17px;color:var(--ink);line-height:1.5;letter-spacing:0;margin-top:4px;text-wrap:pretty;font-weight:500}
+.recent-item .answer{display:flex;align-items:center;gap:10px;font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-soft);margin-top:auto;padding-top:12px;border-top:1px dashed var(--rule);letter-spacing:0.01em;font-weight:500;flex-wrap:wrap}
+.recent-item .answer .gua{font-weight:600;color:var(--ink)}
+.recent-item .answer .verdict{padding:2px 8px;font-size:11px;background:var(--paper-mist);font-weight:600;letter-spacing:0.04em;font-family:var(--font-sans-latin);font-style:normal;text-transform:uppercase}
+.recent-item .answer .verdict.yes{background:var(--zhu-sha-wash);color:var(--zhu-sha)}
+.recent-item .answer .verdict.no{background:var(--celadon-wash);color:var(--celadon)}
+.recent-item .answer .verdict.wait{background:var(--liu-jin-wash);color:var(--liu-jin)}
+
+/* METHOD STRIP */
+.method-strip{margin-top:64px;padding:48px 48px 36px;background:linear-gradient(180deg, var(--paper-raised) 0%, var(--paper-mist) 100%);border:1px solid var(--rule-strong);position:relative;overflow:hidden}
+.method-strip .lantern-wm{position:absolute;right:36px;top:-20px;width:140px;color:var(--zhu-sha);opacity:0.18;pointer-events:none}
+.method-strip h3{font-family:var(--font-serif-latin);font-style:italic;font-size:28px;font-weight:600;color:var(--ink);margin:0 0 6px;letter-spacing:0.01em;position:relative;z-index:2}
+.method-strip h3 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:14px;color:var(--ink-mute);margin-left:14px;letter-spacing:0.18em;font-weight:500}
+.method-strip .h3-lt{font-family:var(--font-sans-latin);font-size:14px;color:var(--ink-soft);margin-bottom:32px;letter-spacing:0.01em;display:block;position:relative;z-index:2}
+.steps3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;align-items:start;position:relative;z-index:2}
+.step{display:flex;flex-direction:column;gap:10px;position:relative;padding-top:14px;border-top:2px solid var(--ink-300)}
+.step .nm{font-family:var(--font-serif-latin);font-style:italic;font-size:32px;color:var(--zhu-sha);font-weight:600;line-height:1}
+.step h4{font-family:var(--font-serif-latin);font-style:italic;font-size:20px;font-weight:600;color:var(--ink);margin:6px 0 0;letter-spacing:0.01em}
+.step h4 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:12px;color:var(--ink-mute);margin-left:10px;letter-spacing:0.16em;font-weight:500}
+.step p{font-family:var(--font-sans-latin);font-size:14px;color:var(--ink-soft);line-height:1.75;margin:4px 0 0;letter-spacing:0.01em;text-wrap:pretty}
+.step p b{color:var(--zhu-sha);font-weight:600}
+.step p em{font-style:italic;font-family:var(--font-serif-latin);color:var(--zhu-sha);font-weight:600}
+.step .stride{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.22em;text-transform:uppercase}
+
+/* CTA STRIP */
+.cta-strip{margin-top:80px;padding:80px 56px 96px;background:var(--ink-900);color:var(--paper);text-align:center;position:relative;overflow:hidden}
+.cta-strip .yi{width:46px;height:46px;background:var(--zhu-sha);color:var(--paper);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:24px;font-weight:600;letter-spacing:0.04em;margin-bottom:24px}
+.cta-strip h2{font-family:var(--font-serif-latin);font-style:italic;font-size:48px;font-weight:600;letter-spacing:0;margin:0 0 14px;color:var(--paper);position:relative;z-index:2;line-height:1.15}
+.cta-strip h2 .cn{display:block;font-family:var(--font-serif-sc);font-style:normal;font-size:18px;color:var(--ink-300);letter-spacing:0.24em;margin-top:14px;font-weight:500}
+.cta-strip p{font-family:var(--font-sans-latin);color:var(--ink-300);max-width:580px;margin:8px auto 30px;font-size:15px;line-height:1.85;letter-spacing:0.01em;text-wrap:pretty;position:relative;z-index:2}
+.cta-strip p em{font-family:var(--font-serif-latin);font-style:italic;color:var(--paper);font-weight:600}
+.cta-strip .btn{background:var(--zhu-sha);color:var(--paper);border:0;font-size:15px;padding:16px 36px;letter-spacing:0.04em;position:relative;z-index:2;font-weight:600}
+.cta-strip .waves-foot{position:absolute;left:0;right:0;bottom:0;height:130px;color:var(--liu-jin);opacity:0.55;z-index:1}
+.cta-strip .waves-foot svg{width:100%;height:100%}
+
+footer{padding:36px 64px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;color:var(--ink-mute);font-size:12px;font-family:var(--font-mono);background:var(--paper)}
+footer .l{display:flex;gap:18px;align-items:center}
+footer .l .s{font-family:var(--font-serif-sc);color:var(--ink-soft);font-size:13px;letter-spacing:0.3em}
+footer .roman{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink-soft);letter-spacing:0.12em}
+footer a{color:var(--ink-soft);text-decoration:none;margin-left:24px;letter-spacing:0.04em;font-family:var(--font-sans-latin)}
+</style></head><body>
+
+<nav>
+  <div class="logo">
+    <div class="seal">点</div>
+    <div class="lock"><div class="en">HexaEdge</div><div class="cn">Liuyao · Est. 2026</div></div>
+  </div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a class="active" href="zhanshi-en.html">Inquiry</a></li>
+    <li><a href="fortune-en.html">Daily Fortune</a></li>
+    <li><a href="ornaments.html">Motifs</a></li>
+    <li><a href="#">History</a></li>
+  </ul>
+  <div class="right">
+    <a href="zhanshi.html" style="font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-soft);letter-spacing:0.18em;text-decoration:none">中文</a>
+    <button class="btn btn-ghost">Sign in</button>
+    <button class="btn btn-pri">Cast</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-bagua" viewBox="0 0 120 120"><use href="#om-bagua"/></svg>
+
+  <div class="eye">EST. 2026 <span class="dot">·</span> CLASSICAL LIUYAO <span class="dot">·</span> INQUIRY OF MATTERS</div>
+  <h1>Inquiry</h1>
+  <div class="sub">Inquiry of Matters · Classical Liuyao Method<span class="cn">占  事  ·  问 事 之 道</span></div>
+  <p class="lede">When the matter sits in your mind, cast it. Two numbers, one hexagram, one judgment.<br>The classical instruction: <em>cast in earnest — cast only once</em>.</p>
+
+  <div class="today-strip">
+    <div class="it"><span class="l">Today</span><span class="v">28 Apr 2026 · <span style="color:var(--ink-mute)">Bingwu · Gengwu</span></span></div>
+    <div class="it"><span class="l">Month-gua</span><span class="v">Da Xu · 山天大畜</span></div>
+    <div class="it"><span class="l">Season</span><span class="v"><span class="zhu">Guyu end · Fire ascending</span></span></div>
+    <div class="it"><span class="l">Day-spirit</span><span class="v"><span class="gold">Vermilion Bird · Si–Wu favorable</span></span></div>
+  </div>
+
+  <div class="hero-mountains">
+    <svg viewBox="0 0 1400 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" opacity="0.10"><polygon points="0,260 220,140 400,230 600,130 820,210 1050,135 1240,210 1400,170 1400,260"/></g>
+      <g fill="currentColor" opacity="0.18"><polygon points="0,260 130,180 320,220 510,170 720,220 920,175 1100,220 1300,185 1400,215 1400,260"/></g>
+      <g fill="currentColor" opacity="0.30"><polygon points="0,260 100,210 250,230 420,205 600,230 780,210 950,232 1150,210 1320,230 1400,220 1400,260"/></g>
+    </svg>
+  </div>
+</section>
+
+<div class="breather">
+  <svg viewBox="0 0 400 24"><use href="#om-divider"/></svg>
+</div>
+
+<div class="wrap">
+
+  <!-- I · 8 CATEGORIES -->
+  <div class="shead">
+    <span class="num">i</span>
+    <div class="ttl-grp">
+      <h2>Eight Kinds of Matter<span class="cn">· 所问何事</span></h2>
+      <span class="lt">Choose a category before you cast — the framing shapes the reading</span>
+    </div>
+    <div class="right">
+      <b>eight</b>
+      tap any card to choose<br>
+      classical six-line method
+    </div>
+  </div>
+
+  <div class="cats">
+
+    <a class="cat c-cai" href="#cast">
+      <span class="roman">i</span>
+      <span class="heat"><b>★★★★★</b>1,284 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></div>
+      <div class="name">Wealth</div>
+      <div class="cn">财 · cai</div>
+      <div class="desc">Finance, investment, partnerships — can it succeed; when does it land?</div>
+    </a>
+
+    <a class="cat c-shi" href="#cast">
+      <span class="roman">ii</span>
+      <span class="heat"><b>★★★★</b>902 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></div>
+      <div class="name">Career</div>
+      <div class="cn">事 · shi</div>
+      <div class="desc">Job-search, promotion, founding — direction and timing for moves.</div>
+    </a>
+
+    <a class="cat c-yuan" href="#cast">
+      <span class="roman">iii</span>
+      <span class="heat"><b>★★★★★</b>1,538 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 120 170"><use href="#om-knot"/></svg></div>
+      <div class="name">Bonds</div>
+      <div class="cn">缘 · yuan</div>
+      <div class="desc">Marriage, partners, alliances — can it form; should you advance?</div>
+    </a>
+
+    <a class="cat c-xing" href="#cast">
+      <span class="roman">iv</span>
+      <span class="heat"><b>★★★</b>446 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 140 100" style="margin-top:30px"><use href="#om-carriage"/></svg></div>
+      <div class="name">Travel</div>
+      <div class="cn">行 · xing</div>
+      <div class="desc">Trips, relocations, long journeys — safe route, expected return.</div>
+    </a>
+
+    <a class="cat c-jian" href="#cast">
+      <span class="roman">v</span>
+      <span class="heat"><b>★★★★</b>718 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 100 100"><use href="#om-peach"/></svg></div>
+      <div class="name">Health</div>
+      <div class="cn">健 · jian</div>
+      <div class="desc">Illness, recovery, treatment — gravity of condition and direction of cure.</div>
+    </a>
+
+    <a class="cat c-song" href="#cast">
+      <span class="roman">vi</span>
+      <span class="heat"><b>★★</b>224 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 100 110"><use href="#om-scales"/></svg></div>
+      <div class="name">Disputes</div>
+      <div class="cn">讼 · song</div>
+      <div class="desc">Litigation, lawsuits, conflicts — odds of winning; settle or fight.</div>
+    </a>
+
+    <a class="cat c-xue" href="#cast">
+      <span class="roman">vii</span>
+      <span class="heat"><b>★★★</b>612 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 100 110"><use href="#om-scroll"/></svg></div>
+      <div class="name">Study</div>
+      <div class="cn">学 · xue</div>
+      <div class="desc">Exams, admissions, further study — likelihood and standing.</div>
+    </a>
+
+    <a class="cat c-xun" href="#cast">
+      <span class="roman">viii</span>
+      <span class="heat"><b>★★</b>338 this week</span>
+      <div class="om-frame"><svg viewBox="0 0 100 100"><use href="#om-moon"/></svg></div>
+      <div class="name">Lost</div>
+      <div class="cn">寻 · xun</div>
+      <div class="desc">Lost items, missing people — where to look; when they surface.</div>
+    </a>
+
+  </div>
+
+  <!-- II · CASTING DESK -->
+  <div class="shead" id="cast">
+    <span class="num">ii</span>
+    <div class="ttl-grp">
+      <h2>The Casting Desk<span class="cn">· 起卦之案</span></h2>
+      <span class="lt">Ask in earnest. Cast just once.</span>
+    </div>
+    <div class="right">
+      <b>two-number method</b>
+      Wenwang Najia · 文王报数<br>
+      no devices required
+    </div>
+  </div>
+
+  <div class="desk">
+    <div class="left">
+      <svg class="corner-knot" viewBox="0 0 120 170"><use href="#om-knot"/></svg>
+
+      <div class="desk-eye">STEP I · FRAME THE MATTER</div>
+      <h3>Frame the matter<span class="cn">· 立问</span></h3>
+      <p>Pick a category, then phrase your question in a single sentence. The more specific the question, the cleaner the answer. <em>Can it</em>, <em>when will it</em>, <em>should I advance or retreat</em> — these are well-formed questions.</p>
+
+      <div class="cat-chips">
+        <span class="chip"><span class="om-chip" style="color:var(--liu-jin)"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></span>Wealth</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></span>Career</span>
+        <span class="chip on"><span class="om-chip" style="color:var(--paper)"><svg viewBox="0 0 120 170"><use href="#om-knot"/></svg></span>Bonds</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 140 100"><use href="#om-carriage"/></svg></span>Travel</span>
+        <span class="chip"><span class="om-chip" style="color:var(--celadon)"><svg viewBox="0 0 100 100"><use href="#om-peach"/></svg></span>Health</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 100 110"><use href="#om-scales"/></svg></span>Disputes</span>
+        <span class="chip"><span class="om-chip" style="color:var(--celadon)"><svg viewBox="0 0 100 110"><use href="#om-scroll"/></svg></span>Study</span>
+        <span class="chip"><span class="om-chip"><svg viewBox="0 0 100 100"><use href="#om-moon"/></svg></span>Lost</span>
+      </div>
+
+      <div class="q-input">
+        <span class="l">YOUR QUESTION · 立问</span>
+        <textarea>Can this relationship come to fruition? If so, when?</textarea>
+        <div class="meta">
+          <span class="hint">·  one cast per question · cast only once · in earnest  ·</span>
+          <span class="ct">52 / 120</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="desk-eye">STEP II · CALL TWO NUMBERS</div>
+      <h3>Call two numbers<span class="cn">· 报二数</span></h3>
+      <p>Hold the question in mind; call out two numbers naturally. The first is the upper trigram; the second the lower. <span class="term">1 Qian</span> · <span class="term">2 Dui</span> · <span class="term">3 Li</span> · <span class="term">4 Zhen</span> · <span class="term">5 Xun</span> · <span class="term">6 Kan</span> · <span class="term">7 Gen</span> · <span class="term">8 Kun</span>.</p>
+
+      <div class="num-pair">
+        <div class="num-cell">
+          <span class="l">UPPER<span class="cn">· 上卦</span></span>
+          <div class="input-box zhu">7</div>
+          <span class="hint"><span class="cn">艮</span>Gen ☶ · Mountain</span>
+        </div>
+        <span class="num-sep">·</span>
+        <div class="num-cell">
+          <span class="l">LOWER<span class="cn">· 下卦</span></span>
+          <div class="input-box gold">2</div>
+          <span class="hint"><span class="cn">兑</span>Dui ☱ · Lake</span>
+        </div>
+      </div>
+
+      <div class="method">
+        <span class="l">METHOD · 起卦法</span>
+        <div class="opts">
+          <div class="opt on">Numbers<span class="cn">报数</span></div>
+          <div class="opt">OCR<span class="cn">截图</span></div>
+          <div class="opt">Coins<span class="cn">摇钱</span></div>
+          <div class="opt">Manual<span class="cn">手动</span></div>
+        </div>
+      </div>
+
+      <div class="cast">
+        <button class="btn btn-ghost" style="flex:0 0 auto;padding:16px 22px">Clear</button>
+        <button class="btn btn-zhu">Cast &amp; Read<span class="arr">→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- III · SAMPLE -->
+  <div class="shead" style="margin-top:64px">
+    <span class="num">iii</span>
+    <div class="ttl-grp">
+      <h2>A Sample Reading<span class="cn">· 样卦 · 一例</span></h2>
+      <span class="lt">How the engine answers · free-tier preview</span>
+    </div>
+    <div class="right">
+      <b>preview</b>
+      free tier · full on Pro
+    </div>
+  </div>
+
+  <div class="preview-row">
+    <div class="seal-side">
+      <svg class="waves" viewBox="0 0 400 120" preserveAspectRatio="xMidYEnd slice"><use href="#om-waves"/></svg>
+      <div>
+        <div class="label">SAMPLE CAST · Bonds</div>
+        <div class="ttl">Third line moves<br>Wealth advances<span class="cn">第三爻动 · 妻财化进</span></div>
+      </div>
+      <div class="yi" style="position:relative;z-index:2">易</div>
+    </div>
+    <div class="body">
+      <div class="you">YOUR INQUIRY · 立问</div>
+      <div class="q-text">"Can this relationship come to fruition? If so, when?"</div>
+
+      <div class="gua-line">
+        <span class="main">Sun</span>
+        <span class="arr">→</span>
+        <span class="vary">Da Xu</span>
+        <span class="cn">山泽损 → 山天大畜</span>
+      </div>
+      <div class="gua-en">Decrease becoming Great Accumulation · Mountain over Lake → Mountain over Heaven</div>
+
+      <div class="verdict">
+        <b>Leaning yes · B-grade.</b> "Decrease" is the hexagram of giving from yourself to benefit another; the World and Response generate each other, with the third line in motion — <em>they're interested, and you are willing</em>, but expect to yield a step and to be patient. The changing hexagram resolves into Da Xu (Great Accumulation): three months on, gathering momentum emerges. Window of completion: <b>around the summer solstice</b>.
+      </div>
+
+      <div class="meta-row">
+        <span class="tag zhu">▲ Leaning Yes</span>
+        <span class="tag">B · Upper-Mid</span>
+        <span>Window · circa 20 Jun 2026</span>
+        <span>Used-God · Wealth Haishui</span>
+        <span style="margin-left:auto;color:var(--zhu-sha);font-family:var(--font-serif-latin);font-style:italic;font-weight:600">Open full reading →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IV · RECENT -->
+  <div class="shead" style="margin-top:64px">
+    <span class="num">iv</span>
+    <div class="ttl-grp">
+      <h2>Recent Inquiries<span class="cn">· 近期所问</span></h2>
+      <span class="lt">Anonymized · the chamber speaks daily · with your permission</span>
+    </div>
+    <div class="right">
+      <b>14:32</b>
+      last hour · opt-in
+    </div>
+  </div>
+
+  <div class="recent-list">
+    <div class="recent-item">
+      <div class="top">
+        <span class="cat-tag"><span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></span>WEALTH<span class="nm">· Wealth</span></span>
+        <span class="when">14:28 · 6m ago</span>
+      </div>
+      <div class="q">"Is now a good time to add to my SPY position?"</div>
+      <div class="answer">
+        <span class="gua">Lü</span>
+        <span>→</span>
+        <span class="gua">Zhong Fu</span>
+        <span class="verdict yes">▲ Yes</span>
+      </div>
+    </div>
+
+    <div class="recent-item">
+      <div class="top">
+        <span class="cat-tag"><span class="om-mini"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></span>CAREER<span class="nm">· Career</span></span>
+        <span class="when">14:21 · 13m ago</span>
+      </div>
+      <div class="q">"It's been a week since the interview — will the offer come?"</div>
+      <div class="answer">
+        <span class="gua">Tun</span>
+        <span>→</span>
+        <span class="gua">Ji Ji</span>
+        <span class="verdict wait">◆ Wait</span>
+      </div>
+    </div>
+
+    <div class="recent-item">
+      <div class="top">
+        <span class="cat-tag"><span class="om-mini" style="color:var(--celadon)"><svg viewBox="0 0 100 100"><use href="#om-peach"/></svg></span>HEALTH<span class="nm">· Health</span></span>
+        <span class="when">14:18 · 16m ago</span>
+      </div>
+      <div class="q">"Father's cough lingers — western or traditional medicine?"</div>
+      <div class="answer">
+        <span class="gua">Jia Ren</span>
+        <span>→</span>
+        <span class="gua">Jian</span>
+        <span class="verdict yes">▲ Traditional</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- V · METHOD STRIP -->
+  <div class="method-strip">
+    <svg class="lantern-wm" viewBox="0 0 120 200"><use href="#om-lantern"/></svg>
+    <h3>Three Steps<span class="cn">· 三步起卦</span></h3>
+    <span class="h3-lt">Cast in under a minute — the classical method, intact</span>
+    <div class="steps3">
+      <div class="step">
+        <span class="stride">STEP I</span>
+        <span class="nm">i</span>
+        <h4>Frame &amp; Choose<span class="cn">立问 · 择类</span></h4>
+        <p>Pick one of eight categories, phrase the matter in a sentence. The classical rule is plain: <b>one cast per matter</b>. If two or three concerns sit together, cast them separately.</p>
+      </div>
+      <div class="step">
+        <span class="stride">STEP II</span>
+        <span class="nm">ii</span>
+        <h4>Call &amp; Cast<span class="cn">报数 · 起卦</span></h4>
+        <p>Hold the question in mind; call out two numbers. Upper number → upper trigram; lower → lower. The sum mod six gives the moving line. <em>Simple, pure, reproducible.</em></p>
+      </div>
+      <div class="step">
+        <span class="stride">STEP III</span>
+        <span class="nm">iii</span>
+        <h4>Read &amp; Time<span class="cn">读卦 · 应期</span></h4>
+        <p>The engine renders the full chart — najia, six relations, World &amp; Response, moving lines, changing hexagram, window of response — in legible form, with classical commentary.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <svg class="waves-foot" viewBox="0 0 400 120" preserveAspectRatio="xMidYEnd slice">
+    <use href="#om-waves"/>
+  </svg>
+
+  <div class="yi">易</div>
+  <h2>You don't have to believe<span class="cn">· 一卦一问 · 心诚则灵</span></h2>
+  <p>Just cast once. The cost of a hexagram is two random numbers. What returns is a <em>clear reading of the moment</em>, drawn from three thousand years of practice.</p>
+  <button class="btn">Cast your first hexagram →</button>
+</section>
+
+<footer>
+  <div class="l">
+    <span class="s">点 卦</span>
+    <span>© 2026 HexaEdge</span>
+  </div>
+  <span class="roman">EST. MMXXVI · Bingwu Year · Gengwu Day</span>
+  <span>
+    <a href="ornaments.html">Motifs</a>
+    <a href="fortune-en.html">Fortune</a>
+    <a href="zhanshi.html">中文</a>
+  </span>
+</footer>
+
+<script src="ornaments.js"></script>
+</body></html>

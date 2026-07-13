@@ -11,7 +11,7 @@ import MoonIcon from '../hud/MoonIcon'
 //导入shadcn/ui组件库的UI组件
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { ArrowLeft, ArrowUp, ZoomIn } from 'lucide-react'
+import { ArrowLeft, ArrowUp, ArrowUpRight, ZoomIn } from 'lucide-react'
 //导入Markdown渲染组件
 import ReactMarkdown from 'react-markdown'
 //导入项目数据获取函数
@@ -24,6 +24,7 @@ import DecryptedText from '../components/DecryptedText'
 // 导入国际化
 import { useLanguage } from '../i18n'
 import { getLocalizedText, getLocalizedArray, localizeProject } from '../utils/localization'
+import { preprocessHighlightMarkers } from '../utils/highlight'
 
 // 辅助函数：从项目的 colors 中提取主色
 const getProjectHighlightColor = (project) => {
@@ -132,13 +133,7 @@ const getLightColorStyle = (project) => {
   return { color: lc };
 };
 
-// 辅助函数：预处理文本，将 [[text]] 转换为 Markdown 加粗格式
-const preprocessHighlightMarkers = (text) => {
-  if (typeof text !== 'string') return text;
-  // 将 [[text]] 转换为 **text** 格式，这样 ReactMarkdown 会将其作为加粗处理
-  // 然后在 strong 组件中应用颜色
-  return text.replace(/\[\[([^\]]+)\]\]/g, '**$1**');
-};
+// [[高亮]] 语法的预处理与 ImageGallery 共用同一份实现(见 utils/highlight)
 
 // 宣言大字:把 [[高亮]] 渲染成高亮色 span(关键词上品牌色)
 const renderManifestoLine = (line, color) =>
@@ -302,6 +297,115 @@ const ProjectDetail = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // Why I'm building this:POV 段落 + 六爻线条母题。挂在 Overview(产品大图之下)。
+  const WhyIBuild = () => {
+    if (!project.overview?.whyIBuild) return null
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-12 pt-8 max-w-4xl"
+        style={{ borderTop: '1px solid var(--hud-line)' }}
+      >
+        <p
+          className="text-xs md:text-sm lg:text-base font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']"
+          style={{ color: 'var(--hud-fg-muted)' }}
+        >
+          <span style={{ color: 'var(--section-tag)' }}>✦</span> Why I&apos;m building this
+        </p>
+        <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
+          <p
+            className="text-lg md:text-xl leading-relaxed tracking-[0.01em] font-['Poppins'] flex-1 max-w-3xl"
+            style={{ color: 'var(--text-body)' }}
+          >
+            {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
+          </p>
+          {project.overview.whyIBuildHexagram && (
+            <div className="shrink-0 flex flex-col items-center gap-3 mx-auto md:mx-0" aria-hidden="true">
+              <div className="flex flex-col gap-2.5" style={{ width: 168 }}>
+                {[...project.overview.whyIBuildHexagram].reverse().map((yao, p) => (
+                  <div key={p} className="flex items-center justify-between" style={{ height: 12 }}>
+                    {yao === 1 ? (
+                      <motion.span
+                        initial={{ scaleX: 0, opacity: 0 }}
+                        whileInView={{ scaleX: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{ delay: (5 - p) * 0.13, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                        style={{ width: '100%', height: '100%', background: (project.overview.whyIBuildHexagramColor || projectAccent), borderRadius: 3, transformOrigin: 'center' }}
+                      />
+                    ) : (
+                      [0, 1].map((s) => (
+                        <motion.span
+                          key={s}
+                          initial={{ scaleX: 0, opacity: 0 }}
+                          whileInView={{ scaleX: 1, opacity: 1 }}
+                          viewport={{ once: true, amount: 0.6 }}
+                          transition={{ delay: (5 - p) * 0.13, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                          style={{ width: '44%', height: '100%', background: (project.overview.whyIBuildHexagramColor || projectAccent), borderRadius: 3, transformOrigin: 'center' }}
+                        />
+                      ))
+                    )}
+                  </div>
+                ))}
+              </div>
+              {project.overview.whyIBuildHexagramLabel && (
+                <p className="text-[12px] tracking-[0.4em] font-['Poppins']" style={{ color: projectAccent }}>
+                  {project.overview.whyIBuildHexagramLabel}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      </motion.div>
+    )
+  }
+
+  // The Challenge 卡片:玻璃底 + 左侧品牌色边。overview 和任意 section 都能挂。
+  const ChallengeCard = ({ challenge, challenges, id }) => {
+    if (!challenge && !(challenges?.length > 0)) return null
+    return (
+      <div
+        id={id}
+        className="p-8 rounded-2xl relative overflow-hidden backdrop-blur-md"
+        style={{
+          background: 'var(--card-glass-bg)',
+          border: '1px solid var(--card-glass-border)',
+          borderLeft: `3px solid ${highlightColor}`,
+        }}
+      >
+        <h3
+          className="text-xl font-semibold mb-4"
+          style={{ fontFamily: "'Poppins', 'Inter', sans-serif", color: 'var(--text-hero)' }}
+        >
+          {t('project.challenge')}
+        </h3>
+        {challenges?.length > 0 ? (
+          <div className="space-y-4">
+            {challenges.map((item, index) => (
+              <div key={index} className="flex items-start space-x-3">
+                <div
+                  className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-1"
+                  style={{ background: `var(--detail-badge-bg, ${getProjectHighlightColor(rawProject)}20)` }}
+                >
+                  <span
+                    className="font-semibold text-sm"
+                    style={{ color: `var(--detail-badge, ${getProjectHighlightColor(rawProject)})` }}
+                  >
+                    {index + 1}
+                  </span>
+                </div>
+                <p className="text-lg leading-relaxed" style={{ color: 'var(--text-body)' }}>{item}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-lg leading-relaxed" style={{ color: 'var(--text-body)' }}>{challenge}</p>
+        )}
+      </div>
+    )
+  }
+
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -390,7 +494,7 @@ const ProjectDetail = () => {
           {/* 顶栏读数:Case Study ✦ ——————— 年份 */}
           <div className="flex items-center gap-4 mb-7">
             <p
-              className="text-[11px] font-medium tracking-[0.3em] uppercase whitespace-nowrap font-['Poppins']"
+              className="text-xs md:text-sm lg:text-base font-medium tracking-[0.3em] uppercase whitespace-nowrap font-['Poppins']"
               style={{ color: 'var(--section-tag)' }}
             >
               <MoonIcon /> Case Study ✦
@@ -398,7 +502,7 @@ const ProjectDetail = () => {
             <span className="h-px flex-1" style={{ background: 'var(--hud-line)' }} aria-hidden="true" />
             {project.year && (
               <span
-                className="text-[11px] tracking-[0.3em] tabular-nums font-['Poppins']"
+                className="text-xs md:text-sm lg:text-base tracking-[0.3em] tabular-nums font-['Poppins']"
                 style={{ color: 'var(--hud-fg-muted)' }}
               >
                 {project.year}
@@ -426,16 +530,17 @@ const ProjectDetail = () => {
           {tldr && (
             <div className="mt-9 max-w-3xl">
               <p
-                className="text-[11px] font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
+                className="text-xs md:text-sm lg:text-base font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
                 style={{ color: 'var(--hud-fg-muted)' }}
               >
                 <span style={{ color: 'var(--section-tag)' }}>✦</span> TL;DR
               </p>
+              {/* 导语级字号：TL;DR 是电梯陈述,不该被排成正文 */}
               <p
-                className="text-base md:text-lg leading-relaxed tracking-[0.01em] font-['Poppins']"
-                style={{ color: 'var(--text-body)' }}
+                className="text-lg md:text-xl lg:text-2xl leading-relaxed tracking-[0.01em] font-['Poppins']"
+                style={{ color: 'var(--text-hero)' }}
               >
-                {tldr}
+                {renderManifestoLine(tldr, highlightColor)}
               </p>
             </div>
           )}
@@ -449,78 +554,17 @@ const ProjectDetail = () => {
               {metaItems.map(({ label, value }) => (
                 <div key={label}>
                   <p
-                    className="text-[11px] font-medium tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
+                    className="text-xs md:text-sm lg:text-base font-medium tracking-[0.25em] uppercase mb-1.5 font-['Poppins']"
                     style={{ color: 'var(--hud-fg-muted)' }}
                   >
                     {label}
                   </p>
-                  <p className="text-base md:text-lg font-normal tracking-[0.01em]" style={{ color: 'var(--text-hero)' }}>{value}</p>
+                  <p className="text-lg md:text-xl font-normal tracking-[0.01em]" style={{ color: 'var(--text-hero)' }}>{value}</p>
                 </div>
               ))}
             </div>
           )}
 
-          {/* Why I'm building this:案例头部收尾的 POV 段落(meta 之下) */}
-          {project.overview?.whyIBuild && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-11 pt-8 max-w-4xl"
-              style={{ borderTop: '1px solid var(--hud-line)' }}
-            >
-              <p
-                className="text-[11px] font-medium uppercase tracking-[0.3em] mb-4 flex items-center gap-2 font-['Poppins']"
-                style={{ color: 'var(--hud-fg-muted)' }}
-              >
-                <span style={{ color: 'var(--section-tag)' }}>✦</span> Why I&apos;m building this
-              </p>
-              <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
-                <p
-                  className="text-base md:text-lg leading-relaxed tracking-[0.01em] font-['Poppins'] flex-1 max-w-3xl"
-                  style={{ color: 'var(--text-body)' }}
-                >
-                  {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
-                </p>
-                {/* 可选:六爻线条母题(自下而上绘入,用项目本色) */}
-                {project.overview.whyIBuildHexagram && (
-                  <div className="shrink-0 flex flex-col items-center gap-3 mx-auto md:mx-0" aria-hidden="true">
-                    <div className="flex flex-col gap-2.5" style={{ width: 168 }}>
-                      {[...project.overview.whyIBuildHexagram].reverse().map((yao, p) => (
-                        <div key={p} className="flex items-center justify-between" style={{ height: 12 }}>
-                          {yao === 1 ? (
-                            <motion.span
-                              initial={{ scaleX: 0, opacity: 0 }}
-                              whileInView={{ scaleX: 1, opacity: 1 }}
-                              viewport={{ once: true, amount: 0.6 }}
-                              transition={{ delay: (5 - p) * 0.13, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                              style={{ width: '100%', height: '100%', background: (project.overview.whyIBuildHexagramColor || projectAccent), borderRadius: 3, transformOrigin: 'center' }}
-                            />
-                          ) : (
-                            [0, 1].map((s) => (
-                              <motion.span
-                                key={s}
-                                initial={{ scaleX: 0, opacity: 0 }}
-                                whileInView={{ scaleX: 1, opacity: 1 }}
-                                viewport={{ once: true, amount: 0.6 }}
-                                transition={{ delay: (5 - p) * 0.13, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                                style={{ width: '44%', height: '100%', background: (project.overview.whyIBuildHexagramColor || projectAccent), borderRadius: 3, transformOrigin: 'center' }}
-                              />
-                            ))
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                    {project.overview.whyIBuildHexagramLabel && (
-                      <p className="text-[12px] tracking-[0.4em] font-['Poppins']" style={{ color: projectAccent }}>
-                        {project.overview.whyIBuildHexagramLabel}
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          )}
         </div>
       </section>
 
@@ -649,23 +693,29 @@ const ProjectDetail = () => {
             )}
           </div>
 
-            {/* Section Header */}
+            {/* Why I'm building this：动机段落，挂在产品大图之下（hero 只负责"是什么"） */}
+            <WhyIBuild />
+
+            {/* Section Header：项目若没写 overview 正文，整块不渲染（TL;DR 已在 hero 说清是什么） */}
+            {(project.overview.mainTitle || project.overview.briefContent) && (
             <div className="mb-8 md:mb-12 lg:mb-16">
             {/* Section Tag */}
-            <div 
+            <div
               className="detail-accent-text text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
             >
               {t('project.projectOverview')}
             </div>
-            
+
             {/* Main Title */}
-            <h2 
-              className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
-              style={{ color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})` }}
-            >
-              {project.overview.mainTitle || 'Transform AI Learning Into Community Experience'}
-            </h2>
-            
+            {project.overview.mainTitle && (
+              <h2
+                className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 md:mb-6 leading-tight"
+                style={{ color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})` }}
+              >
+                {project.overview.mainTitle}
+              </h2>
+            )}
+
             {/* Brief Content */}
             {project.overview.briefContent && (
               <div className="text-sm md:text-base lg:text-lg text-[#565869] leading-relaxed [&_strong]:!font-bold [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
@@ -697,9 +747,10 @@ const ProjectDetail = () => {
               </div>
             )}
           </div>
-          
+          )}
+
           {/* Full Content (只在没有 briefContent 时显示) */}
-          {!project.overview.briefContent && (
+          {!project.overview.briefContent && project.overview.content && (
             <div className="prose prose-lg max-w-none mb-12 [&_strong]:!text-[var(--highlight-color)]">
               <div className="text-lg text-gray-700 leading-relaxed text-left mb-8" style={{ '--highlight-color': highlightColor }}>
                 <ReactMarkdown 
@@ -739,54 +790,12 @@ const ProjectDetail = () => {
             </div>
           )}
             
-            {(project.overview.challenge || project.overview.challenges) && (
-              <div 
-                id="challenge" 
-                className="p-8 rounded-2xl relative overflow-hidden backdrop-blur-md"
-                style={{
-                  background: 'var(--card-glass-bg)',
-                  border: '1px solid var(--card-glass-border)',
-                  borderLeft: `3px solid ${highlightColor}`,
-                }}
-              >
-                <h3 
-                  className="text-xl font-semibold text-gray-900 mb-4"
-                  style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
-                >
-                  {t('project.challenge')}
-                </h3>
-                {project.overview?.challenges ? (
-                  <div className="space-y-4">
-                    {project.overview.challenges.map((challenge, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <div 
-                          className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-1"
-                          style={{
-                            background: `var(--detail-badge-bg, ${getProjectHighlightColor(rawProject)}20)`
-                          }}
-                        >
-                          <span 
-                            className="font-semibold text-sm"
-                            style={{
-                              color: `var(--detail-badge, ${getProjectHighlightColor(rawProject)})`
-                            }}
-                          >
-                            {index + 1}
-                          </span>
-                        </div>
-                        <p className="text-lg text-gray-700 leading-relaxed">
-                          {challenge}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    {project.overview.challenge}
-                  </p>
-                )}
-              </div>
-            )}
+            {/* overview 的 Challenge 卡片(项目没写就不渲染) */}
+            <ChallengeCard
+              id="challenge"
+              challenge={project.overview.challenge}
+              challenges={project.overview.challenges}
+            />
 
             {/* Overview 独立主图（data 中 overview.mainImage: {src, alt, caption}） */}
             {project.overview.mainImage && (
@@ -913,6 +922,31 @@ const ProjectDetail = () => {
                     {preprocessHighlightMarkers(section.briefContent)}
                   </ReactMarkdown>
                 </div>
+              )}
+
+              {/* 章节自己的 The Challenge 卡片(如 The Problem) */}
+              {(section.challenge || section.challenges?.length > 0) && (
+                <div className="mt-8">
+                  <ChallengeCard challenge={section.challenge} challenges={section.challenges} />
+                </div>
+              )}
+
+              {/* 章节外链(如 Design System 的 UI Kit) */}
+              {section.link?.url && (
+                <a
+                  href={section.link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm md:text-base transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                  style={{
+                    color: 'var(--text-hero)',
+                    border: '1px solid var(--card-glass-border)',
+                    background: 'var(--surface-scrim)',
+                  }}
+                >
+                  {section.link.label}
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
               )}
             </div>
             
@@ -1073,7 +1107,7 @@ const ProjectDetail = () => {
                       }}
                     >
                       <p
-                        className="text-[11px] font-medium tracking-[0.3em] uppercase mb-3 font-['Poppins']"
+                        className="text-xs md:text-sm lg:text-base font-medium tracking-[0.3em] uppercase mb-3 font-['Poppins']"
                         style={{ color: 'var(--section-tag)' }}
                       >
                         ✦ {(idx + 1).toString().padStart(2, '0')}
@@ -1151,6 +1185,7 @@ const ProjectDetail = () => {
                         onImageClick={(image) => handleImageClick(image, allImagesInGroup)}
                         displayMode={group.displayMode || 'single'}
                         content={group.content}
+                        highlightColor={highlightColor}
                       />
                     </div>
                   );
@@ -1164,6 +1199,7 @@ const ProjectDetail = () => {
                   onImageClick={(image) => handleImageClick(image, section.images)}
                   displayMode={section.imageDisplayMode || 'single'}
                   content={section.content}
+                  highlightColor={highlightColor}
                 />
               )
             )}

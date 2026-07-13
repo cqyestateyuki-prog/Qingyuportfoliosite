@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HexaEdge · Shipped Outcome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --jade:#F2F6F7;
+    --celadon:#E3ECEF;
+    --porcelain:#243E66;
+    --ink:#14233A;
+    --gilding:#9C7A3A;
+    --cinnabar:#A8392E;
+    --line:rgba(36,62,102,.14);
+    --muted:rgba(20,35,58,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#3a3a44;display:flex;align-items:center;justify-content:center;min-height:100vh}
+
+  /* 16:9 画板，导出时按 2x 截图即得 3840×2160 */
+  .slide{
+    width:1920px;height:1080px;flex:none;
+    background:var(--jade);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;
+    padding:64px 76px 52px;
+    display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+
+  /* ---- 页眉 ---- */
+  .eyebrow{display:flex;align-items:center;gap:14px;
+    font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--porcelain);}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--cinnabar)}
+  .brand{position:absolute;top:58px;right:76px;
+    font-family:'EB Garamond',serif;font-size:30px;letter-spacing:.01em;color:var(--ink)}
+  .brand em{font-style:normal;color:var(--gilding)}
+  h1{font-family:'EB Garamond',serif;font-weight:500;font-size:74px;line-height:1.05;
+    color:var(--ink);margin:18px 0 6px;letter-spacing:-.01em}
+  .sub{font-size:17px;color:var(--muted);max-width:900px;line-height:1.5}
+
+  /* ---- 主体：左闭环 / 右系统 ---- */
+  .body{display:grid;grid-template-columns:560px 1fr;gap:56px;margin-top:36px;flex:1;min-height:0}
+
+  .colhead{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--gilding);margin-bottom:18px;
+    padding-bottom:10px;border-bottom:1px solid var(--line)}
+
+  /* 用户闭环 */
+  .loop{position:relative;padding-left:30px;display:flex;flex-direction:column;height:calc(100% - 40px)}
+  .loop::before{content:"";position:absolute;left:6px;top:12px;bottom:46px;width:2px;
+    background:linear-gradient(180deg,var(--gilding),var(--porcelain))}
+  .step{position:relative;flex:1;padding-bottom:6px}
+  .step::before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;
+    border-radius:50%;background:var(--jade);border:2px solid var(--porcelain);z-index:1}
+  .step.pay::before{background:var(--cinnabar);border-color:var(--cinnabar);
+    box-shadow:0 0 0 4px rgba(168,57,46,.13)}
+  .step b{display:block;font-size:21px;font-weight:600;color:var(--ink);letter-spacing:-.01em;margin-bottom:2px}
+  .step span{font-size:15px;color:var(--muted);line-height:1.45}
+  .closes{margin-left:-30px;display:flex;align-items:center;gap:11px;flex:none;
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--cinnabar)}
+  .closes::before{content:"↻";font-size:19px}
+
+  /* 系统分层 */
+  .stack{display:flex;flex-direction:column;gap:11px}
+  .layer{background:#fff;border:1px solid var(--line);border-left:3px solid var(--porcelain);
+    border-radius:9px;padding:14px 20px;display:grid;grid-template-columns:34px 1fr;gap:16px;align-items:start}
+  .layer.ai{border-left-color:var(--gilding)}
+  .layer.commerce{border-left-color:var(--cinnabar)}
+  .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gilding);padding-top:3px}
+  .layer h3{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:3px}
+  .layer p{font-size:14.5px;color:var(--muted);line-height:1.5}
+  .layer p code{font-family:'JetBrains Mono',monospace;font-size:13px;
+    color:var(--porcelain);background:var(--celadon);padding:1px 6px;border-radius:4px}
+
+  /* ---- 页脚数据条 ---- */
+  .facts{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);
+    display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+  .metrics{display:flex;gap:44px}
+  .metric b{display:block;font-family:'EB Garamond',serif;font-size:34px;line-height:1;
+    color:var(--porcelain);font-weight:600}
+  .metric span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin-top:6px;display:block}
+  .kicker{font-family:'EB Garamond',serif;font-style:italic;font-size:21px;
+    color:var(--porcelain);text-align:right;line-height:1.35;flex:none}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="brand">Hexa<em>Edge</em></div>
+  <div class="eyebrow">Shipped Outcome</div>
+  <h1>One person, the whole system.</h1>
+  <p class="sub">A user arrives from search and leaves with a paid, exported reading. Every layer that carries them there was designed and built by the same person.</p>
+
+  <div class="body">
+    <!-- 左：用户闭环 -->
+    <div>
+      <div class="colhead">The loop, end to end</div>
+      <div class="loop">
+        <div class="step"><b>Arrives from search</b><span>Lands on one of 64 statically generated encyclopedia pages</span></div>
+        <div class="step"><b>Signs up</b><span>Auth, session, account</span></div>
+        <div class="step"><b>Casts</b><span>Three coins, one honest question</span></div>
+        <div class="step"><b>Reads</b><span>Deterministic engine returns a board and a plain-language reading</span></div>
+        <div class="step"><b>Asks</b><span>LLM consultant explains what the engine already computed</span></div>
+        <div class="step pay"><b>Hits a tier gate, pays</b><span>Four tiers, one-time unlocks and subscriptions</span></div>
+        <div class="step"><b>Exports and shares</b><span>Purpose-built PNG / PDF share card</span></div>
+        <div class="closes">the loop closes</div>
+      </div>
+    </div>
+
+    <!-- 右：系统分层 -->
+    <div>
+      <div class="colhead">What had to exist underneath</div>
+      <div class="stack">
+        <div class="layer">
+          <div class="num">01</div>
+          <div><h3>Acquisition &amp; SEO</h3>
+          <p>64 encyclopedia pages statically generated for search, plus 21 editorial articles. The content layer is the funnel.</p></div>
+        </div>
+        <div class="layer commerce">
+          <div class="num">02</div>
+          <div><h3>Identity, commerce, entitlement</h3>
+          <p>Auth and four pricing tiers. <code>One tier check</code> drives every locked surface, so one-time unlocks and subscriptions resolve through the same entitlement layer.</p></div>
+        </div>
+        <div class="layer">
+          <div class="num">03</div>
+          <div><h3>Three product modules</h3>
+          <p>Market readings, personal wealth, encyclopedia. Gated inside the same components that render them.</p></div>
+        </div>
+        <div class="layer">
+          <div class="num">04</div>
+          <div><h3>Deterministic engine</h3>
+          <p>64 hexagrams, Five-Element interactions, moving lines and timing windows, resolved into standardized signals. <code>17 API routes</code>.</p></div>
+        </div>
+        <div class="layer ai">
+          <div class="num">05</div>
+          <div><h3>AI layer, under contract</h3>
+          <p>The LLM explains, it never decides. <code>ban-list</code> <code>output contract</code> <code>evaluation</code>, versioned like code.</p></div>
+        </div>
+        <div class="layer">
+          <div class="num">06</div>
+          <div><h3>Bilingual delivery</h3>
+          <p>next-intl across zh / en: UI, AI output language and terminology switch together. 387 bilingual keys.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="metrics">
+      <div class="metric"><b>6</b><span>system layers</span></div>
+      <div class="metric"><b>3</b><span>modules</span></div>
+      <div class="metric"><b>17</b><span>API routes</span></div>
+      <div class="metric"><b>64</b><span>SSG pages</span></div>
+      <div class="metric"><b>387</b><span>bilingual keys</span></div>
+      <div class="metric"><b>4</b><span>pricing tiers</span></div>
+    </div>
+    <div class="kicker">The design implied it,<br>so I built it.</div>
+  </div>
+</div>
+</body>
+</html>

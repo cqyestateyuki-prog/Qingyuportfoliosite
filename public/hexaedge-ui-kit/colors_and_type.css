@@ -1,0 +1,141 @@
+﻿@charset "UTF-8";
+/* ============================================================
+   HexaEdge - DianGua - Foundational tokens
+   New-Chinese aesthetic - cool indigo + cinnabar - ink-wash literati
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---- Paper · 宣纸 ---- */
+  --yu-bai:        #F2F6F7;   /* 玉白 paper */
+  --paper:         #F2F6F7;   /* alias of yu-bai */
+  --paper-raised:  #FFFFFF;   /* card */
+  --qing-ci:       #E4ECEE;   /* 青瓷釉 paper-deep */
+  --paper-sunken:  #E4ECEE;   /* alias */
+  --xuan-gray:     #B6C3C7;   /* 玄灰 */
+
+  /* ---- Ink scale · 水墨蓝十级 (青花/钻蓝/烟青/青灰…) ---- */
+  --ink-900:       #14233A;   /* 墨青 ink-900 */
+  --ink-700:       #243E66;   /* 青花 ink-700 */
+  --ink-600:       #355F8C;   /* 钻蓝 ink-600 */
+  --ink-400:       #7C95AE;   /* 烟青 ink-400 */
+  --ink-300:       #A6B8C6;   /* 青灰 ink-300 */
+  --ink-200:       #CAD6DD;   /* ink-200 */
+  --ink-100:       #E3ECEF;   /* ink-100 */
+
+  /* Semantic ink aliases */
+  --ink:           #14233A;
+  --ink-soft:      #243E66;
+  --ink-mute:      #7C95AE;
+  --ink-fade:      #A6B8C6;
+  --paper-mist:    #E3ECEF;
+  --paper-noise:   none; /* @kind other */
+
+  /* ---- Accents · 朱砂 / 鎏金 / 青竹绿 ---- */
+  --zhu-sha:       #A8392E;   /* 朱砂 — 主点缀 · 涨 (yang) */
+  --zhu-sha-dim:   #842A22;   /* hover */
+  --zhu-sha-wash:  #F1DEDA;
+  --cinnabar:      #A8392E;   /* alias */
+  --cinnabar-wash: #F1DEDA;
+
+  --liu-jin:       #9C7A3A;   /* 鎏金 — S 级 · 转折 · 动爻 */
+  --liu-jin-wash:  #ECE2C8;
+  --ochre:         #9C7A3A;   /* alias */
+  --ochre-wash:    #ECE2C8;
+
+  --qing-zhu:      #6E9387;   /* 青竹绿 — 跌(中国惯例) · pine */
+  --qing-zhu-wash: #DDE5DD;
+  --celadon:       #6E9387;   /* alias */
+  --celadon-wash:  #DDE5DD;
+
+  /* Indigo (primary brand) — anchored on 青花 ink-700 */
+  --indigo-deep:   #14233A;   /* seal navy */
+  --indigo:        #243E66;
+  --indigo-soft:   #7C95AE;
+  --indigo-wash:   #E3ECEF;
+
+  /* ---- Hairlines ---- */
+  --rule:          #E3ECEF;
+  --rule-strong:   #B6C3C7;
+
+  /* ---- Five-elements · 五行 (table only) ---- */
+  --wx-jin:  #9C7A3A;   /* 金 · 琥珀 */
+  --wx-mu:   #6E9387;   /* 木 · 青竹绿 */
+  --wx-shui: #243E66;   /* 水 · 靛蓝 */
+  --wx-huo:  #A8392E;   /* 火 · 朱砂 */
+  --wx-tu:   #7A6A4D;   /* 土 · 赭石 */
+
+  /* ---- Type families ---- */
+  --font-serif-sc:    "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-sans-sc:     "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --font-serif-latin: "Cormorant Garamond", "Noto Serif SC", "Times New Roman", serif;
+  --font-sans-latin:  ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-mono:        "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ---- Type scale ---- */
+  --ts-display: 64px;  --lh-display: 1.0; /* @kind other */
+  --ts-h1:      40px;  --lh-h1:      1.2; /* @kind other */
+  --ts-h2:      28px;  --lh-h2:      1.25; /* @kind other */
+  --ts-h3:      22px;  --lh-h3:      1.3; /* @kind other */
+  --ts-lead:    18px;  --lh-lead:    1.55; /* @kind other */
+  --ts-body:    15px;  --lh-body:    1.65; /* @kind other */
+  --ts-small:   13px;  --lh-small:   1.55; /* @kind other */
+  --ts-micro:   11px;  --lh-micro:   1.4; /* @kind other */
+
+  /* ---- Spacing (4 / 8 / 12 / 16 / 24 / 32 / 48 / 64) ---- */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+
+  /* ---- Radii ---- */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 10px;
+  --r-xl: 14px;
+
+  /* ---- Shadows ---- */
+  --shadow-rest:  0 1px 0 rgba(26,40,64,0.04), 0 4px 14px rgba(26,40,64,0.05);
+  --shadow-lift:  0 2px 0 rgba(26,40,64,0.04), 0 10px 28px rgba(26,40,64,0.08);
+
+  /* ---- Motion ---- */
+  --ease:      cubic-bezier(0.32, 0.08, 0.24, 1); /* @kind other */
+  --d-fast:    160ms; /* @kind other */
+  --d-base:    240ms; /* @kind other */
+  --d-slow:    400ms; /* @kind other */
+}
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans-sc);
+  font-size: var(--ts-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.h-display, h1.display {
+  font-family: var(--font-serif-sc);
+  font-weight: 600;
+  font-size: var(--ts-display);
+  line-height: var(--lh-display);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+h1, .h1 { font-family: var(--font-serif-sc); font-weight: 600; font-size: var(--ts-h1); line-height: var(--lh-h1); letter-spacing: 0.03em; color: var(--ink); margin: 0; }
+h2, .h2 { font-family: var(--font-serif-sc); font-weight: 600; font-size: var(--ts-h2); line-height: var(--lh-h2); color: var(--ink); margin: 0; }
+h3, .h3 { font-family: var(--font-serif-sc); font-weight: 500; font-size: var(--ts-h3); line-height: var(--lh-h3); color: var(--ink); margin: 0; }
+p, .body { font-family: var(--font-sans-sc); font-weight: 400; font-size: var(--ts-body); line-height: var(--lh-body); color: var(--ink-soft); margin: 0; }
+.lead { font-size: var(--ts-lead); line-height: var(--lh-lead); color: var(--ink-soft); }
+.caption, small { font-size: var(--ts-small); line-height: var(--lh-small); color: var(--ink-mute); }
+.eyebrow { font-family: var(--font-sans-latin); font-size: var(--ts-micro); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+.mono, code { font-family: var(--font-mono); font-size: 0.92em; }
+.serif-latin { font-family: var(--font-serif-latin); font-style: italic; font-weight: 500; color: var(--indigo); }
+
+::selection { background: var(--indigo-wash); color: var(--indigo-deep); }

@@ -9,6 +9,7 @@ export default {
     home: 'Home',
     work: 'Work',
     about: 'About',
+    resume: 'Resume',
     contact: 'Contact',
   },
 

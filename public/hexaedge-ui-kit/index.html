@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HexaEdge · Screen Overview — UI Kit V1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Serif+SC:wght@500;600;700&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F6F7; --raised:#FFFFFF; --sunken:#E4ECEE; --mist:#E3ECEF;
+    --ink:#14233A; --ink-soft:#243E66; --mute:#7C95AE; --fade:#A6B8C6;
+    --rule:#CAD6DD; --cinnabar:#A8392E; --cinnabar-wash:#F1DEDA;
+    --indigo:#243E66; --gold:#B98A2F;
+    --latin:"Cormorant Garamond","Songti SC",serif;
+    --serif:"Noto Serif SC","Songti SC",serif;
+    --sans:"Noto Sans SC","PingFang SC",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1480px;margin:0 auto;padding:84px 48px 120px}
+  /* ── header ── */
+  .brand{display:flex;align-items:center;gap:20px}
+  .seal{width:58px;height:58px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:30px;font-weight:600}
+  .brand .en{font-family:var(--latin);font-style:italic;font-weight:600;font-size:30px;letter-spacing:.01em}
+  .brand .cn{font-family:var(--serif);font-size:15px;letter-spacing:.55em;color:var(--mute);margin-top:4px}
+  .eyebrow{margin-top:56px;font-family:var(--mono);font-size:13px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:14px}
+  .eyebrow::before{content:"";width:36px;height:2px;background:var(--cinnabar)}
+  h1{font-family:var(--latin);font-weight:600;font-size:clamp(48px,5.8vw,84px);letter-spacing:.01em;line-height:1.04;margin-top:18px}
+  .subrow{display:flex;justify-content:space-between;align-items:baseline;gap:40px;margin-top:16px;flex-wrap:wrap}
+  .sub{font-family:var(--latin);font-style:italic;font-size:24px;color:var(--mute)}
+  .meta{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--mute);white-space:nowrap}
+  .meta b{color:var(--ink);font-weight:500}
+  .meta .z{color:var(--cinnabar)} .meta .q{color:var(--indigo)} .meta .j{color:var(--gold)}
+  /* ── section head ── */
+  .sec{margin-top:96px;display:flex;align-items:baseline;gap:22px;border-bottom:1px solid var(--rule);padding-bottom:16px}
+  .sec .rn{font-family:var(--latin);font-style:italic;font-weight:600;font-size:30px;color:var(--cinnabar)}
+  .sec .en{font-family:var(--mono);font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+  .sec .tg{font-family:var(--latin);font-style:italic;font-size:22px;color:var(--fade);margin-left:auto}
+  /* ── cards ── */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}.wrap{padding:56px 22px 80px}}
+  .card{display:block;text-decoration:none;color:inherit;background:var(--raised);border:1px solid var(--rule)}
+  .card .pv{background:var(--sunken);padding:30px 30px 0;overflow:hidden}
+  .card .shot{border:1px solid var(--rule);border-bottom:0;background:#fff;box-shadow:0 22px 44px -20px rgba(20,35,58,.35);overflow:hidden;aspect-ratio:16/10.6}
+  .card .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
+  .card:hover .shot img{transform:scale(1.025)}
+  .foot{display:flex;align-items:baseline;gap:16px;padding:20px 26px;border-top:1px solid var(--rule)}
+  .foot .rn{font-family:var(--latin);font-style:italic;font-weight:600;font-size:22px;color:var(--cinnabar);flex:0 0 34px}
+  .foot .nm{font-family:var(--latin);font-weight:600;font-size:23px;letter-spacing:.01em;white-space:nowrap}
+  .foot .ds{font-family:var(--latin);font-style:italic;font-size:16.5px;color:var(--mute);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .foot .arr{margin-left:auto;font-family:var(--mono);font-size:20px;color:var(--ink);transition:transform .3s ease,color .3s ease}
+  a.card:hover .arr{transform:translateX(6px);color:var(--cinnabar)}
+  .foot .tagx{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--fade);text-transform:uppercase;white-space:nowrap}
+  a.card:hover .tagx{color:var(--cinnabar)}
+  /* ── page footer ── */
+  .end{margin-top:110px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;color:var(--mute);flex-wrap:wrap}
+  .end a{color:var(--cinnabar);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand">
+    <div class="seal">点</div>
+    <div><div class="en">HexaEdge</div><div class="cn">点 卦</div></div>
+  </div>
+
+  <div class="eyebrow">UI KIT · V1.0 · SCREEN OVERVIEW</div>
+  <h1>HexaEdge · Screen Overview</h1>
+  <div class="subrow">
+    <div class="sub">— ten live surfaces of the shipped product, captured full-length</div>
+    <div class="meta"><b>10</b> SCREENS&ensp;·&ensp;PALETTE <span class="z">CINNABAR</span> · <span class="q">PORCELAIN BLUE</span> · <span class="j">GILT GOLD</span></div>
+  </div>
+
+  <!-- I · MARKETING -->
+  <div class="sec"><span class="rn">I</span><span class="en">Marketing</span><span class="tg">the front door</span></div>
+  <div class="grid">
+    <a class="card" href="https://hexaedge.vercel.app/en" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/hero-en.png" alt="Landing page, English"></div></div>
+      <div class="foot"><span class="rn">i</span><span class="nm">Landing · EN</span><span class="ds">marketing home · read the market as weather</span><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="https://hexaedge.vercel.app/" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/hero-zh.png" alt="Landing page, Chinese"></div></div>
+      <div class="foot"><span class="rn">ii</span><span class="nm">Landing · ZH</span><span class="ds">marketing home · the Chinese original</span><span class="arr">→</span></div>
+    </a>
+  </div>
+
+  <!-- II · CORE FLOW -->
+  <div class="sec"><span class="rn">II</span><span class="en">Core Flow</span><span class="tg">cast, then read</span></div>
+  <div class="grid">
+    <a class="card" href="https://hexaedge.vercel.app/en/hexagram/new" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/cast-wizard-en.jpg" alt="Casting wizard"></div></div>
+      <div class="foot"><span class="rn">iii</span><span class="nm">Cast Wizard</span><span class="ds">three steps · the numbers settle the moment</span><span class="arr">→</span></div>
+    </a>
+    <a class="card" href="shots/market-reading-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/result-market.png" alt="Market reading result"></div></div>
+      <div class="foot"><span class="rn">iv</span><span class="nm">Market Reading</span><span class="ds">direction, confidence, timing</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/wealth-reading-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/result-personal.png" alt="Personal wealth reading"></div></div>
+      <div class="foot"><span class="rn">v</span><span class="nm">Wealth Q&amp;A</span><span class="ds">a mirror, not a verdict</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="assets/reading-board.png" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/reading-board.png" alt="Diviner's board"></div></div>
+      <div class="foot"><span class="rn">vi</span><span class="nm">Diviner&rsquo;s Board</span><span class="ds">the engine, laid open</span><span class="tagx">full page ↗</span></div>
+    </a>
+  </div>
+
+  <!-- III · DAILY & LEARN -->
+  <div class="sec"><span class="rn">III</span><span class="en">Daily &amp; Learn</span><span class="tg">reasons to return</span></div>
+  <div class="grid">
+    <a class="card" href="shots/fortune-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/fortune.png" alt="Daily fortune"></div></div>
+      <div class="foot"><span class="rn">vii</span><span class="nm">Daily Fortune</span><span class="ds">a rating for today, a curve for the week</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="https://hexaedge.vercel.app/en/resources" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/encyclopedia.png" alt="Hexagram encyclopedia"></div></div>
+      <div class="foot"><span class="rn">viii</span><span class="nm">Encyclopedia</span><span class="ds">all sixty-four hexagrams, explained</span><span class="arr">→</span></div>
+    </a>
+  </div>
+
+  <!-- IV · COMMERCE & SHARE -->
+  <div class="sec"><span class="rn">IV</span><span class="en">Commerce &amp; Share</span><span class="tg">pay, and pass it on</span></div>
+  <div class="grid">
+    <a class="card" href="https://hexaedge.vercel.app/en/pricing" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="assets/pricing.png" alt="Pricing tiers"></div></div>
+      <div class="foot"><span class="rn">ix</span><span class="nm">Pricing</span><span class="ds">four tiers, one path</span><span class="arr">→</span></div>
+    </a>
+    <div class="card">
+      <div class="pv"><div class="shot"><img src="assets/share-card-market.png" alt="Share card export"></div></div>
+      <div class="foot"><span class="rn">x</span><span class="nm">Share Card</span><span class="ds">the reading, exportable</span><span class="tagx">export artifact</span></div>
+    </div>
+  </div>
+
+  <div class="end">
+    <span>HEXAEDGE — DESIGN SYSTEM · SCREEN OVERVIEW · 2026</span>
+    <span>LIVE AT <a href="https://hexaedge.vercel.app" target="_blank" rel="noopener">HEXAEDGE.VERCEL.APP</a></span>
+  </div>
+
+</div>
+</body>
+</html>

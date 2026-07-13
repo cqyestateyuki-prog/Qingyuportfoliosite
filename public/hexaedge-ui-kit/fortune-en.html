@@ -1,0 +1,714 @@
+<!doctype html>
+<!-- @dsCard group="Brand" name="Fortune · English" subtitle="English-led daily fortune · classical Liuyao terminology kept" -->
+<html lang="en"><head><meta charset="utf-8">
+<title>HexaEdge · Daily Fortune</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans-latin);min-height:100vh}
+
+/* === NAV === */
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 64px;border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:14px}
+.logo .seal{width:38px;height:38px;background:var(--indigo-deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:22px;font-weight:700}
+.logo .lock{display:flex;flex-direction:column;line-height:1}
+.logo .en{font-family:var(--font-serif-latin);font-style:italic;font-size:22px;font-weight:600;color:var(--indigo)}
+.logo .cn{font-family:var(--font-serif-sc);font-size:11px;letter-spacing:0.32em;color:var(--ink-mute);margin-top:5px;text-transform:uppercase}
+nav ul{display:flex;gap:36px;list-style:none;margin:0;padding:0;font-size:14px;font-family:var(--font-sans-latin)}
+nav a{color:var(--ink-soft);text-decoration:none;letter-spacing:0.04em}
+nav a.active{color:var(--ink);position:relative}
+nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-26px;height:2px;background:var(--zhu-sha)}
+nav .right{display:flex;gap:14px;align-items:center}
+.btn{font-family:var(--font-sans-latin);font-size:14px;padding:10px 22px;border:1px solid transparent;cursor:pointer;border-radius:2px;background:none;letter-spacing:0.04em}
+.btn-pri{background:var(--indigo);color:var(--paper)}
+.btn-zhu{background:var(--zhu-sha);color:var(--paper)}
+.btn-ghost{color:var(--ink);border-color:var(--rule-strong);background:var(--paper-raised)}
+
+.wrap{max-width:1280px;margin:0 auto;padding:48px 64px 96px}
+
+/* === PAGE EYEBROW === */
+.page-eye{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--rule);padding-bottom:22px;margin-bottom:14px;position:relative}
+.page-eye .l{display:flex;flex-direction:column;gap:8px}
+.page-eye .eye{font-family:var(--font-sans-latin);font-size:11px;letter-spacing:0.32em;color:var(--zhu-sha);text-transform:uppercase}
+.page-eye .eye .dot{color:var(--zhu-sha);margin:0 8px}
+.page-eye h1{font-family:var(--font-serif-latin);font-style:italic;font-size:72px;font-weight:600;letter-spacing:0.01em;margin:0;color:var(--indigo);line-height:1}
+.page-eye h1 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:18px;color:var(--ink-mute);margin-left:18px;letter-spacing:0.18em;vertical-align:middle;font-weight:500}
+.page-eye .r{font-family:var(--font-mono);font-size:12px;color:var(--ink-mute);text-align:right;line-height:1.85;letter-spacing:0.04em}
+.page-eye .r .big{font-family:var(--font-serif-latin);font-style:italic;font-size:22px;color:var(--ink);letter-spacing:0.02em;display:block;margin-bottom:6px;font-weight:600}
+.page-eye .r .zhu{color:var(--zhu-sha)}
+.title-plum{position:absolute;right:280px;top:-2px;width:160px;color:var(--zhu-sha);opacity:0.55;pointer-events:none}
+
+/* === PERIOD SWITCHER === */
+.period{display:flex;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);align-self:flex-start}
+.period .opt{padding:11px 22px;font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-soft);border-right:1px solid var(--rule);cursor:pointer;letter-spacing:0.04em;min-width:88px;text-align:center;font-weight:500;background:var(--paper-raised)}
+.period .opt:last-child{border-right:0}
+.period .opt.on{background:var(--ink-700);color:var(--paper);font-weight:600}
+
+/* === HERO READING === */
+.reading{display:grid;grid-template-columns:1.2fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px;position:relative;overflow:hidden}
+
+.gua-side{padding:48px 44px;border-right:1px solid var(--rule);position:relative;background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%);overflow:hidden}
+.gua-side .corner-coin{position:absolute;right:-30px;top:-30px;width:200px;color:var(--liu-jin);opacity:0.15;pointer-events:none}
+.gua-side .corner-plum{position:absolute;right:24px;bottom:18px;width:180px;color:var(--zhu-sha);opacity:0.45;pointer-events:none}
+
+.gua-eye{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:30px;position:relative;z-index:2}
+.gua-eye .seal{width:56px;height:56px;background:var(--zhu-sha);color:var(--paper);font-family:var(--font-serif-sc);font-size:28px;font-weight:600;display:flex;align-items:center;justify-content:center;letter-spacing:0.04em}
+.gua-eye .meta{text-align:right;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);line-height:1.8;letter-spacing:0.04em}
+.gua-eye .meta b{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink);font-weight:600;font-size:13px;display:block;letter-spacing:0.04em;margin-bottom:4px}
+
+.gua-name{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;position:relative;z-index:2;flex-wrap:wrap}
+.gua-name .pinyin{font-family:var(--font-serif-latin);font-style:italic;font-size:46px;font-weight:600;color:var(--indigo);letter-spacing:0.02em;line-height:1.1}
+.gua-name .arr{font-size:22px;color:var(--ink-mute);font-family:var(--font-serif-latin)}
+.gua-name .vary{font-family:var(--font-serif-latin);font-style:italic;font-size:34px;color:var(--liu-jin);letter-spacing:0.02em;font-weight:500}
+.gua-name .cn{font-family:var(--font-serif-sc);font-size:18px;color:var(--ink-mute);letter-spacing:0.14em;display:block;width:100%;margin-top:4px;font-weight:500}
+.gua-en-sub{font-family:var(--font-sans-latin);font-size:14px;color:var(--ink-soft);letter-spacing:0.04em;margin-bottom:24px;position:relative;z-index:2;line-height:1.6}
+
+.judging{padding:18px 22px;background:var(--zhu-sha-wash);border-left:3px solid var(--zhu-sha);margin-bottom:32px;position:relative;z-index:2;max-width:90%}
+.judging .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--zhu-sha);text-transform:uppercase;margin-bottom:6px;font-weight:600}
+.judging .text{font-family:var(--font-serif-latin);font-style:italic;font-size:17px;color:var(--ink);line-height:1.7;letter-spacing:0.02em}
+.judging .gloss{font-family:var(--font-sans-latin);font-size:13px;color:var(--ink-soft);line-height:1.7;margin-top:8px;letter-spacing:0.02em;font-style:normal}
+
+.lines{display:flex;flex-direction:column;gap:8px;position:relative;z-index:2}
+.lines .ln{display:flex;align-items:center;gap:14px;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.04em}
+.lines .ln .pos{width:50px;color:var(--ink-mute);font-family:var(--font-serif-latin);font-style:italic;font-size:13px;font-weight:600}
+.lines .ln .bars{flex:0 0 200px;display:flex;gap:6px;align-items:center}
+.lines .ln .bar{height:6px;background:var(--ink);flex:1}
+.lines .ln.broken .bar{flex:0 0 calc(50% - 3px)}
+.lines .ln.dyn .bar{background:var(--liu-jin)}
+.lines .ln .mk{font-family:var(--font-sans-latin);font-size:12px;letter-spacing:0.04em}
+.lines .ln.dyn .mk{color:var(--liu-jin);font-weight:600}
+.lines .ln .cn{font-family:var(--font-serif-sc);color:var(--ink-mute);font-size:11px;letter-spacing:0.06em;margin-left:6px}
+
+.score-side{padding:48px 44px;display:flex;flex-direction:column;gap:18px;position:relative;background:var(--paper-raised)}
+.score-side .corner-lantern{position:absolute;right:24px;top:24px;width:80px;color:var(--zhu-sha);opacity:0.16;pointer-events:none}
+.score-eye{font-family:var(--font-sans-latin);font-size:11px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;display:flex;align-items:center;gap:10px;font-weight:600}
+.score-eye::before{content:"";width:18px;height:1px;background:var(--zhu-sha)}
+
+.big-rating{display:flex;flex-direction:column;gap:14px;padding-bottom:24px;border-bottom:1px solid var(--rule);position:relative;z-index:2}
+.stars{font-family:var(--font-serif-sc);font-size:56px;color:var(--liu-jin);letter-spacing:0.08em;line-height:1}
+.grade-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.grade{font-family:var(--font-serif-latin);font-style:italic;font-size:34px;font-weight:600;color:var(--ink);letter-spacing:0.01em;white-space:nowrap}
+.grade .g{color:var(--zhu-sha);font-family:var(--font-serif-latin);font-style:italic;margin-left:14px}
+.grade .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:18px;color:var(--ink-mute);margin-left:14px;letter-spacing:0.14em;font-weight:500}
+.delta{font-family:var(--font-mono);font-size:12px;color:var(--celadon);letter-spacing:0.04em}
+
+.tags-row{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:2}
+.tag{font-family:var(--font-sans-latin);font-size:12px;padding:5px 12px;border:1px solid var(--rule-strong);border-radius:14px;color:var(--ink-soft);background:var(--paper);letter-spacing:0.04em;font-weight:500}
+.tag.up{color:var(--zhu-sha);border-color:var(--zhu-sha)}
+.tag.gold{color:var(--liu-jin);border-color:var(--liu-jin);background:var(--liu-jin-wash)}
+.tag .cn{font-family:var(--font-serif-sc);font-size:11px;color:inherit;opacity:0.75;margin-left:4px;letter-spacing:0.04em}
+
+.summary{font-family:var(--font-sans-latin);font-size:15px;color:var(--ink);line-height:1.85;letter-spacing:0.01em;text-wrap:pretty;position:relative;z-index:2}
+.summary em{font-style:italic;font-family:var(--font-serif-latin);font-size:16px;font-weight:600;color:var(--zhu-sha)}
+.summary b{font-weight:600;color:var(--ink)}
+
+.score-cta{display:flex;gap:10px;margin-top:auto;padding-top:14px;position:relative;z-index:2}
+.score-cta .btn{flex:1;text-align:center;font-weight:500}
+
+/* divider */
+.div-cloud{display:flex;justify-content:center;padding:24px 0 48px}
+.div-cloud svg{width:420px;color:var(--ink-300)}
+
+.shead{display:flex;align-items:baseline;gap:22px;padding:14px 0 24px}
+.shead .num{font-family:var(--font-serif-latin);font-style:italic;font-size:32px;color:var(--zhu-sha);font-weight:500;line-height:1}
+.shead h2{font-family:var(--font-serif-latin);font-style:italic;font-size:36px;font-weight:600;color:var(--ink);margin:0;letter-spacing:0.01em;white-space:nowrap}
+.shead .cn{font-family:var(--font-serif-sc);font-size:14px;color:var(--ink-mute);letter-spacing:0.14em;margin-left:10px;font-weight:500;font-style:normal}
+.shead .line{flex:1;height:1px;background:var(--rule)}
+
+/* yi/ji */
+.yiji{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.yiji .col{padding:36px 36px 32px;position:relative;overflow:hidden}
+.yiji .col.yi{border-right:1px solid var(--rule);background:linear-gradient(180deg, #FFFFFF 0%, var(--zhu-sha-wash) 240%)}
+.yiji .col.ji{background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%)}
+.yiji .col .corner-orn{position:absolute;right:-20px;bottom:-20px;width:160px;opacity:0.16;pointer-events:none}
+.yiji .col.yi .corner-orn{color:var(--zhu-sha)}
+.yiji .col.ji .corner-orn{color:var(--ink-700)}
+.yiji .col .lab{display:flex;align-items:center;gap:14px;margin-bottom:24px;position:relative;z-index:2}
+.yiji .col .lab .stamp{width:44px;height:44px;font-family:var(--font-serif-sc);font-size:22px;font-weight:600;display:flex;align-items:center;justify-content:center;color:var(--paper);letter-spacing:0.04em}
+.yiji .col.yi .lab .stamp{background:var(--zhu-sha)}
+.yiji .col.ji .lab .stamp{background:var(--ink-900)}
+.yiji .col .lab h3{font-family:var(--font-serif-latin);font-style:italic;font-size:24px;font-weight:600;color:var(--ink);margin:0}
+.yiji .col .lab .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:13px;color:var(--ink-mute);margin-left:8px;letter-spacing:0.14em}
+.yiji ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+.yiji li{display:flex;gap:14px;align-items:flex-start;padding-bottom:14px;border-bottom:1px dashed var(--rule);font-size:14px;line-height:1.6}
+.yiji li:last-child{border-bottom:0;padding-bottom:0}
+.yiji li .om-mini{flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;margin-top:-2px}
+.yiji li .om-mini svg{width:100%;height:100%}
+.yiji .yi li .om-mini{color:var(--zhu-sha)}
+.yiji .ji li .om-mini{color:var(--ink-mute)}
+.yiji li b{font-family:var(--font-serif-latin);font-style:italic;font-size:16px;color:var(--ink);font-weight:600;display:block;margin-bottom:3px;letter-spacing:0.01em}
+.yiji li .desc{color:var(--ink-soft);font-size:13px;letter-spacing:0.01em;font-family:var(--font-sans-latin);line-height:1.65}
+
+/* lucky grid */
+.lucky-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.lucky-grid .it{padding:32px 26px 28px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:10px;position:relative;min-height:200px;overflow:hidden}
+.lucky-grid .it:last-child{border-right:0}
+.lucky-grid .it .om-bg{position:absolute;right:-12px;bottom:-12px;width:96px;opacity:0.16;pointer-events:none}
+.lucky-grid .it.it1 .om-bg, .lucky-grid .it.it2 .om-bg{color:var(--ink-700)}
+.lucky-grid .it.it3 .om-bg{color:var(--zhu-sha);opacity:0.22}
+.lucky-grid .it.it4 .om-bg{color:var(--liu-jin);opacity:0.2}
+.lucky-grid .it .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;position:relative;z-index:2;font-weight:600}
+.lucky-grid .it .l .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.14em;color:var(--ink-soft);margin-left:6px;font-size:11px;font-weight:500}
+.lucky-grid .it .val{font-family:var(--font-serif-latin);font-style:italic;font-size:38px;font-weight:600;color:var(--ink);letter-spacing:0.01em;margin-top:auto;position:relative;z-index:2;line-height:1.1}
+.lucky-grid .it .val .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:18px;color:var(--ink-mute);margin-left:10px;letter-spacing:0.1em;font-weight:500}
+.lucky-grid .it .val.zhu{color:var(--zhu-sha)}
+.lucky-grid .it .val.gold{color:var(--liu-jin)}
+.lucky-grid .it .val.ink{color:var(--indigo)}
+.lucky-grid .it .sub{font-family:var(--font-sans-latin);font-size:12px;color:var(--ink-mute);letter-spacing:0.02em;position:relative;z-index:2;line-height:1.6}
+.lucky-grid .it .sub .term{font-family:var(--font-serif-sc);color:var(--ink-soft);font-size:11px;letter-spacing:0.06em}
+
+.color-swatch-row{display:flex;align-items:center;gap:14px;margin-top:auto;position:relative;z-index:2}
+.color-swatch{width:52px;height:52px;border:1px solid var(--rule-strong);position:relative;flex-shrink:0}
+.color-swatch::after{content:"";position:absolute;inset:5px;border:1px dashed rgba(255,255,255,0.45)}
+.color-meta{display:flex;flex-direction:column;gap:3px}
+.color-meta .nm{font-family:var(--font-serif-latin);font-style:italic;font-size:20px;font-weight:600;color:var(--ink);letter-spacing:0.01em}
+.color-meta .hex{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em}
+
+/* compass section */
+.compass-section{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.compass-side{padding:40px 36px;border-right:1px solid var(--rule);background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%);position:relative;display:flex;align-items:center;justify-content:center;min-height:380px}
+.compass-svg{width:320px;height:320px;display:block}
+.compass-label{position:absolute;top:32px;left:32px;font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.3em;color:var(--ink-mute);text-transform:uppercase;font-weight:600}
+
+.directions{padding:40px 36px;display:flex;flex-direction:column;background:var(--paper-raised)}
+.directions h3{font-family:var(--font-serif-latin);font-style:italic;font-size:28px;font-weight:600;color:var(--ink);margin:0 0 4px;letter-spacing:0.01em}
+.directions h3 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:13px;color:var(--ink-mute);margin-left:14px;letter-spacing:0.14em;font-weight:500}
+.directions p{font-family:var(--font-sans-latin);font-size:14px;color:var(--ink-soft);line-height:1.75;margin:0 0 22px;letter-spacing:0.01em;text-wrap:pretty}
+.dir-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.dir-list .di{display:grid;grid-template-columns:90px 1fr auto;gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--rule)}
+.dir-list .di:last-child{border-bottom:0}
+.dir-list .di .pos{font-family:var(--font-serif-latin);font-style:italic;font-size:22px;font-weight:600;color:var(--ink);letter-spacing:0.01em}
+.dir-list .di .pos .cn{display:block;font-family:var(--font-serif-sc);font-style:normal;font-size:12px;color:var(--ink-mute);font-weight:500;letter-spacing:0.14em;margin-top:2px}
+.dir-list .di .pos .deg{display:block;font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);font-style:normal;letter-spacing:0.06em;margin-top:2px;font-weight:400}
+.dir-list .di .info{display:flex;flex-direction:column;gap:3px}
+.dir-list .di .info b{font-family:var(--font-serif-latin);font-style:italic;font-size:16px;color:var(--ink);font-weight:600;letter-spacing:0.01em}
+.dir-list .di .info .why{font-family:var(--font-sans-latin);font-size:12.5px;color:var(--ink-soft);letter-spacing:0.01em;line-height:1.55}
+.dir-list .di .grade-sq{width:44px;height:44px;border:1px solid;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-latin);font-style:italic;font-size:22px;font-weight:600;letter-spacing:0.01em}
+.dir-list .di .grade-sq.s{color:var(--liu-jin);border-color:var(--liu-jin);background:var(--liu-jin-wash)}
+.dir-list .di .grade-sq.a{color:var(--indigo);border-color:var(--indigo)}
+.dir-list .di .grade-sq.b{color:var(--indigo-soft);border-color:var(--indigo-soft)}
+.dir-list .di .grade-sq.c{color:var(--ink-mute);border-color:var(--ink-fade)}
+
+/* curve card */
+.curve-card{border:1px solid var(--rule-strong);background:var(--paper-raised);padding:32px 36px 28px;margin-bottom:48px;position:relative;overflow:hidden}
+.curve-card .mountains-bg{position:absolute;left:0;right:0;bottom:0;height:80px;color:var(--ink-700);opacity:0.06;pointer-events:none}
+.curve-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;position:relative;z-index:2}
+.curve-head .ttl{font-family:var(--font-serif-latin);font-style:italic;font-size:22px;font-weight:600;color:var(--ink);letter-spacing:0.01em}
+.curve-head .sub{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.06em}
+.curve-wrap{position:relative;height:220px;margin-bottom:14px;z-index:2}
+.curve-svg{width:100%;height:100%;display:block}
+
+.week-days{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border-top:1px solid var(--rule);padding-top:14px;position:relative;z-index:2}
+.week-days .d{padding:10px 6px;text-align:center;display:flex;flex-direction:column;gap:6px;border-right:1px dashed var(--rule)}
+.week-days .d:last-child{border-right:0}
+.week-days .dt{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.04em}
+.week-days .nm{font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink);letter-spacing:0.02em;font-weight:600}
+.week-days .st{font-family:var(--font-serif-sc);font-size:11px;color:var(--liu-jin);letter-spacing:0.06em}
+.week-days .d.today{background:var(--zhu-sha-wash)}
+.week-days .d.today .nm{color:var(--zhu-sha);font-weight:600}
+
+/* three cards */
+.three-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.three-cards .col{padding:32px 30px;border-right:1px solid var(--rule);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px;min-height:300px}
+.three-cards .col:last-child{border-right:0}
+.three-cards .col .om-wm{position:absolute;right:-20px;top:-10px;width:120px;opacity:0.14;pointer-events:none}
+.three-cards .col.c1 .om-wm{color:var(--liu-jin);opacity:0.2}
+.three-cards .col.c2 .om-wm{color:var(--indigo)}
+.three-cards .col.c3 .om-wm{color:var(--celadon)}
+.three-cards .col .eye{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;position:relative;z-index:2;font-weight:600}
+.three-cards .col .eye .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.14em;color:var(--ink-soft);margin-left:6px;font-size:11px;font-weight:500}
+.three-cards .col h3{font-family:var(--font-serif-latin);font-style:italic;font-size:28px;font-weight:600;color:var(--ink);margin:6px 0 0;position:relative;z-index:2;letter-spacing:0.01em}
+.three-cards .col h3 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:14px;color:var(--ink-mute);margin-left:12px;letter-spacing:0.14em;font-weight:500}
+.three-cards .col .lead{font-family:var(--font-sans-latin);font-size:14px;color:var(--ink);line-height:1.75;letter-spacing:0.01em;text-wrap:pretty;position:relative;z-index:2;margin-top:8px}
+.three-cards .col .lead b{color:var(--zhu-sha);font-weight:600}
+.three-cards .col .lead .term{font-family:var(--font-serif-sc);color:var(--ink-soft);font-size:13px;letter-spacing:0.04em}
+.three-cards .col .keys{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:14px;border-top:1px dashed var(--rule);position:relative;z-index:2}
+.three-cards .col .keys .k{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;background:var(--paper-sunken);color:var(--ink-soft);letter-spacing:0.06em}
+
+/* advisory */
+.advisory{border:1px solid var(--rule-strong);background:linear-gradient(135deg, var(--paper-raised) 0%, var(--paper-mist) 100%);padding:40px 44px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;margin-bottom:48px;position:relative;overflow:hidden}
+.advisory .gourd-bg{position:absolute;right:-30px;bottom:-40px;width:200px;color:var(--celadon);opacity:0.16;pointer-events:none}
+.advisory .left-stamp{display:flex;flex-direction:column;align-items:center;gap:10px;padding-right:36px;border-right:1px solid var(--rule);position:relative;z-index:2}
+.advisory .left-stamp .seal{width:72px;height:72px;background:var(--ink-900);color:var(--liu-jin);font-family:var(--font-serif-sc);font-size:34px;font-weight:600;display:flex;align-items:center;justify-content:center;letter-spacing:0.04em}
+.advisory .left-stamp .name{font-family:var(--font-serif-latin);font-style:italic;font-size:13px;color:var(--ink-soft);letter-spacing:0.06em;text-align:center;font-weight:500}
+.advisory .left-stamp .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:10px;color:var(--ink-mute);letter-spacing:0.18em;text-align:center;margin-top:4px}
+.advisory .body{position:relative;z-index:2}
+.advisory .body h3{font-family:var(--font-serif-latin);font-style:italic;font-size:24px;font-weight:600;color:var(--ink);letter-spacing:0.01em;margin:0 0 14px}
+.advisory .body h3 .cn{font-family:var(--font-serif-sc);font-style:normal;font-size:14px;color:var(--ink-mute);margin-left:12px;letter-spacing:0.14em;font-weight:500}
+.advisory .body p{font-family:var(--font-sans-latin);font-size:15px;color:var(--ink-soft);line-height:1.85;letter-spacing:0.01em;text-wrap:pretty;margin:0 0 16px}
+.advisory .body b{color:var(--ink);font-weight:600}
+.advisory .body em{font-style:italic;font-family:var(--font-serif-latin);color:var(--zhu-sha);font-weight:600}
+.advisory .body .src{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.06em;padding-left:14px;border-left:2px solid var(--zhu-sha)}
+
+/* disclaimer */
+.disclaimer{padding:24px 28px;background:var(--paper-mist);border:1px dashed var(--rule-strong);font-size:12px;color:var(--ink-mute);line-height:1.85;text-align:center;font-family:var(--font-mono);letter-spacing:0.06em}
+
+footer{padding:36px 64px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;color:var(--ink-mute);font-size:12px;font-family:var(--font-mono);background:var(--paper)}
+footer .l{display:flex;gap:18px;align-items:center}
+footer .l .s{font-family:var(--font-serif-sc);color:var(--ink-soft);font-size:13px;letter-spacing:0.3em}
+footer .roman{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink-soft);letter-spacing:0.12em}
+footer a{color:var(--ink-soft);text-decoration:none;margin-left:24px;letter-spacing:0.04em;font-family:var(--font-sans-latin)}
+</style></head><body>
+
+<nav>
+  <div class="logo">
+    <div class="seal">点</div>
+    <div class="lock"><div class="en">HexaEdge</div><div class="cn">Liuyao · Est. 2026</div></div>
+  </div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="zhanshi-en.html">Inquiry</a></li>
+    <li><a class="active" href="fortune-en.html">Daily Fortune</a></li>
+    <li><a href="ornaments.html">Motifs</a></li>
+    <li><a href="#">History</a></li>
+  </ul>
+  <div class="right">
+    <a href="fortune.html" style="font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-soft);letter-spacing:0.18em;text-decoration:none">中文</a>
+    <button class="btn btn-ghost">New Cast</button>
+    <button class="btn btn-pri">Share</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- PAGE TITLE -->
+  <div class="page-eye">
+    <div class="l">
+      <div class="eye">DAILY FORTUNE READING <span class="dot">·</span> CLASSICAL LIUYAO <span class="dot">·</span> EST. 2026</div>
+      <h1>Today's Fortune<span class="cn">今 日 财 运</span></h1>
+    </div>
+    <div class="r">
+      <span class="big">28 Apr 2026</span>
+      Bingwu Year · Renchen Month · Gengwu Day<br>
+      Tuesday · <span class="zhu">Day 7 of Guyu</span>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:36px">
+    <div class="period">
+      <div class="opt">Day</div>
+      <div class="opt on">Week</div>
+      <div class="opt">Month</div>
+      <div class="opt">Quarter</div>
+      <div class="opt">Year</div>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.06em">
+      cast at 06:42 · Si hour <span style="color:var(--zhu-sha)">·</span>
+      <a href="#" style="color:var(--ink-soft);text-decoration:underline">Export PDF</a> ·
+      <a href="#" style="color:var(--ink-soft);text-decoration:underline">Share</a>
+    </div>
+  </div>
+
+  <!-- ================ HERO READING ================ -->
+  <section class="reading">
+
+    <div class="gua-side">
+      <svg class="corner-coin" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+
+      <div class="gua-eye">
+        <div class="seal">贲</div>
+        <div class="meta">
+          <b>Primary · Changing</b>
+          Li below · Gen above → Qian below · Gen above<br>
+          World line · 2nd · Father Wuhuo (午火)<br>
+          Response line · 5th · Sibling Zishui (子水)<br>
+          Moving line · 3rd · Wife &amp; Wealth Haishui (亥水)
+        </div>
+      </div>
+
+      <div class="gua-name">
+        <span class="pinyin">Bi</span>
+        <span class="arr">→</span>
+        <span class="vary">Da Xu</span>
+        <span class="cn">山火贲 → 山天大畜</span>
+      </div>
+      <div class="gua-en-sub">Adornment becoming Great Accumulation · <em style="font-style:italic;color:var(--ink-mute)">Mountain over Fire → Mountain over Heaven</em></div>
+
+      <div class="judging">
+        <div class="l">Judging Line · 卦辞</div>
+        <div class="text">"Bi: success. A small step forward is fitting."</div>
+        <div class="gloss">A time of adornment: small movements compound. Refine, accumulate, embellish — not the moment for grand strokes.</div>
+      </div>
+
+      <div class="lines">
+        <div class="ln"><span class="pos">9 / vi</span><span class="bars"><span class="bar"></span></span><span class="mk">Officer · Wood<span class="cn">官鬼寅木</span></span></div>
+        <div class="ln broken"><span class="pos">6 / v</span><span class="bars"><span class="bar"></span><span class="bar"></span></span><span class="mk">Response · Sibling · Water<span class="cn">应 · 兄弟子水</span></span></div>
+        <div class="ln broken"><span class="pos">6 / iv</span><span class="bars"><span class="bar"></span><span class="bar"></span></span><span class="mk">Wealth · Earth<span class="cn">妻财戌土</span></span></div>
+        <div class="ln dyn"><span class="pos">9 / iii</span><span class="bars"><span class="bar"></span></span><span class="mk">○ Moving · Wealth · Water<span class="cn">动 · 妻财亥水</span></span></div>
+        <div class="ln broken"><span class="pos">6 / ii</span><span class="bars"><span class="bar"></span><span class="bar"></span></span><span class="mk">World · Father · Fire<span class="cn">世 · 父母午火</span></span></div>
+        <div class="ln"><span class="pos">9 / i</span><span class="bars"><span class="bar"></span></span><span class="mk">Officer · Wood<span class="cn">官鬼卯木</span></span></div>
+      </div>
+    </div>
+
+    <div class="score-side">
+      <svg class="corner-lantern" viewBox="0 0 120 200"><use href="#om-lantern"/></svg>
+
+      <div class="score-eye">FORTUNE INDEX</div>
+
+      <div class="big-rating">
+        <div class="stars">★★★★☆</div>
+        <div class="grade-row">
+          <div class="grade">Strong<span class="g">A</span><span class="cn">财 运 旺</span></div>
+        </div>
+        <div class="delta">+0.5★ vs. yesterday · highest of the week · main-wealth moves &amp; advances</div>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag up">▲ Strong<span class="cn">偏旺</span></span>
+        <span class="tag gold">★ Wealth in Motion<span class="cn">妻财动</span></span>
+        <span class="tag">Advancing<span class="cn">化进神</span></span>
+        <span class="tag">Day Nourishes World<span class="cn">日辰生世</span></span>
+        <span class="tag">Window · Si–Wu<span class="cn">巳午</span></span>
+      </div>
+
+      <p class="summary">Wealth moves and advances; the World line is nourished by the Day Stem. <b>Fortune flows your way today.</b> Press on partnerships, send the proposal, call in receivables — benefactors are within speaking distance. But the hexagram of Adornment cautions against greed: <em>small movements compound</em>. Don't make today the day of a big bet.</p>
+
+      <div class="score-cta">
+        <button class="btn btn-ghost">Market Cast →</button>
+        <button class="btn btn-zhu">Full Reading →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ YI / JI ============ -->
+  <div class="shead">
+    <span class="num">i</span>
+    <h2>Favorable &amp; Unfavorable<span class="cn">· 今日宜忌</span></h2>
+    <span class="line"></span>
+  </div>
+
+  <section class="yiji">
+    <div class="col yi">
+      <svg class="corner-orn" viewBox="0 0 100 100"><use href="#om-plum"/></svg>
+      <div class="lab">
+        <div class="stamp">宜</div>
+        <h3>Today, do<span class="cn">· Yi · Favorable</span></h3>
+      </div>
+      <ul>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></span>
+          <div><b>Negotiate · Send proposals</b><div class="desc">Wealth moves and nourishes the World line — counterparts concede in conversation.</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></span>
+          <div><b>Collect receivables</b><div class="desc">Old debts come unstuck today. Best before noon (Wu hour).</div></div>
+        </li>
+        <li>
+          <div><b>Seek benefactors</b><div class="desc">The Southeast is your generative direction; an old contact from that quarter brings help.</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-plum"/></svg></span>
+          <div><b>Refine &amp; refurbish</b><div class="desc">Bi means <em style="font-style:italic">to adorn</em>. Tools, signage, attire — small upgrades compound.</div></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col ji">
+      <svg class="corner-orn" viewBox="0 0 100 110"><use href="#om-scales"/></svg>
+      <div class="lab">
+        <div class="stamp">忌</div>
+        <h3>Today, avoid<span class="cn">· Ji · Unfavorable</span></h3>
+      </div>
+      <ul>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 60 100"><use href="#om-flame"/></svg></span>
+          <div><b>Large positions · heavy bets</b><div class="desc">"A small step forward" — outsizing today costs you composure.</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 110"><use href="#om-scales"/></svg></span>
+          <div><b>Confrontation · arguments</b><div class="desc">Officer line carries punishment. Leave headroom with superiors and clients.</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 140 100"><use href="#om-carriage"/></svg></span>
+          <div><b>Large loans out</b><div class="desc">Sibling line is in the Response — money lent today returns unpredictably.</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-moon"/></svg></span>
+          <div><b>Decisions past Zi hour</b><div class="desc">The day's vitality fades after midnight; choices made then tend to reverse.</div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="div-cloud">
+    <svg viewBox="0 0 400 24"><use href="#om-divider"/></svg>
+  </div>
+
+  <!-- ============ LUCKY GRID ============ -->
+  <div class="shead">
+    <span class="num">ii</span>
+    <h2>Today's Coordinates<span class="cn">· 方位 · 时辰 · 财色 · 数字</span></h2>
+    <span class="line"></span>
+  </div>
+
+  <section class="lucky-grid">
+    <div class="it it1">
+      <div class="l">DIRECTION <span class="cn">· 贵人方位</span></div>
+      <div class="val zhu">SE<span class="cn">东 南</span></div>
+      <div class="sub"><span class="term">Xun</span> position · wood nourishes fire · best for asking favors</div>
+    </div>
+    <div class="it it2">
+      <svg class="om-bg" viewBox="0 0 60 100"><use href="#om-flame"/></svg>
+      <div class="l">HOURS <span class="cn">· 吉时辰</span></div>
+      <div class="val ink">9 – 13h<span class="cn">巳 午</span></div>
+      <div class="sub"><span class="term">Si</span> &amp; <span class="term">Wu</span> · when the World line holds the floor</div>
+    </div>
+    <div class="it it3">
+      <svg class="om-bg" viewBox="0 0 100 100"><use href="#om-plum"/></svg>
+      <div class="l">COLOR <span class="cn">· 财运色</span></div>
+      <div class="color-swatch-row">
+        <div class="color-swatch" style="background:#A8392E"></div>
+        <div class="color-meta">
+          <div class="nm">Cinnabar</div>
+          <div class="hex">#A8392E · fire-aids-World</div>
+        </div>
+      </div>
+    </div>
+    <div class="it it4">
+      <svg class="om-bg" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+      <div class="l">NUMBERS <span class="cn">· 财运数字</span></div>
+      <div class="val gold">3 · 8</div>
+      <div class="sub">Moving 3rd line · 8 trigrams · for picks &amp; pins</div>
+    </div>
+  </section>
+
+  <!-- ============ FORTUNE COMPASS ============ -->
+  <div class="shead">
+    <span class="num">iii</span>
+    <h2>Fortune Compass<span class="cn">· 财运罗盘</span></h2>
+    <span class="line"></span>
+  </div>
+
+  <section class="compass-section">
+    <div class="compass-side">
+      <div class="compass-label">FORTUNE COMPASS · EIGHT DIRECTIONS</div>
+
+      <svg class="compass-svg" viewBox="0 0 320 320">
+        <defs>
+          <radialGradient id="rg2" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#F2F6F7"/>
+            <stop offset="100%" stop-color="#E3ECEF"/>
+          </radialGradient>
+        </defs>
+        <circle cx="160" cy="160" r="148" fill="url(#rg2)" stroke="#B6C3C7" stroke-width="1"/>
+        <circle cx="160" cy="160" r="130" fill="none" stroke="#A6B8C6" stroke-width="1"/>
+        <circle cx="160" cy="160" r="92" fill="none" stroke="#A6B8C6" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="160" cy="160" r="56" fill="none" stroke="#A6B8C6" stroke-width="1"/>
+
+        <line x1="160" y1="14" x2="160" y2="306" stroke="#CAD6DD" stroke-width="0.8"/>
+        <line x1="14" y1="160" x2="306" y2="160" stroke="#CAD6DD" stroke-width="0.8"/>
+        <line x1="56" y1="56" x2="264" y2="264" stroke="#CAD6DD" stroke-width="0.8"/>
+        <line x1="56" y1="264" x2="264" y2="56" stroke="#CAD6DD" stroke-width="0.8"/>
+
+        <g font-family="serif" font-size="20" fill="#243E66" text-anchor="middle">
+          <text x="160" y="32">☰</text>
+          <text x="160" y="298">☷</text>
+          <text x="22" y="166">☵</text>
+          <text x="298" y="166">☲</text>
+          <text x="56" y="58">☴</text>
+          <text x="264" y="58">☱</text>
+          <text x="56" y="276">☶</text>
+          <text x="264" y="276">☳</text>
+        </g>
+
+        <g font-family="Cormorant Garamond" font-style="italic" font-size="14" fill="#243E66" text-anchor="middle" font-weight="600">
+          <text x="160" y="58">N</text>
+          <text x="160" y="270">S</text>
+          <text x="58" y="166">W</text>
+          <text x="262" y="166">E</text>
+        </g>
+
+        <path d="M 160 160 L 252 252 A 130 130 0 0 0 290 160 Z" fill="#A8392E" opacity="0.18"/>
+        <path d="M 160 160 L 198 38 A 130 130 0 0 0 122 38 Z" fill="#6E9387" opacity="0.18"/>
+
+        <line x1="160" y1="160" x2="234" y2="234" stroke="#A8392E" stroke-width="3" stroke-linecap="round"/>
+        <polygon points="234,234 218,224 224,218" fill="#A8392E"/>
+
+        <circle cx="160" cy="160" r="22" fill="#14233A"/>
+        <path d="M160 138 A 22 22 0 0 1 160 182 A 11 11 0 0 0 160 160 A 11 11 0 0 1 160 138 Z" fill="#F2F6F7"/>
+        <circle cx="160" cy="149" r="2.8" fill="#14233A"/>
+        <circle cx="160" cy="171" r="2.8" fill="#F2F6F7"/>
+
+        <text x="160" y="318" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="11" fill="#7C95AE" letter-spacing="3">— LUOPAN —</text>
+      </svg>
+    </div>
+
+    <div class="directions">
+      <h3>Eight Directions<span class="cn">· 八方吉凶</span></h3>
+      <p>Fortune flows along eight directions today. Where to step out, where to hold back — read it from the chamber below.</p>
+
+      <div class="dir-list">
+        <div class="di">
+          <div class="pos">SE<span class="cn">东南</span><span class="deg">135°</span></div>
+          <div class="info"><b>Benefactor's Quarter</b><span class="why">Xun-wood nourishes fire — meetings, negotiations, collections all flow.</span></div>
+          <div class="grade-sq s">S</div>
+        </div>
+        <div class="di">
+          <div class="pos">S<span class="cn">南方</span><span class="deg">180°</span></div>
+          <div class="info"><b>World's Home Ground</b><span class="why">Hold and advance — your own court favors you.</span></div>
+          <div class="grade-sq a">A</div>
+        </div>
+        <div class="di">
+          <div class="pos">E<span class="cn">东方</span><span class="deg">90°</span></div>
+          <div class="info"><b>Used-God Generative</b><span class="why">Partnership, signing, visiting an elder — all read positively.</span></div>
+          <div class="grade-sq a">A</div>
+        </div>
+        <div class="di">
+          <div class="pos">W<span class="cn">西方</span><span class="deg">270°</span></div>
+          <div class="info"><b>Neutral</b><span class="why">No strong push or pull — daily business is fine here.</span></div>
+          <div class="grade-sq b">B</div>
+        </div>
+        <div class="di">
+          <div class="pos">N<span class="cn">北方</span><span class="deg">0°</span></div>
+          <div class="info"><b>Caution · Water Clashes Fire</b><span class="why">Avoid large contracts and deep negotiations here today.</span></div>
+          <div class="grade-sq c">C</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WEEK CURVE ============ -->
+  <div class="shead">
+    <span class="num">iv</span>
+    <h2>The Weekly Arc<span class="cn">· 本周财运曲线</span></h2>
+    <span class="line"></span>
+  </div>
+
+  <section class="curve-card">
+    <svg class="mountains-bg" viewBox="0 0 200 80" preserveAspectRatio="none"><use href="#om-mountain"/></svg>
+
+    <div class="curve-head">
+      <div class="ttl">Week of 04/27 – 05/03</div>
+      <div class="sub">primary-hexagram trajectory · star per day</div>
+    </div>
+
+    <div class="curve-wrap">
+      <svg class="curve-svg" viewBox="0 0 700 220" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#A8392E" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#A8392E" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line x1="40" y1="40" x2="700" y2="40" stroke="#E3ECEF" stroke-width="1"/>
+        <line x1="40" y1="80" x2="700" y2="80" stroke="#E3ECEF" stroke-width="1"/>
+        <line x1="40" y1="120" x2="700" y2="120" stroke="#E3ECEF" stroke-width="1"/>
+        <line x1="40" y1="160" x2="700" y2="160" stroke="#E3ECEF" stroke-width="1"/>
+        <text x="6" y="44" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★★★★</text>
+        <text x="6" y="84" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★★★</text>
+        <text x="6" y="124" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★★</text>
+        <text x="6" y="164" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★</text>
+
+        <path d="M80,130 L180,150 L280,85 L380,55 L480,95 L580,115 L680,145 L680,200 L80,200 Z" fill="url(#g2)"/>
+        <path d="M80,130 L180,150 L280,85 L380,55 L480,95 L580,115 L680,145" fill="none" stroke="#A8392E" stroke-width="2.2"/>
+        <circle cx="80"  cy="130" r="4" fill="#A8392E"/>
+        <circle cx="180" cy="150" r="4" fill="#A8392E"/>
+        <circle cx="280" cy="85"  r="5" fill="#FFFFFF" stroke="#A8392E" stroke-width="2"/>
+        <circle cx="380" cy="55"  r="7" fill="#A8392E" stroke="#9C7A3A" stroke-width="2"/>
+        <circle cx="480" cy="95"  r="4" fill="#A8392E"/>
+        <circle cx="580" cy="115" r="4" fill="#A8392E"/>
+        <circle cx="680" cy="145" r="4" fill="#A8392E"/>
+
+        <line x1="380" y1="22" x2="380" y2="200" stroke="#9C7A3A" stroke-width="1" stroke-dasharray="3 4"/>
+        <text x="388" y="32" font-family="Cormorant Garamond" font-style="italic" font-size="12" fill="#9C7A3A" letter-spacing="2">Today · Peak ★★★★+</text>
+      </svg>
+    </div>
+
+    <div class="week-days">
+      <div class="d"><span class="dt">04/27</span><span class="nm">Mon</span><span class="st">★★★</span></div>
+      <div class="d"><span class="dt">04/28</span><span class="nm">Tue</span><span class="st">★★★</span></div>
+      <div class="d"><span class="dt">04/29</span><span class="nm">Wed</span><span class="st">★★★★</span></div>
+      <div class="d today"><span class="dt">04/28</span><span class="nm">Today</span><span class="st">★★★★+</span></div>
+      <div class="d"><span class="dt">05/01</span><span class="nm">Fri</span><span class="st">★★★★</span></div>
+      <div class="d"><span class="dt">05/02</span><span class="nm">Sat</span><span class="st">★★★</span></div>
+      <div class="d"><span class="dt">05/03</span><span class="nm">Sun</span><span class="st">★★★</span></div>
+    </div>
+  </section>
+
+  <!-- ============ SOURCE / PLACE / PEOPLE ============ -->
+  <div class="shead">
+    <span class="num">v</span>
+    <h2>Source · Place · People<span class="cn">· 财源 · 财场 · 财人</span></h2>
+    <span class="line"></span>
+  </div>
+
+  <section class="three-cards">
+    <div class="col c1">
+      <svg class="om-wm" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+      <div class="eye">i · Source <span class="cn">· 财源</span></div>
+      <h3>Where Wealth Flows From<span class="cn">财源</span></h3>
+      <p class="lead">Wealth (<span class="term">妻财亥水</span>) emerges from the moving third line — <b>the source is partnerships and projects already underway</b>, not fresh ventures. Today's gains are seeds planted earlier blooming. Defer new pitches three days.</p>
+      <div class="keys">
+        <span class="k">existing partners</span>
+        <span class="k">contract terms</span>
+        <span class="k">long projects</span>
+        <span class="k">repeat clients</span>
+      </div>
+    </div>
+
+    <div class="col c2">
+      <svg class="om-wm" viewBox="0 0 120 200"><use href="#om-lantern"/></svg>
+      <div class="eye">ii · Place <span class="cn">· 财场</span></div>
+      <h3>Where Wealth Gathers<span class="cn">财场</span></h3>
+      <p class="lead">Southeast is the <span class="term">Xun</span> position — wood — and is therefore <b>your wealth ground today</b>. The southeast quarter of the city, an office facing southeast, a seat oriented south. Indoors: cinnabar accents and wood furnishings amplify it further.</p>
+      <div class="keys">
+        <span class="k">southeast</span>
+        <span class="k">xun · wood</span>
+        <span class="k">south-facing</span>
+        <span class="k">cinnabar accents</span>
+      </div>
+    </div>
+
+    <div class="col c3">
+      <svg class="om-wm" viewBox="0 0 80 120"><use href="#om-bamboo"/></svg>
+      <div class="eye">iii · People <span class="cn">· 财人</span></div>
+      <h3>Who Brings Wealth<span class="cn">财人</span></h3>
+      <p class="lead">Day stem <span class="term">Gengwu</span> nourishes the World — <b>those born in years of Horse, Tiger, or Dog are your benefactors today</b>. When proposals come from any of these three, the words behind them tend to be real. Be wary of Rats.</p>
+      <div class="keys">
+        <span class="k">Horse</span>
+        <span class="k">Tiger</span>
+        <span class="k">Dog</span>
+        <span class="k">avoid · Rat</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADVISORY ============ -->
+  <section class="advisory">
+    <svg class="gourd-bg" viewBox="0 0 100 100"><use href="#om-peach"/></svg>
+
+    <div class="left-stamp">
+      <div class="seal">易</div>
+      <div class="name">Classical Note</div>
+      <div class="cn">古 法 寄 语</div>
+    </div>
+
+    <div class="body">
+      <h3>Hold quiet; observe change; compound the small<span class="cn">· 守静观变 · 以小成大</span></h3>
+      <p>Bi (贲) is <em>fire beneath the mountain</em> — civilization contained, brilliance internalized. Today's vitality is genuine, but the hexagram's instruction is plain: <b>refine, dress up, pursue small advantages</b>. The grand stroke isn't this day. Wealth moves and advances on its own — your job is to neither chase nor squander it.</p>
+      <p>Also: the moving line is Water (亥) and joins with the World's Fire (午). If a stalled agreement is on the table, today is the day to push. But <b>get it in writing</b> — verbal accords here become legal trouble later.</p>
+      <div class="src">From the third-line statement of Bi · Zhouyi Benyi (《周易本义》)  ·  HexaEdge interpretation</div>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    HexaEdge offers a classical-Liuyao perspective as auxiliary reference <span style="color:var(--zhu-sha)">·</span> not investment, medical, or legal advice <span style="color:var(--zhu-sha)">·</span> your judgment and responsibility remain your own
+  </div>
+
+</div>
+
+<footer>
+  <div class="l">
+    <span class="s">点 卦</span>
+    <span>© 2026 HexaEdge</span>
+  </div>
+  <span class="roman">EST. MMXXVI · Bingwu Year · Gengwu Day</span>
+  <span>
+    <a href="ornaments.html">Motifs</a>
+    <a href="zhanshi-en.html">Inquiry</a>
+    <a href="fortune.html">中文</a>
+  </span>
+</footer>
+
+<script src="ornaments.js"></script>
+</body></html>

@@ -1,0 +1,737 @@
+<!doctype html>
+<!-- @dsCard group="Brand" name="财运预测 · Fortune" subtitle="Enhanced daily fortune with bagua compass, 财源/场/人, ornaments throughout" -->
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>HexaEdge · 财运预测</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans-sc);min-height:100vh}
+
+/* === NAV === */
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 64px;border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:14px}
+.logo .seal{width:38px;height:38px;background:var(--indigo-deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:22px;font-weight:700}
+.logo .lock{display:flex;flex-direction:column;line-height:1}
+.logo .en{font-family:var(--font-serif-latin);font-style:italic;font-size:20px;font-weight:600;color:var(--indigo)}
+.logo .cn{font-family:var(--font-serif-sc);font-size:13px;letter-spacing:0.4em;color:var(--ink-soft);margin-top:3px}
+nav ul{display:flex;gap:36px;list-style:none;margin:0;padding:0;font-size:14px}
+nav a{color:var(--ink-soft);text-decoration:none}
+nav a.active{color:var(--ink);position:relative}
+nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-26px;height:2px;background:var(--zhu-sha)}
+nav .right{display:flex;gap:14px;align-items:center}
+.btn{font-family:var(--font-sans-sc);font-size:14px;padding:10px 22px;border:1px solid transparent;cursor:pointer;border-radius:2px;background:none;letter-spacing:0.02em}
+.btn-pri{background:var(--indigo);color:var(--paper)}
+.btn-zhu{background:var(--zhu-sha);color:var(--paper)}
+.btn-ghost{color:var(--ink);border-color:var(--rule-strong);background:var(--paper-raised)}
+
+/* === WRAP === */
+.wrap{max-width:1280px;margin:0 auto;padding:48px 64px 96px}
+
+/* === PAGE EYEBROW === */
+.page-eye{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--rule);padding-bottom:22px;margin-bottom:14px;position:relative}
+.page-eye .l{display:flex;flex-direction:column;gap:8px}
+.page-eye .eye{font-family:var(--font-sans-latin);font-size:11px;letter-spacing:0.32em;color:var(--zhu-sha);text-transform:uppercase}
+.page-eye .eye .dot{color:var(--zhu-sha);margin:0 8px}
+.page-eye h1{font-family:var(--font-serif-sc);font-size:48px;font-weight:600;letter-spacing:0.18em;margin:0;color:var(--ink);text-indent:0.18em}
+.page-eye .r{font-family:var(--font-mono);font-size:12px;color:var(--ink-mute);text-align:right;line-height:1.85;letter-spacing:0.04em}
+.page-eye .r .big{font-family:var(--font-serif-sc);font-size:20px;color:var(--ink);letter-spacing:0.06em;display:block;margin-bottom:6px;font-weight:600}
+.page-eye .r .zhu{color:var(--zhu-sha);font-family:var(--font-serif-sc);letter-spacing:0.06em}
+
+/* tiny corner plum branch — anchored to the right of the title, decorative */
+.title-plum{position:absolute;right:240px;top:-2px;width:160px;color:var(--zhu-sha);opacity:0.55;pointer-events:none}
+
+/* === PERIOD SWITCHER === */
+.period{display:flex;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);align-self:flex-start;margin-bottom:32px}
+.period .opt{padding:11px 22px;font-family:var(--font-serif-sc);font-size:13.5px;color:var(--ink-soft);border-right:1px solid var(--rule);cursor:pointer;letter-spacing:0.1em;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:88px}
+.period .opt:last-child{border-right:0}
+.period .opt.on{background:var(--ink-700);color:var(--paper)}
+.period .opt .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:10px;color:var(--ink-mute);letter-spacing:0.04em}
+.period .opt.on .lt{color:var(--ink-300)}
+
+/* === HERO READING — gua + score === */
+.reading{display:grid;grid-template-columns:1.2fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px;position:relative;overflow:hidden}
+
+/* left: gua + judging */
+.gua-side{padding:48px 44px;border-right:1px solid var(--rule);position:relative;background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%);overflow:hidden}
+.gua-side .corner-coin{position:absolute;right:-30px;top:-30px;width:200px;color:var(--liu-jin);opacity:0.15;pointer-events:none}
+.gua-side .corner-plum{position:absolute;right:24px;bottom:18px;width:180px;color:var(--zhu-sha);opacity:0.45;pointer-events:none}
+
+.gua-eye{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:30px;position:relative;z-index:2}
+.gua-eye .seal{width:56px;height:56px;background:var(--zhu-sha);color:var(--paper);font-family:var(--font-serif-sc);font-size:28px;font-weight:600;display:flex;align-items:center;justify-content:center;letter-spacing:0.04em}
+.gua-eye .meta{text-align:right;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);line-height:1.8;letter-spacing:0.04em}
+.gua-eye .meta b{font-family:var(--font-serif-sc);color:var(--ink);font-weight:600;font-size:13px;display:block;letter-spacing:0.08em;margin-bottom:4px}
+
+.gua-name{display:flex;align-items:baseline;gap:18px;margin-bottom:8px;position:relative;z-index:2}
+.gua-name .main{font-family:var(--font-serif-sc);font-size:52px;font-weight:600;letter-spacing:0.12em;color:var(--ink);line-height:1}
+.gua-name .arr{font-size:22px;color:var(--ink-mute)}
+.gua-name .vary{font-family:var(--font-serif-sc);font-size:34px;color:var(--liu-jin);letter-spacing:0.12em;font-weight:500}
+.gua-en{font-family:var(--font-serif-latin);font-style:italic;font-size:16px;color:var(--ink-mute);letter-spacing:0.02em;margin-bottom:24px;position:relative;z-index:2}
+
+.judging{padding:18px 22px;background:var(--zhu-sha-wash);border-left:3px solid var(--zhu-sha);margin-bottom:32px;position:relative;z-index:2;max-width:88%}
+.judging .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.24em;color:var(--zhu-sha);text-transform:uppercase;margin-bottom:6px}
+.judging .text{font-family:var(--font-serif-sc);font-size:16.5px;color:var(--ink);line-height:1.8;letter-spacing:0.04em}
+
+/* yao lines drawn classically */
+.lines{display:flex;flex-direction:column;gap:8px;position:relative;z-index:2}
+.lines .ln{display:flex;align-items:center;gap:14px;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.04em}
+.lines .ln .pos{width:36px;color:var(--ink-mute);font-family:var(--font-serif-sc);font-size:12px;letter-spacing:0.06em}
+.lines .ln .bars{flex:0 0 200px;display:flex;gap:6px;align-items:center}
+.lines .ln .bar{height:6px;background:var(--ink);flex:1}
+.lines .ln.broken .bar{flex:0 0 calc(50% - 3px)}
+.lines .ln.dyn .bar{background:var(--liu-jin)}
+.lines .ln .mk{font-family:var(--font-serif-sc);font-size:11.5px;letter-spacing:0.06em}
+.lines .ln.dyn .mk{color:var(--liu-jin);font-weight:600}
+.lines .ln .roman{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink-300);font-size:13px;margin-left:auto}
+
+/* right: score */
+.score-side{padding:48px 44px;display:flex;flex-direction:column;gap:18px;position:relative;background:var(--paper-raised)}
+.score-side .corner-lantern{position:absolute;right:24px;top:24px;width:80px;color:var(--zhu-sha);opacity:0.16;pointer-events:none}
+.score-eye{font-family:var(--font-sans-latin);font-size:11px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.score-eye::before{content:"";width:18px;height:1px;background:var(--zhu-sha)}
+.score-eye .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.12em;color:var(--ink-soft);margin-left:4px;font-size:13px}
+
+.big-rating{display:flex;flex-direction:column;gap:14px;padding-bottom:24px;border-bottom:1px solid var(--rule);position:relative;z-index:2}
+.stars{font-family:var(--font-serif-sc);font-size:56px;color:var(--liu-jin);letter-spacing:0.08em;line-height:1}
+.grade-row{display:flex;align-items:baseline;gap:18px}
+.grade{font-family:var(--font-serif-sc);font-size:30px;font-weight:600;color:var(--ink);letter-spacing:0.12em;white-space:nowrap}
+.grade .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:20px;color:var(--zhu-sha);margin-left:10px;letter-spacing:0.02em}
+.delta{font-family:var(--font-mono);font-size:12px;color:var(--celadon);letter-spacing:0.06em}
+
+.tags-row{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:2}
+.tag{font-family:var(--font-serif-sc);font-size:12.5px;padding:5px 14px;border:1px solid var(--rule-strong);border-radius:14px;color:var(--ink-soft);background:var(--paper);letter-spacing:0.08em}
+.tag.up{color:var(--zhu-sha);border-color:var(--zhu-sha)}
+.tag.gold{color:var(--liu-jin);border-color:var(--liu-jin);background:var(--liu-jin-wash)}
+
+.summary{font-family:var(--font-serif-sc);font-size:15px;color:var(--ink);line-height:1.95;letter-spacing:0.04em;text-wrap:pretty;position:relative;z-index:2}
+.summary b{font-weight:600;color:var(--zhu-sha)}
+
+.score-cta{display:flex;gap:10px;margin-top:auto;padding-top:14px;position:relative;z-index:2}
+.score-cta .btn{flex:1;text-align:center}
+
+/* === DIVIDER === */
+.div-cloud{display:flex;justify-content:center;padding:24px 0 48px}
+.div-cloud svg{width:420px;color:var(--ink-300)}
+
+/* === SECTION HEAD === */
+.shead{display:flex;align-items:baseline;gap:22px;padding:14px 0 24px}
+.shead .num{font-family:var(--font-serif-latin);font-style:italic;font-size:32px;color:var(--zhu-sha);font-weight:500;line-height:1}
+.shead h2{font-family:var(--font-serif-sc);font-size:28px;font-weight:600;letter-spacing:0.12em;color:var(--ink);margin:0}
+.shead .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-mute);letter-spacing:0.04em}
+.shead .line{flex:1;height:1px;background:var(--rule)}
+
+/* === 宜 / 忌 with ornaments === */
+.yiji{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.yiji .col{padding:36px 36px 32px;position:relative;overflow:hidden}
+.yiji .col.yi{border-right:1px solid var(--rule);background:linear-gradient(180deg, #FFFFFF 0%, var(--zhu-sha-wash) 240%)}
+.yiji .col.ji{background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%)}
+.yiji .col .corner-orn{position:absolute;right:-20px;bottom:-20px;width:160px;opacity:0.16;pointer-events:none}
+.yiji .col.yi .corner-orn{color:var(--zhu-sha)}
+.yiji .col.ji .corner-orn{color:var(--ink-700)}
+.yiji .col .lab{display:flex;align-items:center;gap:14px;margin-bottom:24px;position:relative;z-index:2}
+.yiji .col .lab .stamp{width:44px;height:44px;font-family:var(--font-serif-sc);font-size:22px;font-weight:600;display:flex;align-items:center;justify-content:center;color:var(--paper);letter-spacing:0.04em}
+.yiji .col.yi .lab .stamp{background:var(--zhu-sha)}
+.yiji .col.ji .lab .stamp{background:var(--ink-900)}
+.yiji .col .lab h3{font-family:var(--font-serif-sc);font-size:22px;font-weight:600;letter-spacing:0.16em;color:var(--ink);margin:0}
+.yiji .col .lab .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:13px;color:var(--ink-mute);margin-left:6px;letter-spacing:0.04em}
+.yiji ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+.yiji li{display:flex;gap:14px;align-items:flex-start;padding-bottom:14px;border-bottom:1px dashed var(--rule);font-size:14px;line-height:1.6}
+.yiji li:last-child{border-bottom:0;padding-bottom:0}
+.yiji li .om-mini{flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;margin-top:-2px}
+.yiji li .om-mini svg{width:100%;height:100%}
+.yiji .yi li .om-mini{color:var(--zhu-sha)}
+.yiji .ji li .om-mini{color:var(--ink-mute)}
+.yiji li b{font-family:var(--font-serif-sc);font-size:15px;color:var(--ink);font-weight:600;display:block;margin-bottom:3px;letter-spacing:0.06em}
+.yiji li .desc{color:var(--ink-soft);font-size:13px;letter-spacing:0.02em}
+
+/* === LUCKY GRID with ornament watermarks === */
+.lucky-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.lucky-grid .it{padding:32px 26px 28px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:10px;position:relative;min-height:200px;overflow:hidden}
+.lucky-grid .it:last-child{border-right:0}
+.lucky-grid .it .om-bg{position:absolute;right:-12px;bottom:-12px;width:96px;opacity:0.16;pointer-events:none}
+.lucky-grid .it.it1 .om-bg{color:var(--ink-700)}
+.lucky-grid .it.it2 .om-bg{color:var(--ink-700)}
+.lucky-grid .it.it3 .om-bg{color:var(--zhu-sha);opacity:0.22}
+.lucky-grid .it.it4 .om-bg{color:var(--liu-jin);opacity:0.2}
+.lucky-grid .it .l{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.24em;color:var(--ink-mute);text-transform:uppercase;position:relative;z-index:2}
+.lucky-grid .it .l .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.12em;color:var(--ink-soft);margin-left:6px;font-size:12px}
+.lucky-grid .it .val{font-family:var(--font-serif-sc);font-size:36px;font-weight:600;color:var(--ink);letter-spacing:0.1em;margin-top:auto;position:relative;z-index:2;line-height:1.1}
+.lucky-grid .it .val.zhu{color:var(--zhu-sha)}
+.lucky-grid .it .val.gold{color:var(--liu-jin)}
+.lucky-grid .it .val.ink{color:var(--indigo)}
+.lucky-grid .it .sub{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.04em;position:relative;z-index:2}
+
+.color-swatch-row{display:flex;align-items:center;gap:14px;margin-top:auto;position:relative;z-index:2}
+.color-swatch{width:52px;height:52px;border:1px solid var(--rule-strong);position:relative;flex-shrink:0}
+.color-swatch::after{content:"";position:absolute;inset:5px;border:1px dashed rgba(255,255,255,0.45)}
+.color-meta{display:flex;flex-direction:column;gap:3px}
+.color-meta .nm{font-family:var(--font-serif-sc);font-size:18px;font-weight:600;color:var(--ink);letter-spacing:0.08em}
+.color-meta .hex{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.06em}
+
+/* === 财运罗盘 · Fortune Compass === */
+.compass-section{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.compass-side{padding:40px 36px;border-right:1px solid var(--rule);background:linear-gradient(180deg, #FFFFFF 0%, var(--paper-mist) 100%);position:relative;display:flex;align-items:center;justify-content:center;min-height:380px}
+.compass-svg{width:320px;height:320px;display:block}
+.compass-label{position:absolute;top:32px;left:32px;font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.28em;color:var(--ink-mute);text-transform:uppercase}
+.compass-label .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.14em;color:var(--ink-soft);margin-left:6px;font-size:12px}
+
+.directions{padding:40px 36px;display:flex;flex-direction:column;gap:0;background:var(--paper-raised)}
+.directions h3{font-family:var(--font-serif-sc);font-size:22px;font-weight:600;letter-spacing:0.12em;color:var(--ink);margin:0 0 4px}
+.directions h3 .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-mute);margin-left:10px;letter-spacing:0.04em}
+.directions p{font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-mute);line-height:1.7;margin:0 0 22px;letter-spacing:0.02em}
+.dir-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.dir-list .di{display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--rule)}
+.dir-list .di:last-child{border-bottom:0}
+.dir-list .di .pos{font-family:var(--font-serif-sc);font-size:22px;font-weight:600;color:var(--ink);letter-spacing:0.1em}
+.dir-list .di .pos .deg{display:block;font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);font-weight:400;letter-spacing:0.04em;margin-top:2px}
+.dir-list .di .info{display:flex;flex-direction:column;gap:3px}
+.dir-list .di .info b{font-family:var(--font-serif-sc);font-size:14.5px;color:var(--ink);font-weight:600;letter-spacing:0.06em}
+.dir-list .di .info .why{font-family:var(--font-sans-sc);font-size:12px;color:var(--ink-soft);letter-spacing:0.02em}
+.dir-list .di .grade-sq{width:44px;height:44px;border:1px solid;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif-sc);font-size:20px;font-weight:600;letter-spacing:0.04em}
+.dir-list .di .grade-sq.s{color:var(--liu-jin);border-color:var(--liu-jin);background:var(--liu-jin-wash)}
+.dir-list .di .grade-sq.a{color:var(--indigo);border-color:var(--indigo)}
+.dir-list .di .grade-sq.b{color:var(--indigo-soft);border-color:var(--indigo-soft)}
+.dir-list .di .grade-sq.c{color:var(--ink-mute);border-color:var(--ink-fade)}
+
+/* === LONG-TERM CURVE === */
+.curve-card{border:1px solid var(--rule-strong);background:var(--paper-raised);padding:32px 36px 28px;margin-bottom:48px;position:relative;overflow:hidden}
+.curve-card .mountains-bg{position:absolute;left:0;right:0;bottom:0;height:80px;color:var(--ink-700);opacity:0.06;pointer-events:none}
+.curve-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;position:relative;z-index:2}
+.curve-head .ttl{font-family:var(--font-serif-sc);font-size:22px;font-weight:600;letter-spacing:0.1em;color:var(--ink)}
+.curve-head .sub{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.06em}
+.curve-wrap{position:relative;height:220px;margin-bottom:14px;z-index:2}
+.curve-svg{width:100%;height:100%;display:block}
+
+.week-days{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border-top:1px solid var(--rule);padding-top:14px;position:relative;z-index:2}
+.week-days .d{padding:10px 6px;text-align:center;display:flex;flex-direction:column;gap:6px;border-right:1px dashed var(--rule)}
+.week-days .d:last-child{border-right:0}
+.week-days .dt{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.04em}
+.week-days .nm{font-family:var(--font-serif-sc);font-size:14px;color:var(--ink);letter-spacing:0.06em;font-weight:500}
+.week-days .st{font-family:var(--font-serif-sc);font-size:11px;color:var(--liu-jin);letter-spacing:0.06em}
+.week-days .d.today{background:var(--zhu-sha-wash)}
+.week-days .d.today .nm{color:var(--zhu-sha);font-weight:600}
+
+/* === 财源三柱 · Three sources === */
+.three-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-bottom:48px}
+.three-cards .col{padding:32px 30px;border-right:1px solid var(--rule);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px;min-height:300px}
+.three-cards .col:last-child{border-right:0}
+.three-cards .col .om-wm{position:absolute;right:-20px;top:-10px;width:120px;opacity:0.14;pointer-events:none}
+.three-cards .col.c1 .om-wm{color:var(--liu-jin);opacity:0.2}
+.three-cards .col.c2 .om-wm{color:var(--indigo)}
+.three-cards .col.c3 .om-wm{color:var(--celadon)}
+.three-cards .col .eye{font-family:var(--font-sans-latin);font-size:10px;letter-spacing:0.24em;color:var(--ink-mute);text-transform:uppercase;position:relative;z-index:2}
+.three-cards .col .eye .cn{font-family:var(--font-serif-sc);text-transform:none;letter-spacing:0.14em;color:var(--ink-soft);margin-left:6px;font-size:12px}
+.three-cards .col h3{font-family:var(--font-serif-sc);font-size:22px;font-weight:600;letter-spacing:0.14em;color:var(--ink);margin:6px 0 0;position:relative;z-index:2}
+.three-cards .col h3 .lt{font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-mute);margin-left:10px;letter-spacing:0.04em}
+.three-cards .col .lead{font-family:var(--font-serif-sc);font-size:14px;color:var(--ink);line-height:1.85;letter-spacing:0.02em;text-wrap:pretty;position:relative;z-index:2;margin-top:8px}
+.three-cards .col .lead b{color:var(--zhu-sha);font-weight:600}
+.three-cards .col .keys{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:14px;border-top:1px dashed var(--rule);position:relative;z-index:2}
+.three-cards .col .keys .k{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;background:var(--paper-sunken);color:var(--ink-soft);letter-spacing:0.06em}
+
+/* === ADVISORY === */
+.advisory{border:1px solid var(--rule-strong);background:linear-gradient(135deg, var(--paper-raised) 0%, var(--paper-mist) 100%);padding:40px 44px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;margin-bottom:48px;position:relative;overflow:hidden}
+.advisory .gourd-bg{position:absolute;right:-30px;bottom:-40px;width:200px;color:var(--celadon);opacity:0.16;pointer-events:none}
+.advisory .left-stamp{display:flex;flex-direction:column;align-items:center;gap:10px;padding-right:36px;border-right:1px solid var(--rule);position:relative;z-index:2}
+.advisory .left-stamp .seal{width:72px;height:72px;background:var(--ink-900);color:var(--liu-jin);font-family:var(--font-serif-sc);font-size:34px;font-weight:600;display:flex;align-items:center;justify-content:center;letter-spacing:0.04em}
+.advisory .left-stamp .name{font-family:var(--font-serif-sc);font-size:13px;color:var(--ink-soft);letter-spacing:0.18em;text-align:center}
+.advisory .body{position:relative;z-index:2}
+.advisory .body h3{font-family:var(--font-serif-sc);font-size:22px;font-weight:600;color:var(--ink);letter-spacing:0.14em;margin:0 0 12px}
+.advisory .body p{font-family:var(--font-serif-sc);font-size:15px;color:var(--ink-soft);line-height:1.95;letter-spacing:0.04em;text-wrap:pretty;margin:0 0 16px}
+.advisory .body b{color:var(--ink);font-weight:600}
+.advisory .body .src{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.06em;padding-left:14px;border-left:2px solid var(--zhu-sha)}
+
+/* === DISCLAIMER === */
+.disclaimer{padding:24px 28px;background:var(--paper-mist);border:1px dashed var(--rule-strong);font-size:12px;color:var(--ink-mute);line-height:1.85;text-align:center;font-family:var(--font-mono);letter-spacing:0.06em}
+
+/* === FOOTER === */
+footer{padding:36px 64px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;color:var(--ink-mute);font-size:12px;font-family:var(--font-mono);background:var(--paper)}
+footer .l{display:flex;gap:18px;align-items:center}
+footer .l .s{font-family:var(--font-serif-sc);color:var(--ink-soft);font-size:13px;letter-spacing:0.3em}
+footer .roman{font-family:var(--font-serif-latin);font-style:italic;color:var(--ink-soft);letter-spacing:0.12em}
+footer a{color:var(--ink-soft);text-decoration:none;margin-left:24px;letter-spacing:0.04em}
+</style></head><body>
+
+<nav>
+  <div class="logo">
+    <div class="seal">点</div>
+    <div class="lock"><div class="en">HexaEdge</div><div class="cn">点卦</div></div>
+  </div>
+  <ul>
+    <li><a href="index.html">主页</a></li>
+    <li><a href="zhanshi.html">占事</a></li>
+    <li><a class="active" href="fortune.html">每日财运</a></li>
+    <li><a href="ornaments.html">纹饰</a></li>
+    <li><a href="#">历史</a></li>
+  </ul>
+  <div class="right">
+    <a href="fortune-en.html" style="font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-soft);letter-spacing:0.06em;text-decoration:none">EN</a>
+    <button class="btn btn-ghost">重新起卦</button>
+    <button class="btn btn-pri">分享</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- PAGE TITLE -->
+  <div class="page-eye">
+    <div class="l">
+      <div class="eye">DAILY FORTUNE READING <span class="dot">·</span> 古法 · 财运预测 <span class="dot">·</span> EST. 2026</div>
+      <h1>今 日 财 运</h1>
+    </div>
+    <div class="r">
+      <span class="big">2026 · 04 · 28</span>
+      丙午年 · 壬辰月 · 庚午日<br>
+      星期二 · <span class="zhu">谷雨第七日</span>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:36px">
+    <div class="period">
+      <div class="opt"><span>日</span><span class="lt">Day</span></div>
+      <div class="opt on"><span>周</span><span class="lt">Week</span></div>
+      <div class="opt"><span>月</span><span class="lt">Month</span></div>
+      <div class="opt"><span>季</span><span class="lt">Qtr</span></div>
+      <div class="opt"><span>年</span><span class="lt">Year</span></div>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.06em">
+      cast at 06:42 · 巳时 <span style="color:var(--zhu-sha)">·</span>
+      <a href="#" style="color:var(--ink-soft);text-decoration:underline">导出 PDF</a> ·
+      <a href="#" style="color:var(--ink-soft);text-decoration:underline">分享</a>
+    </div>
+  </div>
+
+  <!-- ================ HERO READING ================ -->
+  <section class="reading">
+
+    <!-- LEFT: gua side -->
+    <div class="gua-side">
+      <svg class="corner-coin" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+
+      <div class="gua-eye">
+        <div class="seal">贲</div>
+        <div class="meta">
+          <b>本卦 · 之卦</b>
+          离下艮上 → 乾下艮上<br>
+          世爻 · 二爻 · 父母午火<br>
+          应爻 · 五爻 · 兄弟子水<br>
+          动爻 · 三爻 · 妻财亥水
+        </div>
+      </div>
+
+      <div class="gua-name">
+        <span class="main">山火贲</span>
+        <span class="arr">→</span>
+        <span class="vary">山天大畜</span>
+      </div>
+      <div class="gua-en">Bi · Adornment becoming Da Xu · Great Accumulation</div>
+
+      <div class="judging">
+        <div class="l">JUDGING LINE · 卦辞</div>
+        <div class="text">「贲，亨。小利有攸往。」<br>——文饰之时，宜小行小动，积小成大，以蓄养厚积。</div>
+      </div>
+
+      <div class="lines">
+        <div class="ln"><span class="pos">上九</span><span class="bars"><span class="bar"></span></span><span class="mk">官鬼寅木</span><span class="roman">vi</span></div>
+        <div class="ln broken"><span class="pos">六五</span><span class="bars"><span class="bar"></span><span class="bar"></span></span><span class="mk">应 · 兄弟子水</span><span class="roman">v</span></div>
+        <div class="ln broken"><span class="pos">六四</span><span class="bars"><span class="bar"></span><span class="bar"></span></span><span class="mk">妻财戌土</span><span class="roman">iv</span></div>
+        <div class="ln dyn"><span class="pos">九三</span><span class="bars"><span class="bar"></span></span><span class="mk">○ 动 · 妻财亥水</span><span class="roman">iii</span></div>
+        <div class="ln broken"><span class="pos">六二</span><span class="bars"><span class="bar"></span><span class="bar"></span></span><span class="mk">世 · 父母午火</span><span class="roman">ii</span></div>
+        <div class="ln"><span class="pos">初九</span><span class="bars"><span class="bar"></span></span><span class="mk">官鬼卯木</span><span class="roman">i</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: score side -->
+    <div class="score-side">
+      <svg class="corner-lantern" viewBox="0 0 120 200"><use href="#om-lantern"/></svg>
+
+      <div class="score-eye">FORTUNE INDEX <span class="cn">· 财运指数</span></div>
+
+      <div class="big-rating">
+        <div class="stars">★★★★☆</div>
+        <div class="grade-row">
+          <div class="grade">财 运 旺<span class="lt">A · Strong</span></div>
+        </div>
+        <div class="delta">较昨日 +0.5 ★ · 一周内最高 · 主财动而化进</div>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag up">▲ 偏旺</span>
+        <span class="tag gold">★ 妻财动</span>
+        <span class="tag">化进神</span>
+        <span class="tag">日辰生世</span>
+        <span class="tag">应期巳午</span>
+      </div>
+
+      <p class="summary">妻财动而化进，世爻得日辰生扶——<b>今日财气流向你这一边</b>。可主动谈合作、提报价、追回款；遇贵人扶助，言谈中见机会。但忌贪与急——文饰之卦讲究<b>小动而成</b>，不宜下大注。</p>
+
+      <div class="score-cta">
+        <button class="btn btn-ghost">查看市场卦 →</button>
+        <button class="btn btn-zhu">解 读 详 情 →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 宜 / 忌 ============ -->
+  <div class="shead">
+    <span class="num">i</span>
+    <h2>今 日 宜 忌</h2>
+    <span class="lt">Favorable &amp; unfavorable · classical pairing</span>
+    <span class="line"></span>
+  </div>
+
+  <section class="yiji">
+    <div class="col yi">
+      <svg class="corner-orn" viewBox="0 0 100 100"><use href="#om-plum"/></svg>
+      <div class="lab">
+        <div class="stamp">宜</div>
+        <h3>今 日 宜</h3>
+        <span class="lt">Favorable</span>
+      </div>
+      <ul>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-coin"/></svg></span>
+          <div><b>谈合作 · 提报价</b><div class="desc">妻财动而生世，言辞间容易拿到对方让步。</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 120 200"><use href="#om-lantern"/></svg></span>
+          <div><b>追回款 · 收账</b><div class="desc">动爻化进，旧款今日易催动；午时之前最佳。</div></div>
+        </li>
+        <li>
+          <div><b>主动求贵人</b><div class="desc">东南方为生世方位，今日见东南方友人有助。</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-plum"/></svg></span>
+          <div><b>添置 · 修饰</b><div class="desc">贲卦本意为「文饰」——添置工具、修整门面皆吉。</div></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col ji">
+      <svg class="corner-orn" viewBox="0 0 100 110"><use href="#om-scales"/></svg>
+      <div class="lab">
+        <div class="stamp">忌</div>
+        <h3>今 日 忌</h3>
+        <span class="lt">Unfavorable</span>
+      </div>
+      <ul>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 60 100"><use href="#om-flame"/></svg></span>
+          <div><b>大宗投入 · 重仓</b><div class="desc">「小利有攸往」——今日宜小不宜大，重注易失分寸。</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 110"><use href="#om-scales"/></svg></span>
+          <div><b>口角 · 争执</b><div class="desc">官鬼当头有刑，与上司、客户须留三分余地。</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 140 100"><use href="#om-carriage"/></svg></span>
+          <div><b>借出大额</b><div class="desc">兄弟爻为应——今日他人借款，归期难定。</div></div>
+        </li>
+        <li>
+          <span class="om-mini"><svg viewBox="0 0 100 100"><use href="#om-moon"/></svg></span>
+          <div><b>子时后议事</b><div class="desc">日辰之力衰退，深夜决策易反复，宜延至明日早。</div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="div-cloud">
+    <svg viewBox="0 0 400 24"><use href="#om-divider"/></svg>
+  </div>
+
+  <!-- ============ LUCKY GRID ============ -->
+  <div class="shead">
+    <span class="num">ii</span>
+    <h2>方 位 · 时 辰 · 财 色 · 数 字</h2>
+    <span class="lt">Today's coordinates · where, when, in what color</span>
+    <span class="line"></span>
+  </div>
+
+  <section class="lucky-grid">
+    <div class="it it1">
+      <div class="l">DIRECTION <span class="cn">· 贵人方位</span></div>
+      <div class="val zhu">东 南</div>
+      <div class="sub">巽位 · 木气生火世 · 求人办事最佳</div>
+    </div>
+    <div class="it it2">
+      <svg class="om-bg" viewBox="0 0 60 100"><use href="#om-flame"/></svg>
+      <div class="l">HOURS <span class="cn">· 吉时辰</span></div>
+      <div class="val ink">巳 午</div>
+      <div class="sub">9:00 — 13:00 · 世爻得令之时</div>
+    </div>
+    <div class="it it3">
+      <svg class="om-bg" viewBox="0 0 100 100"><use href="#om-plum"/></svg>
+      <div class="l">COLOR <span class="cn">· 财运色</span></div>
+      <div class="color-swatch-row">
+        <div class="color-swatch" style="background:#A8392E"></div>
+        <div class="color-meta">
+          <div class="nm">朱 砂 红</div>
+          <div class="hex">#A8392E · 火助世</div>
+        </div>
+      </div>
+    </div>
+    <div class="it it4">
+      <svg class="om-bg" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+      <div class="l">NUMBER <span class="cn">· 财运数字</span></div>
+      <div class="val gold">3 · 8</div>
+      <div class="sub">三爻动 · 八卦次第 · 用于选号 · 密码</div>
+    </div>
+  </section>
+
+  <!-- ============ FORTUNE COMPASS ============ -->
+  <div class="shead">
+    <span class="num">iii</span>
+    <h2>财 运 罗 盘</h2>
+    <span class="lt">The fortune compass · best-to-worst directions</span>
+    <span class="line"></span>
+  </div>
+
+  <section class="compass-section">
+    <div class="compass-side">
+      <div class="compass-label">FORTUNE COMPASS <span class="cn">· 八方吉凶</span></div>
+
+      <!-- compass illustration: bagua outer + directional rings + cinnabar arrow -->
+      <svg class="compass-svg" viewBox="0 0 320 320">
+        <defs>
+          <radialGradient id="rg" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#F2F6F7"/>
+            <stop offset="100%" stop-color="#E3ECEF"/>
+          </radialGradient>
+        </defs>
+        <!-- background discs -->
+        <circle cx="160" cy="160" r="148" fill="url(#rg)" stroke="#B6C3C7" stroke-width="1"/>
+        <circle cx="160" cy="160" r="130" fill="none" stroke="#A6B8C6" stroke-width="1"/>
+        <circle cx="160" cy="160" r="92" fill="none" stroke="#A6B8C6" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="160" cy="160" r="56" fill="none" stroke="#A6B8C6" stroke-width="1"/>
+
+        <!-- cardinal lines -->
+        <line x1="160" y1="14" x2="160" y2="306" stroke="#CAD6DD" stroke-width="0.8"/>
+        <line x1="14" y1="160" x2="306" y2="160" stroke="#CAD6DD" stroke-width="0.8"/>
+        <line x1="56" y1="56" x2="264" y2="264" stroke="#CAD6DD" stroke-width="0.8"/>
+        <line x1="56" y1="264" x2="264" y2="56" stroke="#CAD6DD" stroke-width="0.8"/>
+
+        <!-- 8 trigrams outer ring -->
+        <g font-family="serif" font-size="20" fill="#243E66" text-anchor="middle">
+          <text x="160" y="32">☰</text>
+          <text x="160" y="298">☷</text>
+          <text x="22" y="166">☵</text>
+          <text x="298" y="166">☲</text>
+          <text x="56" y="58">☴</text>
+          <text x="264" y="58">☱</text>
+          <text x="56" y="276">☶</text>
+          <text x="264" y="276">☳</text>
+        </g>
+
+        <!-- direction labels (inner) -->
+        <g font-family="Noto Serif SC" font-size="13" fill="#243E66" text-anchor="middle" letter-spacing="2">
+          <text x="160" y="58" font-weight="600">北</text>
+          <text x="160" y="270" font-weight="600">南</text>
+          <text x="58" y="166" font-weight="600">西</text>
+          <text x="262" y="166" font-weight="600">东</text>
+        </g>
+
+        <!-- shaded SE favorable wedge (cinnabar) -->
+        <path d="M 160 160 L 252 252 A 130 130 0 0 0 290 160 Z" fill="#A8392E" opacity="0.18"/>
+
+        <!-- N caution wedge (celadon) -->
+        <path d="M 160 160 L 198 38 A 130 130 0 0 0 122 38 Z" fill="#6E9387" opacity="0.18"/>
+
+        <!-- arrow pointing SE (best direction) -->
+        <line x1="160" y1="160" x2="234" y2="234" stroke="#A8392E" stroke-width="3" stroke-linecap="round"/>
+        <polygon points="234,234 218,224 224,218" fill="#A8392E"/>
+
+        <!-- center taiji -->
+        <circle cx="160" cy="160" r="22" fill="#14233A"/>
+        <path d="M160 138 A 22 22 0 0 1 160 182 A 11 11 0 0 0 160 160 A 11 11 0 0 1 160 138 Z" fill="#F2F6F7"/>
+        <circle cx="160" cy="149" r="2.8" fill="#14233A"/>
+        <circle cx="160" cy="171" r="2.8" fill="#F2F6F7"/>
+
+        <!-- compass label -->
+        <text x="160" y="318" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="11" fill="#7C95AE" letter-spacing="3">— Compass —</text>
+      </svg>
+    </div>
+
+    <div class="directions">
+      <h3>八 方 吉 凶<span class="lt">Eight directions</span></h3>
+      <p>财气循八方而流，今日所宜与所忌如下——主动出门或求人之事，可参此盘。</p>
+
+      <div class="dir-list">
+        <div class="di">
+          <div class="pos">东南<span class="deg">SE · 135°</span></div>
+          <div class="info"><b>贵人方 · 巽木生火</b><span class="why">求人办事 · 谈判 · 收账皆顺</span></div>
+          <div class="grade-sq s">S</div>
+        </div>
+        <div class="di">
+          <div class="pos">南方<span class="deg">S · 180°</span></div>
+          <div class="info"><b>世爻本位 · 火得令</b><span class="why">守而进取 · 自家场域得利</span></div>
+          <div class="grade-sq a">A</div>
+        </div>
+        <div class="di">
+          <div class="pos">东方<span class="deg">E · 90°</span></div>
+          <div class="info"><b>用神生处 · 木气有助</b><span class="why">合作 · 签约 · 拜访长辈</span></div>
+          <div class="grade-sq a">A</div>
+        </div>
+        <div class="di">
+          <div class="pos">西方<span class="deg">W · 270°</span></div>
+          <div class="info"><b>平 · 无明显助阻</b><span class="why">日常事可往 · 不必避忌</span></div>
+          <div class="grade-sq b">B</div>
+        </div>
+        <div class="di">
+          <div class="pos">北方<span class="deg">N · 0°</span></div>
+          <div class="info"><b>慎 · 水克火世</b><span class="why">避签大额合同 · 不宜深谈</span></div>
+          <div class="grade-sq c">C</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WEEK CURVE ============ -->
+  <div class="shead">
+    <span class="num">iv</span>
+    <h2 style="white-space:nowrap">本 周 财 运 曲 线</h2>
+    <span class="lt">Weekly arc · day by day, one star at a time</span>
+    <span class="line"></span>
+  </div>
+
+  <section class="curve-card">
+    <svg class="mountains-bg" viewBox="0 0 200 80" preserveAspectRatio="none"><use href="#om-mountain"/></svg>
+
+    <div class="curve-head">
+      <div class="ttl">本 周 财 运 · 04/27 — 05/03</div>
+      <div class="sub">本卦推演 · 逐日一星</div>
+    </div>
+
+    <div class="curve-wrap">
+      <svg class="curve-svg" viewBox="0 0 700 220" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#A8392E" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#A8392E" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- grid lines -->
+        <line x1="40" y1="40" x2="700" y2="40" stroke="#E3ECEF" stroke-width="1"/>
+        <line x1="40" y1="80" x2="700" y2="80" stroke="#E3ECEF" stroke-width="1"/>
+        <line x1="40" y1="120" x2="700" y2="120" stroke="#E3ECEF" stroke-width="1"/>
+        <line x1="40" y1="160" x2="700" y2="160" stroke="#E3ECEF" stroke-width="1"/>
+        <text x="6" y="44" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★★★★</text>
+        <text x="6" y="84" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★★★</text>
+        <text x="6" y="124" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★★</text>
+        <text x="6" y="164" font-family="JetBrains Mono" font-size="10" fill="#7C95AE">★★</text>
+
+        <!-- area fill -->
+        <path d="M80,130 L180,150 L280,85 L380,55 L480,95 L580,115 L680,145 L680,200 L80,200 Z" fill="url(#g1)"/>
+        <!-- line -->
+        <path d="M80,130 L180,150 L280,85 L380,55 L480,95 L580,115 L680,145" fill="none" stroke="#A8392E" stroke-width="2.2"/>
+        <!-- points -->
+        <circle cx="80"  cy="130" r="4" fill="#A8392E"/>
+        <circle cx="180" cy="150" r="4" fill="#A8392E"/>
+        <circle cx="280" cy="85"  r="5" fill="#FFFFFF" stroke="#A8392E" stroke-width="2"/>
+        <circle cx="380" cy="55"  r="7" fill="#A8392E" stroke="#9C7A3A" stroke-width="2"/>
+        <circle cx="480" cy="95"  r="4" fill="#A8392E"/>
+        <circle cx="580" cy="115" r="4" fill="#A8392E"/>
+        <circle cx="680" cy="145" r="4" fill="#A8392E"/>
+
+        <!-- today marker -->
+        <line x1="380" y1="22" x2="380" y2="200" stroke="#9C7A3A" stroke-width="1" stroke-dasharray="3 4"/>
+        <text x="388" y="32" font-family="Noto Serif SC" font-size="12" fill="#9C7A3A" letter-spacing="2">今日 · 峰值 ★★★★+</text>
+      </svg>
+    </div>
+
+    <div class="week-days">
+      <div class="d"><span class="dt">04/27</span><span class="nm">周一</span><span class="st">★★★</span></div>
+      <div class="d"><span class="dt">04/28</span><span class="nm">周二</span><span class="st">★★★</span></div>
+      <div class="d"><span class="dt">04/29</span><span class="nm">周三</span><span class="st">★★★★</span></div>
+      <div class="d today"><span class="dt">04/28</span><span class="nm">今日</span><span class="st">★★★★+</span></div>
+      <div class="d"><span class="dt">05/01</span><span class="nm">周五</span><span class="st">★★★★</span></div>
+      <div class="d"><span class="dt">05/02</span><span class="nm">周六</span><span class="st">★★★</span></div>
+      <div class="d"><span class="dt">05/03</span><span class="nm">周日</span><span class="st">★★★</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 财源 · 财场 · 财人 ============ -->
+  <div class="shead">
+    <span class="num">v</span>
+    <h2 style="white-space:nowrap">财 · 源 · 场 · 人</h2>
+    <span class="lt">Three threads of fortune · source, place, people</span>
+    <span class="line"></span>
+  </div>
+
+  <section class="three-cards">
+    <div class="col c1">
+      <svg class="om-wm" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+      <div class="eye">i · SOURCE <span class="cn">· 财源</span></div>
+      <h3>财 源<span class="lt">Where wealth flows from</span></h3>
+      <p class="lead">妻财亥水自三爻动出——<b>主财源在「合作 · 协议 · 已起步项目」</b>，非新生意。今日所得，多由过往埋下的种子开花。新合作慢三日为佳。</p>
+      <div class="keys">
+        <span class="k">已有合作</span>
+        <span class="k">合同条款</span>
+        <span class="k">长期项目</span>
+        <span class="k">熟客户</span>
+      </div>
+    </div>
+
+    <div class="col c2">
+      <svg class="om-wm" viewBox="0 0 120 200"><use href="#om-lantern"/></svg>
+      <div class="eye">ii · PLACE <span class="cn">· 财场</span></div>
+      <h3>财 场<span class="lt">Where wealth gathers</span></h3>
+      <p class="lead">东南为巽位、为木——<b>东南方场所最旺</b>。城东南商圈、东南向办公室、面朝东南之坐位皆为「财场」。室内有红色摆件 · 木质家具者更佳。</p>
+      <div class="keys">
+        <span class="k">东南方</span>
+        <span class="k">巽位 · 木</span>
+        <span class="k">朝南而坐</span>
+        <span class="k">朱砂摆饰</span>
+      </div>
+    </div>
+
+    <div class="col c3">
+      <svg class="om-wm" viewBox="0 0 80 120"><use href="#om-bamboo"/></svg>
+      <div class="eye">iii · PEOPLE <span class="cn">· 财人</span></div>
+      <h3>财 人<span class="lt">Who brings wealth</span></h3>
+      <p class="lead">日辰庚午生世——<b>属马 · 属虎 · 属狗者为贵人</b>。今日言谈中，留意从这三个属相中走来的合作邀约；他们出口的话，多有实意。属鼠之人慎言。</p>
+      <div class="keys">
+        <span class="k">属马</span>
+        <span class="k">属虎</span>
+        <span class="k">属狗</span>
+        <span class="k">忌属鼠</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADVISORY ============ -->
+  <section class="advisory">
+    <svg class="gourd-bg" viewBox="0 0 100 100"><use href="#om-peach"/></svg>
+
+    <div class="left-stamp">
+      <div class="seal">易</div>
+      <div class="name">古 法 寄 语</div>
+    </div>
+
+    <div class="body">
+      <h3>守 静 观 变 · 以 小 成 大</h3>
+      <p>「贲」为山下有火——文明而止，文饰内蕴。今日运势虽旺，更宜<b>修边幅 · 整门面 · 谋小利</b>，不宜大刀阔斧。妻财动而化进，机会自来；只要不贪不躁，今日所得，皆能积存为明日之厚势。</p>
+      <p>另：动爻为亥水，与世爻午火相合——若有合作议而未决者，今日可推一把；但<b>慎留契约白纸黑字</b>，口头协议易成日后官非。</p>
+      <div class="src">取自 · 贲卦九三爻辞 · 《周易本义》  ·  HexaEdge 释解</div>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    HexaEdge 提供基于六爻古法的辅助参考视角 <span style="color:var(--zhu-sha)">·</span> 不构成任何投资 / 医疗 / 法律建议 <span style="color:var(--zhu-sha)">·</span> 最终判断与责任在你自己手中
+  </div>
+
+</div>
+
+<footer>
+  <div class="l">
+    <span class="s">点 卦</span>
+    <span>© 2026 HexaEdge</span>
+  </div>
+  <span class="roman">EST. MMXXVI · 丙午年 · 庚午日</span>
+  <span>
+    <a href="ornaments.html">纹饰</a>
+    <a href="zhanshi.html">占事</a>
+    <a href="fortune-en.html">EN</a>
+  </span>
+</footer>
+
+<script src="ornaments.js"></script>
+</body></html>

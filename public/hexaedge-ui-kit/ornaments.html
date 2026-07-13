@@ -1,0 +1,416 @@
+<!doctype html>
+<!-- @dsCard group="Brand" name="Ornaments Library" subtitle="21 classical SVG symbols + usage examples" -->
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>HexaEdge · 中式装饰元素</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans-sc);min-height:100vh;padding:0 0 80px}
+
+  header{padding:56px 64px 36px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden;background:linear-gradient(180deg, var(--paper) 0%, var(--paper-mist) 100%)}
+  header .eye{font-family:var(--font-sans-latin);font-size:11px;letter-spacing:0.32em;color:var(--indigo-soft);text-transform:uppercase;margin-bottom:18px}
+  header .eye .dot{color:var(--zhu-sha);margin:0 10px}
+  header h1{font-family:var(--font-serif-sc);font-size:56px;font-weight:600;letter-spacing:0.06em;color:var(--ink);margin:0 0 10px}
+  header .sub{font-family:var(--font-serif-latin);font-style:italic;font-size:20px;color:var(--ink-soft);letter-spacing:0.02em}
+  header .meta{position:absolute;top:64px;right:64px;font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);text-align:right;line-height:1.8}
+  header .meta b{color:var(--ink);font-family:var(--font-serif-sc);font-weight:600;font-size:13px;display:block;margin-bottom:4px;letter-spacing:0.06em}
+
+  /* Hero plum branch corner */
+  .corner-plum{position:absolute;right:24px;bottom:-40px;width:240px;color:var(--zhu-sha);opacity:0.5}
+  .corner-plum svg{width:100%;display:block}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:48px 64px}
+
+  /* Section heads */
+  .section-head{display:flex;align-items:baseline;gap:18px;padding:48px 0 24px;margin-top:24px;border-bottom:1px solid var(--rule)}
+  .section-head .num{font-family:var(--font-serif-latin);font-style:italic;font-size:36px;color:var(--zhu-sha);font-weight:500;line-height:1}
+  .section-head h2{font-family:var(--font-serif-sc);font-size:30px;font-weight:600;letter-spacing:0.08em;color:var(--ink);margin:0}
+  .section-head .en{font-family:var(--font-serif-latin);font-style:italic;font-size:15px;color:var(--ink-mute);letter-spacing:0.04em;margin-left:auto}
+
+  /* Grid */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--paper-raised);border:1px solid var(--rule-strong);margin-top:32px}
+  .grid .it{padding:32px 28px 24px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;min-height:240px}
+  .grid .it:nth-child(4n){border-right:0}
+  .grid .it:nth-last-child(-n+4){border-bottom:0}
+  .grid .it .om{width:96px;height:96px;display:block;color:var(--ink-700);flex-shrink:0;margin-top:6px}
+  .grid .it .om.tall{height:120px}
+  .grid .it .om.wide{width:120px;height:80px}
+  .grid .it .om.zhu{color:var(--zhu-sha)}
+  .grid .it .om.gold{color:var(--liu-jin)}
+  .grid .it .cn{font-family:var(--font-serif-sc);font-size:18px;font-weight:600;color:var(--ink);letter-spacing:0.1em;margin-top:auto}
+  .grid .it .en{font-family:var(--font-serif-latin);font-style:italic;font-size:12px;color:var(--ink-mute);letter-spacing:0.02em}
+  .grid .it .id{position:absolute;top:14px;left:14px;font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);letter-spacing:0.06em;text-transform:lowercase}
+  .grid .it .roman{position:absolute;top:14px;right:14px;font-family:var(--font-serif-latin);font-style:italic;font-size:14px;color:var(--ink-300);font-weight:500}
+
+  /* Wide horizontal ornaments (mountain, water, huiwen, divider) */
+  .wide-row{background:var(--paper-raised);border:1px solid var(--rule-strong);margin-top:32px}
+  .wide-row .it{padding:32px 36px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:160px 1fr 120px;gap:24px;align-items:center}
+  .wide-row .it:last-child{border-bottom:0}
+  .wide-row .lab{display:flex;flex-direction:column;gap:4px}
+  .wide-row .lab .cn{font-family:var(--font-serif-sc);font-size:18px;font-weight:600;color:var(--ink);letter-spacing:0.1em}
+  .wide-row .lab .en{font-family:var(--font-serif-latin);font-style:italic;font-size:12px;color:var(--ink-mute)}
+  .wide-row .lab .id{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);margin-top:6px;letter-spacing:0.05em}
+  .wide-row .om-canvas{display:block;width:100%;height:80px;color:var(--ink-700)}
+  .wide-row .om-canvas.tall{height:110px}
+  .wide-row .om-canvas.zhu{color:var(--zhu-sha)}
+  .wide-row .note{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);line-height:1.6;text-align:right;letter-spacing:0.03em}
+
+  /* Color treatment showcase: same ornament in different ink */
+  .palette-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule-strong);background:var(--paper-raised);margin-top:32px}
+  .palette-row .it{padding:36px 24px;border-right:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+  .palette-row .it:last-child{border-right:0}
+  .palette-row .it .om{width:80px;height:120px}
+  .palette-row .it.ink{color:var(--ink-700)}
+  .palette-row .it.zhu{color:var(--zhu-sha)}
+  .palette-row .it.gold{color:var(--liu-jin)}
+  .palette-row .it.celadon{color:var(--celadon)}
+  .palette-row .it .nm{font-family:var(--font-serif-sc);font-size:15px;color:var(--ink);letter-spacing:0.1em}
+  .palette-row .it .hex{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.04em}
+
+  /* Use-case mini cards: how the ornament could appear in product */
+  .usecase{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+  .uc{border:1px solid var(--rule-strong);background:var(--paper-raised);padding:0;overflow:hidden}
+  .uc-canvas{height:200px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg, var(--paper-raised) 0%, var(--paper-mist) 100%)}
+  .uc-canvas .om{position:absolute;color:var(--ink-700)}
+  .uc-foot{padding:18px 22px;border-top:1px solid var(--rule)}
+  .uc-foot .ttl{font-family:var(--font-serif-sc);font-size:15px;font-weight:600;color:var(--ink);letter-spacing:0.06em;margin-bottom:4px}
+  .uc-foot .sub{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.04em}
+
+  /* corner ornaments in a card mockup */
+  .uc-card{background:var(--paper-raised);width:88%;height:140px;border:1px solid var(--rule-strong);padding:16px;position:relative;font-family:var(--font-serif-sc);font-size:14px;color:var(--ink);letter-spacing:0.06em;display:flex;align-items:center;justify-content:center}
+  .uc-card .corner{position:absolute;width:36px;height:36px;color:var(--zhu-sha);opacity:0.7}
+  .uc-card .corner.tl{top:4px;left:4px}
+  .uc-card .corner.tr{top:4px;right:4px;transform:scaleX(-1)}
+  .uc-card .corner.bl{bottom:4px;left:4px;transform:scaleY(-1)}
+  .uc-card .corner.br{bottom:4px;right:4px;transform:scale(-1)}
+
+  footer{padding:36px 64px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;color:var(--ink-mute);font-size:12px;font-family:var(--font-mono);margin-top:48px}
+
+  /* nav back */
+  .topnav{padding:16px 64px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;background:var(--paper);font-family:var(--font-mono);font-size:12px}
+  .topnav a{color:var(--ink-soft);text-decoration:none;margin-right:18px;letter-spacing:0.04em}
+  .topnav a:hover{color:var(--zhu-sha)}
+  .topnav .seal{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-serif-sc);font-size:14px;color:var(--ink);letter-spacing:0.18em}
+  .topnav .seal::before{content:"点";display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:var(--ink-900);color:var(--paper);font-size:14px;font-weight:600;letter-spacing:0}
+</style></head><body>
+
+<div class="topnav">
+  <span class="seal">点 卦 · HexaEdge</span>
+  <span>
+    <a href="index.html">← Index</a>
+    <a href="zhanshi.html">占事</a>
+    <a href="fortune.html">财运预测</a>
+    <a href="zhanshi-en.html">EN · Inquiry</a>
+    <a href="fortune-en.html">EN · Fortune</a>
+  </span>
+</div>
+
+<header>
+  <div class="eye">CLASSICAL CHINESE ORNAMENTS <span class="dot">·</span> SVG LIBRARY <span class="dot">·</span> EST. 2026</div>
+  <h1>点 卦 · 纹饰</h1>
+  <div class="sub">A library of inked motifs for the HexaEdge interface</div>
+  <div class="meta">
+    <b>v0.1 · 二十件</b>
+    20 symbols · all currentColor<br>
+    use via &lt;use href="#om-name"/&gt;<br>
+    auto-injected by ornaments.js
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ I · ICONIC SYMBOLS (compact, 100x100) ============ -->
+  <div class="section-head">
+    <span class="num">i</span>
+    <h2>器物 · 八件</h2>
+    <span class="en">Objects · ornaments as category icons</span>
+  </div>
+
+  <div class="grid">
+    <div class="it">
+      <span class="id">om-knot</span><span class="roman">i</span>
+      <svg class="om tall zhu" viewBox="0 0 120 170"><use href="#om-knot"/></svg>
+      <span class="cn">中国结</span>
+      <span class="en">Pan-chang Knot</span>
+    </div>
+    <div class="it">
+      <span class="id">om-lantern</span><span class="roman">ii</span>
+      <svg class="om tall zhu" viewBox="0 0 120 200"><use href="#om-lantern"/></svg>
+      <span class="cn">宫灯</span>
+      <span class="en">Palace Lantern</span>
+    </div>
+    <div class="it">
+      <span class="id">om-coin</span><span class="roman">iii</span>
+      <svg class="om gold" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+      <span class="cn">铜钱</span>
+      <span class="en">Bronze Coin</span>
+    </div>
+    <div class="it">
+      <span class="id">om-fan</span><span class="roman">iv</span>
+      <svg class="om tall" viewBox="0 0 140 130"><use href="#om-fan"/></svg>
+      <span class="cn">团扇</span>
+      <span class="en">Round Fan</span>
+    </div>
+    <div class="it">
+      <span class="id">om-peach</span><span class="roman">v</span>
+      <svg class="om tall" viewBox="0 0 100 100"><use href="#om-peach"/></svg>
+      <span class="cn">寿桃</span>
+      <span class="en">Longevity Peach</span>
+    </div>
+    <div class="it">
+      <span class="id">om-scroll</span><span class="roman">vi</span>
+      <svg class="om tall" viewBox="0 0 100 110"><use href="#om-scroll"/></svg>
+      <span class="cn">竹简</span>
+      <span class="en">Bamboo Scroll</span>
+    </div>
+    <div class="it">
+      <span class="id">om-scales</span><span class="roman">vii</span>
+      <svg class="om tall" viewBox="0 0 100 110"><use href="#om-scales"/></svg>
+      <span class="cn">天平</span>
+      <span class="en">Scales</span>
+    </div>
+    <div class="it">
+      <span class="id">om-carriage</span><span class="roman">viii</span>
+      <svg class="om wide" viewBox="0 0 140 100"><use href="#om-carriage"/></svg>
+      <span class="cn">车马</span>
+      <span class="en">Cart &amp; Horse</span>
+    </div>
+  </div>
+
+  <!-- ============ II · NATURE & FOLIAGE ============ -->
+  <div class="section-head">
+    <span class="num">ii</span>
+    <h2>草木山月 · 五件</h2>
+    <span class="en">Nature · grass, wood, mountains, moon</span>
+  </div>
+
+  <div class="grid">
+    <div class="it">
+      <span class="id">om-plum</span><span class="roman">ix</span>
+      <svg class="om zhu" viewBox="0 0 100 100"><use href="#om-plum"/></svg>
+      <span class="cn">梅花</span>
+      <span class="en">Plum Blossom</span>
+    </div>
+    <div class="it">
+      <span class="id">om-bamboo</span><span class="roman">x</span>
+      <svg class="om tall" style="color:var(--celadon)" viewBox="0 0 80 120"><use href="#om-bamboo"/></svg>
+      <span class="cn">竹</span>
+      <span class="en">Bamboo</span>
+    </div>
+    <div class="it">
+      <span class="id">om-lotus</span><span class="roman">xi</span>
+      <svg class="om wide" style="color:var(--celadon)" viewBox="0 0 120 100"><use href="#om-lotus"/></svg>
+      <span class="cn">莲花</span>
+      <span class="en">Lotus</span>
+    </div>
+    <div class="it">
+      <span class="id">om-moon</span><span class="roman">xii</span>
+      <svg class="om" viewBox="0 0 100 100"><use href="#om-moon"/></svg>
+      <span class="cn">月</span>
+      <span class="en">Moon</span>
+    </div>
+    <div class="it">
+      <span class="id">om-flame</span><span class="roman">xiii</span>
+      <svg class="om tall zhu" viewBox="0 0 60 100"><use href="#om-flame"/></svg>
+      <span class="cn">火焰</span>
+      <span class="en">Flame</span>
+    </div>
+    <div class="it">
+      <span class="id">om-ruyi</span><span class="roman">xiv</span>
+      <svg class="om gold" viewBox="0 0 100 110"><use href="#om-ruyi"/></svg>
+      <span class="cn">如意</span>
+      <span class="en">Ruyi Scepter</span>
+    </div>
+    <div class="it">
+      <span class="id">om-xi</span><span class="roman">xv</span>
+      <svg class="om wide zhu" viewBox="0 0 120 100"><use href="#om-xi"/></svg>
+      <span class="cn">双喜</span>
+      <span class="en">Double Happiness</span>
+    </div>
+  </div>
+
+  <!-- ============ III · LANDSCAPE STRIPS ============ -->
+  <div class="section-head">
+    <span class="num">iii</span>
+    <h2>山水云纹 · 横向</h2>
+    <span class="en">Landscape strips · for headers, footers, hero edges</span>
+  </div>
+
+  <div class="wide-row">
+    <div class="it">
+      <div class="lab">
+        <span class="cn">远山</span>
+        <span class="en">Distant Mountains</span>
+        <span class="id">om-mountain</span>
+      </div>
+      <svg class="om-canvas" viewBox="0 0 200 80" preserveAspectRatio="none"><use href="#om-mountain"/></svg>
+      <span class="note">3 ridges · stacked alpha<br>hero foot · page bottom</span>
+    </div>
+    <div class="it">
+      <div class="lab">
+        <span class="cn">水波</span>
+        <span class="en">Water Ripples</span>
+        <span class="id">om-water</span>
+      </div>
+      <svg class="om-canvas zhu" viewBox="0 0 200 80" preserveAspectRatio="none"><use href="#om-water"/></svg>
+      <span class="note">3 wave lines · loop-friendly<br>section dividers</span>
+    </div>
+    <div class="it">
+      <div class="lab">
+        <span class="cn">海水江崖</span>
+        <span class="en">Wave-and-Cliff</span>
+        <span class="id">om-waves</span>
+      </div>
+      <svg class="om-canvas tall" viewBox="0 0 400 120" preserveAspectRatio="xMidYMid meet"><use href="#om-waves"/></svg>
+      <span class="note">imperial-robe hem<br>large hero panels</span>
+    </div>
+    <div class="it">
+      <div class="lab">
+        <span class="cn">回纹</span>
+        <span class="en">Greek-Key Border</span>
+        <span class="id">om-huiwen</span>
+      </div>
+      <svg class="om-canvas" viewBox="0 0 240 32" preserveAspectRatio="xMidYMid meet"><use href="#om-huiwen"/></svg>
+      <span class="note">tileable · 240px unit<br>card edges · footers</span>
+    </div>
+    <div class="it">
+      <div class="lab">
+        <span class="cn">云纹分隔</span>
+        <span class="en">Cloud Divider</span>
+        <span class="id">om-divider</span>
+      </div>
+      <svg class="om-canvas zhu" viewBox="0 0 400 24" preserveAspectRatio="xMidYMid meet"><use href="#om-divider"/></svg>
+      <span class="note">cinnabar dot center<br>between sections</span>
+    </div>
+  </div>
+
+  <!-- ============ IV · COMPOSITES ============ -->
+  <div class="section-head">
+    <span class="num">iv</span>
+    <h2>组合 · 八卦 · 窗格</h2>
+    <span class="en">Composite medallions</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+    <div class="it" style="min-height:280px">
+      <span class="id">om-bagua</span><span class="roman">xvi</span>
+      <svg class="om" style="width:160px;height:160px" viewBox="0 0 120 120"><use href="#om-bagua"/></svg>
+      <span class="cn">八卦盘</span>
+      <span class="en">Bagua Medallion</span>
+    </div>
+    <div class="it" style="min-height:280px;border-right:0">
+      <span class="id">om-lattice</span><span class="roman">xvii</span>
+      <svg class="om" style="width:160px;height:160px" viewBox="0 0 100 100"><use href="#om-lattice"/></svg>
+      <span class="cn">冰裂窗</span>
+      <span class="en">Ice-Crack Lattice</span>
+    </div>
+  </div>
+
+  <!-- ============ V · COLOR TREATMENT ============ -->
+  <div class="section-head">
+    <span class="num">v</span>
+    <h2>设色 · 一物四相</h2>
+    <span class="en">Color treatments · one motif, four ink scales</span>
+  </div>
+
+  <div class="palette-row">
+    <div class="it ink">
+      <svg class="om" viewBox="0 0 120 170"><use href="#om-knot"/></svg>
+      <span class="nm">青花 ink-700</span>
+      <span class="hex">#243E66 · default</span>
+    </div>
+    <div class="it zhu">
+      <svg class="om" viewBox="0 0 120 170"><use href="#om-knot"/></svg>
+      <span class="nm">朱砂</span>
+      <span class="hex">#A8392E · accent</span>
+    </div>
+    <div class="it gold">
+      <svg class="om" viewBox="0 0 120 170"><use href="#om-knot"/></svg>
+      <span class="nm">鎏金</span>
+      <span class="hex">#9C7A3A · S-grade</span>
+    </div>
+    <div class="it celadon">
+      <svg class="om" viewBox="0 0 120 170"><use href="#om-knot"/></svg>
+      <span class="nm">青竹</span>
+      <span class="hex">#6E9387 · pine</span>
+    </div>
+  </div>
+
+  <!-- ============ VI · IN-CONTEXT ============ -->
+  <div class="section-head">
+    <span class="num">vi</span>
+    <h2>在场 · 用例</h2>
+    <span class="en">In-context · how they appear in product</span>
+  </div>
+
+  <div class="usecase">
+    <!-- watermark hero -->
+    <div class="uc">
+      <div class="uc-canvas">
+        <svg class="om" style="width:380px;opacity:0.08;color:var(--ink-700);right:-40px;top:20px" viewBox="0 0 120 120"><use href="#om-bagua"/></svg>
+        <div style="position:relative;z-index:1;font-family:var(--font-serif-sc);font-size:36px;font-weight:600;color:var(--ink);letter-spacing:0.1em">天泽履</div>
+      </div>
+      <div class="uc-foot">
+        <div class="ttl">八卦盘 · hero watermark</div>
+        <div class="sub">8% opacity · ink-700 · offset right</div>
+      </div>
+    </div>
+
+    <!-- mountain footer -->
+    <div class="uc">
+      <div class="uc-canvas" style="background:linear-gradient(180deg, var(--paper-raised) 0%, var(--paper-mist) 100%);align-items:flex-end;padding-bottom:0">
+        <svg class="om" style="width:100%;height:80px;color:var(--ink-900);position:absolute;bottom:0;left:0" viewBox="0 0 200 80" preserveAspectRatio="none"><use href="#om-mountain"/></svg>
+        <div style="position:relative;z-index:1;font-family:var(--font-serif-latin);font-style:italic;font-size:28px;color:var(--indigo);margin-bottom:46px">HexaEdge</div>
+      </div>
+      <div class="uc-foot">
+        <div class="ttl">远山 · hero foot</div>
+        <div class="sub">three-layer alpha · stretches full width</div>
+      </div>
+    </div>
+
+    <!-- coin -->
+    <div class="uc">
+      <div class="uc-canvas">
+        <svg class="om" style="width:140px;height:140px;color:var(--liu-jin)" viewBox="0 0 100 100"><use href="#om-coin"/></svg>
+      </div>
+      <div class="uc-foot">
+        <div class="ttl">铜钱 · category icon · 财</div>
+        <div class="sub">liu-jin · 140×140 in financial cards</div>
+      </div>
+    </div>
+
+    <!-- divider -->
+    <div class="uc">
+      <div class="uc-canvas" style="flex-direction:column;gap:16px;padding:0 32px">
+        <span style="font-family:var(--font-serif-sc);font-size:16px;color:var(--ink);letter-spacing:0.08em">本卦</span>
+        <svg style="width:80%;color:var(--ink-mute)" viewBox="0 0 400 24"><use href="#om-divider"/></svg>
+        <span style="font-family:var(--font-serif-sc);font-size:16px;color:var(--ink);letter-spacing:0.08em">变卦</span>
+      </div>
+      <div class="uc-foot">
+        <div class="ttl">云纹分隔 · between sections</div>
+        <div class="sub">cinnabar dot center · 80% width</div>
+      </div>
+    </div>
+
+    <!-- waves -->
+    <div class="uc">
+      <div class="uc-canvas" style="background:var(--ink-900);align-items:flex-end;padding-bottom:0">
+        <svg class="om" style="width:100%;height:100px;color:var(--liu-jin);position:absolute;bottom:0;left:0;opacity:0.7" viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice"><use href="#om-waves"/></svg>
+        <div style="position:relative;z-index:1;font-family:var(--font-serif-sc);font-size:22px;color:var(--liu-jin);margin-bottom:50px;letter-spacing:0.12em">易</div>
+      </div>
+      <div class="uc-foot">
+        <div class="ttl">海水江崖 · dark CTA strip</div>
+        <div class="sub">gold on indigo · imperial hem</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2026 HexaEdge · 点 卦 · 纹饰库 v0.1</span>
+  <span>EST. MMXXVI · 二十件 · all currentColor</span>
+</footer>
+
+<script src="ornaments.js"></script>
+</body></html>

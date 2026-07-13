@@ -9,6 +9,7 @@ export default {
     home: '首页',
     work: '作品',
     about: '关于',
+    resume: '简历',
     contact: '联系',
   },
 
