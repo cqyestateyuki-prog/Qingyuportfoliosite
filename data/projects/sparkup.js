@@ -44,10 +44,10 @@ export const sparkup = {
       sectionTag: '4-person team · 3 months',
       title: 'Product Lead & Design Lead',
       responsibilities: [
-        'Led product strategy: user research (151 surveys, 10+ interviews), JTBD / Four Forces / Kano analysis, and the pivot from community platform to AI-first diagnostic',
-        'Owned end-to-end UX/UI: Figma sketches → Figma Make for prototyping and iteration → Google AI Studio for finalizing the component library and design system',
-        'Defined the Two-Tier Diagnostic framework (Lite 10Q + Enhanced 30Q+) and the guest-to-user conversion flow',
-        'Designed the Spark Forge interaction: constrained AI generation with drag-and-drop Idea Seeds, budget/scope inputs, and the Forging animation',
+        'Made the call to scrap our community-matching concept after 151 surveys showed the real blocker sat earlier: people did not know whether they were ready',
+        'Split the diagnostic into two tiers so cold traffic gets value before any login, after Kano flagged a forced sign-up as a reverse attribute',
+        'Boxed in the AI generator with budget, scope, and drag-in Idea Seeds, so every idea ties back to the user instead of drifting into generic advice',
+        'Owned product and design end to end, from the research that set the direction to the shipped diagnose, forge, and validate loop',
       ]
     },
 

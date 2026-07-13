@@ -46,8 +46,8 @@ export const aiCommunityPlatform = {
       },
       
        overview: {
-         mainTitle: 'Transform AI Learning Into Community Experience',
-         briefContent: 'AI applications such as ChatGPT, Grok, and Claude currently [[lack built-in communities]], leaving everyday users without a dedicated space to learn, share, and connect. AI Built-in Community Platform [[fills this critical gap]] by offering an intuitive, accessible experience that [[transforms isolated AI use into collaborative discovery]]. The platform supports multiple post types: conversation & thoughts sharing, prompt discovery, and community events along with trending search and a prompt voting system. This combination enables users not only to [[learn useful AI tips but also to express themselves, exchange ideas, and feel a sense of belonging]]. For product owners, the community drives [[user retention]].',
+         mainTitle: 'The Community Layer Every AI Tool Is Missing',
+         briefContent: 'ChatGPT, Grok, and Claude all [[ship without a community]], so millions of people learn to use AI completely alone. The easy fix is a forum for prompts and tips. Research pointed somewhere harder: what people wanted most was [[recognition and a sense of belonging]] in the AI era, more than another list of tips. So the design is a community layer that sits on top of any chat tool without disrupting it, built around belonging first. For the product owner, that belonging is what drives [[retention]].',
          challenge: 'How might I create an ecosystem where users connect, collaborate, and create value for one another?',
          challenges: [
            'How might I create an ecosystem where users connect, collaborate, and create value for one another?',
@@ -88,7 +88,7 @@ export const aiCommunityPlatform = {
           title: 'Research',
           sectionTag: 'Research',
           mainTitle: 'The Demand for Connection',
-          briefContent: 'Through surveys and interviews, I discovered that users don\'t just want to learn techniques—they seek [[emotional connection, recognition, and a sense of belonging]] in the AI era. [[90% of participants]] want an in-app community, and [[58% face prompt engineering barriers]].',
+          briefContent: 'Through surveys and interviews, I discovered that users came to learn techniques and stayed for something else: they seek [[emotional connection, recognition, and a sense of belonging]] in the AI era. [[90% of participants]] want an in-app community, and [[58% face prompt engineering barriers]].',
           icon: '🔍', 
           imageDisplayMode: 'single',
            images: [
@@ -113,12 +113,12 @@ export const aiCommunityPlatform = {
           title: 'Iteration',
           sectionTag: 'Iteration',
           mainTitle: 'From Insight to Interface',
-          briefContent: 'I aimed to create an in-app community homepage that is both familiar—leveraging patterns users already know from Reddit, RedNotes, and YouTube—and tailored for AI-specific use cases. The design evolved through multiple rounds of sketching and testing.',
+          briefContent: 'I aimed to create an in-app community homepage that is familiar in its bones, leaning on patterns users already know from Reddit, RedNotes and YouTube, then tailored for AI-specific use cases. The design evolved through multiple rounds of sketching and testing.',
           icon: '🎨',
           content: [
             '**Three-column to Two-panel**: The initial design used a standard three-column layout. However, testing revealed that AI generated content required more horizontal space. I pivoted to a two-panel structure that better accommodates the AI chat interface alongside community content.',
             '',
-            '**Visual System**: Rather than creating a proprietary visual design system, I designed a [[platform-agnostic community framework]]. It acts as a functional layer on top of conversational UIs—adding community features without disrupting the core chat experience.',
+            '**Visual System**: Rather than creating a proprietary visual design system, I designed a [[platform-agnostic community framework]]. It acts as a functional layer on top of conversational UIs, adding community features without disrupting the core chat experience.',
             '',
             '**Interaction Patterns**: I focused on lowering the barrier to entry by using familiar patterns. The "Share Prompt" flow was simplified from 5 steps to 2 steps based on user feedback.'
           ],
@@ -181,7 +181,7 @@ export const aiCommunityPlatform = {
           title: 'Final Solution',
           sectionTag: 'Final Solution',
           mainTitle: 'One Integrated Ecosystem',
-          briefContent: 'The final platform successfully transforms [[isolated AI tool usage into collaborative community experiences]]. Users can easily [[discover relevant content, share their AI stories, and build meaningful connections]]. By integrating community directly within AI tools, I create powerful network effects that drive [[retention, engagement, and sustainable growth]].',
+          briefContent: 'The shipped platform puts community inside the tool, where the work already happens. Users [[share a chat, post a prompt, or find an event]] without leaving their AI. Keeping it in context is the whole point: a forum bolted on the side gets ignored, but a layer where you already work turns solo use into [[a reason to come back]].',
           icon: '🚀',
           featureDisplayMode: 'side-by-side',
           features: [
@@ -231,7 +231,7 @@ export const aiCommunityPlatform = {
           title: 'Impact & Reflection',
           sectionTag: 'Impact & Reflection',
           mainTitle: 'Learnings & Future Steps',
-          briefContent: 'This project demonstrated how community features can significantly enhance the value of AI tools. By moving beyond simple chat interfaces to a connected ecosystem, we can create more sticky, engaging products.',
+          briefContent: 'The takeaway: a community layer only earns its place if it is simpler than the tool it sits on. Users are already overwhelmed by AI, so the layer has to lower the load, never add to it.',
           icon: '💭',
           content: [
             '**Impact**:',

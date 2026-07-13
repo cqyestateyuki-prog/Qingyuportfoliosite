@@ -35,8 +35,8 @@ export const excelAiAgent = {
       },
       
        overview: {
-      mainTitle: { en: 'Transform Data Analysis Into Natural Conversation', zh: '将数据分析转化为自然对话' },
-      briefContent: { en: 'Excel AI Agent is a [[lightweight AI agent]] that enables [[non-technical users to complete complex data analysis tasks through natural language interaction]]. By understanding user questions, automatically generating Python code, and creating visual charts, I transformed technical data analysis into an accessible conversational experience.', zh: 'Excel AI Agent 是一款[[轻量级 AI 智能体]]，让[[非技术用户通过自然语言交互完成复杂数据分析任务]]。通过理解用户问题、自动生成 Python 代码并生成可视化图表，将技术型数据分析转化为易用的对话体验。' },
+      mainTitle: { en: 'An AI Analyst That Shows Its Work', zh: '一个把过程摊开给你看的 AI 分析师' },
+      briefContent: { en: 'Non-technical people are locked out of their own data: analysis means formulas or Python. Hand it to an AI and you hit the opposite problem, [[a black box you cannot trust]]. Excel AI Agent solves both by [[showing its work]]. You ask in plain language, and it streams back the Python it wrote, the steps it ran, and the exact columns it used. [[Transparency is what makes a non-technical user trust the answer]].', zh: '非技术的人被挡在自己的数据之外:做分析要么得会公式,要么得会 Python。交给 AI 又走到另一个极端:[[一个你无法信任的黑箱]]。Excel AI Agent 两头都解:[[把过程摊开给你看]]。你用大白话提问,它实时显示写出的 Python 代码、执行的每一步、以及用到的具体数据列。[[让非技术用户敢信结果的,正是透明]]。' },
       content: { en: 'Excel AI Agent is a lightweight AI agent that serves as a natural language-powered intelligent data analysis assistant, allowing users to complete complex data analysis tasks without writing code. Through AI technology, the system understands users\' natural language questions, automatically generates Python analysis code, executes analysis, and generates visual charts. The project features a clean white background design with Excel green as the primary color theme, supporting real-time streaming output and voice input, providing an efficient and intuitive data analysis experience for everyday users who need to work with Excel data but lack technical expertise.', zh: 'Excel AI Agent 是一款基于自然语言的智能数据分析助手，用户无需写代码即可完成复杂分析。系统理解自然语言问题、自动生成并执行 Python 分析代码、生成可视化图表；界面以白色为主、Excel 绿为主题色，支持实时流式输出与语音输入，为需要处理 Excel 但缺乏技术背景的用户提供高效直观的体验。' },
          challenges: [
         { en: 'How might we enable non-technical users to easily complete complex data analysis tasks?', zh: '如何让非技术用户轻松完成复杂的数据分析任务？' },
@@ -94,9 +94,9 @@ export const excelAiAgent = {
         title: 'Core Features',
         sectionTag: 'Key Features',
         mainTitle: 'Three Pillars of Intelligent Analysis',
-        briefContent: 'The platform\'s core features directly address user pain points: [[Natural language interaction]] (text and voice) eliminates coding needs, [[streaming output]] provides real-time feedback, and [[intelligent chart generation]] automatically creates visualizations. The complete flow—from file upload to analysis results—happens seamlessly through conversation.',
+        briefContent: 'The platform\'s core features directly address user pain points: [[Natural language interaction]] (text and voice) eliminates coding needs, [[streaming output]] provides real-time feedback, and [[intelligent chart generation]] automatically creates visualizations. The complete flow, from file upload to analysis results, happens through conversation.',
           icon: '✨',
-        content: 'The platform\'s core features directly address user pain points. Natural language interaction (both text and voice) eliminates the need for code, streaming output provides real-time feedback, intelligent chart generation automatically creates appropriate visualizations, and data traceability enhances trust. The main user flow starts with uploading an Excel file, which triggers automatic preprocessing and indexing. Users then input natural language questions and click "Run". The system generates an analysis plan with progress display, generates Python code with streaming output to the UI, executes the code with streaming execution results, generates visualization charts automatically, generates analysis summary with AI, and finally displays data traceability showing used data columns.',
+        content: 'Every feature exists to close the trust gap, not to add surface. Voice and text input remove the code barrier. Streaming output turns a long wait into visible thinking. Data traceability names the exact columns behind every answer, so you can check the machine instead of taking it on faith. What matters is that you can see how it got there, column by column.',
         images:[
           {
             src: '/media/projects/excel ai agent/5.png',
@@ -183,7 +183,7 @@ export const excelAiAgent = {
           title: 'Final Showcase & Impact',
         sectionTag: 'Final Showcase & Impact',
         mainTitle: 'From Technical Complexity to Natural Conversation',
-        briefContent: 'Excel AI Agent transforms data analysis from a [[technical task requiring coding skills]] into a [[conversational experience accessible to everyone]]. The platform reduces learning costs, improves efficiency through automation, and enhances visualization from plain text to [[interactive charts]]. The design demonstrates how AI technology can solve real-world problems while maintaining excellent user experience.',
+        briefContent: 'The result is a data analyst anyone can talk to and still audit. No formulas, no code, and a demo you can watch run end to end. The bet the whole tool makes: for AI to be trusted with real work, it has to [[show that work, not hide it]].',
           icon: '🚀',
         content: 'Excel AI Agent successfully transforms complex data analysis from a technical task requiring coding skills into a conversational experience accessible to everyone. The platform reduces learning costs from needing to learn Excel/Python to simply asking questions in natural language, improves efficiency from manually writing code to automatic generation and execution, and enhances result visualization from plain text output to interactive charts. The design demonstrates how AI technology can be applied to solve real-world problems while maintaining excellent user experience.',
           imageDisplayMode: 'single',

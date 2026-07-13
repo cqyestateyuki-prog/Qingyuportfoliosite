@@ -82,7 +82,7 @@ export const petiboxy = {
         icon: '🔍',
         content: [
           'Despite strong adoption intent, structural barriers prevent most people from adopting. The missing link: a trustworthy, accessible platform.',
-          '60% of potential pet owners express willingness to adopt if a reliable platform existed. However, 43.9% of current pets come from pet stores, only 35% are acquired through adoption, and 21.1% come from other sources. The problem isn\'t lack of willingness—it\'s lack of access.'
+          '60% of potential pet owners express willingness to adopt if a reliable platform existed. However, 43.9% of current pets come from pet stores, only 35% are acquired through adoption, and 21.1% come from other sources. Willingness is not the bottleneck. Access is.'
         ],
         imageDisplayMode: 'single',
         images: [
@@ -125,7 +125,7 @@ export const petiboxy = {
         title: 'Design Approach & Iteration',
         sectionTag: 'Design Approach & Iteration',
         mainTitle: 'Built on Three Core Principles',
-        briefContent: 'Three principles shaped it: [[Integrated Pet Profiles]] tie the charity features to Petiboxy\'s existing nutrition app, so one health record follows a pet through adoption; [[Multi-Channel Rescue]] lets people help at any level — finding, adopting, or supporting an org; and [[Community-Driven Growth]] leans on real adoption stories to build trust.',
+        briefContent: 'Three principles shaped it: [[Integrated Pet Profiles]] tie the charity features to Petiboxy\'s existing nutrition app, so one health record follows a pet through adoption; [[Multi-Channel Rescue]] lets people help at any level, whether that means finding, adopting, or supporting an org; and [[Community-Driven Growth]] leans on real adoption stories to build trust.',
           icon: '🎨',
         content: [
           'Principle 1: Integrated Pet Profiles - Seamless connection between Petiboxy\'s nutrition app and charity features. Complete pet health records support better adoption matches.',
