@@ -85,8 +85,9 @@ const ReelItem = ({ children }) => {
 };
 
 // ============ 同框快翻画廊 ============
-// 主项目卡内浏览内容图(hero + 案例章节图,最多 6 张):
+// 主项目卡内浏览内容图(hero + 案例的全部章节图):
 // 鼠标悬在图上滚动 = 左右翻页;翻到头继续滚 = 放行页面滚到下一个项目
+// 一次只渲染当前那张(key={idx} + lazy),所以不截断也不会一次性加载所有图
 const ProjectGallery = ({ project, language }) => {
   const images = useMemo(() => {
     const list = [project.heroImage || project.thumbnail];
@@ -94,7 +95,7 @@ const ProjectGallery = ({ project, language }) => {
       s.images?.forEach((img) => img?.src && list.push(img.src));
       s.imageGroups?.forEach((g) => g.images?.forEach((img) => img?.src && list.push(img.src)));
     });
-    return [...new Set(list.filter(Boolean))].slice(0, 6);
+    return [...new Set(list.filter(Boolean))];
   }, [project]);
 
   const [[idx, dir], setSlide] = useState([0, 0]);

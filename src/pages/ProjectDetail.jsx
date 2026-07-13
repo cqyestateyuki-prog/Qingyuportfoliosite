@@ -7,7 +7,6 @@ import React from 'react'
 //导入React Router Hooks，用于获取URL参数和导航
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import MoonIcon from '../hud/MoonIcon'
 //导入shadcn/ui组件库的UI组件
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -491,25 +490,6 @@ const ProjectDetail = () => {
           <span className="hidden md:block absolute -top-4 -left-3 w-5 h-5 border-t border-l pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
           <span className="hidden md:block absolute -top-4 -right-3 w-5 h-5 border-t border-r pointer-events-none" style={{ borderColor: 'var(--hud-line-strong)' }} aria-hidden="true" />
 
-          {/* 顶栏读数:Case Study ✦ ——————— 年份 */}
-          <div className="flex items-center gap-4 mb-7">
-            <p
-              className="text-xs md:text-sm lg:text-base font-medium tracking-[0.3em] uppercase whitespace-nowrap font-['Poppins']"
-              style={{ color: 'var(--section-tag)' }}
-            >
-              <MoonIcon /> Case Study ✦
-            </p>
-            <span className="h-px flex-1" style={{ background: 'var(--hud-line)' }} aria-hidden="true" />
-            {project.year && (
-              <span
-                className="text-xs md:text-sm lg:text-base tracking-[0.3em] tabular-nums font-['Poppins']"
-                style={{ color: 'var(--hud-fg-muted)' }}
-              >
-                {project.year}
-              </span>
-            )}
-          </div>
-
           {/* 标题(柔光)+ 副标题,左对齐贴合下方章节节奏 */}
           <h1
             className="text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight mb-5 animate-fade-in font-['Poppins']"
@@ -528,7 +508,7 @@ const ProjectDetail = () => {
 
           {/* TL;DR 一段速览(替代原 DOMAIN/FORM/COLLABORATORS 标签组) */}
           {tldr && (
-            <div className="mt-9 max-w-3xl">
+            <div className="mt-9">
               <p
                 className="text-xs md:text-sm lg:text-base font-medium uppercase tracking-[0.3em] mb-3 flex items-center gap-2 font-['Poppins']"
                 style={{ color: 'var(--hud-fg-muted)' }}
@@ -791,11 +771,15 @@ const ProjectDetail = () => {
           )}
             
             {/* overview 的 Challenge 卡片(项目没写就不渲染) */}
-            <ChallengeCard
-              id="challenge"
-              challenge={project.overview.challenge}
-              challenges={project.overview.challenges}
-            />
+            {(project.overview.challenge || project.overview.challenges?.length > 0) && (
+              <div className="mt-12">
+                <ChallengeCard
+                  id="challenge"
+                  challenge={project.overview.challenge}
+                  challenges={project.overview.challenges}
+                />
+              </div>
+            )}
 
             {/* Overview 独立主图（data 中 overview.mainImage: {src, alt, caption}） */}
             {project.overview.mainImage && (
