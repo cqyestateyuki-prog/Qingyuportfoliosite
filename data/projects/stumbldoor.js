@@ -6,8 +6,8 @@ export const stumbldoor = {
     featured: true, order: 2, // Selected Work · 第 2 位
     title: 'Stumbldoor',
     subtitle: {
-      en: 'Library Experience for the Future',
-      zh: '未来图书馆体验'
+      en: 'Reimagining the Library Experience for the Future',
+      zh: '重新想象未来的图书馆体验'
     },
     categories: ['UIUX', 'Research'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
@@ -16,8 +16,8 @@ export const stumbldoor = {
     // ========== 主页展示 ==========
     thumbnail: '/media/projects/stumbldoor/hero/hero-image@66662x.png',  // 列表页缩略图
     brief: {
-      en: 'A mobile app that rethinks the library experience for a generation that reads on screens: track your reading, find your next book, and explore a library in person.',
-      zh: '一款为「在屏幕上长大的一代」重新设计图书馆体验的 App:记录阅读、找到下一本书、把逛图书馆变成探索。'
+      en: 'Stumbldoor is a mobile app that [[rethinks the library experience]] for people who grew up reading on screens. The point is to make a library visit feel like exploring, so you [[stumble onto genres and authors you would never have searched for]].',
+      zh: 'Stumbldoor 是一款为「在屏幕上长大的一代」[[重新设计图书馆体验]]的 App。核心是把逛图书馆变回一种探索，让你[[撞见那些你根本不会去搜的书和作者]]。'
     },
     
     // ========== 详情页 Hero ==========
@@ -53,21 +53,8 @@ export const stumbldoor = {
     
     // ========== 项目概述 ==========
     overview: {
-      mainTitle: 'Reimagining the Library Experience',
-      briefContent: '[[Stumbldoor]] is a mobile app that [[rethinks the library experience]] for people who grew up reading on screens. You track what you read, get recommendations that fit your taste, and find a library nearby. The bigger idea is to make a library visit feel like exploring, so people stumble onto genres and authors they would never have searched for.',
-      challenge: 'How might I make libraries more relevant, inclusive, culturally dynamic & appealing in the future?',
-      challenges: [
-        'How might we make libraries more relevant, inclusive, culturally dynamic & appealing in the future?',
-        'How might we bridge the gap between physical and digital library experiences?',
-        'How might we encourage users to discover new genres and authors?',
-        'How might we address the 21.2% decline in physical library visits?'
-      ],
-      mainImage: {
-        src: '/media/projects/stumbldoor/overview/main-image.jpg',
-        alt: 'Stumbldoor App Overview',
-        caption: 'Stumbldoor — from home screen to in-library discovery'
-      },
-      whyIBuild: 'I grew up loving libraries, and it bothered me to watch my generation drift away from them. The books are still good; the experience just stopped speaking to people who live on their phones. Stumbldoor is my attempt to [[make a library feel worth walking into again]], by making discovery feel a bit more like play.'
+      // 正文与 challenge 已移走:TL;DR 在 hero 说清"是什么",challenge 移到 Problem Statement。
+      whyIBuild: 'I grew up loving libraries, and Stumbldoor is my attempt to [[make a library feel worth walking into again]], by making discovery feel a bit more like play.'
     },
     
     // ========== 角色（可选）==========
@@ -95,7 +82,13 @@ export const stumbldoor = {
         title: 'Problem Statement',
         sectionTag: 'Problem Statement',
         mainTitle: 'The Crisis of Libraries',
-        briefContent: 'From 2009 to 2022, physical library visits declined by [[21.2%]]. Yet library card registrations [[peaked in 2019]]. This paradox reveals a critical gap: [[people want to read, but the traditional library experience is failing them]]. Libraries face an [[identity crisis]]—while younger generations still value physical books, they\'re intimidated by formal library spaces, struggle to navigate complex layouts, and crave a more personalized, social reading experience.',
+        challenges: [
+          'How might we make libraries more relevant, inclusive, culturally dynamic & appealing in the future?',
+          'How might we bridge the gap between physical and digital library experiences?',
+          'How might we encourage users to discover new genres and authors?',
+          'How might we address the 21.2% decline in physical library visits?'
+        ],
+        briefContent: 'From 2009 to 2022, physical library visits declined by [[21.2%]]. Yet library card registrations [[peaked in 2019]]. This paradox reveals a critical gap: [[people want to read, but the traditional library experience is failing them]]. Libraries face an [[identity crisis]]. Younger generations still value physical books, but they are intimidated by formal library spaces, struggle to navigate complex layouts, and want a more personal, social way to read.',
         icon: '💡',
         images: [
           {

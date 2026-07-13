@@ -14,16 +14,18 @@ export const hexaedge = {
 
     thumbnail: '/media/projects/hexaedge/sections/s01-cover.png',
     brief: {
-      en: 'HexaEdge re-engineers Liuyao, a decision framework that was [[binary long before Leibniz]], into a deterministic engine. The 64 hexagrams and their tangle of variables become [[standardized signals]] on a calendar timeline, turning a 3,000-year-old method into a decision-support tool for reading a market or a personal call.',
-      zh: 'HexaEdge 把六爻重建为一台确定性推理引擎。这套决策框架[[比莱布尼茨更早用上二进制]]。64 卦及其纠缠的变量被解构成[[标准化信号]]，落在日历时间线上，让这套三千年的古法成为读一笔行情或一个人生决断的决策辅助工具。'
+      en: 'Liuyao is a 3,000-year-old decision framework that was [[binary long before Leibniz]]. HexaEdge re-engineers it into a [[deterministic engine]] for reading a market or a personal call.',
+      zh: '六爻是一套三千年的决策框架，[[比莱布尼茨更早用上二进制]]。HexaEdge 把它重建为一台[[确定性推理引擎]]，用来读一笔行情或一个人生决断。'
     },
     heroImage: '/media/projects/hexaedge/sections/s01-cover.png',
     heroVideo: null,
 
+    // domain[0] 会渲染成首页项目卡上的标签(Showcase.jsx)，所以第一项写"这是什么领域的产品"，
+    // 技术架构退到第二项。Symbolic AI 是学术术语，招聘方多半不认识，换成同样准确但人人看得懂的说法。
     domain: [
-      { en: 'Symbolic AI × LLM', zh: '符号智能 × 大模型' },
-      { en: 'Decision-support UX', zh: '决策辅助 UX' },
-      { en: 'Cultural Tech · B2C SaaS', zh: '文化科技 · B2C SaaS' }
+      { en: 'Decision-support SaaS', zh: '决策辅助 SaaS' },
+      { en: 'Deterministic Engine × LLM', zh: '确定性引擎 × 大模型' },
+      { en: 'Cultural Tech · B2C', zh: '文化科技 · B2C' }
     ],
     form: [
       { en: 'Product Design', zh: '产品设计' },
@@ -56,7 +58,7 @@ export const hexaedge = {
         { label: 'GitHub', url: 'https://github.com/cqyestateyuki-prog/LiuyaoSaaSProject', type: 'secondary' }
       ],
       // Why I'm building this(hero meta 之下)+ 六爻线条母题(新中式鎏金)
-      whyIBuild: 'HexaEdge began with a simple premise: three coins, an honest question, and a 3,000-year-old decision logic. Our goal is to scale this ancient framework for a global audience, treating it as an [[objective logic system]] rather than an occult superstition. HexaEdge serves as a tool for [[cognitive friction]] that lets you unpack a complex market or a personal decision from [[multiple dimensions]], instead of rushing toward a single, forced answer.',
+      whyIBuild: 'HexaEdge started as a quant decision system I built for my own calls, and AI and vibe coding are what let me take it from [[a tool for one person to a product anyone can use]].',
       whyIBuildHexagram: [1, 0, 1, 1, 0, 1], // 1=阳(整) 0=阴(断),自下而上
       whyIBuildHexagramColor: '#F2F6F7', // 六爻线条颜色(近白,压在深色 hero 上)
       whyIBuildHexagramLabel: '古法新用'
@@ -86,7 +88,7 @@ export const hexaedge = {
         title: 'Market & Opportunity',
         sectionTag: 'Market & Opportunity',
         mainTitle: 'The Intersection of Two Appetites',
-        briefContent: 'HexaEdge captures a rare psychological convergence in today\'s young demographic: [[the deep emotional need for clarity]] and [[the high-stakes thrill of financial trading]]. While users turn to traditional tools for mindfulness, they navigate modern markets with aggressive speculation.\n\nUnderneath both appetites sits [[a market worth hundreds of billions]], and no one is [[building it with taste]]. We bridge that gap through design.',
+        briefContent: 'HexaEdge captures a rare psychological convergence in today\'s young demographic: [[the deep emotional need for clarity]] and [[the high-stakes thrill of financial trading]]. While users turn to traditional tools for mindfulness, they navigate modern markets with aggressive speculation.\n\nUnderneath both appetites sits [[a market worth hundreds of billions]], and no one is [[building it with taste]]. I bridge that gap through design.',
         icon: '📈',
         imageDisplayMode: 'single',
         images: [
@@ -210,7 +212,7 @@ export const hexaedge = {
         title: 'Outcome',
         sectionTag: 'Outcome',
         mainTitle: 'Design to Deploy, No Handoff',
-        briefContent: 'The loop is closed. [[A user lands on an encyclopedia page from search, signs up, casts, reads, hits a tier gate, pays, and exports the result as a share card.]] I built every step of that, including the parts most designers hand off: [[auth, the entitlement layer behind four pricing tiers, bilingual AI output, and SEO]].\n\nThe scoring engine, the reading UI, and the compliance layer were designed and shipped by the same person, so [[none of it drifted across a handoff]]. What went live is a business, not a prototype.',
+        briefContent: 'The loop is closed. [[A user lands on an encyclopedia page from search, signs up, casts, reads, hits a tier gate, pays, and exports the result as a share card.]] I built every step of that, including the parts most designers hand off: [[auth, the entitlement layer behind fthe pricing tiers, bilingual AI output, and SEO]].\n\nThe scoring engine, the reading UI, and the compliance layer were designed and shipped by the same person, so [[none of it drifted across a handoff]]. What went live is a business, not a prototype.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
@@ -227,7 +229,7 @@ export const hexaedge = {
         title: 'Reflection',
         sectionTag: 'Reflection & Next Steps',
         mainTitle: 'Give the Decision Back to Users',
-        briefContent: 'The compliance red line between metaphysics and finance set the brief, and it forced the core decision: [[stop predicting, start describing]]. The constraint became the spine of the whole product. Liuyao could have been fortune-telling. I chose not to go that way. Give it modern product design and it earns a second life: [[calmer decisions, agency intact.]]\n\n**What\'s next:**\n- [[Signal visualization & rigor]]: confidence heatmaps, trend overlays, and continued tuning of the deterministic scoring engine.\n- [[Deeper RAG & data feeding]]: expanding the knowledge base with more classical texts and real-market outcome data.\n- [[Traction & the share loop]]: leaning on the export/share cards as an organic growth surface, then user testing with 18–30 investors who have no Liuyao background.\n\nAncient method, modern use. More clarity, never less agency.',
+        briefContent: 'A constraint I could not negotiate with turned out to be the best brief I have had. [[Stop predicting, start describing]] is the one decision the whole product hangs off.\n\nWhat I build next: confidence heatmaps and trend overlays on the deterministic engine, a knowledge base fed with more classical texts and real market outcomes, and user testing with investors who have never touched Liuyao.',
         icon: '💭'
       }
     ]
