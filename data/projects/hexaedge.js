@@ -14,8 +14,8 @@ export const hexaedge = {
 
     thumbnail: '/media/projects/hexaedge/sections/s01-cover.png',
     brief: {
-      en: 'Rebuilding a 3,000-year-old symbolic system into a deterministic engine. HexaEdge turns an ancient method into a decision-support tool for reading a market or a personal decision from multiple angles.',
-      zh: '把三千年的符号系统重建为一台确定性推理引擎。HexaEdge 把这套古法变成一款决策辅助工具，让你从多个角度审视一笔市场行情或一个个人决策。'
+      en: 'HexaEdge re-engineers Liuyao, a decision framework that was [[binary long before Leibniz]], into a deterministic engine. The 64 hexagrams and their tangle of variables become [[standardized signals]] on a calendar timeline, turning a 3,000-year-old method into a decision-support tool for reading a market or a personal call.',
+      zh: 'HexaEdge 把六爻重建为一台确定性推理引擎。这套决策框架[[比莱布尼茨更早用上二进制]]。64 卦及其纠缠的变量被解构成[[标准化信号]]，落在日历时间线上，让这套三千年的古法成为读一笔行情或一个人生决断的决策辅助工具。'
     },
     heroImage: '/media/projects/hexaedge/sections/s01-cover.png',
     heroVideo: null,
@@ -49,9 +49,8 @@ export const hexaedge = {
     },
 
     overview: {
-      mainTitle: 'I Rebuilt a 3,000-Year-Old Symbolic System into a Deterministic Engine',
-      briefContent: '**HexaEdge (点卦)** re-engineers **Liuyao (六爻)**, one of the world\'s oldest decision frameworks and [[binary long before Leibniz]], into a modern decision-support product. Through intuitive UI/UX, I turn an ancient stochastic method into a [[clean, testable inference model]]. The 64 hexagrams and their tangle of variables, from Five-Element interactions to moving-line transformations and timing windows, are [[deconstructed into standardized signals]] and rendered on a calendar timeline. The whole pipeline runs from a single cast to a readable, plain-language reading, shifting the experience from [["magic" to "method"]].',
-      challenge: 'How do you carry a rigorous 3,000-year-old framework into a modern financial product without losing its logic, and without it reading as superstition to a generation that has only ever seen the ritual?',
+      // 正文与 challenge 已移走:TL;DR 在 hero 说清"是什么",challenge 移到 The Problem 做开场。
+      // 这里只保留产品大图下的入口按钮和 Why I'm building this。
       buttons: [
         { label: 'Live Site', url: 'https://hexaedge.vercel.app', type: 'primary' },
         { label: 'GitHub', url: 'https://github.com/cqyestateyuki-prog/LiuyaoSaaSProject', type: 'secondary' }
@@ -69,7 +68,8 @@ export const hexaedge = {
         title: 'The Problem',
         sectionTag: 'The Problem',
         mainTitle: 'Legacy Usability Crisis',
-        briefContent: 'Outdated and chaotic layouts force users to view a rigorous logic system as [[mere superstition]]. HexaEdge introduces new design to eliminate this [[visual friction]].',
+        briefContent: 'Look up Liuyao today and you land on a web page that has not been touched since the 2000s: dense tables, unexplained jargon, a layout that fights you. [[The interface is what makes a rigorous logic system read as superstition]]. HexaEdge removes that [[visual friction]] so the logic underneath can be seen.',
+        challenge: 'How might we carry a rigorous 3,000-year-old framework into a modern financial product without losing its logic, and without it reading as superstition to a generation that has only ever seen the ritual?',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
@@ -86,7 +86,7 @@ export const hexaedge = {
         title: 'Market & Opportunity',
         sectionTag: 'Market & Opportunity',
         mainTitle: 'The Intersection of Two Appetites',
-        briefContent: 'HexaEdge captures a rare psychological convergence in today\'s young demographic: [[the deep emotional need for clarity]] and [[the high-stakes thrill of financial trading]]. While users turn to traditional tools for mindfulness, they navigate modern markets with aggressive speculation.\n\nUnderneath both appetites sits [[a market worth hundreds of billions]], and no one is building it with taste. We bridge that gap through [[design]].',
+        briefContent: 'HexaEdge captures a rare psychological convergence in today\'s young demographic: [[the deep emotional need for clarity]] and [[the high-stakes thrill of financial trading]]. While users turn to traditional tools for mindfulness, they navigate modern markets with aggressive speculation.\n\nUnderneath both appetites sits [[a market worth hundreds of billions]], and no one is [[building it with taste]]. We bridge that gap through design.',
         icon: '📈',
         imageDisplayMode: 'single',
         images: [
@@ -111,8 +111,8 @@ export const hexaedge = {
         icon: '✨',
         imageDisplayMode: 'alternating',
         content: [
-          'All screens shown are taken directly from the shipped production environment. This includes the onboarding flow, the 64-hexagram index, the casting wizard, and the market-signal dashboard.',
-          'High-fidelity refinement is our strategic entry point. While the AI-divination sector is crowded with cliché mysticism and generic chat boxes, the intersection of Liuyao and equity trading is completely open ground. I replace vague conversational text with visualized market signals. HexaEdge establishes high-end design leadership where it is starved most.'
+          'AI divination apps have never had an interface worth looking at. [[HexaEdge is the first time Liuyao gets used to read a market as well as a fortune.]]',
+          'Their visual language is generic chat boxes and cliché mysticism. I dropped both. Readings render as visual signals rather than paragraphs: the hexagram as a board you can actually read, moving lines laid on a calendar timeline, momentum as a chart. [[The design is what makes an ancient method feel like a tool instead of magic.]]'
         ],
         images: [
           {
@@ -132,9 +132,13 @@ export const hexaedge = {
         id: 'design-philosophy',
         title: 'Design System',
         sectionTag: 'Design System & Philosophy',
-        mainTitle: 'Materializing Warmth, Then Meaning',
-        briefContent: 'The palette is drawn entirely from traditional Chinese materials. The goal was [[warm and refined, never cold or sterile]]. It should feel like holding a piece of jade, not using a fintech dashboard.\n\n**Materializing warmth.** Jade White (#F2F6F7) as a paper-like base, Celadon Glaze (#E4ECEE) for sunken card surfaces, Porcelain Blue (#243E66) as brand primary and body text, Ink Black (#14233A) for headings, plus a six-step ink scale.\n\n**Materializing meaning.** The same palette carries semantics: Cinnabar for bull signals and emphasis, Celadon Jade for bear, Gilding for active pivot signals, Ochre for neutral ground, all mapped onto the Five Elements. The system lives as [[tokens → components → products.]]',
+        mainTitle: 'Materializing Warmth, Coding Meaning',
+        briefContent: 'Traditional SaaS feels cold and impersonal, with no temperature to it. HexaEdge draws its palette from jade and blue-and-white porcelain instead, classical Eastern colors that feel elegant and smooth to the touch, and that carry [[an energy meant to support you]].\n\nJade canvases, celadon depths, and ink-black typography build the foundation, but their true purpose is semantic. Rooted in the Five Elements, cinnabar reads as bullish momentum, while celadon maps bearish shifts. By aligning cultural intuition with financial logic, cognitive load vanishes: [[the color you feel is the exact signal you read.]]',
         icon: '🎨',
+        link: {
+          label: 'View the UI Kit',
+          url: '/hexaedge-ui-kit/index.html',
+        },
         imageDisplayMode: 'single',
         images: [
           {
@@ -172,7 +176,7 @@ export const hexaedge = {
         title: 'Iteration',
         sectionTag: 'Iteration',
         mainTitle: 'I Removed the Verdict',
-        briefContent: 'The hardest call here wasn\'t visual, it was ethical. Telling users their fate is bad UX, and a compliance problem in most markets I want to ship in.\n\n**Shi (势) is momentum, not destiny.** The source material already said so, which gave me the way out. Every verdict became a description of tendency. Personal readings turned into [[a mirror, not a decision]]. Market readings run on hard quant underneath, but the narrative stays on top: raw numbers only read to people who already know the system, and the story is what makes them [[legible to everyone else]]. [[The decision stays yours.]]',
+        briefContent: 'A verdict is what people come to a reading for, and it was the one thing I couldn\'t ship: telling users their fate is bad UX, and a compliance problem in most markets I want to ship in.\n\n**Shi (势) focuses on momentum instead of destiny.** The source material already said so, which gave me the way out. Every verdict became a description of tendency. Personal readings turned into [[a mirror, not a decision]]. Market readings run on hard quant underneath, but the narrative stays on top: raw numbers only read to people who already know the system, and the story is what makes them [[legible to everyone else]]. [[The decision stays yours.]]',
         icon: '🔁',
         imageDisplayMode: 'single',
         images: [
@@ -189,7 +193,7 @@ export const hexaedge = {
         title: 'AI UX',
         sectionTag: 'AI UX',
         mainTitle: 'The Prompt Is the Product\'s Ethics',
-        briefContent: 'The compliance boundary between metaphysics and finance isn\'t a footnote. It lives in the prompt. I treated the prompt as a [[design artifact]], versioned like code, and evolved it from [["answer the fate" → "describe the momentum."]]',
+        briefContent: 'HexaEdge does not predict the market. It describes the momentum around a decision and hands that decision back. The compliance boundary between [[metaphysics and finance]] runs through every reading, and it lives in the prompt.\n\n[[A rule the model can ignore is not a rule.]] So the ethics run twice: a versioned ban-list compiled into the prompt, then an output scan that enforces it in code. A generation carrying a banned word gets one retry with the violation named; if it comes back dirty, [[the scan kills it]] and a deterministic fallback ships instead. The violating text never reaches a user and never enters the cache. The prompt is versioned like code, and [[the diff from V1 to V3 is where the design actually happened.]]',
         icon: '⚙️',
         imageDisplayMode: 'single',
         images: [
@@ -206,7 +210,7 @@ export const hexaedge = {
         title: 'Outcome',
         sectionTag: 'Outcome',
         mainTitle: 'Design to Deploy, No Handoff',
-        briefContent: 'No design-to-engineering handoff, because the designer and the engineer were the same person. That is why the scoring engine, the reading UI, and the compliance layer never drifted: nothing got translated across a wall and lost. It shipped as a real product with [[three modules, payments, auth, and tiering]], not a prototype. Every screen in this deck is the deployed build.',
+        briefContent: 'The loop is closed. [[A user lands on an encyclopedia page from search, signs up, casts, reads, hits a tier gate, pays, and exports the result as a share card.]] I built every step of that, including the parts most designers hand off: [[auth, the entitlement layer behind four pricing tiers, bilingual AI output, and SEO]].\n\nThe scoring engine, the reading UI, and the compliance layer were designed and shipped by the same person, so [[none of it drifted across a handoff]]. What went live is a business, not a prototype.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
