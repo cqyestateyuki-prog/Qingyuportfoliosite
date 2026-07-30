@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://qingyu-portfolio.vercel.app/sitemap.xml
+# HexaEdge case study and its assets are off-limits to all crawlers
+Disallow: /project/hexaedge
+Disallow: /hexaedge-knowledge-graph/
+Disallow: /hexaedge-ui-kit/
 
-# Disallow admin or private areas (if any)
-# Disallow: /admin/
-# Disallow: /private/
+Sitemap: https://qingyu-portfolio.vercel.app/sitemap.xml

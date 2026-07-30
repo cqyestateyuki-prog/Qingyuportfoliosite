@@ -6,3 +6,7 @@ dist/
 
 # Prefer npm (package-lock.json) for CI; ignore pnpm lockfile to avoid frozen-lockfile mismatch
 pnpm-lock.yaml
+
+# 本地个人文件,勿提交
+commit_msg.txt
+作品集方向-笔记.md

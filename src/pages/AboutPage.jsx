@@ -126,8 +126,8 @@ const AboutPage = () => {
             <div className="flex-1 w-full flex justify-center lg:justify-end relative min-h-[720px]">
               <div className="relative w-full max-w-md mx-auto lg:mr-0">
                 {[
-                  { src: '/files/profile picture/profile_picture.png', y: 0, rotate: -3, z: 'z-10', delay: 0 },
-                  { src: '/files/profile picture/profile_picture2.jpg', y: 260, rotate: 2, z: 'z-20', delay: 0.2 },
+                  { src: '/files/profile picture/profile_picture3.jpg', y: 0, rotate: -3, z: 'z-10', delay: 0 },
+                  { src: '/files/profile picture/profile_picture4.jpg', y: 260, rotate: 2, z: 'z-20', delay: 0.2 },
                 ].map((card) => (
                   <motion.div
                     key={card.src}

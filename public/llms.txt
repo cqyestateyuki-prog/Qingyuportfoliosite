@@ -1,0 +1,24 @@
+# Serena Cao
+
+AI Product Designer and Design Engineer based in New York, NY.
+
+Serena Cao (Qingyu Cao) is a product designer who codes. She designs UX for AI products and ships the frontends herself in React and Next.js, covering the full path from design system to deployed product. She is currently the founding designer of Kogna, a live AI decision-support platform for executives, now in private beta.
+
+This site is a single-page React app. If you cannot render JavaScript, this file is the reliable summary of the pages listed below.
+
+## Pages
+
+- Home: https://qingyu-portfolio.vercel.app/
+- About: https://qingyu-portfolio.vercel.app/about
+- Resume (PDF): https://qingyu-portfolio.vercel.app/files/Qingyu_Cao_Resume.pdf
+
+## Selected work
+
+- Kogna (2026): Led the design system and UI/UX for an AI decision-support platform that turns fragmented business data into real-time strategic intelligence for leaders. https://qingyu-portfolio.vercel.app/project/kogna
+- Spark Up (2026): An AI platform that diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback. https://qingyu-portfolio.vercel.app/project/sparkup
+- Petiboxy (2025): A pet rescue ecosystem connecting people with pets in need, supporting rescue organizations, and building a compassionate community. https://qingyu-portfolio.vercel.app/project/petiboxy
+- Stumbldoor (2024): A mobile app that rethinks the library experience for people who grew up reading on screens. https://qingyu-portfolio.vercel.app/project/stumbldoor
+
+## Contact
+
+- Email: cqyestateyuki@gmail.com
