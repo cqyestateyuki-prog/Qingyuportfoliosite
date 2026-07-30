@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HexaEdge · One Engine, Three Registers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --jade:#F2F6F7;
+    --celadon:#E3ECEF;
+    --porcelain:#243E66;
+    --ink:#14233A;
+    --gilding:#9C7A3A;
+    --cinnabar:#A8392E;
+    --bamboo:#6E9387;
+    --line:rgba(36,62,102,.14);
+    --muted:rgba(20,35,58,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#3a3a44;display:flex;align-items:center;justify-content:center;min-height:100vh}
+
+  /* 16:9 画板，导出时按 2x 截图即得 3840×2160 */
+  .slide{
+    width:1920px;height:1080px;flex:none;
+    background:var(--jade);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;
+    padding:64px 76px 52px;
+    display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+
+  .eyebrow{display:flex;align-items:center;gap:14px;
+    font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--porcelain);}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--cinnabar)}
+  .brand{position:absolute;top:58px;right:76px;
+    font-family:'EB Garamond',serif;font-size:30px;letter-spacing:.01em;color:var(--ink)}
+  .brand em{font-style:normal;color:var(--gilding)}
+  h1{font-family:'EB Garamond',serif;font-weight:500;font-size:74px;line-height:1.05;
+    color:var(--ink);margin:18px 0 8px;letter-spacing:-.01em}
+  .sub{font-size:18px;color:var(--muted);max-width:1100px;line-height:1.5}
+
+  /* 同一份引擎结论 */
+  .source{margin-top:30px;display:flex;align-items:center;gap:18px;
+    background:var(--celadon);border:1px solid var(--line);border-left:3px solid var(--porcelain);
+    border-radius:9px;padding:16px 22px}
+  .source .lbl{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gilding);white-space:nowrap}
+  .source .val{font-size:16px;color:var(--ink)}
+  .source .val b{font-weight:600}
+  .source .val span{color:var(--muted)}
+
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:26px;flex:1;min-height:0}
+  .col{background:#fff;border:1px solid var(--line);border-top:3px solid var(--porcelain);
+    border-radius:11px;padding:26px 28px 24px;display:flex;flex-direction:column}
+  .col.plain{border-top-color:var(--bamboo)}
+  .col.personal{border-top-color:var(--gilding)}
+  .who{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gilding);margin-bottom:10px}
+  .col.plain .who{color:var(--bamboo)}
+  .col h3{font-size:27px;font-weight:600;letter-spacing:-.015em;line-height:1.15;margin-bottom:4px}
+  .col h3 i{font-style:normal;font-family:'Noto Serif SC',serif;font-size:22px;color:var(--muted);margin-left:8px}
+  .col .persona{font-size:15.5px;color:var(--muted);line-height:1.5;margin:10px 0 16px;
+    padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .col ul{display:flex;flex-direction:column;gap:10px}
+  .col li{list-style:none;font-size:15.5px;line-height:1.5;color:var(--ink);position:relative;padding-left:16px}
+  .col li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;
+    background:var(--porcelain);opacity:.45}
+  .col li span{color:var(--muted)}
+  .quote{margin-top:auto;padding-top:16px;font-family:'EB Garamond',serif;font-style:italic;
+    font-size:19px;line-height:1.4;color:var(--porcelain)}
+  .col.personal .quote{color:var(--gilding)}
+  code{font-family:'JetBrains Mono',monospace;font-size:13.5px;
+    color:var(--porcelain);background:var(--celadon);padding:1px 6px;border-radius:4px}
+
+  .foot{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line)}
+  .foot b{color:var(--porcelain);font-weight:500}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="brand">Hexa<em>Edge</em></div>
+  <div class="eyebrow">Iteration · Voice</div>
+  <h1>One Engine, Three Registers</h1>
+  <div class="sub">The engine returns one structured result. Who is reading decides how it gets said, and that choice lives in three separate system prompts.</div>
+
+  <div class="source">
+    <span class="lbl">One result in</span>
+    <span class="val"><b>direction</b> <span>·</span> <b>confidence</b> <span>·</span> <b>bull / bear vote</b> <span>·</span> <b>signal list</b> <span>·</span> <b>timing windows</b> <span>— computed, identical for all three</span></span>
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <div class="who">Practitioner · market</div>
+      <h3>Terms kept<i>卦师视图</i></h3>
+      <div class="persona">Written for someone who already reads a chart. Terminology is spoken, never avoided.</div>
+      <ul>
+        <li>Every term has to land as an observable market behaviour <span>before it is allowed in</span></li>
+        <li>Fixed four-part shape: momentum now, where you stand, risk and timing, what you can adjust</li>
+        <li>No date or figure the engine did not produce</li>
+      </ul>
+      <div class="quote">“A term left untranslated is a term left as superstition.”</div>
+    </div>
+
+    <div class="col plain">
+      <div class="who">First-timer · market</div>
+      <h3>Plain language<i>普通视图</i></h3>
+      <div class="persona">Same quantitative result, written for someone who has never cast anything.</div>
+      <ul>
+        <li>One headline line, three signals, then the full reading</li>
+        <li>Every claim anchored to engine data <span>— direction, strength, level, date, line position</span></li>
+        <li>Jargon is translated out, not simplified away</li>
+      </ul>
+      <div class="quote">“Plain does not mean vague.”</div>
+    </div>
+
+    <div class="col personal">
+      <div class="who">Personal · wealth</div>
+      <h3>One metaphor<i>求财</i></h3>
+      <div class="persona">Written by someone who knows the classics and knows people better.</div>
+      <ul>
+        <li>The whole reading runs on a single image, carried to the end</li>
+        <li><code>你是杯子，财是水</code> <span>— wealth flowing to you, you pouring it out, or more water than the cup can hold</span></li>
+        <li>Name the thing the person already half-sensed and has not said out loud</li>
+      </ul>
+      <div class="quote">“The reading only works if the person understands it.”</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Three system prompts · one deterministic engine</span>
+    <span><b>Audience is a design decision, not a tone setting.</b></span>
+  </div>
+</div>
+</body>
+</html>

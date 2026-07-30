@@ -73,20 +73,26 @@ const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext
 };
 
 // 新增：单张大图展示组件
-export const SingleImageDisplay = ({ image, onImageClick }) => {
+export const SingleImageDisplay = ({ image, onImageClick, overlay = null }) => {
   if (!image) return null;
 
   return (
     <div className="w-full">
-      <div 
+      <div
         className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group"
         onClick={() => onImageClick(image)}
       >
-        <img 
-          src={image.src} 
+        <img
+          src={image.src}
           alt={image.alt}
           className="w-full h-auto group-hover:scale-105 transition-transform duration-500"
         />
+        {/* 章节外链(如 UI Kit)浮在图上,点它不该同时打开灯箱 */}
+        {overlay && (
+          <div className="absolute top-4 right-4 z-10" onClick={(e) => e.stopPropagation()}>
+            {overlay}
+          </div>
+        )}
       </div>
       {image.caption && (
         <p className="text-center text-gray-600 mt-4 text-sm italic">{image.caption}</p>
@@ -186,10 +192,10 @@ export const AlternatingDisplay = ({ content, images, onImageClick, highlightCol
       {items.map((item, idx) => (
         <div key={idx}>
           {item.type === 'text' ? (
-            <div className="text-lg text-gray-700 leading-relaxed">
+            <div className="text-base md:text-lg text-gray-700 leading-[1.75] tracking-[0.01em]">
               <ReactMarkdown
                 components={{
-                  p: ({children}) => <p className="mb-4">{children}</p>,
+                  p: ({children}) => <p className="mb-6 last:mb-0">{children}</p>,
                   strong: ({children}) => (
                     <strong className="font-bold" style={{ color: highlightColor }}>{children}</strong>
                   )
@@ -211,7 +217,7 @@ export const AlternatingDisplay = ({ content, images, onImageClick, highlightCol
 };
 
 // 新增：智能图片展示组件 - 根据配置选择展示模式
-export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single', content = null, highlightColor }) => {
+export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single', content = null, highlightColor, overlay = null }) => {
   if (!images || images.length === 0) return null;
 
   // 如果指定为交替模式，使用交替布局
@@ -229,10 +235,11 @@ export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single'
     return (
       <div className="space-y-8">
         {images.map((image, idx) => (
-          <SingleImageDisplay 
+          <SingleImageDisplay
             key={idx}
-            image={image} 
+            image={image}
             onImageClick={onImageClick}
+            overlay={idx === 0 ? overlay : null}
           />
         ))}
       </div>
@@ -248,10 +255,11 @@ export const SmartImageDisplay = ({ images, onImageClick, displayMode = 'single'
   return (
     <div className="space-y-8">
       {images.map((image, idx) => (
-        <SingleImageDisplay 
+        <SingleImageDisplay
           key={idx}
-          image={image} 
+          image={image}
           onImageClick={onImageClick}
+          overlay={idx === 0 ? overlay : null}
         />
       ))}
     </div>

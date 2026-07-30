@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HexaEdge · Iteration · Guided Casting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --jade:#F2F6F7;
+    --celadon:#E3ECEF;
+    --porcelain:#243E66;
+    --ink:#14233A;
+    --gilding:#9C7A3A;
+    --cinnabar:#A8392E;
+    --line:rgba(36,62,102,.14);
+    --muted:rgba(20,35,58,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#3a3a44;display:flex;align-items:center;justify-content:center;min-height:100vh}
+
+  /* 16:9 画板，导出时按 2x 截图即得 3840×2160 */
+  .slide{
+    width:1920px;height:1080px;flex:none;
+    background:var(--jade);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;
+    padding:64px 76px 52px;
+    display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+
+  .eyebrow{display:flex;align-items:center;gap:14px;
+    font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--porcelain);}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--cinnabar)}
+  .brand{position:absolute;top:58px;right:76px;
+    font-family:'EB Garamond',serif;font-size:30px;letter-spacing:.01em;color:var(--ink)}
+  .brand em{font-style:normal;color:var(--gilding)}
+  h1{font-family:'EB Garamond',serif;font-weight:500;font-size:74px;line-height:1.05;
+    color:var(--ink);margin:18px 0 8px;letter-spacing:-.01em}
+  .sub{font-size:18px;color:var(--muted);max-width:1060px;line-height:1.5}
+
+  /* ---- before / after ---- */
+  .compare{display:grid;grid-template-columns:1fr 74px 1fr;align-items:stretch;margin-top:38px;flex:1;min-height:0}
+  .panel{border:1px solid var(--line);border-radius:11px;padding:28px 30px 24px;
+    display:flex;flex-direction:column}
+  .panel.before{background:var(--celadon);border-top:3px solid var(--cinnabar)}
+  .panel.after{background:#fff;border-top:3px solid var(--gilding)}
+  .ptag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;margin-bottom:10px}
+  .before .ptag{color:var(--cinnabar)}
+  .after .ptag{color:var(--gilding)}
+  .panel h3{font-size:29px;font-weight:600;letter-spacing:-.015em;line-height:1.15;margin-bottom:14px}
+  .panel .lead{font-size:16.5px;color:var(--muted);line-height:1.5;margin-bottom:16px}
+
+  .steps{display:flex;gap:9px;margin-bottom:18px;flex-wrap:wrap}
+  .pill{font-family:'JetBrains Mono',monospace;font-size:12.5px;padding:5px 13px;border-radius:20px;
+    border:1px solid var(--line);background:#fff;color:var(--porcelain)}
+  .after .pill{background:var(--celadon)}
+  .pill.dim{color:var(--muted)}
+
+  .panel ul{display:flex;flex-direction:column;gap:9px}
+  .panel li{list-style:none;font-size:16px;line-height:1.45;color:var(--ink);
+    padding-left:22px;position:relative}
+  .panel li span{color:var(--muted)}
+  .before li::before{content:"×";position:absolute;left:0;top:-1px;color:var(--cinnabar);
+    font-family:'JetBrains Mono',monospace;font-size:16px}
+  .after li::before{content:"→";position:absolute;left:0;top:0;color:var(--gilding);
+    font-family:'JetBrains Mono',monospace;font-size:15px}
+  .verdict{margin-top:auto;padding-top:16px;font-family:'JetBrains Mono',monospace;
+    font-size:13px;letter-spacing:.03em}
+  .before .verdict{color:var(--cinnabar)}
+  .after .verdict{color:var(--gilding)}
+
+  .mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+  .mid .ar{font-family:'JetBrains Mono',monospace;font-size:26px;color:var(--gilding)}
+  .mid .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;text-orientation:mixed}
+
+  /* ---- 三次改动 ---- */
+  .log{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:0.5;min-height:0}
+  .beat{border-left:2px solid var(--line);padding-left:18px}
+  .beat b{display:block;font-size:17.5px;font-weight:600;margin-bottom:5px;letter-spacing:-.01em}
+  .beat p{font-size:15px;color:var(--muted);line-height:1.45}
+  .beat i{display:block;margin-top:7px;font-style:normal;font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.02em;color:var(--porcelain)}
+
+  .foot{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line)}
+  .foot b{color:var(--porcelain);font-weight:500}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="brand">Hexa<em>Edge</em></div>
+  <div class="eyebrow">Iteration</div>
+  <h1>Casting Used to Require a Teacher</h1>
+  <div class="sub">Every existing tool assumes you already know the ritual. I rebuilt casting as a guided conversation, with the AI doing the interviewing and the teaching arriving exactly where it is needed.</div>
+
+  <div class="compare">
+    <div class="panel before">
+      <div class="ptag">Before · the category, and my v1</div>
+      <h3>A form for people who already knew</h3>
+      <div class="lead">Three steps, blank fields, and vocabulary nobody explains.</div>
+      <div class="steps">
+        <span class="pill dim">01 Cast setup</span>
+        <span class="pill dim">02 Chart input</span>
+        <span class="pill dim">03 Result</span>
+      </div>
+      <ul>
+        <li>Pick a method you have never heard of <span>(report a number, toss coins, use a timestamp)</span></li>
+        <li>Know what a moving line is before the form will accept you</li>
+        <li>Phrase the question correctly, with no idea what counts as correct</li>
+        <li>Help lives on a separate page, if it exists at all</li>
+      </ul>
+      <div class="verdict">a beginner leaves at step one</div>
+    </div>
+
+    <div class="mid">
+      <span class="ar">→</span>
+      <span class="lbl">rebuilt</span>
+    </div>
+
+    <div class="panel after">
+      <div class="ptag">After · AI in the flow, not on top of it</div>
+      <h3>A conversation that teaches while it casts</h3>
+      <div class="lead">One scripted path asks in plain language, one thing at a time.</div>
+      <div class="steps">
+        <span class="pill">Tell it the situation</span>
+        <span class="pill">It picks the method</span>
+        <span class="pill">Cast</span>
+        <span class="pill">Read</span>
+      </div>
+      <ul>
+        <li>You type the situation in your own words, and the model parses it into the question, the timing and the type</li>
+        <li>Method chosen for you when you have no preference, with the reason shown</li>
+        <li>Beginner questions surface per step: <span>how do I report a number, what is a moving line</span></li>
+        <li>Scripted, not open chat, so the flow stays reproducible</li>
+      </ul>
+      <div class="verdict">no prior knowledge required to finish a cast</div>
+    </div>
+  </div>
+
+  <div class="log">
+    <div class="beat">
+      <b>Wizard to conversation</b>
+      <p>A toggle between the two shipped first, then came out. Two entry paths meant two things to maintain and one more decision for the user.</p>
+      <i>one path, not two</i>
+    </div>
+    <div class="beat">
+      <b>Teaching moved into the flow</b>
+      <p>The FAQ row used to sit at the bottom with every question in it. Now each step carries only the ones that belong to it.</p>
+      <i>beginner questions stopped competing with real ones</i>
+    </div>
+    <div class="beat">
+      <b>Placeholder cut to one line</b>
+      <p>The long two-sentence example wrapped on a narrow screen and got clipped by the single-line input. Examples moved to the suggestion chips.</p>
+      <i>found in use, not in review</i>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Guided casting · CastChat · intent parsing · progressive disclosure</span>
+    <span><b>The method stays exact. The way in does not have to be.</b></span>
+  </div>
+</div>
+</body>
+</html>

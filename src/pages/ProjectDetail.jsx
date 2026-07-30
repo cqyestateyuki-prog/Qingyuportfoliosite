@@ -203,7 +203,8 @@ const ProjectDetail = () => {
 
   // 创建导航数据（动态构建，根据实际内容）
   const navigationSections = [
-    { id: 'overview', title: 'Overview', icon: '📋' },
+    // 首项跟着 overview.sectionTag 走：Kogna 那块其实是 The Problem，导航就不该写 Overview
+    { id: 'overview', title: rawProject?.overview?.sectionTag || 'Overview', icon: '📋' },
     // 只有当role存在时才添加
     ...(project?.role ? [{ id: 'role', title: 'My Role', icon: '👤' }] : []),
     // 添加所有章节
@@ -304,7 +305,7 @@ const ProjectDetail = () => {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-12 pt-8 max-w-4xl"
+        className="mt-12 pt-8"
         style={{ borderTop: '1px solid var(--hud-line)' }}
       >
         <p
@@ -314,8 +315,9 @@ const ProjectDetail = () => {
           <span style={{ color: 'var(--section-tag)' }}>✦</span> Why I&apos;m building this
         </p>
         <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
+          {/* 没有六爻母题图时（如 Kogna），文字占满整行，不留右侧空白 */}
           <p
-            className="text-lg md:text-xl leading-relaxed tracking-[0.01em] font-['Poppins'] flex-1 max-w-3xl"
+            className="text-lg md:text-xl leading-[1.75] tracking-[0.01em] font-['Poppins'] flex-1"
             style={{ color: 'var(--text-body)' }}
           >
             {renderManifestoLine(project.overview.whyIBuild, highlightColor)}
@@ -361,6 +363,74 @@ const ProjectDetail = () => {
   }
 
   // The Challenge 卡片:玻璃底 + 左侧品牌色边。overview 和任意 section 都能挂。
+  // 章节外链按钮:配色跟首页 hero 的主按钮走(实心紫 + 光晕)
+  const SectionLinkButton = ({ link }) => (
+    <a
+      href={link.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm md:text-base text-white transition-all duration-200 hover:scale-105"
+      style={{
+        backgroundColor: '#8a81d7',
+        boxShadow: '0 0 25px rgba(138, 129, 215, 0.4)',
+      }}
+    >
+      {link.label}
+      <ArrowUpRight className="w-4 h-4" />
+    </a>
+  )
+
+  // 章节内嵌可交互页面(如 AI Engineering 的知识图谱)。
+  // 默认 pointer-events:none,点一下才接管鼠标 —— 否则光标扫过时 canvas 的滚轮缩放
+  // 会吃掉整页滚动;鼠标移开自动交还,滚回来不会再被劫持。
+  const SectionEmbed = ({ embed, link, caption }) => {
+    const [live, setLive] = useState(false)
+    return (
+      <figure className="mb-12">
+        <div
+          className="relative rounded-2xl overflow-hidden"
+          style={{ border: '1px solid var(--card-glass-border)' }}
+          onMouseLeave={() => setLive(false)}
+        >
+          <div style={{ aspectRatio: embed.ratio || '16 / 10' }}>
+            <iframe
+              src={embed.src}
+              title={embed.title || 'Interactive embed'}
+              loading="lazy"
+              className="block w-full h-full"
+              style={{ border: 0, pointerEvents: live ? 'auto' : 'none' }}
+            />
+          </div>
+
+          {!live && (
+            <button
+              type="button"
+              onClick={() => setLive(true)}
+              className="absolute inset-0 flex items-center justify-center bg-transparent"
+              aria-label={embed.activateLabel || 'Click to interact'}
+            >
+              <span
+                className="px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm"
+                style={{ backgroundColor: 'rgba(20, 35, 58, 0.72)' }}
+              >
+                {embed.activateLabel || 'Click to interact'}
+              </span>
+            </button>
+          )}
+
+          {link?.url && (
+            <div className="absolute top-4 right-4">
+              <SectionLinkButton link={link} />
+            </div>
+          )}
+        </div>
+        {caption && (
+          <figcaption className="mt-3 text-center text-sm italic text-gray-500">{caption}</figcaption>
+        )}
+      </figure>
+    )
+  }
+
   const ChallengeCard = ({ challenge, challenges, id }) => {
     if (!challenge && !(challenges?.length > 0)) return null
     return (
@@ -517,7 +587,7 @@ const ProjectDetail = () => {
               </p>
               {/* 导语级字号：TL;DR 是电梯陈述,不该被排成正文 */}
               <p
-                className="text-lg md:text-xl lg:text-2xl leading-relaxed tracking-[0.01em] font-['Poppins']"
+                className="text-lg md:text-xl lg:text-2xl leading-[1.6] tracking-[0.01em] font-['Poppins']"
                 style={{ color: 'var(--text-hero)' }}
               >
                 {renderManifestoLine(tldr, highlightColor)}
@@ -671,6 +741,23 @@ const ProjectDetail = () => {
                 </a>
               </div>
             )}
+
+            {/* Spark Up:首图跳转线上产品 */}
+            {project.id === 'sparkup' && (
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+                <a
+                  href="https://willinghood-core-wwmhkbgzea-uc.a.run.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-[#1a1a2e] font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
+                >
+                  Visit Spark Up
+                  <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
 
             {/* Why I'm building this：动机段落，挂在产品大图之下（hero 只负责"是什么"） */}
@@ -678,12 +765,12 @@ const ProjectDetail = () => {
 
             {/* Section Header：项目若没写 overview 正文，整块不渲染（TL;DR 已在 hero 说清是什么） */}
             {(project.overview.mainTitle || project.overview.briefContent) && (
-            <div className="mb-8 md:mb-12 lg:mb-16">
-            {/* Section Tag */}
+            <div className="mt-16 mb-8 md:mb-12 lg:mb-16">
+            {/* Section Tag：项目可用 overview.sectionTag 覆写（如 Kogna 这块其实是 Problem，不是 Overview） */}
             <div
               className="detail-accent-text text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[2px] mb-3 md:mb-4"
             >
-              {t('project.projectOverview')}
+              {rawProject?.overview?.sectionTag || t('project.projectOverview')}
             </div>
 
             {/* Main Title */}
@@ -698,7 +785,7 @@ const ProjectDetail = () => {
 
             {/* Brief Content */}
             {project.overview.briefContent && (
-              <div className="text-sm md:text-base lg:text-lg text-[#565869] leading-relaxed [&_strong]:!font-bold [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
+              <div className="text-base md:text-lg text-[#565869] leading-[1.75] tracking-[0.01em] [&_strong]:!font-bold [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
                 <ReactMarkdown 
                   components={{
                     p: ({children}) => {
@@ -736,7 +823,7 @@ const ProjectDetail = () => {
                 <ReactMarkdown 
                   components={{
                     p: ({children}) => {
-                      return <p className="mb-4">{children}</p>;
+                      return <p className="mb-6 last:mb-0">{children}</p>;
                     },
                     strong: ({children}) => {
                       return (
@@ -879,11 +966,11 @@ const ProjectDetail = () => {
               
               {/* Brief Content (100-150字正文) */}
               {section.briefContent && (
-                <div className="text-sm md:text-base lg:text-lg text-[#565869] leading-relaxed [&_strong]:!font-bold [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
+                <div className="text-base md:text-lg text-[#565869] leading-[1.75] tracking-[0.01em] [&_strong]:!font-bold [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
                   <ReactMarkdown 
                     components={{
                       p: ({children}) => {
-                        return <p className="mb-4 last:mb-0">{children}</p>;
+                        return <p className="mb-6 last:mb-0">{children}</p>;
                       },
                       strong: ({children}) => {
                       return (
@@ -915,25 +1002,19 @@ const ProjectDetail = () => {
                 </div>
               )}
 
-              {/* 章节外链(如 Design System 的 UI Kit) */}
-              {section.link?.url && (
-                <a
-                  href={section.link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm md:text-base transition-all duration-200 hover:scale-105 hover:shadow-lg"
-                  style={{
-                    color: 'var(--text-hero)',
-                    border: '1px solid var(--card-glass-border)',
-                    background: 'var(--surface-scrim)',
-                  }}
-                >
-                  {section.link.label}
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
+              {/* 章节外链(如 Design System 的 UI Kit):有配图时浮在首图上,没图才落在正文下。
+                  有 embed 时外链挂在 embed 右上角,这里和首图上都不再出。 */}
+              {section.link?.url && !section.embed?.src && !(section.images?.length > 0) && (
+                <div className="mt-8">
+                  <SectionLinkButton link={section.link} />
+                </div>
               )}
             </div>
-            
+
+            {section.embed?.src && (
+              <SectionEmbed embed={section.embed} link={section.link} caption={section.embed.caption} />
+            )}
+
             {/* 只在非交替模式下显示完整文字内容（保留原有功能） */}
                 {section.imageDisplayMode !== 'alternating' && section.content && !section.briefContent && (
                   <div className="prose prose-lg max-w-none mb-12 [&_strong]:!text-[var(--highlight-color)]" style={{ '--highlight-color': highlightColor }}>
@@ -943,7 +1024,7 @@ const ProjectDetail = () => {
                           <ReactMarkdown 
                             components={{
                               p: ({children}) => {
-                                return <p className="mb-4">{children}</p>;
+                                return <p className="mb-6 last:mb-0">{children}</p>;
                               },
                           strong: ({children}) => {
                       return (
@@ -972,7 +1053,7 @@ const ProjectDetail = () => {
                     <ReactMarkdown
                       components={{
                         p: ({children}) => {
-                          return <p className="mb-4">{children}</p>;
+                          return <p className="mb-6 last:mb-0">{children}</p>;
                         },
                         strong: ({children}) => {
                       return (
@@ -1178,12 +1259,13 @@ const ProjectDetail = () => {
             ) : (
               // 向后兼容：如果只有 images 和 imageDisplayMode，使用原有逻辑
               section.images && section.images.length > 0 && (
-                <SmartImageDisplay 
+                <SmartImageDisplay
                   images={section.images}
                   onImageClick={(image) => handleImageClick(image, section.images)}
                   displayMode={section.imageDisplayMode || 'single'}
                   content={section.content}
                   highlightColor={highlightColor}
+                  overlay={section.link?.url && !section.embed?.src ? <SectionLinkButton link={section.link} /> : null}
                 />
               )
             )}

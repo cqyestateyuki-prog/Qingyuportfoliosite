@@ -33,7 +33,7 @@ export const myLittleFishTank = {
     overview: {
       mainTitle: { en: 'Nostalgic Fish Tank Simulator', zh: '怀旧鱼缸模拟器' },
       content: { en: '"My Little Fish Tank" is a 3D fish tank simulator that taps into the childhood nostalgia associated with owning and caring for a fish tank. Inspired by the joy and responsibility of maintaining a miniature aquatic ecosystem, the game offers players the opportunity to nurture fish, decorate their tank, and manage a virtual aquatic environment. The idea is to recreate the sense of accomplishment and attachment that comes from growing and caring for fish, combined with the excitement of collecting and customizing their environment.', zh: '《我的小鱼缸》是一款 3D 鱼缸模拟器，唤起童年养鱼的回忆。玩家可以养鱼、装饰鱼缸、管理虚拟水族环境，在照料与成长中获得成就感与归属感，并结合收集与自定义环境的乐趣。' },
-      challenge: { en: 'How to create an engaging simulation game that captures the nostalgia and joy of fishkeeping?', zh: '如何做出一款能捕捉养鱼怀旧与乐趣的模拟游戏？' }
+      challenge: { en: 'How might we build a simulation game that captures the nostalgia and joy of fishkeeping?', zh: '如何做出一款能捕捉养鱼怀旧与乐趣的模拟游戏？' }
     },
     
     sections: [

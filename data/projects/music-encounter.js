@@ -38,10 +38,10 @@ export const musicEncounter = {
       mainTitle: { en: 'Music as a Universal Language for Digital Connection', zh: '音乐作为数字连接的世界语' },
       content: { en: "Music Encounter is a groundbreaking Open World 3D world adventure game that explores how music and sound can serve as the primary means of interaction and connection between people.Music moves people. Its kinetic power can affect human emotions and behaviors, and people can feel the bonds between people under certain circumstances across different cultures. The goal of the game is to use music and sound to connect and match people, and to provide people with a good interactive and social experience. ", zh: '《音乐邂逅》是一款以音乐与声音为主要互动与连接方式的 3D 开放世界冒险游戏。音乐能打动人，其动能可影响情绪与行为，在不同文化下让人感受到人与人的纽带。游戏目标是以音乐与声音连接、匹配玩家，提供优质的互动与社交体验。' },
       challenges:[
-        { en: 'How can music and sound create deeper, more meaningful connections between people in digital spaces?', zh: '音乐与声音如何在数字空间中创造更深、更有意义的连接？' },
-        { en: 'Can music and sound help to build connections between people, and help people find their partners, friends, or even lovers in a more efficient and interesting way?', zh: '音乐与声音能否更高效、有趣地帮助人们建立连接，找到伴侣、朋友甚至恋人？' },
-        { en: 'How will musical communication be different from traditional text, video, or voice communication?', zh: '音乐沟通与传统的文字、视频或语音沟通有何不同？' },
-        { en: 'How would open world 3D games fit into these interests?', zh: '开放世界 3D 游戏如何与这些诉求结合？' }
+        { en: 'How might we use music and sound to build real connections between people in digital spaces?', zh: '如何用音乐与声音在数字空间中建立真实的连接？' },
+        { en: 'How might we let music help people find friends, partners, or even lovers?', zh: '如何让音乐帮人找到朋友、伴侣甚至恋人？' },
+        { en: 'How might we make musical communication do what text, video, and voice cannot?', zh: '如何让音乐沟通做到文字、视频、语音做不到的事？' },
+        { en: 'How might we build all of this into an open world 3D game?', zh: '如何把这一切装进一个开放世界 3D 游戏？' }
       ] 
     },
     

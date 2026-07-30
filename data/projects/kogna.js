@@ -2,7 +2,7 @@
 export const kogna = {
     id: 'kogna',
     year: '2026',
-    featured: true, order: 1,
+    featured: true, order: 1, // Selected Work · 第 1 位
     title: 'Kogna AI',
     subtitle: {
       en: 'Strategic Business Insight, For All',
@@ -47,31 +47,40 @@ export const kogna = {
       lightColor: '#0D3B66'
     },
 
-    // Context & Problem — overview 块承载(OVERVIEW+Challenge+PROBLEM 三合一, 碎片化只讲一次)
+        // 全站规范:overview 只承载"产品全貌图 + 入口 + Why I'm building"，
+    // 问题陈述一律独立成 The Problem 章节(见 sections[0])。
     overview: {
-      mainTitle: 'Every leader pays a fragmentation tax',
-      briefContent: 'Leadership teams run the business from four or five tools at once: CRM, project tracker, finance, BI dashboards, a stack of spreadsheets. By the time someone stitches those into one picture (often a chief of staff burning hours on it every week), the picture is already weeks old. I joined [[Kogna]] as the [[design system lead]] while the product was growing faster than its UI could keep up: every new page looked a little different, and the whole thing read as [[a patchwork instead of one product]]. My job was to make it feel like one product, and trustworthy enough to base a real decision on.',
-      challenge: 'How do you give a leader the whole business at a glance without burying the detail behind any single number?',
-      challenges: [
-        'Surface a decision, not a dashboard: turn dozens of disconnected metrics into one signal a leader can act on at a glance, with the detail still one click away.',
-        'Make dense, data-heavy screens feel calm enough for an executive to trust.',
-        'Hold every screen together inside a product still shipping new features every week.'
-      ],
       mainImage: {
         src: '/media/projects/kogna/slides/slide-02.png',
         alt: 'What Kogna does: fragmented tools converging into one command center',
         caption: 'Every tool fans into one AI command center'
       },
       // Why I'm building this:压成 hero 题注一句
-      whyIBuild: 'I build for [[how leaders actually decide]]: today that means the C-suite who feel the pain first, but the goal is to put strategic clarity in reach of anyone running something, [[not just the few]].'
+      whyIBuild: 'I built Kogna to get inside [[how leaders actually decide]], what they worry about and what they need to see before they commit, because [[I want to be running something myself one day]].'
     },
 
     sections: [
-      // ── 01 · Research (single directional insight) ──
+      // ── 01 · The Problem ──
+      {
+        id: 'problem',
+        title: 'The Problem',
+        sectionTag: '01 · The Problem',
+        mainTitle: 'Every leader pays a fragmentation tax',
+        briefContent: 'Leadership teams run the business from four or five tools at once: CRM, project tracker, finance, BI dashboards, a stack of spreadsheets. By the time someone stitches those into one picture (often a chief of staff burning hours on it every week), the picture is already weeks old. I joined [[Kogna]] as the [[design system lead]] while the product was growing faster than its UI could keep up: every new page looked a little different, and the whole thing read as [[a patchwork instead of one product]]. My job was to make it feel like one product, and trustworthy enough to base a real decision on.',
+        challenge: 'How might we give a leader the whole business at a glance without burying the detail behind any single number?',
+        challenges: [
+          'How might we turn dozens of disconnected metrics into one signal a leader can act on at a glance, with the detail still one click away?',
+          'How might we make dense, data-heavy screens feel calm enough for an executive to trust?',
+          'How might we hold every screen together inside a product that ships new features every week?'
+        ],
+        icon: '💡'
+      },
+
+      // ── 02 · Research (single directional insight) ──
       {
         id: 'research',
         title: 'Research',
-        sectionTag: '01 · Research',
+        sectionTag: '02 · Research',
         mainTitle: 'Leaders don\'t want another dashboard',
         briefContent: 'Before drawing a screen I sat in on customer discovery: [[180+ outreach contacts]], [[15+ executive interviews]], and three validated personas across CEOs, COOs and chiefs of staff. One line kept coming back, and it set the whole direction: leaders don\'t want another dashboard to read, they want the [[decision surfaced]] for them.',
         icon: '🔍',
@@ -85,11 +94,11 @@ export const kogna = {
         ]
       },
 
-      // ── 02 · The Solution: three named pillars (mapped 1:1 to Key Decisions) ──
+      // ── 03 · The Solution: three named pillars (mapped 1:1 to Key Decisions) ──
       {
         id: 'solution',
         title: 'The Solution',
-        sectionTag: '02 · The Solution',
+        sectionTag: '03 · The Solution',
         mainTitle: 'Three pillars, one panoramic view',
         briefContent: 'The answer is three pillars that work as one view: [[Kogna Insight]], a Business Radar that ranks what needs attention; [[Smart Tiles]], a dashboard each leader assembles from live data; and [[What → Why]], which connects the stack and answers questions over it. Each pillar came down to one hard call, unpacked next.',
         icon: '✦',
@@ -113,11 +122,11 @@ export const kogna = {
         ]
       },
 
-      // ── 03 · Key Decisions (the fork behind each pillar: A vs B → chose B) ──
+      // ── 04 · Key Decisions (the fork behind each pillar: A vs B → chose B) ──
       {
         id: 'decisions',
         title: 'Key Decisions',
-        sectionTag: '03 · Key Decisions',
+        sectionTag: '04 · Key Decisions',
         mainTitle: 'Three forks, and why I went the way I did',
         briefContent: 'Each pillar came down to one fork in the road. These are the calls that shaped how the product actually feels to use.',
         icon: '🧭',
@@ -144,11 +153,11 @@ export const kogna = {
         ]
       },
 
-      // ── 04 · AI UX & Trust (real mechanisms only: severity ramp, source+confidence+audit, human-in-the-loop, empty states) ──
+      // ── 05 · AI UX & Trust (real mechanisms only: severity ramp, source+confidence+audit, human-in-the-loop, empty states) ──
       {
         id: 'ai-ux',
         title: 'AI UX & Trust',
-        sectionTag: '04 · AI UX & Trust',
+        sectionTag: '05 · AI UX & Trust',
         mainTitle: 'Designing for a system that can be wrong',
         briefContent: 'An engine that reads your business only helps if a leader can trust it and stay in control. Human-in-the-loop is a brand value here, not a footnote: the AI drafts, you decide. Three UX choices carry most of that trust.',
         icon: '🛡️',
@@ -168,11 +177,11 @@ export const kogna = {
         ]
       },
 
-      // ── 05 · How We Build (design-engineer evidence: single source of truth + Figma↔Claude Code loop) ──
+      // ── 06 · How We Build (design-engineer evidence: single source of truth + Figma↔Claude Code loop) ──
       {
         id: 'how-we-build',
         title: 'How We Build',
-        sectionTag: '05 · How We Build',
+        sectionTag: '06 · How We Build',
         mainTitle: 'One source of truth, an AI-accelerated loop',
         briefContent: 'One [[design system]] is the single source of truth: tokens, an Inter type ramp and every component live once in code and mirror into Figma under the same names, so changing a token updates code, docs and design together. [[Figma and Claude Code stay in sync over MCP]], so a screen I design becomes token-correct React and the code flows back to the file. Every visual change ships with a [[before/after page diff]] and a review pass, so the person who designs a screen is the one who ships it.',
         icon: '⚡',
@@ -191,11 +200,11 @@ export const kogna = {
         ]
       },
 
-      // ── 06 · Outcomes (real beta signal + founder quote; keeps counts) ──
+      // ── 07 · Outcomes (real beta signal + founder quote; keeps counts) ──
       {
         id: 'outcomes',
         title: 'Outcomes',
-        sectionTag: '06 · Outcomes',
+        sectionTag: '07 · Outcomes',
         mainTitle: 'From idea to a live, validated platform',
         briefContent: 'Kogna is a [[live V1 in private beta]], running on a [[10+ connector]] backbone and validated against [[180+ discovery conversations]], with its [[first design-partner leaders]] onboard and a post-beta pricing path. Its founder, CEO Jonathan Beck, frames the bet plainly: "today\'s strategy tools show you what happened; we built something that shows you what\'s next, and why." What ships next is as deliberate as what shipped: custom model training on a feedback-enriched lakehouse, more connectors, and multi-step agents that run an analysis end to end.',
         icon: '🚀',
@@ -209,11 +218,11 @@ export const kogna = {
         ]
       },
 
-      // ── 07 · Reflection ──
+      // ── 08 · Reflection ──
       {
         id: 'reflection',
         title: 'Reflection',
-        sectionTag: '07 · Reflection',
+        sectionTag: '08 · Reflection',
         mainTitle: 'A design system is leverage',
         briefContent: 'At Kogna I design the screens and write the code that ships them, so I design what I can actually build and put it live the same week. The product is young and changes constantly, so I lock the flow and logic first and let the polish catch up release by release. [[I\'d rather put a working version in front of real users than hold back a perfect one.]] The lesson I\'ll keep: [[a system earns its place only when reaching for it is the easy choice.]]',
         icon: '💭'

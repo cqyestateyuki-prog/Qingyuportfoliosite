@@ -2,7 +2,7 @@
 export const hexaedge = {
     id: 'hexaedge',
     year: '2026',
-    featured: true, order: 3,
+    featured: true, order: 2, // Selected Work · 第 2 位
     title: 'HexaEdge',
     subtitle: {
       en: 'Ancient Logic, Modern Signals',
@@ -10,7 +10,7 @@ export const hexaedge = {
     },
     categories: ['AI', 'Product Design', 'UIUX', 'Programming'],
     tags: ['Product Design', 'Design Engineering', 'AI/LLM', 'Decision-support UX', 'Neo-Chinese Aesthetic', 'SaaS'],
-    techTags: ['#Next.js 16', '#React 19', '#TypeScript', '#FastAPI', '#Claude Code', '#Figma', '#LLM API'],
+    techTags: ['#Next.js 16', '#React 19', '#TypeScript', '#FastAPI', '#Claude Code', '#Figma', '#LLM API', '#RAG', '#pgvector', '#Embeddings'],
 
     thumbnail: '/media/projects/hexaedge/sections/s01-cover.png',
     brief: {
@@ -70,7 +70,7 @@ export const hexaedge = {
         title: 'The Problem',
         sectionTag: 'The Problem',
         mainTitle: 'Legacy Usability Crisis',
-        briefContent: 'Look up Liuyao today and you land on a web page that has not been touched since the 2000s: dense tables, unexplained jargon, a layout that fights you. [[The interface is what makes a rigorous logic system read as superstition]]. HexaEdge removes that [[visual friction]] so the logic underneath can be seen.',
+        briefContent: 'Look up traditional I Ching divination today and you land on a web page that has not been touched since the 2000s: dense tables, unexplained jargon, a layout that fights you. [[The interface is what makes a rigorous logic system read as superstition]]. HexaEdge removes that [[visual friction]] so the logic underneath can be seen.',
         challenge: 'How might we carry a rigorous 3,000-year-old framework into a modern financial product without losing its logic, and without it reading as superstition to a generation that has only ever seen the ritual?',
         icon: '💡',
         imageDisplayMode: 'single',
@@ -88,7 +88,7 @@ export const hexaedge = {
         title: 'Market & Opportunity',
         sectionTag: 'Market & Opportunity',
         mainTitle: 'The Intersection of Two Appetites',
-        briefContent: 'HexaEdge captures a rare psychological convergence in today\'s young demographic: [[the deep emotional need for clarity]] and [[the high-stakes thrill of financial trading]]. While users turn to traditional tools for mindfulness, they navigate modern markets with aggressive speculation.\n\nUnderneath both appetites sits [[a market worth hundreds of billions]], and no one is [[building it with taste]]. I bridge that gap through design.',
+        briefContent: 'The same young person carries two appetites: [[the deep emotional need for clarity]] and [[the high-stakes thrill of financial trading]]. They turn to traditional tools for mindfulness, then navigate modern markets with aggressive speculation.\n\nUnderneath both appetites sits [[a market worth hundreds of billions]], and no one is [[building it with taste]]. I bridge that gap through design.',
         icon: '📈',
         imageDisplayMode: 'single',
         images: [
@@ -177,32 +177,64 @@ export const hexaedge = {
         id: 'iteration',
         title: 'Iteration',
         sectionTag: 'Iteration',
-        mainTitle: 'I Removed the Verdict',
-        briefContent: 'A verdict is what people come to a reading for, and it was the one thing I couldn\'t ship: telling users their fate is bad UX, and a compliance problem in most markets I want to ship in.\n\n**Shi (势) focuses on momentum instead of destiny.** The source material already said so, which gave me the way out. Every verdict became a description of tendency. Personal readings turned into [[a mirror, not a decision]]. Market readings run on hard quant underneath, but the narrative stays on top: raw numbers only read to people who already know the system, and the story is what makes them [[legible to everyone else]]. [[The decision stays yours.]]',
+        mainTitle: 'Systemic Iterations: Copy, Voice, and Flow',
         icon: '🔁',
-        imageDisplayMode: 'single',
+        // 一段配一张图,不要正文堆完再堆图(alternating 走 AlternatingDisplay,支持 [[高亮]])
+        imageDisplayMode: 'alternating',
+        content: [
+          '**Copy.** Every fixed-fate verdict came out. Each conclusion was rewritten as an active description of where the momentum is heading, which [[returns the decision to the user]] and keeps the product inside the compliance line of the markets I want to ship in.',
+          '**Voice.** One engine, three registers. A trader keeps the terminology intact, with every term mapped to an observable market behaviour. A first-time user gets the same quantitative result in plain language. A personal wealth reading gets a counsellor working through one sustained metaphor, because [[the reading only works if the person understands it]].',
+          '**Flow.** An expert-only ritual became a guided onboarding conversation. The front end turns a situation described in the user\'s own words into the parameters the engine needs, and [[each step exposes only the questions that belong to it]].'
+        ],
         images: [
           {
             src: '/media/projects/hexaedge/sections/s10-iteration.png',
             alt: 'Rewriting verdicts into momentum language',
             caption: 'From verdict to momentum: the same reading, reframed to keep agency with the user.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/voice-registers.png',
+            alt: 'The same engine result written three ways: practitioner, first-timer, personal reading',
+            caption: 'One structured result, three system prompts. Audience is a design decision, not a tone setting.'
+          },
+          {
+            src: '/media/projects/hexaedge/sections/iteration-casting.png',
+            alt: 'Before and after: a three-step casting form rebuilt as a guided conversation',
+            caption: 'The form assumed the vocabulary. The conversation supplies it, one step at a time.'
           }
         ]
       },
 
       {
         id: 'ai-ux',
-        title: 'AI UX',
-        sectionTag: 'AI UX',
-        mainTitle: 'The Prompt Is the Product\'s Ethics',
-        briefContent: 'HexaEdge does not predict the market. It describes the momentum around a decision and hands that decision back. The compliance boundary between [[metaphysics and finance]] runs through every reading, and it lives in the prompt.\n\n[[A rule the model can ignore is not a rule.]] So the ethics run twice: a versioned ban-list compiled into the prompt, then an output scan that enforces it in code. A generation carrying a banned word gets one retry with the violation named; if it comes back dirty, [[the scan kills it]] and a deterministic fallback ships instead. The violating text never reaches a user and never enters the cache. The prompt is versioned like code, and [[the diff from V1 to V3 is where the design actually happened.]]',
+        title: 'AI Engineering',
+        sectionTag: 'AI Engineering',
+        mainTitle: 'The Engine Decides, the Model Explains',
+        briefContent: 'The engine computes direction, timing and confidence in TypeScript, and the model never decides any of it. The [[LLM]] does the writing, in the voice that fits whoever is reading, grounded by [[RAG]] over the 64-hexagram [[knowledge base]]. The [[prompt is versioned]], [[guardrails]] scan every generation, and a [[golden eval set]] of 10 cases scores the output for compliance and faithfulness. Every cast is stored and labelled with what actually happened, so the corpus grows with use.',
         icon: '⚙️',
+        link: {
+          label: 'Open full view',
+          url: '/hexaedge-knowledge-graph/index.html',
+        },
+        // 知识图谱直接在页内跑,不跳转。默认不吃鼠标,点一下才可拖拽/缩放/搜索。
+        embed: {
+          src: '/hexaedge-knowledge-graph/index.html',
+          title: 'HexaEdge signal knowledge graph',
+          ratio: '16 / 10',
+          activateLabel: 'Click to explore the graph',
+          caption: '66 cases, 109 signals, 333 links, generated from the case archive. Gold nodes are signals; cases are coloured by timeframe. Outcomes stay in the private copy.'
+        },
         imageDisplayMode: 'single',
         images: [
           {
+            src: '/media/projects/hexaedge/sections/ai-engineering.png',
+            alt: 'Request path: deterministic engine, RAG retrieval, LLM generation, guardrail scan',
+            caption: 'One request, four stages, plus the three things that keep the output honest.'
+          },
+          {
             src: '/media/projects/hexaedge/sections/ai-ux.png',
-            alt: 'Prompt as design artifact: ban-list, output contract, evaluation',
-            caption: 'The prompt is versioned like code, from V1 compliance to V3 "describe the momentum."'
+            alt: 'The prompt as an engineering artifact: ban-list, output contract, evaluation',
+            caption: 'The prompt is versioned like code, from V1 "answer the fate" to V3 "describe the momentum."'
           }
         ]
       },
@@ -212,7 +244,7 @@ export const hexaedge = {
         title: 'Outcome',
         sectionTag: 'Outcome',
         mainTitle: 'Design to Deploy, No Handoff',
-        briefContent: 'The loop is closed. [[A user lands on an encyclopedia page from search, signs up, casts, reads, hits a tier gate, pays, and exports the result as a share card.]] I built every step of that, including the parts most designers hand off: [[auth, the entitlement layer behind fthe pricing tiers, bilingual AI output, and SEO]].\n\nThe scoring engine, the reading UI, and the compliance layer were designed and shipped by the same person, so [[none of it drifted across a handoff]]. What went live is a business, not a prototype.',
+        briefContent: 'Someone finds a hexagram page through Google, signs up, casts three coins, reads what comes back, hits a tier gate, pays, and leaves with a full PDF report. [[Every step of that is a screen I drew and a route I wrote]], including the parts that normally get handed off: [[auth]], the [[entitlement and credit ledger]] behind four pricing tiers, [[i18n]] down to the AI output itself, and the [[SEO]] content hub, structured data included, that brought them in.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
@@ -228,9 +260,17 @@ export const hexaedge = {
         id: 'reflection',
         title: 'Reflection',
         sectionTag: 'Reflection & Next Steps',
-        mainTitle: 'Give the Decision Back to Users',
-        briefContent: 'A constraint I could not negotiate with turned out to be the best brief I have had. [[Stop predicting, start describing]] is the one decision the whole product hangs off.\n\nWhat I build next: confidence heatmaps and trend overlays on the deterministic engine, a knowledge base fed with more classical texts and real market outcomes, and user testing with investors who have never touched Liuyao.',
-        icon: '💭'
+        mainTitle: 'The Counsellor and the Fortune-Teller',
+        briefContent: 'What separates a counsellor from a fortune-teller is the question I keep coming back to. The fortune-teller keeps score on being right; the counsellor leaves you understanding your own situation better than when you walked in. [[The second one is the harder product to build]], and most of the difficulty is language: getting an AI to talk to a person so it feels like being helped rather than being told.\n\nNext: extending retrieval from the classical texts to the case archive itself, and putting the thing in front of people who have never cast a hexagram.',
+        icon: '💭',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/hexaedge/sections/s13-reflection.png',
+            alt: 'Closing statement: the compliance line set the brief',
+            caption: 'Where the constraint landed: stop predicting, start describing.'
+          }
+        ]
       }
     ]
   };

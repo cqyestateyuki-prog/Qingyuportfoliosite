@@ -3,7 +3,7 @@ export const stumbldoor = {
     // ========== Stumbldoor Project 图书系统==========
     id: 'stumbldoor',
     year: '2024',
-    featured: true, order: 2, // Selected Work · 第 2 位
+    featured: false, // 移至 Passion Projects
     title: 'Stumbldoor',
     subtitle: {
       en: 'Reimagining the Library Experience for the Future',

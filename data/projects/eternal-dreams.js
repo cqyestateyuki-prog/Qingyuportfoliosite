@@ -39,7 +39,7 @@ export const eternalDreams = {
     overview: {
       mainTitle: { en: 'A Journey Through Fantasy and Dreams', zh: '穿越幻想与梦境之旅' },
       content: { en: "Eternal Dream takes place in a fantasy world known as 'Dream', featuring an art style that leans towards 3D anime and is non-realistic. Players awaken in this fantasy-styled world, as if they are in an eternal nightmare/dream. They need to defeat unknown monsters and travel to towns as beautiful as those in fairy tales. Players will start their journey, and end up going home or being the hero of this world.", zh: '《永恒之梦》发生在名为「梦」的幻想世界，采用偏 3D 动漫的非写实美术风格。玩家在奇幻世界中苏醒，仿佛置身永恒梦魇/美梦，需击败未知怪物、造访如童话般的小镇，开启旅程，最终归家或成为世界英雄。' },
-      challenge: { en: 'How to create an engaging narrative that adapts to player choices?', zh: '如何创造能随玩家选择而变化的引人入胜的叙事？' }
+      challenge: { en: 'How might we build a narrative that adapts to player choices and still holds together?', zh: '如何做出能随玩家选择变化、又不散架的叙事？' }
     },
     
     sections: [

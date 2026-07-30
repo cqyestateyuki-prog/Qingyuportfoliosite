@@ -34,7 +34,7 @@ export const primeDirective = {
     overview: {
       mainTitle: { en: 'Defending the Zeta Station', zh: '保卫泽塔空间站' },
       content: { en: "As a security robot onboard a deep space station, you were created to stop any threats that may appear. On this fateful day, you have been awoken from stasis sleep to stop a gang of pirates that have overtaken the station. Navigate through the corridors of the Zeta Station, collect weapon upgrades, defeat the invaders, and fulfill your prime directive!", zh: '你是深空站上的安保机器人，被制造用来消灭一切威胁。在这注定的一天，你从休眠中苏醒，去阻止占领空间站的海盗团伙。穿越泽塔站的走廊、收集武器升级、击败入侵者，完成你的首要指令。' },
-      challenge: { en: 'How to create an engaging 2D platformer with unique vector graphics and combat mechanics?', zh: '如何用独特的矢量美术与战斗机制打造引人入胜的 2D 平台游戏？' }
+      challenge: { en: 'How might we make a 2D platformer stand out through its vector art and combat mechanics?', zh: '如何用矢量美术与战斗机制让一款 2D 平台游戏脱颖而出？' }
     },
     
     sections: [

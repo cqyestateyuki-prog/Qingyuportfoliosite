@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HexaEdge · AI Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --jade:#F2F6F7;
+    --celadon:#E3ECEF;
+    --porcelain:#243E66;
+    --ink:#14233A;
+    --gilding:#9C7A3A;
+    --cinnabar:#A8392E;
+    --line:rgba(36,62,102,.14);
+    --muted:rgba(20,35,58,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#3a3a44;display:flex;align-items:center;justify-content:center;min-height:100vh}
+
+  /* 16:9 画板，导出时按 2x 截图即得 3840×2160 */
+  .slide{
+    width:1920px;height:1080px;flex:none;
+    background:var(--jade);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;
+    padding:64px 76px 52px;
+    display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+
+  /* ---- 页眉 ---- */
+  .eyebrow{display:flex;align-items:center;gap:14px;
+    font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--porcelain);}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--cinnabar)}
+  .brand{position:absolute;top:58px;right:76px;
+    font-family:'EB Garamond',serif;font-size:30px;letter-spacing:.01em;color:var(--ink)}
+  .brand em{font-style:normal;color:var(--gilding)}
+  h1{font-family:'EB Garamond',serif;font-weight:500;font-size:74px;line-height:1.05;
+    color:var(--ink);margin:18px 0 8px;letter-spacing:-.01em}
+  .sub{font-size:18px;color:var(--muted);max-width:1020px;line-height:1.5}
+
+  /* ---- 主流水线 ---- */
+  .flowhead{display:flex;align-items:baseline;gap:16px;margin:40px 0 18px}
+  .flowhead .colhead{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--gilding)}
+  .flowhead .rule{flex:1;height:1px;background:var(--line)}
+
+  .flow{display:grid;grid-template-columns:1fr 26px 1fr 26px 1fr 26px 1fr;align-items:stretch;gap:0;flex:1.15;min-height:0}
+  .arrow{display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--gilding)}
+  .stage{background:#fff;border:1px solid var(--line);border-top:3px solid var(--porcelain);
+    border-radius:10px;padding:26px 26px 22px;display:flex;flex-direction:column}
+  .stage.ai{border-top-color:var(--gilding)}
+  .stage.guard{border-top-color:var(--cinnabar)}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gilding);margin-bottom:9px}
+  .stage h3{font-size:25px;font-weight:600;letter-spacing:-.01em;line-height:1.2;margin-bottom:8px}
+  .stage p{font-size:16px;color:var(--muted);line-height:1.5}
+  .stage ul{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+  .stage li{list-style:none;font-size:15px;color:var(--muted);line-height:1.4;padding-left:14px;position:relative}
+  .stage li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;
+    border-radius:50%;background:var(--porcelain);opacity:.5}
+  .stage .kicker{margin-top:auto;padding-top:12px;font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;letter-spacing:.02em;color:var(--porcelain)}
+  .stage.guard .kicker{color:var(--cinnabar)}
+  code{font-family:'JetBrains Mono',monospace;font-size:13px;
+    color:var(--porcelain);background:var(--celadon);padding:1px 6px;border-radius:4px}
+
+  /* ---- 支撑层三卡 ---- */
+  .support{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:30px;flex:0.85;min-height:0}
+  .card{background:var(--celadon);border:1px solid var(--line);border-left:3px solid var(--gilding);
+    border-radius:9px;padding:26px 28px;display:flex;flex-direction:column}
+  .card h4{font-size:21px;font-weight:600;margin-bottom:6px;letter-spacing:-.01em}
+  .card p{font-size:15.5px;color:var(--muted);line-height:1.5}
+  .chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:12px;background:#fff;
+    border:1px solid var(--line);border-radius:20px;padding:3px 11px;color:var(--porcelain)}
+  .chip.pass{color:var(--gilding);border-color:rgba(156,122,58,.35)}
+
+  .foot{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line)}
+  .foot b{color:var(--porcelain);font-weight:500}
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="brand">Hexa<em>Edge</em></div>
+  <div class="eyebrow">AI Engineering</div>
+  <h1>The Engine Decides, the Model Explains</h1>
+  <div class="sub">The reading is computed in TypeScript before a model is ever called. The LLM writes it up, grounded in a retrieved knowledge base, and nothing reaches the user unscanned.</div>
+
+  <div class="flowhead">
+    <span class="colhead">Request path</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="flow">
+    <div class="stage">
+      <div class="tag">01 · Deterministic core</div>
+      <h3>The engine computes the call</h3>
+      <p>Chart-work in TypeScript: line strength, element clashes, moving-line chains, timing windows, a bull-bear vote.</p>
+      <ul>
+        <li>Returns direction, timing, confidence</li>
+        <li>Same cast, same result, testable</li>
+      </ul>
+      <div class="kicker">the model never votes</div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="stage ai">
+      <div class="tag">02 · Retrieval</div>
+      <h3>RAG over the knowledge base</h3>
+      <p>The 64-hexagram corpus is chunked by field, embedded, and searched by vector similarity.</p>
+      <ul>
+        <li><code>pgvector</code> + HNSW in Postgres</li>
+        <li>Top passages injected as grounding</li>
+        <li>Field-typed chunks, so a finance question hits the finance passage</li>
+      </ul>
+      <div class="kicker">sources, not memory</div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="stage ai">
+      <div class="tag">03 · Generation</div>
+      <h3>The LLM writes the reading</h3>
+      <p>A versioned prompt puts the result in the voice that fits the reader, in English or Chinese.</p>
+      <ul>
+        <li>Practitioner: terms kept, each compiled into an observable market behaviour</li>
+        <li>First-timer: same result, plain language</li>
+        <li>Personal reading: one sustained metaphor, not a lecture</li>
+      </ul>
+      <div class="kicker">three voices, one engine</div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="stage guard">
+      <div class="tag">04 · Guardrails</div>
+      <h3>Scanned before it ships</h3>
+      <p>Every generation is checked against the compliance ban-list before it can reach a user.</p>
+      <ul>
+        <li>One hit → retry with the violation named</li>
+        <li>Still dirty → killed, fallback ships</li>
+        <li>Nothing bad enters the cache</li>
+      </ul>
+      <div class="kicker">degrade, never leak</div>
+    </div>
+  </div>
+
+  <div class="support">
+    <div class="card">
+      <h4>Prompt as a versioned artifact</h4>
+      <p>Every claim compiles twice: the mechanism, then what it looks like as market behaviour. V1 answered the fate; V3 describes the momentum.</p>
+      <div class="chips" style="margin-top:auto"><span class="chip">two-layer compile</span><span class="chip">provider-agnostic</span><span class="chip">V1 → V3</span><span class="chip">diffed in git</span></div>
+    </div>
+    <div class="card">
+      <h4>Evals, not vibes</h4>
+      <p>A golden set of 10 real casts runs the engine, hits the live route, and scores the output deterministically, with an optional LLM judge on faithfulness and voice.</p>
+      <div class="chips" style="margin-top:auto"><span class="chip pass">compliance 10/10</span><span class="chip pass">wording 10/10</span><span class="chip">LLM judge 1–5</span></div>
+    </div>
+    <div class="card">
+      <h4>A corpus that grows with use</h4>
+      <p>Casts persist under row-level security; a nightly job labels the matured market casts with what actually happened. Outcome columns are writable only by the server.</p>
+      <div class="chips" style="margin-top:auto"><span class="chip">RLS</span><span class="chip">nightly labeling</span><span class="chip">service-role only</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Next.js 16 · TypeScript · Supabase / pgvector · OpenAI embeddings · Groq</span>
+    <span><b>A missing key disables a feature. It never breaks the product.</b></span>
+  </div>
+</div>
+</body>
+</html>

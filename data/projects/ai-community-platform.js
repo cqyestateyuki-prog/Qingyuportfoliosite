@@ -48,13 +48,13 @@ export const aiCommunityPlatform = {
        overview: {
          mainTitle: 'The Community Layer Every AI Tool Is Missing',
          briefContent: 'ChatGPT, Grok, and Claude all [[ship without a community]], so millions of people learn to use AI completely alone. The easy fix is a forum for prompts and tips. Research pointed somewhere harder: what people wanted most was [[recognition and a sense of belonging]] in the AI era, more than another list of tips. So the design is a community layer that sits on top of any chat tool without disrupting it, built around belonging first. For the product owner, that belonging is what drives [[retention]].',
-         challenge: 'How might I create an ecosystem where users connect, collaborate, and create value for one another?',
+         challenge: 'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
          challenges: [
-           'How might I create an ecosystem where users connect, collaborate, and create value for one another?',
-           'How might I enable users to easily share their AI usage experiences and insights?',
-           'How might I help users quickly find relevant, high-quality AI content, prompts, and events?',
-           'How might I lower the barrier to entry for AI users to participate in community learning?',
-           'How might I ensure the quality and reliability of shared AI content and prompts?'
+           'How might we create an ecosystem where users connect, collaborate, and create value for one another?',
+           'How might we enable users to easily share their AI usage experiences and insights?',
+           'How might we help users quickly find relevant, high-quality AI content, prompts, and events?',
+           'How might we lower the barrier to entry for AI users to participate in community learning?',
+           'How might we ensure the quality and reliability of shared AI content and prompts?'
          ],
          buttons: [
            {

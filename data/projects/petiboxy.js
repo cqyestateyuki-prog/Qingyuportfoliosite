@@ -2,7 +2,7 @@
 export const petiboxy = {
     id: 'petiboxy',
     year: '2025',
-    featured: true, order: 4, // 提进 Selected Work · 第 4 位
+    featured: true, order: 4, // Selected Work · 第 4 位
     title: { en: 'Petiboxy Charity Platform', zh: 'Petiboxy 宠物救助平台' },
     subtitle: { en: 'Connecting Love, Saving Lives', zh: '连接爱心，拯救生命' },
     categories: ['UIUX', 'Product Design', 'Research'],

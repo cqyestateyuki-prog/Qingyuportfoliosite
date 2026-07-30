@@ -40,9 +40,9 @@ export const excelAiAgent = {
       content: { en: 'Excel AI Agent is a lightweight AI agent that serves as a natural language-powered intelligent data analysis assistant, allowing users to complete complex data analysis tasks without writing code. Through AI technology, the system understands users\' natural language questions, automatically generates Python analysis code, executes analysis, and generates visual charts. The project features a clean white background design with Excel green as the primary color theme, supporting real-time streaming output and voice input, providing an efficient and intuitive data analysis experience for everyday users who need to work with Excel data but lack technical expertise.', zh: 'Excel AI Agent 是一款基于自然语言的智能数据分析助手，用户无需写代码即可完成复杂分析。系统理解自然语言问题、自动生成并执行 Python 分析代码、生成可视化图表；界面以白色为主、Excel 绿为主题色，支持实时流式输出与语音输入，为需要处理 Excel 但缺乏技术背景的用户提供高效直观的体验。' },
          challenges: [
         { en: 'How might we enable non-technical users to easily complete complex data analysis tasks?', zh: '如何让非技术用户轻松完成复杂的数据分析任务？' },
-        { en: 'How can I make AI\'s working process transparent and understandable?', zh: '如何让 AI 的工作过程透明、可理解？' },
-        { en: 'How to balance feature completeness with simplicity?', zh: '如何在功能完整与简洁之间取得平衡？' },
-        { en: 'How to provide real-time feedback during analysis to reduce user anxiety?', zh: '如何在分析过程中提供实时反馈以降低用户焦虑？' },
+        { en: 'How might we make AI\'s working process transparent and understandable?', zh: '如何让 AI 的工作过程透明、可理解？' },
+        { en: 'How might we balance feature completeness with simplicity?', zh: '如何在功能完整与简洁之间取得平衡？' },
+        { en: 'How might we provide real-time feedback during analysis to reduce user anxiety?', zh: '如何在分析过程中提供实时反馈以降低用户焦虑？' },
          ]
        },
   

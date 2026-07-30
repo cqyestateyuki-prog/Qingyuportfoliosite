@@ -1,7 +1,7 @@
 // sparkup
 export const sparkup = {
     id: 'sparkup',
-    featured: false, // 移至 Passion Projects
+    featured: true, order: 3, // Selected Work · 第 3 位
     title: 'Spark Up',
     year: '2026',
     subtitle: {
@@ -12,7 +12,7 @@ export const sparkup = {
     tags: ['Product Strategy', 'UX Design', 'UI Design', 'Figma Make', 'Google AI Studio', 'Next.js', 'Tailwind CSS', 'FastAPI', 'Firebase', 'OpenAI API', 'AWS', 'JTBD', 'Kano Model'],
     techTags: ['#Figma Make', '#Google AI Studio', '#Next.js', '#Tailwind CSS', '#FastAPI', '#Firebase', '#OpenAI API', '#AWS'],
 
-    // hero/缩略图 = 真实产品截图(Diagnostic Dashboard); problemstatement 单独放在 Problem 节
+    // 原 hero.png 已删除,沿用现有真实产品截图 final-dashboard.png 作缩略图/头图
     thumbnail: '/media/projects/sparkup/sections/final-dashboard.png',
     brief: {
       en: 'An AI platform that diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback.',
@@ -20,12 +20,6 @@ export const sparkup = {
     },
     heroImage: '/media/projects/sparkup/sections/final-dashboard.png',
     heroVideo: null,
-
-    // 元信息一行 stack(Technical 段已并入此处,不再单列章节)
-    meta: {
-      duration: '3 months',
-      stack: 'Next.js · FastAPI · Firebase · OpenAI · AWS',
-    },
 
     domain: [
       { en: 'AI Product', zh: 'AI 产品' },
@@ -44,10 +38,10 @@ export const sparkup = {
       sectionTag: '4-person team · 3 months',
       title: 'Product Lead & Design Lead',
       responsibilities: [
-        'Made the call to scrap our community-matching concept after 151 surveys showed the real blocker sat earlier: people did not know whether they were ready',
-        'Split the diagnostic into two tiers so cold traffic gets value before any login, after Kano flagged a forced sign-up as a reverse attribute',
-        'Boxed in the AI generator with budget, scope, and drag-in Idea Seeds, so every idea ties back to the user instead of drifting into generic advice',
-        'Owned product and design end to end, from the research that set the direction to the shipped diagnose, forge, and validate loop',
+        'Led product strategy: user research (151 surveys, 10+ interviews), JTBD / Four Forces / Kano analysis, and the pivot from community platform to AI-first diagnostic',
+        'Owned end-to-end UX/UI: Figma sketches → Figma Make for prototyping and iteration → Google AI Studio for finalizing the component library and design system',
+        'Defined the Two-Tier Diagnostic framework (Lite 10Q + Enhanced 30Q+) and Guest-to-User conversion flow',
+        'Designed the Spark Forge interaction: constrained AI generation with drag-and-drop Idea Seeds, budget/scope inputs, and Forging animation',
       ]
     },
 
@@ -60,10 +54,9 @@ export const sparkup = {
       lightColor: '#0081d4'
     },
 
-    // Context & Problem(合并原 Overview + The Problem)
     overview: {
       mainTitle: 'A Reality Check for People With Startup Anxiety',
-      briefContent: '**SparkUp** is an [[AI pre-entrepreneurship platform]] built for one specific person: someone who scrolls past startup success stories and feels a knot of envy and doubt, thinking "Could I do this too?" Our JTBD research found their first question isn\'t "Who can help me?" It\'s [["Am I even capable?"]] Most tools skip that and jump straight to networking, pitch decks, or motivational content. SparkUp starts where the anxiety actually lives: an [[honest read on your readiness]] across six dimensions, then AI that [[forges ideas around your real strengths and constraints]], then community feedback to pressure-test them. The loop is short: diagnose, forge, validate.',
+      briefContent: '**SparkUp** is an [[AI-powered pre-entrepreneurship platform]] that [[diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback]]. It targets a specific audience: people who scroll through startup success stories on social media and feel a mix of envy and anxiety, wondering, "Could I do this too?" Rather than hand out generic encouragement, SparkUp gives users an [[honest diagnostic of where they stand]] across six dimensions, then uses AI to [[forge business ideas tailored to their strengths and constraints]]. The core loop is simple: diagnose your readiness, forge ideas with AI, and validate them with the community.',
       challenge: 'How might we help people with vague startup ambitions get an honest, low-pressure read on their readiness without discouraging them or wasting their time?',
       challenges: [
         'How might we help people with vague startup ambitions get an honest read on their readiness without discouraging them?',
@@ -71,165 +64,153 @@ export const sparkup = {
         'How might we bridge the gap between "I want to start something" and "Here is something concrete I could start"?',
         'How might we design around AI latency so wait time feels productive, not frustrating?'
       ],
-      mainImage: {
-        src: '/media/projects/sparkup/problemstatement.png',
-        alt: 'Problem statement: 90% of aspiring founders never launch',
-        caption: '90% of aspiring founders never launch. The biggest hurdle is the lack of structured guidance.'
-      },
       buttons: []
     },
 
     sections: [
-      // Research(三个发现各配一段文字+一张图,分开放)
+      {
+        id: 'the-problem',
+        title: 'The Problem',
+        sectionTag: 'The Problem',
+        mainTitle: '"Am I Even Capable?" Was the Question No One Answered',
+        briefContent: 'Our JTBD research surfaced a core tension. When people see startup stories on social media, their first question isn\'t "Who can help me?" It\'s [["Am I even capable?"]] Existing tools skip past this and jump straight to networking, pitch decks, or motivational content. But the real anxiety is personal: people want to know, at low cost, whether the whole thing is even worth pursuing. The [[Four Forces model]] made it concrete. The push was income ceilings and a loss of meaning at work; the pull was a wish for honest self-knowledge instead of guesswork; the anxiety was the fear of wasting time on an unvalidated path; the habit was endless research with no structured self-reflection. So the design problem was clear: build a tool that [[replaces vague self-doubt with a structured, honest readiness picture]].',
+        icon: '💡',
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/sparkup/problemstatement.png',
+            alt: 'Problem Statement: The "Day One" Paralysis',
+            caption: '90% of aspiring founders never launch. The biggest hurdle is the lack of structured guidance.'
+          }
+        ]
+      },
+
       {
         id: 'process-research',
         title: 'Research',
         sectionTag: 'Research',
         mainTitle: '151 Surveys Killed Our First Idea, Then Gave Us a Better One',
-        briefContent: 'As Product Lead I ran [[151 survey responses and 10+ interviews]], reading them through JTBD, the Four Forces, and the Kano Model. Three findings set the direction.',
+        briefContent: 'As Product Lead, I ran [[151 survey responses and 10+ qualitative interviews]], drawing on JTBD, Four Forces, and the Kano Model. The finding that changed everything: users\' core pain wasn\'t [[lack of connections or mentorship]]. It was [[not knowing whether they were ready to start]]. That killed our original community-matching concept and pushed us to pivot fully to an AI-first diagnostic tool. Kano analysis also showed that forcing people to log in before they got any value was a [[reverse attribute]], so I designed a [[Guest-to-User flow]] where anyone can finish the Lite Diagnostic (10 questions) without signing up, then gets a nudge to save their results. That\'s where the [[Two-Tier Strategy]] came from: a quick Lite assessment as a low-friction hook with an instant Readiness Score, plus an Enhanced version (30+ questions) with a [[6-dimensional radar breakdown]], AI-generated action plans, and pattern analysis. As Design Lead, I owned the full UX/UI pipeline, taking it from Figma sketches to Figma Make for prototyping and iteration, then to Google AI Studio to finalize the component library and design system.',
         icon: '🔍',
-        featureDisplayMode: 'side-by-side',
-        features: [
+        imageDisplayMode: 'alternating',
+        images: [
           {
-            name: 'The push, the pull, and the fear',
-            detail: 'The Four Forces made the tension concrete. People were pushed by income ceilings and work that had stopped meaning much, and pulled by a wish for honest self-knowledge over guesswork. What held them back was the fear of sinking months into an unvalidated path, plus a habit of researching endlessly without ever reflecting in a structured way.',
-            image: '/media/projects/sparkup/userresearch.png',
-            imageCaption: 'JTBD and Kano analysis across 151 surveys and 10+ interviews.'
+            src: '/media/projects/sparkup/marketresearch.png',
+            alt: 'Market Research: Global Side Hustle Trend',
+            caption: '72% of Americans and 73% of Chinese consumers are engaged in or considering side hustles.'
           },
           {
-            name: 'The ambition is mainstream',
-            detail: 'The market told the same story from the outside: 72% of Americans and 73% of Chinese consumers run or are considering a side hustle. Wanting to start something is no longer a niche dream. The confidence to start it is what\'s scarce.',
-            image: '/media/projects/sparkup/marketresearch.png',
-            imageCaption: 'Sources: SurveyMonkey 2025, Mastercard 2023.'
-          },
-          {
-            name: 'The finding that reset the project',
-            detail: 'The core pain wasn\'t [[a lack of connections or mentorship]]. It was [[not knowing whether they were ready to start]]. That one insight killed our original community-matching concept; how we acted on it is in the iteration below.',
-            image: '/media/projects/sparkup/userpersona.png',
-            imageCaption: 'Primary persona, curious but uncertain: scrolls founder stories, takes courses, and never launches.'
+            src: '/media/projects/sparkup/userresearch.png',
+            alt: 'User Research: JTBD, Four Forces, and Kano Model',
+            caption: '151 surveys and 10+ interviews revealed the core pain: not knowing whether they are ready.'
           }
         ]
       },
 
-      // ★ Iteration(三个岔路口决策卡 + 老虎机→锻造炉迭代实录)
       {
-        id: 'iteration',
+        id: 'process-design',
         title: 'Iteration',
         sectionTag: 'Iteration',
-        mainTitle: 'Three Forks That Shaped the Product',
-        briefContent: 'SparkUp wasn\'t designed in one pass. It went through a full concept pivot and a rebuilt core feature, and each round came down to a fork in the road. These are the three that mattered, and why the evidence pushed each one.',
-        icon: '🧭',
-        features: [
-          {
-            name: 'Community matching vs AI diagnostic',
-            detail: 'Our first concept matched aspiring founders with mentors and peers. Then 151 survey responses showed the real blocker sat earlier: people didn\'t know whether they were ready. We chose the AI-first diagnostic and scrapped the matching build, because solving the wrong problem well is worse than restarting on the right one.'
-          },
-          {
-            name: 'One long assessment vs a two-tier diagnostic',
-            detail: 'A single 30-question test is thorough but scares off cold traffic, and Kano flagged a forced login before any value as a reverse attribute. We chose two tiers: a 10-question Lite pass anyone finishes as a guest with an instant Readiness Score, then an Enhanced 30-question version with a six-dimension radar for people who opt in.'
-          },
-          {
-            name: 'Open-ended AI vs constrained generation',
-            detail: 'Our Demo Day MVP was an idea slot machine: it generated at random, users watched the show and left. Left open, a generator drifts into generic advice. So we boxed the model in. Users set budget and scope and can drag in an Idea Seed before anything generates, so every idea Spark Forge returns ties back to their diagnostic profile instead of a blank prompt. Ideas you helped forge are ideas you keep.'
-          }
-        ],
+        mainTitle: 'From Boring Survey to 3D Command Deck',
+        briefContent: '**Phase 1 (Dashboard)**: flat layout → [["Future Lab"]] style with Bento Grid, Glassmorphism cards, and 3D parallax mouse tracking. **Phase 2 (AI Diagnostic)**: Google Forms survey → [[3D grid background]] with radar-scan iconography and Quick/Full dual-path selection. **Phase 3 (Idea Bank → Spark Forge)**: static card grid → [[Spark Forge]] where users drag seeds, set constraints, and Ignite to generate ideas.',
+        icon: '🎨',
         imageDisplayMode: 'single',
         images: [
           {
             src: '/media/projects/sparkup/sections/iteration-mvp-to-forge.png',
             alt: 'Iteration: from the Demo Day idea slot machine to the Spark Forge',
-            caption: 'The rebuild in one picture, from the concept deck: the Demo Day "idea slot machine" (random output, no ownership) versus the Forge (your input, your constraints). Retention across the two phases as reported in the deck: 12% to 45%.'
+            caption: 'Phase 3 rebuild: the Demo Day idea slot machine (random output) became the Spark Forge, where users set constraints and drag in seeds before generating.'
           }
         ]
       },
 
-      // AI-UX(用现有事实:等待/约束/重试与信任)
       {
-        id: 'ai-ux',
-        title: 'AI UX',
-        sectionTag: 'AI UX',
-        mainTitle: 'Designing the Wait, the Guardrails, and the Retry',
-        briefContent: 'AI features fail in predictable ways: they make you wait, they wander off-brief, and sometimes they simply miss. I designed for those three moments before touching the happy path.',
-        icon: '🤖',
+        id: 'process-tech',
+        title: 'Technical',
+        sectionTag: 'Technical',
+        mainTitle: 'Next.js + AWS, Delivered in 3 Months',
+        briefContent: 'The project was [[delivered in 3 months]] by a 4-person team. Tech stack: **Next.js** + **TypeScript** + **Tailwind CSS** for the frontend, **FastAPI (Python)** for the backend, **Firebase** for auth and data, **OpenAI API** for AI features, and **AWS** (ECR + App Runner + Terraform) for deployment. Bilingual i18n (EN/ZH); mobile-first responsive design.',
+        icon: '💻',
+        buttons: [],
         features: [
           {
-            name: 'A wait that produces something',
-            detail: 'Idea generation carries real latency. Instead of a spinner, the Forging animation shows the model assembling an idea from your seeds and constraints, so the wait reads as work in progress rather than a stall.'
+            name: 'Next.js + Tailwind CSS',
+            description: 'Frontend & UI',
+            detail: 'Next.js + TypeScript; Tailwind CSS + Radix UI components; bilingual i18n (EN/ZH); mobile-first responsive design'
           },
           {
-            name: 'Constraints keep it on-brief',
-            detail: 'Budget, scope, and keyword inputs frame every run. The model can\'t wander into a business you could never start; output stays inside the box you set. That is what makes the results feel personal instead of random.'
+            name: 'FastAPI + Firebase + OpenAI',
+            description: 'Backend & AI',
+            detail: 'Python FastAPI backend; Firebase Auth + Firestore for persistence; OpenAI API for diagnostic analysis, idea generation, business plans, and challenge paths'
           },
           {
-            name: 'A miss you can steer',
-            detail: 'When a batch lands flat, you adjust one constraint and re-forge rather than rerolling blindly. Low diagnostic scores get specific, encouraging next steps, and a fallback UI covers the case where the model returns nothing.'
-          }
-        ],
-        imageDisplayMode: 'single',
-        images: [
-          {
-            src: '/media/projects/sparkup/sections/forging-ritual.png',
-            alt: 'The Forging ritual: each step of the wait names the work in progress',
-            caption: 'The Forging sequence: instead of a spinner, each step names the work the model is doing, so the wait reads as thinking, not stalling.'
+            name: 'AWS Deployment',
+            description: 'Infrastructure & CI/CD',
+            detail: 'Docker → AWS ECR → AWS App Runner; Terraform for infrastructure; GitHub Actions CI/CD with version-tag triggered deploys'
           }
         ]
       },
 
-      // Solution(3 能力,终图缺真实资产暂不上图,避免破图)
       {
         id: 'the-solution',
         title: 'Final Solution',
         sectionTag: 'Final Solution',
         mainTitle: 'Diagnose → Forge → Validate: One Continuous Journey',
-        briefContent: 'Three capabilities, one continuous flow. [[Diagnose]] your readiness, [[Forge]] personalized ideas with AI, and [[Validate]] them with the community. The dashboard stitches all three into one command center.',
+        briefContent: 'Three capabilities, one continuous flow: [[Diagnose]] your readiness, [[Forge]] personalized ideas with AI, and [[Validate]] them through community feedback. Launched on [[Product Hunt]].',
         icon: '🚀',
         featureDisplayMode: 'side-by-side',
         features: [
           {
             name: 'AI Readiness Diagnostic',
-            detail: 'Lite (10 questions) plus Enhanced (30+) across six dimensions, with smart routing between them. A radar chart turns strengths and gaps into something you can act on at a glance.'
+            detail: 'Lite (10Q) + Enhanced (30Q+) across 6 dimensions with smart routing. Radar Chart makes strengths and gaps actionable at a glance.'
           },
           {
             name: 'Spark Forge',
-            detail: 'Set keywords, budget, and scope, optionally drag in an Idea Seed, then Ignite. AI generates business ideas matched to your diagnostic profile instead of a blank prompt.'
+            detail: 'Set keywords, budget, and scope, optionally drag in an Idea Seed, and AI generates business ideas matched to your diagnostic profile.'
           },
           {
             name: 'Validation & Dashboard',
-            detail: 'Publish ideas to Spark Square for lightweight community feedback. The dashboard ties it together: Readiness Score, radar breakdown, Spark Stash, and next-step recommendations.'
+            detail: 'Publish ideas to Spark Square for community feedback. Dashboard ties it together: Readiness Score, radar breakdown, Spark Stash, and recommendations.'
           }
         ],
-        imageDisplayMode: 'alternating',
-        images: [
+        imageGroups: [
           {
-            src: '/media/projects/sparkup/sections/final-dashboard.png',
-            alt: 'Diagnostic Dashboard: readiness score, AI analysis log, recommended actions',
-            caption: 'The Diagnostic Dashboard: Readiness Score with dimension breakdown, a live AI analysis log, and recommended next actions.'
-          },
-          {
-            src: '/media/projects/sparkup/sections/forge-card.png',
-            alt: 'A SparkUp challenge card generated by Spark Forge',
-            caption: 'A generated challenge card: difficulty, potential, time and stack at a glance. Accepting one is a zero-risk first act of entrepreneurship.'
+            title: 'Final Visuals',
+            displayMode: 'alternating',
+            images: [
+              {
+                src: '/media/projects/sparkup/sections/final-dashboard.png',
+                alt: 'Spark Up Dashboard',
+                caption: 'Command center with Radar Chart and personalized action steps'
+              },
+              {
+                src: '/media/projects/sparkup/sections/forge-card.png',
+                alt: 'A SparkUp challenge card generated by Spark Forge',
+                caption: 'A generated challenge card: difficulty, potential, time, and stack at a glance.'
+              }
+            ]
           }
         ]
       },
 
-      // Impact(targets vs 实测)& Reflection(honesty 教训保留)
-      // TODO(qingyu): add 1 real signal (a launch, a live-user count, or a verbatim user-testing quote) to replace the design targets below
       {
         id: 'impact-reflection',
         title: 'Impact & Reflection',
         sectionTag: 'Impact & Reflection',
         mainTitle: 'Trusting Data Over Instinct, Honesty Over Empty Encouragement',
+        briefContent: '[[151 survey responses]] drove a complete product pivot, from community matching to an AI-first diagnostic and ideation tool. Our North Star metric was **Readiness-to-Action Conversion** (a user completes the Enhanced Diagnostic and forges at least one personalized idea). Design targets: Lite completion rate >70%, Lite→Enhanced conversion >40%, ideas forged per user >3, community share rate >50%. The lesson that stuck with me: the best products don\'t always push people to act. Sometimes they encourage [[honest reflection]] instead. SparkUp doesn\'t tell everyone "You can do this!" It asks [["Are you ready?"]] and backs the answer with evidence. In a space crowded with "just start" advice, we built something that helps people start [[with clarity]].',
         icon: '💭',
         content: [
-          'One real signal anchors this project: [[151 survey responses]] forced a full pivot, from community matching to an AI-first diagnostic. That call is validated. The product metrics below are not.',
-          'Our North Star was **Readiness-to-Action Conversion**: a user finishes the Enhanced Diagnostic and forges at least one personalized idea. Everything past the research is a target we set, not a number we have measured.',
-          '**What is validated**',
-          '- 151 survey responses and 10+ interviews confirmed the "honest readiness check" positioning and killed the original community-matching concept.\n- Age-cohort differences (18–27, 28–34, 35+) shaped roadmap priorities.',
-          '**Design targets, not yet validated**',
-          '- Lite completion rate above 70%\n- Lite to Enhanced conversion above 40%\n- Ideas forged per user above 3\n- Community share rate above 50%',
-          '**Reflection**',
-          '- **Pivot courage**: throwing away months of community-platform work stung. 151 surveys do not lie, so data beat intuition.\n- **Honesty with a next step**: never leave a low score as a verdict. Pair it with an action, like a low Market score routing to the Market Research Challenge.\n- **Design for the miss first**: a fallback UI when the model returns nothing, encouraging copy for low scores, and Idea Seeds as scaffolding when someone starts from blank.\n- **If I had more time**: a 6-month longitudinal study, model iteration from idea-quality feedback, and a real launch to replace these targets with measured numbers.'
+          '**Impact**:',
+          '- **Research**: 151 responses validated the "honest readiness check" positioning and killed the original community-matching concept; age cohort differences (18–27, 28–34, 35+) informed roadmap priorities.',
+          '- **Design**: AI-augmented pipeline (Figma sketches → Figma Make for prototyping → Google AI Studio for component library and design system). Radar Chart, Forge Engine drag-and-drop, and Forging animation were all validated in user testing.',
+          '- **Team**: Evidence-based decision culture; achievable success criteria; reusable 6-dimensional diagnostic framework.',
+          '',
+          '**Reflection**:',
+          '- **Pivot courage**: Throwing away months of community-platform work was painful; 151 surveys don\'t lie. Data trumps intuition.',
+          '- **Honesty + encouragement**: Always pair critique with actionable next steps (e.g. "Your Market score is low → Take Market Research Challenge").',
+          '- **Edge cases**: Fallback UI when AI fails; encouraging messaging for low scores; Idea Seeds as scaffolding when users have no starting point.',
+          '- **If I had more time**: Longitudinal study (6 months post-diagnostic); AI model iteration from idea-quality feedback; deeper community features (cautiously); content marketing (Xiaohongshu, Product Hunt).'
         ]
       }
     ]
