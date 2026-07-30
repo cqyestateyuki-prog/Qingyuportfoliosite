@@ -151,42 +151,26 @@ export const sparkup = {
         mainTitle: 'Diagnose → Forge → Validate: One Continuous Journey',
         briefContent: 'Three capabilities, one continuous flow: [[Diagnose]] your readiness, [[Forge]] personalized ideas with AI, and [[Validate]] them through community feedback. Launched on [[Product Hunt]].',
         icon: '🚀',
-        featureDisplayMode: 'side-by-side',
+        featureDisplayMode: 'stacked',
+        // 01/02/03 文字在上、通栏配图在下,逐条交错排列
         features: [
           {
             name: 'AI Readiness Diagnostic',
-            detail: 'Lite (10Q) + Enhanced (30Q+) across 6 dimensions with smart routing. Radar Chart makes strengths and gaps actionable at a glance.'
+            detail: 'Lite (10Q) + Enhanced (30Q+) across 6 dimensions with smart routing. Radar Chart makes strengths and gaps actionable at a glance.',
+            image: '/media/projects/sparkup/final-ignite-dashboard.jpg',
+            imageCaption: 'Diagnostic dashboard: Total Readiness score, 6-dimension radar, and recommended next steps'
           },
           {
             name: 'Spark Forge',
-            detail: 'Set keywords, budget, and scope, optionally drag in an Idea Seed, and AI generates business ideas matched to your diagnostic profile.'
+            detail: 'Set keywords, budget, and scope, optionally drag in an Idea Seed, and AI generates business ideas matched to your diagnostic profile.',
+            image: '/media/projects/sparkup/hero-first-spark.jpg',
+            imageCaption: 'Spark Forge: drag in Idea Seeds, set budget and scope, and let AI forge ideas matched to your profile'
           },
           {
             name: 'Validation & Dashboard',
-            detail: 'Publish ideas to Spark Square for community feedback. Dashboard ties it together: Readiness Score, radar breakdown, Spark Stash, and recommendations.'
-          }
-        ],
-        imageGroups: [
-          {
-            title: 'Final Visuals',
-            displayMode: 'alternating',
-            images: [
-              {
-                src: '/media/projects/sparkup/final-ignite-dashboard.jpg',
-                alt: 'Spark Up diagnostic dashboard with Total Readiness score and radar chart',
-                caption: 'Diagnostic dashboard: Total Readiness score, 6-dimension radar, and recommended next steps'
-              },
-              {
-                src: '/media/projects/sparkup/hero-first-spark.jpg',
-                alt: 'Spark Forge idea bank with draggable Idea Seeds and constraint controls',
-                caption: 'Spark Forge: drag in Idea Seeds, set budget and scope, and let AI forge ideas matched to your profile'
-              },
-              {
-                src: '/media/projects/sparkup/final-spark-card.jpg',
-                alt: 'A generated Spark Card with pain point, AI solution, cost budget, and time investment',
-                caption: 'A generated Spark Card: pain point, AI solution, cost budget, and time investment at a glance'
-              }
-            ]
+            detail: 'Publish ideas to Spark Square for community feedback. Dashboard ties it together: Readiness Score, radar breakdown, Spark Stash, and recommendations.',
+            image: '/media/projects/sparkup/final-spark-card.jpg',
+            imageCaption: 'A generated Spark Card: pain point, AI solution, cost budget, and time investment at a glance'
           }
         ]
       },

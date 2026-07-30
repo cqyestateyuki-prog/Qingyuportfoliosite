@@ -1082,7 +1082,60 @@ const ProjectDetail = () => {
 
             {/* 特性卡片 */}
             {section.features && section.features.length > 0 && (
-              section.featureDisplayMode === 'side-by-side' ? (
+              section.featureDisplayMode === 'stacked' ? (
+                // 上下交错布局:数字+文字在上,通栏大图在下,逐条排列
+                <div className="space-y-16 md:space-y-24 mb-12">
+                  {section.features.map((feature, idx) => (
+                    <div key={idx} className="space-y-6">
+                      <div>
+                        <div
+                          className="text-5xl md:text-6xl font-bold mb-6"
+                          style={{ color: highlightColor }}
+                        >
+                          {(idx + 1).toString().padStart(2, '0')}
+                        </div>
+                        <h3
+                          className="text-2xl md:text-3xl font-bold mb-4"
+                          style={{
+                            color: `var(--detail-heading, ${getProjectDarkColor(rawProject)})`,
+                            fontFamily: "'Poppins', 'Inter', sans-serif"
+                          }}
+                        >
+                          {feature.name}
+                        </h3>
+                        {feature.detail && (
+                          <p className="text-lg text-gray-700 leading-relaxed max-w-3xl">
+                            {feature.detail}
+                          </p>
+                        )}
+                      </div>
+                      {(feature.image || feature.gif) && (
+                        <div>
+                          <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                            <img
+                              src={feature.image || feature.gif}
+                              alt={feature.name}
+                              className="w-full h-auto object-contain cursor-pointer hover:scale-[1.02] transition-transform duration-500"
+                              onClick={() => handleImageClick(
+                                { src: feature.image || feature.gif, alt: feature.name },
+                                section.features.filter(f => f.image || f.gif).map(f => ({
+                                  src: f.image || f.gif,
+                                  alt: f.name
+                                }))
+                              )}
+                            />
+                          </div>
+                          {feature.imageCaption && (
+                            <p className="text-sm text-gray-500 mt-3 text-center italic">
+                              {feature.imageCaption}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : section.featureDisplayMode === 'side-by-side' ? (
                 // 新的左右布局样式：一边是数字和文字，另一边是图片
                 <div className="space-y-16 md:space-y-24 mb-12">
                   {section.features.map((feature, idx) => (
