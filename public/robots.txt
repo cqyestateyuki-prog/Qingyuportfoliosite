@@ -6,4 +6,4 @@ Disallow: /project/hexaedge
 Disallow: /hexaedge-knowledge-graph/
 Disallow: /hexaedge-ui-kit/
 
-Sitemap: https://qingyu-portfolio.vercel.app/sitemap.xml
+Sitemap: https://portfolio.qingyucao.com/sitemap.xml

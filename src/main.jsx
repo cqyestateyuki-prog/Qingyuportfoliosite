@@ -12,6 +12,16 @@ import { LanguageProvider } from './i18n'
 import './index.css'
 import App from './App.jsx'
 
+// 新版本部署后,旧标签页懒加载的 chunk 哈希已失效,服务器回退返回 index.html(text/html),
+// Vite 会派发 vite:preloadError。整页刷新一次拿新构建;30 秒窗口防连环刷新。
+window.addEventListener('vite:preloadError', (event) => {
+  const lastReload = Number(sessionStorage.getItem('chunk-reload-at') || 0)
+  if (Date.now() - lastReload < 30000) return
+  sessionStorage.setItem('chunk-reload-at', String(Date.now()))
+  event.preventDefault()
+  window.location.reload()
+})
+
 // 创建React应用的入口点，将App组件渲染到DOM中
 createRoot(document.getElementById('root')).render(
   <StrictMode>

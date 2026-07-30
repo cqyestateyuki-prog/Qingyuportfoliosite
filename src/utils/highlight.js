@@ -8,3 +8,18 @@ export const preprocessHighlightMarkers = (text) => {
   if (typeof text !== 'string') return text;
   return text.replace(/\[\[([^\]]+)\]\]/g, '**$1**');
 };
+
+// 纯文本场景(塔罗卡简介等):去掉标记只留文字
+export const stripHighlightMarkers = (text) => {
+  if (typeof text !== 'string') return text;
+  return text.replace(/\[\[([^\]]+)\]\]/g, '$1');
+};
+
+// 不走 Markdown 的轻量场景(Showcase 简介行):拆成 {text, highlighted} 段落交给组件上色
+export const splitHighlightSegments = (text) => {
+  if (typeof text !== 'string') return [{ text: text ?? '', highlighted: false }];
+  return text
+    .split(/\[\[([^\]]+)\]\]/g)
+    .map((part, i) => ({ text: part, highlighted: i % 2 === 1 }))
+    .filter((seg) => seg.text);
+};

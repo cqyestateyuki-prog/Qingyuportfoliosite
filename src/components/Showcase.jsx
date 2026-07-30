@@ -16,6 +16,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import MoonIcon from '../hud/MoonIcon';
 import { useLanguage } from '../i18n';
 import { getLocalizedText, getLocalizedArray } from '../utils/localization';
+import { splitHighlightSegments } from '../utils/highlight';
 
 // ============ 3D 倾斜卡片组件 ============
 const TiltCard = ({ children, className = '', max = 8 }) => {
@@ -298,7 +299,17 @@ const Showcase = ({ projects }) => {
                 className="text-base font-light leading-snug line-clamp-2 max-w-2xl"
                 style={{ color: 'var(--text-body)' }}
               >
-                {getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)}
+                {splitHighlightSegments(
+                  getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)
+                ).map((seg, i) =>
+                  seg.highlighted ? (
+                    <span key={i} className="font-normal" style={{ color: 'var(--section-tag)' }}>
+                      {seg.text}
+                    </span>
+                  ) : (
+                    <span key={i}>{seg.text}</span>
+                  )
+                )}
               </p>
               <Link to={`/project/${project.id}`} className="shrink-0">
                 <motion.span

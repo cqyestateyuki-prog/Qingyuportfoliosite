@@ -8,6 +8,7 @@ import HudTabs from '../hud/HudTabs';
 import MoonIcon from '../hud/MoonIcon';
 import { useLanguage } from '../i18n';
 import { getLocalizedText } from '../utils/localization';
+import { stripHighlightMarkers } from '../utils/highlight';
 
 /**
  * Portfolio — 02 WORK 章节
@@ -151,7 +152,7 @@ const Portfolio = () => {
                           className="text-[11px] leading-relaxed line-clamp-2 mb-1.5 font-['Poppins']"
                           style={{ color: 'var(--text-muted)' }}
                         >
-                          {getLocalizedText(project.brief, language)}
+                          {stripHighlightMarkers(getLocalizedText(project.brief, language))}
                         </p>
                         <p
                           className="text-[9px] tracking-[0.2em] uppercase font-['Poppins']"
