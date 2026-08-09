@@ -48,6 +48,26 @@
   a.card:hover .arr{transform:translateX(6px);color:var(--cinnabar)}
   .foot .tagx{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--fade);text-transform:uppercase;white-space:nowrap}
   a.card:hover .tagx{color:var(--cinnabar)}
+  /* ── 视图切换(桌面/手机) ── */
+  .viewbar{display:flex;align-items:center;gap:14px;margin-top:26px}
+  .viewbar .lb{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--fade)}
+  .seg{display:inline-flex;border:1px solid var(--rule);background:var(--raised)}
+  .seg button{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    padding:9px 18px;border:0;background:transparent;color:var(--mute);cursor:pointer;transition:background .2s,color .2s}
+  .seg button + button{border-left:1px solid var(--rule)}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  /* ── 手机机身(纯 CSS, 不用图) ── */
+  .phone{display:none;width:264px;margin:0 auto;position:relative;
+    border:11px solid var(--ink);border-radius:42px;background:var(--ink);
+    box-shadow:0 26px 50px -22px rgba(20,35,58,.55)}
+  .phone .scr{position:relative;overflow:hidden;border-radius:31px;background:#fff;aspect-ratio:390/844}
+  .phone .scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
+  .card:hover .phone .scr img{transform:scale(1.02)}
+  .phone .isl{position:absolute;z-index:2;top:9px;left:50%;transform:translateX(-50%);
+    width:92px;height:24px;border-radius:14px;background:var(--ink)}
+  body[data-view="mobile"] .shot{display:none}
+  body[data-view="mobile"] .phone{display:block}
+  body[data-view="mobile"] .card .pv{padding:30px 30px 30px}
   /* ── page footer ── */
   .end{margin-top:110px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;color:var(--mute);flex-wrap:wrap}
   .end a{color:var(--cinnabar);text-decoration:none}
@@ -63,14 +83,22 @@
 
   <h1>HexaEdge · Screen Overview</h1>
 
+  <div class="viewbar">
+    <span class="lb">View</span>
+    <div class="seg" role="group" aria-label="Viewport">
+      <button type="button" data-view="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" data-view="mobile" aria-pressed="false">Mobile</button>
+    </div>
+  </div>
+
   <div class="sec"><span class="rn">I</span><span class="en">Marketing</span><span class="tg">the front door</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/home-en.jpg" alt="Landing, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/home-en.jpg" alt="Landing, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-home-en.jpg" alt="Landing, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">i</span><span class="nm">Landing &middot; EN</span><span class="ds">marketing home &middot; read the market as weather</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/home-zh.jpg" alt="Landing, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/home-zh.jpg" alt="Landing, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-home-zh.jpg" alt="Landing, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">ii</span><span class="nm">Landing &middot; ZH</span><span class="ds">marketing home &middot; the Chinese original</span><span class="arr">&rarr;</span></div>
     </a>
   </div>
@@ -78,51 +106,51 @@
   <div class="sec"><span class="rn">II</span><span class="en">Core Flow</span><span class="tg">cast, read, ask, keep</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en/hexagram/new" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/cast-wizard-en.jpg" alt="Cast Wizard, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/cast-wizard-en.jpg" alt="Cast Wizard, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-cast-wizard-en.jpg" alt="Cast Wizard, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">iii</span><span class="nm">Cast Wizard &middot; EN</span><span class="ds">three steps &middot; the numbers settle the moment</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/hexagram/new" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/cast-wizard-zh.jpg" alt="Cast Wizard, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/cast-wizard-zh.jpg" alt="Cast Wizard, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-cast-wizard-zh.jpg" alt="Cast Wizard, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">iv</span><span class="nm">Cast Wizard &middot; ZH</span><span class="ds">three steps &middot; the numbers settle the moment</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="shots/market-reading-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/market-reading-en.jpg" alt="Market Reading, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/market-reading-en.jpg" alt="Market Reading, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-market-reading-en.jpg" alt="Market Reading, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">v</span><span class="nm">Market Reading &middot; EN</span><span class="ds">direction, confidence, timing</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/market-reading-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/market-reading-zh.jpg" alt="Market Reading, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/market-reading-zh.jpg" alt="Market Reading, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-market-reading-zh.jpg" alt="Market Reading, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">vi</span><span class="nm">Market Reading &middot; ZH</span><span class="ds">direction, confidence, timing</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/wealth-reading-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/wealth-reading-en.jpg" alt="Wealth Q&amp;A, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/wealth-reading-en.jpg" alt="Wealth Q&amp;A, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-wealth-reading-en.jpg" alt="Wealth Q&amp;A, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">vii</span><span class="nm">Wealth Q&amp;A &middot; EN</span><span class="ds">a mirror, not a verdict</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/wealth-reading-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/wealth-reading-zh.jpg" alt="Wealth Q&amp;A, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/wealth-reading-zh.jpg" alt="Wealth Q&amp;A, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-wealth-reading-zh.jpg" alt="Wealth Q&amp;A, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">viii</span><span class="nm">Wealth Q&amp;A &middot; ZH</span><span class="ds">a mirror, not a verdict</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/followup-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/followup-en.jpg" alt="AI Follow-up, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/followup-en.jpg" alt="AI Follow-up, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-followup-en.jpg" alt="AI Follow-up, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">ix</span><span class="nm">AI Follow-up &middot; EN</span><span class="ds">docked to the reading &middot; ask without leaving it</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/followup-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/followup-zh.jpg" alt="AI Follow-up, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/followup-zh.jpg" alt="AI Follow-up, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-followup-zh.jpg" alt="AI Follow-up, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">x</span><span class="nm">AI Follow-up &middot; ZH</span><span class="ds">docked to the reading &middot; ask without leaving it</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/chat-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/chat-en.jpg" alt="Chat Session, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/chat-en.jpg" alt="Chat Session, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-chat-en.jpg" alt="Chat Session, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xi</span><span class="nm">Chat Session &middot; EN</span><span class="ds">the same thread, full width and kept</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/chat-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/chat-zh.jpg" alt="Chat Session, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/chat-zh.jpg" alt="Chat Session, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-chat-zh.jpg" alt="Chat Session, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xii</span><span class="nm">Chat Session &middot; ZH</span><span class="ds">the same thread, full width and kept</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/history-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/history-en.jpg" alt="History, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/history-en.jpg" alt="History, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-history-en.jpg" alt="History, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xiii</span><span class="nm">History &middot; EN</span><span class="ds">every cast kept, and how it played out</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/history-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/history-zh.jpg" alt="History, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/history-zh.jpg" alt="History, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-history-zh.jpg" alt="History, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xiv</span><span class="nm">History &middot; ZH</span><span class="ds">every cast kept, and how it played out</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
@@ -130,27 +158,27 @@
   <div class="sec"><span class="rn">III</span><span class="en">Knowledge Base</span><span class="tg">built to be found</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en/resources" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/resources-en.jpg" alt="Encyclopedia, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/resources-en.jpg" alt="Encyclopedia, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-resources-en.jpg" alt="Encyclopedia, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xv</span><span class="nm">Encyclopedia &middot; EN</span><span class="ds">all sixty-four hexagrams, indexed</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/resources" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/resources-zh.jpg" alt="Encyclopedia, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/resources-zh.jpg" alt="Encyclopedia, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-resources-zh.jpg" alt="Encyclopedia, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xvi</span><span class="nm">Encyclopedia &middot; ZH</span><span class="ds">all sixty-four hexagrams, indexed</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="shots/hexagram-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/hexagram-en.jpg" alt="Hexagram Entry, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/hexagram-en.jpg" alt="Hexagram Entry, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-hexagram-en.jpg" alt="Hexagram Entry, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xvii</span><span class="nm">Hexagram Entry &middot; EN</span><span class="ds">one hexagram, the whole entry</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/hexagram-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/hexagram-zh.jpg" alt="Hexagram Entry, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/hexagram-zh.jpg" alt="Hexagram Entry, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-hexagram-zh.jpg" alt="Hexagram Entry, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xviii</span><span class="nm">Hexagram Entry &middot; ZH</span><span class="ds">one hexagram, the whole entry</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/liuyao-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/liuyao-en.jpg" alt="Liuyao Overview, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/liuyao-en.jpg" alt="Liuyao Overview, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-liuyao-en.jpg" alt="Liuyao Overview, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xix</span><span class="nm">Liuyao Overview &middot; EN</span><span class="ds">the method, explained end to end</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/liuyao-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/liuyao-zh.jpg" alt="Liuyao Overview, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/liuyao-zh.jpg" alt="Liuyao Overview, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-liuyao-zh.jpg" alt="Liuyao Overview, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xx</span><span class="nm">Liuyao Overview &middot; ZH</span><span class="ds">the method, explained end to end</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
@@ -158,11 +186,11 @@
   <div class="sec"><span class="rn">IV</span><span class="en">Community</span><span class="tg">casts worth passing around</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en/community" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/community-en.jpg" alt="Share Wall, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/community-en.jpg" alt="Share Wall, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-community-en.jpg" alt="Share Wall, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxi</span><span class="nm">Share Wall &middot; EN</span><span class="ds">hexagrams other people put up</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/community" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/community-zh.jpg" alt="Share Wall, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/community-zh.jpg" alt="Share Wall, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-community-zh.jpg" alt="Share Wall, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxii</span><span class="nm">Share Wall &middot; ZH</span><span class="ds">hexagrams other people put up</span><span class="arr">&rarr;</span></div>
     </a>
   </div>
@@ -170,27 +198,27 @@
   <div class="sec"><span class="rn">V</span><span class="en">Commerce &amp; Account</span><span class="tg">where it becomes a product</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en/pricing" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/pricing-en.jpg" alt="Pricing, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/pricing-en.jpg" alt="Pricing, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-pricing-en.jpg" alt="Pricing, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxiii</span><span class="nm">Pricing &middot; EN</span><span class="ds">four tiers, one path</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/pricing" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/pricing-zh.jpg" alt="Pricing, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/pricing-zh.jpg" alt="Pricing, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-pricing-zh.jpg" alt="Pricing, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxiv</span><span class="nm">Pricing &middot; ZH</span><span class="ds">four tiers, one path</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/en/resources/courses" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/courses-en.jpg" alt="Course Center, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/courses-en.jpg" alt="Course Center, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-courses-en.jpg" alt="Course Center, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxv</span><span class="nm">Course Center &middot; EN</span><span class="ds">live cohorts, taught by a person</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/resources/courses" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/courses-zh.jpg" alt="Course Center, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/courses-zh.jpg" alt="Course Center, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-courses-zh.jpg" alt="Course Center, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxvi</span><span class="nm">Course Center &middot; ZH</span><span class="ds">live cohorts, taught by a person</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="shots/settings-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/settings-en.jpg" alt="Settings, English"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/settings-en.jpg" alt="Settings, English"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-settings-en.jpg" alt="Settings, English, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxvii</span><span class="nm">Settings &middot; EN</span><span class="ds">billing, data, and the account</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/settings-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/settings-zh.jpg" alt="Settings, Chinese"></div></div>
+      <div class="pv"><div class="shot"><img loading="lazy" src="shots/settings-zh.jpg" alt="Settings, Chinese"></div><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-settings-zh.jpg" alt="Settings, Chinese, mobile"></div></div></div>
       <div class="foot"><span class="rn">xxviii</span><span class="nm">Settings &middot; ZH</span><span class="ds">billing, data, and the account</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
@@ -201,5 +229,27 @@
   </div>
 
 </div>
+<script>
+  (function () {
+    var body = document.body, segs = document.querySelectorAll('.seg button');
+    // 图片卡的 href 跟着视图走; 跳线上的卡(带 .arr)两个视图都指线上, 不动
+    var imgCards = [].filter.call(document.querySelectorAll('a.card'), function (a) {
+      return /^shots\//.test(a.getAttribute('href') || '');
+    }).map(function (a) {
+      var d = a.getAttribute('href');
+      // 卡片显示的是 mt-(顶部缩略), 点开给整张 m-
+      return { a: a, d: d, m: d.replace(/^shots\//, 'shots/m-') };
+    });
+    function apply(v) {
+      body.dataset.view = v;
+      segs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.view === v)); });
+      imgCards.forEach(function (c) { c.a.setAttribute('href', v === 'mobile' ? c.m : c.d); });
+      try { localStorage.setItem('ykit-view', v); } catch (e) {}
+    }
+    segs.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.view); }); });
+    var saved; try { saved = localStorage.getItem('ykit-view'); } catch (e) {}
+    apply(saved === 'mobile' ? 'mobile' : 'desktop');
+  })();
+</script>
 </body>
 </html>
