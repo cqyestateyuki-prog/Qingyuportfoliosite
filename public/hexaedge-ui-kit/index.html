@@ -20,21 +20,21 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1480px;margin:0 auto;padding:84px 48px 120px}
+  .wrap{max-width:1480px;margin:0 auto;padding:48px 48px 80px}
   /* ── header ── */
   .brand{display:flex;align-items:center;gap:20px}
   .seal{width:58px;height:58px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:30px;font-weight:600}
   .brand .en{font-family:var(--latin);font-style:italic;font-weight:600;font-size:30px;letter-spacing:.01em}
   .brand .cn{font-family:var(--serif);font-size:15px;letter-spacing:.55em;color:var(--mute);margin-top:4px}
-  h1{font-family:var(--latin);font-weight:600;font-size:clamp(48px,5.8vw,84px);letter-spacing:.01em;line-height:1.04;margin-top:52px}
+  h1{font-family:var(--latin);font-weight:600;font-size:clamp(48px,5.8vw,84px);letter-spacing:.01em;line-height:1.04;margin-top:30px}
   /* ── section head ── */
-  .sec{margin-top:96px;display:flex;align-items:baseline;gap:22px;border-bottom:1px solid var(--rule);padding-bottom:16px}
+  .sec{margin-top:52px;display:flex;align-items:baseline;gap:22px;border-bottom:1px solid var(--rule);padding-bottom:16px}
   .sec .rn{font-family:var(--latin);font-style:italic;font-weight:600;font-size:30px;color:var(--cinnabar)}
   .sec .en{font-family:var(--mono);font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
   .sec .tg{font-family:var(--latin);font-style:italic;font-size:22px;color:var(--fade);margin-left:auto}
   /* ── cards: 两列 = 左英右中 ── */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
-  @media (max-width:980px){.grid{grid-template-columns:1fr}.wrap{padding:56px 22px 80px}}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:26px}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}.wrap{padding:36px 22px 60px}}
   .card{display:block;text-decoration:none;color:inherit;background:var(--raised);border:1px solid var(--rule)}
   .card .pv{background:var(--sunken);padding:30px 30px 0;overflow:hidden}
   .card .shot{border:1px solid var(--rule);border-bottom:0;background:#fff;box-shadow:0 22px 44px -20px rgba(20,35,58,.35);overflow:hidden;aspect-ratio:16/10}   /* =1440x900 视口比例: 16/10.6 会让 cover 左右各裁一刀, 啃掉侧栏边缘 */
@@ -49,7 +49,7 @@
   .foot .tagx{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--fade);text-transform:uppercase;white-space:nowrap}
   a.card:hover .tagx{color:var(--cinnabar)}
   /* ── 视图切换(桌面/手机) ── */
-  .viewbar{display:flex;align-items:center;gap:14px;margin-top:26px}
+  .viewbar{display:flex;align-items:center;gap:14px;margin-top:20px}
   .viewbar .lb{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--fade)}
   .seg{display:inline-flex;border:1px solid var(--rule);background:var(--raised)}
   .seg button{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
@@ -69,7 +69,7 @@
   body[data-view="mobile"] .phone{display:block}
   body[data-view="mobile"] .card .pv{padding:30px 30px 30px}
   /* ── page footer ── */
-  .end{margin-top:110px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;color:var(--mute);flex-wrap:wrap}
+  .end{margin-top:70px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;color:var(--mute);flex-wrap:wrap}
   .end a{color:var(--cinnabar);text-decoration:none}
 </style>
 </head>
