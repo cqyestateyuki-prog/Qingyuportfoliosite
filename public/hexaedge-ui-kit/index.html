@@ -26,25 +26,18 @@
   .seal{width:58px;height:58px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:30px;font-weight:600}
   .brand .en{font-family:var(--latin);font-style:italic;font-weight:600;font-size:30px;letter-spacing:.01em}
   .brand .cn{font-family:var(--serif);font-size:15px;letter-spacing:.55em;color:var(--mute);margin-top:4px}
-  .eyebrow{margin-top:56px;font-family:var(--mono);font-size:13px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:14px}
-  .eyebrow::before{content:"";width:36px;height:2px;background:var(--cinnabar)}
-  h1{font-family:var(--latin);font-weight:600;font-size:clamp(48px,5.8vw,84px);letter-spacing:.01em;line-height:1.04;margin-top:18px}
-  .subrow{display:flex;justify-content:space-between;align-items:baseline;gap:40px;margin-top:16px;flex-wrap:wrap}
-  .sub{font-family:var(--latin);font-style:italic;font-size:24px;color:var(--mute)}
-  .meta{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--mute);white-space:nowrap}
-  .meta b{color:var(--ink);font-weight:500}
-  .meta .z{color:var(--cinnabar)} .meta .q{color:var(--indigo)} .meta .j{color:var(--gold)}
+  h1{font-family:var(--latin);font-weight:600;font-size:clamp(48px,5.8vw,84px);letter-spacing:.01em;line-height:1.04;margin-top:52px}
   /* ── section head ── */
   .sec{margin-top:96px;display:flex;align-items:baseline;gap:22px;border-bottom:1px solid var(--rule);padding-bottom:16px}
   .sec .rn{font-family:var(--latin);font-style:italic;font-weight:600;font-size:30px;color:var(--cinnabar)}
   .sec .en{font-family:var(--mono);font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
   .sec .tg{font-family:var(--latin);font-style:italic;font-size:22px;color:var(--fade);margin-left:auto}
-  /* ── cards ── */
+  /* ── cards: 两列 = 左英右中 ── */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
   @media (max-width:980px){.grid{grid-template-columns:1fr}.wrap{padding:56px 22px 80px}}
   .card{display:block;text-decoration:none;color:inherit;background:var(--raised);border:1px solid var(--rule)}
   .card .pv{background:var(--sunken);padding:30px 30px 0;overflow:hidden}
-  .card .shot{border:1px solid var(--rule);border-bottom:0;background:#fff;box-shadow:0 22px 44px -20px rgba(20,35,58,.35);overflow:hidden;aspect-ratio:16/10.6}
+  .card .shot{border:1px solid var(--rule);border-bottom:0;background:#fff;box-shadow:0 22px 44px -20px rgba(20,35,58,.35);overflow:hidden;aspect-ratio:16/10}   /* =1440x900 视口比例: 16/10.6 会让 cover 左右各裁一刀, 啃掉侧栏边缘 */
   .card .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
   .card:hover .shot img{transform:scale(1.025)}
   .foot{display:flex;align-items:baseline;gap:16px;padding:20px 26px;border-top:1px solid var(--rule)}
@@ -68,71 +61,138 @@
     <div><div class="en">HexaEdge</div><div class="cn">点 卦</div></div>
   </div>
 
-  <div class="eyebrow">UI KIT · V1.0 · SCREEN OVERVIEW</div>
   <h1>HexaEdge · Screen Overview</h1>
-  <div class="subrow">
-    <div class="sub">— ten live surfaces of the shipped product, captured full-length</div>
-    <div class="meta"><b>10</b> SCREENS&ensp;·&ensp;PALETTE <span class="z">CINNABAR</span> · <span class="q">PORCELAIN BLUE</span> · <span class="j">GILT GOLD</span></div>
-  </div>
 
-  <!-- I · MARKETING -->
   <div class="sec"><span class="rn">I</span><span class="en">Marketing</span><span class="tg">the front door</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/hero-en.png" alt="Landing page, English"></div></div>
-      <div class="foot"><span class="rn">i</span><span class="nm">Landing · EN</span><span class="ds">marketing home · read the market as weather</span><span class="arr">→</span></div>
+      <div class="pv"><div class="shot"><img src="shots/home-en.jpg" alt="Landing, English"></div></div>
+      <div class="foot"><span class="rn">i</span><span class="nm">Landing &middot; EN</span><span class="ds">marketing home &middot; read the market as weather</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="https://hexaedge.vercel.app/" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/hero-zh.png" alt="Landing page, Chinese"></div></div>
-      <div class="foot"><span class="rn">ii</span><span class="nm">Landing · ZH</span><span class="ds">marketing home · the Chinese original</span><span class="arr">→</span></div>
+      <div class="pv"><div class="shot"><img src="shots/home-zh.jpg" alt="Landing, Chinese"></div></div>
+      <div class="foot"><span class="rn">ii</span><span class="nm">Landing &middot; ZH</span><span class="ds">marketing home &middot; the Chinese original</span><span class="arr">&rarr;</span></div>
     </a>
   </div>
 
-  <!-- II · CORE FLOW -->
-  <div class="sec"><span class="rn">II</span><span class="en">Core Flow</span><span class="tg">cast, then read</span></div>
+  <div class="sec"><span class="rn">II</span><span class="en">Core Flow</span><span class="tg">cast, read, ask, keep</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en/hexagram/new" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="shots/cast-wizard-en.jpg" alt="Casting wizard"></div></div>
-      <div class="foot"><span class="rn">iii</span><span class="nm">Cast Wizard</span><span class="ds">three steps · the numbers settle the moment</span><span class="arr">→</span></div>
+      <div class="pv"><div class="shot"><img src="shots/cast-wizard-en.jpg" alt="Cast Wizard, English"></div></div>
+      <div class="foot"><span class="rn">iii</span><span class="nm">Cast Wizard &middot; EN</span><span class="ds">three steps &middot; the numbers settle the moment</span><span class="arr">&rarr;</span></div>
+    </a>
+    <a class="card" href="https://hexaedge.vercel.app/hexagram/new" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/cast-wizard-zh.jpg" alt="Cast Wizard, Chinese"></div></div>
+      <div class="foot"><span class="rn">iv</span><span class="nm">Cast Wizard &middot; ZH</span><span class="ds">three steps &middot; the numbers settle the moment</span><span class="arr">&rarr;</span></div>
     </a>
     <a class="card" href="shots/market-reading-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/result-market.png" alt="Market reading result"></div></div>
-      <div class="foot"><span class="rn">iv</span><span class="nm">Market Reading</span><span class="ds">direction, confidence, timing</span><span class="tagx">full page ↗</span></div>
+      <div class="pv"><div class="shot"><img src="shots/market-reading-en.jpg" alt="Market Reading, English"></div></div>
+      <div class="foot"><span class="rn">v</span><span class="nm">Market Reading &middot; EN</span><span class="ds">direction, confidence, timing</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/market-reading-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/market-reading-zh.jpg" alt="Market Reading, Chinese"></div></div>
+      <div class="foot"><span class="rn">vi</span><span class="nm">Market Reading &middot; ZH</span><span class="ds">direction, confidence, timing</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/wealth-reading-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/result-personal.png" alt="Personal wealth reading"></div></div>
-      <div class="foot"><span class="rn">v</span><span class="nm">Wealth Q&amp;A</span><span class="ds">a mirror, not a verdict</span><span class="tagx">full page ↗</span></div>
+      <div class="pv"><div class="shot"><img src="shots/wealth-reading-en.jpg" alt="Wealth Q&amp;A, English"></div></div>
+      <div class="foot"><span class="rn">vii</span><span class="nm">Wealth Q&amp;A &middot; EN</span><span class="ds">a mirror, not a verdict</span><span class="tagx">full page ↗</span></div>
     </a>
-    <a class="card" href="assets/reading-board.png" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/reading-board.png" alt="Diviner's board"></div></div>
-      <div class="foot"><span class="rn">vi</span><span class="nm">Diviner&rsquo;s Board</span><span class="ds">the engine, laid open</span><span class="tagx">full page ↗</span></div>
+    <a class="card" href="shots/wealth-reading-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/wealth-reading-zh.jpg" alt="Wealth Q&amp;A, Chinese"></div></div>
+      <div class="foot"><span class="rn">viii</span><span class="nm">Wealth Q&amp;A &middot; ZH</span><span class="ds">a mirror, not a verdict</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/followup-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/followup-en.jpg" alt="AI Follow-up, English"></div></div>
+      <div class="foot"><span class="rn">ix</span><span class="nm">AI Follow-up &middot; EN</span><span class="ds">docked to the reading &middot; ask without leaving it</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/followup-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/followup-zh.jpg" alt="AI Follow-up, Chinese"></div></div>
+      <div class="foot"><span class="rn">x</span><span class="nm">AI Follow-up &middot; ZH</span><span class="ds">docked to the reading &middot; ask without leaving it</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/chat-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/chat-en.jpg" alt="Chat Session, English"></div></div>
+      <div class="foot"><span class="rn">xi</span><span class="nm">Chat Session &middot; EN</span><span class="ds">the same thread, full width and kept</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/chat-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/chat-zh.jpg" alt="Chat Session, Chinese"></div></div>
+      <div class="foot"><span class="rn">xii</span><span class="nm">Chat Session &middot; ZH</span><span class="ds">the same thread, full width and kept</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/history-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/history-en.jpg" alt="History, English"></div></div>
+      <div class="foot"><span class="rn">xiii</span><span class="nm">History &middot; EN</span><span class="ds">every cast kept, and how it played out</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/history-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/history-zh.jpg" alt="History, Chinese"></div></div>
+      <div class="foot"><span class="rn">xiv</span><span class="nm">History &middot; ZH</span><span class="ds">every cast kept, and how it played out</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
 
-  <!-- III · DAILY & LEARN -->
-  <div class="sec"><span class="rn">III</span><span class="en">Daily &amp; Learn</span><span class="tg">reasons to return</span></div>
+  <div class="sec"><span class="rn">III</span><span class="en">Knowledge Base</span><span class="tg">built to be found</span></div>
   <div class="grid">
-    <a class="card" href="shots/fortune-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/fortune.png" alt="Daily fortune"></div></div>
-      <div class="foot"><span class="rn">vii</span><span class="nm">Daily Fortune</span><span class="ds">a rating for today, a curve for the week</span><span class="tagx">full page ↗</span></div>
-    </a>
     <a class="card" href="https://hexaedge.vercel.app/en/resources" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/encyclopedia.png" alt="Hexagram encyclopedia"></div></div>
-      <div class="foot"><span class="rn">viii</span><span class="nm">Encyclopedia</span><span class="ds">all sixty-four hexagrams, explained</span><span class="arr">→</span></div>
+      <div class="pv"><div class="shot"><img src="shots/resources-en.jpg" alt="Encyclopedia, English"></div></div>
+      <div class="foot"><span class="rn">xv</span><span class="nm">Encyclopedia &middot; EN</span><span class="ds">all sixty-four hexagrams, indexed</span><span class="arr">&rarr;</span></div>
+    </a>
+    <a class="card" href="https://hexaedge.vercel.app/resources" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/resources-zh.jpg" alt="Encyclopedia, Chinese"></div></div>
+      <div class="foot"><span class="rn">xvi</span><span class="nm">Encyclopedia &middot; ZH</span><span class="ds">all sixty-four hexagrams, indexed</span><span class="arr">&rarr;</span></div>
+    </a>
+    <a class="card" href="shots/hexagram-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/hexagram-en.jpg" alt="Hexagram Entry, English"></div></div>
+      <div class="foot"><span class="rn">xvii</span><span class="nm">Hexagram Entry &middot; EN</span><span class="ds">one hexagram, the whole entry</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/hexagram-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/hexagram-zh.jpg" alt="Hexagram Entry, Chinese"></div></div>
+      <div class="foot"><span class="rn">xviii</span><span class="nm">Hexagram Entry &middot; ZH</span><span class="ds">one hexagram, the whole entry</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/liuyao-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/liuyao-en.jpg" alt="Liuyao Overview, English"></div></div>
+      <div class="foot"><span class="rn">xix</span><span class="nm">Liuyao Overview &middot; EN</span><span class="ds">the method, explained end to end</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/liuyao-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/liuyao-zh.jpg" alt="Liuyao Overview, Chinese"></div></div>
+      <div class="foot"><span class="rn">xx</span><span class="nm">Liuyao Overview &middot; ZH</span><span class="ds">the method, explained end to end</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
 
-  <!-- IV · COMMERCE & SHARE -->
-  <div class="sec"><span class="rn">IV</span><span class="en">Commerce &amp; Share</span><span class="tg">pay, and pass it on</span></div>
+  <div class="sec"><span class="rn">IV</span><span class="en">Community</span><span class="tg">casts worth passing around</span></div>
+  <div class="grid">
+    <a class="card" href="https://hexaedge.vercel.app/en/community" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/community-en.jpg" alt="Share Wall, English"></div></div>
+      <div class="foot"><span class="rn">xxi</span><span class="nm">Share Wall &middot; EN</span><span class="ds">hexagrams other people put up</span><span class="arr">&rarr;</span></div>
+    </a>
+    <a class="card" href="https://hexaedge.vercel.app/community" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/community-zh.jpg" alt="Share Wall, Chinese"></div></div>
+      <div class="foot"><span class="rn">xxii</span><span class="nm">Share Wall &middot; ZH</span><span class="ds">hexagrams other people put up</span><span class="arr">&rarr;</span></div>
+    </a>
+  </div>
+
+  <div class="sec"><span class="rn">V</span><span class="en">Commerce &amp; Account</span><span class="tg">where it becomes a product</span></div>
   <div class="grid">
     <a class="card" href="https://hexaedge.vercel.app/en/pricing" target="_blank" rel="noopener">
-      <div class="pv"><div class="shot"><img src="assets/pricing.png" alt="Pricing tiers"></div></div>
-      <div class="foot"><span class="rn">ix</span><span class="nm">Pricing</span><span class="ds">four tiers, one path</span><span class="arr">→</span></div>
+      <div class="pv"><div class="shot"><img src="shots/pricing-en.jpg" alt="Pricing, English"></div></div>
+      <div class="foot"><span class="rn">xxiii</span><span class="nm">Pricing &middot; EN</span><span class="ds">four tiers, one path</span><span class="arr">&rarr;</span></div>
     </a>
-    <div class="card">
-      <div class="pv"><div class="shot"><img src="assets/share-card-market.png" alt="Share card export"></div></div>
-      <div class="foot"><span class="rn">x</span><span class="nm">Share Card</span><span class="ds">the reading, exportable</span><span class="tagx">export artifact</span></div>
-    </div>
+    <a class="card" href="https://hexaedge.vercel.app/pricing" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/pricing-zh.jpg" alt="Pricing, Chinese"></div></div>
+      <div class="foot"><span class="rn">xxiv</span><span class="nm">Pricing &middot; ZH</span><span class="ds">four tiers, one path</span><span class="arr">&rarr;</span></div>
+    </a>
+    <a class="card" href="https://hexaedge.vercel.app/en/resources/courses" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/courses-en.jpg" alt="Course Center, English"></div></div>
+      <div class="foot"><span class="rn">xxv</span><span class="nm">Course Center &middot; EN</span><span class="ds">live cohorts, taught by a person</span><span class="arr">&rarr;</span></div>
+    </a>
+    <a class="card" href="https://hexaedge.vercel.app/resources/courses" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/courses-zh.jpg" alt="Course Center, Chinese"></div></div>
+      <div class="foot"><span class="rn">xxvi</span><span class="nm">Course Center &middot; ZH</span><span class="ds">live cohorts, taught by a person</span><span class="arr">&rarr;</span></div>
+    </a>
+    <a class="card" href="shots/settings-en.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/settings-en.jpg" alt="Settings, English"></div></div>
+      <div class="foot"><span class="rn">xxvii</span><span class="nm">Settings &middot; EN</span><span class="ds">billing, data, and the account</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/settings-zh.jpg" target="_blank" rel="noopener">
+      <div class="pv"><div class="shot"><img src="shots/settings-zh.jpg" alt="Settings, Chinese"></div></div>
+      <div class="foot"><span class="rn">xxviii</span><span class="nm">Settings &middot; ZH</span><span class="ds">billing, data, and the account</span><span class="tagx">full page ↗</span></div>
+    </a>
   </div>
 
   <div class="end">
