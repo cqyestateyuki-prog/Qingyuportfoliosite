@@ -8,16 +8,15 @@ import HudTabs from '../hud/HudTabs';
 import MoonIcon from '../hud/MoonIcon';
 import { useLanguage } from '../i18n';
 import { getLocalizedText } from '../utils/localization';
-import { stripHighlightMarkers } from '../utils/highlight';
+import Media from './Media';
+import { thumbSrc } from '../utils/thumbs';
 
 /**
  * Portfolio — 02 WORK 章节
  *
- * Selected Work(Showcase)+ 塔罗牌阵档案库(More Projects):
- * 每个项目是一张横版塔罗牌,流式居中排布,hover 抽出端正 + 翻出简介
+ * Selected Work(Showcase 碎裂式大卡)+ Passion Projects(纯图卡片):
+ * 下半区每个项目就是一张图,统一 16:10 流式居中,hover 才浮出名字和年份
  */
-
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX'];
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -97,76 +96,50 @@ const Portfolio = () => {
         </div>
 
         <div className="max-w-7xl mx-auto pb-12">
-          <motion.div layout className="flex flex-wrap justify-center gap-6 md:gap-8">
+          {/* 切分类时别再叠 FLIP 了:这一屏同时还挂着上面碎片墙的四十多个格子,
+              每格五层绝对定位,加上全屏 WebGL,主线程已经很紧。
+              外层容器的 layout 去掉(容器高度补间没什么可看的),
+              卡片只留 opacity + 位移,hover 交给 CSS 走合成层。 */}
+          <motion.div className="flex flex-wrap justify-center gap-6 md:gap-8">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project) => (
                 <motion.div
                   layout
                   key={project.id}
-                  initial={{ opacity: 0, y: 32 }}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  whileHover={{ y: -10, scale: 1.03, zIndex: 40 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
                   className="relative"
                 >
+                  {/* 纯图卡片:平时只有图,名字和年份 hover 才浮出。
+                      统一 16:10 裁切 —— 这批图 1.50~1.88 比例不一,
+                      16:10 居中,平均裁得最少 */}
                   <Link
                     to={`/project/${project.id}`}
                     onClick={() => handleProjectClick(project)}
                     aria-label={getLocalizedText(project.title, language)}
-                    className="tarot-card group block w-[92vw] max-w-[380px] md:w-[380px] rounded-2xl overflow-hidden backdrop-blur-md"
-                    style={{ background: 'var(--card-glass-bg)' }}
+                    className="passion-card group block w-[92vw] max-w-[400px] md:w-[400px] aspect-[16/10] rounded-2xl overflow-hidden relative"
                   >
-                    {/* 牌框:外缘留白 + 内细线框,塔罗双框 */}
-                    <div
-                      className="m-2 rounded-xl flex flex-col"
-                      style={{ border: '1px solid var(--hud-line)' }}
-                    >
-                      {/* 牌首:✦ 罗马数字 ✦ */}
-                      <p
-                        className="text-center text-[11px] tracking-[0.35em] py-2 font-['Poppins']"
-                        style={{ color: 'var(--hud-fg-muted)' }}
+                    <Media
+                      src={thumbSrc(project.thumbnail || project.heroImage)}
+                      alt={getLocalizedText(project.title, language)}
+                      className="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-[1.06]"
+                    />
+
+                    <div className="passion-meta">
+                      <h3
+                        className="text-[15px] leading-snug font-['Tenor_Sans'] mb-1"
+                        style={{ color: '#fff' }}
                       >
-                        ✦ {ROMAN[index] || index + 1} ✦
+                        {getLocalizedText(project.title, language)}
+                      </h3>
+                      <p
+                        className="text-[9px] tracking-[0.22em] uppercase font-['Poppins']"
+                        style={{ color: 'rgba(255,255,255,0.7)' }}
+                      >
+                        {[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).join(' · ')}
                       </p>
-
-                      {/* 牌面图(16:10 横幅,object-contain 完整显示不裁切) */}
-                      <div className="relative mx-2 rounded-lg overflow-hidden aspect-[16/10]">
-                        <img
-                          src={project.thumbnail || project.heroImage}
-                          alt=""
-                          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                      </div>
-
-                      {/* 牌名 + 简介(常显)+ 年份/类别 */}
-                      <div className="px-3 pt-2.5 pb-2.5 text-center">
-                        <h3
-                          className="text-[15px] leading-snug font-['Tenor_Sans'] mb-1 line-clamp-1"
-                          style={{ color: 'var(--text-hero)' }}
-                        >
-                          {getLocalizedText(project.title, language)}
-                        </h3>
-                        <p
-                          className="text-[11px] leading-relaxed line-clamp-2 mb-1.5 font-['Poppins']"
-                          style={{ color: 'var(--text-muted)' }}
-                        >
-                          {stripHighlightMarkers(getLocalizedText(project.brief, language))}
-                        </p>
-                        <p
-                          className="text-[9px] tracking-[0.2em] uppercase font-['Poppins']"
-                          style={{ color: 'var(--section-tag)' }}
-                        >
-                          {[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).join(' · ')}
-                        </p>
-                        {/* 牌脚饰线 */}
-                        <div className="flex items-center justify-center gap-1.5 mt-1.5" aria-hidden="true">
-                          <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
-                          <MoonIcon size={8} style={{ color: 'var(--hud-fg-muted)' }} />
-                          <span className="h-px w-6" style={{ background: 'var(--hud-line)' }} />
-                        </div>
-                      </div>
                     </div>
                   </Link>
                 </motion.div>

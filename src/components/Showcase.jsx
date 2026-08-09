@@ -1,22 +1,23 @@
 /**
  * Showcase Component
- * 
- * Featured 项目展示区域，采用极简高端设计风格
- * - 交替左右布局
- * - 3D 倾斜悬停效果
+ *
+ * Featured 项目展示区域,采用极简高端设计风格
+ * - 整块 hero 点击碎裂成案例页卡片墙(ShatterGrid)
+ * - 3D 倾斜悬停效果(仅折叠态,展开后关掉,否则读碎片很晕)
  * - 精简的标签展示
- * 
+ *
  * @param {Array} projects - Featured 项目列表
  */
 
-import { useState, useRef, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 import MoonIcon from '../hud/MoonIcon';
 import { useLanguage } from '../i18n';
-import { getLocalizedText, getLocalizedArray } from '../utils/localization';
+import { getLocalizedText } from '../utils/localization';
 import { splitHighlightSegments } from '../utils/highlight';
+import ShatterGrid from './ShatterGrid';
+import { countProjectPages } from '../utils/projectSlides';
 
 // ============ 3D 倾斜卡片组件 ============
 const TiltCard = ({ children, className = '', max = 8 }) => {
@@ -47,6 +48,9 @@ const TiltCard = ({ children, className = '', max = 8 }) => {
     y.set(0.5);
   };
 
+  const enabled = max > 0;
+  const active = isHovered && enabled;
+
   return (
     <motion.div
       ref={ref}
@@ -55,10 +59,12 @@ const TiltCard = ({ children, className = '', max = 8 }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX: isHovered ? rotateX : 0,
-        rotateY: isHovered ? rotateY : 0,
-        transformStyle: 'preserve-3d',
-        perspective: 1000,
+        rotateX: active ? rotateX : 0,
+        rotateY: active ? rotateY : 0,
+        // 关掉倾斜时必须连 3D 上下文一起关:preserve-3d 里套十几个各自带
+        // transform 的碎片,Chrome 会画不出靠后的几行(整行空白但 DOM 一切正常)
+        transformStyle: enabled ? 'preserve-3d' : 'flat',
+        perspective: enabled ? 1000 : 'none',
       }}
     >
       {children}
@@ -85,148 +91,28 @@ const ReelItem = ({ children }) => {
   );
 };
 
-// ============ 同框快翻画廊 ============
-// 主项目卡内浏览内容图(hero + 案例的全部章节图):
-// 鼠标悬在图上滚动 = 左右翻页;翻到头继续滚 = 放行页面滚到下一个项目
-// 一次只渲染当前那张(key={idx} + lazy),所以不截断也不会一次性加载所有图
-const ProjectGallery = ({ project, language }) => {
-  const images = useMemo(() => {
-    const list = [project.heroImage || project.thumbnail];
-    project.sections?.forEach((s) => {
-      s.images?.forEach((img) => img?.src && list.push(img.src));
-      s.imageGroups?.forEach((g) => g.images?.forEach((img) => img?.src && list.push(img.src)));
-    });
-    return [...new Set(list.filter(Boolean))];
-  }, [project]);
-
-  const [[idx, dir], setSlide] = useState([0, 0]);
-  const boxRef = useRef(null);
-  const idxRef = useRef(0);
-  const wheelLockRef = useRef(0);
-  idxRef.current = idx;
-
-  const go = (d) => (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setSlide(([i]) => [(i + d + images.length) % images.length, d]);
-  };
-
-  // 滚轮翻页(非 passive 才能拦截页面滚动;React 合成 wheel 是 passive 的)
-  useEffect(() => {
-    const el = boxRef.current;
-    if (!el || images.length <= 1) return undefined;
-    const onWheel = (e) => {
-      // 触控板横滑优先,普通滚轮用纵向
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (delta === 0) return;
-      const forward = delta > 0;
-      const i = idxRef.current;
-      // 边界:不拦截,放行页面滚动去下一个项目
-      if (forward ? i >= images.length - 1 : i <= 0) return;
-      e.preventDefault();
-      const now = Date.now();
-      if (now - wheelLockRef.current < 550) return;
-      wheelLockRef.current = now;
-      setSlide([i + (forward ? 1 : -1), forward ? 1 : -1]);
-    };
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, [images.length]);
-
-  const slideVariants = {
-    enter: (d) => ({ x: d > 0 ? '38%' : d < 0 ? '-38%' : 0, opacity: 0, scale: 1.04 }),
-    center: { x: 0, opacity: 1, scale: 1 },
-    exit: (d) => ({ x: d > 0 ? '-30%' : '30%', opacity: 0, scale: 0.98 }),
-  };
-
-  return (
-    <div
-      ref={boxRef}
-      className="relative rounded-2xl overflow-hidden shadow-xl transition-shadow duration-500 group-hover:shadow-2xl"
-      style={{
-        aspectRatio: '16/9',
-        background: project.colors?.heroGradient || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      }}
-    >
-      <AnimatePresence initial={false} custom={dir} mode="popLayout">
-        <motion.img
-          key={idx}
-          src={images[idx]}
-          alt={getLocalizedText(project.title, language)}
-          custom={dir}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-        />
-      </AnimatePresence>
-
-      {/* 悬停遮罩 */}
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
-
-      {images.length > 1 && (
-        <>
-          {/* 左右快翻箭头(桌面 hover 浮现,触屏常显) */}
-          {[
-            { d: -1, side: 'left-3', Icon: ChevronLeft, label: 'Previous image' },
-            { d: 1, side: 'right-3', Icon: ChevronRight, label: 'Next image' },
-          ].map(({ d, side, Icon, label }) => (
-            <button
-              key={side}
-              type="button"
-              onClick={go(d)}
-              onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
-              aria-label={label}
-              className={`absolute ${side} top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:scale-110 md:opacity-0 md:group-hover:opacity-100`}
-              style={{
-                background: 'rgba(16, 12, 32, 0.45)',
-                border: '1px solid rgba(255, 255, 255, 0.25)',
-                color: 'rgba(255, 255, 255, 0.9)',
-              }}
-            >
-              <Icon size={18} />
-            </button>
-          ))}
-
-          {/* HUD 计数读数 */}
-          <span
-            className="absolute top-3 right-3 z-10 px-2 py-0.5 rounded text-[10px] tracking-[0.25em] tabular-nums font-['Poppins'] backdrop-blur-sm md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: 'rgba(16, 12, 32, 0.45)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              color: 'rgba(255, 255, 255, 0.85)',
-            }}
-          >
-            {String(idx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')} ⇅
-          </span>
-
-          {/* 进度圆点 */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
-            {images.map((_, i) => (
-              <span
-                key={i}
-                className="rounded-full transition-all duration-300"
-                style={{
-                  width: i === idx ? 16 : 5,
-                  height: 5,
-                  background: i === idx ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)',
-                }}
-              />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
-
 // ============ 主组件 ============
 const Showcase = ({ projects }) => {
   const { t, language } = useLanguage();
-  
+  const navigate = useNavigate();
+
+  // 首个项目默认摊开:既示范了「这里能点开」,访客也不至于滑过一整屏只看到几张封面
+  const [expandedIds, setExpandedIds] = useState(() => {
+    const first = projects?.[0]?.id;
+    return new Set(first ? [first] : []);
+  });
+  // 每个项目当前翻到第几页(九格一页)
+  const [pages, setPages] = useState({});
+
+  const toggle = (id, next) => {
+    setExpandedIds((prev) => {
+      const s = new Set(prev);
+      if (next) s.add(id);
+      else s.delete(id);
+      return s;
+    });
+  };
+
   if (!projects || projects.length === 0) return null;
 
   return (
@@ -245,85 +131,147 @@ const Showcase = ({ projects }) => {
       </div>
 
       <div className="max-w-7xl mx-auto space-y-28 relative" style={{ perspective: '1200px' }}>
-        {projects.map((project, index) => (
-          <ReelItem key={project.id}>
-          <motion.div
-            initial={{ opacity: 0, y: 48 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ type: 'spring', stiffness: 180, damping: 22, delay: index * 0.05 }}
-            className="feature-panel"
-          >
-            {/* ====== 抬头:类别标签 + 项目标题 + 年份 chips ====== */}
-            <div className="flex flex-wrap items-end justify-between gap-3 mb-6 font-['Poppins']">
-              <div>
-                <p
-                  className="text-[11px] font-medium tracking-[0.3em] uppercase mb-2"
-                  style={{ color: 'var(--section-tag)' }}
-                >
-                  ✦ {getLocalizedText(project.domain?.[0], language) || project.categories?.[0]}
-                </p>
-                <h3
-                  className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight"
-                  style={{ color: 'var(--text-hero)' }}
-                >
-                  {getLocalizedText(project.title, language)}
-                </h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).map((chip) => (
-                  <span
-                    key={chip}
-                    className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider"
-                    style={{
-                      backgroundColor: 'color-mix(in srgb, var(--hud-glow) 35%, transparent)',
-                      color: 'var(--text-accent)',
-                    }}
-                  >
-                    {chip}
-                  </span>
-                ))}
-              </div>
-            </div>
+        {projects.map((project, index) => {
+          const isExpanded = expandedIds.has(project.id);
+          // 线上版入口:优先 primary,否则拿第一个
+          const btns = project.overview?.buttons || [];
+          const liveLink = btns.find((b) => b.type === 'primary') || btns[0] || null;
+          const totalPages = countProjectPages(project, language);
+          const page = Math.min(pages[project.id] || 0, totalPages - 1);
+          const turnPage = (d) =>
+            setPages((prev) => ({
+              ...prev,
+              [project.id]: (page + d + totalPages) % totalPages,
+            }));
 
-            {/* ====== 通栏大图画廊(16:9,滚轮/箭头翻页) ====== */}
-            <Link to={`/project/${project.id}`} className="block">
-              <TiltCard max={4} className="relative group cursor-pointer">
-                <ProjectGallery project={project} language={language} />
-              </TiltCard>
-            </Link>
-
-            {/* ====== 底行:简介 + View Project ====== */}
-            <div className="mt-6 flex flex-col md:flex-row md:items-center justify-between gap-3 font-['Poppins']">
-              <p
-                className="text-base font-light leading-snug line-clamp-2 max-w-2xl"
-                style={{ color: 'var(--text-body)' }}
+          return (
+            <ReelItem key={project.id}>
+              <motion.div
+                initial={{ opacity: 0, y: 48 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ type: 'spring', stiffness: 180, damping: 22, delay: index * 0.05 }}
+                className="feature-panel"
               >
-                {splitHighlightSegments(
-                  getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)
-                ).map((seg, i) =>
-                  seg.highlighted ? (
-                    <span key={i} className="font-normal" style={{ color: 'var(--section-tag)' }}>
-                      {seg.text}
-                    </span>
-                  ) : (
-                    <span key={i}>{seg.text}</span>
-                  )
-                )}
-              </p>
-              <Link to={`/project/${project.id}`} className="shrink-0">
-                <motion.span
-                  whileHover={{ x: 4 }}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium tracking-[0.15em] uppercase transition-colors"
-                  style={{ color: 'var(--section-tag)' }}
-                >
-                  {t('portfolio.viewProject')} <span aria-hidden="true">→</span>
-                </motion.span>
-              </Link>
-            </div>
-          </motion.div>
-          </ReelItem>
-        ))}
+                {/* ====== 抬头:标题 + 一排标签(左) / 线上版入口(右) ====== */}
+                <div className="flex flex-wrap items-end justify-between gap-3 mb-6 font-['Poppins']">
+                  <div>
+                    {/* 领域和年份/类别做成同一种 chip 排在一起,读起来是一串定位信息。
+                        2026-08-08 用户: 标签放标题上面 (eyebrow 式 — 先定位, 后名字) */}
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {[
+                        getLocalizedText(project.domain?.[0], language),
+                        project.year,
+                        ...(project.categories || []).slice(0, 2),
+                      ]
+                        .filter(Boolean)
+                        .map((chip) => (
+                          <span
+                            key={chip}
+                            className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider"
+                            style={{
+                              backgroundColor: 'color-mix(in srgb, var(--hud-glow) 35%, transparent)',
+                              color: 'var(--text-accent)',
+                            }}
+                          >
+                            {chip}
+                          </span>
+                        ))}
+                    </div>
+                    <Link to={`/project/${project.id}`}>
+                      <h3
+                        className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight transition-opacity hover:opacity-70"
+                        style={{ color: 'var(--text-hero)' }}
+                      >
+                        {getLocalizedText(project.title, language)}
+                      </h3>
+                    </Link>
+                  </div>
+
+                  {/* 线上跑着的版本。只有配了 overview.buttons 的项目才有,没有就空着 */}
+                  {liveLink && (
+                    <a
+                      href={liveLink.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="live-link shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium uppercase tracking-[0.18em]"
+                    >
+                      {liveLink.label}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
+                </div>
+
+                {/* ====== 整块 hero → 点击碎成案例页卡片墙 ====== */}
+                {/* 外层不能包 Link:一点就跳走,展开永远触发不了。进详情页走标题和下面的箭头 */}
+                <TiltCard max={isExpanded ? 0 : 4} className="relative">
+                  <ShatterGrid
+                    project={project}
+                    language={language}
+                    expanded={isExpanded}
+                    page={page}
+                    onToggle={(next) => toggle(project.id, next)}
+                    onTileClick={() => navigate(`/project/${project.id}`)}
+                  />
+                </TiltCard>
+
+                {/* ====== 底行:简介 + View Project ====== */}
+                <div className="mt-6 flex flex-col md:flex-row md:items-center justify-between gap-3 font-['Poppins']">
+                  <p
+                    className="text-base font-light leading-snug line-clamp-2 max-w-2xl"
+                    style={{ color: 'var(--text-body)' }}
+                  >
+                    {splitHighlightSegments(
+                      getLocalizedText(project.brief, language) || getLocalizedText(project.subtitle, language)
+                    ).map((seg, i) =>
+                      seg.highlighted ? (
+                        <span key={i} className="font-normal" style={{ color: 'var(--section-tag)' }}>
+                          {seg.text}
+                        </span>
+                      ) : (
+                        <span key={i}>{seg.text}</span>
+                      )
+                    )}
+                  </p>
+                  <div className="flex items-center gap-6 shrink-0">
+                    {/* 翻页:一页九格,剩下的缩略图在后面几页。只有一页的项目不显示 */}
+                    {isExpanded && totalPages > 1 && (
+                      <div className="shatter-pager flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => turnPage(-1)}
+                          aria-label="上一页缩略图"
+                        >
+                          ‹
+                        </button>
+                        <span className="pager-count tabular-nums">
+                          {String(page + 1).padStart(2, '0')} / {String(totalPages).padStart(2, '0')}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => turnPage(1)}
+                          aria-label="下一页缩略图"
+                        >
+                          ›
+                        </button>
+                      </div>
+                    )}
+
+                    <Link to={`/project/${project.id}`}>
+                      <motion.span
+                        whileHover={{ x: 4 }}
+                        className="inline-flex items-center gap-1.5 text-sm font-medium tracking-[0.15em] uppercase transition-colors"
+                        style={{ color: 'var(--section-tag)' }}
+                      >
+                        {t('portfolio.viewProject')} <span aria-hidden="true">→</span>
+                      </motion.span>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            </ReelItem>
+          );
+        })}
       </div>
     </div>
   );

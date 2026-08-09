@@ -168,21 +168,466 @@ html:not(.dark) .cosmos-canvas-el {
 /* Featured 项目面板:双主题透明,融入背景 */
 .feature-panel {
   border-radius: 28px;
+  /* 这里曾经加过 content-visibility: auto 来省视口外的渲染,
+     但它带来的 paint containment 会把内部的命中测试一并裁掉 ——
+     即使整块就在视口里,九宫格的每一格也点不动了(elementFromPoint
+     只能命中 .feature-panel 本身)。性能收益换不来一个点不了的画廊。 */
 }
 
-/* ---- 塔罗牌阵档案库 ---- */
-.tarot-card {
+/* ---- 碎裂式项目展示(ShatterGrid) ---- */
+/* 折叠态每格是 hero 的一块切片,gap 为 0 拼成完整一张;展开后飞散并换成案例页。
+   所有格子始终在 DOM 里,只切 CSS —— 增删节点会让浏览器翻译插件崩掉整棵树。 */
+.shatter {
+  --col-gap: 14px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  aspect-ratio: var(--shatter-collapsed);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    aspect-ratio 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+    gap 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.5s ease,
+    box-shadow 0.5s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+}
+
+.shatter[data-expanded="1"] {
+  aspect-ratio: var(--shatter-expanded);
+  /* 这里的 gap 是行间距(容器是纵向 flex),列间距在 .shatter-row 上。
+     上下比左右松一点:横向本来就有卡片自身的宽度撑着,纵向不留够会挤成一片 */
+  gap: 22px;
+  border-radius: 0;
+  overflow: visible;
+  cursor: default;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.shatter-row {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+  transition: gap 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shatter[data-expanded="1"] .shatter-row {
+  gap: var(--col-gap);
+  /* 最后一行不满时居中,而不是把那一两格拉宽填满 */
+  justify-content: center;
+}
+
+/* 展开态格宽写死成「一列」,不再 flex:1 均分。
+   否则不满的行会把格子撑大 —— 5 张图排 3+2 时,第二行两格会宽出 50%。
+   折叠态仍然 flex:1,那时候必须占满才拼得成完整一张图。 */
+.shatter[data-expanded="1"] .shatter-tile {
+  flex: 0 0 calc((100% - (var(--cols, 3) - 1) * var(--col-gap)) / var(--cols, 3));
+}
+
+/* 格子 = 鼠标命中区。它自己永远不缩放,只做碎裂的位移和旋转;
+   放大交给里面的 .tile-inner。格子跟着放大的话命中区也会变大,
+   盖住旁边的格子,想移过去就一直够不着(尤其正中间那格,四面都被压)。 */
+.shatter-tile {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: inherit;
+  transform: translate(0, 0) rotate(0deg);
+  transition: transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0s);
+}
+
+.shatter[data-expanded="1"] .shatter-tile {
+  transform: translate(var(--dx, 0), var(--dy, 0)) rotate(var(--rot, 0deg));
+  transform-origin: var(--ox, center) var(--oy, center);
+  cursor: pointer;
+}
+
+/* 视觉层:圆角、底色、阴影、裁切都在这儿,放大也在这儿 */
+.tile-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 0;
+  /* 不吃鼠标 —— 放大后溢出的部分不能抢走隔壁格子的 hover */
+  pointer-events: none;
+  transform-origin: var(--ox, center) var(--oy, center);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shatter[data-expanded="1"] .tile-inner {
+  border-radius: 10px;
+  background: var(--surface-scrim);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.26),
+    0 0 0 1px var(--hud-line);
+}
+
+/* 鼠标停住 → 原地长大到能读清这一页,并浮到别的格子上面。
+   边上的格子靠 --ox/--oy 往里长,不会顶出屏幕 */
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:hover,
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:focus-visible {
+  transform: translate(var(--dx, 0), var(--dy, 0)) rotate(0deg);
+  transition-delay: 0s;
+  z-index: 20;
+}
+
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:hover .tile-inner,
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:focus-visible .tile-inner {
+  transform: scale(2.6);
+  border-radius: 6px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 60px var(--hud-glow),
+    0 0 0 1px var(--hud-line-strong);
+}
+
+/* 留白填充层:图片自己的模糊延伸,盖住 contain 之后两侧的空当 */
+.tile-bloom {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(22px) saturate(1.15);
+  transform: scale(1.18);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  transition-delay: var(--delay, 0s);
+  pointer-events: none;
+}
+
+/* 只有 data-bloom="1" 的格子(图片比例对不上)才点亮模糊层。
+   16:9 的图正片本来就铺满,那层 blur 纯属白烧 GPU */
+.shatter[data-expanded="1"] .shatter-tile[data-bloom="1"] .tile-bloom {
+  opacity: 1;
+}
+
+/* 切片层:折叠时可见,展开时淡出 */
+.tile-slice {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+  transition-delay: var(--delay, 0s);
+}
+
+.shatter[data-expanded="1"] .tile-slice {
+  opacity: 0;
+}
+
+/* 切缝:折叠态极淡的描边,hover 时亮起暗示可点 */
+.tile-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 0.5px var(--hud-line);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.shatter[data-expanded="0"]:hover .tile-inner::after {
+  opacity: 1;
+}
+
+.shatter[data-expanded="1"] .tile-inner::after {
+  opacity: 0;
+}
+
+/* 案例页层:展开时淡入。
+   gap 会让格子的实际比例(约 1.80)偏离 16:9 的图,contain 后每边差 2~3px,
+   放大 2.6 倍就变成一道漏出模糊层的亮边。给正片 3% 溢出把这道缝吃掉 ——
+   贴合的图边缘裁掉 1.5%(PPT 页那圈本来就是留白),竖图仍然完整居中。 */
+/* 案例页层。默认按 contain + 3% 溢出(还没量出比例前的保守值);
+   量完之后由 data-fit 接管:贴合的图 cover 填满,比例差得远的 contain 保完整。 */
+.tile-slide {
+  position: absolute;
+  top: -3%;
+  left: -3%;
+  width: 106%;
+  height: 106%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  transition-delay: var(--delay, 0s);
+}
+
+/* 比例和格子只差 1~2%(gap 造成的):直接铺满,不留那条会透出下层的缝 */
+.shatter-tile[data-fit="cover"] .tile-slide {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shatter[data-expanded="1"] .tile-slide {
+  opacity: 1;
+}
+
+/* 高清层:平时没有 src(等于透明),hover 那一格才加载原图盖上来。
+   加载途中底下的缩略图还在,不会闪白 */
+.tile-slide-hi {
+  opacity: 0 !important;
+  transition: opacity 0.25s ease;
+  transition-delay: 0s;
+}
+
+/* 必须等 data-ready=1 才显形:加载途中让它保持透明,底下的小档图还在,
+   否则会露出浏览器画的破图图标 */
+/* [src] 也要在:鼠标移到别格时这一格的 src 会被摘掉,
+   没有 src 的 img 同样会被浏览器画成破图 */
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:hover .tile-slide-hi[data-ready="1"][src],
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:focus-visible .tile-slide-hi[data-ready="1"][src] {
+  opacity: 1 !important;
+}
+
+/* 可交互 artifact(知识图谱那种):格子里跑活的,但不吃鼠标 —— 点击仍然是进项目页。
+   按 4 倍尺寸渲染再缩回去,让它走桌面布局:直接塞进 320px 宽的格子里,
+   页面会按手机断面排版,字巨大、节点糊成一团。比例自适应,格子多宽都成立。 */
+.tile-embed {
+  border: 0;
+  pointer-events: none;
+  background: #fff;
+  object-fit: unset;
+  /* 抵消 .tile-slide 那 3% 的溢出:iframe 不需要,它没有 contain 留白问题 */
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 400%;
+  transform: scale(0.25);
+  transform-origin: top left;
+}
+
+/* 页码 + 标题:展开态常显,hover 放大时淡出让位给内容 */
+.tile-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 20px 10px 7px;
+  font-family: "Poppins", sans-serif;
+  text-align: left;
+  background: linear-gradient(to top, rgba(10, 8, 22, 0.9), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.shatter[data-expanded="1"] .tile-meta {
+  opacity: 1;
+}
+
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:hover .tile-meta,
+.shatter[data-expanded="1"][data-armed="1"] .shatter-tile:focus-visible .tile-meta {
+  opacity: 0;
+}
+
+.tile-num {
+  flex-shrink: 0;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.65);
+  font-variant-numeric: tabular-nums;
+}
+
+.tile-title {
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 折叠态的「可点」提示 */
+.shatter-hint {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(16, 12, 32, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.shatter[data-expanded="0"]:hover .shatter-hint,
+.shatter[data-expanded="0"]:focus-visible .shatter-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 收起按钮:只在展开态可见可点 */
+.shatter-collapse {
+  position: absolute;
+  top: -14px;
+  right: 0;
+  z-index: 3;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--hud-fg);
+  background: var(--surface-scrim-strong);
+  border: 1px solid var(--hud-line);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.shatter-wrap:has(.shatter[data-expanded="1"]) .shatter-collapse {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shatter-collapse:hover {
+  color: var(--text-accent);
+  border-color: var(--hud-line-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shatter,
+  .shatter-row,
+  .shatter-tile,
+  .tile-slice,
+  .tile-slide,
+  .tile-meta {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .shatter[data-expanded="1"] .shatter-tile {
+    transform: none;
+  }
+}
+
+/* 项目抬头右侧:线上跑着的那版的入口。
+   静止状态就带光晕 —— 这是整块里唯一通向站外真产品的入口,得让人一眼看见 */
+.live-link {
+  color: var(--text-accent);
+  border: 1px solid var(--hud-line-strong);
+  background: var(--surface-scrim);
+  backdrop-filter: blur(8px);
+  /* 光晕从 --text-accent 调,不用 --hud-glow:后者日间只有 0.16 透明度,
+     白底上根本看不出在发光 */
+  text-shadow: 0 0 12px color-mix(in srgb, var(--text-accent) 55%, transparent);
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--text-accent) 38%, transparent),
+    0 0 48px color-mix(in srgb, var(--text-accent) 22%, transparent),
+    inset 0 0 16px color-mix(in srgb, var(--text-accent) 16%, transparent);
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.live-link:hover {
+  color: var(--text-hero);
+  border-color: var(--hud-line-strong);
+  box-shadow:
+    0 0 34px color-mix(in srgb, var(--text-accent) 55%, transparent),
+    0 0 76px color-mix(in srgb, var(--text-accent) 34%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--text-accent) 26%, transparent);
+}
+
+/* 缩略图翻页 */
+.shatter-pager button {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--hud-line);
+  color: var(--hud-fg);
+  line-height: 1;
+  transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.shatter-pager button:hover {
+  color: var(--text-accent);
+  border-color: var(--hud-line-strong);
+  box-shadow: 0 0 16px var(--hud-glow);
+}
+
+.shatter-pager .pager-count {
+  min-width: 62px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--hud-fg-muted);
+}
+
+/* ---- Passion Projects 纯图卡片 ---- */
+/* 卡片就是一张图,名字和年份压在底部、hover 才浮出。
+   高度不设死,跟着图片原始比例走,一行里自然错落 */
+.passion-card {
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.18),
     0 0 0 1px var(--card-glass-border);
-  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* 抬起走 CSS transform(GPU 合成),不用 framer-motion 的 whileHover ——
+     那是每帧跑 JS,和同一批卡片的 layout FLIP 抢主线程 */
+  transform: translateY(0);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tarot-card:hover {
+.passion-card:hover,
+.passion-card:focus-visible {
+  transform: translateY(-10px) scale(1.03);
+  z-index: 40;
   box-shadow:
     0 18px 48px rgba(0, 0, 0, 0.3),
     0 0 44px var(--hud-glow),
     0 0 0 1px var(--hud-line-strong);
+}
+
+.passion-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 40px 16px 14px;
+  text-align: left;
+  /* 底下压得住白底截图才读得清 —— 文字落在渐变的中上段,
+     那一带浓度不能掉太快 */
+  background: linear-gradient(
+    to top,
+    rgba(8, 6, 20, 0.95) 0%,
+    rgba(8, 6, 20, 0.88) 45%,
+    rgba(8, 6, 20, 0.45) 75%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.passion-card:hover .passion-meta,
+.passion-card:focus-visible .passion-meta {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ---- 项目详情页:宇宙皮肤(作用域覆写老页面的灰阶工具类) ---- */

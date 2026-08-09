@@ -1,20 +1,48 @@
+import { useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ReactMarkdown from 'react-markdown';
 import { preprocessHighlightMarkers } from '../utils/highlight';
 
 const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext }) => {
-  if (!image) return null;
-
+  const isOpen = Boolean(image);
   const hasMultipleImages = images && images.length > 1;
-  const canGoPrevious = hasMultipleImages && currentIndex > 0;
-  const canGoNext = hasMultipleImages && currentIndex < images.length - 1;
+
+  // 键盘:Esc 关,左右翻页
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose?.();
+      else if (e.key === 'ArrowLeft' && hasMultipleImages) onPrevious?.();
+      else if (e.key === 'ArrowRight' && hasMultipleImages) onNext?.();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, hasMultipleImages, onClose, onPrevious, onNext]);
+
+  // 打开时锁住背景滚动,关闭还原
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={image.alt || 'Image viewer'}
+      onClick={onClose}
+    >
       {/* 关闭按钮 - 固定在屏幕右上角 */}
       <Button
-        onClick={onClose}
+        onClick={(e) => { e.stopPropagation(); onClose?.(); }}
         className="fixed top-4 right-4 bg-black/70 hover:bg-black/80 text-white border border-white/30 z-10 shadow-lg"
         size="sm"
       >
@@ -22,32 +50,35 @@ const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext
         Close
       </Button>
 
-      {/* 上一张按钮 */}
-      {canGoPrevious && (
-        <Button
-          onClick={onPrevious}
-          className="fixed left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/80 text-white border border-white/30 z-10 shadow-lg"
-          size="sm"
-        >
-          <ChevronLeft className="w-4 h-4 mr-2" />
-          Previous
-        </Button>
-      )}
-
-      {/* 下一张按钮 */}
-      {canGoNext && (
-        <Button
-          onClick={onNext}
-          className="fixed right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/80 text-white border border-white/30 z-10 shadow-lg"
-          size="sm"
-        >
-          Next
-          <ChevronRight className="w-4 h-4 ml-2" />
-        </Button>
+      {/* 上一张 / 下一张(循环翻页) */}
+      {hasMultipleImages && (
+        <>
+          <Button
+            onClick={(e) => { e.stopPropagation(); onPrevious?.(); }}
+            aria-label="Previous image"
+            className="fixed left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/80 text-white border border-white/30 z-10 shadow-lg"
+            size="sm"
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Previous
+          </Button>
+          <Button
+            onClick={(e) => { e.stopPropagation(); onNext?.(); }}
+            aria-label="Next image"
+            className="fixed right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/80 text-white border border-white/30 z-10 shadow-lg"
+            size="sm"
+          >
+            Next
+            <ChevronRight className="w-4 h-4 ml-2" />
+          </Button>
+        </>
       )}
 
       {/* 图片容器 */}
-      <div className="relative w-full h-full flex items-center justify-center">
+      <div
+        className="relative w-full h-full flex items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         <img
           src={image.src}
           alt={image.alt}

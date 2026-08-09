@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "thumbs": "python3 scripts/build-thumbs.py",
+    "predev": "npm run thumbs || true",
     "dev": "vite",
+    "prebuild": "npm run thumbs || true",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

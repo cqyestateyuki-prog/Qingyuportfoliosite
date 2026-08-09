@@ -20,6 +20,7 @@ import NextProject from '../components/NextProject'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import DecryptedText from '../components/DecryptedText'
+import Media from '../components/Media'
 // 导入国际化
 import { useLanguage } from '../i18n'
 import { getLocalizedText, getLocalizedArray, localizeProject } from '../utils/localization'
@@ -1112,7 +1113,7 @@ const ProjectDetail = () => {
                       {(feature.image || feature.gif) && (
                         <div>
                           <div className="relative rounded-2xl overflow-hidden shadow-lg">
-                            <img
+                            <Media
                               src={feature.image || feature.gif}
                               alt={feature.name}
                               className="w-full h-auto object-contain cursor-pointer hover:scale-[1.02] transition-transform duration-500"
@@ -1179,15 +1180,15 @@ const ProjectDetail = () => {
                             className="relative rounded-2xl overflow-hidden shadow-lg"
                           >
                             {feature.gif ? (
-                              <img 
-                                src={feature.gif} 
+                              <Media
+                                src={feature.gif}
                                 alt={feature.name}
                                 className="w-full h-auto object-contain"
                                 style={{ maxHeight: '50vh' }}
                               />
                             ) : (
-                              <img 
-                                src={feature.image} 
+                              <img
+                                src={feature.image}
                                 alt={feature.name}
                                 className="w-full h-auto object-contain cursor-pointer hover:scale-105 transition-transform duration-500"
                                 style={{ maxHeight: '50vh' }}
