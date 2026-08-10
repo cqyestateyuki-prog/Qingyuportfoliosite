@@ -12,6 +12,7 @@ import { primeDirective } from './prime-directive.js';
 import { myLittleFishTank } from './my-little-fish-tank.js';
 import { kogna } from './kogna.js';
 import { hexaedge } from './hexaedge.js';
+import { wishflow } from './wishflow.js';
 
 export const projects = [
   sparkup,
@@ -26,6 +27,7 @@ export const projects = [
   myLittleFishTank,
   kogna,
   hexaedge,
+  wishflow,
 ];
 
 // ========== helpers ==========
