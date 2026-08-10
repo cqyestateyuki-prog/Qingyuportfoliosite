@@ -159,11 +159,19 @@ const Showcase = ({ projects }) => {
                     {/* 领域和年份/类别做成同一种 chip 排在一起,读起来是一串定位信息。
                         2026-08-08 用户: 标签放标题上面 (eyebrow 式 — 先定位, 后名字) */}
                     <div className="flex flex-wrap gap-2 mb-3">
-                      {[
-                        getLocalizedText(project.domain?.[0], language),
-                        project.year,
-                        ...(project.categories || []).slice(0, 2),
-                      ]
+                      {(() => {
+                        // domain 和 category 常常说的是同一件事(「AI Product」+「AI」),
+                        // 并排两个 chip 读起来是重复的。被 domain 盖住的 category 直接不排,
+                        // 空出来的位置让给后面还没说过的那一个
+                        const lead = getLocalizedText(project.domain?.[0], language);
+                        const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                        const leadKey = norm(lead);
+                        const cats = (project.categories || []).filter((c) => {
+                          const k = norm(c);
+                          return k && leadKey && !(leadKey.includes(k) || k.includes(leadKey));
+                        });
+                        return [lead, project.year, ...cats.slice(0, 2)];
+                      })()
                         .filter(Boolean)
                         .map((chip) => (
                           <span
@@ -204,16 +212,47 @@ const Showcase = ({ projects }) => {
 
                 {/* ====== 整块 hero → 点击碎成案例页卡片墙 ====== */}
                 {/* 外层不能包 Link:一点就跳走,展开永远触发不了。进详情页走标题和下面的箭头 */}
-                <TiltCard max={isExpanded ? 0 : 4} className="relative">
-                  <ShatterGrid
-                    project={project}
-                    language={language}
-                    expanded={isExpanded}
-                    page={page}
-                    onToggle={(next) => toggle(project.id, next)}
-                    onTileClick={() => navigate(`/project/${project.id}`)}
-                  />
-                </TiltCard>
+                <div className="relative">
+                  <TiltCard max={isExpanded ? 0 : 4} className="relative">
+                    <ShatterGrid
+                      project={project}
+                      language={language}
+                      expanded={isExpanded}
+                      page={page}
+                      onToggle={(next) => toggle(project.id, next)}
+                      onTileClick={() => navigate(`/project/${project.id}`)}
+                    />
+                  </TiltCard>
+
+                  {/* 翻页竖着贴在卡片右外侧,和左边那条章节导航是一对。
+                      按钮沿用 Live Site 那套发光,这一屏就这两处会亮。
+                      一页九格,剩下的缩略图在后面几页;只有一页的项目不显示 */}
+                  {isExpanded && totalPages > 1 && (
+                    <div className="shatter-pager shatter-pager-side">
+                      <button
+                        type="button"
+                        onClick={() => turnPage(-1)}
+                        aria-label="上一页缩略图"
+                        data-tip="View previous page"
+                      >
+                        ∧
+                      </button>
+                      <span className="pager-count tabular-nums">
+                        {String(page + 1).padStart(2, '0')}
+                        <i>/</i>
+                        {String(totalPages).padStart(2, '0')}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => turnPage(1)}
+                        aria-label="下一页缩略图"
+                        data-tip="View next page"
+                      >
+                        ∨
+                      </button>
+                    </div>
+                  )}
+                </div>
 
                 {/* ====== 底行:简介 + View Project ====== */}
                 <div className="mt-6 flex flex-col md:flex-row md:items-center justify-between gap-3 font-['Poppins']">
@@ -234,29 +273,6 @@ const Showcase = ({ projects }) => {
                     )}
                   </p>
                   <div className="flex items-center gap-6 shrink-0">
-                    {/* 翻页:一页九格,剩下的缩略图在后面几页。只有一页的项目不显示 */}
-                    {isExpanded && totalPages > 1 && (
-                      <div className="shatter-pager flex items-center gap-1">
-                        <button
-                          type="button"
-                          onClick={() => turnPage(-1)}
-                          aria-label="上一页缩略图"
-                        >
-                          ‹
-                        </button>
-                        <span className="pager-count tabular-nums">
-                          {String(page + 1).padStart(2, '0')} / {String(totalPages).padStart(2, '0')}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => turnPage(1)}
-                          aria-label="下一页缩略图"
-                        >
-                          ›
-                        </button>
-                      </div>
-                    )}
-
                     <Link to={`/project/${project.id}`}>
                       <motion.span
                         whileHover={{ x: 4 }}

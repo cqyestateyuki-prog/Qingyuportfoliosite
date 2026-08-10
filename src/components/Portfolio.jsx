@@ -18,6 +18,81 @@ import { thumbSrc } from '../utils/thumbs';
  * 下半区每个项目就是一张图,统一 16:10 流式居中,hover 才浮出名字和年份
  */
 
+/**
+ * hover 播放用的片段。只认本地文件。
+ *
+ * 不走 vimeo:隐藏控件要 background=1 或 controls=0,这两个参数都是 Plus 以上
+ * 才有的,免费档下播放器整块白屏;不加又会在卡片上糊一条进度条和 vimeo logo。
+ * 所以 hoverVideo 填 public 下的 mp4/webm 路径,没填就还是静态图。
+ */
+const localVideo = (src) => (/\.(mp4|webm)$/i.test(String(src || '')) ? src : null);
+
+/**
+ * 一张 passion 卡片。
+ * 有片段的项目 hover 才挂 <video>,鼠标离开立刻卸掉 ——
+ * 不能让六七个视频在后台一直解码。触屏没有 hover,不挂。
+ */
+const PassionCard = ({ project, title, meta, onClick }) => {
+  const [playing, setPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
+  const clip = localVideo(project.hoverVideo || project.heroVideo);
+
+  const start = () => {
+    if (!clip) return;
+    if (!window.matchMedia?.('(hover: hover)').matches) return;
+    setPlaying(true);
+  };
+  const stop = () => { setPlaying(false); setReady(false); };
+
+  return (
+    <Link
+      to={`/project/${project.id}`}
+      onClick={onClick}
+      aria-label={title}
+      onMouseEnter={start}
+      onMouseLeave={stop}
+      onFocus={start}
+      onBlur={stop}
+      className="passion-card group block w-full aspect-[16/10] rounded-2xl overflow-hidden relative"
+    >
+      <Media
+        src={thumbSrc(project.thumbnail || project.heroImage)}
+        alt={title}
+        className="w-full h-full object-cover block"
+      />
+
+      {playing && (
+        <video
+          className="passion-video"
+          data-ready={ready ? 'yes' : 'no'}
+          src={clip}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          tabIndex={-1}
+          /* 等到真有画面了再淡入,不然会闪一下黑底 */
+          onPlaying={() => setReady(true)}
+        />
+      )}
+
+      <div className="passion-meta">
+        <h3 className="text-[15px] leading-snug font-['Tenor_Sans'] mb-1" style={{ color: '#fff' }}>
+          {title}
+        </h3>
+        <p
+          className="text-[9px] tracking-[0.22em] uppercase font-['Poppins']"
+          style={{ color: 'rgba(255,255,255,0.7)' }}
+        >
+          {meta}
+        </p>
+      </div>
+    </Link>
+  );
+};
+
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [isVisible, setIsVisible] = useState(false);
@@ -100,48 +175,29 @@ const Portfolio = () => {
               每格五层绝对定位,加上全屏 WebGL,主线程已经很紧。
               外层容器的 layout 去掉(容器高度补间没什么可看的),
               卡片只留 opacity + 位移,hover 交给 CSS 走合成层。 */}
-          <motion.div className="flex flex-wrap justify-center gap-6 md:gap-8">
+          <motion.div className="passion-grid flex flex-wrap justify-center items-center gap-4 md:gap-5">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (
                 <motion.div
-                  layout
+                  /* 只让位置走 FLIP。用整个 layout 的话,hover 时 CSS 改的 flex-basis
+                     会被 framer-motion 当成布局变化,用 scale 补偿抵消掉,卡片就不会挤 */
+                  layout="position"
                   key={project.id}
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative"
+                  className="passion-slot relative"
                 >
                   {/* 纯图卡片:平时只有图,名字和年份 hover 才浮出。
                       统一 16:10 裁切 —— 这批图 1.50~1.88 比例不一,
-                      16:10 居中,平均裁得最少 */}
-                  <Link
-                    to={`/project/${project.id}`}
+                      16:10 居中,平均裁得最少。有 vimeo 的 hover 会开始播 */}
+                  <PassionCard
+                    project={project}
+                    title={getLocalizedText(project.title, language)}
+                    meta={[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).join(' · ')}
                     onClick={() => handleProjectClick(project)}
-                    aria-label={getLocalizedText(project.title, language)}
-                    className="passion-card group block w-[92vw] max-w-[400px] md:w-[400px] aspect-[16/10] rounded-2xl overflow-hidden relative"
-                  >
-                    <Media
-                      src={thumbSrc(project.thumbnail || project.heroImage)}
-                      alt={getLocalizedText(project.title, language)}
-                      className="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-[1.06]"
-                    />
-
-                    <div className="passion-meta">
-                      <h3
-                        className="text-[15px] leading-snug font-['Tenor_Sans'] mb-1"
-                        style={{ color: '#fff' }}
-                      >
-                        {getLocalizedText(project.title, language)}
-                      </h3>
-                      <p
-                        className="text-[9px] tracking-[0.22em] uppercase font-['Poppins']"
-                        style={{ color: 'rgba(255,255,255,0.7)' }}
-                      >
-                        {[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).join(' · ')}
-                      </p>
-                    </div>
-                  </Link>
+                  />
                 </motion.div>
               ))}
             </AnimatePresence>

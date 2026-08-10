@@ -17,6 +17,40 @@ export const TILES_PER_PAGE = 9;
  */
 const ARTIFACT_SLOT = 4;
 
+/**
+ * 碎片墙上那行小字。
+ *
+ * 优先用图自己的标签 —— User Flow、Information Architecture 这类术语,
+ * 一眼就知道这张图是什么。退回本节标题的话,同一节有几张图就重复几次,
+ * 而且是「From Insight to Interface」这种长句,等于没说。
+ *
+ * alt 超过 34 字的是描述句不是标签(hexaedge、kogna 那批),当标题会更糟,
+ * 那种就还是用本节标题,或者给那张图单独写个 label。
+ */
+const tileTitle = (img, sectionTitle, language) => {
+  const label = getLocalizedText(img?.label, language);
+  if (label) return label;
+  const alt = getLocalizedText(img?.alt, language);
+  if (alt && alt.length <= 34) return alt;
+  return sectionTitle;
+};
+
+/**
+ * 案例里该留、首页碎片墙不该占格的图,数据里标 hideInGallery: true。
+ * 直接从 data 删掉的话详情页也跟着少一张,所以只在这里跳过。
+ */
+const hidden = (img) => img?.hideInGallery === true;
+
+/** 视频格子在碎片墙里走 <video>(静音循环自动播),不能走 <img> */
+const isVideo = (src) => /\.(mp4|webm|mov)$/i.test(String(src || ''));
+
+/**
+ * 眉标里剥掉自带的编号。
+ * 有些项目的 sectionTag 写成「02 · Research」,碎片墙格子左边已经有一个序号了,
+ * 两个数字并排读起来很乱。
+ */
+const stripNum = (s) => String(s || '').replace(/^\s*\d+\s*[·・.、\-–—:]\s*/, '');
+
 export const collectProjectSlides = (project, language) => {
   if (!project) return [];
   const collected = [];
@@ -33,10 +67,12 @@ export const collectProjectSlides = (project, language) => {
     );
   } else {
     const seen = new Set();
-    const push = (src, title, caption, kind = 'image') => {
+    // tag 是那一节的小标题(Problem Statement 这种),title 是这张图具体是什么。
+    // 两行一起,和案例里每节「眉标 + 大标题」的排法对上
+    const push = (src, title, caption, kind = 'image', tag = '', poster = '') => {
       if (!src || seen.has(src)) return;
       seen.add(src);
-      collected.push({ src, title: title || '', caption: caption || '', kind });
+      collected.push({ src, title: title || '', caption: caption || '', kind, tag: tag || '', poster });
     };
 
     // hero 只登记去重、不占格:折叠态整幅就是它,碎开后再放一遍是重复,白占一格。
@@ -46,39 +82,61 @@ export const collectProjectSlides = (project, language) => {
 
     push(
       project.overview?.mainImage?.src,
-      getLocalizedText(project.overview?.mainTitle, language),
+      tileTitle(
+        project.overview?.mainImage,
+        getLocalizedText(project.overview?.mainTitle, language),
+        language
+      ),
       getLocalizedText(project.overview?.mainImage?.caption, language)
     );
 
     project.sections?.forEach((s) => {
       const sectionTitle = getLocalizedText(s.mainTitle || s.title, language);
-      s.images?.forEach((img) =>
-        push(img?.src, sectionTitle, getLocalizedText(img?.caption, language))
-      );
+      const tag = stripNum(getLocalizedText(s.sectionTag || s.title, language));
+      s.images?.forEach((img) => {
+        if (hidden(img)) return;
+        push(
+          img?.src,
+          tileTitle(img, sectionTitle, language),
+          getLocalizedText(img?.caption, language),
+          isVideo(img?.src) ? 'video' : 'image',
+          tag,
+          img?.poster
+        );
+      });
       s.imageGroups?.forEach((g) =>
-        g.images?.forEach((img) =>
+        g.images?.forEach((img) => {
+          if (hidden(img)) return;
           push(
             img?.src,
-            getLocalizedText(g.title, language) || sectionTitle,
-            getLocalizedText(img?.caption, language)
-          )
-        )
+            tileTitle(img, getLocalizedText(g.title, language) || sectionTitle, language),
+            getLocalizedText(img?.caption, language),
+            'image',
+            tag
+          );
+        })
       );
       // features 的图以前不进首页画廊,案例里最好看的成品图全被漏掉了
-      s.features?.forEach((f) =>
+      // feature 的 name 是案例正文里的小标题,有的是整句话,当碎片墙标题太长。
+      // 那种给它单独写个 label
+      s.features?.forEach((f) => {
+        if (hidden(f)) return;
         push(
           f?.image || f?.gif,
-          getLocalizedText(f?.name, language) || sectionTitle,
-          getLocalizedText(f?.imageCaption, language)
-        )
-      );
+          tileTitle({ label: f?.label, alt: f?.name }, sectionTitle, language),
+          getLocalizedText(f?.imageCaption, language),
+          'image',
+          tag
+        );
+      });
       // 可交互的 artifact(知识图谱那种),不是图片所以以前整个漏掉了
       if (s.embed?.src) {
         push(
           s.embed.src,
           getLocalizedText(s.embed.title, language) || sectionTitle,
           getLocalizedText(s.embed.caption, language),
-          'embed'
+          'embed',
+          tag
         );
       }
       // 站内 html 的 link 也是能跑起来的 artifact(UI Kit 就只挂在 link 上)。
@@ -88,7 +146,8 @@ export const collectProjectSlides = (project, language) => {
           s.link.url,
           getLocalizedText(s.link.label, language) || sectionTitle,
           getLocalizedText(s.briefContent, language),
-          'embed'
+          'embed',
+          tag
         );
       }
     });
@@ -105,6 +164,21 @@ export const collectProjectSlides = (project, language) => {
   }
 
   return ordered;
+};
+
+/**
+ * 同一个 artifact,嵌在格子里预览时走的地址。
+ *
+ * 这些页面都比一屏长得多,格子里只露得出顶部,看着像张静态截图,
+ * 没人猜得到下面还有二十多屏 —— 加个开关让预览自己慢慢往下走,把「还有」演出来。
+ *
+ * 参数只加在 iframe 上,点格子和案例里那个按钮跳的仍是干净地址:
+ * 人真要读的时候,页面不该自己动。
+ */
+export const embedPreviewSrc = (src) => {
+  if (typeof src !== 'string' || !src) return src;
+  const [path, hash] = src.split('#');
+  return `${path}${path.includes('?') ? '&' : '?'}autoscroll=1${hash ? `#${hash}` : ''}`;
 };
 
 export const countProjectPages = (project, language) =>

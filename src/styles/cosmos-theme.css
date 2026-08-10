@@ -443,6 +443,24 @@ html:not(.dark) .cosmos-canvas-el {
   font-variant-numeric: tabular-nums;
 }
 
+/* 眉标 + 标题竖排 */
+.tile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tile-tag {
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .tile-title {
   font-size: 11px;
   line-height: 1.35;
@@ -451,6 +469,40 @@ html:not(.dark) .cosmos-canvas-el {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+/* 折叠态叠在切片之上的转动件(目前只有 HexaEdge 的八卦罗盘用)。
+   位置和大小都是相对容器的百分比,由数据里的 heroCompose.spin 给,
+   所以容器缩放到任何尺寸都和底图对得上。
+   transform 里的 translate 要写在 rotate 前面:先挪到圆心,再原地转 */
+.hero-spin {
+  position: absolute;
+  aspect-ratio: 1;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: center;
+  animation: hero-spin-turn linear infinite;
+  transition: opacity 0.45s ease;
+  will-change: transform;
+}
+
+@keyframes hero-spin-turn {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 鼠标压上来就地定格,点开碎裂是从这个静止画面开始的 */
+.shatter:hover .hero-spin {
+  animation-play-state: paused;
+}
+
+/* 碎开之后底下换成案例页了,盘必须让开 */
+.shatter[data-expanded="1"] .hero-spin {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-spin { animation: none; transform: translate(-50%, -50%); }
 }
 
 /* 折叠态的「可点」提示 */
@@ -553,6 +605,102 @@ html:not(.dark) .cosmos-canvas-el {
 }
 
 /* 缩略图翻页 */
+/* 竖着贴在卡片右外侧,和左边那条章节导航呼应。
+   容器 max-w-7xl 居中,两侧本来就有留白,够放这一条。
+   屏幕不够宽(装不下 56px 的边距)时退回卡片内部右上角,不然会顶出容器 */
+.shatter-pager-side {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  margin-left: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 5;
+}
+
+/* 页码做成和 Live Site 同款的发光胶囊 —— 那个按钮是这一屏唯一会发光的东西,
+   翻页跟它同一套,右侧这条就不再像一串没人管的小字 */
+.shatter-pager.shatter-pager-side button {
+  position: relative; /* 给 ::after 的提示做定位锚点 */
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--hud-line);
+  background: var(--surface-scrim);
+  backdrop-filter: blur(8px);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+  color: var(--hud-fg-muted);
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shatter-pager.shatter-pager-side button:hover {
+  color: var(--text-accent);
+  border-color: var(--hud-line-strong);
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--text-accent) 38%, transparent),
+    inset 0 0 14px color-mix(in srgb, var(--text-accent) 14%, transparent);
+}
+
+/* hover 时往左浮出说明。不用原生 title:它要等一秒才弹,样式也管不了。
+   往左是因为这条贴着卡片右外侧,朝右会顶出容器 */
+.shatter-pager.shatter-pager-side button::after {
+  content: attr(data-tip);
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--hud-line);
+  background: var(--surface-scrim);
+  backdrop-filter: blur(8px);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.shatter-pager.shatter-pager-side button:hover::after {
+  opacity: 1;
+}
+
+/* 页码竖着叠三行:当前页 / 分隔 / 总页数 */
+.shatter-pager-side .pager-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  line-height: 1.45;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--text-accent);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--text-accent) 45%, transparent);
+}
+
+.shatter-pager-side .pager-count i {
+  font-style: normal;
+  opacity: 0.4;
+}
+
+@media (max-width: 1420px) {
+  .shatter-pager-side {
+    left: auto;
+    right: 14px;
+    top: 14px;
+    transform: none;
+    margin-left: 0;
+  }
+}
+
 .shatter-pager button {
   width: 26px;
   height: 26px;
@@ -580,26 +728,92 @@ html:not(.dark) .cosmos-canvas-el {
 /* ---- Passion Projects 纯图卡片 ---- */
 /* 卡片就是一张图,名字和年份压在底部、hover 才浮出。
    高度不设死,跟着图片原始比例走,一行里自然错落 */
+/* 卡片本身不放大 —— 放大要靠占位互相挤,不是浮起来盖住邻居 */
+.passion-slot {
+  flex: 0 1 400px;
+  max-width: 92vw;
+}
+
+/* 指针设备 + 够宽的屏幕才玩挤压;触屏没有 hover,窄屏一行一个也挤不动。
+   一行三个:平时 400×3,hover 时 600 + 300 + 300,加起来和 gap 都不变,
+   所以不会把最后一张挤到下一行去 */
+@media (hover: hover) and (min-width: 900px) {
+  /* 宽和高分开给,不用 aspect-ratio。
+     高度一旦跟着宽度算,格子就得按"放大后多高"预留,放大倍数和行距空白
+     就被绑死了 —— 想收空白只能牺牲倍数。拆开之后横向放得开,纵向只长一点,
+     格子预留 300 就够,平时卡片 250,行距里只多出 50 */
+  .passion-slot {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    /* 收得比放缓一点,曲线也不要 expo —— 那个起手太冲。
+       末尾这个 delay 是给"复原"用的:卡片之间的 gap 不属于任何一张卡,
+       鼠标路过时两条规则都不匹配,不等一下就会往回弹一下,手感是卡顿 */
+    transition: flex-basis 0.52s cubic-bezier(0.33, 1, 0.68, 1) 0.15s;
+  }
+  .passion-slot > .passion-card {
+    width: 100%;
+    aspect-ratio: auto;
+    height: 250px;
+    transition: height 0.52s cubic-bezier(0.33, 1, 0.68, 1) 0.15s;
+  }
+  .passion-grid .passion-slot:hover > .passion-card {
+    height: 300px;
+    transition-delay: 0.09s;
+  }
+  .passion-grid:has(.passion-slot:hover) .passion-slot:not(:hover) > .passion-card {
+    height: 225px;
+    transition-delay: 0.09s;
+  }
+
+  /* 必须是 :has(),不能用 .passion-grid:hover。
+     后者在鼠标划过卡片之间的空隙时也成立,于是出现"全体缩小但没人放大"的
+     中间态,整行宽度塌一下又弹回来,来回抖。
+     :not(:hover) 不能省 —— :has() 的特异性把括号里的也算进去,
+     这条会盖过下面的放大规则,结果是连被 hover 的那张一起缩 */
+  .passion-grid:has(.passion-slot:hover) .passion-slot:not(:hover) {
+    flex-basis: 330px;
+    /* 稍等一下再动,快速划过就不会一路挤过去 */
+    transition-delay: 0.09s;
+  }
+  .passion-grid .passion-slot:hover {
+    flex-basis: 540px;
+    transition-delay: 0.09s;
+  }
+}
+
 .passion-card {
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.18),
     0 0 0 1px var(--card-glass-border);
-  /* 抬起走 CSS transform(GPU 合成),不用 framer-motion 的 whileHover ——
-     那是每帧跑 JS,和同一批卡片的 layout FLIP 抢主线程 */
-  transform: translateY(0);
-  transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .passion-card:hover,
 .passion-card:focus-visible {
-  transform: translateY(-10px) scale(1.03);
   z-index: 40;
   box-shadow:
     0 18px 48px rgba(0, 0, 0, 0.3),
     0 0 44px var(--hud-glow),
     0 0 0 1px var(--hud-line-strong);
+}
+
+/* hover 时挂上来的片段。铺满卡片、居中裁切,
+   起播前是黑的,所以等 data-ready 再淡入 */
+.passion-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.passion-video[data-ready='yes'] {
+  opacity: 1;
 }
 
 .passion-meta {

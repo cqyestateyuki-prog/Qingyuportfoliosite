@@ -50,9 +50,12 @@ export const kogna = {
         // 全站规范:overview 只承载"产品全貌图 + 入口 + Why I'm building"，
     // 问题陈述一律独立成 The Problem 章节(见 sections[0])。
     overview: {
+      buttons: [
+        { label: 'Live Site', url: 'https://kogna.io/', type: 'primary' }
+      ],
       mainImage: {
         src: '/media/projects/kogna/slides/slide-02.png',
-        alt: 'What Kogna does: fragmented tools converging into one command center',
+        alt: 'TL;DR · What Kogna Does',
         caption: 'Every tool fans into one AI command center'
       },
       // Why I'm building this:压成 hero 题注一句
@@ -88,7 +91,7 @@ export const kogna = {
         images: [
           {
             src: '/media/projects/kogna/slides/slide-05.png',
-            alt: 'Research: outreach, interviews, personas',
+            alt: 'User Research',
             caption: 'Customer discovery across CEOs, COOs and chiefs of staff'
           }
         ]
@@ -134,18 +137,21 @@ export const kogna = {
         features: [
           {
             name: 'Kogna Insight: from data to a decision',
+            label: 'From Data to Decision',
             detail: 'A: show the metric and let the leader read it. B: state the risk and the one move to make. I chose B. "Data to decision" is a stated brand value, and in discovery leaders wanted the answer, not another chart, so every insight now leads with a plainly stated risk, its severity, and a Strategy button that turns it into a plan. When sales dips, the card says whether it reads as a production bottleneck or a market shift.',
             image: '/media/projects/kogna/slides/slide-07.png',
             imageCaption: 'Every insight leads with a risk and the action to take'
           },
           {
             name: 'Smart Tiles: a fixed board, or one that builds itself',
+            label: 'Tile System',
             detail: 'A: ship one executive template for everyone. B: let each leader assemble their own board. I chose B. A CEO and a COO lead from different numbers, so adaptive tiles for pipeline, win rate, blocked issues and company health snap into a grid the leader arranges, and the layout persists between visits. An AI insight can be pinned straight onto the board.',
             image: '/media/projects/kogna/slides/slide-08.png',
             imageCaption: 'The leader arranges the board; the layout persists'
           },
           {
             name: 'Where the AI assistant lives',
+            label: 'AI Assistant',
             detail: 'A: give the AI its own page you navigate to. B: keep it one tap away, in context. I chose B. A separate chat page breaks the train of thought, so Ask Kogna opens beside the work and answers about the risk or tile in front of you. On mobile, built for a leader on the go, the assistant stays a single tap from every screen.',
             image: '/media/projects/kogna/slides/slide-11.png',
             imageCaption: 'Ask Kogna stays in context, next to the work'
@@ -189,12 +195,12 @@ export const kogna = {
         images: [
           {
             src: '/media/projects/kogna/slides/slide-12.png',
-            alt: 'How we build: designer who codes, AI-accelerated loop',
+            alt: 'Design Process',
             caption: 'Design, build with AI, review, ship: the same system every day'
           },
           {
             src: '/media/projects/kogna/slides/slide-10.png',
-            alt: 'Design system: logo, color, typography',
+            alt: 'Design System',
             caption: 'One source of truth: tokens, color and an Inter type ramp across the product'
           }
         ]
@@ -212,7 +218,7 @@ export const kogna = {
         images: [
           {
             src: '/media/projects/kogna/slides/slide-13.png',
-            alt: 'Outcomes: live V1 and what is next',
+            alt: 'Outcome',
             caption: 'V1 live · 10+ connectors · 180+ discovery outreach · private beta'
           }
         ]

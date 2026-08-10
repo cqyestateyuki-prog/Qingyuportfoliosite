@@ -67,6 +67,8 @@ export const localizeProject = (project, language = 'en') => {
       content: getLocalizedText(project.overview.content, language),
       challenge: getLocalizedText(project.overview.challenge, language),
       challenges: getLocalizedArray(project.overview.challenges, language),
+      // Why I'm building this 也支持双语(ProjectDetail 直接读这个字段渲染)
+      whyIBuild: getLocalizedText(project.overview.whyIBuild, language),
       buttons: project.overview.buttons?.map(btn => ({
         ...btn,
         text: getLocalizedText(btn.text, language),
@@ -86,6 +88,21 @@ export const localizeProject = (project, language = 'en') => {
       mainTitle: getLocalizedText(section.mainTitle, language),
       briefContent: getLocalizedText(section.briefContent, language),
       content: section.content ? getLocalizedArray(section.content, language) : undefined,
+      // 章节级 The Challenge(挂在 section 上的那张卡)
+      challenge: section.challenge ? getLocalizedText(section.challenge, language) : undefined,
+      challenges: section.challenges ? getLocalizedArray(section.challenges, language) : undefined,
+      // 章节外链按钮的文字
+      link: section.link ? {
+        ...section.link,
+        label: getLocalizedText(section.link.label, language),
+      } : undefined,
+      // 内嵌 artifact 的标题、说明与激活提示
+      embed: section.embed ? {
+        ...section.embed,
+        title: getLocalizedText(section.embed.title, language),
+        caption: getLocalizedText(section.embed.caption, language),
+        activateLabel: getLocalizedText(section.embed.activateLabel, language),
+      } : undefined,
       // features 的本地化
       features: section.features?.map(feature => ({
         ...feature,

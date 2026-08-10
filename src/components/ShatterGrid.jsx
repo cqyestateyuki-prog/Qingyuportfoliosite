@@ -13,7 +13,7 @@
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { thumbSrc, thumbSrcHi } from '../utils/thumbs';
-import { collectProjectSlides, TILES_PER_PAGE } from '../utils/projectSlides';
+import { collectProjectSlides, embedPreviewSrc, TILES_PER_PAGE } from '../utils/projectSlides';
 
 // 桌面 3 列 / 平板手机 2 列。列数参与切片计算,所以要读到 JS 里,不能只写 CSS 断点。
 // 一行 4 个单张太小看不清内容,3 个是「一屏铺开」和「看得清」的平衡点
@@ -88,7 +88,11 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
     if (expanded) setLoaded(true);
   }, [expanded]);
 
-  const heroSrc = project.heroImage || project.thumbnail || slides[0]?.src;
+  // 折叠态的底图。项目配了 heroCompose 就用抠掉转动件的那版,
+  // 转动件单独叠一层(见下面的 hero-spin),详情页 hero 仍用原图,不受影响
+  const spin = project.heroCompose?.spin;
+  const heroSrc =
+    project.heroCompose?.base || project.heroImage || project.thumbnail || slides[0]?.src;
 
   // 切成 rows 行。行数按 cols 算,但每行张数取均衡分配:
   // 5 张分成 3+2 而不是 4+1 —— 后者最后一格会被拉成占满整宽的怪东西。
@@ -142,7 +146,10 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
           <div className="shatter-row" key={r}>
             {row.items.map((slide, i) => {
               const k = row.items.length;
+              // 页内下标(定位、错峰、hover 都用它)
               const flat = row.offset + i;
+              // 显示用的序号要跨页接着排:第二页从 10 起,不是又从 01 开始
+              const seq = page * TILES_PER_PAGE + flat + 1;
               // 错峰用行内相对位置,这样不满的行也是从中间往两边散
               const dist = Math.hypot(i - (k - 1) / 2, r - cy) / maxDist;
 
@@ -221,20 +228,39 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
                     aria-hidden="true"
                     style={{
                       backgroundImage:
-                        loaded && slide.kind !== 'embed' ? `url("${thumbSrc(slide.src)}")` : undefined,
+                        loaded && slide.kind === 'video' && slide.poster
+                          ? `url("${thumbSrc(slide.poster)}")`
+                          : loaded && slide.kind === 'image'
+                            ? `url("${thumbSrc(slide.src)}")`
+                            : undefined,
                     }}
                   />
 
                   {/* 展开态:真正的案例页。走缩略图,hover 放大时清晰度也够 */}
                   {slide.kind === 'embed' ? (
-                    // 可交互 artifact:格子里跑活的,不吃鼠标(点击仍是进项目)
+                    // 可交互 artifact:格子里跑活的,不吃鼠标(点击仍是进项目)。
+                    // 这里走 embedPreviewSrc(带自动滚动的开关),上面 onClick 新开的是原地址
                     <iframe
                       className="tile-slide tile-embed"
-                      src={loaded ? slide.src : undefined}
+                      src={loaded ? embedPreviewSrc(slide.src) : undefined}
                       title={slide.title || 'Interactive artifact'}
                       loading="lazy"
                       tabIndex={-1}
                       scrolling="no"
+                    />
+                  ) : slide.kind === 'video' ? (
+                    // 视频格:静音循环自动播。海报先顶着,免得起播前是一块黑
+                    <video
+                      className="tile-slide"
+                      src={loaded ? slide.src : undefined}
+                      poster={slide.poster || undefined}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      tabIndex={-1}
+                      aria-label={slide.title || ''}
                     />
                   ) : (
                     <img
@@ -278,7 +304,8 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
                   <img
                     className="tile-slide tile-slide-hi"
                     src={
-                      hoverIdx === flat && slide.kind !== 'embed' ? thumbSrcHi(slide.src) : undefined
+                      // 视频格没有高清版可换,它自己就在播;embed 是活的更不需要
+                      hoverIdx === flat && slide.kind === 'image' ? thumbSrcHi(slide.src) : undefined
                     }
                     alt=""
                     aria-hidden="true"
@@ -301,9 +328,17 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
                     <span className="tile-meta">
                       <span className="tile-num">
                         {/* 箭头是给「点了会新开一页」一个预告 */}
-                        {slide.kind === 'embed' ? 'LIVE ↗' : String(flat + 1).padStart(2, '0')}
+                        {slide.kind === 'embed' ? 'LIVE ↗' : String(seq).padStart(2, '0')}
                       </span>
-                      {slide.title && <span className="tile-title">{slide.title}</span>}
+                      {/* 眉标 + 标题两行,照案例里每节的排法 */}
+                      {(slide.tag || slide.title) && (
+                        <span className="tile-text">
+                          {slide.tag && slide.tag !== slide.title && (
+                            <span className="tile-tag">{slide.tag}</span>
+                          )}
+                          {slide.title && <span className="tile-title">{slide.title}</span>}
+                        </span>
+                      )}
                     </span>
                   </span>
                 </button>
@@ -311,6 +346,24 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
             })}
           </div>
         ))}
+
+        {/* 折叠态叠在切片之上的转动件(HexaEdge 的八卦罗盘)。
+            底图已经把它抠掉了,所以这里转的是它自己,不是整张封面。
+            hover 就地定格,再点才碎开 —— 从静止的画面裂开,前后是连着的 */}
+        {spin && (
+          <img
+            className="hero-spin"
+            src={spin.src}
+            alt=""
+            aria-hidden="true"
+            style={{
+              width: spin.size,
+              left: spin.left,
+              top: spin.top,
+              animationDuration: spin.duration || '28s',
+            }}
+          />
+        )}
 
         {/* 折叠态的可点提示 —— 唯一会告诉访客「这里能点」的信号 */}
         <span className="shatter-hint" aria-hidden="true">

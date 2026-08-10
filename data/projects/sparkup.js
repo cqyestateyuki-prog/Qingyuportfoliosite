@@ -64,7 +64,9 @@ export const sparkup = {
         'How might we bridge the gap between "I want to start something" and "Here is something concrete I could start"?',
         'How might we design around AI latency so wait time feels productive, not frustrating?'
       ],
-      buttons: []
+      buttons: [
+        { label: 'Live Site', url: 'https://willinghood-core-wwmhkbgzea-uc.a.run.app/', type: 'primary' }
+      ]
     },
 
     sections: [
@@ -79,7 +81,7 @@ export const sparkup = {
         images: [
           {
             src: '/media/projects/sparkup/problemstatement.png',
-            alt: 'Problem Statement: The "Day One" Paralysis',
+            alt: 'Problem Statement',
             caption: '90% of aspiring founders never launch. The biggest hurdle is the lack of structured guidance.'
           }
         ]
@@ -96,12 +98,12 @@ export const sparkup = {
         images: [
           {
             src: '/media/projects/sparkup/marketresearch.png',
-            alt: 'Market Research: Global Side Hustle Trend',
+            alt: 'Market Research',
             caption: '72% of Americans and 73% of Chinese consumers are engaged in or considering side hustles.'
           },
           {
             src: '/media/projects/sparkup/userresearch.png',
-            alt: 'User Research: JTBD, Four Forces, and Kano Model',
+            alt: 'User Research',
             caption: '151 surveys and 10+ interviews revealed the core pain: not knowing whether they are ready.'
           }
         ]
@@ -113,8 +115,21 @@ export const sparkup = {
         sectionTag: 'Iteration',
         mainTitle: 'From Boring Survey to 3D Command Deck',
         briefContent: '**Phase 1 (Dashboard)**: flat layout → [["Future Lab"]] style with Bento Grid, Glassmorphism cards, and 3D parallax mouse tracking. **Phase 2 (AI Diagnostic)**: Google Forms survey → [[3D grid background]] with radar-scan iconography and Quick/Full dual-path selection. **Phase 3 (Idea Bank → Spark Forge)**: static card grid → [[Spark Forge]] where users drag seeds, set constraints, and Ignite to generate ideas.',
-        icon: '🎨'
-        // Iteration 配图先撤下,待新图定稿后再补
+        icon: '🎨',
+        // Iteration 配图先撤下,待新图定稿后再补。
+        // UI Kit 直接在页内跑,默认不吃鼠标,点一下才能滚动翻看;
+        // link 会挂到 embed 右上角,想看全屏的从那里跳出去
+        embed: {
+          src: '/sparkup-ui-kit/index.html',
+          title: 'Spark Up UI Kit',
+          ratio: '16 / 10',
+          activateLabel: 'Click to browse the kit',
+          caption: 'Every screen that shipped, in one board: the diagnostic, the forge, and the dashboard.'
+        },
+        link: {
+          label: 'View the UI Kit',
+          url: '/sparkup-ui-kit/index.html',
+        }
       },
 
       {

@@ -3,6 +3,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ReactMarkdown from 'react-markdown';
 import { preprocessHighlightMarkers } from '../utils/highlight';
+import Media from './Media';
 
 const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext }) => {
   const isOpen = Boolean(image);
@@ -79,8 +80,10 @@ const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext
         className="relative w-full h-full flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
+        {/* 走 Media:碎片墙上点开的可能是视频格,写死 <img> 会显示成裂图 */}
+        <Media
           src={image.src}
+          poster={image.poster}
           alt={image.alt}
           className="max-w-[95vw] max-h-[95vh] object-contain rounded-lg"
         />
@@ -107,14 +110,20 @@ const ImageGallery = ({ image, images, currentIndex, onClose, onPrevious, onNext
 export const SingleImageDisplay = ({ image, onImageClick, overlay = null }) => {
   if (!image) return null;
 
+  // 视频走 Media(自动播放、静音、循环),而且不进灯箱 —— 灯箱是给图片用的
+  const isVideo = /\.(mp4|webm|mov)$/i.test(image.src || '');
+
   return (
     <div className="w-full">
       <div
-        className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group"
-        onClick={() => onImageClick(image)}
+        className={`relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group ${
+          isVideo ? '' : 'cursor-pointer'
+        }`}
+        onClick={isVideo ? undefined : () => onImageClick(image)}
       >
-        <img
+        <Media
           src={image.src}
+          poster={image.poster}
           alt={image.alt}
           className="w-full h-auto group-hover:scale-105 transition-transform duration-500"
         />

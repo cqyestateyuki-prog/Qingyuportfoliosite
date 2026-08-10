@@ -251,5 +251,52 @@
     apply(saved === 'mobile' ? 'mobile' : 'desktop');
   })();
 </script>
+<script>
+  /* 作品集首页把这一页嵌成小格预览, 只露得出顶部一屏, 看着就是张静态图,
+     谁也不知道下面还有二十多块屏 —— 让它自己慢慢往下走, 把「还有」演出来。
+     只认 ?autoscroll=1: 直接打开这个地址(给人读的)行为一点不变。 */
+  (function () {
+    if (new URLSearchParams(location.search).get('autoscroll') !== '1') return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var HOLD_END = 1800, HOLD_TOP = 900, REWIND = 1100;
+    var y = 0, phase = 'down', mark = 0, from = 0, prev = 0;
+
+    function limit() {
+      return Math.max(0, document.documentElement.scrollHeight - innerHeight);
+    }
+
+    function frame(t) {
+      if (!prev) prev = t;
+      /* 标签页切走时 rAF 是停的, 切回来第一帧的间隔是几十秒。
+         不夹一下, 这一帧就直接把页面推到底了 */
+      var dt = Math.min((t - prev) / 1000, 0.05);
+      prev = t;
+      var end = limit();
+
+      if (end > 4) {
+        if (phase === 'down') {
+          /* 每秒十分之一屏。预览格把整页缩到四分之一显示, 再慢就看不出在动了 */
+          y = Math.min(y + innerHeight * 0.1 * dt, end);
+          if (y >= end) { phase = 'hold'; mark = t; }
+        } else if (phase === 'hold') {
+          if (t - mark >= HOLD_END) { phase = 'rewind'; mark = t; from = y; }
+        } else if (phase === 'rewind') {
+          /* 回顶要缓动着回去: 一帧切到 0 像页面重载了, 反而以为自己错过了什么 */
+          var p = Math.min((t - mark) / REWIND, 1);
+          var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          y = from * (1 - e);
+          if (p >= 1) { phase = 'rest'; mark = t; y = 0; }
+        } else if (t - mark >= HOLD_TOP) {
+          phase = 'down';
+        }
+        scrollTo(0, y);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  })();
+</script>
 </body>
 </html>

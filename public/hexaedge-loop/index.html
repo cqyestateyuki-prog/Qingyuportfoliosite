@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HexaEdge · The Loop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Serif+SC:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F6F7; --raised:#FFFFFF; --sunken:#E4ECEE;
+    --ink:#14233A; --mute:#7C95AE; --fade:#A6B8C6;
+    --rule:#CAD6DD; --cinnabar:#A8392E; --indigo:#243E66; --gold:#B98A2F;
+    --latin:"Cormorant Garamond","Songti SC",serif;
+    --serif:"Noto Serif SC","Songti SC",serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  /* html 不能有底色,否则 iframe 里透不出宿主页面。
+     body 留一层半透的纸色:全透明的话卡片标题(深墨)落在星空上就看不见了 */
+  html{height:100%;background:transparent}
+  body{height:100%;
+    background:rgba(242,246,247,0.86);color:var(--ink);
+    font-family:var(--latin);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;-webkit-font-smoothing:antialiased;
+    user-select:none;
+  }
+
+  /* 填满宿主给的框。自己定宽高比的话,一旦和外层容器不一致(案例页里是 1:1),
+     上下就白空一大截 */
+  .stage{position:relative;width:100%;height:100%;display:grid;place-items:center}
+
+  /* 盘:整体跟着拖拽转 */
+  .wheel{position:absolute;inset:0;display:grid;place-items:center;
+         transition:transform .75s cubic-bezier(.22,.61,.36,1);cursor:grab}
+  .wheel.dragging{transition:none;cursor:grabbing}
+
+  /* 三道同心圆:卡片正好坐在最外那道上,尺寸由 JS 跟着半径给 */
+  .rings{position:absolute;aspect-ratio:1;border-radius:50%;border:1px solid var(--rule)}
+  .rings::before,.rings::after{content:"";position:absolute;border-radius:50%;border:1px solid var(--rule);opacity:.65}
+  .rings::before{inset:16%}
+  .rings::after{inset:36%}
+
+  .spokes{position:absolute;aspect-ratio:1}
+  .spokes i{position:absolute;left:50%;top:50%;width:1px;background:var(--rule);
+            opacity:.75;transform-origin:top center}
+
+  /* 六个站位 */
+  /* 卡片宽度由 JS 按半径给:六张绕圈时相邻卡中心距正好等于 R,超过 R 就会撞 */
+  .node{position:absolute;left:50%;top:50%;width:0;height:0}
+  .card{position:absolute;transform:translate(-50%,-50%);text-align:center;
+        transition:width .4s ease}
+  .shot{border:1px solid var(--rule);background:#fff;overflow:hidden;
+        aspect-ratio:16/10;box-shadow:0 16px 34px -18px rgba(20,35,58,.45);
+        transition:box-shadow .4s ease,border-color .4s ease,transform .4s ease}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+  .cap{margin-top:11px;display:flex;align-items:baseline;justify-content:center;gap:9px;white-space:nowrap}
+  .cap .rn{font-style:italic;font-weight:600;color:var(--cinnabar);font-size:19px}
+  .cap .nm{font-weight:600;font-size:22px;letter-spacing:.01em}
+  .cap2{margin-top:3px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+        color:var(--fade);text-transform:uppercase;white-space:nowrap}
+
+  .node.on .shot{border-color:var(--cinnabar);box-shadow:0 26px 52px -14px rgba(168,57,46,.45);
+                 transform:scale(1.06)}
+  .node.on .cap2{color:var(--mute)}
+
+  /* 盘心:太极 + 当前这一段。说明放这里,底部就全让给盘 */
+  .core{position:absolute;display:flex;flex-direction:column;align-items:center;gap:9px;
+        pointer-events:none;text-align:center;width:min(34%,420px)}
+  .taiji{width:clamp(58px,6.6vw,96px);aspect-ratio:1;flex:none}
+  .taiji svg{width:100%;height:100%;display:block}
+  .core .now{font-family:var(--mono);font-size:10px;letter-spacing:.26em;
+             text-transform:uppercase;color:var(--mute)}
+  .core .line{font-size:clamp(14px,1.35vw,19px);font-style:italic;color:var(--ink);
+              line-height:1.45;min-height:3em}
+
+  /* hint 也放盘心,底部留给最下面那张卡的 caption */
+  .core .hint{margin-top:2px;font-family:var(--mono);font-size:9px;letter-spacing:.2em;
+              text-transform:uppercase;color:var(--fade)}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="wheel" id="wheel">
+    <div class="rings"></div>
+    <div class="spokes" id="spokes"></div>
+    <div id="nodes"></div>
+  </div>
+
+  <div class="core">
+    <div class="taiji">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="49" fill="none" stroke="#243E66" stroke-width="1" opacity=".5"/>
+        <path d="M50 1 A49 49 0 0 1 50 99 A24.5 24.5 0 0 0 50 50 A24.5 24.5 0 0 1 50 1 Z" fill="#243E66" opacity=".85"/>
+        <circle cx="50" cy="25.5" r="7" fill="#F2F6F7"/>
+        <circle cx="50" cy="74.5" r="7" fill="#243E66" opacity=".85"/>
+      </svg>
+    </div>
+    <span class="now" id="now">i · Found</span>
+    <div class="line" id="line"></div>
+    <div class="hint">drag the wheel · or click a screen</div>
+  </div>
+</div>
+
+<script>
+const SHOTS = '/hexaedge-ui-kit/shots/';
+const STOPS = [
+  { rn:'i',   name:'Found', img:'hexagram-en.jpg',
+    who:'growth · seo',
+    line:'A hexagram page ranks, and someone who was not looking for divination lands on it.' },
+  { rn:'ii',  name:'Join',  img:'home-en.jpg',
+    who:'backend · auth',
+    line:'They sign up. Accounts, sessions and the credit ledger sit behind this one button.' },
+  { rn:'iii', name:'Cast',  img:'cast-wizard-en.jpg',
+    who:'product design',
+    line:'One plain question. The conversation collects everything the engine needs.' },
+  { rn:'iv',  name:'Read',  img:'market-reading-en.jpg',
+    who:'ai engineering',
+    line:'Direction, timing and confidence, written in the register that fits the reader.' },
+  { rn:'v',   name:'Pay',   img:'pricing-en.jpg',
+    who:'billing · entitlements',
+    line:'A tier gate stops them. Four plans, one entitlement ledger underneath.' },
+  { rn:'vi',  name:'Share', img:'community-en.jpg',
+    who:'growth · ugc',
+    line:'The reading goes back out, and the wall it lands on is the next page Google indexes.' },
+];
+
+const STEP = 360 / STOPS.length;
+const wheel  = document.getElementById('wheel');
+const nodes  = document.getElementById('nodes');
+const spokes = document.getElementById('spokes');
+const nowEl  = document.getElementById('now');
+const lineEl = document.getElementById('line');
+
+// 半径按舞台尺寸走,窗口变了要重算
+let R = 0;
+const setR = () => {
+  const st = document.querySelector('.stage');
+  R = st.clientHeight * 0.34;
+  // 三道同心圆和分格线跟着半径,卡片正好坐在最外一道上
+  const rings = document.querySelector('.rings');
+  rings.style.width = (R * 2) + 'px';
+  spokes.style.width = (R * 2) + 'px';
+  [...spokes.children].forEach(sp => { sp.style.height = (R * 0.64) + 'px'; });
+  // 相邻卡片中心距 = 2R·sin30° = R,留一点缝
+  els.forEach(n => { n.querySelector('.card').style.width = (R * 0.92) + 'px'; });
+  place();
+};
+
+const els = STOPS.map((s, i) => {
+  const n = document.createElement('div');
+  n.className = 'node';
+  n.innerHTML = `
+    <div class="card">
+      <div class="shot"><img src="${SHOTS}${s.img}" alt="${s.name}"></div>
+      <div class="cap"><span class="rn">${s.rn}</span><span class="nm">${s.name}</span></div>
+      <div class="cap2">${s.who}</div>
+    </div>`;
+  n.addEventListener('click', () => { if (!moved) select(i); });
+  nodes.appendChild(n);
+
+  const sp = document.createElement('i');
+  spokes.appendChild(sp);
+  return n;
+});
+
+function place () {
+  els.forEach((n, i) => {
+    const deg = -90 + i * STEP;
+    const rad = deg * Math.PI / 180;
+    const card = n.querySelector('.card');
+    card.style.left = (Math.cos(rad) * R) + 'px';
+    card.style.top  = (Math.sin(rad) * R) + 'px';
+  });
+  // 分格线落在两站中间
+  [...spokes.children].forEach((sp, i) => {
+    sp.style.transform = `rotate(${180 + STEP / 2 + i * STEP}deg) translateY(${R * 0.36}px)`;
+  });
+}
+
+let angle = 0;          // 盘当前转角
+let current = -1;
+
+function render () {
+  wheel.style.transform = `rotate(${angle}deg)`;
+  // 卡片反向转,保持水平
+  els.forEach(n => { n.querySelector('.card').style.transform = `translate(-50%,-50%) rotate(${-angle}deg)`; });
+  // 谁离正上方最近谁就是当前
+  const idx = ((Math.round(-angle / STEP) % STOPS.length) + STOPS.length) % STOPS.length;
+  if (idx !== current) {
+    current = idx;
+    els.forEach((n, i) => n.classList.toggle('on', i === idx));
+    const s = STOPS[idx];
+    nowEl.textContent = `${s.rn} · ${s.name}`;
+    lineEl.textContent = s.line;
+  }
+}
+
+const select = i => { angle = -i * STEP; render(); };
+
+// 拖拽转盘。不用 setPointerCapture:它会把 click 的目标也吃掉,卡片就点不动了
+let down = false, moved = false, startA = 0, startAngle = 0, startXY = null;
+const stage = document.querySelector('.stage');
+const angleAt = (x, y) => {
+  const r = stage.getBoundingClientRect();
+  return Math.atan2(y - (r.top + r.height / 2), x - (r.left + r.width / 2)) * 180 / Math.PI;
+};
+
+wheel.addEventListener('pointerdown', e => {
+  down = true; moved = false;
+  startA = angleAt(e.clientX, e.clientY); startAngle = angle;
+  startXY = [e.clientX, e.clientY];
+});
+addEventListener('pointermove', e => {
+  if (!down) return;
+  if (!moved && Math.hypot(e.clientX - startXY[0], e.clientY - startXY[1]) < 5) return;
+  if (!moved) { moved = true; wheel.classList.add('dragging'); }
+  angle = startAngle + (angleAt(e.clientX, e.clientY) - startA);
+  render();
+});
+addEventListener('pointerup', () => {
+  if (!down) return;
+  down = false;
+  if (!moved) return;              // 没动就是一次点击,交给 card 的 click
+  wheel.classList.remove('dragging');
+  angle = Math.round(angle / STEP) * STEP;   // 松手吸附到最近一格
+  render();
+});
+
+addEventListener('resize', setR);
+setR();
+render();
+
+/* 首页碎片墙把这一页嵌成小格预览,格子里不吃鼠标,谁也不会知道这盘能转。
+   带 ?autoscroll=1 时就自己一站一站走 —— 那个参数是「预览时自己动起来」的统一开关
+   (见 projectSlides.embedPreviewSrc),UI Kit 那页拿它往下滚,这里拿它转盘。
+   案例详情页嵌的是不带参数的地址,那边由访客自己拖。 */
+(function () {
+  if (new URLSearchParams(location.search).get('autoscroll') !== '1') return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var i = 0;
+  setInterval(function () {
+    /* 转一整圈要 6 次,每次停 3.2 秒够读完盘心那句话。
+       用 select 而不是连续转:连续转的话盘心的文字一直在换,反而看不清 */
+    i = (i + 1) % STOPS.length;
+    select(i);
+  }, 3200);
+})();
+</script>
+</body>
+</html>

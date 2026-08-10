@@ -80,7 +80,7 @@ export const musicEncounter = {
         images: [
           {
             src: '/media/projects/musicencounter/paperprototype.jpg',
-            alt: 'Paper Prototype Characters',
+            alt: 'Paper Prototype',
             caption: 'Hand-drawn character sketches used for paper prototype' 
           },
         ]
@@ -100,7 +100,7 @@ export const musicEncounter = {
         images: [
           {
             src: '/media/projects/musicencounter/Story.png',
-            alt: 'Musical Fantasy World',
+            alt: 'World Building',
             caption: 'The magical world of Sonorians'
           },
           {
@@ -110,7 +110,7 @@ export const musicEncounter = {
           },
           {
             src: '/media/projects/musicencounter/environment.png',
-            alt: 'Low-poly Art Style',
+            alt: 'Art Style',
             caption: 'Minimalist, relaxing visual design inspired by Journey and Sky'
           }
         ]
@@ -129,12 +129,12 @@ export const musicEncounter = {
         images: [
             {
               src: '/media/projects/musicencounter/iteration.jpg',
-              alt: 'Iteration Screenshot',
+              alt: 'Iteration',
               caption: 'Iteration Screenshot'
             },
             {
               src: '/media/projects/musicencounter/Playerfeedback.jpg',
-              alt: 'User Feedback & Gaming Experience data',
+              alt: 'User Feedback',
               caption: 'User Feedback & Gaming Experience data'
             },
           ]
@@ -159,7 +159,7 @@ export const musicEncounter = {
           },
           {
             src: '/media/projects/musicencounter/music-system.jpg',
-            alt: 'Music Generation System',
+            alt: 'Music System',
             caption: 'Technical architecture for music generation and interaction'
           },
         ]
@@ -175,22 +175,22 @@ export const musicEncounter = {
         images: [
           {
             src: '/media/projects/musicencounter/StartScreen.png',
-            alt: 'Gameplay Screenshot - Start Screen',
+            alt: 'Start Screen',
             caption: 'Game Start Screen'
           },
           {
             src: '/media/projects/musicencounter/personality.png',
-            alt: 'Gameplay Screenshot - Set your personality',
+            alt: 'Personality Setup',
             caption: 'Players set their personality and a melody will be generated'
           },
           {
             src: '/media/projects/musicencounter/123.png',
-            alt: 'Gameplay Screenshot - Explore the world',
+            alt: 'Explore the World',
             caption: 'Players having adventures in the world'
           },
           {
             src: '/media/projects/musicencounter/456.png',
-            alt: 'Gameplay Screenshot - Explore the world2',
+            alt: 'Explore the World',
             caption: 'Players having adventures in the world'
           },
         
