@@ -8,12 +8,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* 取自 wishflow/app/globals.css 的真实变量, 不是重新配的色 */
   :root{
     --paper:#faf9f7; --ink:#2e2b33; --text:#4a5568;
     --wish:#917fb9; --wish-ink:#5e4e8c; --mist:#eee9f5;
     --card:#ffffff; --border:rgba(214,206,233,.8);
-    --wish-low:#cdc2e4; --wish-deep:#7c6aaa;
+    --wish-low:#cdc2e4;
     --latin:"Cormorant Garamond",serif;
     --sans:"Noto Sans SC","PingFang SC",system-ui,sans-serif;
     --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
@@ -23,10 +22,16 @@
   .wrap{max-width:1480px;margin:0 auto;padding:48px 48px 80px}
   .brand{display:flex;align-items:center;gap:16px}
   .dot{width:14px;height:14px;border-radius:50%;background:var(--wish)}
-  .brand .nm{font-family:var(--latin);font-weight:600;font-size:26px;letter-spacing:.01em}
+  .brand .nm{font-family:var(--latin);font-weight:600;font-size:26px}
   .brand .cn{font-family:var(--sans);font-size:13px;letter-spacing:.4em;color:var(--wish-ink)}
   h1{font-family:var(--latin);font-weight:600;font-size:clamp(42px,5.2vw,72px);line-height:1.05;margin-top:28px;color:var(--wish-ink)}
   .sub{font-family:var(--latin);font-style:italic;font-size:20px;color:var(--text);margin-top:10px}
+  .viewbar{display:flex;align-items:center;gap:14px;margin-top:20px}
+  .viewbar .lb{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--wish-low)}
+  .seg{display:inline-flex;border:1px solid var(--border);background:var(--card);border-radius:999px;overflow:hidden}
+  .seg button{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    padding:9px 18px;border:0;background:transparent;color:var(--text);cursor:pointer;transition:background .2s,color .2s}
+  .seg button[aria-pressed="true"]{background:var(--wish);color:#fff}
   .sec{margin-top:52px;display:flex;align-items:baseline;gap:20px;border-bottom:1px solid var(--border);padding-bottom:14px}
   .sec .rn{font-family:var(--latin);font-style:italic;font-weight:600;font-size:26px;color:var(--wish)}
   .sec .en{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text)}
@@ -34,13 +39,20 @@
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:26px}
   @media (max-width:980px){.grid{grid-template-columns:1fr}.wrap{padding:36px 20px 60px}}
   .card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
-  .card .pv{background:var(--mist);padding:30px 30px 30px}
-  .phone{width:264px;margin:0 auto;position:relative;border:11px solid var(--wish-ink);border-radius:42px;
-    background:var(--wish-ink);box-shadow:0 22px 44px -20px rgba(94,78,140,.45)}
+  .card .pv{background:var(--mist);padding:30px 30px 0}
+  .card .shot{border:1px solid var(--border);border-bottom:0;background:#fff;border-radius:10px 10px 0 0;
+    box-shadow:0 20px 40px -20px rgba(94,78,140,.4);overflow:hidden;aspect-ratio:16/10}
+  .card .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
+  .card:hover .shot img{transform:scale(1.02)}
+  .phone{display:none;width:264px;margin:0 auto;position:relative;border:11px solid var(--wish-ink);
+    border-radius:42px;background:var(--wish-ink);box-shadow:0 22px 44px -20px rgba(94,78,140,.45)}
   .phone .scr{position:relative;overflow:hidden;border-radius:31px;background:#fff;aspect-ratio:390/844}
   .phone .scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
   .card:hover .phone .scr img{transform:scale(1.02)}
   .phone .isl{position:absolute;z-index:2;top:9px;left:50%;transform:translateX(-50%);width:92px;height:24px;border-radius:14px;background:var(--wish-ink)}
+  body[data-view="mobile"] .shot{display:none}
+  body[data-view="mobile"] .phone{display:block}
+  body[data-view="mobile"] .card .pv{padding:30px}
   .foot{display:flex;align-items:baseline;gap:14px;padding:18px 24px;border-top:1px solid var(--border)}
   .foot .rn{font-family:var(--latin);font-style:italic;font-weight:600;font-size:20px;color:var(--wish);flex:0 0 30px}
   .foot .nm{font-family:var(--latin);font-weight:600;font-size:21px;white-space:nowrap}
@@ -60,16 +72,30 @@
   </div>
 
   <h1>Wishflow · Screen Overview</h1>
-  <div class="sub">— a life-long wish navigator, captured on the device it was built for</div>
+  <div class="sub">— a life-long wish navigator, ten surfaces in both languages</div>
+
+  <div class="viewbar">
+    <span class="lb">View</span>
+    <div class="seg" role="group" aria-label="Viewport">
+      <button type="button" data-view="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" data-view="mobile" aria-pressed="false">Mobile</button>
+    </div>
+  </div>
 
   <div class="sec"><span class="rn">I</span><span class="en">Front Door</span><span class="tg">where it starts</span></div>
   <div class="grid">
     <a class="card" href="shots/home-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-home-en.jpg" alt="Landing, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/home-en.jpg" alt="Landing, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-home-en.jpg" alt="Landing, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">i</span><span class="nm">Landing &middot; EN</span><span class="ds">the line takes shape · 让愿望慢慢成形</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/home-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-home-zh.jpg" alt="Landing, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/home-zh.jpg" alt="Landing, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-home-zh.jpg" alt="Landing, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">ii</span><span class="nm">Landing &middot; ZH</span><span class="ds">the line takes shape · 让愿望慢慢成形</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
@@ -77,27 +103,45 @@
   <div class="sec"><span class="rn">II</span><span class="en">Core Loop</span><span class="tg">write, look, connect</span></div>
   <div class="grid">
     <a class="card" href="shots/try-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-try-en.jpg" alt="Create, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/try-en.jpg" alt="Create, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-try-en.jpg" alt="Create, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">iii</span><span class="nm">Create &middot; EN</span><span class="ds">describe a wish, AI draws it</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/try-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-try-zh.jpg" alt="Create, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/try-zh.jpg" alt="Create, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-try-zh.jpg" alt="Create, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">iv</span><span class="nm">Create &middot; ZH</span><span class="ds">describe a wish, AI draws it</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/wishes-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-wishes-en.jpg" alt="Wish Gallery, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/wishes-en.jpg" alt="Wish Gallery, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-wishes-en.jpg" alt="Wish Gallery, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">v</span><span class="nm">Wish Gallery &middot; EN</span><span class="ds">board · galaxy · river, three ways to look</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/wishes-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-wishes-zh.jpg" alt="Wish Gallery, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/wishes-zh.jpg" alt="Wish Gallery, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-wishes-zh.jpg" alt="Wish Gallery, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">vi</span><span class="nm">Wish Gallery &middot; ZH</span><span class="ds">board · galaxy · river, three ways to look</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/daily-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-daily-en.jpg" alt="Today, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/daily-en.jpg" alt="Today, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-daily-en.jpg" alt="Today, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">vii</span><span class="nm">Today &middot; EN</span><span class="ds">a mood, and one wish worth two minutes</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/daily-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-daily-zh.jpg" alt="Today, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/daily-zh.jpg" alt="Today, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-daily-zh.jpg" alt="Today, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">viii</span><span class="nm">Today &middot; ZH</span><span class="ds">a mood, and one wish worth two minutes</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
@@ -105,19 +149,31 @@
   <div class="sec"><span class="rn">III</span><span class="en">Keeping</span><span class="tg">no streaks, no failures</span></div>
   <div class="grid">
     <a class="card" href="shots/fragments-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-fragments-en.jpg" alt="Fragments, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/fragments-en.jpg" alt="Fragments, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-fragments-en.jpg" alt="Fragments, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">ix</span><span class="nm">Fragments &middot; EN</span><span class="ds">half-thoughts, kept locally</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/fragments-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-fragments-zh.jpg" alt="Fragments, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/fragments-zh.jpg" alt="Fragments, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-fragments-zh.jpg" alt="Fragments, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">x</span><span class="nm">Fragments &middot; ZH</span><span class="ds">half-thoughts, kept locally</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/log-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-log-en.jpg" alt="Connection Log, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/log-en.jpg" alt="Connection Log, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-log-en.jpg" alt="Connection Log, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xi</span><span class="nm">Connection Log &middot; EN</span><span class="ds">only the moments you came back</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/log-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-log-zh.jpg" alt="Connection Log, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/log-zh.jpg" alt="Connection Log, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-log-zh.jpg" alt="Connection Log, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xii</span><span class="nm">Connection Log &middot; ZH</span><span class="ds">only the moments you came back</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
@@ -125,44 +181,86 @@
   <div class="sec"><span class="rn">IV</span><span class="en">Account & Legal</span><span class="tg">the quiet parts</span></div>
   <div class="grid">
     <a class="card" href="shots/me-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-me-en.jpg" alt="Settings, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/me-en.jpg" alt="Settings, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-me-en.jpg" alt="Settings, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xiii</span><span class="nm">Settings &middot; EN</span><span class="ds">sync, visual intensity, language</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/me-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-me-zh.jpg" alt="Settings, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/me-zh.jpg" alt="Settings, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-me-zh.jpg" alt="Settings, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xiv</span><span class="nm">Settings &middot; ZH</span><span class="ds">sync, visual intensity, language</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/login-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-login-en.jpg" alt="Sign in, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/login-en.jpg" alt="Sign in, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-login-en.jpg" alt="Sign in, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xv</span><span class="nm">Sign in &middot; EN</span><span class="ds">email link or Google</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/login-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-login-zh.jpg" alt="Sign in, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/login-zh.jpg" alt="Sign in, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-login-zh.jpg" alt="Sign in, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xvi</span><span class="nm">Sign in &middot; ZH</span><span class="ds">email link or Google</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/privacy-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-privacy-en.jpg" alt="Privacy, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/privacy-en.jpg" alt="Privacy, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-privacy-en.jpg" alt="Privacy, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xvii</span><span class="nm">Privacy &middot; EN</span><span class="ds">what stays on device</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/privacy-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-privacy-zh.jpg" alt="Privacy, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/privacy-zh.jpg" alt="Privacy, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-privacy-zh.jpg" alt="Privacy, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xviii</span><span class="nm">Privacy &middot; ZH</span><span class="ds">what stays on device</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/terms-en.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-terms-en.jpg" alt="Terms, English"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/terms-en.jpg" alt="Terms, English"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-terms-en.jpg" alt="Terms, English, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xix</span><span class="nm">Terms &middot; EN</span><span class="ds">plain, short</span><span class="tagx">full page ↗</span></div>
     </a>
     <a class="card" href="shots/terms-zh.jpg" target="_blank" rel="noopener">
-      <div class="pv"><div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/t-terms-zh.jpg" alt="Terms, Chinese"></div></div></div>
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/terms-zh.jpg" alt="Terms, Chinese"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-terms-zh.jpg" alt="Terms, Chinese, mobile"></div></div>
+      </div>
       <div class="foot"><span class="rn">xx</span><span class="nm">Terms &middot; ZH</span><span class="ds">plain, short</span><span class="tagx">full page ↗</span></div>
     </a>
   </div>
 
   <div class="end">
-    <span>WISHFLOW — SCREEN OVERVIEW · iPHONE 390&times;844 · EN LEFT / ZH RIGHT</span>
+    <span>WISHFLOW — SCREEN OVERVIEW · DESKTOP 1440&times;900 / iPHONE 390&times;844 · EN LEFT / ZH RIGHT</span>
     <span>CAPACITOR · iOS &amp; ANDROID</span>
   </div>
 
 </div>
+<script>
+  (function () {
+    var body = document.body, segs = document.querySelectorAll('.seg button');
+    var cards = [].map.call(document.querySelectorAll('a.card'), function (a) {
+      var d = a.getAttribute('href');
+      return { a: a, d: d, m: d.replace(/^shots\//, 'shots/m-') };   // 卡片显示 mt-(顶部缩略), 点开给整张 m-
+    });
+    function apply(v) {
+      body.dataset.view = v;
+      segs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.view === v)); });
+      cards.forEach(function (c) { c.a.setAttribute('href', v === 'mobile' ? c.m : c.d); });
+      try { localStorage.setItem('wfkit-view', v); } catch (e) {}
+    }
+    segs.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.view); }); });
+    var saved; try { saved = localStorage.getItem('wfkit-view'); } catch (e) {}
+    apply(saved === 'mobile' ? 'mobile' : 'desktop');
+  })();
+</script>
 </body>
 </html>
