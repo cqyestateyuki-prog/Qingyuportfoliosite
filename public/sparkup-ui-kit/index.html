@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spark Up · Screen Overview — UI Kit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* 取自 apps/web/src/styles/globals.css 的真实变量 */
+  :root{
+    --paper:#F8FAFC; --card:#ffffff; --ink:#030213; --muted:#717182;
+    --line:#e2e8f0; --accent:#2563EB; --accent-soft:#E9EFFD;
+    --sans:"Inter",system-ui,-apple-system,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1480px;margin:0 auto;padding:48px 48px 80px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--accent);color:#fff;display:flex;
+    align-items:center;justify-content:center;font-weight:700;font-size:17px}
+  .brand .nm{font-weight:700;font-size:19px;letter-spacing:-.01em}
+  .brand .cn{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+  h1{font-size:clamp(34px,4.4vw,56px);font-weight:700;letter-spacing:-.022em;line-height:1.06;margin-top:26px}
+  .sub{font-size:16px;color:var(--muted);margin-top:10px;max-width:640px;line-height:1.6}
+  .viewbar{display:flex;align-items:center;gap:14px;margin-top:22px}
+  .viewbar .lb{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .seg{display:inline-flex;border:1px solid var(--line);background:var(--card);border-radius:10px;overflow:hidden}
+  .seg button{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    padding:9px 18px;border:0;background:transparent;color:var(--muted);cursor:pointer;transition:.18s}
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  .sec{margin-top:52px;display:flex;align-items:baseline;gap:18px;border-bottom:1px solid var(--line);padding-bottom:13px}
+  .sec .rn{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--accent)}
+  .sec .en{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .sec .tg{font-size:15px;color:#a3aab8;margin-left:auto}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:26px}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}.wrap{padding:34px 20px 60px}}
+  .card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);
+    border-radius:16px;overflow:hidden;transition:box-shadow .25s,transform .25s}
+  .card:hover{box-shadow:0 18px 40px -24px rgba(3,2,19,.35);transform:translateY(-2px)}
+  .card .pv{background:var(--accent-soft);padding:26px 26px 0}
+  .card .shot{border:1px solid var(--line);border-bottom:0;background:#fff;border-radius:10px 10px 0 0;
+    box-shadow:0 16px 34px -20px rgba(3,2,19,.4);overflow:hidden;aspect-ratio:16/10}
+  .card .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
+  .phone{display:none;width:258px;margin:0 auto;position:relative;border:10px solid var(--ink);
+    border-radius:40px;background:var(--ink);box-shadow:0 22px 44px -22px rgba(3,2,19,.5)}
+  .phone .scr{position:relative;overflow:hidden;border-radius:31px;background:#fff;aspect-ratio:390/844}
+  .phone .scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+  .phone .isl{position:absolute;z-index:2;top:8px;left:50%;transform:translateX(-50%);width:88px;height:22px;border-radius:13px;background:var(--ink)}
+  body[data-view="mobile"] .shot{display:none}
+  body[data-view="mobile"] .phone{display:block}
+  body[data-view="mobile"] .card .pv{padding:26px}
+  .foot{display:flex;align-items:baseline;gap:13px;padding:16px 22px;border-top:1px solid var(--line)}
+  .foot .rn{font-family:var(--mono);font-size:13px;color:var(--accent);flex:0 0 26px}
+  .foot .nm{font-weight:600;font-size:16px;white-space:nowrap}
+  .foot .ds{font-size:14px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .foot .tagx{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:#a3aab8;text-transform:uppercase;white-space:nowrap}
+  a.card:hover .tagx{color:var(--accent)}
+  .end{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+    gap:20px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--muted);flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand">
+    <span class="mark">S</span>
+    <div><div class="nm">Spark Up</div><div class="cn">AI Co-founder Platform</div></div>
+  </div>
+
+  <h1>Spark Up · Screen Overview</h1>
+  <p class="sub">— nine live surfaces of the shipped product, captured full-length on desktop and phone.
+    Community ideas and the diagnostic question set are served by the real FastAPI backend.</p>
+
+  <div class="viewbar">
+    <span class="lb">View</span>
+    <div class="seg" role="group" aria-label="Viewport">
+      <button type="button" data-view="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" data-view="mobile" aria-pressed="false">Mobile</button>
+    </div>
+  </div>
+
+  <div class="sec"><span class="rn">I</span><span class="en">Front Door</span><span class="tg">the pitch</span></div>
+  <div class="grid">
+    <a class="card" href="shots/landing.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/landing.jpg" alt="Landing"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-landing.jpg" alt="Landing, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">i</span><span class="nm">Landing</span><span class="ds">where ideas get their first spark</span><span class="tagx">full page ↗</span></div>
+    </a>
+  </div>
+
+  <div class="sec"><span class="rn">II</span><span class="en">Diagnostic</span><span class="tg">know before you leap</span></div>
+  <div class="grid">
+    <a class="card" href="shots/ai-test.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/ai-test.jpg" alt="Assessment Picker"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-ai-test.jpg" alt="Assessment Picker, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">ii</span><span class="nm">Assessment Picker</span><span class="ds">quick five minutes, or the full read</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/diagnostic.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/diagnostic.jpg" alt="Diagnostic Flow"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-diagnostic.jpg" alt="Diagnostic Flow, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">iii</span><span class="nm">Diagnostic Flow</span><span class="ds">twelve questions across six dimensions</span><span class="tagx">full page ↗</span></div>
+    </a>
+  </div>
+
+  <div class="sec"><span class="rn">III</span><span class="en">Ideas</span><span class="tg">from seed to plan</span></div>
+  <div class="grid">
+    <a class="card" href="shots/dashboard.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/dashboard.jpg" alt="Dashboard"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-dashboard.jpg" alt="Dashboard, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">iv</span><span class="nm">Dashboard</span><span class="ds">readiness, next steps, and the square</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/idea-bank.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/idea-bank.jpg" alt="Idea Bank"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-idea-bank.jpg" alt="Idea Bank, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">v</span><span class="nm">Idea Bank</span><span class="ds">curated seeds + the sparking engine</span><span class="tagx">full page ↗</span></div>
+    </a>
+  </div>
+
+  <div class="sec"><span class="rn">IV</span><span class="en">Account & Legal</span><span class="tg">the quiet parts</span></div>
+  <div class="grid">
+    <a class="card" href="shots/profile.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/profile.jpg" alt="Sign in"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-profile.jpg" alt="Sign in, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">vi</span><span class="nm">Sign in</span><span class="ds">password or email link</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/register.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/register.jpg" alt="Create Account"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-register.jpg" alt="Create Account, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">vii</span><span class="nm">Create Account</span><span class="ds">one screen, no wizard</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/feedback.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/feedback.jpg" alt="Feedback"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-feedback.jpg" alt="Feedback, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">viii</span><span class="nm">Feedback</span><span class="ds">sliders, not a survey</span><span class="tagx">full page ↗</span></div>
+    </a>
+    <a class="card" href="shots/terms.jpg" target="_blank" rel="noopener">
+      <div class="pv">
+        <div class="shot"><img loading="lazy" src="shots/terms.jpg" alt="Terms of Service"></div>
+        <div class="phone"><div class="isl"></div><div class="scr"><img loading="lazy" src="shots/mt-terms.jpg" alt="Terms of Service, mobile"></div></div>
+      </div>
+      <div class="foot"><span class="rn">ix</span><span class="nm">Terms of Service</span><span class="ds">on ink, not paper</span><span class="tagx">full page ↗</span></div>
+    </a>
+  </div>
+
+  <div class="end">
+    <span>SPARK UP — SCREEN OVERVIEW · DESKTOP 1440&times;900 / iPHONE 390&times;844</span>
+    <span>VITE + REACT &middot; FASTAPI &middot; FIREBASE</span>
+  </div>
+
+</div>
+<script>
+  (function () {
+    var body = document.body, segs = document.querySelectorAll('.seg button');
+    var cards = [].map.call(document.querySelectorAll('a.card'), function (a) {
+      var d = a.getAttribute('href');
+      return { a: a, d: d, m: d.replace(/^shots\//, 'shots/m-') };
+    });
+    function apply(v) {
+      body.dataset.view = v;
+      segs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.view === v)); });
+      cards.forEach(function (c) { c.a.setAttribute('href', v === 'mobile' ? c.m : c.d); });
+      try { localStorage.setItem('sukit-view', v); } catch (e) {}
+    }
+    segs.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.view); }); });
+    var saved; try { saved = localStorage.getItem('sukit-view'); } catch (e) {}
+    apply(saved === 'mobile' ? 'mobile' : 'desktop');
+  })();
+</script>
+</body>
+</html>
