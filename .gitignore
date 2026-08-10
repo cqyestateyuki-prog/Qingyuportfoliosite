@@ -10,3 +10,6 @@ pnpm-lock.yaml
 # 本地个人文件,勿提交
 commit_msg.txt
 作品集方向-笔记.md
+
+# UI Kit 截图产出
+scripts/sparkup-ui-kit/out/
