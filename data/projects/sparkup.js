@@ -8,7 +8,7 @@ export const sparkup = {
       en: 'Where Ideas Get Their First Spark',
       zh: '让创意迸发第一道火花'
     },
-    categories: ['AI', 'Product Design', 'UIUX', 'Programming', 'Research'],
+    categories: ['AI', 'Product Design', 'UIUX', 'Research'],
     tags: ['Product Strategy', 'UX Design', 'UI Design', 'Figma Make', 'Google AI Studio', 'Next.js', 'Tailwind CSS', 'FastAPI', 'Firebase', 'OpenAI API', 'AWS', 'JTBD', 'Kano Model'],
     techTags: ['#Figma Make', '#Google AI Studio', '#Next.js', '#Tailwind CSS', '#FastAPI', '#Firebase', '#OpenAI API', '#AWS'],
 
