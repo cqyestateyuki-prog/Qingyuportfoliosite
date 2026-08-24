@@ -5,5 +5,9 @@ Allow: /
 Disallow: /project/hexaedge
 Disallow: /hexaedge-knowledge-graph/
 Disallow: /hexaedge-ui-kit/
+Disallow: /hexaedge-loop/
+Disallow: /media/projects/hexaedge/
+Disallow: /media/thumbs/hexaedge/
+Disallow: /media/thumbs-hi/hexaedge/
 
 Sitemap: https://portfolio.qingyucao.com/sitemap.xml

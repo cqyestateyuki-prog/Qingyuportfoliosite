@@ -18,6 +18,14 @@ This site is a single-page React app. If you cannot render JavaScript, this file
 - Spark Up (2026): An AI platform that diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback. https://portfolio.qingyucao.com/project/sparkup
 - Petiboxy (2025): A pet rescue ecosystem connecting people with pets in need, supporting rescue organizations, and building a compassionate community. https://portfolio.qingyucao.com/project/petiboxy
 - Stumbldoor (2024): A mobile app that rethinks the library experience for people who grew up reading on screens. https://portfolio.qingyucao.com/project/stumbldoor
+- Wishflow (2026): A bilingual wish keeper for people who go quiet when an app starts counting streaks. Designed and built solo in Next.js and Supabase. https://portfolio.qingyucao.com/project/wishflow
+
+## Live sites
+
+These two run as real businesses and have no case study page on this site.
+
+- GBK Parts (2026): A wholesale storefront for heavy-duty truck parts, organized around how fleet buyers actually search: by SKU, by part number, by cross reference. https://gbkparts.com/
+- Mia World NYC (2026): A Shopify storefront for handmade press-on nails, where each collection shot fills the screen before any copy asks you to buy. https://miaworldnyc.com/
 
 ## Contact
 
