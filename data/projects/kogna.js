@@ -10,7 +10,7 @@ export const kogna = {
     },
     categories: ['AI', 'Product Design', 'UIUX', 'Design System'],
     tags: ['Design System', 'UI Design', 'Product Design', 'SaaS', 'B2B', 'AI Platform', 'Dark Mode', 'Component Library'],
-    techTags: ['#Design System', '#Next.js', '#Tailwind CSS', '#React', '#TypeScript', '#Dark Mode'],
+    techTags: ['#Design System', '#Next.js', '#Tailwind CSS', '#React', '#TypeScript', '#Dark Mode', '#Design Tooling', '#AI Workflow'],
 
     thumbnail: '/media/projects/kogna/slides/slide-01.png',
     brief: {
@@ -33,9 +33,9 @@ export const kogna = {
     collaborators: [],
     meta: {
       role: 'Lead Product Designer & Design Engineer',
-      duration: 'Jan 2026 – Present',
+      duration: 'Feb 2026 – Present',
       team: '10-person startup · CEO, COO, 3 frontend, 5 backend',
-      stack: 'Figma · Claude Code · Next.js · React · Supabase',
+      stack: 'Figma · Claude Code · Next.js · React · Playwright · Supabase',
     },
 
     colors: {
@@ -84,8 +84,8 @@ export const kogna = {
         id: 'research',
         title: 'Research',
         sectionTag: '02 · Research',
-        mainTitle: 'Leaders don\'t want another dashboard',
-        briefContent: 'Before drawing a screen I sat in on customer discovery: [[180+ outreach contacts]], [[15+ executive interviews]], and three validated personas across CEOs, COOs and chiefs of staff. One line kept coming back, and it set the whole direction: leaders don\'t want another dashboard to read, they want the [[decision surfaced]] for them.',
+        mainTitle: 'Leaders asked for the decision, not the data',
+        briefContent: 'Before drawing a screen I sat in on customer discovery: [[180+ outreach contacts]], [[3 in-depth operator interviews]] and [[1 beta session]], and three validated personas across CEOs, COOs and chiefs of staff. One line kept coming back, and it set the whole direction: leaders don\'t want another dashboard to read, they want the [[decision surfaced]] for them.',
         icon: '🔍',
         imageDisplayMode: 'single',
         images: [
@@ -188,8 +188,8 @@ export const kogna = {
         id: 'how-we-build',
         title: 'How We Build',
         sectionTag: '06 · How We Build',
-        mainTitle: 'One source of truth, an AI-accelerated loop',
-        briefContent: 'One [[design system]] is the single source of truth: tokens, an Inter type ramp and every component live once in code and mirror into Figma under the same names, so changing a token updates code, docs and design together. [[Figma and Claude Code stay in sync over MCP]], so a screen I design becomes token-correct React and the code flows back to the file. Every visual change ships with a [[before/after page diff]] and a review pass, so the person who designs a screen is the one who ships it.',
+        mainTitle: 'One source of truth, checked on every change',
+        briefContent: 'The product changes every week and much of the code is written with an AI in the loop, so a design system that only lived in Figma would have drifted from the product within a month. So it lives in code. Tokens, the type ramp and every component are written once, in [[globals.css and an 882-line DESIGN.md]], and mirrored into the Figma library under the same names; a map file records which Figma node is which component. Figma and Claude Code talk over MCP in both directions: a screen I draw in Figma comes back as token-correct React, and a token I change in code updates the Figma variables. [[Nineteen unauthenticated preview routes]] render every screen in a fixed state, so the whole product can be screenshotted without a login, and every visual change ships with its own before/after page diff. The person who designs the screen is the one who ships it, usually the same week.',
         icon: '⚡',
         imageDisplayMode: 'single',
         images: [
@@ -206,13 +206,51 @@ export const kogna = {
         ]
       },
 
-      // ── 07 · Outcomes (real beta signal + founder quote; keeps counts) ──
+      // ── 07 · The Tooling (the workflow, and the tools that keep it honest) ──
+      {
+        id: 'tooling',
+        title: 'The Tooling',
+        sectionTag: '07 · The Tooling',
+        mainTitle: 'The tools I wrote to keep the system honest',
+        briefContent: 'Rules that nobody checks stop being rules. So beside the design system I wrote six small tools and wired two of them into CI as merge-blocking steps. On every pull request they answer three questions: does this code break a rule, is the codebase drifting, and did a page change that nobody meant to change. [[Every number below is read out of the repo, not estimated.]]',
+        icon: '🛠️',
+        featureDisplayMode: 'side-by-side',
+        features: [
+          {
+            name: 'design-lint',
+            label: '867 lines · 22 rules · blocks the merge',
+            detail: 'A static check that reads DESIGN.md back to the code. It fails a pull request for raw hex where a token exists, pixel sizes off the type ramp, a fifth font size in one view, weight-500 text, off-ladder radii, coloured left-edge bars, and hover states that point at a token nobody defined. A rule can be broken on purpose, but only with a written reason on that line.'
+          },
+          {
+            name: 'design-budget',
+            label: '8 counters · numbers only move down',
+            detail: 'Some drift is legal line by line and still bad in total: 558 raw colour literals, 110 off-scale spacing values, 90 off-ramp type sizes. The budget records those counts and fails CI if any of them goes up. Nothing has to be fixed all at once; the backlog just cannot grow.'
+          },
+          {
+            name: 'page-snapshot + page-diff-report',
+            label: '19 preview routes · 22 baselines · per-pixel diff',
+            detail: 'One command screenshots every route in light and dark into a versioned set, with a manifest of what was captured and what was not. Another compares two sets pixel by pixel and writes a report sorted most-changed first, with unchanged pages folded away. It is how a "small tweak" gets caught touching six pages.'
+          },
+          {
+            name: 'ds-inspect',
+            label: '1,558 lines · every route, every token',
+            detail: 'The cross-reference a designer keeps asking engineers for. It walks every route, resolves the component tree, and reports which type role, colour token and spacing step each page is wearing, and which design-system entry owns that value. Off-ramp values are flagged in place.'
+          },
+          {
+            name: 'figma-web-snapshots + kogna-ui-review',
+            label: 'Figma stays anchored · an agent runs the review',
+            detail: 'A script re-anchors the Figma "Live App Snapshots" page to the running app, so the file cannot drift from the product. A review skill for Claude Code reads DESIGN.md, runs the gate, and reports the pass rate together with the parts of the app the gate does not cover yet, citing a rule ID on every finding.'
+          }
+        ]
+      },
+
+      // ── 08 · Outcomes (real beta signal + founder quote; keeps counts) ──
       {
         id: 'outcomes',
         title: 'Outcomes',
-        sectionTag: '07 · Outcomes',
+        sectionTag: '08 · Outcomes',
         mainTitle: 'From idea to a live, validated platform',
-        briefContent: 'Kogna is a [[live V1 in private beta]], running on a [[10+ connector]] backbone and validated against [[180+ discovery conversations]], with its [[first design-partner leaders]] onboard and a post-beta pricing path. Its founder, CEO Jonathan Beck, frames the bet plainly: "today\'s strategy tools show you what happened; we built something that shows you what\'s next, and why." What ships next is as deliberate as what shipped: custom model training on a feedback-enriched lakehouse, more connectors, and multi-step agents that run an analysis end to end.',
+        briefContent: 'Kogna is a [[live V1 in private beta]], running on a [[10+ connector]] backbone and validated against [[180+ discovery outreach]], with [[2 pilot companies and 1 partner organization]] onboard and a post-beta pricing path. Its founder, CEO Jonathan Beck, frames the bet plainly: "today\'s strategy tools show you what happened; we built something that shows you what\'s next, and why." What ships next is as deliberate as what shipped: custom model training on a feedback-enriched lakehouse, more connectors, and multi-step agents that run an analysis end to end.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
@@ -224,11 +262,11 @@ export const kogna = {
         ]
       },
 
-      // ── 08 · Reflection ──
+      // ── 09 · Reflection ──
       {
         id: 'reflection',
         title: 'Reflection',
-        sectionTag: '08 · Reflection',
+        sectionTag: '09 · Reflection',
         mainTitle: 'A design system is leverage',
         briefContent: 'At Kogna I design the screens and write the code that ships them, so I design what I can actually build and put it live the same week. The product is young and changes constantly, so I lock the flow and logic first and let the polish catch up release by release. [[I\'d rather put a working version in front of real users than hold back a perfect one.]] The lesson I\'ll keep: [[a system earns its place only when reaching for it is the easy choice.]]',
         icon: '💭'

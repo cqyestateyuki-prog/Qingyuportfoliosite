@@ -2,6 +2,9 @@
 export const sparkup = {
     id: 'sparkup',
     featured: true, order: 3, // Selected Work · 第 3 位
+    // 碎片墙:成品图(Diagnostic / Forge / Validation)要连着排在 04-06,
+    // UI Kit 别插在中间,往后排到最后一格
+    artifactSlot: 6,
     title: 'Spark Up',
     year: '2026',
     subtitle: {
@@ -178,7 +181,9 @@ export const sparkup = {
           {
             name: 'Spark Forge',
             detail: 'Set keywords, budget, and scope, optionally drag in an Idea Seed, and AI generates business ideas matched to your diagnostic profile.',
-            image: '/media/projects/sparkup/hero-first-spark.jpg',
+            // 这里以前挂的是 hero 那张 Product Hunt 宣图,和顶部大图重复,
+            // 碎片墙也因为去重把这一格整个跳掉了,换成产品里真实的 Forge 界面
+            image: '/media/projects/sparkup/final-spark-forge.jpg',
             imageCaption: 'Spark Forge: drag in Idea Seeds, set budget and scope, and let AI forge ideas matched to your profile'
           },
           {

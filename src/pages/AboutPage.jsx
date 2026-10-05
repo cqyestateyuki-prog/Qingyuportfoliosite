@@ -122,12 +122,12 @@ const AboutPage = () => {
               </motion.div>
             </div>
 
-            {/* 右:三卡叠放(照片×2 + CodeProfile) */}
+            {/* 右:三卡叠放(照片 → CodeProfile → Claude 用量截图) */}
             <div className="flex-1 w-full flex justify-center lg:justify-end relative min-h-[720px]">
               <div className="relative w-full max-w-md mx-auto lg:mr-0">
                 {[
-                  { src: '/files/profile picture/profile_picture3.jpg', y: 0, rotate: -3, z: 'z-10', delay: 0 },
-                  { src: '/files/profile picture/profile_picture4.jpg', y: 260, rotate: 2, z: 'z-20', delay: 0.2 },
+                  { src: '/files/profile picture/profile_picture3.jpg', alt: 'Serena Cao', ratio: '16 / 10', y: 0, rotate: -3, z: 'z-10', delay: 0 },
+                  { src: '/files/profile picture/claude-max-usage.png', alt: 'Claude Max plan usage, weekly limit at 96% used', ratio: '1520 / 810', y: 520, rotate: -1, z: 'z-30', delay: 0.4 },
                 ].map((card) => (
                   <motion.div
                     key={card.src}
@@ -142,19 +142,19 @@ const AboutPage = () => {
                       boxShadow: '0 8px 32px rgba(0,0,0,0.18), 0 0 24px var(--hud-glow)',
                     }}
                   >
-                    <div className="aspect-[16/10] rounded-xl overflow-hidden relative">
-                      <img src={card.src} alt="Serena Cao" className="w-full h-full object-cover" />
+                    <div className="rounded-xl overflow-hidden relative" style={{ aspectRatio: card.ratio }}>
+                      <img src={card.src} alt={card.alt} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 mix-blend-overlay" />
                     </div>
                   </motion.div>
                 ))}
 
                 <motion.div
-                  initial={{ opacity: 0, y: 20, rotate: -1 }}
-                  animate={{ opacity: 1, y: 520, rotate: -1 }}
+                  initial={{ opacity: 0, y: 20, rotate: 2 }}
+                  animate={{ opacity: 1, y: 260, rotate: 2 }}
                   whileHover={{ rotate: 0, zIndex: 40 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="absolute top-0 left-0 lg:left-4 w-full z-30"
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="absolute top-0 left-0 lg:left-4 w-full z-20"
                 >
                   <CodeProfile />
                 </motion.div>

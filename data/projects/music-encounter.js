@@ -4,7 +4,7 @@ export const musicEncounter = {
     year: '2024',
     title: { en: 'Music Encounter', zh: '音乐邂逅' },
     subtitle: { en: '3D Open World Social Adventure Game', zh: '3D 开放世界社交冒险游戏' },
-    categories: ['Game', 'Research', 'Programming'],
+    categories: ['Game', 'Research'],
     tags: ['Game Design', 'Unity', 'Music Interaction', 'Social Gaming', 'Research'],
     techTags: ['#Unity', 'C#', '#Interactive Design', '#Music notes from text'],
     

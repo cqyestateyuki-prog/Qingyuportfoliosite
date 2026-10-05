@@ -103,6 +103,9 @@ const Showcase = ({ projects }) => {
   });
   // 每个项目当前翻到第几页(九格一页)
   const [pages, setPages] = useState({});
+  // 翻页条滚进视野过的项目。提示动画要等人真看到了才播,
+  // 否则首个项目默认展开,动画在页面顶部就演完了,滚下来只剩一条静止的小字
+  const [pagerSeen, setPagerSeen] = useState(() => new Set());
 
   const toggle = (id, next) => {
     setExpandedIds((prev) => {
@@ -143,6 +146,9 @@ const Showcase = ({ projects }) => {
               ...prev,
               [project.id]: (page + d + totalPages) % totalPages,
             }));
+          // 这条右侧的翻页很容易被当成装饰读过去。滚进视野时推一下下箭头、
+          // 把说明浮出来,人自己翻过一次就不用再提示了
+          const hintPager = pagerSeen.has(project.id) && pages[project.id] === undefined;
 
           return (
             <ReelItem key={project.id}>
@@ -228,7 +234,13 @@ const Showcase = ({ projects }) => {
                       按钮沿用 Live Site 那套发光,这一屏就这两处会亮。
                       一页九格,剩下的缩略图在后面几页;只有一页的项目不显示 */}
                   {isExpanded && totalPages > 1 && (
-                    <div className="shatter-pager shatter-pager-side">
+                    <motion.div
+                      className={`shatter-pager shatter-pager-side${hintPager ? ' is-hinting' : ''}`}
+                      onViewportEnter={() =>
+                        setPagerSeen((prev) => (prev.has(project.id) ? prev : new Set(prev).add(project.id)))
+                      }
+                      viewport={{ once: true, amount: 0.8 }}
+                    >
                       <button
                         type="button"
                         onClick={() => turnPage(-1)}
@@ -250,7 +262,7 @@ const Showcase = ({ projects }) => {
                       >
                         ∨
                       </button>
-                    </div>
+                    </motion.div>
                   )}
                 </div>
 

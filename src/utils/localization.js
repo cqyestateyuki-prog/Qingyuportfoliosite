@@ -73,7 +73,7 @@ export const localizeProject = (project, language = 'en') => {
         ...btn,
         text: getLocalizedText(btn.text, language),
       })),
-    } : undefined,
+    } : {}, // 没写 overview 的项目(如 gbkparts/miaworld)给空对象,读字段时整块跳过而不是崩
     // role 的本地化
     role: project.role ? {
       ...project.role,

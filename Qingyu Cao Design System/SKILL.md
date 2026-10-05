@@ -11,7 +11,8 @@ Mockups, decks, landing pages, case studies, and prototypes that should feel lik
 1. `README.md` — voice, tone, casing, sample copy, surface rhythm, every visual rule.
 2. `colors_and_type.css` — every token. Always link this file rather than hardcoding hex.
 3. `ui_kits/portfolio/` — React reference recreation of all the major surfaces. Open `index.html` to see them composed.
-4. `preview/` — single-purpose review cards (colors, type, spacing, components, brand, icons).
+4. `../public/portfolio-ui-kit/` — **real renders**: every live screen (17 × EN/ZH × desktop/mobile) shot from the running app, browsable gallery in `index.html`. When recreating a surface, check here for what it actually looks like today. Re-shoot after UI changes: `scripts/portfolio-ui-kit/README.md`.
+5. `preview/` — single-purpose review cards (colors, type, spacing, components, brand, icons).
 
 ## Hard rules — never break
 

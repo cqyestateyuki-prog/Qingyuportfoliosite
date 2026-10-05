@@ -14,6 +14,10 @@ export const TILES_PER_PAGE = 9;
  * 前四格让叙事先一口气讲完(问题 → 市场 → 设计跨越),别被打断;
  * 紧接着放能动手玩的 artifact —— 它们比任何静态截图都更能说明东西真做出来了。
  * 提前排还顺带解决一件事:artifact 在案例里通常排得很靠后,不然会被第一页截掉。
+ *
+ * 成品图本身就是这个项目最该先看的东西时(SparkUp 的 Diagnostic / Forge / Validation
+ * 是连着讲的一组),artifact 插在中间会把这组切断 —— 那种项目在 data 里写
+ * artifactSlot 往后挪。数字大于静态图张数就等于排到最后一格。
  */
 const ARTIFACT_SLOT = 4;
 
@@ -77,8 +81,11 @@ export const collectProjectSlides = (project, language) => {
 
     // hero 只登记去重、不占格:折叠态整幅就是它,碎开后再放一遍是重复,白占一格。
     // (折叠态的切片单独走 heroImage,和这里各走各的,不受影响)
+    //
+    // 例外:hero 本身就是某个功能的成品图时(SparkUp 那张宣图讲的是 Spark Forge),
+    // 跳过它等于把这一格从案例里抹掉 —— 这种在 data 里写 heroInGallery: true 放行。
     const heroKey = project.heroImage || project.thumbnail;
-    if (heroKey) seen.add(heroKey);
+    if (heroKey && project.heroInGallery !== true) seen.add(heroKey);
 
     push(
       project.overview?.mainImage?.src,
@@ -155,7 +162,8 @@ export const collectProjectSlides = (project, language) => {
 
   const live = collected.filter((x) => x.kind === 'embed');
   const stills = collected.filter((x) => x.kind !== 'embed');
-  const ordered = [...stills.slice(0, ARTIFACT_SLOT), ...live, ...stills.slice(ARTIFACT_SLOT)];
+  const slot = Number.isInteger(project.artifactSlot) ? project.artifactSlot : ARTIFACT_SLOT;
+  const ordered = [...stills.slice(0, slot), ...live, ...stills.slice(slot)];
 
   // 极端情况:项目除了 hero 一张图都没有,那还是拿 hero 顶上,总比空着强
   if (!ordered.length) {

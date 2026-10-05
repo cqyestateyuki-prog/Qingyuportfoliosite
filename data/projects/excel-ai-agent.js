@@ -4,7 +4,7 @@ export const excelAiAgent = {
     year: '2025',
     title: { en: 'Excel AI Agent', zh: 'Excel AI 智能体' },
     subtitle: { en: 'Intelligent Data Analysis Assistant', zh: '智能数据分析助手' },
-    categories: ['AI', 'Programming','Product Design'],
+    categories: ['AI', 'Product Design'],
     tags: ['AI-Powered Tool', 'Data Analysis', 'Voice Input', 'Web Application'],
     techTags: ['#AI Agent devlopment','#HTML', '#Python', '#WebSocket', '#OpenAI API', '#SSE'],
     

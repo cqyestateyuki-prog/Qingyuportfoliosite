@@ -4,7 +4,7 @@ export const eternalDreams = {
     year: '2024',
     title: { en: 'Eternal Dreams', zh: '永恒之梦' },
     subtitle: { en: 'Third Person Role Playing Game', zh: '第三人称角色扮演游戏' },
-    categories: ['Game', 'Programming','3D Art',], // 多分类支持
+    categories: ['Game', '3D Art',], // 多分类支持
     tags: ['Game Design', 'Unity', '3D Environment Design', 'C#'],
     techTags: ['#Unity', 'C#', '#Maya', '#Blender', '#3D Modeling'],
     

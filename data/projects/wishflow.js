@@ -3,20 +3,29 @@ export const wishflow = {
   id: 'wishflow',
   year: '2026',
   featured: false,
+  order: 1, // Passion Projects 里的位次
+
+  // 卡片直接开线上站,不进站内详情页。
+  // sections 里的案例内容留着不动:直接访问 /project/wishflow 仍然打得开,
+  // 哪天想让它走详情页,把这一行删掉就行
+  externalUrl: 'https://wishflow-ruddy.vercel.app',
+
+  // 首页卡片 hover 时播这段(录屏,静音循环)。移开就卸载,不让它在后台一直解码
+  hoverVideo: '/media/projects/wishflow/landing-flow.mp4',
   title: { en: 'Wishflow', zh: '愿航' },
   subtitle: { en: 'A Life-long Wish Navigator', zh: '一生级愿望导航' },
-  categories: ['AI', 'Product Design', 'UIUX', 'Programming'],
+  categories: ['AI', 'Product Design', 'UIUX'],
   tags: ['Product Design', 'Design System', 'Generative Art', 'Bilingual'],
   techTags: ['#NextJS', '#Supabase', '#Claude', '#Capacitor'],
 
-  thumbnail: '/media/projects/wishflow/wishes-board-en.jpg',
+  thumbnail: '/media/projects/wishflow/home-en.jpg',
   brief: {
     en: 'A wish keeper for people who go quiet when tools start counting.',
     zh: '给那些一被打卡就沉默的人，做一个替他们保管愿望的地方。',
   },
 
   heroImage: '/media/projects/wishflow/home-en.jpg',
-  heroVideo: null,
+  heroVideo: '/media/projects/wishflow/full-flow.mp4',
   liveUrl: 'https://wishflow-ruddy.vercel.app',
 
   domain: [
@@ -61,7 +70,7 @@ export const wishflow = {
       imageDisplayMode: 'two-column',
       images: [
         { src: '/media/projects/wishflow/home-en.jpg', alt: 'Landing — let wishes slowly take shape' },
-        { src: '/media/projects/wishflow/home-zh.jpg', alt: 'Landing, Chinese' },
+        { src: '/media/projects/wishflow/phone-home-en.jpg', alt: 'The same landing on phone' },
       ],
     },
     {
@@ -105,7 +114,7 @@ export const wishflow = {
       imageDisplayMode: 'two-column',
       images: [
         { src: '/media/projects/wishflow/daily-en.jpg', alt: 'Today — a mood, and one wish worth two minutes' },
-        { src: '/media/projects/wishflow/phone-gallery-zh.jpg', alt: 'Wish gallery on phone, Chinese' },
+        { src: '/media/projects/wishflow/phone-gallery-en.jpg', alt: 'Wish gallery on phone' },
       ],
     },
   ],
