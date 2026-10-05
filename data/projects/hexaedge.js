@@ -8,7 +8,7 @@ export const hexaedge = {
       en: 'Ancient Logic, Modern Signals',
       zh: '古法新用 · 六爻金融信号'
     },
-    categories: ['AI', 'Product Design', 'UIUX', 'Programming'],
+    categories: ['AI', 'Product Design', 'UIUX'],
     tags: ['Product Design', 'Design Engineering', 'AI/LLM', 'Decision-support UX', 'Neo-Chinese Aesthetic', 'SaaS'],
     techTags: ['#Next.js 16', '#React 19', '#TypeScript', '#FastAPI', '#Claude Code', '#Figma', '#LLM API', '#RAG', '#pgvector', '#Embeddings'],
 
@@ -18,7 +18,9 @@ export const hexaedge = {
       zh: '六爻是一套三千年的决策框架，[[比莱布尼茨更早用上二进制]]。HexaEdge 把它重建为一台[[确定性推理引擎]]，用来读一笔行情或一个人生决断。'
     },
     heroImage: '/media/projects/hexaedge/sections/s01-cover.png',
-    heroVideo: null,
+    // 宣传片(50s,有声)。首页碎片墙:悬停静音起播 / 点击有声播放,播完碎开成案例页;详情页主图也用它。
+    // 用的是 ffmpeg 压过的网页版(12.8MB, faststart),原片 promo-en.mp4 留着不动。
+    heroVideo: '/media/projects/hexaedge/videos/promo-en-web.mp4',
 
     // 首页碎片墙折叠态:底图用抠掉罗盘的那版,罗盘单独叠一层慢慢转。
     // 位置是拿原封面和这张底图做差分量出来的 —— 盘在封面上圆心 (3220,210)、半径约 1000,
@@ -69,7 +71,7 @@ export const hexaedge = {
       // 正文与 challenge 已移走:TL;DR 在 hero 说清"是什么",challenge 移到 The Problem 做开场。
       // 这里只保留产品大图下的入口按钮和 Why I'm building this。
       buttons: [
-        { label: 'Live Site', url: 'https://hexaedge.vercel.app', type: 'primary' },
+        { label: 'Live Site', url: 'https://hexaedge.co', type: 'primary' },
         { label: 'GitHub', url: 'https://github.com/cqyestateyuki-prog/LiuyaoSaaSProject', type: 'secondary' }
       ],
       // Why I'm building this(hero meta 之下)+ 六爻线条母题(新中式鎏金)

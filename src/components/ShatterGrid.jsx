@@ -47,6 +47,78 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
   const armFrom = useRef(null);
   const gridRef = useRef(null);
 
+  // 折叠态的宣传片(优先 project.hoverVideo,没有就用 heroVideo;只认本地 mp4/webm)。
+  // 悬停 → 静音起播;点击 → 有声播放;播完 → 碎开成案例页;播放中再点 → 跳过直接碎开。
+  // <video> 始终挂在 DOM 里,只切 src 和 data 属性(同约束 1,不增删节点)。
+  const filmSrc = project.hoverVideo || project.heroVideo;
+  const film = /\.(mp4|webm)$/i.test(String(filmSrc || '')) ? filmSrc : null;
+  const [filmMode, setFilmMode] = useState('idle'); // idle | preview(悬停静音) | playing(点击有声)
+  const [filmReady, setFilmReady] = useState(false);
+  const filmRef = useRef(null);
+  const filmBarRef = useRef(null);
+  const filmOn = Boolean(film) && !expanded && filmMode !== 'idle';
+
+  const stopFilm = () => {
+    setFilmMode('idle');
+    setFilmReady(false);
+    if (filmBarRef.current) filmBarRef.current.style.setProperty('--p', '0');
+  };
+
+  // 模式变化时驱动真正的 <video>:起播 / 切有声 / 卸载
+  useEffect(() => {
+    const v = filmRef.current;
+    if (!v || !film) return;
+    if (filmMode === 'idle') {
+      v.pause();
+      v.removeAttribute('src');
+      v.load();
+      return;
+    }
+    if (!v.getAttribute('src')) {
+      v.src = film;
+      v.load();
+    }
+    v.muted = filmMode !== 'playing';
+    const p = v.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(() => {
+        // 有声播放被浏览器拦下(极少见,点击本身就是手势):退回静音继续,不让画面卡住
+        v.muted = true;
+        v.play().catch(() => {});
+      });
+    }
+  }, [filmMode, film]);
+
+  // 碎开之后片子必须停,免得声音还在底下响
+  useEffect(() => {
+    if (expanded && filmMode !== 'idle') stopFilm();
+  }, [expanded]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // 折叠态的点击 / 回车:没片子直接碎开;有片子先有声播放;播放中再点就是跳过
+  const activateFolded = () => {
+    if (expanded) return;
+    if (!film) {
+      toggle(true);
+      return;
+    }
+    if (filmMode === 'playing') {
+      stopFilm();
+      toggle(true);
+      return;
+    }
+    const v = filmRef.current;
+    if (v) {
+      // 在手势回调里直接起播:Safari 只认这种方式的有声播放
+      if (!v.getAttribute('src')) {
+        v.src = film;
+        v.load();
+      }
+      v.muted = false;
+      v.play().catch(() => {});
+    }
+    setFilmMode('playing');
+  };
+
   useEffect(() => {
     if (armed) return undefined;
     const onMove = (e) => {
@@ -127,13 +199,25 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
         data-armed={armed ? '1' : '0'}
         role={expanded ? undefined : 'button'}
         tabIndex={expanded ? -1 : 0}
-        aria-label={expanded ? undefined : `展开 ${slides.length} 张案例页`}
-        onClick={() => { if (!expanded) toggle(true); }}
+        aria-label={
+          expanded ? undefined : film ? `播放宣传片,播完展开 ${slides.length} 张案例页` : `展开 ${slides.length} 张案例页`
+        }
+        onClick={activateFolded}
         onKeyDown={(e) => {
           if (!expanded && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
-            toggle(true);
+            activateFolded();
           }
+        }}
+        onMouseEnter={() => {
+          // 悬停只在真有鼠标的设备上起播,触屏没有 hover,点了直接有声播
+          if (!film || expanded || filmMode !== 'idle') return;
+          if (!window.matchMedia?.('(hover: hover)').matches) return;
+          setFilmMode('preview');
+        }}
+        onMouseLeave={() => {
+          // 只有悬停预览会随鼠标离开而停;点过的(有声)继续放到完
+          if (filmMode === 'preview') stopFilm();
         }}
         style={{
           '--shatter-collapsed': '16 / 9',
@@ -365,9 +449,41 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
           />
         )}
 
-        {/* 折叠态的可点提示 —— 唯一会告诉访客「这里能点」的信号 */}
-        <span className="shatter-hint" aria-hidden="true">
-          ⊕ EXPAND {String(slides.length).padStart(2, '0')} FRAMES
+        {/* 折叠态宣传片:盖在切片和转动件之上。src 只在起播时注入,停下即卸(见上面的 effect) */}
+        <video
+          ref={filmRef}
+          className="shatter-film"
+          data-on={filmOn ? '1' : '0'}
+          data-ready={filmReady ? '1' : '0'}
+          playsInline
+          preload="none"
+          aria-hidden="true"
+          tabIndex={-1}
+          /* 等真有画面了再淡入,不然会闪一下黑底 */
+          onPlaying={() => setFilmReady(true)}
+          onTimeUpdate={(e) => {
+            const v = e.currentTarget;
+            if (filmBarRef.current && v.duration) {
+              filmBarRef.current.style.setProperty('--p', String(v.currentTime / v.duration));
+            }
+          }}
+          onEnded={() => {
+            stopFilm();
+            toggle(true);
+          }}
+        />
+        {/* 片子的进度条:细细一道紫,告诉人「播完会碎开」 */}
+        <span ref={filmBarRef} className="shatter-film-bar" data-on={filmOn ? '1' : '0'} aria-hidden="true" />
+
+        {/* 折叠态的可点提示 —— 唯一会告诉访客「这里能点」的信号;播放中它就是跳过键 */}
+        <span className="shatter-hint" data-film={filmOn ? filmMode : 'off'} aria-hidden="true">
+          {film && filmMode === 'playing'
+            ? `⊕ SKIP → ${String(slides.length).padStart(2, '0')} FRAMES`
+            : film && filmMode === 'preview'
+              ? '▶ CLICK FOR SOUND'
+              : film
+                ? '▶ PLAY FILM'
+                : `⊕ EXPAND ${String(slides.length).padStart(2, '0')} FRAMES`}
         </span>
       </div>
 
