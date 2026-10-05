@@ -13,6 +13,9 @@ import { myLittleFishTank } from './my-little-fish-tank.js';
 import { kogna } from './kogna.js';
 import { hexaedge } from './hexaedge.js';
 import { wishflow } from './wishflow.js';
+import { gbkparts } from './gbkparts.js';
+import { miaworld } from './miaworld.js';
+import { worldexecute } from './worldexecute.js';
 
 export const projects = [
   sparkup,
@@ -28,6 +31,9 @@ export const projects = [
   kogna,
   hexaedge,
   wishflow,
+  gbkparts,
+  miaworld,
+  worldexecute,
 ];
 
 // ========== helpers ==========

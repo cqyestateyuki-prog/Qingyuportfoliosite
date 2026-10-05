@@ -47,6 +47,8 @@ export default {
     moreProjects: '热爱之作',
     viewProject: '查看项目',
     viewCaseStudy: '查看案例',
+    liveSite: '访问线上站',
+    close: '关闭',
     clickToExplore: '点击探索',
     viewDetails: '查看详情',
     viewAll: '查看全部项目',

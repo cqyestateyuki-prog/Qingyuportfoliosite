@@ -10,6 +10,7 @@ import { useLanguage } from '../i18n';
 import { getLocalizedText } from '../utils/localization';
 import Media from './Media';
 import { thumbSrc } from '../utils/thumbs';
+import PassionTheater from './PassionTheater';
 
 /**
  * Portfolio — 02 WORK 章节
@@ -32,7 +33,7 @@ const localVideo = (src) => (/\.(mp4|webm)$/i.test(String(src || '')) ? src : nu
  * 有片段的项目 hover 才挂 <video>,鼠标离开立刻卸掉 ——
  * 不能让六七个视频在后台一直解码。触屏没有 hover,不挂。
  */
-const PassionCard = ({ project, title, meta, onClick }) => {
+const PassionCard = ({ project, title, meta, onClick, onOpen }) => {
   const [playing, setPlaying] = useState(false);
   const [ready, setReady] = useState(false);
   const clip = localVideo(project.hoverVideo || project.heroVideo);
@@ -44,11 +45,25 @@ const PassionCard = ({ project, title, meta, onClick }) => {
   };
   const stop = () => { setPlaying(false); setReady(false); };
 
+  // 配了 externalUrl 的是线上跑着的真站,点了新标签打开,不进站内详情页
+  const external = project.externalUrl;
+  const Wrapper = external ? 'a' : Link;
+  const wrapperProps = external
+    ? { href: external, target: '_blank', rel: 'noopener noreferrer' }
+    : { to: `/project/${project.id}` };
+
   return (
-    <Link
-      to={`/project/${project.id}`}
-      onClick={onClick}
-      aria-label={title}
+    <Wrapper
+      {...wrapperProps}
+      /* 点一下不再直接跳走:先在站内的放映厅里大屏看视频,外站 / 案例页的入口在放映厅里。
+         href 留着,右键新开或中键点仍然是原来的目标 */
+      onClick={(e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        e.preventDefault();
+        onClick?.();
+        onOpen?.(project);
+      }}
+      aria-label={external ? `${title}(新窗口打开)` : title}
       onMouseEnter={start}
       onMouseLeave={stop}
       onFocus={start}
@@ -78,6 +93,13 @@ const PassionCard = ({ project, title, meta, onClick }) => {
         />
       )}
 
+      {/* 外站的角标常驻,不等 hover —— 点下去会离开作品集,这个得先说 */}
+      {external && (
+        <span className="passion-external" aria-hidden="true">
+          ↗
+        </span>
+      )}
+
       <div className="passion-meta">
         <h3 className="text-[15px] leading-snug font-['Tenor_Sans'] mb-1" style={{ color: '#fff' }}>
           {title}
@@ -89,13 +111,15 @@ const PassionCard = ({ project, title, meta, onClick }) => {
           {meta}
         </p>
       </div>
-    </Link>
+    </Wrapper>
   );
 };
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [isVisible, setIsVisible] = useState(false);
+  // 放映厅里正在看的项目;null = 关着。组件常驻,只切内容和开关属性
+  const [theater, setTheater] = useState(null);
   const { t, language } = useLanguage();
 
   useEffect(() => {
@@ -118,7 +142,7 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
-  const filters = ['All', 'AI', 'UIUX', 'Product Design', 'Programming', 'Game', 'Research'];
+  const filters = ['All', 'AI', 'Creative Coding', 'UIUX', 'Product Design', 'Web Design', 'Game', 'Research'];
 
   // Featured = Professional Work(进 Showcase 大卡);其余 = Personal Projects(牌阵)
   // 两个版块互不重复:牌阵只展示非 featured 的个人项目
@@ -126,7 +150,10 @@ const Portfolio = () => {
     .filter((p) => p.featured)
     .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
   const showcaseItems = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 3);
-  const personalProjects = projects.filter((p) => !p.featured);
+  // 和上面的 Showcase 一样按 order 排,没写 order 的沉到后面、保持 registry 里的先后
+  const personalProjects = projects
+    .filter((p) => !p.featured)
+    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
   const filteredProjects = personalProjects.filter((project) => {
     if (activeFilter === 'All') return true;
@@ -197,6 +224,7 @@ const Portfolio = () => {
                     title={getLocalizedText(project.title, language)}
                     meta={[project.year, ...(project.categories || []).slice(0, 2)].filter(Boolean).join(' · ')}
                     onClick={() => handleProjectClick(project)}
+                    onOpen={setTheater}
                   />
                 </motion.div>
               ))}
@@ -205,6 +233,9 @@ const Portfolio = () => {
         </div>
       </div>
       </section>
+
+      {/* Passion 放映厅:大屏 + 进度条,常驻 DOM,靠 data-open 开关 */}
+      <PassionTheater project={theater} onClose={() => setTheater(null)} />
     </>
   );
 };

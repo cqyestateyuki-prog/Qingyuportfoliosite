@@ -47,6 +47,8 @@ export default {
     moreProjects: 'Passion Projects',
     viewProject: 'View Project',
     viewCaseStudy: 'View Case Study',
+    liveSite: 'Visit live site',
+    close: 'Close',
     clickToExplore: 'Click to explore',
     viewDetails: 'View details',
     viewAll: 'View All Projects',

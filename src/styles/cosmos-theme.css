@@ -510,7 +510,7 @@ html:not(.dark) .cosmos-canvas-el {
   position: absolute;
   right: 14px;
   bottom: 14px;
-  z-index: 2;
+  z-index: 4; /* 要压在宣传片(z 3)之上 */
   padding: 6px 12px;
   border-radius: 999px;
   font-family: "Poppins", sans-serif;
@@ -530,6 +530,52 @@ html:not(.dark) .cosmos-canvas-el {
 .shatter[data-expanded="0"]:focus-visible .shatter-hint {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* 播放中提示常驻(鼠标离开也在):这是跳过的唯一入口 */
+.shatter[data-expanded="0"] .shatter-hint[data-film="playing"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 折叠态宣传片:盖在切片和转动件之上,起播有画面后才淡入,免得闪黑 */
+.shatter-film {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.shatter-film[data-on="1"][data-ready="1"] {
+  opacity: 1;
+}
+
+.shatter[data-expanded="1"] .shatter-film {
+  opacity: 0;
+}
+
+/* 片子的进度条:细细一道紫,告诉人「播完会碎开」 */
+.shatter-film-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: calc(var(--p, 0) * 100%);
+  background: var(--section-tag);
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.shatter-film-bar[data-on="1"] {
+  opacity: 1;
 }
 
 /* 收起按钮:只在展开态可见可点 */
@@ -634,16 +680,25 @@ html:not(.dark) .cosmos-canvas-el {
   font-size: 13px;
   letter-spacing: 0.12em;
   font-variant-numeric: tabular-nums;
-  color: var(--hud-fg-muted);
+  /* 没 hover 也常亮,和 Live Site 一个处理。
+     不做呼吸:这条只有三个小元素,明灭起来像在报警,而不是在招手 */
+  color: var(--text-accent);
+  border-color: var(--hud-line-strong);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--text-accent) 50%, transparent);
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--text-accent) 34%, transparent),
+    0 0 44px color-mix(in srgb, var(--text-accent) 18%, transparent),
+    inset 0 0 14px color-mix(in srgb, var(--text-accent) 14%, transparent);
   transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .shatter-pager.shatter-pager-side button:hover {
-  color: var(--text-accent);
-  border-color: var(--hud-line-strong);
+  color: var(--text-hero);
   box-shadow:
-    0 0 22px color-mix(in srgb, var(--text-accent) 38%, transparent),
-    inset 0 0 14px color-mix(in srgb, var(--text-accent) 14%, transparent);
+    0 0 32px color-mix(in srgb, var(--text-accent) 55%, transparent),
+    0 0 70px color-mix(in srgb, var(--text-accent) 32%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--text-accent) 24%, transparent);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--text-accent) 65%, transparent);
 }
 
 /* hover 时往左浮出说明。不用原生 title:它要等一秒才弹,样式也管不了。
@@ -673,6 +728,55 @@ html:not(.dark) .cosmos-canvas-el {
   opacity: 1;
 }
 
+/* 翻页条第一次滚进视野时的引导:下箭头推三下,说明同步浮出来。
+   播完就停 —— 常驻呼吸的话这三个小元素会一直在明灭,像在报警;
+   人自己翻过一页(pages 里记上了)提示就撤掉,不再打扰 */
+@keyframes pager-nudge {
+  0%,
+  55%,
+  100% {
+    transform: translateY(0);
+  }
+  22% {
+    transform: translateY(5px);
+  }
+  38% {
+    transform: translateY(1px);
+  }
+}
+
+@keyframes pager-nudge-tip {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  20%,
+  55% {
+    opacity: 1;
+  }
+}
+
+.shatter-pager-side.is-hinting button:last-of-type {
+  animation: pager-nudge 1.9s cubic-bezier(0.34, 1.4, 0.64, 1) 0.7s 3;
+}
+
+.shatter-pager-side.is-hinting button:last-of-type::after {
+  animation: pager-nudge-tip 1.9s ease-in-out 0.7s 3;
+}
+
+/* 鼠标一挪过来就交给 hover 那套,别让引导动画抢着闪 */
+.shatter-pager-side.is-hinting:hover button:last-of-type,
+.shatter-pager-side.is-hinting:hover button:last-of-type::after {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shatter-pager-side.is-hinting button:last-of-type,
+  .shatter-pager-side.is-hinting button:last-of-type::after {
+    animation: none;
+  }
+}
+
 /* 页码竖着叠三行:当前页 / 分隔 / 总页数 */
 .shatter-pager-side .pager-count {
   display: flex;
@@ -683,7 +787,8 @@ html:not(.dark) .cosmos-canvas-el {
   font-size: 12px;
   letter-spacing: 0.14em;
   color: var(--text-accent);
-  text-shadow: 0 0 12px color-mix(in srgb, var(--text-accent) 45%, transparent);
+  /* 只让字发光。这是个 span,给它 box-shadow 会画出一个方框光晕,很难看 */
+  text-shadow: 0 0 12px color-mix(in srgb, var(--text-accent) 50%, transparent);
 }
 
 .shatter-pager-side .pager-count i {
@@ -814,6 +919,33 @@ html:not(.dark) .cosmos-canvas-el {
 
 .passion-video[data-ready='yes'] {
   opacity: 1;
+}
+
+/* 外站角标:常驻右上角,提前说明这一下会离开作品集 */
+.passion-external {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(10, 8, 22, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+  pointer-events: none;
+}
+
+.passion-card:hover .passion-external {
+  background: rgba(10, 8, 22, 0.78);
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
 .passion-meta {
@@ -947,4 +1079,270 @@ html:not(.dark) .project-detail--kogna .detail-accent-text {
 .project-detail .shadow-xl,
 .project-detail .shadow-md {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 0 24px var(--hud-glow);
+}
+
+/* ---- Passion 放映厅:点一张 passion 卡,大屏看视频 ---- */
+/* 常驻 DOM,data-open 开关;遮罩用主题纱幕色,日夜两版自动跟 */
+.theater {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--surface-scrim-strong);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.theater[data-open="1"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.theater-dialog {
+  position: relative;
+  width: min(1240px, 96vw);
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transform: translateY(18px) scale(0.985);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.theater[data-open="1"] .theater-dialog {
+  transform: none;
+}
+.theater-close {
+  position: absolute;
+  right: 0;
+  top: -42px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-hero);
+  background: color-mix(in srgb, var(--hud-glow) 35%, transparent);
+  border: 1px solid var(--hud-line-strong);
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.theater-close:hover {
+  background: color-mix(in srgb, var(--hud-glow) 70%, transparent);
+  box-shadow: 0 0 24px var(--hud-glow);
+}
+
+/* 舞台:16:10,和 passion 卡同比例,所以录成 1280×800 的片子刚好铺满 */
+.theater-stage {
+  position: relative;
+  /* 高度够就铺满 1240 宽;矮屏时按高度反推宽度,始终保持 16:10,不出黑边 */
+  width: min(100%, calc((94vh - 190px) * var(--ratio-num, 1.6)));
+  aspect-ratio: var(--ratio, 16 / 10);
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0a0816;
+  border: 1px solid var(--hud-line-strong);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.45),
+    0 0 70px var(--hud-glow);
+}
+.theater-corner {
+  position: absolute;
+  z-index: 3;
+  width: 22px;
+  height: 22px;
+  border: 0 solid rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+.theater-corner.tl { top: 12px; left: 12px; border-top-width: 1px; border-left-width: 1px; }
+.theater-corner.tr { top: 12px; right: 12px; border-top-width: 1px; border-right-width: 1px; }
+.theater-corner.bl { bottom: 12px; left: 12px; border-bottom-width: 1px; border-left-width: 1px; }
+.theater-corner.br { bottom: 12px; right: 12px; border-bottom-width: 1px; border-right-width: 1px; }
+.theater-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+}
+.theater-stage[data-has-video="1"][data-ready="1"] .theater-poster {
+  opacity: 0;
+}
+.theater-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+.theater-stage[data-has-video="0"] .theater-video,
+.theater-stage[data-has-video="0"] .theater-controls {
+  display: none;
+}
+
+/* 控制条:播放中淡出,悬停 / 暂停 / 键盘聚焦时出现 */
+.theater-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 30px 18px 14px;
+  color: #fff;
+  background: linear-gradient(to top, rgba(6, 4, 16, 0.88), rgba(6, 4, 16, 0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.theater-stage:hover .theater-controls,
+.theater-stage:focus-within .theater-controls,
+.theater-stage[data-playing="0"] .theater-controls {
+  opacity: 1;
+}
+.theater-ibtn {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(10, 8, 22, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.theater-ibtn:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(10, 8, 22, 0.8);
+}
+.theater-time {
+  flex: 0 0 auto;
+  min-width: 102px;
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+.theater-track {
+  position: relative;
+  flex: 1 1 auto;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  touch-action: none;
+}
+.theater-track::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.22);
+}
+.theater-fill {
+  position: absolute;
+  left: 0;
+  height: 3px;
+  border-radius: 2px;
+  width: calc(var(--p, 0) * 100%);
+  background: var(--section-tag);
+  box-shadow: 0 0 12px var(--hud-glow);
+}
+.theater-fill::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.theater-track:hover .theater-fill::after {
+  opacity: 1;
+}
+
+/* 舞台下面:定位行 + 名字 + 一句简介 + 出口 */
+.theater-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding: 0 4px;
+}
+.theater-eyebrow {
+  margin: 0 0 8px;
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--section-tag);
+}
+.theater-title {
+  margin: 0 0 8px;
+  font-family: "Tenor Sans", serif;
+  font-size: 30px;
+  line-height: 1.15;
+  color: var(--text-hero);
+}
+.theater-brief {
+  margin: 0;
+  max-width: 720px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+.theater-hl {
+  color: var(--section-tag);
+}
+.theater-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-hero);
+  border: 1px solid var(--hud-line-strong);
+  background: color-mix(in srgb, var(--hud-glow) 40%, transparent);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+.theater-btn:hover {
+  background: color-mix(in srgb, var(--hud-glow) 75%, transparent);
+  box-shadow: 0 0 28px var(--hud-glow);
+}
+.theater-btn[data-show="0"] {
+  display: none;
+}
+@media (max-width: 760px) {
+  .theater { padding: 10px; }
+  .theater-close { top: -36px; }
+  .theater-stage { width: min(100%, calc((94vh - 230px) * var(--ratio-num, 1.6))); border-radius: 14px; }
+  .theater-foot { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .theater-title { font-size: 22px; }
+  .theater-brief { font-size: 14px; }
+  .theater-time { min-width: 0; }
 }
