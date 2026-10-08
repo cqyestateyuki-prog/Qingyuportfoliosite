@@ -17,7 +17,7 @@ export const kogna = {
       en: 'Led the design system and UI/UX for an AI decision-support platform that turns fragmented business data into real-time strategic intelligence for leaders. Now a live V1 in private beta, with its first design-partner users onboard.',
       zh: '主导一个 AI 决策支持平台的设计系统与 UI/UX:将碎片化的企业数据转化为面向高管的实时战略洞察;V1 已上线并进入私测,首批深度体验用户已在使用。'
     },
-    heroImage: '/media/projects/kogna/slides/slide-01.png',
+    heroImage: '/media/projects/kogna/redesign-2026-10/kit-home.jpg', // Kit v2 Home (Oct 2026); the June cover stays as the card thumbnail
     heroVideo: null,
 
     domain: [
@@ -212,7 +212,7 @@ export const kogna = {
         title: 'The Tooling',
         sectionTag: '07 · The Tooling',
         mainTitle: 'The tools I wrote to keep the system honest',
-        briefContent: 'Rules that nobody checks stop being rules. So beside the design system I wrote six small tools and wired two of them into CI as merge-blocking steps. On every pull request they answer three questions: does this code break a rule, is the codebase drifting, and did a page change that nobody meant to change. [[Every number below is read out of the repo, not estimated.]]',
+        briefContent: 'Rules that nobody checks stop being rules. So beside the design system I wrote a set of small tools and wired two of them into CI as merge-blocking steps. On every pull request they answer three questions: does this code break a rule, is the codebase drifting, and did a page change that nobody meant to change. [[Every number below is read out of the repo, not estimated.]]',
         icon: '🛠️',
         featureDisplayMode: 'side-by-side',
         features: [
@@ -227,9 +227,9 @@ export const kogna = {
             detail: 'Some drift is legal line by line and still bad in total: 558 raw colour literals, 110 off-scale spacing values, 90 off-ramp type sizes. The budget records those counts and fails CI if any of them goes up. Nothing has to be fixed all at once; the backlog just cannot grow.'
           },
           {
-            name: 'page-snapshot + page-diff-report',
-            label: '19 preview routes · 22 baselines · per-pixel diff',
-            detail: 'One command screenshots every route in light and dark into a versioned set, with a manifest of what was captured and what was not. Another compares two sets pixel by pixel and writes a report sorted most-changed first, with unchanged pages folded away. It is how a "small tweak" gets caught touching six pages.'
+            name: 'ui-diff',
+            label: 'since · refs · compare · history — runs itself every Friday',
+            detail: 'A standalone tool that answers "what changed on screen?" without reading a diff. Give it two commits and it checks both out, starts both, screenshots every route in light and dark, and ranks the pages by how far they moved, with the commits, the merged PRs and the files behind the change attached, plus a list of the changed UI files no screenshot can reach. "compare" puts design-kit screens or a competitor beside the build, row by row, with timed flows and a notes box that exports to Markdown; "history" lays every captured version of a screen in one strip so the evolution is visible at a glance. A Friday job runs it on its own and opens the report.'
           },
           {
             name: 'ds-inspect',
@@ -244,16 +244,70 @@ export const kogna = {
         ]
       },
 
-      // ── 08 · Outcomes (real beta signal + founder quote; keeps counts) ──
+      // ── 08 · The Redesign (Oct 2026: the kit that replaced the September system, and the lesson) ──
+      {
+        id: 'redesign',
+        title: 'The Redesign',
+        sectionTag: '08 · The Redesign',
+        mainTitle: 'The week the whole look was replaced, and what I kept',
+        briefContent: 'In October 2026 the CEO sent a 24-page alignment spec: the app had to read like the landing page, cyan-led and bright, not purple-led and pale. A day later came a complete design kit: a spec, tokens, 43 icons, two interactive mockups of every screen, and a drop-in stylesheet. An engineer applied it across [[231 files in two days]]. My September system had been built the other way round: [[dozens of careful rulings]], one at a time, each measured for contrast and enforced by lint, and next to a language decided all at once it read as thin. I audited the new branch against the spec ([[6 done, 4 half, 5 untouched]]), filed the gaps, and rewrote how I work: [[kit first, then one sweep]]. Measure after you look, not instead of looking. The tools I built are what made the audit possible: every screen before and after, side by side, in an afternoon.',
+        icon: '🔁',
+        featureDisplayMode: 'side-by-side',
+        features: [
+          {
+            name: 'The kit',
+            label: 'Spec · tokens · icons · mockups · screens',
+            detail: 'Everything an engineer needs, decided once: a 27-page spec with a one-line brand test, W3C tokens that import into Figma, a 10-colour palette with a tint and a text colour for every fill, 43 icons, fonts, and a full interactive mockup of the desktop and phone apps. The spec ends with a fix list and a release checklist, so "done" is a set of checks rather than an opinion.',
+            image: '/media/projects/kogna/redesign-2026-10/kit-board.jpg',
+            imageCaption: 'Design Kit v2 · the board screen, as specified'
+          },
+          {
+            name: 'Timeline, before',
+            label: 'September · the calm system',
+            detail: 'Pale bars, labels dropped when they did not fit, a diamond for a milestone, a violet Today line. Every value was on a token and cleared its contrast floor. It still carried almost no information at a glance, which is what the audit said.',
+            image: '/media/projects/kogna/redesign-2026-10/timeline-before.jpg',
+            imageCaption: 'Stagging, 5 October, before the kit'
+          },
+          {
+            name: 'Timeline, after',
+            label: 'October · the kit applied',
+            detail: 'Solid bars in the column colour, titles inside, an overdue flag, a dashed amber Today line, a check on finished work, due-only tasks as labelled chips. The same data, now readable from across the room.',
+            image: '/media/projects/kogna/redesign-2026-10/timeline-after.jpg',
+            imageCaption: 'Stagging, 5 October, after PR #318'
+          },
+          {
+            name: 'Design beside build',
+            label: 'ui-diff compare · the audit in one report',
+            detail: 'Kit screens on the left, the running build on the right, one row per screen, notes under each. This is how the gaps were found: a stored project code where the spec wanted initials, nine columns that still scroll at 1440px, a help button in the wrong green, an overflow count that should open a member list.',
+            image: '/media/projects/kogna/redesign-2026-10/kit-vs-build.jpg',
+            imageCaption: 'Kit v2 vs the build, 7 October'
+          },
+          {
+            name: 'How every screen evolved',
+            label: 'ui-diff history · four versions, one strip',
+            detail: 'One row per route, one frame per captured version, oldest first: the August system, the September pass, the day before the kit, the kit. Every Friday run adds a column, so the record keeps itself.',
+            image: '/media/projects/kogna/redesign-2026-10/ui-history.jpg',
+            imageCaption: 'Home, chrome and timeline across four versions'
+          }
+        ]
+      },
+
+      // ── 09 · Outcomes (real beta signal + founder quote; keeps counts) ──
       {
         id: 'outcomes',
         title: 'Outcomes',
-        sectionTag: '08 · Outcomes',
+        sectionTag: '09 · Outcomes',
         mainTitle: 'From idea to a live, validated platform',
         briefContent: 'Kogna is a [[live V1 in private beta]], running on a [[10+ connector]] backbone and validated against [[180+ discovery outreach]], with [[2 pilot companies and 1 partner organization]] onboard and a post-beta pricing path. Its founder, CEO Jonathan Beck, frames the bet plainly: "today\'s strategy tools show you what happened; we built something that shows you what\'s next, and why." What ships next is as deliberate as what shipped: custom model training on a feedback-enriched lakehouse, more connectors, and multi-step agents that run an analysis end to end.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
+          {
+            src: '/media/projects/kogna/videos/kogna-promo-2026-05-web.mp4',
+            poster: '/media/projects/kogna/videos/kogna-promo-2026-05-poster.jpg',
+            alt: 'Kogna launch video',
+            caption: 'The team\'s launch video, May 2026 · 55 s'
+          },
           {
             src: '/media/projects/kogna/slides/slide-13.png',
             alt: 'Outcome',
@@ -262,13 +316,13 @@ export const kogna = {
         ]
       },
 
-      // ── 09 · Reflection ──
+      // ── 10 · Reflection ──
       {
         id: 'reflection',
         title: 'Reflection',
-        sectionTag: '09 · Reflection',
+        sectionTag: '10 · Reflection',
         mainTitle: 'A design system is leverage',
-        briefContent: 'At Kogna I design the screens and write the code that ships them, so I design what I can actually build and put it live the same week. The product is young and changes constantly, so I lock the flow and logic first and let the polish catch up release by release. [[I\'d rather put a working version in front of real users than hold back a perfect one.]] The lesson I\'ll keep: [[a system earns its place only when reaching for it is the easy choice.]]',
+        briefContent: 'At Kogna I design the screens and write the code that ships them, so I design what I can actually build and put it live the same week. The product is young and changes constantly, so I lock the flow and logic first and let the polish catch up release by release. [[I\'d rather put a working version in front of real users than hold back a perfect one.]] The lesson I\'ll keep: [[a system earns its place only when reaching for it is the easy choice.]] The October redesign sharpened that: leverage comes from deciding the whole language once, in a kit anyone can build from, and then applying it in one sweep. A thousand careful rulings are not a system; a kit is.',
         icon: '💭'
       }
     ]
