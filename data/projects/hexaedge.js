@@ -18,9 +18,9 @@ export const hexaedge = {
       zh: '六爻是一套三千年的决策框架，[[比莱布尼茨更早用上二进制]]。HexaEdge 把它重建为一台[[确定性推理引擎]]，用来读一笔行情或一个人生决断。'
     },
     heroImage: '/media/projects/hexaedge/sections/s01-cover.png',
-    // 宣传片(50s,有声)。首页碎片墙:悬停静音起播 / 点击有声播放,播完碎开成案例页;详情页主图也用它。
-    // 用的是 ffmpeg 压过的网页版(12.8MB, faststart),原片 promo-en.mp4 留着不动。
-    heroVideo: '/media/projects/hexaedge/videos/promo-en-web.mp4',
+    // 宣传片(50s,有声,原片 20MB,moov 已在前能边下边播)。首页碎片墙:悬停静音起播 / 点击有声播放,播完碎开成案例页;详情页主图也用它。
+    // Cloudflare Pages 单文件上限 25MB,别放更大的。
+    heroVideo: '/media/projects/hexaedge/videos/promo-en.mp4',
 
     // 首页碎片墙折叠态:底图用抠掉罗盘的那版,罗盘单独叠一层慢慢转。
     // 位置是拿原封面和这张底图做差分量出来的 —— 盘在封面上圆心 (3220,210)、半径约 1000,

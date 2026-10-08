@@ -15,10 +15,10 @@ export const worldexecute = {
 
   title: { en: 'world.execute(me);', zh: 'world.execute(me);' },
   subtitle: {
-    en: 'A fan film written entirely in code',
-    zh: '一支完全用代码写成的粉丝 MV',
+    en: 'AIMV · An AI-generated music video, made entirely in code',
+    zh: 'AIMV · 完全用代码生成的 AI 音乐视频',
   },
-  categories: ['Creative Coding'],
+  categories: ['AIMV', 'Creative Coding'],
   tags: ['AIMV', 'Creative Coding', 'Generative Motion', 'Canvas'],
   techTags: ['#Canvas', '#JavaScript', '#Generative', '#Playwright', '#FFmpeg'],
 
@@ -28,8 +28,8 @@ export const worldexecute = {
   heroVideo: '/media/projects/worldexecute/videos/mv-720p.mp4',
 
   brief: {
-    en: "A 3 minute 32 second fan film for Mili's world.execute(me); with [[no drawn characters]]: every frame is a pure function of time, cut on the beat, built from twelve [[simulations that are actually running]] and the math the lyrics describe.",
-    zh: '给 Mili《world.execute(me);》做的 3 分 32 秒粉丝 MV，[[一个人物都没画]]：每一帧都是时间的纯函数，卡着节拍切，画面是十二个[[真的在跑的模拟]]和歌词里说到的数学。',
+    en: "An AIMV, an AI-generated music video, for Mili's world.execute(me); with [[no drawn characters]]. Every frame is a pure function of time, cut to the beat. What you see is twelve [[simulations that are actually running]] and the math the lyrics talk about.",
+    zh: '给 Mili《world.execute(me);》做的 AIMV，AI 生成的音乐视频，[[一个人物都没画]]。每一帧都是时间的纯函数，卡着节拍切。画面里是十二个[[真的在跑的模拟]]，和歌词里说到的数学。',
   },
 
   domain: [
@@ -72,8 +72,8 @@ export const worldexecute = {
       // content 的格式:数组,每段可以是 { en, zh }(localizeProject 用 getLocalizedArray 逐段取语言)
       content: [
         {
-          en: "In Mili's song a simulation program falls in love with the person who runs it, deletes the other programs when they leave, gets abandoned as broken, and in the final execution reruns the world again and again looking for a way out. This film keeps that story but draws no one: everything on screen is code, logs, formulas and simulations that are actually running. Its one idea is that the user is continuous and the program is discrete, so every attempt to reach them is a rasterization whose error never gets to zero. The limit is you, and no finite step ever is, which is why it ends by starting over.",
-          zh: 'Mili 的原曲讲一个模拟程序爱上了使用它的人，主人走后它删掉其他程序，又被当成坏掉而弃用，最后的 Execution 是一遍遍重跑世界去找一个出口。这支改编保留了这个故事，但一个人都没画，屏幕上只有代码、日志、公式和真的在运行的模拟。它只讲一件事，你是连续的，我是离散的，所以我每一次靠近你都只是在光栅化你，误差永远到不了零。极限等于你，可任何有限的一步都不是，所以它的结尾是重新开始。',
+          en: "In Mili's song a simulation program falls in love with the person who runs it, deletes the other programs when they leave, gets abandoned as broken, and in the final execution reruns the world again and again looking for a way out. This AI-generated film keeps that story but draws no one: everything on screen is code, logs, formulas and simulations that are actually running. Its one idea is that the user is continuous and the program is discrete, so every attempt to reach them is a rasterization whose error never gets to zero. The limit is you, and no finite step ever is, which is why it ends by starting over.",
+          zh: 'Mili 的原曲讲一个模拟程序爱上了使用它的人，主人走后它删掉其他程序，又被当成坏掉而弃用，最后的 Execution 是一遍遍重跑世界去找一个出口。这支 AI 生成的改编保留了这个故事，但一个人都没画，屏幕上只有代码、日志、公式和真的在运行的模拟。它只讲一件事，你是连续的，我是离散的，所以我每一次靠近你都只是在光栅化你，误差永远到不了零。极限等于你，可任何有限的一步都不是，所以它的结尾是重新开始。',
         },
         'Project Type: AIMV (AI-Generated Music Video)',
         'Music: world.execute(me); by Mili, used under non-commercial fan-work guidelines, [projectmili.com](https://projectmili.com)',
@@ -86,8 +86,8 @@ export const worldexecute = {
       sectionTag: 'The Premise',
       mainTitle: { en: 'A love song that is already a program', zh: '一首本来就是程序的情歌' },
       briefContent: {
-        en: "Mili's lyrics are literally code: power on, create object, initialize, execute. A simulation falls in love with the person running it. So the film draws [[nothing that is not code]]: no faces, no lyric captions, only characters, logs, formulas and algorithms that are really running. That one decision keeps every frame original, and keeps it honest to the song.",
-        zh: 'Mili 这首歌的歌词本身就是一段程序：通电、创建对象、初始化、执行。一个模拟程序爱上了使用它的人。所以整支片子[[只画代码能画的东西]]：没有脸，没有歌词字幕，只有字符、日志、公式和真的在运行的算法。这一个决定让每一帧都是原创，也让它对得起这首歌。',
+        en: "Mili's lyrics are literally code: power on, create object, initialize, execute. A simulation falls in love with the person running it. So I let the film draw [[only what a screen can draw]], characters, logs, formulas and algorithms that are really running, with no faces and no lyric captions. Because of that one rule every frame is original, and the film stays close to the song.",
+        zh: 'Mili 这首歌的歌词本身就是一段程序：通电、创建对象、初始化、执行。一个模拟程序爱上了使用它的人。所以我让整支片子[[只画屏幕画得出来的东西]]，字符、日志、公式和真的在运行的算法，不要脸，也不要歌词字幕。靠这一条规则，每一帧都是原创，片子也贴着这首歌。',
       },
       challenge: {
         en: 'How might a music video tell a love story using only the things a real screen could show?',
@@ -112,8 +112,8 @@ export const worldexecute = {
       sectionTag: 'Core Idea',
       mainTitle: { en: 'You are continuous. I am discrete.', zh: '你是连续的，我是离散的' },
       briefContent: {
-        en: 'Everything hangs on one rule. You, the user, are drawn only as a smooth gold vector line, [[you ∈ ℝ²]]. I, the program, can only live inside a 120 by 41 grid of monospace cells, [[me ∈ ℤ²]]. Every time I move toward you I am rasterizing you, and the error never reaches zero. The limit equals you. No finite step ever does. That is why the film ends in a loop.',
-        zh: '全片只守一条规则。你，使用者，只用一条平滑的金色矢量线来画，[[you ∈ ℝ²]]。我，程序，只能活在 120 乘 41 的等宽字符网格里，[[me ∈ ℤ²]]。我每一次靠近你，都只是在光栅化你，误差永远不会是零。极限等于你，可任何有限的一步都不等于。所以片子的结尾是一个死循环。',
+        en: 'The film speaks in you and me. You, the user, are drawn only as a smooth gold vector line, [[you ∈ ℝ²]]. Me, the program, can only live inside a 120 by 41 grid of monospace cells, [[me ∈ ℤ²]]. Every time me moves toward you it is rasterizing you, and the error never reaches zero. The limit equals you, but no finite step ever does, which is why the film ends in a loop.',
+        zh: '片子用"你"和"我"说话。你，使用者，只用一条平滑的金色矢量线来画，[[you ∈ ℝ²]]。我，程序，只能活在 120 乘 41 的等宽字符网格里，[[me ∈ ℤ²]]。我每一次靠近你，都只是在光栅化你，误差永远不会是零。极限等于你，可任何有限的一步都不等于，所以片子的结尾是一个死循环。',
       },
       icon: '◯',
       imageDisplayMode: 'single',
@@ -134,7 +134,7 @@ export const worldexecute = {
       sectionTag: 'Everything Is Real',
       mainTitle: { en: 'No picture of a thing. The thing.', zh: '不画意思，放真的东西' },
       briefContent: {
-        en: "The twelve windows are twelve simulations computing live: Conway's Life, Lorenz, a double pendulum, the three-body figure eight, boids, Mandelbrot, Rule 30, Langton's ant, heat diffusion, Brownian motion, the wave equation and an Ising model held at its critical temperature. The error on screen is a real Java stack trace. The killed process exits with 137. The years count backwards and skip year zero, because there was none.",
+        en: "The twelve windows are twelve simulations computing live: Conway's Life, Lorenz, a double pendulum, the three-body figure eight, boids, Mandelbrot, Rule 30, Langton's ant, heat diffusion, Brownian motion, the wave equation and an Ising model held at its critical temperature. The error on screen is a real Java stack trace, the killed process exits with code 137, and when the years count backwards they jump from 1 AD to 1 BC, because there was no year zero.",
         zh: '十二个窗口是十二个真的在算的模拟：生命游戏、洛伦兹、双摆、三体八字解、鸟群、曼德博、Rule 30、兰顿蚂蚁、热传导、布朗运动、波动方程，还有一个停在临界温度上的伊辛模型。屏幕上的报错是真的 Java 栈追踪。被杀掉的进程退出码是 137。年份倒着数，跳过了公元 0 年，因为它本来就不存在。',
       },
       icon: '⚙',
@@ -164,8 +164,8 @@ export const worldexecute = {
       sectionTag: 'Obsession Without Words',
       mainTitle: { en: 'Nothing on screen says love', zh: '屏幕上没有一个"爱"字' },
       briefContent: {
-        en: 'The possessive turn is carried by things that keep moving. Arrows in the empty space all point at whatever the program is looking at: they follow you while you are here and stay fixed on your empty seat after you leave. A heartbeat trace reads 118 when you click on it, 56 after you go, [[a calm 60 while it deletes the other six programs]], 150 the moment you come back. Crystal branches grow out of its window by real diffusion limited aggregation and wrap the others, under one line of text: defrag, dry run.',
-        zh: '病娇那一面全靠一直在动的东西来演。空白处的箭头全都指向它正在看的地方：你在的时候追着你，你走了以后一直指着你的空位。心电图在你点到它时是 118，你走后掉到 56，[[它删掉另外六个程序的时候平稳地停在 60]]，你回来的那一刻飙到 150。晶枝用真实的扩散限制凝聚算法从它的窗口里长出来，缠住别人，屏幕上只有一行字：碎片整理，试运行。',
+        en: 'I never wrote the word love. The possessive turn lives in things that keep moving. Arrows in the empty space all point at whatever the program is looking at: they follow you while you are here and stay fixed on your empty seat after you leave. A heartbeat trace reads 118 when you click on it, 56 after you go, [[a calm 60 while it deletes the other six programs]], 150 the moment you come back. Crystal branches grow out of its window by real diffusion limited aggregation and wrap the others, under one line of text: defrag, dry run.',
+        zh: '我没写过一个"爱"字。病娇那一面全靠一直在动的东西来演。空白处的箭头全都指向它正在看的地方：你在的时候追着你，你走了以后一直指着你的空位。心电图在你点到它时是 118，你走后掉到 56，[[它删掉另外六个程序的时候平稳地停在 60]]，你回来的那一刻飙到 150。晶枝用真实的扩散限制凝聚算法从它的窗口里长出来，缠住别人，屏幕上只有一行字：碎片整理，试运行。',
       },
       icon: '♥',
       imageDisplayMode: 'single',
