@@ -5,8 +5,8 @@ export const kogna = {
     featured: true, order: 1, // Selected Work · 第 1 位
     title: 'Kogna AI',
     subtitle: {
-      en: 'Strategic Business Insight, For All',
-      zh: '战略洞察 · 人人可及'
+      en: 'Designing a Building-Block Project Hub & AI Workspace for Lean Teams',
+      zh: '为精益团队设计积木式项目中心与 AI 工作空间'
     },
     categories: ['AI', 'Product Design', 'UIUX', 'Design System'],
     tags: ['Design System', 'UI Design', 'Product Design', 'SaaS', 'B2B', 'AI Platform', 'Dark Mode', 'Component Library'],
@@ -14,8 +14,8 @@ export const kogna = {
 
     thumbnail: '/media/projects/kogna/slides/slide-01.png',
     brief: {
-      en: 'Led the design system and UI/UX for an AI decision-support platform that turns fragmented business data into real-time strategic intelligence for leaders. Now a live V1 in private beta, with its first design-partner users onboard.',
-      zh: '主导一个 AI 决策支持平台的设计系统与 UI/UX:将碎片化的企业数据转化为面向高管的实时战略洞察;V1 已上线并进入私测,首批深度体验用户已在使用。'
+      en: 'Led the design system and UI/UX for Kogna, AI project management that keeps tasks, timelines and team chat in one place, and finds what\'s holding a project back. Live at kogna.io.',
+      zh: '主导 Kogna 的设计系统与 UI/UX:一个把任务、时间线和团队聊天放在一处、还能找出项目卡点的 AI 项目管理工具;已在 kogna.io 上线。'
     },
     heroImage: '/media/projects/kogna/redesign-2026-10/kit-home.jpg', // Kit v2 Home (Oct 2026); the June cover stays as the card thumbnail
     heroVideo: null,
@@ -23,7 +23,7 @@ export const kogna = {
     domain: [
       { en: 'AI Platform', zh: 'AI 平台' },
       { en: 'B2B SaaS', zh: 'B2B SaaS' },
-      { en: 'Strategy Intelligence', zh: '战略智能' }
+      { en: 'Project Management', zh: '项目管理' }
     ],
     form: [
       { en: 'Design System', zh: '设计系统' },
@@ -56,10 +56,10 @@ export const kogna = {
       mainImage: {
         src: '/media/projects/kogna/slides/slide-02.png',
         alt: 'TL;DR · What Kogna Does',
-        caption: 'Every tool fans into one AI command center'
+        caption: 'The work in one place. The blocker, found for you.'
       },
       // Why I'm building this:压成 hero 题注一句
-      whyIBuild: 'I built Kogna to get inside [[how leaders actually decide]], what they worry about and what they need to see before they commit, because [[I want to be running something myself one day]].'
+      whyIBuild: 'I joined Kogna to get inside [[how teams and the people who lead them actually decide]], what they worry about and what they need to see before they commit, because [[I want to be running something myself one day]].'
     },
 
     sections: [
@@ -68,13 +68,13 @@ export const kogna = {
         id: 'problem',
         title: 'The Problem',
         sectionTag: '01 · The Problem',
-        mainTitle: 'Every leader pays a fragmentation tax',
-        briefContent: 'Leadership teams run the business from four or five tools at once: CRM, project tracker, finance, BI dashboards, a stack of spreadsheets. By the time someone stitches those into one picture (often a chief of staff burning hours on it every week), the picture is already weeks old. I joined [[Kogna]] as the [[design system lead]] while the product was growing faster than its UI could keep up: every new page looked a little different, and the whole thing read as [[a patchwork instead of one product]]. My job was to make it feel like one product, and trustworthy enough to base a real decision on.',
-        challenge: 'How might we give a leader the whole business at a glance without burying the detail behind any single number?',
+        mainTitle: 'Five apps, and none of them says what\'s stuck',
+        briefContent: 'Kogna\'s founders found themselves switching between five apps just to keep a single project moving, and small teams live the same way: tasks in a tracker, updates in a chat app, dates in a spreadsheet. Each of those tools records the work and none of them reads it, so someone spends the week chasing people for status, and a slipping task only surfaces once it is already late. I joined [[Kogna]] as the [[design system lead]] while the product was growing faster than its UI could keep up: every new page looked a little different, and the whole thing read as [[a patchwork instead of one product]]. My job was to make it feel like one product, and trustworthy enough to base a real decision on.',
+        challenge: 'How might we point a manager at the one blocker that matters, across every project, without a wall of alerts?',
         challenges: [
-          'How might we turn dozens of disconnected metrics into one signal a leader can act on at a glance, with the detail still one click away?',
-          'How might we make dense, data-heavy screens feel calm enough for an executive to trust?',
-          'How might we hold every screen together inside a product that ships new features every week?'
+          'How might we point a manager at the one blocker that matters, across every project, without a wall of alerts?',
+          'How might we keep people in charge of an AI that will sometimes be wrong?',
+          'How might we make it obvious when the AI is talking, on every screen, while the product changes every week?'
         ],
         icon: '💡'
       },
@@ -102,25 +102,25 @@ export const kogna = {
         id: 'solution',
         title: 'The Solution',
         sectionTag: '03 · The Solution',
-        mainTitle: 'Three pillars, one panoramic view',
-        briefContent: 'The answer is three pillars that work as one view: [[Kogna Insight]], a Business Radar that ranks what needs attention; [[Smart Tiles]], a dashboard each leader assembles from live data; and [[What → Why]], which connects the stack and answers questions over it. Each pillar came down to one hard call, unpacked next.',
+        mainTitle: 'Three ways to find where to step in',
+        briefContent: 'Three pieces that work together: [[Kogna Insight]], which states the risk plainly and turns it into a plan; [[Smart Tiles]], a home each person builds from tiles; and [[Ask Kogna]], the assistant that reads a board and finds what\'s stuck. Each came down to one hard call, unpacked next.',
         icon: '✦',
         featureDisplayMode: 'side-by-side',
         features: [
           {
             name: 'Kogna Insight',
-            detail: 'A Business Radar for the whole company. It reads strengths, weaknesses, opportunities and threats through proven frameworks (SWOT, SOAR, VRIO and TOWS), ranks them by live severity, and puts the most urgent signal first.',
+            detail: 'The risk, stated plainly. Insight reads the work you\'ve connected and opens with what\'s at risk, how serious it is, and a Strategy button that turns it into a plan, instead of a report to dig through.',
             image: '/media/projects/kogna/pillars/insight.png'
           },
           {
             name: 'Smart Tiles',
-            detail: 'A dashboard the leader assembles. Adaptive KPI tiles pull live from Salesforce, HubSpot, Jira and Asana and snap into a grid they arrange, with an AI insight pinned right to the board.',
+            detail: 'Everyone\'s own home, built from tiles. Open work, overdue, shipped and cycle time across every project, with the strategy Ask Kogna drafted pinned next to the numbers.',
             image: '/media/projects/kogna/pillars/smart-tiles.png'
           },
           {
-            name: 'What → Why',
-            detail: 'Connect the stack, then see what changed and why. Ten-plus sources link together, and Ask Kogna answers questions over your connected data.',
-            image: '/media/projects/kogna/pillars/what-why.png'
+            name: 'Ask Kogna',
+            detail: 'Catches the blocker before it stalls a launch. Ask from any board and it reads what\'s overdue, what\'s blocked and who\'s carrying the most, then drafts the next moves as cards. You make the call: nothing changes until you tap.',
+            image: '/media/projects/kogna/redesign-2026-10/kit-ask-kogna.jpg'
           }
         ]
       },
@@ -138,23 +138,23 @@ export const kogna = {
           {
             name: 'Kogna Insight: from data to a decision',
             label: 'From Data to Decision',
-            detail: 'A: show the metric and let the leader read it. B: state the risk and the one move to make. I chose B. "Data to decision" is a stated brand value, and in discovery leaders wanted the answer, not another chart, so every insight now leads with a plainly stated risk, its severity, and a Strategy button that turns it into a plan. When sales dips, the card says whether it reads as a production bottleneck or a market shift.',
+            detail: 'A: show the metric and let the leader read it. B: state the risk and the one move to make. I chose B. "Data to decision" is a stated brand value, and in discovery leaders wanted the answer, not another chart, so every insight leads with a plainly stated risk, its severity, and a Strategy button that turns it into a plan. The pattern outlived the pivot: on a project today, Ask Kogna names the missing piece first and offers the moves after it.',
             image: '/media/projects/kogna/slides/slide-07.png',
             imageCaption: 'Every insight leads with a risk and the action to take'
           },
           {
-            name: 'Smart Tiles: a fixed board, or one that builds itself',
+            name: 'Smart Tiles: a home that bends to how you work',
             label: 'Tile System',
-            detail: 'A: ship one executive template for everyone. B: let each leader assemble their own board. I chose B. A CEO and a COO lead from different numbers, so adaptive tiles for pipeline, win rate, blocked issues and company health snap into a grid the leader arranges, and the layout persists between visits. An AI insight can be pinned straight onto the board.',
+            detail: 'A: one fixed dashboard for everyone. B: let each person assemble their own. I chose B. A CEO and a COO lead from different numbers, so instead of one fixed dashboard each person snaps together their own from tiles, pins an AI insight beside them, and finds it the same way next visit. When Kogna turned into project management the idea carried over: Smart Tiles is now the manager\'s home, open, overdue and shipped across every project, with the strategy Ask Kogna drafted pinned next to the numbers.',
             image: '/media/projects/kogna/slides/slide-08.png',
-            imageCaption: 'The leader arranges the board; the layout persists'
+            imageCaption: 'The first version, on live Jira data; the layout persists'
           },
           {
-            name: 'Where the AI assistant lives',
-            label: 'AI Assistant',
-            detail: 'A: give the AI its own page you navigate to. B: keep it one tap away, in context. I chose B. A separate chat page breaks the train of thought, so Ask Kogna opens beside the work and answers about the risk or tile in front of you. On mobile, built for a leader on the go, the assistant stays a single tap from every screen.',
-            image: '/media/projects/kogna/slides/slide-11.png',
-            imageCaption: 'Ask Kogna stays in context, next to the work'
+            name: 'Cyan means AI',
+            label: 'Colour',
+            detail: 'A: cyan as the general brand accent. B: cyan only where the AI is. I chose B. By August cyan had leaked into status and payment: a trial countdown, "Start free", confirmation checks, a Retry button. If everything is cyan, nothing says "AI". I read every call site in context and took cyan back from the twelve that weren\'t AI, so the brightest thing left in the header is the one door to the assistant, Ask Kogna. When the brand went cyan-led in October, the rule carried over as one primary per page: in the header, Ask Kogna is still the only cyan block, and the shared top-bar button takes its size and edge from it.',
+            image: '/media/projects/kogna/slides/slide-09.png',
+            imageCaption: 'Before and after the cyan rule, and the header today'
           }
         ]
       },
@@ -164,21 +164,29 @@ export const kogna = {
         id: 'ai-ux',
         title: 'AI UX & Trust',
         sectionTag: '05 · AI UX & Trust',
-        mainTitle: 'Designing for a system that can be wrong',
-        briefContent: 'An engine that reads your business only helps if a leader can trust it and stay in control. Human-in-the-loop is a brand value here, not a footnote: the AI drafts, you decide. Three UX choices carry most of that trust.',
+        mainTitle: 'Designing for an assistant that can be wrong',
+        briefContent: 'An AI that reads your projects only helps if the team can trust it and stays in charge. Ask Kogna drafts, a person decides. Three rules carry most of that trust.',
         icon: '🛡️',
         features: [
           {
-            name: 'Priority over noise',
-            detail: 'The Business Radar watches strengths, weaknesses, opportunities and threats around the clock, but it never dumps them on you. Findings are ranked on one severity ramp, from critical down to a neutral low, so the signal worth acting on today sits at the top and quiet items stay quiet. If a screen turns into a wall of color, the ranking is wrong.'
+            name: 'Nothing moves without you',
+            detail: 'Task changes arrive as cards and a strategy arrives as a draft you can refine. Nothing is written to a board until a person approves it, so the AI can be bold in what it suggests and never touches the work on its own.'
           },
           {
             name: 'Answers that show their work',
-            detail: 'Ask Kogna answers over your connected data, names the sources behind the answer, and carries a confidence read. A separate audit step checks those sources actually support the claim and sends the answer back to be redone if they do not. When the data cannot support an answer, it says "I don\'t have information on this" instead of inventing one.'
+            detail: 'Every answer opens into the steps behind it: what it read, the passages it leaned on, and how sure it is. When the data isn\'t there, it says what\'s missing instead of filling the gap with something plausible.'
           },
           {
-            name: 'Nothing acts without you',
-            detail: 'A risk becomes a plan only when you say so: the AI proposes a strategy and its tasks, you refine it in a preview, and nothing is saved until you commit. Empty and loading states are held to the same honesty. A blank panel says why it is empty and what to do next, and the branded spinner is reserved for the moments the AI is actually thinking.'
+            name: 'Signal over noise',
+            detail: 'Findings land on one severity scale, from critical down to low, so the problem worth acting on today sits on top and the rest stays quiet. If a screen turns into a wall of colour, the ranking is wrong.'
+          }
+        ],
+        imageDisplayMode: 'single',
+        images: [
+          {
+            src: '/media/projects/kogna/slides/slide-10.png',
+            alt: 'AI UX & Trust',
+            caption: 'Three rules, each shown with the demo project from the kogna.io landing page'
           }
         ]
       },
@@ -188,20 +196,20 @@ export const kogna = {
         id: 'how-we-build',
         title: 'How We Build',
         sectionTag: '06 · How We Build',
-        mainTitle: 'One source of truth, checked on every change',
-        briefContent: 'The product changes every week and much of the code is written with an AI in the loop, so a design system that only lived in Figma would have drifted from the product within a month. So it lives in code. Tokens, the type ramp and every component are written once, in [[globals.css and an 882-line DESIGN.md]], and mirrored into the Figma library under the same names; a map file records which Figma node is which component. Figma and Claude Code talk over MCP in both directions: a screen I draw in Figma comes back as token-correct React, and a token I change in code updates the Figma variables. [[Nineteen unauthenticated preview routes]] render every screen in a fixed state, so the whole product can be screenshotted without a login, and every visual change ships with its own before/after page diff. The person who designs the screen is the one who ships it, usually the same week.',
+        mainTitle: 'Using AI to ship an AI product',
+        briefContent: 'Kogna changes every week and much of its code is written with an AI in the loop, so a design system that lived only in Figma would drift within weeks. I put the system where the AI works. Tokens, the type ramp and every component are written once, in [[globals.css and DESIGN.md]], and mirrored into the Figma library under the same names. Figma and Claude Code talk over MCP in both directions: a screen I draw in Figma comes back as token-correct React, and a token I change in code updates the Figma variables. A Claude Code skill reviews screens against DESIGN.md, unauthenticated preview routes render every screen without a login, and [[gates in CI stop a merge when the AI gets it wrong]]. The person who designs the screen is the one who ships it, usually the same week.',
         icon: '⚡',
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/kogna/slides/slide-12.png',
+            src: '/media/projects/kogna/slides/slide-11.png',
             alt: 'Design Process',
-            caption: 'Design, build with AI, review, ship: the same system every day'
+            caption: 'Kit first, build with AI, review on screen, ship: the same loop every day'
           },
           {
-            src: '/media/projects/kogna/slides/slide-10.png',
+            src: '/media/projects/kogna/slides/slide-12.png',
             alt: 'Design System',
-            caption: 'One source of truth: tokens, color and an Inter type ramp across the product'
+            caption: 'The kit, measured: white labels on every fill, and eight decisions on record'
           }
         ]
       },
@@ -218,7 +226,7 @@ export const kogna = {
         features: [
           {
             name: 'design-lint',
-            label: '867 lines · 22 rules · blocks the merge',
+            label: '868 lines · 20 rules · blocks the merge',
             detail: 'A static check that reads DESIGN.md back to the code. It fails a pull request for raw hex where a token exists, pixel sizes off the type ramp, a fifth font size in one view, weight-500 text, off-ladder radii, coloured left-edge bars, and hover states that point at a token nobody defined. A rule can be broken on purpose, but only with a written reason on that line.'
           },
           {
@@ -297,8 +305,8 @@ export const kogna = {
         id: 'outcomes',
         title: 'Outcomes',
         sectionTag: '09 · Outcomes',
-        mainTitle: 'From idea to a live, validated platform',
-        briefContent: 'Kogna is a [[live V1 in private beta]], running on a [[10+ connector]] backbone and validated against [[180+ discovery outreach]], with [[2 pilot companies and 1 partner organization]] onboard and a post-beta pricing path. Its founder, CEO Jonathan Beck, frames the bet plainly: "today\'s strategy tools show you what happened; we built something that shows you what\'s next, and why." What ships next is as deliberate as what shipped: custom model training on a feedback-enriched lakehouse, more connectors, and multi-step agents that run an analysis end to end.',
+        mainTitle: 'From an insight dashboard to a live workspace',
+        briefContent: 'Kogna is [[live at kogna.io]]: free for teams of up to ten, with Standard at $9 a seat and Pro on a waitlist, and its first two partnerships, with [[Startup Gainesville]] and [[Nexus at UCF]], put ten free seats in front of every team. My September system was replaced in October, and [[the lint gate I wrote for it now checks Kit v2\'s rules on every pull request]]. What ships next: predictive blockers, a strategy sandbox where a director tries a plan before committing the team, and one AI surface that widens out of the side menu next to the open project.',
         icon: '🚀',
         imageDisplayMode: 'single',
         images: [
@@ -309,9 +317,9 @@ export const kogna = {
             caption: 'The team\'s launch video, May 2026 · 55 s'
           },
           {
-            src: '/media/projects/kogna/slides/slide-13.png',
+            src: '/media/projects/kogna/slides/slide-16.png',
             alt: 'Outcome',
-            caption: 'V1 live · 10+ connectors · 180+ discovery outreach · private beta'
+            caption: 'Live at kogna.io · 2 partnerships · 20 lint rules in CI · 3 systems in six months'
           }
         ]
       },
