@@ -12,6 +12,7 @@ import { primeDirective } from './prime-directive.js';
 import { myLittleFishTank } from './my-little-fish-tank.js';
 import { kogna } from './kogna.js';
 import { hexaedge } from './hexaedge.js';
+import { sidePocket } from './side-pocket.js';
 import { wishflow } from './wishflow.js';
 import { gbkparts } from './gbkparts.js';
 // miaworld 2026-10-18 从主页撤下,数据文件 miaworld.js 留着,想恢复就加回 import 和数组
@@ -30,6 +31,7 @@ export const projects = [
   myLittleFishTank,
   kogna,
   hexaedge,
+  sidePocket,
   wishflow,
   gbkparts,
   worldexecute,

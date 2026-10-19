@@ -40,7 +40,7 @@ HI_W = int(sys.argv[2]) if len(sys.argv) > 2 else 2200
 # 大档只给 data/projects/*.js 里 featured: true 的项目生成。
 # 全站都生成是 82MB,其中大半永远不会被请求(下面牌阵的卡片不放大)。
 # 换了 featured 项目要同步改这里;漏了也不会坏,前端拿不到大档会自动回退原图。
-HI_DIRS = {"kogna", "hexaedge", "sparkup", "petiboxy", "stumbldoor"}
+HI_DIRS = {"kogna", "hexaedge", "sparkup", "petiboxy", "stumbldoor", "sidepocket"}
 
 EXTS = (".png", ".jpg", ".jpeg", ".gif")
 
