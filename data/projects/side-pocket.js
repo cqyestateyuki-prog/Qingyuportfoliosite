@@ -99,7 +99,7 @@ export const sidePocket = {
             title: 'Trust · The first version made up an exchange rate',
             text: 'The hackathon asked every team to build on PRISM by Block Convey, a tracing tool that records each step an AI agent takes, so I could reopen any run and see where it went wrong. In v1 the model read raw CSV exports and did the arithmetic itself. It got 72 of 81 reference questions right, and six of the nine misses had one cause: an exchange rate was missing, and the model quietly used a nearby day\'s rate instead. So the arithmetic moved into code, the model only calls tools and explains, and a missing rate now stops the run. v2 scored 89 of 89.',
             tabs: [
-              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/06-prism-v1-invented-rate.jpg', alt: 'v1 trace using the wrong day\'s rate', caption: 'v1 in PRISM gives a fluent answer for Lena Koch\'s August on Freelancer.com. However, it priced an August 21 record at the August 20 rate. PRISM\'s own analysis rated the arithmetic accurate, and only my reference-answer checker caught it.' },
+              { label: 'Iteration', image: '/media/projects/sidepocket/sections/06-prism-v1-invented-rate.jpg', alt: 'v1 trace using the wrong day\'s rate', caption: 'v1 in PRISM gives a fluent answer for Lena Koch\'s August on Freelancer.com. However, it priced an August 21 record at the August 20 rate. PRISM\'s own analysis rated the arithmetic accurate, and only my reference-answer checker caught it.' },
               { label: 'Solution', image: '/media/projects/sidepocket/sections/07-prism-v2-refusal.jpg', alt: 'v2 trace stopping at the missing rate', caption: 'v2 stops at the missing EUR rate for August 21 and asks for it.' },
               { label: 'In the app', image: '/media/projects/sidepocket/sections/ask1.jpg', alt: 'Ask Tilly answer with agent steps', caption: 'Every number in Tilly\'s answer links to the step that produced it.' }
             ]
@@ -136,7 +136,7 @@ export const sidePocket = {
             title: 'All side income · From a tax tool back to every gig',
             text: 'The hackathon demo centred on tax. That evening I went back to the broader purpose, seeing every source of side income, and v1.4 added income and expenses you enter yourself, a kept-after-expenses total, a monthly goal and milestone badges computed from the ledger. The goal counts net income and kept after expenses is a smaller number, so each carries its own label.',
             tabs: [
-              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Hackathon Overview', caption: 'The hackathon Overview. However, it led with tax: what to set aside and the next US estimated-tax date.' },
+              { label: 'Iteration', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Hackathon Overview', caption: 'The hackathon Overview. However, it led with tax: what to set aside and the next US estimated-tax date.' },
               { label: 'Solution', image: '/media/projects/sidepocket/sections/overview.jpg', alt: 'Overview in v1.4', caption: 'Income first: net income, the goal reached on Sep 28, income by source and expenses.' },
               { label: 'Milestones', image: '/media/projects/sidepocket/sections/milestones.jpg', alt: 'Milestones', caption: '7 of 8 badges, each with its own Tilly pose and the date it was earned.' }
             ]
