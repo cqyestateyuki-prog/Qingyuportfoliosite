@@ -88,137 +88,71 @@ export const sidePocket = {
       },
 
       {
-        id: 'iteration-trust',
-        title: 'AI Trust',
-        sectionTag: 'Iteration 1 · Trust',
-        mainTitle: 'The First Version Made Up an Exchange Rate',
+        id: 'iteration',
+        title: 'Iteration',
+        sectionTag: 'Iteration',
+        mainTitle: 'Six Rounds of Iteration',
         icon: '🔁',
-        // 一段配一张图
-        imageDisplayMode: 'alternating',
-        content: [
-          'In v1 the model read the raw CSV exports and did the arithmetic itself. It answered 72 of 81 reference questions correctly, and six of the nine misses had one cause: an exchange rate was missing, so [[the model borrowed a nearby day\'s rate and answered with confidence]]. Asked what Lena Koch earned on Freelancer.com in August, it priced an August 21 record at the August 20 rate. PRISM, the hackathon\'s tracing tool, rated that arithmetic accurate. Only my reference-answer checker caught it.',
-          'So the arithmetic moved into code. Deterministic ledger tools compute every total, and the model only chooses which tools to call and explains the result. A missing rate raises an error that names the record, and the run stops. v2 passed all nine questions v1 had missed and scored 89 of 89 on the full set, re-checked by a separate script.',
-          'In the interface this became one rule: [[every number in Tilly\'s answer links to the step that produced it]]. A source link only helps when the calculation behind it respected the source.'
-        ],
-        images: [
+        // 六轮迭代收在一节里:每轮一段话 + 一行横向对比(showcases 自动编号 01-06)。block.text 不解析 [[ ]]
+        showcases: [
           {
-            src: '/media/projects/sidepocket/sections/06-prism-v1-invented-rate.jpg',
-            alt: 'v1 trace using the wrong day\'s rate',
-            caption: 'v1 in PRISM: a fluent answer built on the August 20 rate for an August 21 record.'
+            title: 'Trust · The first version made up an exchange rate',
+            text: 'In v1 the model read raw CSV exports and did the arithmetic itself. It got 72 of 81 reference questions right, and six of the nine misses had one cause: an exchange rate was missing, and the model quietly used a nearby day\'s rate instead. So the arithmetic moved into code, the model only calls tools and explains, and a missing rate now stops the run. v2 scored 89 of 89.',
+            tabs: [
+              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/06-prism-v1-invented-rate.jpg', alt: 'v1 trace using the wrong day\'s rate', caption: 'v1 gives a fluent answer for Lena Koch\'s August on Freelancer.com. However, it priced an August 21 record at the August 20 rate, and only the reference-answer checker caught it.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/07-prism-v2-refusal.jpg', alt: 'v2 trace stopping at the missing rate', caption: 'v2 stops at the missing EUR rate for August 21 and asks for it.' },
+              { label: 'In the app', image: '/media/projects/sidepocket/sections/ask1.jpg', alt: 'Ask Tilly answer with agent steps', caption: 'Every number in Tilly\'s answer links to the step that produced it.' }
+            ]
           },
           {
-            src: '/media/projects/sidepocket/sections/07-prism-v2-refusal.jpg',
-            alt: 'v2 trace stopping at the missing rate',
-            caption: 'v2 on the same question stops and asks for the EUR rate for August 21.'
+            title: 'Colour · The ledger green clashed with the pigeon',
+            text: 'Kit v1 took its form from Linktree, in forest green with lime. It felt steady enough for a ledger and looked out of place next to the lilac and pink pigeon, so I kept one prototype and swapped only the colour variables until the product and the bird agreed, then fixed contrast to WCAG AA.',
+            tabs: [
+              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/palette-a-forest.jpg', alt: 'Forest green Overview', caption: 'Forest green #1F4B2C with lime. Steady and trustworthy like a ledger. However, it looked out of place next to the pink and lilac pigeon.' },
+              { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/palette-d-pink.jpg', alt: 'Hot pink Overview', caption: 'Hot pink #D6246E as the main colour, the most Pop Mart of the set. However, big pink blocks behind money figures might not look serious enough.' },
+              { label: 'Iteration 3', image: '/media/projects/sidepocket/sections/palette-c-violet.jpg', alt: 'Electric violet Overview', caption: 'Electric violet #5B2BD6 with pink. Creative without losing professionalism, and the closest match to the pigeon. However, it was the most purple of all.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Soft violet Overview', caption: 'Soft violet #6B5BC2: still violet, with less saturation and closer to a designer toy. WCAG AA fixes then took text on violet to 4.71:1, metadata to 5.21:1 and pink text to 5.22:1.' }
+            ]
           },
           {
-            src: '/media/projects/sidepocket/sections/ask1.jpg',
-            alt: 'Ask Tilly answer with agent steps',
-            caption: 'Ask Tilly: the answer, the agent steps beside it, and a link from each figure to its step.'
+            title: 'Tilly · The first pigeon still looked like Duolingo',
+            text: 'I wanted a mascot that reacts to what happens in the product, from a new payout to a missing exchange rate. The 3D toy pigeons still read as Duolingo and would not hold up as a 40 px avatar, so I closed the eyes into crescents, redrew the bird as a flat sticker and gave each state of the product its own pose.',
+            tabs: [
+              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/tilly-1-3d-drafts.jpg', alt: 'Six 3D mascot drafts', caption: 'Two references: Duolingo\'s owl, a character that reacts to what you do, and Pop Mart\'s blind-box toys, chubby and pastel. An owl was too close to Duolingo, so I drew a carrier pigeon with a coin bag and a map scarf, and tried round eyes, crescent eyes, a worried face, dot eyes, round glasses and a globe chick. However, the round eyes still read as Duolingo, and a 3D render would not read at small UI sizes.' },
+              { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/tilly-2-flat-sticker.jpg', alt: 'Flat sticker pigeon in four moods', caption: 'The pigeon as a flat sticker with closed crescent eyes, in its first four moods: wave, think, worried and celebrate. It reads at 40 px. However, four moods could not cover income and rewards.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/04-tilly-poses.jpg', alt: 'Tilly pose candidates with picks outlined', caption: '16 poses picked from 29, each with a place in the product: a laptop while the agent works, an envelope when the answer arrives, a different pose on each milestone badge.' },
+              { label: 'App icon', image: '/media/projects/sidepocket/sections/logo-options.jpg', alt: 'Four app icon options', caption: 'Four icon options. The pigeon head on violet became the app icon, and the folded-map bird is kept on file as a possible brand mark.' }
+            ]
+          },
+          {
+            title: 'Your data · How would anyone know the numbers were right?',
+            text: 'After the pitch, someone asked how a user would know the AI\'s numbers were right, so I let people try it on their own statements, privately. Statements stay in the browser, account IDs become four-digit labels before upload, and the model only sees the question and computed totals.',
+            tabs: [
+              { label: 'Four-digit labels', image: '/media/projects/sidepocket/sections/mydata.jpg', alt: 'Imported statements with four-digit account labels', caption: 'Seven imported statements. Each account appears only as a four-digit label.' },
+              { label: 'ECB rates', image: '/media/projects/sidepocket/sections/18-ledger-cny-ecb.jpg', alt: 'CNY ledger with ECB rate labels', caption: 'Every converted amount carries its ECB rate and the date of that rate.' }
+            ]
+          },
+          {
+            title: 'All side income · From a tax tool back to every gig',
+            text: 'The hackathon demo centred on tax. That evening I went back to the broader purpose, seeing every source of side income, and v1.4 added income and expenses you enter yourself, a kept-after-expenses total, a monthly goal and milestone badges computed from the ledger. The goal counts net income and kept after expenses is a smaller number, so each carries its own label.',
+            tabs: [
+              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Hackathon Overview', caption: 'The hackathon Overview. However, it led with tax: what to set aside and the next US estimated-tax date.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/overview.jpg', alt: 'Overview in v1.4', caption: 'Income first: net income, the goal reached on Sep 28, income by source and expenses.' },
+              { label: 'Milestones', image: '/media/projects/sidepocket/sections/milestones.jpg', alt: 'Milestones', caption: '7 of 8 badges, each with its own Tilly pose and the date it was earned.' }
+            ]
+          },
+          {
+            title: 'Review · The shorter label said the opposite',
+            text: 'Claude Code agents built the screens and GPT-6 Astra wrote the copy, so this round was review. All 137 UI strings went back through Astra with a plain-copy guide, and in that pass "keeps the most" became "Highest fee share", the opposite meaning, so I reverted it. The screens lost extra text and buttons, filters moved into the column headers, and real platform marks replaced colour dots.',
+            tabs: [
+              { label: 'Ledger · before', image: '/media/projects/sidepocket/sections/14-ledger-before.jpg', alt: 'Ledger in kit v1.1' },
+              { label: 'Ledger · now', image: '/media/projects/sidepocket/sections/ledger.jpg', alt: 'Ledger now' },
+              { label: 'My data · before', image: '/media/projects/sidepocket/sections/12-mydata-before.jpg', alt: 'My data before the trim' },
+              { label: 'My data · now', image: '/media/projects/sidepocket/sections/mydata-empty.jpg', alt: 'My data now' },
+              { label: 'Tax · before', image: '/media/projects/sidepocket/sections/16-tax-before.jpg', alt: 'Tax before the copy pass' },
+              { label: 'Tax · now', image: '/media/projects/sidepocket/sections/tax.jpg', alt: 'Tax now' }
+            ]
           }
-        ]
-      },
-
-      {
-        id: 'iteration-colour',
-        title: 'Colour',
-        sectionTag: 'Iteration 2 · Colour',
-        mainTitle: 'The Ledger Green Clashed with the Pigeon',
-        problem: 'Kit v1 took its form from Linktree, in forest green with lime. It felt steady enough for a ledger, and it looked out of place next to the lilac and pink pigeon I wanted as a mascot.',
-        solution: 'I built a palette lab: one prototype, the same data, and only the colour variables swapped. I chose soft violet #6B5BC2 with pink #FF7AB6, then fixed contrast to WCAG AA.',
-        icon: '🎨',
-        tabs: [
-          { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/palette-a-forest.jpg', alt: 'Forest green Overview', caption: 'Forest green #1F4B2C with lime. Steady and trustworthy like a ledger. However, it looked out of place next to the pink and lilac pigeon.' },
-          { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/palette-d-pink.jpg', alt: 'Hot pink Overview', caption: 'Hot pink #D6246E as the main colour, the most Pop Mart of the set. However, big pink blocks behind money figures might not look serious enough.' },
-          { label: 'Iteration 3', image: '/media/projects/sidepocket/sections/palette-c-violet.jpg', alt: 'Electric violet Overview', caption: 'Electric violet #5B2BD6 with pink. Creative without losing professionalism, and the closest match to the pigeon. However, it was the most purple of all.' },
-          { label: 'Solution', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Soft violet Overview', caption: 'Soft violet #6B5BC2: still violet, with less saturation and closer to a designer toy. WCAG AA fixes then took text on violet to 4.71:1, metadata to 5.21:1 and pink text to 5.22:1.' }
-        ]
-      },
-
-      {
-        id: 'iteration-tilly',
-        title: 'Tilly',
-        sectionTag: 'Iteration 3 · Tilly',
-        mainTitle: 'The First Pigeon Still Looked Like Duolingo',
-        problem: 'I wanted a mascot that reacts to what happens in the product, from a new payout to a missing exchange rate. The first round of 3D toy pigeons still read as Duolingo and would not hold up as a 40 px avatar.',
-        solution: 'I closed the eyes into crescents, redrew the bird as a flat sticker that reads from 128 px down to 40 px, and gave each state of the product its own pose.',
-        icon: '🐦',
-        tabs: [
-          { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/tilly-1-3d-drafts.jpg', alt: 'Six 3D mascot drafts', caption: 'Two references: Duolingo\'s owl, a character that reacts to what you do, and Pop Mart\'s blind-box toys, chubby and pastel. An owl was too close to Duolingo, so I drew a carrier pigeon with a coin bag and a map scarf, and tried round eyes, crescent eyes, a worried face, dot eyes, round glasses and a globe chick. However, the round eyes still read as Duolingo, and a 3D render would not read at small UI sizes.' },
-          { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/tilly-2-flat-sticker.jpg', alt: 'Flat sticker pigeon in four moods', caption: 'The pigeon as a flat sticker with closed crescent eyes, in its first four moods: wave, think, worried and celebrate. It reads at 40 px. However, four moods could not cover income and rewards.' },
-          { label: 'Solution', image: '/media/projects/sidepocket/sections/04-tilly-poses.jpg', alt: 'Tilly pose candidates with picks outlined', caption: '16 poses picked from 29, each with a place in the product: a laptop while the agent works, an envelope when the answer arrives, a different pose on each milestone badge.' },
-          { label: 'App icon', image: '/media/projects/sidepocket/sections/logo-options.jpg', alt: 'Four app icon options', caption: 'Four icon options. The pigeon head on violet became the app icon, and the folded-map bird is kept on file as a possible brand mark.' }
-        ]
-      },
-
-      {
-        id: 'iteration-privacy',
-        title: 'Your Data',
-        sectionTag: 'Iteration 4 · Your Own Data',
-        mainTitle: 'How Would Anyone Know the Numbers Were Right?',
-        icon: '🔁',
-        imageDisplayMode: 'alternating',
-        content: [
-          'After the pitch, someone asked how a user would know the AI\'s numbers were right. The honest answer was to let them try it on their own statements, which meant designing for privacy first. Statements stay in the browser. Account IDs become salted four-digit labels before anything is uploaded, since two digits collided, and the server swaps them again before the model sees anything. [[The model gets the question and the computed totals, never a statement row]], and the server keeps no copy.',
-          'A design review then caught the mockup breaking a rule the backend already kept. It filled weekend exchange rates from the ECB even when someone had uploaded their own rate file, which mixed two sources inside one total. ECB rates now cover only the currencies with no file, and a weekend uses the last publication with its date on screen.',
-          '[[A rate file the user supplies is used exactly.]] When it is missing a date, that record stops and stays out of the totals until the rate is added.'
-        ],
-        images: [
-          {
-            src: '/media/projects/sidepocket/sections/mydata.jpg',
-            alt: 'Imported statements with four-digit account labels',
-            caption: 'Seven imported statements. Each account appears only as a four-digit label.'
-          },
-          {
-            src: '/media/projects/sidepocket/sections/18-ledger-cny-ecb.jpg',
-            alt: 'CNY ledger with ECB rate labels',
-            caption: 'The CNY view: every converted amount carries its ECB rate and the date of that rate.'
-          },
-          {
-            src: '/media/projects/sidepocket/sections/19-ledger-ratefile-stop.jpg',
-            alt: 'A record stopped by a missing rate',
-            caption: 'A gap in the user\'s rate file stops the record and leaves it out of the totals.'
-          }
-        ]
-      },
-
-      {
-        id: 'iteration-scope',
-        title: 'All Income',
-        sectionTag: 'Iteration 5 · All Side Income',
-        mainTitle: 'From a Tax Tool Back to All Side Income',
-        briefContent: 'The hackathon demo centred on the tax layer. That evening I went back to the broader purpose: seeing all side income and how much each source brings in. Version 1.4 added income and expenses you enter yourself, a kept-after-expenses total, a monthly goal and eight milestone badges that code computes from the ledger. This was my own product call, and no user had asked for it yet.\n\nOne distinction mattered more than it looks. The goal counts net income, and kept after expenses is a different, smaller number, so each carries its own label. [[A goal and a total that quietly measure different things will end up contradicting each other.]]',
-        icon: '🔁',
-        imageDisplayMode: 'single',
-        images: [
-          {
-            src: '/media/projects/sidepocket/sections/overview.jpg',
-            alt: 'Overview',
-            caption: 'Her September: net income, the goal reached on Sep 28, income by source and expenses.'
-          },
-          {
-            src: '/media/projects/sidepocket/sections/milestones.jpg',
-            alt: 'Milestones',
-            caption: 'Milestones: 7 of 8 badges, each with its own Tilly pose and the date it was earned.'
-          }
-        ]
-      },
-
-      {
-        id: 'iteration-review',
-        title: 'Review',
-        sectionTag: 'Iteration 6 · Review',
-        mainTitle: 'The Shorter Label Said the Opposite',
-        briefContent: 'Claude Code agents built the screens and GPT-6 Astra wrote the copy, so most of my work at this stage was reviewing what they made. I sent all 137 UI strings back to Astra with a plain-copy guide, and lines like "Your tax items, together." became "Tax summary". In the same pass Astra shortened "keeps the most", the platform where you keep the highest share of each dollar, to "Highest fee share". [[The shorter label meant the opposite]], and I reverted it.\n\nThe screens went through the same review. My data lost two buttons and most of its explanatory text, the period and currency switches became one shared dropdown, Ledger filters moved into the column headers, and [[real platform marks replaced colour dots]].',
-        icon: '🔁',
-        tabsTitle: 'Before and now',
-        tabs: [
-          { label: 'Ledger · before', image: '/media/projects/sidepocket/sections/14-ledger-before.jpg', alt: 'Ledger in kit v1.1' },
-          { label: 'Ledger · now', image: '/media/projects/sidepocket/sections/ledger.jpg', alt: 'Ledger now' },
-          { label: 'My data · before', image: '/media/projects/sidepocket/sections/12-mydata-before.jpg', alt: 'My data before the trim' },
-          { label: 'My data · now', image: '/media/projects/sidepocket/sections/mydata-empty.jpg', alt: 'My data now' },
-          { label: 'Tax · before', image: '/media/projects/sidepocket/sections/16-tax-before.jpg', alt: 'Tax before the copy pass' },
-          { label: 'Tax · now', image: '/media/projects/sidepocket/sections/tax.jpg', alt: 'Tax now' }
         ]
       },
 
