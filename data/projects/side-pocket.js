@@ -129,10 +129,8 @@ export const sidePocket = {
         icon: '🎨',
         tabs: [
           { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/palette-a-forest.jpg', alt: 'Forest green Overview', caption: 'Forest green #1F4B2C with lime. Steady and trustworthy like a ledger. However, it looked out of place next to the pink and lilac pigeon.' },
-          { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/palette-b-instagram.jpg', alt: 'Instagram gradient Overview', caption: 'An Instagram gradient. The most creator-like of the set. However, it looked too much like Instagram itself.' },
-          { label: 'Iteration 3', image: '/media/projects/sidepocket/sections/palette-d-pink.jpg', alt: 'Hot pink Overview', caption: 'Hot pink #D6246E as the main colour, the most Pop Mart of the set. However, big pink blocks behind money figures might not look serious enough.' },
-          { label: 'Iteration 4', image: '/media/projects/sidepocket/sections/palette-c-violet.jpg', alt: 'Electric violet Overview', caption: 'Electric violet #5B2BD6 with pink. Creative without losing professionalism, and the closest match to the pigeon. However, it was the most purple of all.' },
-          { label: 'Iteration 5', image: '/media/projects/sidepocket/sections/palette-c1-indigo.jpg', alt: 'Indigo Overview', caption: 'Indigo #4B4FC4, recommended because it looked more like a finance product. I went for a softer, more toy-like violet instead.' },
+          { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/palette-d-pink.jpg', alt: 'Hot pink Overview', caption: 'Hot pink #D6246E as the main colour, the most Pop Mart of the set. However, big pink blocks behind money figures might not look serious enough.' },
+          { label: 'Iteration 3', image: '/media/projects/sidepocket/sections/palette-c-violet.jpg', alt: 'Electric violet Overview', caption: 'Electric violet #5B2BD6 with pink. Creative without losing professionalism, and the closest match to the pigeon. However, it was the most purple of all.' },
           { label: 'Solution', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Soft violet Overview', caption: 'Soft violet #6B5BC2: still violet, with less saturation and closer to a designer toy. WCAG AA fixes then took text on violet to 4.71:1, metadata to 5.21:1 and pink text to 5.22:1.' }
         ]
       },
