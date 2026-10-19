@@ -12,7 +12,7 @@ export const sidePocket = {
     techTags: ['#Claude Code', '#Python', '#FastAPI', '#JavaScript', '#LLM Tool Use', '#Remotion', '#Vercel'],
 
     thumbnail: '/media/projects/sidepocket/cover.png',
-    brief: 'Side income from global platforms shrinks on its way to the bank. Side Pocket puts statements from eight platforms into [[one ledger]] and [[links each number to the step that produced it]].',
+    brief: 'Side income from global platforms arrives in different statements, currencies and fee rules. Side Pocket puts eight platforms into [[one ledger]], so you can see what each gig brings in and what you keep, and [[every number links to the step that produced it]].',
     heroImage: '/media/projects/sidepocket/cover.png',
     // 作品集短片(61 秒,有声,Remotion 做的,按配乐 134 BPM 卡点)。16MB,moov 在前。
     heroVideo: '/media/projects/sidepocket/side-pocket-film.mp4',
@@ -59,9 +59,9 @@ export const sidePocket = {
         id: 'the-problem',
         title: 'The Problem',
         sectionTag: 'The Problem',
-        mainTitle: 'The Money Shrinks Before It Lands',
-        briefContent: 'Moon Spirit, the fictional New York designer in my sample account, is paid by seven platforms in two currencies. Every statement has its own date format and its own fee columns, and the amount changes several times before it reaches her bank. [[At the end of the month she cannot say what she actually kept.]]',
-        challenge: 'How might we show people what they kept from every platform they earn on, and let them check each number instead of taking it on trust?',
+        mainTitle: 'Keeping Track Became a Second Job',
+        briefContent: 'Moon Spirit, the fictional New York designer in my sample account, earns on seven platforms in two currencies. Each one pays on its own schedule and exports its own statement, with different date formats, currencies and fee columns. To see which gig brought in how much this month, and what she kept after fees, she would have to stitch seven files together by hand. [[Keeping track of her side income had become a second job.]]',
+        challenge: 'How might we make it easy to see all side income in one place, what each gig brings in and what is left after fees, without a spreadsheet every month?',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
