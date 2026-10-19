@@ -12,7 +12,7 @@ export const sidePocket = {
     techTags: ['#Claude Code', '#Python', '#FastAPI', '#JavaScript', '#LLM Tool Use', '#Remotion', '#Vercel'],
 
     thumbnail: '/media/projects/sidepocket/cover.png',
-    brief: 'Side income from global platforms arrives in different statements, currencies and fee rules. Side Pocket puts eight platforms into [[one ledger]], so you can see what each gig brings in and what you keep, and [[every number links to the step that produced it]].',
+    brief: 'As remote work and the gig economy grow, more people earn on the side through platforms around the world. Side Pocket puts eight of them into [[one ledger]] with a tax layer on top, so you can see what each gig brings in, what you keep and what to set aside, and [[every number links to the step that produced it]].',
     heroImage: '/media/projects/sidepocket/cover.png',
     // 作品集短片(61 秒,有声,Remotion 做的,按配乐 134 BPM 卡点)。16MB,moov 在前。
     heroVideo: '/media/projects/sidepocket/side-pocket-film.mp4',
@@ -60,8 +60,8 @@ export const sidePocket = {
         title: 'The Problem',
         sectionTag: 'The Problem',
         mainTitle: 'Keeping Track Became a Second Job',
-        briefContent: 'Moon Spirit, the fictional New York designer in my sample account, earns on seven platforms in two currencies. Each one pays on its own schedule and exports its own statement, with different date formats, currencies and fee columns. To see which gig brought in how much this month, and what she kept after fees, she would have to stitch seven files together by hand. [[Keeping track of her side income had become a second job.]]',
-        challenge: 'How might we make it easy to see all side income in one place, what each gig brings in and what is left after fees, without a spreadsheet every month?',
+        briefContent: 'Remote work, digital nomads and the gig economy keep growing, and more people now earn on the side through platforms based in other countries. That money arrives from several places, in different currencies and on different schedules, and each platform takes its own fees. [[People need a simple way to track it, deal with the tax that comes with it and see their finances in one place.]]\n\nMoon Spirit, the fictional New York designer in my sample account, earns on seven platforms in two currencies. To see what each gig brought in this month and what she kept after fees, she would have to stitch seven statements together by hand. Keeping track had become a second job.',
+        challenge: 'How might we give people who earn across platforms one simple place to track their side income, plan for tax and manage their money, without a spreadsheet every month?',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
