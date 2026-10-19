@@ -12,14 +12,14 @@ export const sidePocket = {
     techTags: ['#Claude Code', '#Python', '#FastAPI', '#JavaScript', '#LLM Tool Use', '#Remotion', '#Vercel'],
 
     thumbnail: '/media/projects/sidepocket/cover.png',
-    brief: 'As remote work and the gig economy grow, more people earn on the side through platforms around the world. Side Pocket puts eight of them into [[one ledger]] with a tax layer on top, so you can see what each gig brings in, what you keep and what to set aside, and [[every number links to the step that produced it]].',
+    brief: 'Side income now comes from many platforms, currencies and fee rules. Side Pocket puts eight platforms into [[one ledger]] with a tax layer, and [[every number links to its source]].',
     heroImage: '/media/projects/sidepocket/cover.png',
     // 作品集短片(61 秒,有声,Remotion 做的,按配乐 134 BPM 卡点)。16MB,moov 在前。
     heroVideo: '/media/projects/sidepocket/side-pocket-film.mp4',
 
     // domain[0] 是首页卡片上的标签
     domain: [
-      { en: 'Personal Finance', zh: '个人财务' },
+      { en: 'Finance', zh: '财务' },
       { en: 'Creator & Gig Economy', zh: '创作者与零工经济' },
       { en: 'AI Agent × Deterministic Ledger', zh: 'AI 智能体 × 确定性账本' }
     ],
@@ -60,21 +60,12 @@ export const sidePocket = {
         title: 'The Problem',
         sectionTag: 'The Problem',
         mainTitle: 'Keeping Track Became a Second Job',
-        briefContent: 'Remote work, digital nomads and the gig economy keep growing, and more people now earn on the side through platforms based in other countries. That money arrives from several places, in different currencies and on different schedules, and each platform takes its own fees. [[People need a simple way to track it, deal with the tax that comes with it and see their finances in one place.]]\n\nMoon Spirit, the fictional New York designer in my sample account, earns on seven platforms in two currencies. To see what each gig brought in this month and what she kept after fees, she would have to stitch seven statements together by hand. Keeping track had become a second job.',
-        challenge: 'How might we give people who earn across platforms one simple place to track their side income, plan for tax and manage their money, without a spreadsheet every month?',
+        briefContent: '64 million Americans freelanced in 2023 (Upwork), and 18.5 million work as digital nomads (MBO Partners, 2025). Their income comes from many platforms, each with its own currency, schedule and fees. [[Tracking it, tax included, turns into a second job.]]',
+        challenge: 'How might we make side income from every platform easy to track, tax included?',
         icon: '💡',
         imageDisplayMode: 'single',
         images: [
-          {
-            src: '/media/projects/sidepocket/sections/problem-statements.jpg',
-            alt: 'Seven platform statements in seven formats',
-            caption: 'Seven of her September statements. The date format and the fee columns change with every platform.'
-          },
-          {
-            src: '/media/projects/sidepocket/sections/problem-breakdown.jpg',
-            alt: 'Gross to net for September across seven platforms',
-            caption: 'Her September across seven platforms, from gross down through the fees. The last bar is the question.'
-          }
+          { src: '/media/projects/sidepocket/sections/problem.jpg', alt: 'Seven platform statements for one month', caption: 'One month of side income, written seven different ways.' }
         ]
       },
 
@@ -83,7 +74,7 @@ export const sidePocket = {
         title: 'Research',
         sectionTag: 'Research',
         mainTitle: 'People Wanted Proof Before Tax',
-        briefContent: 'My starting brief was an AI income manager that would work out tax for creators paid by Chinese and US platforms. Before designing anything, I read public Reddit threads from freelancers and creators and ranked seven pain points. Tax owed was not at the top. The loudest complaint was [[forms that did not match what landed]]: a 1099-K counting the platform\'s commission as income, PayPal reporting the same money a second time. One Fiverr seller counted more than $12,000 in fees over two years with nothing documenting them, and Upwork users called the service fee "tax".\n\nSo the ledger came first, with [[fees and withholding in separate columns]], and tax became a layer on top. I also widened the audience to anyone earning through global platforms. This was one day of desk research, and I did not interview anyone.',
+        briefContent: 'I read Reddit threads from freelancers and creators and ranked seven pain points. The loudest was [[forms that did not match what landed]], with fees nobody could explain. So the ledger came first, with fees and tax in separate columns. Desk research only.',
         icon: '🔎'
       },
 
@@ -93,57 +84,57 @@ export const sidePocket = {
         sectionTag: 'Iteration',
         mainTitle: 'Six Rounds of Iteration',
         icon: '🔁',
-        // 六轮迭代收在一节里:每轮一段话 + 一行横向对比(showcases 自动编号 01-06)。block.text 不解析 [[ ]]
+        // 六轮迭代收在一节里:每轮一两句 + 一行横向对比(showcases 自动编号 01-06)。block.text 不解析 [[ ]]
         showcases: [
           {
             title: 'Trust · The first version made up an exchange rate',
-            text: 'The hackathon asked every team to build on PRISM by Block Convey, a tracing tool that records each step an AI agent takes, so I could reopen any run and see where it went wrong. In v1 the model read raw CSV exports and did the arithmetic itself. It got 72 of 81 reference questions right, and six of the nine misses had one cause: an exchange rate was missing, and the model quietly used a nearby day\'s rate instead. So the arithmetic moved into code, the model only calls tools and explains, and a missing rate now stops the run. v2 scored 89 of 89.',
+            text: 'PRISM by Block Convey, the hackathon\'s tracing tool, records each step an AI agent takes. In v1 the model did the math and, missing an exchange rate, borrowed another day\'s. I moved the math into code and made a missing rate stop the run: 72/81 became 89/89.',
             tabs: [
-              { label: 'Iteration', image: '/media/projects/sidepocket/sections/06-prism-v1-invented-rate.jpg', alt: 'v1 trace using the wrong day\'s rate', caption: 'v1 in PRISM gives a fluent answer for Lena Koch\'s August on Freelancer.com. However, it priced an August 21 record at the August 20 rate. PRISM\'s own analysis rated the arithmetic accurate, and only my reference-answer checker caught it.' },
-              { label: 'Solution', image: '/media/projects/sidepocket/sections/07-prism-v2-refusal.jpg', alt: 'v2 trace stopping at the missing rate', caption: 'v2 stops at the missing EUR rate for August 21 and asks for it.' },
-              { label: 'In the app', image: '/media/projects/sidepocket/sections/ask1.jpg', alt: 'Ask Tilly answer with agent steps', caption: 'Every number in Tilly\'s answer links to the step that produced it.' }
+              { label: 'Iteration', image: '/media/projects/sidepocket/sections/06-prism-v1-invented-rate.jpg', alt: 'v1 trace using the wrong day\'s rate', caption: 'v1 prices an August 21 record at the August 20 rate. PRISM rated it accurate; my answer checker did not.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/07-prism-v2-refusal.jpg', alt: 'v2 trace stopping at the missing rate', caption: 'v2 stops and asks for the missing rate.' },
+              { label: 'In the app', image: '/media/projects/sidepocket/sections/ask1.jpg', alt: 'Ask Tilly answer with agent steps', caption: 'Every number links to the step behind it.' }
             ]
           },
           {
             title: 'Colour · The ledger green clashed with the pigeon',
-            text: 'Kit v1 took its form from Linktree, in forest green with lime. It felt steady enough for a ledger and looked out of place next to the lilac and pink pigeon, so I kept one prototype and swapped only the colour variables until the product and the bird agreed, then fixed contrast to WCAG AA.',
+            text: 'Forest green suited a ledger but clashed with the pigeon. I swapped only the colour variables until the product and the bird matched.',
             tabs: [
-              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/palette-a-forest.jpg', alt: 'Forest green Overview', caption: 'Forest green #1F4B2C with lime. Steady and trustworthy like a ledger. However, it looked out of place next to the pink and lilac pigeon.' },
-              { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/palette-d-pink.jpg', alt: 'Hot pink Overview', caption: 'Hot pink #D6246E as the main colour, the most Pop Mart of the set. However, big pink blocks behind money figures might not look serious enough.' },
-              { label: 'Iteration 3', image: '/media/projects/sidepocket/sections/palette-c-violet.jpg', alt: 'Electric violet Overview', caption: 'Electric violet #5B2BD6 with pink. Creative without losing professionalism, and the closest match to the pigeon. However, it was the most purple of all.' },
-              { label: 'Solution', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Soft violet Overview', caption: 'Soft violet #6B5BC2: still violet, with less saturation and closer to a designer toy. WCAG AA fixes then took text on violet to 4.71:1, metadata to 5.21:1 and pink text to 5.22:1.' }
+              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/palette-a-forest.jpg', alt: 'Forest green Overview', caption: 'Forest green: steady, but wrong next to the pigeon.' },
+              { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/palette-d-pink.jpg', alt: 'Hot pink Overview', caption: 'Hot pink: playful, but not serious enough for money.' },
+              { label: 'Iteration 3', image: '/media/projects/sidepocket/sections/palette-c-violet.jpg', alt: 'Electric violet Overview', caption: 'Electric violet: the right family, but too purple.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Soft violet Overview', caption: 'Soft violet #6B5BC2 with pink, checked to WCAG AA.' }
             ]
           },
           {
             title: 'Tilly · The first pigeon still looked like Duolingo',
-            text: 'I wanted a mascot that reacts to what happens in the product, from a new payout to a missing exchange rate. The 3D toy pigeons still read as Duolingo and would not hold up as a 40 px avatar, so I closed the eyes into crescents, redrew the bird as a flat sticker and gave each state of the product its own pose.',
+            text: 'I wanted a mascot that reacts to what happens in the product. The 3D drafts read as Duolingo and blurred at small sizes, so Tilly became a flat sticker with a pose for each state.',
             tabs: [
-              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/tilly-1-3d-drafts.jpg', alt: 'Six 3D mascot drafts', caption: 'Two references: Duolingo\'s owl, a character that reacts to what you do, and Pop Mart\'s blind-box toys, chubby and pastel. An owl was too close to Duolingo, so I drew a carrier pigeon with a coin bag and a map scarf, and tried round eyes, crescent eyes, a worried face, dot eyes, round glasses and a globe chick. However, the round eyes still read as Duolingo, and a 3D render would not read at small UI sizes.' },
-              { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/tilly-2-flat-sticker.jpg', alt: 'Flat sticker pigeon in four moods', caption: 'The pigeon as a flat sticker with closed crescent eyes, in its first four moods: wave, think, worried and celebrate. It reads at 40 px. However, four moods could not cover income and rewards.' },
-              { label: 'Solution', image: '/media/projects/sidepocket/sections/04-tilly-poses.jpg', alt: 'Tilly pose candidates with picks outlined', caption: '16 poses picked from 29, each with a place in the product: a laptop while the agent works, an envelope when the answer arrives, a different pose on each milestone badge.' },
-              { label: 'App icon', image: '/media/projects/sidepocket/sections/logo-options.jpg', alt: 'Four app icon options', caption: 'Four icon options. The pigeon head on violet became the app icon, and the folded-map bird is kept on file as a possible brand mark.' }
+              { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/tilly-1-3d-drafts.jpg', alt: 'Six 3D mascot drafts', caption: 'Inspired by Duolingo\'s owl and Pop Mart\'s blind-box toys. The round eyes still read as Duolingo.' },
+              { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/tilly-2-flat-sticker.jpg', alt: 'Flat sticker pigeon in four moods', caption: 'A flat sticker with crescent eyes, clear at 40 px. Four moods were not enough.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/04-tilly-poses.jpg', alt: 'Tilly pose candidates with picks outlined', caption: '16 poses picked from 29, one for each state.' },
+              { label: 'App icon', image: '/media/projects/sidepocket/sections/logo-options.jpg', alt: 'Four app icon options', caption: 'The pigeon head became the app icon.' }
             ]
           },
           {
             title: 'Your data · How would anyone know the numbers were right?',
-            text: 'After the pitch, someone asked how a user would know the AI\'s numbers were right, so I let people try it on their own statements, privately. Statements stay in the browser, account IDs become four-digit labels before upload, and the model only sees the question and computed totals.',
+            text: 'After the pitch, someone asked how they could trust the numbers. Now you can use your own statements: they stay in your browser, accounts become four-digit labels, and the AI only sees totals.',
             tabs: [
-              { label: 'Four-digit labels', image: '/media/projects/sidepocket/sections/mydata.jpg', alt: 'Imported statements with four-digit account labels', caption: 'Seven imported statements. Each account appears only as a four-digit label.' },
-              { label: 'ECB rates', image: '/media/projects/sidepocket/sections/18-ledger-cny-ecb.jpg', alt: 'CNY ledger with ECB rate labels', caption: 'Every converted amount carries its ECB rate and the date of that rate.' }
+              { label: 'Four-digit labels', image: '/media/projects/sidepocket/sections/mydata.jpg', alt: 'Imported statements with four-digit account labels', caption: 'Each account shows only as a four-digit label.' },
+              { label: 'ECB rates', image: '/media/projects/sidepocket/sections/18-ledger-cny-ecb.jpg', alt: 'CNY ledger with ECB rate labels', caption: 'Every conversion shows its ECB rate and date.' }
             ]
           },
           {
             title: 'All side income · From a tax tool back to every gig',
-            text: 'The hackathon demo centred on tax. That evening I went back to the broader purpose, seeing every source of side income, and v1.4 added income and expenses you enter yourself, a kept-after-expenses total, a monthly goal and milestone badges computed from the ledger. The goal counts net income and kept after expenses is a smaller number, so each carries its own label.',
+            text: 'The hackathon demo was about tax. Version 1.4 turned it back to all side income: entries you add yourself, expenses, a monthly goal and milestone badges.',
             tabs: [
-              { label: 'Iteration', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Hackathon Overview', caption: 'The hackathon Overview. However, it led with tax: what to set aside and the next US estimated-tax date.' },
-              { label: 'Solution', image: '/media/projects/sidepocket/sections/overview.jpg', alt: 'Overview in v1.4', caption: 'Income first: net income, the goal reached on Sep 28, income by source and expenses.' },
-              { label: 'Milestones', image: '/media/projects/sidepocket/sections/milestones.jpg', alt: 'Milestones', caption: '7 of 8 badges, each with its own Tilly pose and the date it was earned.' }
+              { label: 'Iteration', image: '/media/projects/sidepocket/sections/palette-c2-soft.jpg', alt: 'Hackathon Overview', caption: 'The hackathon Overview led with tax.' },
+              { label: 'Solution', image: '/media/projects/sidepocket/sections/overview.jpg', alt: 'Overview in v1.4', caption: 'Income first, with the monthly goal.' },
+              { label: 'Milestones', image: '/media/projects/sidepocket/sections/milestones.jpg', alt: 'Milestones', caption: '7 of 8 badges earned.' }
             ]
           },
           {
             title: 'Review · The shorter label said the opposite',
-            text: 'Claude Code agents built the screens and GPT-6 Astra wrote the copy, so this round was review. All 137 UI strings went back through Astra with a plain-copy guide, and in that pass "keeps the most" became "Highest fee share", the opposite meaning, so I reverted it. The screens lost extra text and buttons, filters moved into the column headers, and real platform marks replaced colour dots.',
+            text: 'Agents wrote the code and GPT-6 Astra the copy, so my job was review. One shortened label, "Highest fee share", meant the opposite of the original, so I reverted it. Screens lost extra text and buttons.',
             tabs: [
               { label: 'Ledger · before', image: '/media/projects/sidepocket/sections/14-ledger-before.jpg', alt: 'Ledger in kit v1.1' },
               { label: 'Ledger · now', image: '/media/projects/sidepocket/sections/ledger.jpg', alt: 'Ledger now' },
@@ -161,13 +152,13 @@ export const sidePocket = {
         title: 'Outcome',
         sectionTag: 'Outcome',
         mainTitle: 'Built in a Day, Checked Against 89 Answers',
-        briefContent: 'I submitted Side Pocket, then called Side Atlas, to the MONEY TALKS hackathon in New York in the Money Operations track, and v1.4 went live the same night. Every account in it is fictional. The scores come from 12 made-up creators across July to September 2026, so they show how the system behaves on controlled inputs, and they do not prove it reads every real export.\n\nI worked kit-first. The spec and the prototype were signed off before any UI code, and [[every visual ruling went into a decision log]] that the coding agents worked from.\n\nThe film at the top is built in Remotion from captures of the live screens and cut to the beat of its music.',
+        briefContent: 'Submitted to the MONEY TALKS hackathon in New York. v1.4 went live the same night. All data is fictional.',
         icon: '🚀',
         stats: [
-          { value: '89/89', label: 'reference questions right once the math moved into code, up from 72 of 81.' },
-          { value: '73', label: 'design decisions logged in the kit, behind a 47-page spec.' },
-          { value: '122', label: 'automated tests passing before v1.4 added more.' },
-          { value: '1 day', label: 'from the first commit at 11:43 to v1.4 live that night.' }
+          { value: '89/89', label: 'answers correct once the math moved into code, up from 72/81.' },
+          { value: '73', label: 'design decisions logged in the kit.' },
+          { value: '129', label: 'automated tests passing.' },
+          { value: '1 day', label: 'from first commit to v1.4 live.' }
         ]
       },
 
@@ -178,8 +169,8 @@ export const sidePocket = {
         mainTitle: 'What I Learned',
         icon: '💭',
         columns: [
-          { label: 'What I learned', text: 'With agents writing the code and the copy, my job was setting the limits and reviewing the output. That review changed the calculation architecture and caught a label that reversed a metric.' },
-          { label: 'If I had more time', text: 'I would test all eight statement formats against real exports first, then connect the platforms that offer APIs and add bank matching.' }
+          { label: 'What I learned', text: 'With agents doing the building, my job was setting limits and reviewing. That review changed the architecture and caught a reversed label.' },
+          { label: 'If I had more time', text: 'Test all eight statement formats against real exports, then connect the platforms that have APIs.' }
         ]
       }
     ]
