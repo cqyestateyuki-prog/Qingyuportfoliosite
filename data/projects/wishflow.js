@@ -18,13 +18,13 @@ export const wishflow = {
   tags: ['Product Design', 'Design System', 'Generative Art', 'Bilingual'],
   techTags: ['#NextJS', '#Supabase', '#Claude', '#Capacitor'],
 
-  thumbnail: '/media/projects/wishflow/home-en.jpg',
+  thumbnail: '/media/projects/wishflow/wishflow-hero.png',
   brief: {
     en: 'A wish keeper for people who go quiet when tools start counting.',
     zh: '给那些一被打卡就沉默的人，做一个替他们保管愿望的地方。',
   },
 
-  heroImage: '/media/projects/wishflow/home-en.jpg',
+  heroImage: '/media/projects/wishflow/wishflow-hero.png',
   heroVideo: '/media/projects/wishflow/full-flow.mp4',
   liveUrl: 'https://wishflow-ruddy.vercel.app',
 

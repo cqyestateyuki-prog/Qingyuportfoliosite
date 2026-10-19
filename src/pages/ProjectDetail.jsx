@@ -684,7 +684,7 @@ const ProjectDetail = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-8 py-4 bg-white/90 backdrop-blur-sm text-[#2d2356] font-semibold rounded-xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/50"
                 >
-                  Visit AI Community Platform
+                  Try the Live Demo
                   <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>

@@ -4,23 +4,23 @@ export const aiCommunityPlatform = {
       year: '2025',
       featured: false, // 移至 Passion Projects
       title: {
-        en: 'AI Built-in Community Platform',
-        zh: 'AI 产品内嵌社区平台'
+        en: 'AI Built-in Community Framework',
+        zh: 'AI 产品内嵌社区框架'
       },
       subtitle: {
-        en: 'Modern integrated Community Platform for AI Tools',
-        zh: '为 AI 工具打造的现代化集成社区平台'
+        en: 'Modern integrated Community Framework for AI Tools',
+        zh: '为 AI 工具打造的现代化集成社区框架'
       },
       categories: ['AI', 'UIUX', 'Product Design', 'Research'],
       tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
       techTags: ['#Figma','#React','#TypeScript', '#Next.js','#HTML/CSS'],
       
-      thumbnail: '/media/projects/aicommunity/Hero2 copy.png',
+      thumbnail: '/media/projects/aicommunity/community-hero.png',
       brief: {
-        en: 'An in-app integrated community system designed for AI Tools.',
-        zh: '专为 AI 工具设计的应用内集成社区系统。'
+        en: 'An in-app community framework designed for AI tools.',
+        zh: '专为 AI 工具设计的应用内社区框架。'
       },
-      heroImage: '/media/projects/aicommunity/Hero2 copy.png',
+      heroImage: '/media/projects/aicommunity/community-hero.png',
       heroVideo: 'https://vimeo.com/1145264634?share=copy&fl=sv&fe=ci',
       
       domain: [
@@ -58,7 +58,7 @@ export const aiCommunityPlatform = {
          ],
          buttons: [
            {
-             text: 'Visit Live Community Platform',
+             text: 'Try the Live Demo',
              url: 'https://ai-community-mvp-v2-7y9m.vercel.app/',
              type: 'external'
            }
@@ -147,7 +147,7 @@ export const aiCommunityPlatform = {
            title: 'Technical',
            sectionTag: 'Technical',
            mainTitle: 'Built for Scale and Performance',
-           briefContent: 'To bring the design to life, I built a high-performance web application using a modern tech stack. The focus was on component modularity and type safety to ensure the platform could scale.',
+           briefContent: 'To bring the design to life, I built a high-performance web application using a modern tech stack. The focus was on component modularity and type safety so the framework could scale.',
            icon: '💻',
            buttons: [
              {
@@ -181,7 +181,7 @@ export const aiCommunityPlatform = {
           title: 'Final Solution',
           sectionTag: 'Final Solution',
           mainTitle: 'One Integrated Ecosystem',
-          briefContent: 'The shipped platform puts community inside the tool, where the work already happens. Users [[share a chat, post a prompt, or find an event]] without leaving their AI. Keeping it in context is the whole point: a forum bolted on the side gets ignored, but a layer where you already work turns solo use into [[a reason to come back]].',
+          briefContent: 'The shipped framework puts community inside the tool, where the work already happens. Users [[share a chat, post a prompt, or find an event]] without leaving their AI. Keeping it in context is the whole point: a forum bolted on the side gets ignored, but a layer where you already work turns solo use into [[a reason to come back]].',
           icon: '🚀',
           featureDisplayMode: 'side-by-side',
           features: [
