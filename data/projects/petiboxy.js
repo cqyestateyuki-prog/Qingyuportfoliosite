@@ -67,8 +67,8 @@ export const petiboxy = {
         ],
         images: [
           {
-            src: '/media/projects/petiboxy/problem2.png',
-            alt: 'user research',
+            src: '/media/projects/petiboxy/sec-crisis.png',
+            alt: '90 million stray cats and dogs in China, shown as 90 dots',
           }
         ]
       },
@@ -87,8 +87,8 @@ export const petiboxy = {
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/petiboxy/userresearch.png',
-            alt: 'user research',
+            src: '/media/projects/petiboxy/sec-research.png',
+            alt: '60% would adopt if a trusted platform existed, but only 35% of pets are adopted today',
           }
         ]
       },
@@ -151,16 +151,16 @@ export const petiboxy = {
         imageDisplayMode: 'single',
         images: [
           {
-            src: '/media/projects/petiboxy/final1.png',
-            alt: 'Final Visual',
+            src: '/media/projects/petiboxy/final-lost.png',
+            alt: 'Baby Come Home: find lost pets',
           },
           {
-            src: '/media/projects/petiboxy/final2.png',
-            alt: 'Final Visual',
-          }, 
+            src: '/media/projects/petiboxy/final-adopt.png',
+            alt: 'Adoption & Rescue: adopt or post a pet that needs rescue',
+          },
           {
-            src: '/media/projects/petiboxy/final3.png',
-            alt: 'Final Visual',
+            src: '/media/projects/petiboxy/final-orgs.png',
+            alt: 'Charity Organizations: verified rescue groups',
           },
         ]
       },
@@ -183,8 +183,8 @@ export const petiboxy = {
           imageDisplayMode: 'single',
           images: [
             {
-            src: '/media/projects/petiboxy/impact.png',
-            alt: 'Expected Outcomes',
+            src: '/media/projects/petiboxy/sec-impact.png',
+            alt: 'Design targets: +45% lost pets reunited, +60% adoption over purchase, +75% funding for rescue groups, 80% users taking part',
             caption: 'Platform success metrics and expected impact'
           }
         ]
