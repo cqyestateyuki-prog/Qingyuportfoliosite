@@ -14,14 +14,14 @@ export const stumbldoor = {
     techTags: ['#Figma', '#Wireframe', '#Prototype','#Visual Design', '#Mobile App','#Design System'],  // 技术标签
     
     // ========== 主页展示 ==========
-    thumbnail: '/media/projects/stumbldoor/hero/hero-image@66662x.png',  // 列表页缩略图
+    thumbnail: '/media/projects/stumbldoor/hero/stumbldoor-hero.png',  // 列表页缩略图
     brief: {
       en: 'Stumbldoor is a mobile app that [[rethinks the library experience]] for people who grew up reading on screens. The point is to make a library visit feel like exploring, so you [[stumble onto genres and authors you would never have searched for]].',
       zh: 'Stumbldoor 是一款为「在屏幕上长大的一代」[[重新设计图书馆体验]]的 App。核心是把逛图书馆变回一种探索，让你[[撞见那些你根本不会去搜的书和作者]]。'
     },
     
     // ========== 详情页 Hero ==========
-    heroImage: '/media/projects/stumbldoor/hero/hero-image@66662x.png',
+    heroImage: '/media/projects/stumbldoor/hero/stumbldoor-hero.png',
     heroVideo: null,  // 可选：视频路径
     
     // ========== 项目标签==========

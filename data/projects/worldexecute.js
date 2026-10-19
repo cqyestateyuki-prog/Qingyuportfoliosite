@@ -4,7 +4,7 @@ export const worldexecute = {
   id: 'worldexecute',
   year: '2026',
   featured: false,
-  order: 0, // Passion Projects 里的位次:第一张
+  order: 5, // Passion Projects 里的位次:第二行第一张(一行三张,排在 petiboxy 的 4 后面)
 
   // 首页卡 hover:60 秒无声精选段(0:15 前奏起,到 CRT 关机),卡片本来就静音循环
   hoverVideo: '/media/projects/worldexecute/videos/excerpt-60s.mp4',

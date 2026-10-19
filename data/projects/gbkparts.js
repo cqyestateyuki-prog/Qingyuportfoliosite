@@ -3,7 +3,7 @@ export const gbkparts = {
   id: 'gbkparts',
   year: '2026',
   featured: false, // Passion Projects
-  order: 2, // Passion Projects 里的位次
+  order: 0, // Passion Projects 里的位次:第一张
 
   // externalUrl:卡片直接开外站,不进站内详情页。
   // 这类是线上跑着的商业站,本身就是成品,没必要再编一套案例叙事

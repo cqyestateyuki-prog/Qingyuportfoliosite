@@ -37,6 +37,8 @@ const PassionCard = ({ project, title, meta, onClick, onOpen }) => {
   const [playing, setPlaying] = useState(false);
   const [ready, setReady] = useState(false);
   const clip = localVideo(project.hoverVideo || project.heroVideo);
+  // 放映厅要有片可放才值得进;没片的项目进去只有一张静图,还得再点一次才到案例页
+  const hasFilm = Boolean(localVideo(project.theaterVideo) || clip);
 
   const start = () => {
     if (!clip) return;
@@ -55,12 +57,13 @@ const PassionCard = ({ project, title, meta, onClick, onOpen }) => {
   return (
     <Wrapper
       {...wrapperProps}
-      /* 点一下不再直接跳走:先在站内的放映厅里大屏看视频,外站 / 案例页的入口在放映厅里。
-         href 留着,右键新开或中键点仍然是原来的目标 */
+      /* 有片的项目点一下先进放映厅大屏看视频,外站 / 案例页的入口在放映厅里;
+         没片的直接走 href,一次就到。右键新开或中键点仍然是原来的目标 */
       onClick={(e) => {
+        onClick?.();
+        if (!hasFilm) return;
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
         e.preventDefault();
-        onClick?.();
         onOpen?.(project);
       }}
       aria-label={external ? `${title}(新窗口打开)` : title}

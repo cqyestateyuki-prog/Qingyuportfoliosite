@@ -16,3 +16,8 @@
 - 对外英文文案要去 AI 味:不用破折号、不用 AI 高频词、不写对仗排比腔
 - 案例文案硬规矩见 `WRITING-GUIDE.md`
 - 项目数据在 `data/projects/<id>.js`,一文件一项目;`[[文字]]` 是高亮标记语法
+
+## 视觉
+
+- 做任何项目首图或案例配图之前,先读 `VISUAL-GUIDE.md`(构图、配色、比例、截图做法、丑图清单)
+- 截图工具:`node scripts/visuals/capture.mjs steps.json`
