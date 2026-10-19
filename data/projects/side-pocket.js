@@ -140,15 +140,13 @@ export const sidePocket = {
         title: 'Tilly',
         sectionTag: 'Iteration 3 · Tilly',
         mainTitle: 'The First Pigeon Still Looked Like Duolingo',
-        problem: 'I wanted a character that reacts to the product the way Duolingo\'s owl does, with Pop Mart\'s chubby proportions. An owl was out because it was too close to Duolingo, so I chose a carrier pigeon. The first one still read as Duolingo, and a 3D toy render does not work as a 40 px avatar.',
+        problem: 'I wanted a mascot that reacts to what happens in the product, from a new payout to a missing exchange rate. The first round of 3D toy pigeons still read as Duolingo and would not hold up as a 40 px avatar.',
         solution: 'I closed the eyes into crescents, redrew the bird as a flat sticker that reads from 128 px down to 40 px, and gave each state of the product its own pose.',
         icon: '🐦',
         tabs: [
-          { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/tilly-1-3d-round-eyes.jpg', alt: '3D pigeon with round eyes', caption: 'A Pop Mart-style toy: a carrier pigeon with a coin bag and a map scarf, bringing money home from many countries. However, the big round shiny eyes still read as Duolingo.' },
-          { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/tilly-2-3d-crescent-eyes.jpg', alt: '3D pigeon with crescent eyes', caption: 'Closed crescent eyes fixed the Duolingo look. However, it was still a 3D render, and it would not read at small UI sizes.' },
-          { label: 'Iteration 3', image: '/media/projects/sidepocket/sections/tilly-3-flat-sticker.jpg', alt: 'Flat sticker pigeon in four moods', caption: 'The same bird as a flat sticker, in its first four moods: wave, think, worried and celebrate. It reads at 40 px.' },
+          { label: 'Iteration 1', image: '/media/projects/sidepocket/sections/tilly-1-3d-drafts.jpg', alt: 'Six 3D mascot drafts', caption: 'Two references: Duolingo\'s owl, a character that reacts to what you do, and Pop Mart\'s blind-box toys, chubby and pastel. An owl was too close to Duolingo, so I drew a carrier pigeon with a coin bag and a map scarf, and tried round eyes, crescent eyes, a worried face, dot eyes, round glasses and a globe chick. However, the round eyes still read as Duolingo, and a 3D render would not read at small UI sizes.' },
+          { label: 'Iteration 2', image: '/media/projects/sidepocket/sections/tilly-2-flat-sticker.jpg', alt: 'Flat sticker pigeon in four moods', caption: 'The pigeon as a flat sticker with closed crescent eyes, in its first four moods: wave, think, worried and celebrate. It reads at 40 px. However, four moods could not cover income and rewards.' },
           { label: 'Solution', image: '/media/projects/sidepocket/sections/04-tilly-poses.jpg', alt: 'Tilly pose candidates with picks outlined', caption: '16 poses picked from 29, each with a place in the product: a laptop while the agent works, an envelope when the answer arrives, a different pose on each milestone badge.' },
-          { label: 'Also tried', image: '/media/projects/sidepocket/sections/tilly-also-tried.jpg', alt: 'Other mascot directions', caption: 'Other drafts: a worried face for error states, two eye variants with dot eyes and round glasses, and a globe chick that competed with the pigeon.' },
           { label: 'App icon', image: '/media/projects/sidepocket/sections/logo-options.jpg', alt: 'Four app icon options', caption: 'Four icon options. The pigeon head on violet became the app icon, and the folded-map bird is kept on file as a possible brand mark.' }
         ]
       },
