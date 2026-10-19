@@ -11,7 +11,7 @@ export const aiCommunityPlatform = {
         en: 'Modern integrated Community Framework for AI Tools',
         zh: '为 AI 工具打造的现代化集成社区框架'
       },
-      categories: ['AI', 'UIUX', 'Product Design', 'Research'],
+      categories: ['UIUX', 'Product Design'],
       tags: ['UI/UX Design', 'React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Frontend Development',  'Web Development'],
       techTags: ['#Figma','#React','#TypeScript', '#Next.js','#HTML/CSS'],
       

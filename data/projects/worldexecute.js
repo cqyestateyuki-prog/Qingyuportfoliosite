@@ -18,7 +18,7 @@ export const worldexecute = {
     en: 'AIMV · An AI-generated music video, made entirely in code',
     zh: 'AIMV · 完全用代码生成的 AI 音乐视频',
   },
-  categories: ['AIMV', 'Creative Coding'],
+  categories: ['AIMV', 'Creative Design'],
   tags: ['AIMV', 'Creative Coding', 'Generative Motion', 'Canvas'],
   techTags: ['#Canvas', '#JavaScript', '#Generative', '#Playwright', '#FFmpeg'],
 

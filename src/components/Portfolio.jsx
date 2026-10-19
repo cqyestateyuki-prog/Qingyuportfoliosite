@@ -142,7 +142,7 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
-  const filters = ['All', 'AI', 'Creative Coding', 'UIUX', 'Product Design', 'Web Design', 'Game', 'Research'];
+  const filters = ['All', 'Product Design', 'Creative Design', 'UIUX', 'Game Design'];
 
   // Featured = Professional Work(进 Showcase 大卡);其余 = Personal Projects(牌阵)
   // 两个版块互不重复:牌阵只展示非 featured 的个人项目

@@ -3,9 +3,9 @@
 import { sparkup } from './sparkup.js';
 import { aiCommunityPlatform } from './ai-community-platform.js';
 import { stumbldoor } from './stumbldoor.js';
-import { excelAiAgent } from './excel-ai-agent.js';
+// excelAiAgent 2026-10-18 从主页撤下,数据文件 excel-ai-agent.js 留着
 import { petiboxy } from './petiboxy.js';
-import { ziplink } from './ziplink.js';
+// ziplink 2026-10-18 从主页撤下,数据文件 ziplink.js 留着
 import { musicEncounter } from './music-encounter.js';
 import { eternalDreams } from './eternal-dreams.js';
 import { primeDirective } from './prime-directive.js';
@@ -22,9 +22,7 @@ export const projects = [
   sparkup,
   aiCommunityPlatform,
   stumbldoor,
-  excelAiAgent,
   petiboxy,
-  ziplink,
   musicEncounter,
   eternalDreams,
   primeDirective,

@@ -17,12 +17,12 @@ export const gbkparts = {
     en: 'B2B Wholesale & Ecommerce',
     zh: 'B2B 批发与电商',
   },
-  categories: ['Web Design', 'E-commerce'],
+  categories: ['Product Design', 'UIUX', 'E-commerce'],
   tags: ['E-commerce', 'Web Design', 'SEO'],
   techTags: ['#WordPress', '#WooCommerce', '#SEO'],
 
-  thumbnail: '/media/projects/gbkparts/hero.png',
-  heroImage: '/media/projects/gbkparts/hero.png',
+  thumbnail: '/media/projects/gbkparts/gbk-hero.png',
+  heroImage: '/media/projects/gbkparts/gbk-hero.png',
   heroVideo: null,
 
   brief: {

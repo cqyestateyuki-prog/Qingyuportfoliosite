@@ -4,7 +4,7 @@ export const primeDirective = {
     year: '2024',
     title: { en: 'Prime Directive', zh: '首要指令' },
     subtitle: { en: '2D Action-Platformer Game', zh: '2D 动作平台游戏' },
-    categories: ['Game', '2D Art'],
+    categories: ['Game Design', '2D Art'],
     techTags: ['#Unity', '#Level Design','#Adobe Illustrator','#Adobe Creative Suite'],
     
     thumbnail: '/media/projects/primedirective/Hero3.png',

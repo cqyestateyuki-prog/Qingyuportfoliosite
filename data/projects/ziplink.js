@@ -4,7 +4,7 @@ export const ziplink = {
     year: '2024',
     title: { en: 'Ziplink', zh: 'Ziplink' },
     subtitle: { en: 'In-Car Experience Redesign', zh: '车载体验重设计' },
-    categories: ['UIUX','Research'],  // 多分类支持
+    categories: ['UIUX'],  // 多分类支持
     tags: ['User Experience Design', 'Mobile App', 'Research'],
     techTags: ['#Figma', '#Wireframe', '#Prototype'],
     

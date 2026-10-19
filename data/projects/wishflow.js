@@ -14,7 +14,7 @@ export const wishflow = {
   hoverVideo: '/media/projects/wishflow/landing-flow.mp4',
   title: { en: 'Wishflow', zh: '愿航' },
   subtitle: { en: 'A Life-long Wish Navigator', zh: '一生级愿望导航' },
-  categories: ['AI', 'Product Design', 'UIUX'],
+  categories: ['Product Design', 'UIUX'],
   tags: ['Product Design', 'Design System', 'Generative Art', 'Bilingual'],
   techTags: ['#NextJS', '#Supabase', '#Claude', '#Capacitor'],
 

@@ -4,7 +4,7 @@ export const myLittleFishTank = {
     year: '2024',
     title: { en: 'My Little Fish Tank', zh: '我的小鱼缸' },
     subtitle: { en: '3D Fish Tank Simulator', zh: '3D 鱼缸模拟器' },
-    categories: ['Game', '3D Art'],
+    categories: ['Game Design', '3D Art'],
     techTags: ['#Unity','#Maya', '#3D Modeling & Animation','Texturing'],
     
     thumbnail: '/media/projects/fishtank/Picture2.png',

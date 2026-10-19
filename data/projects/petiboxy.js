@@ -5,14 +5,14 @@ export const petiboxy = {
     featured: false, order: 4, // 暂时撤出 Selected Work,先放 Passion Projects
     title: { en: 'Petiboxy Charity Platform', zh: 'Petiboxy 宠物救助平台' },
     subtitle: { en: 'Connecting Love, Saving Lives', zh: '连接爱心，拯救生命' },
-    categories: ['UIUX', 'Product Design', 'Research'],
+    categories: ['UIUX', 'Product Design'],
     tags: ['Mobile App', 'Charity Platform', 'Pet Rescue', 'User Experience Design'],
     techTags: ['#Figma', '#UI/UX Design', '#Mobile App', '#Product Design'],
     
-    thumbnail: '/media/projects/petiboxy/hero.png',
+    thumbnail: '/media/projects/petiboxy/petiboxy-hero.png',
     brief: { en: 'A comprehensive pet rescue ecosystem connecting people with pets in need, supporting rescue organizations, and building a compassionate community.', zh: '一个连接求助宠物与领养者、支持救助机构、共建爱心社区的宠物救助生态平台。' },
     
-    heroImage: '/media/projects/petiboxy/hero.png',
+    heroImage: '/media/projects/petiboxy/petiboxy-hero.png',
     heroVideo: null,
     
     domain: [
