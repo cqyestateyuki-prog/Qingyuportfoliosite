@@ -16,6 +16,7 @@ This site is a single-page React app. If you cannot render JavaScript, this file
 
 - Kogna (2026): Led the design system and UI/UX for an AI decision-support platform that turns fragmented business data into real-time strategic intelligence for leaders. https://portfolio.qingyucao.com/project/kogna
 - Side Pocket (2026): A global side-income ledger with a tax layer, built at the MONEY TALKS hackathon in New York. Statements from eight platforms land in one ledger, and every number the AI assistant gives links back to the step that produced it. https://portfolio.qingyucao.com/project/side-pocket
+- Vhay (2026): Marketplace and UI redesign for Vhay, an on-chain B2B marketplace and trade finance platform live on the XRP Ledger, made at the AI & Fintech XRP Ledger Hackathon in New York. Serena rebuilt the marketplace filters and seller details, and moved the app to a glass shell with design tokens and AA contrast. https://portfolio.qingyucao.com/project/vhay
 - Spark Up (2026): An AI platform that diagnoses startup readiness, generates personalized business ideas, and validates them through community feedback. https://portfolio.qingyucao.com/project/sparkup
 - Petiboxy (2025): A pet rescue ecosystem connecting people with pets in need, supporting rescue organizations, and building a compassionate community. https://portfolio.qingyucao.com/project/petiboxy
 - Stumbldoor (2024): A mobile app that rethinks the library experience for people who grew up reading on screens. https://portfolio.qingyucao.com/project/stumbldoor
