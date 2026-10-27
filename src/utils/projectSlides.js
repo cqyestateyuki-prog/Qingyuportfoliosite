@@ -73,10 +73,12 @@ export const collectProjectSlides = (project, language) => {
     const seen = new Set();
     // tag 是那一节的小标题(Problem Statement 这种),title 是这张图具体是什么。
     // 两行一起,和案例里每节「眉标 + 大标题」的排法对上
-    const push = (src, title, caption, kind = 'image', tag = '', poster = '') => {
+    // bare:图里自己印了标题和标签(GBK 的 Problem/Solution 配图),格子上再叠一行字幕
+    // 就是同一句话说两遍,还把图左下角的标签挡住。这种在 data 里写 labelInImage: true
+    const push = (src, title, caption, kind = 'image', tag = '', poster = '', bare = false) => {
       if (!src || seen.has(src)) return;
       seen.add(src);
-      collected.push({ src, title: title || '', caption: caption || '', kind, tag: tag || '', poster });
+      collected.push({ src, title: title || '', caption: caption || '', kind, tag: tag || '', poster, bare });
     };
 
     // hero 只登记去重、不占格:折叠态整幅就是它,碎开后再放一遍是重复,白占一格。
@@ -108,7 +110,8 @@ export const collectProjectSlides = (project, language) => {
           getLocalizedText(img?.caption, language),
           isVideo(img?.src) ? 'video' : 'image',
           tag,
-          img?.poster
+          img?.poster,
+          img?.labelInImage === true
         );
       });
       s.imageGroups?.forEach((g) =>

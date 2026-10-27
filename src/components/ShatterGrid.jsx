@@ -409,6 +409,8 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
                     }}
                   />
 
+                    {/* 图里已经印了标题和标签的(labelInImage),不再叠字幕 */}
+                    {!slide.bare && (
                     <span className="tile-meta">
                       <span className="tile-num">
                         {/* 箭头是给「点了会新开一页」一个预告 */}
@@ -424,6 +426,7 @@ const ShatterGrid = ({ project, language, expanded, page = 0, onToggle, onTileCl
                         </span>
                       )}
                     </span>
+                    )}
                   </span>
                 </button>
               );

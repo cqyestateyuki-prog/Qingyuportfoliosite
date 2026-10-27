@@ -4,7 +4,7 @@
 export const sidePocket = {
     id: 'side-pocket',
     year: '2026',
-    featured: true, order: 4, // Selected Work · 第 4 位
+    featured: false, order: 0.5, // More Projects 第二排第二张(2026-10-26 顺延)
     title: 'Side Pocket',
     subtitle: 'A Global Side-Income Ledger with a Tax Layer',
     categories: ['AI', 'Product Design', 'UIUX', 'Design System'],

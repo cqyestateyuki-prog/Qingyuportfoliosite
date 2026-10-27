@@ -2,7 +2,7 @@
 export const hexaedge = {
     id: 'hexaedge',
     year: '2026',
-    featured: true, order: 2, // Selected Work · 第 2 位
+    featured: true, order: 3, // Selected Work · 第 3 位
     title: 'HexaEdge',
     subtitle: {
       en: 'Ancient Logic, Modern Signals',

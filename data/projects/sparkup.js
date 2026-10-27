@@ -1,7 +1,7 @@
 // sparkup
 export const sparkup = {
     id: 'sparkup',
-    featured: true, order: 3, // Selected Work · 第 3 位
+    featured: false, order: 0.1, // More Projects 第一排第一张(2026-10-26 她定)
     // 碎片墙:成品图(Diagnostic / Forge / Validation)要连着排在 04-06,
     // UI Kit 别插在中间,往后排到最后一格
     artifactSlot: 6,
